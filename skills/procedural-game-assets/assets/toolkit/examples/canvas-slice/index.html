@@ -2,21 +2,24 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>PGA Canvas 切片</title>
+<title>PGA 网页游戏模板 · 演示切片</title>
 <style>
   body { margin: 0; background: #17171d; color: #d8d8e0; font: 13px/1.6 system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; }
   canvas { image-rendering: pixelated; margin-top: 12px; }
-  p { max-width: 640px; color: #9ab; }
+  p { max-width: 660px; color: #9ab; margin: 8px 0; }
   kbd { background: #2c2c38; padding: 0 4px; border: 1px solid #444; }
+  #dbg { font-family: ui-monospace, monospace; color: #7fa; }
 </style>
 </head>
 <body>
 <canvas id="cv" width="960" height="540"></canvas>
+<div id="dbg"></div>
 <p>
-  <kbd>←</kbd><kbd>→</kbd> 移动　<kbd>↑</kbd> 朝上瞄准（动作切换）　<kbd>J</kbd> 射击（子弹从枪口附件点出膛）　<kbd>B</kbd> 日/夜切换<br>
-  本切片直接消费 <code>assets/ember.manifest.json</code> 与图集 PNG：帧矩形、锚点、附件点与剪辑毫秒时长全部来自清单。
-  准备资产：<code>node bin/pga.mjs export examples/recipes/ember.mjs --out examples/canvas-slice/assets</code>
+  <kbd>←</kbd><kbd>→</kbd> 移动　<kbd>↑</kbd> 朝上瞄准　<kbd>J</kbd> 射击　<kbd>K</kbd>/<kbd>空格</kbd> 跳跃　<kbd>Esc</kbd> 暂停　<kbd>R</kbd> 重启<br>
+  目标：击毁全部 3 座炮塔（MISSION CLEAR）；被碰到 3 次或坠落则 MISSION FAILED。<br>
+  本页是 ADR-0005 模板的演示：启动时烘焙（无导出文件），逻辑层无 DOM、固定步长、
+  固定种子；<code>__game.step(n, input)</code> 可逐帧推进，<code>__game.state()</code> 读取快照。
 </p>
-<script type="module" src="/main.js"></script>
+<script type="module" src="/examples/canvas-slice/main.js"></script>
 </body>
 </html>

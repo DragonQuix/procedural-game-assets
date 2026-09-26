@@ -1,6 +1,6 @@
 {
   "name": "procedural-game-assets",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "程序化 2D 像素游戏资产工具包：生成、烘焙、校验、预览和导出",
   "type": "module",

@@ -22,6 +22,7 @@ const PAYLOAD = [
   ['package.json', 'package.json'],
   ['package-lock.json', 'package-lock.json'],
   ['CONTEXT.md', 'CONTEXT.md'],
+  ['docs/PLAN.md', 'docs/PLAN.md'],
   ['bin', 'bin'],
   ['src', 'src'],
   ['tools/gallery', 'tools/gallery'],

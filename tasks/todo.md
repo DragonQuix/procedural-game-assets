@@ -27,10 +27,12 @@
 - [ ] `template/render/`：场景/自发光/HUD 层序，消费 CanvasBank
 - [ ] canvas-slice 升级整合 + node 测试 + 浏览器验证 + 运行说明
 
-## R3 技能改版
+## R3 技能改版（已完成）
 
-- [ ] SKILL.md 主用途改为"工具包 + 模板做网页游戏"；Godot 降可选引用
-- [ ] 重装前核对开发源与安装副本差异；重新打包（release.mjs）并安装；提醒新会话验证
+- [x] SKILL.md 主用途改为网页游戏；Godot 降可选（reference/godot.md 保留）
+- [x] toolkit-api.md 增加 adapters/canvas 与模板接口
+- [x] 差异核对：旧载荷自洽，变更在源树；版本 0.2.0，PLAN.md 入载荷
+- [x] 重装完成：114 文件哈希一致；0.1.0 备份保留（backup-20260926101924）；发现链路待新会话验证
 
 ## R4 新验收（pga-acceptance 干净目录）
 

@@ -10,23 +10,45 @@ src/core/      raster（绘制原语+裁剪诊断）、color、ascii、transform
 src/geometry/  humanoid.js：solvePose 姿态求解（纯几何）
 src/bake/      frame（描边/锚点平移/包围盒）、asset（校验）、variants（镜像/损坏/放大）
 src/recipes/   humanoid / machine / vegetation / prop / terrain 五类配方
+src/adapters/  canvas.js：CanvasBank 启动烘焙缓存（路径 1，注入式 Canvas 工厂）
 src/export/    png（pngjs 封装）、atlas（稳定打包）、manifest（版本化清单+校验）、bmp
 bin/pga.mjs    validate / bake / export / gallery
+examples/canvas-slice/  轻量 Canvas 网页游戏模板（template/logic 无 DOM + render + demo-content）
 ```
 
-## 常用调用
+## 启动烘焙（路径 1，ADR-0004）
 
 ```js
 import { bakeHumanoid } from './src/recipes/humanoid.js';
+import { createCanvasBank, clipFrameAt, attachmentWorld } from './src/adapters/canvas.js';
+
+const bank = createCanvasBank({
+  assets: [bakeHumanoid(spec)],
+  makeCanvas: (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; },
+});
+const s = bank.sprite('stand_fwd', 'flip'); // 'orig'|'flip'|'flash'|'flashFlip'，按需缓存
+ctx.drawImage(s.canvas, x - s.anchor.x, y - s.anchor.y);
+clipFrameAt(bank.clips.run_fwd, nowMs);     // 剪辑毫秒时长取帧
+attachmentWorld(frame, 'muzzle', pos, facing); // 附件点世界坐标
+```
+
+## 模板逻辑接口（ADR-0005）
+
+```js
+import { createGame } from './template/logic/game.js';
+const game = createGame({ seed, level, content });
+game.step(n, { right: true, fire: true }); // 逐 tick 推进
+game.state();                              // 可 JSON 断言快照
+game.setPaused(true); game.reset();
+```
+
+## 离线导出（路径 2，可选部署）
+
+```js
 import { packAtlas, renderAtlasPages } from './src/export/atlas.js';
 import { buildManifest, validateManifest } from './src/export/manifest.js';
 import { encodePNG } from './src/export/png.js';
-
-const asset = bakeHumanoid(spec);                    // spec 见 recipes 头注
-const packed = packAtlas(asset.frames, { maxPage: 1024, margin: 2 });
-const pages = renderAtlasPages(packed, new Map(asset.frames.map(f => [f.id, f])));
-const manifest = buildManifest(asset, packed, { generator: 'your-tool@x.y' });
-validateManifest(manifest);                          // [] 为合法
+// 与路径 1 同源：packAtlas(bank 同款 asset.frames)；往返切回帧逐像素一致
 ```
 
 ## 坐标（ADR-0002 摘要）

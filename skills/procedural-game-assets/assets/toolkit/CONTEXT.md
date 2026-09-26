@@ -2,7 +2,7 @@
 
 本文件是工具包的术语与边界来源。修改术语或边界时必须同步更新本文件；长期取舍写入 `docs/adr/`。
 
-日期：2026-09-26。状态：P0 建立。
+日期：2026-09-26。状态：P0 建立；同日按范围校正修订（网页游戏优先，Godot 降可选）。
 
 ## 术语
 
@@ -19,7 +19,9 @@
 | `clip`（动画剪辑） | 帧 ID 序列 + 每帧毫秒时长 | 时间是数据（毫秒），不硬编码进游戏状态机 |
 | `bake`（烘焙） | 由配方 + 种子确定性地产出全部帧与剪辑的过程 | 同配方同种子同输出；静态纹理不在消费端每帧重新生成 |
 | `manifest` | 导出的版本化 JSON 清单（schemaVersion、帧、图集页、剪辑、来源） | 不含绝对路径、不含构建时间戳；schema 不兼容即导入失败 |
-| `bank` | 烘焙产物的命名集合 | 原项目的 `SpriteBank` 概念；新库以 `BakedAsset` 取代其四份 Canvas 预烘焙 |
+| `bank` / `CanvasBank` | 烘焙产物的命名缓存；CanvasBank 由 `adapters/canvas.js` 在启动时构建 | 原项目的 `SpriteBank` 概念；变体按需生成，不无条件预烘四份 |
+| `runtime path`（接入路径） | 资产进入游戏的两种方式：启动烘焙（默认）或离线导出（可选部署），共享烘焙核心 | 见 ADR-0004 |
+| `template`（模板） | `examples/canvas-slice/` 升级形态的轻量 Canvas 网页游戏骨架 | 范围与测试接口见 ADR-0005；不是通用引擎 |
 
 ## 坐标契约（要点，全文见 ADR-0002）
 
@@ -35,20 +37,24 @@ core/      无 DOM、无 FS、无网络、无时钟；只依赖显式参数与�
 geometry/  姿态求解等纯几何；依赖 core
 bake/      帧组装、变体、包围盒、诊断；不创建 Canvas
 recipes/   各类资产配方（人形、机械、植被、道具、地形）
-export/    PNG、图集、manifest（IO 适配层）
-adapters/  Canvas、Godot 等消费适配
+export/    PNG、图集、manifest（可选部署路径，IO 适配层）
+adapters/  Canvas 启动烘焙适配（ADR-0004）；Godot 等为可选适配
 bin/       CLI 入口（受信本地工具）
 tools/     画廊与基线采集
+examples/canvas-slice/  轻量 Canvas 网页游戏模板（ADR-0005）
+examples/godot/         Godot 可选适配样例（非验收前提）
 ```
 
-画廊与导出必须调用同一烘焙实现。游戏逻辑可消费附件点与动画状态，但碰撞规则不归本库。
+画廊、导出与网页启动烘焙必须调用同一烘焙实现（ADR-0004）。
+游戏逻辑可消费附件点与动画状态，但碰撞规则不归资产核心库（模板逻辑层除外，见 ADR-0005）。
 
 ## 上下文依据
 
-- 方案：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ASSETS-IMPLEMENTATION-PLAN.md`
+- 当前路线：`docs/PLAN.md`（范围校正后版本；Godot 降为可选适配）
+- 原方案（历史依据，只读）：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ASSETS-IMPLEMENTATION-PLAN.md`
 - 分析：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ART-ANALYSIS.md`
 - 原游戏设计：`E:/Repos/Games/ForOthers/others_003/docs/DESIGN.md`
 - 来源与授权：`docs/provenance.md`
-- ADR：`docs/adr/`
+- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板）
 
 本项目当前没有 `CONTEXT-MAP.md`（未做领域拆分）；如将来拆分领域再建立。
