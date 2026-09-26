@@ -183,13 +183,19 @@ export function createGame({ seed = 1, level, content }) {
   return {
     step(n, input = {}) {
       for (let i = 0; i < n; i++) {
-        // 暂停与重启为边沿触发（本 tick 新按下）；重启当 tick 不再推进
-        if (input.restart && !prevInput.restart) {
+        // 暂停与重启为边沿触发。input.pressed 存在时按离散事件消费
+        // （每次 step 调用只在首 tick 应用一次，补帧 n>1 不重复触发）；
+        // 否则退回布尔边沿（本 tick 按下且上一 tick 未按），保持旧注入快照语义。
+        // 重启当 tick 不再推进。
+        const pressed = (key) => input.pressed
+          ? i === 0 && Boolean(input.pressed[key])
+          : input[key] && !prevInput[key];
+        if (pressed('restart')) {
           reset();
           prevInput = { ...input };
           continue;
         }
-        if (input.pause && !prevInput.pause) paused = !paused;
+        if (pressed('pause')) paused = !paused;
         if (!paused) stepTick(input);
         prevInput = { ...input };
       }

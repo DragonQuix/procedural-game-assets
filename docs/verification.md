@@ -85,10 +85,78 @@
   敌人盒高度差 1px、bastion 眉影、子弹浅背景配色。资产核心零修改。
 - 无对照组：只声称"复用成功"，不声称质量提升百分比。
 
-## 未验证项（如实记录）
+## R5 多宿主试验回收（2026-09-26，0.3.0）
 
-- 独立 Agent 复用试验（需用户授权，未进行）。
-- 技能发现链路（新会话/重启 Codex App 后确认）。
+来源：首个非 Codex 宿主试验项目 `E:/Repos/Tools/pga-trial-kimi-code`（只读证据，
+HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类结论按证据逐条核验，
+核验结果见本节与文末未验证项。
+
+### 回收内容
+
+1. **模板输入契约**（`template/logic/input.js`、`game.js`、`main.js`）：
+   - 证实试验报告指出的缺陷：点按缓冲 + 布尔边沿检测会把连续两次暂停点按吞成
+     true/true（暂停后无法恢复）。修正：pressed 离散事件队列（每动作上限 8 条，
+     每次快照每动作消费一条），game.step 优先消费 pressed、无 pressed 字段的旧
+     布尔快照保持边沿语义。
+   - 另发现上轮换接草稿的缺陷并修正：暂停帧 `clear()` 全清会把同帧双击 Esc 的
+     第二条 pressed 误杀；改为 `clear({ except: SYSTEM_ACTIONS })` 只清游戏动作。
+   - 失焦清空（blur/visibilitychange hidden）回收自试验项目；被清的键需重新
+     按下才生效（防粘键），自动重复不复活。
+   - 覆盖测试 10 项（`tests/unit/input.test.js`）：亚帧点按、长按、自动重复、
+     快速连按、多物理键同动作、暂停/恢复、重启、blur/hidden/clear/unbind、
+     补帧 step(n)、暂停中输入丢弃。
+2. **DOM HUD 文字方案**（`template/render/hud.js`、`index.html`）：低分辨率画布
+   内 fillText 小字全部移除（护盾格保留），stats/横幅走 DOM，支持中文；
+   dbg 行加 `/paused` 标记（回收自试验项目：无 JS 求值的宿主靠 dbg 文本读状态）。
+   位图字体作为可选方案写入文档，不维护第二套实现。
+3. **携带隔离**（`tools/init-project.mjs` + `tools/release-manifest.mjs`）：
+   干净目录初始化把工具包携带到 `vendor/pga/` 并逐文件 sha256 复核，
+   项目根建立游戏自身 package.json/CONTEXT.md/README.md，模板复制为 `game/`
+   并把 import 改写为相对路径（Node 与浏览器通用）。清单路径根 = vendor/pga/，
+   项目根文件不受清单约束——试验项目的"CONTEXT.md 同名撞车例外"就此消除。
+   `release.mjs` 拆出共用哈希模块，未新增第二套打包系统。
+   测试 4 项（`tests/integration/init-project.test.js`）：迷你载荷全链、
+   覆盖保护、缺失/损坏/多出/身份撞名响亮失败、真实载荷链（init→冒烟→
+   携带副本全量套件→check→静态服务 HTTP）。
+4. **审图与证据规则**回收进 `skills/.../reference/visual-diagnosis.md`（文字、
+   状态不只靠颜色、暗背景辨识度、场景语义、证据纪律），按任务要求泛化——
+   不强制"背景更暗"/支架吊索，不写"≤10px 一律不合格"式保证；
+   空间站专用美术与领航玩法未回收（项目内容层，非通用能力）。
+
+### 本轮验证
+
+- 全量回归 `node --test "tests/**/*.test.js"`：**132/132**（116 基线 + 输入 10
+  中的增量、HUD 2、init 4；原 input 草稿 7 项已并入扩充后的 10 项）。
+- 浏览器实际验证（Python Playwright 1.58 headless Chromium，trusted 键盘事件，
+  脚本 `tools/browser-check.py` 已入库可复跑）：12/12 通过——真实按键
+  右移/跳跃/射击/暂停/恢复/重启，暂停中输入不补发，双击 Esc 净结果恢复，
+  三预设状态与文案断言。
+- 截图（`output/playwright/r3-*.png`，人工过目）：暂停/胜利横幅中文清晰、
+  stats 右上不遮挡；dsf 1.25/1.5 下 DOM 文字清晰（画布像素边缘有非整数缩放的
+  固有抖动，如实记录）；420px 窄屏布局不溢出。
+  注：旧 `output/playwright/before-win.png` 内嵌浏览器截图未捕获画布，
+  不是有效基线，本轮未覆盖它，留作历史文件。
+- 干净目录验收：`work/init-check/`（gitignored）由载荷 init 生成——
+  项目测试 1/1、携带副本套件 124 过 3 跳过（跳过的是宿主安装集成测试）、
+  `--check` 通过、`game/` 无绝对路径残留（grep 0 命中）、
+  浏览器 12/12（用项目自己的 `vendor/pga/tools/static-server.mjs` 起服务）。
+- 只读边界复核：`pga-trial-kimi-code`（f319b7c）、原游戏 `others_003`、
+  共享安装 `.codex/skills/procedural-game-assets` 本轮均未修改（git 状态与
+  哈希复核可查）；本轮只产出开发仓库内的 0.3.0 发行候选，共享安装保持 0.2.1。
+
+### 未验证项（本轮新增/沿用）
+
+- OS 级真实失焦：headless 环境无法复现（试验项目探针结论相同）；
+  blur/隐藏监听由合成事件单测覆盖。
+- 真人全程试玩与真人单局时长：两轮均无真人试玩，脚本/机器定时通关
+  不换算为真人时长。
+- 各宿主重启/新会话后的技能列表刷新（沿用）。
+- 试验项目的"Kimi 原生技能发现成功"：本轮未在新会话重演，沿用其验收记录。
+- 第二个非 Codex 宿主试验：未进行，是否开始由维护者决定。
+
+## 未验证项（长期，如实记录）
+
+- 技能发现链路（新会话/重启各宿主后确认）。
 - Godot 编辑器人工预览（F5）；Godot 后续增强（冻结）。
 - 音频模块（旧技能保留参考，未升级为工具包模块）。
 - 跨平台（Linux/macOS）与 Node 23+ 未测。
