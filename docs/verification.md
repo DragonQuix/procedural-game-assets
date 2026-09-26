@@ -30,13 +30,25 @@
 - 窗口模式 demo 截图人工确认：跑姿贴地面参考线、枪口红点、nearest 无串色。
 - 编辑器内人工预览（F5）步骤已写入 `examples/godot/README.md`，本会话未执行。
 
-## 技能安装（P7 + R3）
+## 技能安装（P7 + R3 + 入口收敛）
 
-- 主存储：`C:/Users/admin/.codex/skills/procedural-game-assets`（当前 0.2.1）。
-- 备份链：`.agents/...backup-20260926094152`（初版真目录）、
-  `.codex/...backup-20260926101924`（0.1.0）、`.codex/...backup-20260926102505`（0.2.0）。
-- 发现入口：`C:/Users/admin/.agents/skills/procedural-game-assets`（junction → 主存储）。
-- **发现链路待新会话验证**：技能能否被 Codex 发现并触发，需新会话/重启确认。
+- 唯一发现入口（2026-09-26 收敛后）：
+  - 主存储 `C:/Users/admin/.codex/skills/procedural-game-assets`（0.2.1，与开发源逐目录一致）；
+  - 发现入口 `C:/Users/admin/.agents/skills/procedural-game-assets`（junction → 主存储）。
+  - 两个发现目录内**无任何 backup 残留**（已逐一核实）。
+- 备份（发现目录之外，`C:/Users/admin/.codex/backups/skills/procedural-game-assets/`）：
+  - `agents-backup-20260926094152`（初版纯文档技能，无 toolkit）
+  - `codex-backup-20260926101924`（0.1.0）、`codex-backup-20260926102505`（0.2.0）
+  - `codex-backup-20260926112629`、`codex-backup-20260926112814`（0.2.1 两次安装演练）
+- 迁移核验：3 个旧备份共 231 个文件迁移前后 sha256 逐文件一致
+  （记录 `C:/Users/admin/.codex/backups/skills-migration-record.json`，
+  工具 `tools/snapshot-hashes.mjs` / `tools/verify-migration.mjs`）。
+- 安装脚本修复（install-core 重构 + install.mjs 瘦 CLI）：
+  备份默认落 `<codex-home>/backups/skills`（发现目录之外）；
+  junction 探测改 readlink（isSymbolicLink 对 junction 恒 false）；
+  入口父目录缺失时先建目录（新环境曾致 junction 静默退回复制）。
+  回归测试 `tests/integration/install.test.js` 3 项（载荷中自动跳过）。
+- **发现链路待新会话验证**：技能列表刷新需新会话/重启 Codex App 确认。
 
 ## R1–R3（范围校正后，2026-09-26）
 

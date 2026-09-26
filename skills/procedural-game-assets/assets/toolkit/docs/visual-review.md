@@ -92,6 +92,17 @@
 修复记录：GDScript 三处 `:=` 推断失败与 class_name 全局缓存依赖 → 改 preload
 显式类型；MainLoop._process 返回语义（true=退出）修正。
 
+## R2/R4：模板与验收切片（2026-09-26）
+
+| 切片 | 浏览器验证 | 结果 |
+|---|---|---|
+| 模板演示（canvas-slice，ember + 炮塔 + 夜林） | 初始 + ?preset=fight/win/contact 截图：白闪、粒子、HUD、无敌帧闪烁、MISSION CLEAR、残骸 | 通过（机测 demo-presets 5 项同源） |
+| 雪原突击（pga-acceptance，snowowl + scorp + 冻原白天） | 初始 + ?preset=assault/clear/hit 截图：尾炮挂接、琥珀子弹浅背景可读、雪原肃清、接触粒子、护盾格减少 | 通过（机测 work/game.test.mjs 6/6 同源） |
+
+视觉修复：bastion 眉影（目镜读作面甲缝）、验收子弹改琥珀色（浅背景）、
+敌人盒与枪口高度差 1px（机测锁定后修内容）。contact 预设玩家不可见属
+无敌帧闪烁设计（tick%4==3 隐藏帧），已在文档注明。
+
 ## 后续阶段待查
 
 - P3 后：图集导出资产与画廊同源对照。

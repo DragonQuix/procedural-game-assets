@@ -44,3 +44,12 @@
 ## 冻结
 
 - Godot 增强、音频模块化、Unity、网络服务：见 PLAN.md 冻结项
+
+## 发现入口与备份收敛（2026-09-26，单独任务）
+
+- [x] 核查：4 个同名入口（0.2.1 / 0.1.0 / 0.2.0 / 初版文档）按内容定版
+- [x] 3 个旧备份（231 文件）移至 `.codex/backups/skills/procedural-game-assets/`，迁移前后 sha256 逐文件一致
+- [x] 安装脚本修复：备份落发现目录之外；junction 探测（readlink）；入口父目录创建；install-core 重构 + 集成测试 3 项
+- [x] 唯一入口核实：`.codex/skills` 与 `.agents/skills` 各仅一个 procedural-game-assets
+- [x] 载荷重建（115 文件，新测试在载荷中自动跳过）并重装，开发源==安装副本
+- [ ] 发现列表刷新验证：待新会话/重启 Codex App（本会话无法证明）

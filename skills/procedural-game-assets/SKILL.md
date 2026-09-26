@@ -87,5 +87,6 @@ node bin/pga.mjs gallery --dir work/out --port 47840   # 资产画廊（先 bake
 ## 版本与回滚
 
 技能与工具包版本绑定（`assets/toolkit/package.json` 与 `.pga-release.json` 哈希清单）。
-安装脚本在安装前备份旧版；回滚 = 将备份目录改回原名（`scripts/install.mjs`）。
+安装脚本在安装前把旧版备份到发现目录之外（默认 `.codex/backups/skills/procedural-game-assets/`）；
+回滚 = 删除主存储与入口，把备份目录改回原名（`scripts/install.mjs`）。
 旧版 `reference/pixel-art.md` 伪代码骨架已被可运行工具包取代，不再随附。

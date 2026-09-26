@@ -1,7 +1,7 @@
 {
   "generator": "procedural-game-assets@0.2.1",
-  "builtFrom": "8de14879105d5c439d388ccebbb37370c14a89d9",
-  "fileCount": 114,
+  "builtFrom": "cff29506500e6b414909b96f17738dc2ab1585d4",
+  "fileCount": 115,
   "files": {
     "bin/pga.mjs": "f6ce8aaad03e020d99219efaa28c577310dbdea90ab35da0f74b1cb2f23d99a5",
     "CONTEXT.md": "84face18d981fbff6961d1db87cccaebaa6c427a2ed885194b1e6a9fb22a2cde",
@@ -13,7 +13,7 @@
     "docs/PLAN.md": "9140088b618ecc29c733dc91bd628336b4b277f405bbb622524eb0f41be2ff36",
     "docs/provenance.md": "7c49e08242b32978455cfa08b0b6df09352c2a64ddc5965ce17fe301958816bc",
     "docs/recipe-guide.md": "c4ad3cd8a852d1c3a2266bfcdbde9de5cbb594224fd7b15ff3df8b723be10d95",
-    "docs/visual-review.md": "12736e689d617856f1e08c2f916e408a25cb56e4783d630a0191b64b79e27dbb",
+    "docs/visual-review.md": "bcc0da6329168922494071ec533a74b112d73f4bc834a8693a1406bfca5969f6",
     "examples/canvas-slice/index.html": "c742a098c154b3f47471f5e41dec64b7b51c9b7373a929975bb70f9431db7f7f",
     "examples/canvas-slice/main.js": "3f3a70371622b457f3da661b09e07f98a85e23e64410ac6f0d588499e820f324",
     "examples/canvas-slice/README.md": "77c7c0ba24f1eb95d38248abfcf65fbc041cf29ed7f82a1f2f55a771c07a2f6f",
@@ -100,6 +100,7 @@
     "tests/integration/consumer-contract.test.js": "8080f73e2d57ca484c57243c8e3b2311e48e81101e8bb264b15f3a8037e90878",
     "tests/integration/demo-presets.test.js": "5e11d7901b6fcb856d70d205bf7375aaf63b4e0183c94c478741ca3d66d81072",
     "tests/integration/export.test.js": "a872dc52543bc7d7d3e617dd06d9ca6b7c4634884f44ffe2939b5b9f83b6888b",
+    "tests/integration/install.test.js": "18d295900b70eb623a131543f69cde8e8187812ad6f4898713535371399fb72d",
     "tests/unit/ascii.test.js": "cfb8d6a44d957e396d454ea3cda143571a1d3cb1653072cbbb582e01829db463",
     "tests/unit/atlas.test.js": "9c6294291d943cb1603fb7935db6e5e0ea93c422f968fa9240a0903cfaf14f22",
     "tests/unit/bake.test.js": "b77c40f28787768409ea444c5c1a147e5f791d9af9744608572d4220bd186125",
