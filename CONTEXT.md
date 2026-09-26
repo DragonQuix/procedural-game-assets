@@ -40,7 +40,7 @@ recipes/   各类资产配方（人形、机械、植被、道具、地形）
 export/    PNG、图集、manifest（可选部署路径，IO 适配层）
 adapters/  Canvas 启动烘焙适配（ADR-0004）；Godot 等为可选适配
 bin/       CLI 入口（受信本地工具）
-tools/     画廊与基线采集
+tools/     画廊、基线采集、发行打包（release）与项目初始化（init-project）
 examples/canvas-slice/  轻量 Canvas 网页游戏模板（ADR-0005）
 examples/godot/         Godot 可选适配样例（非验收前提）
 ```

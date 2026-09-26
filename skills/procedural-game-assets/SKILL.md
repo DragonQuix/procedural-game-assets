@@ -26,18 +26,43 @@ node tools/static-server.mjs . 47850
 node bin/pga.mjs gallery --dir work/out --port 47840   # 资产画廊（先 bake/export 到 work/out）
 ```
 
+## 干净目录开始自己的游戏（携带隔离，0.3.0 起）
+
+```powershell
+node <技能目录>/assets/toolkit/tools/init-project.mjs <新目录> --name <游戏名>
+cd <新目录>
+npm test          # 模板冒烟测试
+npm run serve     # → http://127.0.0.1:47850/game/
+npm run check     # 携带完整性 + 项目身份校验
+```
+
+init 做三件事：把工具包按发行清单携带到 `vendor/pga/` 并逐文件 sha256 复核
+（缺失/损坏/多出都失败，不静默忽略）；在项目根建立**游戏自己的** package.json、
+CONTEXT.md、README.md；把模板复制为 `game/` 并把 import 改写成指向
+`vendor/pga/` 的相对路径。工具包的 CONTEXT.md 与 `.pga-release.json` 只管理
+`vendor/pga/` 副本，项目根文件不受清单约束——同名文件各归各，没有例外条款。
+游戏代码只经相对路径引用 `vendor/pga/`，不依赖开发仓库、原游戏或全局技能目录。
+改游戏只动 `game/` 与 `tests/`；`vendor/pga/` 视为只读（改了会被 `npm run check` 报出）。
+
 ## 制作一个网页游戏切片（推荐顺序）
 
 1. **定风格样本**：分辨率、角色占屏比例、描边、材质色阶、玩家/危险/背景优先级。
 2. **做资产**：复制最近的模板配方（`examples/recipes/`，参数见
    `docs/recipe-guide.md`），`validate` → `bake --bmp --scale 4` → 画廊审图。
    先修轮廓与比例，再修动作与附件点，最后调色阶与细节。
-3. **复制模板改内容**：换配方、改 `template/demo-content.js` 的关卡/敌人/手感，
-   达成"移动 + 一种交互 + 明确胜负"的最小闭环。规则只加在
-   `template/logic/`（无 DOM、可 node 测试），表现只放 `template/render/`。
+3. **复制模板改内容**（推荐用上面的 init-project 自动完成）：换配方、改
+   `template/demo-content.js` 的关卡/敌人/手感，达成"移动 + 一种交互 + 明确胜负"
+   的最小闭环。规则只加在 `template/logic/`（无 DOM、可 node 测试），
+   表现只放 `template/render/`。文字用 DOM HUD（`template/render/hud.js`），
+   不要在低分辨率场景画布上 `fillText` 小字（放大后破碎；位图字体为可选替代，
+   见 `reference/visual-diagnosis.md`）。输入契约：点按经 `pressed` 离散事件
+   消费，暂停中及暂停/重启当帧丢弃游戏输入（详见 `reference/toolkit-api.md`）。
 4. **浏览器验收**：实际画面与操作（移动/交互/胜负/反馈），
-   用 `?preset=` 定格复现关键状态截图；日夜背景下确认可读性。
+   用 `?preset=` 定格复现关键状态截图；日夜背景下确认可读性；
+   文字另查原尺寸、常用放大尺寸与非整数缩放（dsf 1.25/1.5 或页面缩放）。
 5. **测试与记录**：`node --test` 全过；写下可复现的运行步骤。
+   记录证据时区分注入快照 / 真实键盘事件 / 预设定格 / 状态注入 / 人工试玩，
+   脚本通关 tick 不换算成真人时长（规则见 `reference/visual-diagnosis.md` 证据纪律）。
 
 ## 职责边界（不要混层）
 
@@ -74,8 +99,12 @@ node bin/pga.mjs gallery --dir work/out --port 47840   # 资产画廊（先 bake
 - 新角色与场景和默认示例明显不同；移动、一种交互、明确的成功或失败状态；
   动画与视觉反馈（白闪/粒子等至少其一）。
 - 浏览器实际画面与操作验证（截图留证），不是"测试通过"就算完。
+  截图覆盖原尺寸、常用放大尺寸与非整数缩放；窄屏一次。
 - `node --test` 全过；运行步骤可复现（静态服务命令 + URL）。
-- 派生产物不写开发机绝对路径；不声明未验证的能力。
+- 项目根是游戏自己的身份（package.json 名称/版本/描述、CONTEXT.md），
+  工具包只在 `vendor/pga/`；`npm run check` 哈希校验通过。
+- 派生产物不写开发机绝对路径；不声明未验证的能力（真人时长、宿主发现链路等
+  没有真人/新会话证据时标注"未验证"）。
 
 ## 可选适配
 

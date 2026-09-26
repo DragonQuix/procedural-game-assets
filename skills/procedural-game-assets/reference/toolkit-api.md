@@ -42,6 +42,25 @@ game.state();                              // 可 JSON 断言快照
 game.setPaused(true); game.reset();
 ```
 
+## 键盘输入绑定（template/logic/input.js）
+
+```js
+import { bindKeyboard, SYSTEM_ACTIONS } from './template/logic/input.js';
+const kb = bindKeyboard(window);           // 测试可传 EventTarget
+const snap = kb.snapshot();                // 每 tick 取一次
+// snap.left / fire / ...：held 或有未消费点按
+// snap.pressed.fire / ...：本次快照消费到一条点按（离散事件）
+kb.clear();                                // 清空全部按住与点按队列（blur/隐藏/unbind 自动走这里）
+kb.clear({ except: SYSTEM_ACTIONS });      // 只清游戏动作，保留暂停/重启队列
+kb.unbind();                               // 移除全部监听并清空
+```
+
+契约要点：点按按动作入队（每动作上限 8），每次 snapshot 每动作消费一条——
+连续两次点按暂停键会产生两个 pressed 事件，不会被布尔快照的 true/true 吞并；
+暂停/重启在 game.step 里按 pressed 离散消费（每次 step 调用只在首 tick 应用一次），
+无 pressed 字段的旧布尔快照保持边沿语义。clear 后被清掉的键需重新按下才生效（防粘键）。
+DOM 文字 HUD（template/render/hud.js）替代画布内小字：`updateHud(root, state)`。
+
 ## 离线导出（路径 2，可选部署）
 
 ```js
