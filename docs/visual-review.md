@@ -48,6 +48,23 @@
 1. rustclaw `down` 枪长 8→6：fall_down 姿态厚笔刷向下枪口越界 2px（插进地面）——改配方数据，不改核心、不加裁剪声明。
 2. BMP 测试索引错位、CLI validate 模板变量笔误、画廊 Windows 路由 bug——均为测试/工具层，核心算法未因验收改动。
 
+## P4：机械、植被、道具、地形（2026-09-26）
+
+检查方式：`pga bake --bmp --scale N` 导出 BMP 人工查看；自动化断言见
+`tests/unit/machine.test.js`、`tests/unit/recipes-p4.test.js`（83/83 通过）。
+
+| 资产 | 检查项与结果 | 证据 |
+|---|---|---|
+| turret-mole（机械） | 通过：基座/平射管/高射管分件可读；损坏态压暗+烧灼+剥落明显；左向镜像锚点随动 | `work/review-p4/turret-mole/*.bmp` |
+| tree-broadleaf（植被） | 通过：树冠暗/中/亮分层清晰，斑点不破坏轮廓 | `work/review-p4/tree-broadleaf/` |
+| tree-deadpine（植被变体） | 通过：稀疏枯枝、斜干，与阔冠树结构明显不同（非同结构换种子） | `work/review-p4/tree-deadpine/` |
+| pod-scatter/laser/missile（道具） | 通过：共享舱体外壳，图标形状各异（弹丸/光条/火箭）；外壳像素一致性有断言 | `work/review-p4/pod-*/` |
+| medkit（道具变体） | 通过：不同外壳（白箱红十字），一眼可辨 | `work/review-p4/medkit/` |
+| ground-cliff（地形） | 通过：3 块水平相邻填充块无可见接缝（另有色差断言）；草皮顶边跨块连续；顶+左角部组合正确 | `work/review-p4/ground-strip.bmp`、`top_left.bmp` |
+
+修复记录：turret 高射管初版帧高不足（重画角度后越界）→ 按"画不下就放大帧"原则
+改帧约束与原点；平射管笔刷端部越界 → 帧宽 16→18。均为配方数据修正，未改核心。
+
 ## 后续阶段待查
 
 - P3 后：图集导出资产与画廊同源对照。

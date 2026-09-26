@@ -13,6 +13,10 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { bakeHumanoid } from '../src/recipes/humanoid.js';
+import { bakeMachine } from '../src/recipes/machine.js';
+import { bakeVegetation } from '../src/recipes/vegetation.js';
+import { bakeProp } from '../src/recipes/prop.js';
+import { bakeTerrain } from '../src/recipes/terrain.js';
 import { assetToJSON } from '../src/adapters/asset-file.js';
 import { encodeBMP } from '../src/export/bmp.js';
 import { encodePNG } from '../src/export/png.js';
@@ -23,7 +27,7 @@ import { scaleNearest } from '../src/core/transform.js';
 import { startGalleryServer } from '../tools/gallery/server.mjs';
 
 const GENERATOR = `procedural-game-assets@${JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8')).version}`;
-const BAKERS = { humanoid: bakeHumanoid };
+const BAKERS = { humanoid: bakeHumanoid, machine: bakeMachine, vegetation: bakeVegetation, prop: bakeProp, terrain: bakeTerrain };
 const MARKER = '.pga.json';
 
 function fail(message, code) {
