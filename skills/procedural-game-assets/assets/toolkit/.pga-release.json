@@ -1,6 +1,6 @@
 {
   "generator": "procedural-game-assets@0.3.0",
-  "builtFrom": "f619d5bac88db291625052040038eb58374cc14a",
+  "builtFrom": "789cfbc402e162f0b080b269482b4f4ddde5d67a",
   "fileCount": 122,
   "pathRoot": "工具包根（携带后的 vendor/pga/）；files 键为相对该根的 POSIX 路径",
   "files": {
@@ -102,7 +102,7 @@
     "tests/integration/consumer-contract.test.js": "8080f73e2d57ca484c57243c8e3b2311e48e81101e8bb264b15f3a8037e90878",
     "tests/integration/demo-presets.test.js": "5e11d7901b6fcb856d70d205bf7375aaf63b4e0183c94c478741ca3d66d81072",
     "tests/integration/export.test.js": "a872dc52543bc7d7d3e617dd06d9ca6b7c4634884f44ffe2939b5b9f83b6888b",
-    "tests/integration/init-project.test.js": "400f65d2c44f94af5e56b7b7ba79ee9ccba25410773befdf987e8a46e53375dc",
+    "tests/integration/init-project.test.js": "fae9b3bc0a84c0dc41616ecf393cd6e0aaaab14b5e857ea4e17bb7b218465ad2",
     "tests/integration/install.test.js": "18d295900b70eb623a131543f69cde8e8187812ad6f4898713535371399fb72d",
     "tests/integration/register-harnesses.test.js": "60dedd23a7b512e4ed5064d05acb12283ac11319169acce005a240c59b53b920",
     "tests/unit/ascii.test.js": "cfb8d6a44d957e396d454ea3cda143571a1d3cb1653072cbbb582e01829db463",
@@ -123,7 +123,7 @@
     "tools/gallery/index.html": "4a8d3c376f342dc1190039dd2c98bb5b39a0948b7a53a23ccbe1ce0f2e56ef48",
     "tools/gallery/server.mjs": "e2ce109e2aa3f613fe6faaf11ba3802f9495fb8e8f09a7cc015ffcd94a746a8c",
     "tools/gallery/style.css": "ab6fe198d0af67a78a3e364648e767f508eb370a25e98dd2dcabba9b286644a6",
-    "tools/init-project.mjs": "bd5fc50f2f4c46d415205bbad56330812307378dc209a81243c919ae9ac339c5",
+    "tools/init-project.mjs": "319be5a2373332a736f5efba2830dcb8d795d70f646ee11ed5a0a26e1790a447",
     "tools/release-manifest.mjs": "914782f43dba65a383ea38d21f7b36f6befb4922f99398f7447162eff21fe5b7",
     "tools/static-server.mjs": "aa3542527561f9d4982300827d9fd287d2954d3d01e994ffbe722afdca7545dd"
   }

@@ -125,23 +125,33 @@ HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类
 
 ### 本轮验证
 
-- 全量回归 `node --test "tests/**/*.test.js"`：**132/132**（116 基线 + 输入 10
-  中的增量、HUD 2、init 4；原 input 草稿 7 项已并入扩充后的 10 项）。
+- 全量回归 `node --test "tests/**/*.test.js"`：**133/133**（116 基线 + 输入契约 10、
+  HUD 2、init 5）。
 - 浏览器实际验证（Python Playwright 1.58 headless Chromium，trusted 键盘事件，
-  脚本 `tools/browser-check.py` 已入库可复跑）：12/12 通过——真实按键
-  右移/跳跃/射击/暂停/恢复/重启，暂停中输入不补发，双击 Esc 净结果恢复，
-  三预设状态与文案断言。
-- 截图（`output/playwright/r3-*.png`，人工过目）：暂停/胜利横幅中文清晰、
+  脚本 `tools/browser-check.py` 已入库可复跑）：**行为断言 10/10**——真实按键
+  右移/跳跃/射击/暂停/恢复/重启，暂停中输入不补发，同帧双击 Esc 两次切换都完成
+  （同步派发保证同帧入队；谓词 `paused && tick>冻结值` 只有两次切换都发生后才成立，
+  实测 tick 146→147 后回到暂停），三预设状态与文案断言。截图采集单独计数，
+  不计入断言通过率。
+- 截图（`output/playwright/r3-*.png`，逐张人工过目）：暂停/胜利横幅中文清晰、
   stats 右上不遮挡；dsf 1.25/1.5 下 DOM 文字清晰（画布像素边缘有非整数缩放的
-  固有抖动，如实记录）；420px 窄屏布局不溢出。
-  注：旧 `output/playwright/before-win.png` 内嵌浏览器截图未捕获画布，
-  不是有效基线，本轮未覆盖它，留作历史文件。
+  固有抖动，如实记录）；320px 原生展示与 420px 窄屏布局不溢出，dbg `/paused`
+  标记实测生效。
+- 同状态前后对照（`r3-before-*.png`，从修改前提交 4edb7b6 的 git worktree 补采，
+  同预设同视图）：`preset=win` 修改前画布内 "MISSION CLEAR" 与中文 "按 R 重启"
+  破碎、左上角 tick 小字碎裂，修改后 DOM 文案清晰；320px 下修改前画布固定
+  960px 溢出视口且 Esc 点按丢失（dbg 仍 playing，亚帧点按丢失的实测暴露），
+  修改后响应式适配且暂停生效。旧 `output/playwright/before-win.png` 内嵌浏览器
+  截图未捕获画布，不是有效基线，未覆盖，留作历史文件。
 - 干净目录验收：`work/init-check/`（gitignored）由载荷 init 生成——
-  项目测试 1/1、携带副本套件 124 过 3 跳过（跳过的是宿主安装集成测试）、
+  项目测试 1/1、携带副本套件全过（宿主安装集成测试自动跳过）、
   `--check` 通过、`game/` 无绝对路径残留（grep 0 命中）、
-  浏览器 12/12（用项目自己的 `vendor/pga/tools/static-server.mjs` 起服务）。
+  浏览器断言 10/10（用项目自己的 `vendor/pga/tools/static-server.mjs` 起服务）。
+- 携带身份前置校验实测：`--name procedural-game-assets` 或目录 basename 撞名时
+  init 退出 2 且不落任何文件；已有同名 package.json 拒绝且不改动（补修前
+  是"init 报成功、--check 才失败"，已由维护者实测复核确认修复）。
 - 只读边界复核：`pga-trial-kimi-code`（f319b7c）、原游戏 `others_003`、
-  共享安装 `.codex/skills/procedural-game-assets` 本轮均未修改（git 状态与
+  共享安装 `.codex/skills/procedural-game-assets` 均未修改（git 状态与
   哈希复核可查）；本轮只产出开发仓库内的 0.3.0 发行候选，共享安装保持 0.2.1。
 
 ### 未验证项（本轮新增/沿用）
