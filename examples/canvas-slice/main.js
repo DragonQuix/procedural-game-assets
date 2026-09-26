@@ -14,9 +14,10 @@ import turret from '/examples/recipes/turret.mjs';
 import ground from '/examples/recipes/ground.mjs';
 import { createGame, TICK_MS } from './template/logic/game.js';
 import { makeLevel } from './template/logic/collision.js';
-import { bindKeyboard } from './template/logic/input.js';
+import { bindKeyboard, SYSTEM_ACTIONS } from './template/logic/input.js';
 import { startLoop } from './template/logic/loop.js';
 import { createRenderer } from './template/render/renderer.js';
+import { updateHud } from './template/render/hud.js';
 
 const VIEW = { w: 320, h: 180 };
 
@@ -63,7 +64,8 @@ function render() {
   display.imageSmoothingEnabled = false;
   display.drawImage(scene, 0, 0, cv.width, cv.height);
   const s = game.state();
-  document.getElementById('dbg').textContent = `${s.status}  tick=${s.tick}  x=${s.player.x}  shield=${s.shield}  enemies=${s.enemies.filter((e) => e.alive).length}  particles=${s.particles.count}`;
+  updateHud(document.getElementById('hud'), s);
+  document.getElementById('dbg').textContent = `${s.status}${s.paused ? '/paused' : ''}  tick=${s.tick}  x=${s.player.x}  shield=${s.shield}  enemies=${s.enemies.filter((e) => e.alive).length}  particles=${s.particles.count}`;
 }
 
 const keyboard = bindKeyboard(window);
@@ -76,7 +78,19 @@ if (preset && PRESETS[preset]) {
   render();
   console.log(`preset=${preset} 定格：`, JSON.stringify(game.state()));
 } else {
-  startLoop({ game, input: keyboard.snapshot, render });
+  startLoop({ game, input: () => {
+    const snap = keyboard.snapshot();
+    // 暂停中及暂停/恢复/重启当帧丢弃游戏输入（含已缓冲点按），避免恢复后补发；
+    // 保留 pause/restart 队列——同帧双击 Esc 的第二次按下不会被误吞。
+    if (game.paused || snap.pressed.pause || snap.pressed.restart) {
+      keyboard.clear({ except: SYSTEM_ACTIONS });
+      for (const key of ['left', 'right', 'up', 'fire', 'jump']) {
+        snap[key] = false;
+        snap.pressed[key] = false;
+      }
+    }
+    return snap;
+  }, render });
 }
 
 // 测试与调试接口：可手动逐帧推进、读状态、暂停

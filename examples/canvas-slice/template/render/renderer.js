@@ -107,17 +107,6 @@ export function createRenderer({ ctx, bank, level, view, night = true }) {
       ctx.fillStyle = i < v.shield ? '#39d0c4' : '#2a3440';
       ctx.fillRect(6 + i * 8, 6, 6, 6);
     }
-    ctx.fillStyle = '#d8d8e0';
-    ctx.font = '8px monospace';
-    ctx.fillText(`tick ${v.tick}`, 6, 22);
-    if (v.status !== 'playing') {
-      ctx.fillStyle = v.status === 'win' ? '#7fe08a' : '#ff6a6a';
-      ctx.font = '16px monospace';
-      ctx.fillText(v.status === 'win' ? 'MISSION CLEAR' : 'MISSION FAILED', VW / 2 - 56, VH / 2);
-      ctx.font = '8px monospace';
-      ctx.fillStyle = '#d8d8e0';
-      ctx.fillText('按 R 重启', VW / 2 - 24, VH / 2 + 14);
-    }
   }
 
   function draw(game) {
