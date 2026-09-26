@@ -10,15 +10,15 @@
 - [x] 建立 `CONTEXT.md`（术语与边界）
 - [x] ADR：平台解耦（0001）、坐标契约（0002）、离线清单（0003）
 - [x] 授权与来源检查：记入 `docs/provenance.md`
-- [ ] 采集 111 精灵基线（RGBA、尺寸、锚点、名称）→ `tests/fixtures/baseline/`
-- [ ] P0 提交
+- [x] 采集 111 精灵基线（RGBA、尺寸、锚点、名称）→ `tests/fixtures/baseline/`
+- [x] P0 提交（cfac45e）
 
 ## P1 像素核心（方案 §7 P1）
 
-- [ ] `core/raster.js`：绘制原语 + 诊断 + 输入校验
-- [ ] `core/ascii.js`、`core/transform.js`、`core/rng.js`、`core/hash.js`
-- [ ] 单元测试：栅格、变换、ASCII、确定性（方案 §8.1）
-- [ ] P1 提交
+- [x] `core/raster.js`：绘制原语 + clip 诊断（error/warn/allow）+ 输入校验 + floor 取整
+- [x] `core/color.js`、`core/ascii.js`、`core/transform.js`、`core/rng.js`、`core/hash.js`、`core/diagnostics.js`
+- [x] 单元测试 35 项：栅格、变换（镜像/旋转/锚点附件点联动）、ASCII、确定性（2026-09-26 全过）
+- [x] P1 提交
 
 ## P2 角色闭环（方案 §7 P2）
 
