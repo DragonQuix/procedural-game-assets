@@ -10,5 +10,8 @@
   "scripts": {
     "test": "node --test",
     "baseline": "node tools/capture-baseline.mjs"
+  },
+  "dependencies": {
+    "pngjs": "7.0.0"
   }
 }

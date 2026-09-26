@@ -4,6 +4,7 @@
  *
  *   node bin/pga.mjs validate <recipe.mjs> [--json]
  *   node bin/pga.mjs bake <recipe.mjs> --out <dir> [--bmp] [--scale N] [--bg #rrggbb]
+ *   node bin/pga.mjs export <recipe.mjs> --out <dir> [--max-page N] [--margin N]
  *   node bin/pga.mjs gallery --dir <dir> [--port N]
  *
  * 退出码：0 成功；2 用法/输入错误；3 烘焙或校验失败；4 覆盖保护拒绝。
@@ -14,6 +15,9 @@ import { pathToFileURL } from 'node:url';
 import { bakeHumanoid } from '../src/recipes/humanoid.js';
 import { assetToJSON } from '../src/adapters/asset-file.js';
 import { encodeBMP } from '../src/export/bmp.js';
+import { encodePNG } from '../src/export/png.js';
+import { packAtlas, renderAtlasPages } from '../src/export/atlas.js';
+import { buildManifest } from '../src/export/manifest.js';
 import { PixelPainter } from '../src/core/raster.js';
 import { scaleNearest } from '../src/core/transform.js';
 import { startGalleryServer } from '../tools/gallery/server.mjs';
@@ -133,6 +137,39 @@ async function cmdGallery(opts) {
   console.log(`画廊已启动：http://127.0.0.1:${port}/ （资产目录 ${dir}，Ctrl+C 停止）`);
 }
 
+/** 导出：与画廊共享同一烘焙实现，增加图集 PNG 与版本化清单。 */
+async function cmdExport(recipePath, opts) {
+  if (!opts.out) fail('export 需要 --out <dir>', 2);
+  const specs = await loadSpecs(recipePath);
+  let assets;
+  try {
+    assets = bakeSpecs(specs);
+  } catch (e) {
+    fail(`烘焙失败：${e.message}`, 3);
+  }
+  const outDir = resolve(opts.out);
+  await ensureOutDir(outDir);
+  await writeFile(join(outDir, MARKER), JSON.stringify({ tool: 'procedural-game-assets', generator: GENERATOR }) + '\n');
+  const packOpts = { maxPage: opts['max-page'] ?? 1024, margin: opts.margin ?? 2 };
+  for (const asset of assets) {
+    let packed;
+    try {
+      packed = packAtlas(asset.frames, packOpts);
+    } catch (e) {
+      fail(`打包失败（${asset.id}）：${e.message}`, 3);
+    }
+    const frameMap = new Map(asset.frames.map((f) => [f.id, f]));
+    const pagePainters = renderAtlasPages(packed, frameMap);
+    for (const [i, p] of pagePainters.entries()) {
+      await writeFile(join(outDir, `${asset.id}.page${i}.png`), encodePNG(p.w, p.h, p.toRGBA()));
+    }
+    const manifest = buildManifest(asset, packed, { generator: GENERATOR });
+    await writeFile(join(outDir, `${asset.id}.manifest.json`), JSON.stringify(manifest, null, 2) + '\n');
+    const pages = manifest.pages.map((p) => `${p.file}(${p.width}×${p.height})`).join(' ');
+    console.log(`✓ ${asset.id}：${asset.frames.length} 帧 → ${pages} + ${asset.id}.manifest.json`);
+  }
+}
+
 const [cmd, ...rest] = process.argv.slice(2);
 const positional = rest.filter((a) => !a.startsWith('--'));
 const opts = {};
@@ -142,14 +179,17 @@ for (let i = 0; i < rest.length; i++) {
 }
 opts.scale = opts.scale ? Number(opts.scale) : undefined;
 opts.port = opts.port ? Number(opts.port) : undefined;
+opts.margin = opts.margin ? Number(opts.margin) : undefined;
+opts['max-page'] = opts['max-page'] ? Number(opts['max-page']) : undefined;
 opts.bg = typeof opts.bg === 'string' ? opts.bg : '#202028';
 
 try {
   if (cmd === 'validate') await cmdValidate(positional[0] ?? fail('validate 需要配方路径', 2), Boolean(opts.json));
   else if (cmd === 'bake') await cmdBake(positional[0] ?? fail('bake 需要配方路径', 2), opts);
+  else if (cmd === 'export') await cmdExport(positional[0] ?? fail('export 需要配方路径', 2), opts);
   else if (cmd === 'gallery') await cmdGallery(opts);
   else {
-    console.error('用法：pga <validate|bake|gallery> ...（见文件头注释）');
+    console.error('用法：pga <validate|bake|export|gallery> ...（见文件头注释）');
     process.exit(cmd ? 2 : 0);
   }
 } catch (e) {
