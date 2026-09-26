@@ -104,6 +104,36 @@ test('init 覆盖保护：vendor/pga 非空拒绝；源无清单拒绝', async (
   assert.equal(r2.status, 2);
 });
 
+test('init 项目名前置校验：同名工具包拒绝且不落任何文件', async (t) => {
+  const root = await mkdtemp(join(tmpdir(), 'pga-init-name-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const source = join(root, 'payload');
+  await mkdir(source, { recursive: true });
+  await makeFakePayload(source);
+
+  // --name 撞工具包名：拒绝，且 vendor/pga 与身份文件都未写入
+  const proj = join(root, 'game-a');
+  const r1 = spawnSync('node', [initScript, proj, '--from', source, '--name', 'procedural-game-assets'], { encoding: 'utf8' });
+  assert.equal(r1.status, 2);
+  assert.match(r1.stderr, /同名/);
+  assert.ok(!existsSync(proj), '校验失败前不得创建项目目录');
+
+  // 目录名撞工具包名（默认取 basename）：同样拒绝
+  const r2 = spawnSync('node', [initScript, join(root, 'procedural-game-assets'), '--from', source], { encoding: 'utf8' });
+  assert.equal(r2.status, 2);
+
+  // 已有 package.json 但 name 仍是工具包名：拒绝且不覆盖
+  const proj3 = join(root, 'game-b');
+  await mkdir(proj3, { recursive: true });
+  await writeFile(join(proj3, 'package.json'), JSON.stringify({ name: 'procedural-game-assets', version: '0.2.1' }) + '\n');
+  const r3 = spawnSync('node', [initScript, proj3, '--from', source], { encoding: 'utf8' });
+  assert.equal(r3.status, 2);
+  assert.match(r3.stderr, /已有 package\.json/);
+  const pkg = JSON.parse(await readFile(join(proj3, 'package.json'), 'utf8'));
+  assert.equal(pkg.version, '0.2.1', '已有文件未被改动');
+  assert.ok(!existsSync(join(proj3, 'vendor')), '校验失败前不得携带');
+});
+
 test('--check：缺失/损坏/多出/身份撞名都失败且非 0', async (t) => {
   const root = await mkdtemp(join(tmpdir(), 'pga-init-check-'));
   t.after(() => rm(root, { recursive: true, force: true }));

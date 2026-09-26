@@ -173,6 +173,17 @@ async function cmdInit(targetArg, opts) {
   }
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   const name = opts.name ?? basename(target);
+  // 项目名校验在写入之前：与工具包同名注定过不了 --check，不能在报告成功后才暴露
+  if (name === TOOLKIT_NAME) {
+    fail(`项目名不能与工具包同名（${TOOLKIT_NAME}）；请用 --name 指定游戏名`, 2);
+  }
+  const existingPkgPath = join(target, 'package.json');
+  if (existsSync(existingPkgPath)) {
+    const existing = JSON.parse(await readFile(existingPkgPath, 'utf8'));
+    if (existing.name === TOOLKIT_NAME) {
+      fail(`目标目录已有 package.json 且 name 仍是工具包名 ${TOOLKIT_NAME}——不是合格的项目身份。请先改名或换目录；本脚本不覆盖已有文件`, 2);
+    }
+  }
   const vendorDir = join(target, 'vendor', 'pga');
   if (existsSync(vendorDir) && (await readdir(vendorDir)).length > 0) {
     fail(`${vendorDir} 已存在且非空；为避免覆盖已拒绝。如需重来请先自行删除该目录`, 4);

@@ -39,8 +39,10 @@ npm run check     # 携带完整性 + 项目身份校验
 init 做三件事：把工具包按发行清单携带到 `vendor/pga/` 并逐文件 sha256 复核
 （缺失/损坏/多出都失败，不静默忽略）；在项目根建立**游戏自己的** package.json、
 CONTEXT.md、README.md；把模板复制为 `game/` 并把 import 改写成指向
-`vendor/pga/` 的相对路径。工具包的 CONTEXT.md 与 `.pga-release.json` 只管理
-`vendor/pga/` 副本，项目根文件不受清单约束——同名文件各归各，没有例外条款。
+`vendor/pga/` 的相对路径。项目名不得与工具包同名（写入前校验，同名直接拒绝；
+目标目录已有 package.json 时同名同样拒绝且不改动它）。工具包的 CONTEXT.md 与
+`.pga-release.json` 只管理 `vendor/pga/` 副本，项目根文件不受清单约束——
+同名文件各归各，没有例外条款。
 游戏代码只经相对路径引用 `vendor/pga/`，不依赖开发仓库、原游戏或全局技能目录。
 改游戏只动 `game/` 与 `tests/`；`vendor/pga/` 视为只读（改了会被 `npm run check` 报出）。
 
