@@ -1,5 +1,6 @@
 node_modules/
 output/
 work/
+examples/*/assets/
 *.log
 .DS_Store

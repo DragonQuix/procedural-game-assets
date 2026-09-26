@@ -67,8 +67,12 @@
 
 ## P6 消费与集成（方案 §7 P6）
 
-- [ ] Canvas 可玩切片
-- [ ] Godot 4 导入器与预览样例（无 Godot 则标未验证）
+- [x] Canvas 切片：移动、动作切换、射击交互（枪口附件点）、日夜对照；只消费导出产物
+- [x] 消费契约集成测试（`tests/integration/consumer-contract.test.js`）：枪口点落枪端像素、锚点贴脚底、镜像 W-x 连续、剪辑时长
+- [x] Godot 4 工程：PGAManifest Resource + @tool PGASprite 显式帧播放器 + demo 场景
+- [x] 无头导入检查通过（Godot 4.6.2-stable，退出码 0）；demo 截图人工确认
+- [x] node --test 87/87 通过（2026-09-26）
+- [x] P6 提交
 
 ## P7 技能封装（方案 §7 P7）
 
