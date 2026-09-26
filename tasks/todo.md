@@ -53,3 +53,11 @@
 - [x] 唯一入口核实：`.codex/skills` 与 `.agents/skills` 各仅一个 procedural-game-assets
 - [x] 载荷重建（115 文件，新测试在载荷中自动跳过）并重装，开发源==安装副本
 - [ ] 发现列表刷新验证：待新会话/重启 Codex App（本会话无法证明）
+
+## 多宿主入口注册（2026-09-26）
+
+- [x] 实机核查 9 宿主惯例（anysearch 参照：skills/<name> 链接到唯一主存储）
+- [x] register-harnesses.mjs：8 宿主 junction → .codex/skills 主存储（读回均 0.2.1），OMP 经 customDirectories 间接生效
+- [x] 修正脚本"错指开发仓库"缺陷并重建全部链接；幂等验证 8/8
+- [x] 端到端测试 register-harnesses.test.js 2 项；载荷 116 文件重装
+- [ ] 各宿主重启/新会话后的技能列表验证（本会话无法证明）

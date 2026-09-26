@@ -1,7 +1,7 @@
 {
   "generator": "procedural-game-assets@0.2.1",
-  "builtFrom": "cff29506500e6b414909b96f17738dc2ab1585d4",
-  "fileCount": 115,
+  "builtFrom": "9dfa99a9e53ffe4dde466cd3b465329ff6218d27",
+  "fileCount": 116,
   "files": {
     "bin/pga.mjs": "f6ce8aaad03e020d99219efaa28c577310dbdea90ab35da0f74b1cb2f23d99a5",
     "CONTEXT.md": "84face18d981fbff6961d1db87cccaebaa6c427a2ed885194b1e6a9fb22a2cde",
@@ -101,6 +101,7 @@
     "tests/integration/demo-presets.test.js": "5e11d7901b6fcb856d70d205bf7375aaf63b4e0183c94c478741ca3d66d81072",
     "tests/integration/export.test.js": "a872dc52543bc7d7d3e617dd06d9ca6b7c4634884f44ffe2939b5b9f83b6888b",
     "tests/integration/install.test.js": "18d295900b70eb623a131543f69cde8e8187812ad6f4898713535371399fb72d",
+    "tests/integration/register-harnesses.test.js": "60dedd23a7b512e4ed5064d05acb12283ac11319169acce005a240c59b53b920",
     "tests/unit/ascii.test.js": "cfb8d6a44d957e396d454ea3cda143571a1d3cb1653072cbbb582e01829db463",
     "tests/unit/atlas.test.js": "9c6294291d943cb1603fb7935db6e5e0ea93c422f968fa9240a0903cfaf14f22",
     "tests/unit/bake.test.js": "b77c40f28787768409ea444c5c1a147e5f791d9af9744608572d4220bd186125",

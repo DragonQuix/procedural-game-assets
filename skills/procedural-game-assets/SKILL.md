@@ -84,6 +84,19 @@ node bin/pga.mjs gallery --dir work/out --port 47840   # 资产画廊（先 bake
 - **音频**：`reference/audio.md`（上一版保留的合成音效/芯片音乐参考），
   可用但未升级为工具包模块，不要声称已由本工具包覆盖。
 
+## 多宿主入口
+
+单一真相源是主存储（`.codex/skills/procedural-game-assets`，哈希校验过的版本）。
+各宿主以链接指向主存储（与 anysearch 同形态）：
+
+- Codex（`.codex/skills` + `.agents/skills`）：`scripts/install.mjs`
+- Claude Code / Cursor / DeepSeek Harness / ZCode / workbuddy / Grok build / Kimi Code：
+  `node scripts/register-harnesses.mjs`（幂等；预置真实目录会备份到发现目录之外）
+- OMP 无自有 skills 目录：经其 `skills.customDirectories`（指向 zcode/grok/dsh/
+  workbuddy/cursor 的 skills 目录）间接生效，无需单独入口。
+
+每个宿主都要各自重启或新开会话后才会刷新技能列表——脚本无法代替该验证。
+
 ## 版本与回滚
 
 技能与工具包版本绑定（`assets/toolkit/package.json` 与 `.pga-release.json` 哈希清单）。

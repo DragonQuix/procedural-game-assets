@@ -50,6 +50,21 @@
   回归测试 `tests/integration/install.test.js` 3 项（载荷中自动跳过）。
 - **发现链路待新会话验证**：技能列表刷新需新会话/重启 Codex App 确认。
 
+## 多宿主注册（2026-09-26）
+
+- 核查：各宿主惯例为 `~/.<harness>/skills/<name>` 链接到唯一主存储（参照 anysearch）。
+  单一真相源保持 `.codex/skills/procedural-game-assets`。
+- 已注册（junction → 主存储，读回均 0.2.1）：
+  `.agents/skills`（Codex 插件层）、`.claude/skills`、`.cursor/skills`、`.dsh/skills`、
+  `.zcode/skills`、`.workbuddy/skills`、`.grok/skills`、`.kimi-code/skills`。
+- OMP：无自有 skills 目录，其 `agent/config.yml` 的 `skills.customDirectories`
+  指向 zcode/grok/dsh/workbuddy/cursor 的 skills 目录，间接生效，未另建入口。
+- 工具：`skills/procedural-game-assets/scripts/register-harnesses.mjs`
+  （幂等；预置真实目录备份到发现目录之外；--dry-run/--list）。
+  端到端测试 `tests/integration/register-harnesses.test.js` 2 项（载荷中自动跳过）。
+- 曾出错并已修正：注册脚本初版把入口错指到开发仓库，已改为默认指向主存储并重建全部链接。
+- **每个宿主需各自重启或新开会话后验证**（本会话无法证明任一宿主的技能列表已刷新）。
+
 ## R1–R3（范围校正后，2026-09-26）
 
 | 阶段 | 验证 | 结果 |
