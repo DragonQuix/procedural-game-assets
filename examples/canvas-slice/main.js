@@ -1,177 +1,93 @@
 /**
- * examples/canvas-slice/main.js — Canvas 消费切片
+ * examples/canvas-slice/main.js — 模板演示引导（浏览器侧）
  *
- * 只消费离线导出产物（manifest + 图集 PNG），不碰烘焙器：
- * - 帧矩形从 manifest.pages/frames 取得
- * - 绘制位置 = 世界坐标 - anchor（锚点对齐脚底）
- * - 子弹出膛点 = 角色位置 + (attachments.muzzle - anchor)，面朝左时 x 取反
- * - 镜像：加载时整页预翻一次；镜像帧锚点 = W - x（ADR-0002 点镜像）
- * - 剪辑播放按 manifest.clips 的毫秒时长驱动
- * 检查清单：移动、一个动作切换（↑朝上瞄准）、一种交互（J 射击）、日夜背景对照（B）。
+ * 接入路径 1（ADR-0004）：启动时烘焙配方 → CanvasBank 缓存 → 运行时 drawImage。
+ * 从仓库根目录启动静态服务后打开本页：
+ *   node tools/static-server.mjs . 47850  →  http://127.0.0.1:47850/examples/canvas-slice/
  */
+import { bakeHumanoid } from '/src/recipes/humanoid.js';
+import { bakeMachine } from '/src/recipes/machine.js';
+import { bakeTerrain } from '/src/recipes/terrain.js';
+import { createCanvasBank } from '/src/adapters/canvas.js';
+import ember from '/examples/recipes/ember.mjs';
+import turret from '/examples/recipes/turret.mjs';
+import ground from '/examples/recipes/ground.mjs';
+import { createGame, TICK_MS } from './template/logic/game.js';
+import { makeLevel } from './template/logic/collision.js';
+import { bindKeyboard } from './template/logic/input.js';
+import { startLoop } from './template/logic/loop.js';
+import { createRenderer } from './template/render/renderer.js';
 
-const VIEW_W = 320;
-const VIEW_H = 180;
-const GROUND_Y = 150;
+const VIEW = { w: 320, h: 180 };
 
+// 1. 启动烘焙（路径 1）：配方 → BakedAsset → CanvasBank
+const assets = [bakeHumanoid(ember), bakeMachine(turret), bakeTerrain(ground)];
+const bank = createCanvasBank({
+  assets,
+  makeCanvas: (w, h) => {
+    const c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    return c;
+  },
+});
+
+// 2. 关卡与内容（数据，不含逻辑）
+import { DEMO_SEED, DEMO_LEVEL_ROWS, DEMO_PLAYER, DEMO_ENEMIES, PRESETS } from './template/demo-content.js';
+
+const level = makeLevel(DEMO_LEVEL_ROWS);
+
+const frameData = new Map(assets.flatMap((a) => a.frames.map((f) => [f.id, f])));
+
+const game = createGame({
+  seed: DEMO_SEED,
+  level,
+  content: {
+    frames: frameData,
+    view: VIEW,
+    player: DEMO_PLAYER,
+    enemies: DEMO_ENEMIES,
+  },
+});
+
+// 3. 渲染与循环
 const cv = document.getElementById('cv');
-const ctx = cv.getContext('2d');
+const display = cv.getContext('2d');
 const scene = document.createElement('canvas');
-scene.width = VIEW_W;
-scene.height = VIEW_H;
-const g = scene.getContext('2d');
+scene.width = VIEW.w;
+scene.height = VIEW.h;
+const renderer = createRenderer({ ctx: scene.getContext('2d'), bank, level, view: VIEW, night: true });
 
-async function loadManifest(id) {
-  const manifest = await (await fetch(`/assets/${id}.manifest.json`)).json();
-  if (manifest.schemaVersion !== 1) throw new Error(`schemaVersion ${manifest.schemaVersion} 与本切片不兼容`);
-  const pages = await Promise.all(
-    manifest.pages.map(
-      (p) =>
-        new Promise((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => resolve(img);
-          img.onerror = () => reject(new Error(`无法加载图集 ${p.file}`));
-          img.src = `/assets/${p.file}`;
-        }),
-    ),
-  );
-  return { manifest, pages };
+function render() {
+  renderer.draw(game);
+  display.imageSmoothingEnabled = false;
+  display.drawImage(scene, 0, 0, cv.width, cv.height);
+  const s = game.state();
+  document.getElementById('dbg').textContent = `${s.status}  tick=${s.tick}  x=${s.player.x}  shield=${s.shield}  enemies=${s.enemies.filter((e) => e.alive).length}  particles=${s.particles.count}`;
 }
 
-const { manifest, pages } = await loadManifest('ember');
-if (manifest.hints?.filter !== 'nearest' || manifest.hints?.mipmap !== false) console.warn('清单采样提示缺失');
-const frames = new Map(manifest.frames.map((f) => [f.id, f]));
+const keyboard = bindKeyboard(window);
 
-// 每页预生成一个水平镜像画布（像素 W-1-i）；镜像帧锚点/附件点用点镜像 W-x
-const flippedPages = pages.map((img) => {
-  const c = document.createElement('canvas');
-  c.width = img.width;
-  c.height = img.height;
-  const cctx = c.getContext('2d');
-  cctx.translate(img.width, 0);
-  cctx.scale(-1, 1);
-  cctx.drawImage(img, 0, 0);
-  return c;
-});
-
-const player = { x: 80, facing: 1, moving: false, firing: 0 };
-const keys = new Set();
-const bullets = [];
-let night = true;
-let last = performance.now();
-const clipClocks = new Map();
-
-addEventListener('keydown', (e) => {
-  keys.add(e.key);
-  if (e.key === 'b' || e.key === 'B') night = !night;
-});
-addEventListener('keyup', (e) => keys.delete(e.key));
-
-function clipFrame(clipName, now) {
-  const clip = manifest.clips[clipName];
-  if (!clip) return null;
-  const seq = clip.frames;
-  const ms = Array.isArray(clip.ms) ? clip.ms : seq.map(() => clip.ms);
-  const total = ms.reduce((a, b) => a + b, 0);
-  if (!clipClocks.has(clipName)) clipClocks.set(clipName, now);
-  let t = (now - clipClocks.get(clipName)) % total;
-  for (let i = 0; i < seq.length; i++) {
-    if (t < ms[i]) return seq[i];
-    t -= ms[i];
-  }
-  return seq[0];
+// 可复现的浏览器验收预设：?preset=fight|win|contact 时先按脚本推进再定格渲染
+//（不启动 rAF 循环），供截图与状态断言；无预设时正常交互。预设数据见 demo-content.js。
+const preset = new URLSearchParams(location.search).get('preset');
+if (preset && PRESETS[preset]) {
+  for (const input of PRESETS[preset]) game.step(1, input);
+  render();
+  console.log(`preset=${preset} 定格：`, JSON.stringify(game.state()));
+} else {
+  startLoop({ game, input: keyboard.snapshot, render });
 }
 
-function frameId(now) {
-  if (player.moving) return keys.has('ArrowUp') ? 'p_stand_up' : clipFrame('run_fwd', now);
-  return keys.has('ArrowUp') ? 'p_stand_up' : 'p_stand_fwd';
-}
-
-/** 附件点的世界坐标（含朝向）：pos + facing * (attachment - anchor) */
-function attachmentWorld(f, name) {
-  const m = f.attachments[name];
-  return { x: player.x + (m.x - f.anchor.x) * player.facing, y: GROUND_Y + (m.y - f.anchor.y) };
-}
-
-function update(dt, now) {
-  player.moving = false;
-  if (keys.has('ArrowLeft')) {
-    player.x -= 0.09 * dt;
-    player.facing = -1;
-    player.moving = true;
-  }
-  if (keys.has('ArrowRight')) {
-    player.x += 0.09 * dt;
-    player.facing = 1;
-    player.moving = true;
-  }
-  player.x = Math.max(20, Math.min(VIEW_W - 20, player.x));
-  if ((keys.has('j') || keys.has('J')) && player.firing <= 0) {
-    const m = attachmentWorld(frames.get(frameId(now)), 'muzzle');
-    bullets.push({ x: m.x, y: m.y, vx: 0.3 * player.facing });
-    player.firing = 120;
-  }
-  player.firing -= dt;
-  for (const b of bullets) b.x += b.vx * dt;
-  for (let i = bullets.length - 1; i >= 0; i--) if (bullets[i].x < -10 || bullets[i].x > VIEW_W + 10) bullets.splice(i, 1);
-}
-
-function drawFrame(fid, wx, wy, facing) {
-  const f = frames.get(fid);
-  if (!f) return;
-  const dy = Math.round(wy - f.anchor.y);
-  if (facing > 0) {
-    g.drawImage(pages[f.page], f.rect.x, f.rect.y, f.rect.w, f.rect.h, Math.round(wx - f.anchor.x), dy, f.rect.w, f.rect.h);
-  } else {
-    // 镜像帧：rect 在预翻页上的位置 + 锚点点镜像 W-x
-    const page = pages[f.page];
-    const fx = page.width - f.rect.x - f.rect.w;
-    const ax = f.rect.w - f.anchor.x;
-    g.drawImage(flippedPages[f.page], fx, f.rect.y, f.rect.w, f.rect.h, Math.round(wx - ax), dy, f.rect.w, f.rect.h);
-  }
-}
-
-function drawBackground() {
-  const sky = g.createLinearGradient(0, 0, 0, VIEW_H);
-  if (night) {
-    sky.addColorStop(0, '#0a0e1e');
-    sky.addColorStop(1, '#1c2846');
-  } else {
-    sky.addColorStop(0, '#7db4e0');
-    sky.addColorStop(1, '#d8ecf4');
-  }
-  g.fillStyle = sky;
-  g.fillRect(0, 0, VIEW_W, VIEW_H);
-  if (night) {
-    g.fillStyle = '#e8ecff';
-    for (let i = 0; i < 24; i++) g.fillRect((i * 53) % VIEW_W, ((i * 29) % 90) + 4, 1, 1);
-  }
-  g.fillStyle = night ? '#10160f' : '#5e7a42';
-  g.fillRect(0, GROUND_Y, VIEW_W, VIEW_H - GROUND_Y);
-  g.fillStyle = night ? '#1d2a1a' : '#74904e';
-  g.fillRect(0, GROUND_Y, VIEW_W, 2);
-}
-
-function render(now) {
-  drawBackground();
-  const fid = frameId(now);
-  drawFrame(fid, player.x, GROUND_Y, player.facing);
-  for (const b of bullets) {
-    g.fillStyle = '#ffe08a';
-    g.fillRect(Math.round(b.x) - 2, Math.round(b.y) - 1, 4, 2);
-  }
-  const m = attachmentWorld(frames.get(fid), 'muzzle'); // 调试叠加：枪口附件点
-  g.fillStyle = '#ff4040';
-  g.fillRect(Math.round(m.x) - 1, Math.round(m.y) - 1, 3, 3);
-  ctx.imageSmoothingEnabled = false;
-  ctx.drawImage(scene, 0, 0, cv.width, cv.height);
-}
-
-function loop(now) {
-  const dt = Math.min(50, now - last);
-  last = now;
-  update(dt, now);
-  render(now);
-  requestAnimationFrame(loop);
-}
-requestAnimationFrame(loop);
+// 测试与调试接口：可手动逐帧推进、读状态、暂停
+window.__game = {
+  step: (n, input) => {
+    game.step(n, input);
+    render();
+  },
+  state: () => game.state(),
+  setPaused: (b) => game.setPaused(b),
+  tickMs: TICK_MS,
+};
+render();
+console.log('启动烘焙完成：', bank.frameIds().length, '帧入缓存；__game.step(n, input) 可手动推进');
