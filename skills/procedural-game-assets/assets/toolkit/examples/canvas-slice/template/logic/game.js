@@ -33,6 +33,8 @@ export function createGame({ seed = 1, level, content }) {
   const params = { ...DEFAULT_PARAMS, ...(content.params ?? {}) };
   const frames = content.frames; // Map 或普通对象：frameId -> { anchor, attachments, width, height }
   const getFrame = (id) => (frames instanceof Map ? frames.get(id) : frames[id]);
+  // 开火帧由内容声明（资产命名属于内容，不属于逻辑层）
+  const aimFrames = content.aimFrames ?? { fwd: 'p_stand_fwd', up: 'p_stand_up' };
   const initial = structuredClone({
     player: { x: content.player.x, y: content.player.y, w: content.player.w ?? 14, h: content.player.h ?? 30, vx: 0, vy: 0, onGround: true },
     enemies: content.enemies.map((e) => ({ hp: 3, alive: true, flashTicks: 0, ...e })),
@@ -105,8 +107,9 @@ export function createGame({ seed = 1, level, content }) {
     // 射击（交互）：子弹从枪口附件点出膛
     aimUp = Boolean(input.up);
     if (input.fire && fireCd <= 0) {
-      const fid = aimUp ? 'p_stand_up' : 'p_stand_fwd';
+      const fid = aimUp ? aimFrames.up : aimFrames.fwd;
       const f = getFrame(fid);
+      if (!f) throw new Error(`开火帧 '${fid}' 不存在（content.aimFrames 须指向内容帧）`);
       const m = attachmentWorld(f, 'muzzle', { x: player.x + player.w / 2, y: player.y + player.h }, facing);
       lastMuzzle = m;
       bullets.push({ x: m.x, y: m.y, vx: aimUp ? 0 : params.bulletSpeed * facing, vy: aimUp ? -params.bulletSpeed : 0, life: params.bulletLife });

@@ -1,6 +1,6 @@
 {
-  "generator": "procedural-game-assets@0.2.0",
-  "builtFrom": "43805103efafd183662d714399703ecde50344fd",
+  "generator": "procedural-game-assets@0.2.1",
+  "builtFrom": "8de14879105d5c439d388ccebbb37370c14a89d9",
   "fileCount": 114,
   "files": {
     "bin/pga.mjs": "f6ce8aaad03e020d99219efaa28c577310dbdea90ab35da0f74b1cb2f23d99a5",
@@ -19,7 +19,7 @@
     "examples/canvas-slice/README.md": "77c7c0ba24f1eb95d38248abfcf65fbc041cf29ed7f82a1f2f55a771c07a2f6f",
     "examples/canvas-slice/template/demo-content.js": "f105bad4008f329bb09f8bcec721daa8342924ce04fed78b9529cdcdec8d44cc",
     "examples/canvas-slice/template/logic/collision.js": "e9fe332f9a499a9195628dd91b16e7e7367170aeaea56d0eb2602381b54dfe5e",
-    "examples/canvas-slice/template/logic/game.js": "de7025ef85680b962fd33498a46699d849784aa450f0a76861933a8594039775",
+    "examples/canvas-slice/template/logic/game.js": "f74e7f0c6560fb93b7116d0c2dc34af04f79ada83b233e1cc75c056d770504a5",
     "examples/canvas-slice/template/logic/input.js": "bab13b4c3718def8b0377291262209be0d855e25882ce2a0123ced9370507939",
     "examples/canvas-slice/template/logic/loop.js": "93175194460db0149cca9420a8a1cb3ce60ea68b5e15f8e049721bdcd3e8a04e",
     "examples/canvas-slice/template/logic/particles.js": "97e0e97e933c705a5d4a64b1bebe30f451508395d225d2d056fa300ccbde34a0",
@@ -72,7 +72,7 @@
     "node_modules/pngjs/package.json": "85b17f2f852aece03e71edb4ed4d9fddf6a0a8f0b69ac75d7f00b6592d62d37c",
     "node_modules/pngjs/README.md": "1d90045508b00719a3f9415f8a57cddfba05f9ea51746c48ffed8122ad68bf85",
     "package-lock.json": "3feaadb2a5ec509702526093ccd8f67122114349fba11e20e80d310763e7fa37",
-    "package.json": "d05de75f3d29f9114cf913dd64f695f40d6b1a3d25f07f97ce9047648f0fd764",
+    "package.json": "e585ed7fa50f2c452109e10953ba3aa2777a89a384d2680e5c540c01d720ab00",
     "src/adapters/asset-file.js": "957f66aa4d8e602346127d3f9a920b42c5fb62f92b978ee2fde9d691d09dee5e",
     "src/adapters/canvas.js": "0a8125fa84290d0cdde92f07f2dd3fabfc84e2d1842c5c6db0861cccee3ae5a2",
     "src/bake/asset.js": "960a077e56a5ea9acf9f07fbd0d98159b772e17fb0591f89be312ec6e20aac3f",

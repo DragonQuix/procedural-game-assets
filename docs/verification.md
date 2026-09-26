@@ -30,18 +30,38 @@
 - 窗口模式 demo 截图人工确认：跑姿贴地面参考线、枪口红点、nearest 无串色。
 - 编辑器内人工预览（F5）步骤已写入 `examples/godot/README.md`，本会话未执行。
 
-## 技能安装（P7）
+## 技能安装（P7 + R3）
 
-- 主存储：`C:/Users/admin/.codex/skills/procedural-game-assets`（新建，无覆盖）。
-- 旧版备份：`C:/Users/admin/.agents/skills/procedural-game-assets.backup-20260926094152`（未删除）。
+- 主存储：`C:/Users/admin/.codex/skills/procedural-game-assets`（当前 0.2.1）。
+- 备份链：`.agents/...backup-20260926094152`（初版真目录）、
+  `.codex/...backup-20260926101924`（0.1.0）、`.codex/...backup-20260926102505`（0.2.0）。
 - 发现入口：`C:/Users/admin/.agents/skills/procedural-game-assets`（junction → 主存储）。
-- 安装前后载荷哈希（100 文件）均校验通过；已安装位置测试 87/87。
 - **发现链路待新会话验证**：技能能否被 Codex 发现并触发，需新会话/重启确认。
+
+## R1–R3（范围校正后，2026-09-26）
+
+| 阶段 | 验证 | 结果 |
+|---|---|---|
+| R1 网页接入 | adapters/canvas.js CanvasBank（注入工厂、变体缓存、与导出同源）；stub 测试 7 项 | 109/109 |
+| R2 模板 | 逻辑层 11 项 + demo-presets 5 项（确定性/碰撞/交互/胜负/暂停重启）；浏览器三预设截图人工确认 | 109/109 |
+| R3 技能改版 | 载荷 114 文件哈希一致，两处独立运行 109/109；0.1.0/0.2.0 备份保留 | 通过 |
+
+## R4 首版验收（v2，实施者干净目录复用，非独立 Agent 试验）
+
+目录：`E:/Repos/Tools/pga-acceptance`（提交 7d42571），起点仅为已安装载荷。
+
+- 新角色族 snowowl 两体型、scorp 机械、tundra 地形（与示例明显不同）；
+  可玩切片「雪原突击」：移动、射击交互、雪原肃清/任务失败、白闪与粒子反馈。
+- 机测 `work/game.test.mjs` 6/6（三预设、确定性、内容契约）；
+  浏览器截图：初始 + assault/clear/hit 三预设人工确认。
+- 验收发现并已修复：模板帧名硬编码（工具包 0.2.1 改 content.aimFrames）、
+  敌人盒高度差 1px、bastion 眉影、子弹浅背景配色。资产核心零修改。
+- 无对照组：只声称"复用成功"，不声称质量提升百分比。
 
 ## 未验证项（如实记录）
 
-- 独立 Agent 复用试验（P8 需用户授权，尚未进行）。
-- Godot 编辑器人工预览（F5）与导入插件形式的编辑器集成（首版不计划）。
+- 独立 Agent 复用试验（需用户授权，未进行）。
+- 技能发现链路（新会话/重启 Codex App 后确认）。
+- Godot 编辑器人工预览（F5）；Godot 后续增强（冻结）。
 - 音频模块（旧技能保留参考，未升级为工具包模块）。
-- 跨平台（Linux/macOS）与 Node 23+ 未测；pngjs 字节级输出跨版本一致性未测
-  （判据为解码后 RGBA，ADR-0003）。
+- 跨平台（Linux/macOS）与 Node 23+ 未测。
