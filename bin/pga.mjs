@@ -52,7 +52,11 @@ async function loadSpecs(recipePath) {
 }
 
 function bakeSpecs(specs) {
-  return specs.map((s) => BAKERS[s.kind](s));
+  return specs.map((s) => {
+    let asset = BAKERS[s.kind](s);
+    if (typeof s.postBake === 'function') asset = s.postBake(asset) ?? asset; // 配方可追加手工帧（如故障示例）
+    return asset;
+  });
 }
 
 async function cmdValidate(recipePath, json) {

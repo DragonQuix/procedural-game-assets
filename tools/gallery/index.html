@@ -9,9 +9,17 @@
 <header>
   <strong>PGA 画廊</strong>
   <label>资产 <select id="asset"></select></label>
+  <label>对比 <select id="compare"></select></label>
   <label>缩放 <select id="zoom"><option>1</option><option>2</option><option selected>4</option><option>8</option></select>×</label>
   <label><input type="checkbox" id="grid" checked> 网格</label>
-  <label>背景 <select id="bg"><option value="dark">深色</option><option value="light">浅色</option><option value="checker">棋盘</option></select></label>
+  <label>变体 <select id="variant">
+    <option value="orig">原图</option><option value="flip">镜像</option>
+    <option value="flash">白闪</option><option value="sil">剪影</option><option value="gray">灰度</option>
+  </select></label>
+  <label>背景 <select id="bg">
+    <option value="dark">深色</option><option value="light">浅色</option><option value="checker">棋盘</option>
+    <option value="night">夜间场景</option><option value="day">日间场景</option>
+  </select></label>
   <label><input type="checkbox" id="ovAnchor" checked> 锚点</label>
   <label><input type="checkbox" id="ovAttach" checked> 附件点</label>
   <label><input type="checkbox" id="ovBounds"> 包围盒</label>
@@ -23,7 +31,11 @@
 <main>
   <aside id="frames"></aside>
   <section id="stage">
-    <canvas id="cv"></canvas>
+    <div id="canvases">
+      <canvas id="cv"></canvas>
+      <canvas id="cv2"></canvas>
+    </div>
+    <div id="cmpLabel"></div>
     <div id="info"></div>
   </section>
 </main>
