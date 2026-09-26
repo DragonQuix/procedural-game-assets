@@ -47,6 +47,17 @@ export function pad(src, padPx) {
   return p;
 }
 
+/** 最近邻整数放大 k 倍（预览与 BMP 导出用；k 为正整数）。 */
+export function scaleNearest(src, k) {
+  if (!Number.isInteger(k) || k < 1) throw new RangeError(`非法放大倍数：${k}`);
+  if (k === 1) return src.clone();
+  const p = new PixelPainter(src.w * k, src.h * k, { clip: 'error' });
+  for (let y = 0; y < p.h; y++) {
+    for (let x = 0; x < p.w; x++) p.data[y * p.w + x] = src.data[Math.floor(y / k) * src.w + Math.floor(x / k)];
+  }
+  return p;
+}
+
 /* ---------- 几何点变换（锚点/附件点，像素边界坐标） ---------- */
 
 /** 水平镜像点：(x,y) → (W-x, y)。W 为帧宽（边界坐标）。 */
