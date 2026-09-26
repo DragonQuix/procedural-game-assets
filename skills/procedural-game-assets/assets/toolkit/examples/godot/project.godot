@@ -1,0 +1,11 @@
+; Godot 4 工程配置（PGA 消费示例）
+; 已验证版本：Godot 4.6.2-stable（见 README.md，不宣称覆盖全部 4.x）
+config_version=5
+
+[application]
+config/name="PGA Godot 消费示例"
+run/main_scene="res://scenes/demo.tscn"
+
+[rendering]
+; 像素资产默认最近邻采样；图集由 pngjs 离线生成、不带 mipmap
+textures/canvas_textures/default_texture_filter=0

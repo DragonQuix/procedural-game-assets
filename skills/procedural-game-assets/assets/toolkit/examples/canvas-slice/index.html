@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>PGA Canvas 切片</title>
+<style>
+  body { margin: 0; background: #17171d; color: #d8d8e0; font: 13px/1.6 system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; }
+  canvas { image-rendering: pixelated; margin-top: 12px; }
+  p { max-width: 640px; color: #9ab; }
+  kbd { background: #2c2c38; padding: 0 4px; border: 1px solid #444; }
+</style>
+</head>
+<body>
+<canvas id="cv" width="960" height="540"></canvas>
+<p>
+  <kbd>←</kbd><kbd>→</kbd> 移动　<kbd>↑</kbd> 朝上瞄准（动作切换）　<kbd>J</kbd> 射击（子弹从枪口附件点出膛）　<kbd>B</kbd> 日/夜切换<br>
+  本切片直接消费 <code>assets/ember.manifest.json</code> 与图集 PNG：帧矩形、锚点、附件点与剪辑毫秒时长全部来自清单。
+  准备资产：<code>node bin/pga.mjs export examples/recipes/ember.mjs --out examples/canvas-slice/assets</code>
+</p>
+<script type="module" src="/main.js"></script>
+</body>
+</html>

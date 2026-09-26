@@ -76,7 +76,14 @@
 
 ## P7 技能封装（方案 §7 P7）
 
-- [ ] 升级现有技能、发行打包、安装脚本与回滚
+- [x] 环境核查：CODEX_HOME=`C:/Users/admin/.codex`；主存储惯例=`.codex/skills/<name>` + `.agents/skills` junction；旧技能为真实目录无链接
+- [x] 新 SKILL.md：触发条件、执行入口、关键约束、视觉诊断路径、验收标准；音频入口保留并标注未升级
+- [x] reference/：toolkit-api、visual-diagnosis、godot、audio（逐字保留）
+- [x] `tools/release.mjs`：100 文件载荷 + sha256 清单；载荷独立运行 87/87
+- [x] `scripts/install.mjs`：哈希校验 → 备份 → 主存储 → junction → 安装后验证（失败回滚）
+- [x] 已安装：主存储 `.codex/skills/...`；旧版备份 `...backup-20260926094152`；入口 junction
+- [ ] 发现链路新会话验证（无法在本会话完成，已如实记录）
+- [x] P7 提交
 
 ## P8 复用与发布验收（方案 §7 P8）
 
