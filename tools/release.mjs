@@ -8,11 +8,11 @@
  *
  * 用法：node tools/release.mjs [--check]   --check 只校验不重新生成
  */
-import { createHash } from 'node:crypto';
-import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
-import { dirname, join, relative } from 'node:path';
+import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { MANIFEST_NAME, hashTree, verifyTree } from './release-manifest.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url)) + '/..';
 const payloadDir = join(root, 'skills/procedural-game-assets/assets/toolkit');
@@ -27,6 +27,8 @@ const PAYLOAD = [
   ['src', 'src'],
   ['tools/gallery', 'tools/gallery'],
   ['tools/static-server.mjs', 'tools/static-server.mjs'],
+  ['tools/release-manifest.mjs', 'tools/release-manifest.mjs'],
+  ['tools/init-project.mjs', 'tools/init-project.mjs'],
   ['examples/recipes', 'examples/recipes'],
   ['examples/faults', 'examples/faults'],
   ['examples/canvas-slice', 'examples/canvas-slice'],
@@ -41,24 +43,6 @@ const PAYLOAD = [
 
 /** 载荷内排除的派生/本地文件 */
 const EXCLUDE = /[\\/]assets([\\/]|$)|demo-capture\.png$|node_modules[\\/]\.package-lock/;
-
-const sha256 = (buf) => createHash('sha256').update(buf).digest('hex');
-
-async function* walk(dir) {
-  for (const entry of await readdir(dir, { withFileTypes: true })) {
-    const p = join(dir, entry.name);
-    if (entry.isDirectory()) yield* walk(p);
-    else if (entry.isFile()) yield p;
-  }
-}
-
-async function hashTree(dir) {
-  const files = {};
-  for await (const p of walk(dir)) {
-    files[relative(dir, p).replaceAll('\\', '/')] = sha256(await readFile(p));
-  }
-  return files;
-}
 
 async function build() {
   const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
@@ -84,25 +68,27 @@ async function build() {
     // 无 git 环境时保留 unknown
   }
   const files = await hashTree(payloadDir);
-  const manifest = { generator: `procedural-game-assets@${pkg.version}`, builtFrom: commit, fileCount: Object.keys(files).length, files };
-  await writeFile(join(payloadDir, '.pga-release.json'), JSON.stringify(manifest, null, 2) + '\n');
+  const manifest = {
+    generator: `procedural-game-assets@${pkg.version}`,
+    builtFrom: commit,
+    fileCount: Object.keys(files).length,
+    pathRoot: '工具包根（携带后的 vendor/pga/）；files 键为相对该根的 POSIX 路径',
+    files,
+  };
+  await writeFile(join(payloadDir, MANIFEST_NAME), JSON.stringify(manifest, null, 2) + '\n');
   console.log(`载荷已生成：${payloadDir}`);
   console.log(`版本 ${pkg.version}，来源提交 ${commit.slice(0, 7)}，${manifest.fileCount} 个文件`);
   await check();
 }
 
 async function check() {
-  const manifest = JSON.parse(await readFile(join(payloadDir, '.pga-release.json'), 'utf8'));
-  const actual = await hashTree(payloadDir);
-  delete actual['.pga-release.json'];
-  const missing = Object.keys(manifest.files).filter((f) => !(f in actual));
-  const extra = Object.keys(actual).filter((f) => !(f in manifest.files));
-  const changed = Object.keys(manifest.files).filter((f) => actual[f] && actual[f] !== manifest.files[f]);
-  if (missing.length || extra.length || changed.length) {
+  const manifest = JSON.parse(await readFile(join(payloadDir, MANIFEST_NAME), 'utf8'));
+  const diff = await verifyTree(payloadDir);
+  if (diff) {
     console.error('载荷校验失败：');
-    for (const f of missing) console.error(`  缺失 ${f}`);
-    for (const f of extra) console.error(`  多出（疑似手工修改）${f}`);
-    for (const f of changed) console.error(`  改动（疑似手工修改）${f}`);
+    for (const f of diff.missing) console.error(`  缺失 ${f}`);
+    for (const f of diff.extra) console.error(`  多出（疑似手工修改）${f}`);
+    for (const f of diff.changed) console.error(`  改动（疑似手工修改）${f}`);
     process.exit(3);
   }
   console.log(`载荷校验通过：${manifest.fileCount} 个文件哈希一致`);
