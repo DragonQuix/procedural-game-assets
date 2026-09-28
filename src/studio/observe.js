@@ -73,3 +73,157 @@ export function buildViews(compiled, opts = {}) {
   }
   return views;
 }
+
+/* ---------- 角色（多帧）视图与播放材料 ---------- */
+
+/** 纯 JS base64（核心无 Buffer 依赖；bytes → base64 字符串）。 */
+function base64Encode(bytes) {
+  const TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+  let out = '';
+  for (let i = 0; i < bytes.length; i += 3) {
+    const a = bytes[i];
+    const b = i + 1 < bytes.length ? bytes[i + 1] : 0;
+    const c = i + 2 < bytes.length ? bytes[i + 2] : 0;
+    out += TABLE[a >> 2] + TABLE[((a & 3) << 4) | (b >> 4)] + (i + 1 < bytes.length ? TABLE[((b & 15) << 2) | (c >> 6)] : '=') + (i + 2 < bytes.length ? TABLE[c & 63] : '=');
+  }
+  return out;
+}
+
+/**
+ * 角色编译结果 → 逐帧视图 + 自包含播放页（player.html）。
+ * 播放材料：帧以 data URL 内嵌，按剪辑毫秒时长用 requestAnimationFrame 逐帧播放，
+ * 可暂停/逐帧步进/切换剪辑；是真实播放材料，不是静态帧拼图。PNG 编码在 IO 层：
+ * 调用方传 encode(width,height,rgba)→PNG 字节后才有 playerHtml，否则为 null。
+ */
+export function buildCharacterViews(compiled, opts = {}) {
+  const scale = opts.displayScale ?? 4;
+  const background = opts.background ?? '#202028';
+  const encode = opts.encode;
+  const frames = compiled.asset.frames.map((f) => {
+    const scaled = scaleNearest(PixelPainter.fromRGBA(f.width, f.height, f.rgba), scale);
+    return { id: f.id, native: frameView(f), display: withBackground(scaled, background) };
+  });
+  let playerHtml = null;
+  if (typeof encode === 'function') {
+    const frameData = compiled.asset.frames.map((f) => {
+      const scaled = scaleNearest(PixelPainter.fromRGBA(f.width, f.height, f.rgba), Math.max(2, scale));
+      const bg = withBackground(scaled, background);
+      return { id: f.id, width: bg.width, height: bg.height, dataUrl: `data:image/png;base64,${base64Encode(encode(bg.width, bg.height, bg.rgba))}` };
+    });
+    playerHtml = buildPlayerHtml(compiled, frameData, { background });
+  }
+  return { frames, playerHtml };
+}
+
+/** 自包含播放页（无外部资源；file:// 直接打开可播）。 */
+export function buildPlayerHtml(compiled, frameData, opts = {}) {
+  const background = opts.background ?? '#202028';
+  const payload = JSON.stringify({
+    id: compiled.asset.id,
+    frames: frameData,
+    clips: compiled.asset.clips,
+    renderHash: compiled.hashes.renderHash,
+  });
+  return `<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>PGA Studio 播放预览 — ${compiled.asset.id}</title>
+<style>
+  body { background: #17171d; color: #d8d8e0; font: 14px/1.5 system-ui, sans-serif; margin: 24px; }
+  h1 { font-size: 16px; } code { color: #8ff0e8; }
+  .stage { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+  canvas { background: ${background}; image-rendering: pixelated; border: 1px solid #333; }
+  button { background: #2a2a33; color: inherit; border: 1px solid #444; padding: 4px 10px; margin: 2px; cursor: pointer; }
+  button.active { border-color: #8ff0e8; }
+  .meta { color: #9a9aa5; font-size: 12px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<h1>PGA Studio 播放预览：<code>${compiled.asset.id}</code></h1>
+<div class="stage">
+  <div>
+    <canvas id="cv"></canvas>
+    <div class="meta" id="info"></div>
+    <div id="ctl">
+      <button data-act="play">播放/暂停</button>
+      <button data-act="prev">‹ 上一帧</button>
+      <button data-act="next">下一帧 ›</button>
+    </div>
+    <div id="clips"></div>
+  </div>
+</div>
+<div class="meta">renderHash=<code>${compiled.hashes.renderHash}</code>；帧内嵌为 data URL，时长来自资产剪辑（毫秒）。</div>
+<script id="pga-data" type="application/json">${payload.replace(/</g, '\u003c')}</script>
+<script>
+const DATA = JSON.parse(document.getElementById('pga-data').textContent);
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const info = document.getElementById('info');
+const byId = new Map(DATA.frames.map((f) => [f.id, f]));
+const images = new Map();
+let clipName = Object.keys(DATA.clips)[0] ?? null;
+let frameIds = clipName ? DATA.clips[clipName].frames : DATA.frames.map((f) => f.id);
+let durations = clipName ? (Array.isArray(DATA.clips[clipName].ms) ? DATA.clips[clipName].ms : frameIds.map(() => DATA.clips[clipName].ms)) : frameIds.map(() => 500);
+let idx = 0;
+let playing = true;
+
+function draw() {
+  const f = byId.get(frameIds[idx]);
+  const img = images.get(f.id);
+  cv.width = f.width;
+  cv.height = f.height;
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  if (img && img.complete) ctx.drawImage(img, 0, 0);
+  info.textContent = (clipName ? '剪辑 ' + clipName + ' · ' : '') + '帧 ' + frameIds[idx] + '（' + (idx + 1) + '/' + frameIds.length + '，' + durations[idx] + 'ms）' + (playing ? ' · 播放中' : ' · 已暂停');
+}
+function select(name) {
+  clipName = name;
+  frameIds = name ? DATA.clips[name].frames : DATA.frames.map((f) => f.id);
+  const ms = name ? DATA.clips[name].ms : 500;
+  durations = Array.isArray(ms) ? ms : frameIds.map(() => ms);
+  idx = 0;
+  acc = 0;
+  for (const b of document.querySelectorAll('#clips button')) b.classList.toggle('active', b.dataset.clip === name);
+  draw();
+}
+const clipsBox = document.getElementById('clips');
+for (const name of Object.keys(DATA.clips)) {
+  const b = document.createElement('button');
+  b.textContent = name;
+  b.dataset.clip = name;
+  b.onclick = () => select(name);
+  clipsBox.appendChild(b);
+}
+document.getElementById('ctl').addEventListener('click', (e) => {
+  const act = e.target.dataset.act;
+  if (act === 'play') playing = !playing;
+  if (act === 'prev') { idx = (idx - 1 + frameIds.length) % frameIds.length; playing = false; }
+  if (act === 'next') { idx = (idx + 1) % frameIds.length; playing = false; }
+  draw();
+});
+function tick(now) {
+  if (playing) {
+    if (!lastTick) lastTick = now;
+    acc += now - lastTick;
+    while (acc >= durations[idx]) { acc -= durations[idx]; idx = (idx + 1) % frameIds.length; }
+    lastTick = now;
+    draw();
+  } else {
+    lastTick = 0;
+  }
+}
+let acc = 0;
+let lastTick = 0;
+let loaded = 0;
+for (const f of DATA.frames) {
+  const img = new Image();
+  img.onload = () => { if (++loaded === DATA.frames.length) { select(clipName); setInterval(() => tick(performance.now()), 50); requestAnimationFrame(function raf(t) { tick(t); requestAnimationFrame(raf); }); } };
+  img.src = f.dataUrl;
+  images.set(f.id, img);
+}
+</script>
+</body>
+</html>
+`;
+}

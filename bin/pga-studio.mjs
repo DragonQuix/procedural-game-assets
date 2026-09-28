@@ -11,11 +11,10 @@
  *   node bin/pga-studio.mjs state   --ws <dir>
  *   node bin/pga-studio.mjs inspect --ws <dir> [--revision rN] [--out <dir>] [--node <id>]
  *   node bin/pga-studio.mjs export  --ws <dir> [--revision rN] --out <dir>
- *   node bin/pga-studio.mjs edit    --ws <dir> --base rN --op <id> --target <node>
- *                                   [--params '{"w":28}' | --material X | --ramp X]
- *                                   [--preserve '<json数组>'] [--request-id id]
- *   node bin/pga-studio.mjs explore --ws <dir> --base rN --op <id> --target <node>
- *                                   --field w --values 24,26,28 [--preserve '<json数组>'] [--request-id id]
+ *   node bin/pga-studio.mjs edit    --ws <dir> --base rN --op <id> --target <目标>
+ *                                   [--params '{"w":28}' | --material X | --ramp X | --value <值>]
+ *   node bin/pga-studio.mjs explore --ws <dir> --base rN --op <id> --target <目标>
+ *                                   [--field w] --values 24,26,28 [--preserve '<json数组>'] [--request-id id]
  *   node bin/pga-studio.mjs commit  --ws <dir> (--accept <candidateId> | --restore rN)
  *                                   --expected-head rN [--request-id id]
  *
@@ -88,8 +87,17 @@ function commonOpts() {
 }
 
 function buildOperation() {
-  const id = requireOpt('op', '需要 --op <geometry.set|material.set|ramp.set>');
-  const target = requireOpt('target', `操作 ${id} 需要 --target <nodeId>`);
+  const id = requireOpt('op', '需要 --op <geometry.set|material.set|ramp.set|palette.set|rig.set|art.set>');
+  const target = requireOpt('target', `操作 ${id} 需要 --target <目标>`);
+  if (id === 'palette.set' || id === 'rig.set' || id === 'art.set') {
+    // 角色操作（pga-studio/character/1）：统一 { id, target, value }
+    const raw = requireOpt('value', `${id} 需要 --value <值>（颜色 '#rrggbb' / 整数 / ASCII 行 JSON 数组）`);
+    try {
+      return { id, target, value: JSON.parse(raw) };
+    } catch {
+      return { id, target, value: raw };
+    }
+  }
   if (id === 'geometry.set') {
     const params = jsonOpt('params', null);
     if (!params) fail('INVALID_DOCUMENT', `geometry.set 需要 --params '{"w":28}'`, 2);
@@ -111,8 +119,28 @@ function buildOperation() {
 }
 
 function buildExploreSpec() {
-  const id = requireOpt('op', '需要 --op <geometry.set|material.set|ramp.set>');
-  const target = requireOpt('target', `操作 ${id} 需要 --target <nodeId>`);
+  const id = requireOpt('op', '需要 --op <geometry.set|material.set|ramp.set|palette.set|rig.set|art.set>');
+  const target = requireOpt('target', `操作 ${id} 需要 --target <目标>`);
+  if (id === 'palette.set' || id === 'rig.set' || id === 'art.set') {
+    // 角色探索：{ id, target, values }（无 field）
+    const raw = requireOpt('values', 'explore 需要 --values <逗号分隔或 JSON 数组>');
+    if (raw.startsWith('[')) {
+      try {
+        return { id, target, values: JSON.parse(raw) };
+      } catch (e) {
+        fail('INVALID_DOCUMENT', `--values 不是合法 JSON 数组：${e.message}`, 2);
+      }
+    }
+    return {
+      id,
+      target,
+      values: raw.split(',').map((s) => {
+        const t = s.trim();
+        const n = Number(t);
+        return t !== '' && Number.isFinite(n) ? n : t;
+      }),
+    };
+  }
   const field = requireOpt('field', 'explore 需要 --field <字段>');
   const raw = requireOpt('values', 'explore 需要 --values <逗号分隔取值或 JSON 数组>');
   if (raw.startsWith('[')) {

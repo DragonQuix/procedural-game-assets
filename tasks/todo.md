@@ -90,7 +90,18 @@
 - [x] 留出组合试点 H1（仪表新建＋局部覆盖）/ H2（poly 顶点缩短）均 PASS，客观核验
 - [x] 指南更新（/2 词汇、保护语义警示、过窄 poly 边界、--preserve 格式）
 - [ ] M4 留空：比例/细节尺度规则、正反例库、构造件库
-- [ ] M5：角色跨帧一致修改（下一项见 plans/agent-studio.md）
+
+## S5 PGA Studio M5（2026-09-28，ADR-0011）
+
+- [x] ADR-0011（角色数据面 / 跨帧不变量 / 播放材料）
+- [x] `pga-studio/character/1` 校验与能力；锈爪样例与 bakeHumanoid 逐字节等价（锚点 11c587dd:d890d15f）
+- [x] palette.set / rig.set / art.set 跨帧一致；受影响帧/附件点/剪辑自动报告；dead 姿态 notCovered
+- [x] 锚点/接地（底缘）不变量；metadata 保护命中实证（attachments.muzzle）
+- [x] dispatch 统一分派；store/CLI 文档类型无关；player.html 播放材料（墙钟计时修复）
+- [x] 新测试 19 项；全套件 312/312；m5-demo 六步全过
+- [x] 真实浏览器播放验证：run_fwd 帧计数前进并截图；改色前后对比图实际查看
+- [ ] M5 留空：帧覆盖、任意骨架/生物、角色 pixels/structure 保护、APNG/GIF
+- [ ] M6：发行核对（下一项见 plans/agent-studio.md）
 
 ## 发现入口与备份收敛（2026-09-26，单独任务）
 

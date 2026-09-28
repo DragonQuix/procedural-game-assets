@@ -208,6 +208,50 @@ node bin/pga-studio.mjs export --doc <file.json> --out <dir>
 图集默认每帧四周留 2px 透明边距（`--margin`），所以单帧 32×32 的页面会是 36×36 之类；
 页面尺寸 = 帧尺寸 + 2×margin，不是错误。
 
+## 5. 角色文档（pga-studio/character/1，M5 起）
+
+既有 humanoid 配方的结构化数据面：同一工作区与命令，换一类文档与操作。
+样例：`examples/studio/rustclaw.studio.json`（锈爪：13 帧、4 剪辑、焊接面罩 + 青色目镜带）。
+
+```json
+{
+  "schemaVersion": "pga-studio/character/1",
+  "id": "rustclaw",
+  "seed": 42,
+  "template": { "id": "humanoid-rig", "version": 1, "checkedPoseKinds": ["rig"] },
+  "meta": { "source": "...", "license": "CC0", "notes": "可选" },
+  "frame": { "w": 40, "h": 46, "feetY": 44, "bodyX": 20 },
+  "palette": { "V": "#39d0c4", "A": "#8a4b26" },
+  "art": { "head": ["..AAAA.."], "torso": ["BBKK"] },
+  "rig": { "hipY": -11, "thigh": 4, "shin": 4, "thick": 4, "guns": { "fwd": { "grip": [7, -14], "dir": [1, 0], "back": 3, "len": 7 } } },
+  "poses": [{ "id": "stand_fwd", "kind": "rig", "legs": [[-9, 3], [11, 5]], "aim": "fwd" }],
+  "clips": { "run_fwd": { "frames": ["run0_fwd"], "ms": 110 } },
+  "constraints": [{ "kind": "metadata", "target": "anchor" }]
+}
+```
+
+要点：
+
+- `palette` 单字符键 → 颜色（ASCII 图与绘制共用）；`art.head/torso` 为 ASCII 像素图（字符须取自调色板或 `.` 空格）。
+- `rig` 骨架参数经 solvePose 求解；`feetY` 是脚底边界行，接地由求解器自动保持。
+- `poses` 姿态为显式数据；`kind ∈ rig|prone|dead|dive|ball`。
+  `template.checkedPoseKinds` 声明**不变量检查适配的姿态种类**（首版 `["rig"]`）；
+  其余姿态照常渲染，但在候选报告中列为 `notCoveredChanges`（明确不假装覆盖）。
+- `constraints` 仅 `metadata` 类别：`anchor` / `attachments[.<名>]` / `frameSize`；
+  pixels/structure 类别校验期即拒绝（UNSUPPORTED_SCOPE，未实现）。
+
+角色操作（edit 用 `--op <id> --target <目标> --value <值>`；explore 用 `--values`）：
+
+| op | target | value | 影响 |
+|---|---|---|---|
+| `palette.set` | 调色板键（如 `V`） | `'#rrggbb'` | 全部使用该键的帧一致改色 |
+| `rig.set` | `thigh/shin/thick/hipSpread/hipY/torsoDrop/headDx/headDrop` 或 `guns.<方向>.<len|back>` | 整数（范围见 inspect capabilities） | solvePose 重解；接地保持；枪口等附件点一致联动 |
+| `art.set` | `head` / `torso` | ASCII 行 JSON 数组 | 部件替换；尺寸变化会合法移动头部附件点（报告如实呈现） |
+
+角色候选检查：锚点（脚底中线）不动、接地（包围盒底缘）不变、受影响帧/剪辑/附件点自动报告。
+inspect 的 `capabilities` 给出每个字段当前值与范围；previews 下有逐帧 native/display PNG 与
+**player.html 播放页**（按剪辑时长真实播放，可暂停/步进/切剪辑；动画验收请实际观看播放）。
+
 ## 4. 纪律
 
 - 只用 CLI 改状态；不手工编辑 `<ws>` 内文件；不把文档写成代码。

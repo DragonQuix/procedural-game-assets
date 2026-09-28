@@ -18,11 +18,9 @@
  */
 import { mkdir, open, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { compileStudioDocument, renderHash } from '../studio/compiler.js';
 import { stableStringify, fnv1aHex } from '../studio/document.js';
-import { applyOperation, exploreOperation } from '../studio/operators.js';
-import { checkCandidate, preserveFromDocument } from '../studio/protect.js';
-import { buildViews } from '../studio/observe.js';
+import { compileAny, applyAnyOperation, exploreAnyOperation, checkAnyCandidate, preserveFromAnyDocument, docKindOf } from '../studio/dispatch.js';
+import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { encodePNG } from '../export/png.js';
 
 const MARKER = '.pga.json';
@@ -124,7 +122,7 @@ export class StudioStore {
     const store = new StudioStore(dir, opts);
     await writeMarker(dir, store.generator);
     for (const sub of ['revisions', 'candidates', 'requests', 'previews']) await mkdir(join(dir, sub), { recursive: true });
-    const compiled = compileStudioDocument(doc, { toolVersion: store.toolVersion });
+    const compiled = compileAny(doc, { toolVersion: store.toolVersion });
     const revision = await store._writeRevision({ doc: compiled.document, parent: null, source: { kind: 'create' }, compiled, bumpSeq: 1 });
     await store._writeHead();
     return { store, revision, compiled };
@@ -181,7 +179,7 @@ export class StudioStore {
   async _getCompiled(revision) {
     if (this._compiled.has(revision)) return this._compiled.get(revision);
     const record = await this._readRevision(revision);
-    const compiled = compileStudioDocument(record.doc, { toolVersion: this.toolVersion });
+    const compiled = compileAny(record.doc, { toolVersion: this.toolVersion });
     this._compiled.set(revision, compiled);
     return compiled;
   }
@@ -252,9 +250,23 @@ export class StudioStore {
   /* ---------- 预览 ---------- */
 
   async _writePreviews(compiled, label) {
-    const views = buildViews(compiled, { displayScale: this.displayScale, background: this.background });
     const dir = join(this.dir, 'previews', label);
     await mkdir(dir, { recursive: true });
+    if (compiled.kind === 'character') {
+      const views = buildCharacterViews(compiled, { displayScale: this.displayScale, background: this.background, encode: encodePNG });
+      const files = { frames: {}, player: join('previews', label, `${label}.player.html`) };
+      for (const fv of views.frames) {
+        files.frames[fv.id] = {
+          native: join('previews', label, `${label}.${fv.id}.native.png`),
+          display: join('previews', label, `${label}.${fv.id}.display.png`),
+        };
+        await writeFile(join(this.dir, files.frames[fv.id].native), encodePNG(fv.native.width, fv.native.height, fv.native.rgba));
+        await writeFile(join(this.dir, files.frames[fv.id].display), encodePNG(fv.display.width, fv.display.height, fv.display.rgba));
+      }
+      await writeFile(join(this.dir, files.player), views.playerHtml);
+      return files;
+    }
+    const views = buildViews(compiled, { displayScale: this.displayScale, background: this.background });
     const files = {
       native: join('previews', label, `${label}.native.png`),
       display: join('previews', label, `${label}.display.png`),
@@ -274,10 +286,10 @@ export class StudioStore {
     const reqId = requestId ?? `req-${fnv1aHex(stableStringify(['edit', baseRevision, operation, preserve]))}`;
     return this._mutate(reqId, ['edit', baseRevision, operation, preserve], async () => {
       const base = await this._getCompiled(baseRevision);
-      const { doc: candDoc, plan } = applyOperation(base.document, operation); // 形状/范围错误向上抛（CANDIDATE_INVALID 等）
-      const candidate = compileStudioDocument(candDoc, { toolVersion: this.toolVersion });
-      const mergedPreserve = [...preserveFromDocument(base.document), ...preserve];
-      const checks = checkCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve });
+      const { doc: candDoc, plan } = applyAnyOperation(base.document, operation); // 形状/范围错误向上抛（CANDIDATE_INVALID 等）
+      const candidate = compileAny(candDoc, { toolVersion: this.toolVersion });
+      const mergedPreserve = [...preserveFromAnyDocument(base.document), ...preserve];
+      const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve });
       const candidateId = `c-${fnv1aHex(stableStringify([baseRevision, operation, mergedPreserve]))}`;
       const previews = { base: await this._writePreviews(base, `${baseRevision}-base`), candidate: await this._writePreviews(candidate, candidateId) };
       const record = {
@@ -291,7 +303,7 @@ export class StudioStore {
         previews,
       };
       await writeFileAtomic(join(this.dir, 'candidates', `${candidateId}.json`), JSON.stringify(record, null, 2) + '\n');
-      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, hashes: candidate.hashes, previews };
+      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews };
     });
   }
 
@@ -302,8 +314,8 @@ export class StudioStore {
     const reqId = requestId ?? `req-${fnv1aHex(stableStringify(['explore', baseRevision, spec, preserve]))}`;
     return this._mutate(reqId, ['explore', baseRevision, spec, preserve], async () => {
       const base = await this._getCompiled(baseRevision);
-      const entries = exploreOperation(base.document, spec);
-      const mergedPreserve = [...preserveFromDocument(base.document), ...preserve];
+      const entries = exploreAnyOperation(base.document, spec);
+      const mergedPreserve = [...preserveFromAnyDocument(base.document), ...preserve];
       const seen = new Map([[base.hashes.renderHash, 'base']]);
       const candidates = [];
       for (const entry of entries) {
@@ -311,8 +323,8 @@ export class StudioStore {
           candidates.push({ value: entry.value, status: 'ERROR', error: entry.error });
           continue;
         }
-        const candidate = compileStudioDocument(entry.doc, { toolVersion: this.toolVersion });
-        const checks = checkCandidate({ baseCompiled: base, candidateCompiled: candidate, plan: entry.plan, preserve: mergedPreserve });
+        const candidate = compileAny(entry.doc, { toolVersion: this.toolVersion });
+        const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan: entry.plan, preserve: mergedPreserve });
         const candidateId = `c-${fnv1aHex(stableStringify([baseRevision, { id: spec.id, target: spec.target, field: spec.field, value: entry.value }, mergedPreserve]))}`;
         const duplicateOf = checks.status !== 'REJECTED' ? (seen.get(candidate.hashes.renderHash) ?? null) : null;
         if (!duplicateOf) seen.set(candidate.hashes.renderHash, candidateId);
@@ -320,7 +332,10 @@ export class StudioStore {
         const record = {
           candidateId,
           baseRevision,
-          operation: { id: spec.id, target: spec.target, params: spec.id === 'geometry.set' ? { [spec.field]: entry.value } : { [spec.field]: entry.value } },
+          operation:
+            docKindOf(base.document) === 'character'
+              ? { id: spec.id, target: spec.target, value: entry.value }
+              : { id: spec.id, target: spec.target, params: { [spec.field]: entry.value } },
           preserve: mergedPreserve,
           doc: candidate.document,
           hashes: candidate.hashes,
@@ -336,6 +351,7 @@ export class StudioStore {
           duplicateOf,
           conflicts: checks.conflicts,
           diff: checks.diff,
+          checks,
           hashes: candidate.hashes,
           previews,
         });
@@ -376,15 +392,15 @@ export class StudioStore {
         }
         // 篡改防护：不信落盘的 checks——用基准 + 操作重新推导文档、重编译并重新执行保护检查
         const base = await this._getCompiled(record.baseRevision);
-        const { doc: rederivedDoc, plan } = applyOperation(base.document, record.operation);
-        const recompiled = compileStudioDocument(record.doc, { toolVersion: this.toolVersion });
+        const { doc: rederivedDoc, plan } = applyAnyOperation(base.document, record.operation);
+        const recompiled = compileAny(record.doc, { toolVersion: this.toolVersion });
         if (recompiled.hashes.documentHash !== record.hashes.documentHash || recompiled.hashes.renderHash !== record.hashes.renderHash) {
           fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的内容哈希与记录不符（文件可能被篡改）`, { target: candidateId });
         }
         if (stableStringify(rederivedDoc) !== stableStringify(record.doc)) {
           fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的文档与操作重新推导结果不符（文件可能被篡改）`, { target: candidateId });
         }
-        const checks = checkCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: record.preserve });
+        const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: record.preserve });
         if (checks.status !== record.checks.status) {
           fail('CANDIDATE_INVALID', `候选 '${candidateId}' 落盘状态（${record.checks.status}）与重新校验（${checks.status}）不符（文件可能被篡改）`, { target: candidateId });
         }
@@ -402,7 +418,7 @@ export class StudioStore {
       }
       if (action === 'restore') {
         const target = await this._readRevision(targetRevision);
-        const compiled = compileStudioDocument(target.doc, { toolVersion: this.toolVersion });
+        const compiled = compileAny(target.doc, { toolVersion: this.toolVersion });
         const revision = await this._writeRevision({ doc: target.doc, parent: this.head, source: { kind: 'restore', from: targetRevision }, compiled });
         await this._writeHead();
         return { requestId: reqId, action, restoredFrom: targetRevision, head: this.head, revision: revision.revision, parent: revision.parent, hashes: revision.hashes };

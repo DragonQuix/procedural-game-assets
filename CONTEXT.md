@@ -33,6 +33,8 @@
 | `revision`（修订） | Studio 工作区中一次已提交的不可变文档快照（`r1..rN`，含父指针与来源） | 历史 ID ≠ 内容哈希；恢复是引用旧内容的新修订 |
 | `edit candidate`（编辑候选） | 从某修订派生的未提交文档 + 保护检查结果，内容哈希识别（`c-*`） | 不改变 head；与 pga-loop 的冻结 `candidate` 不同域，见 ADR-0009 |
 | `allowed region`（允许影响区域） | 由操作计划与依赖独立计算的像素可变化区域（旧∪新几何、描边邻域、层序遮挡） | 绝不从事后差分反推；区域外变化即违规 |
+| `character document`（角色文档） | `pga-studio/character/1`：humanoid 配方的结构化数据面（palette/frame/rig/art/poses/clips） | 经既有 bakeHumanoid 编译；不变量仅适配 checkedPoseKinds；见 ADR-0011 |
+| `grounding`（接地） | 角色帧包围盒底缘（贴地）在修改前后不变 | 顶缘随体高/腿长合法变化；由 solvePose 自动保持 |
 | `head` | Studio 工作区当前已确认修订指针（`head.json`，原子替换更新） | 只有 commit 移动它；并发底线是 expectedHead 校验 |
 
 ## 坐标契约（要点，全文见 ADR-0002）
@@ -70,6 +72,6 @@ examples/godot/         Godot 可选适配样例（非验收前提）
 - 分析：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ART-ANALYSIS.md`
 - 原游戏设计：`E:/Repos/Games/ForOthers/others_003/docs/DESIGN.md`
 - 来源与授权：`docs/provenance.md`
-- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio、0009 Studio 编辑事务、0010 Studio 风格与构造）
+- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio、0009 Studio 编辑事务、0010 Studio 风格与构造、0011 Studio 角色与跨帧）
 
 本项目当前没有 `CONTEXT-MAP.md`（未做领域拆分）；如将来拆分领域再建立。

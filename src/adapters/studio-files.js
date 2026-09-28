@@ -9,8 +9,8 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { compileStudioDocument, describeCapabilities } from '../studio/compiler.js';
-import { buildViews } from '../studio/observe.js';
+import { compileAny, describeAnyCapabilities } from '../studio/dispatch.js';
+import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { stableStringify } from '../studio/document.js';
 import { assetToJSON } from './asset-file.js';
 import { encodePNG } from '../export/png.js';
@@ -46,6 +46,19 @@ function previewFileName(kind, compiled, nodeId) {
 
 async function writePreviews(outDir, compiled, views, nodeId) {
   const files = {};
+  if (compiled.kind === 'character') {
+    files.frames = {};
+    for (const fv of views.frames) {
+      files.frames[fv.id] = { native: `${compiled.asset.id}.${fv.id}.native.png`, display: `${compiled.asset.id}.${fv.id}.display.png` };
+      await writeFile(join(outDir, files.frames[fv.id].native), encodePNG(fv.native.width, fv.native.height, fv.native.rgba));
+      await writeFile(join(outDir, files.frames[fv.id].display), encodePNG(fv.display.width, fv.display.height, fv.display.rgba));
+    }
+    if (views.playerHtml) {
+      files.player = `${compiled.asset.id}.player.html`;
+      await writeFile(join(outDir, files.player), views.playerHtml);
+    }
+    return files;
+  }
   files.native = previewFileName('native', compiled);
   await writeFile(join(outDir, files.native), encodePNG(views.native.width, views.native.height, views.native.rgba));
   files.display = previewFileName('display', compiled);
@@ -58,6 +71,20 @@ async function writePreviews(outDir, compiled, views, nodeId) {
 }
 
 function summarize(compiled, source, outDir, files) {
+  if (compiled.kind === 'character') {
+    return {
+      assetId: compiled.asset.id,
+      kind: compiled.asset.kind,
+      seed: compiled.asset.seed,
+      source,
+      frames: compiled.frames,
+      clips: compiled.asset.clips,
+      hashes: compiled.hashes,
+      diagnostics: compiled.diagnostics,
+      outDir,
+      files,
+    };
+  }
   return {
     assetId: compiled.asset.id,
     kind: compiled.asset.kind,
@@ -75,14 +102,20 @@ function summarize(compiled, source, outDir, files) {
   };
 }
 
-/** 写可编辑源文档与 sceneMap（M1 起的路径与命名保持不变）。 */
+/** 写可编辑源文档与帧信息（M1 起的路径与命名保持不变）。 */
 async function writeSourceBundle(outDir, compiled) {
   const files = {};
   files.document = `${compiled.asset.id}.studio.json`;
   await writeFile(join(outDir, files.document), JSON.stringify(compiled.document, null, 2) + '\n');
   files.scene = `${compiled.asset.id}.scene.json`;
-  await writeFile(join(outDir, files.scene), JSON.stringify({ sceneMap: compiled.sceneMap, hashes: compiled.hashes, diagnostics: compiled.diagnostics }, null, 2) + '\n');
+  const scene = compiled.kind === 'character' ? { frames: compiled.frames, clips: compiled.asset.clips } : { sceneMap: compiled.sceneMap };
+  await writeFile(join(outDir, files.scene), JSON.stringify({ ...scene, hashes: compiled.hashes, diagnostics: compiled.diagnostics }, null, 2) + '\n');
   return files;
+}
+
+/** 按文档类型构建视图（角色多帧 / 道具单帧）。 */
+function buildAnyViews(compiled, opts = {}) {
+  return compiled.kind === 'character' ? buildCharacterViews(compiled, { ...opts, encode: encodePNG }) : buildViews(compiled, opts);
 }
 
 /**
@@ -97,7 +130,7 @@ export async function createFromFile(docPath, outDir, opts = {}) {
     displayScale: opts.displayScale,
     background: opts.background,
   });
-  const views = buildViews(compiled, { displayScale: opts.displayScale, background: opts.background });
+  const views = buildAnyViews(compiled, { displayScale: opts.displayScale, background: opts.background });
   const files = await writePreviews(outDir, compiled, views);
   Object.assign(files, await writeSourceBundle(outDir, compiled));
   const summary = summarize(compiled, docPath, outDir, files);
@@ -111,7 +144,7 @@ export async function createFromFile(docPath, outDir, opts = {}) {
  */
 export async function inspectFromFile(docPath, opts = {}) {
   const doc = await readStudioDocument(docPath);
-  const compiled = compileStudioDocument(doc, { toolVersion: opts.toolVersion });
+  const compiled = compileAny(doc, { toolVersion: opts.toolVersion });
   return inspectCompiled(compiled, docPath, opts);
 }
 
@@ -130,16 +163,16 @@ export async function inspectWorkspace(wsDir, opts = {}) {
 }
 
 async function inspectCompiled(compiled, source, opts = {}) {
-  const capabilities = describeCapabilities(compiled.document);
+  const capabilities = describeAnyCapabilities(compiled.document);
   let files = null;
   if (opts.outDir) {
     await ensureOutDir(opts.outDir);
     await writeMarker(opts.outDir, opts.generator ?? 'unknown');
-    const views = buildViews(compiled, { displayScale: opts.displayScale, background: opts.background, node: opts.node });
+    const views = buildAnyViews(compiled, { displayScale: opts.displayScale, background: opts.background, node: opts.node });
     files = await writePreviews(opts.outDir, compiled, views, opts.node);
   } else if (opts.node !== undefined) {
-    // 不写盘时也校验节点存在，保持行为一致
-    buildViews(compiled, { node: opts.node });
+    // 不写盘时也校验节点存在，保持行为一致（角色文档无节点裁切，--node 仅道具模式）
+    if (compiled.kind !== 'character') buildViews(compiled, { node: opts.node });
   }
   const summary = summarize(compiled, source, opts.outDir ?? null, files);
   summary.constraints = compiled.document.constraints;
@@ -176,7 +209,7 @@ async function exportCompiled(compiled, source, outDir, opts = {}) {
 /** export（文档模式）。 */
 export async function exportFromFile(docPath, outDir, opts = {}) {
   const doc = await readStudioDocument(docPath);
-  const compiled = compileStudioDocument(doc, { toolVersion: opts.toolVersion });
+  const compiled = compileAny(doc, { toolVersion: opts.toolVersion });
   return exportCompiled(compiled, docPath, outDir, opts);
 }
 

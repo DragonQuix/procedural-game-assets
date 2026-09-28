@@ -256,6 +256,63 @@ HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类
   不据此宣称技能已经能稳定生成同级画面、所有 critic 均能区分风格与质量，或循环必然收敛。
 - 未修改用户级技能、Gauntlet、用户原图或独立试验项目；各软件安装刷新另行执行与验证。
 
+## S5 PGA Studio M5（2026-09-28，ADR-0011）
+
+阶段：M5（角色、跨帧与资产族）。
+依据：HANDOFF M5、ADR-0008–0010、ADR-0011、`docs/studio-cli.md` §5。
+本轮目标：一个已有角色（锈爪）及其现有剪辑的结构化数据面；修改跨帧一致传播；
+受影响帧/附件点自动报告；未适配姿态明确不支持；实际播放材料与真实观看播放验证。
+
+### 实际完成
+
+- `src/studio/character-doc.js`：`pga-studio/character/1` 校验/规范化/能力声明（调色板键、骨架范围、姿态/剪辑引用、metadata-only 保护）。
+- `src/studio/character-compiler.js`：文档 → 内存 CharacterSpec → 既有 `bakeHumanoid`；逐帧定位（anchor/attachments/bounds/pixels/checked）、renderHash（全帧+剪辑）、notCovered 标记。
+- `src/studio/character-ops.js`：`palette.set` / `rig.set`（含 guns.<aim>.<len|back>）/ `art.set` 与同基准探索。
+- 跨帧检查 `checkCharacterCandidate`：结构下钻核对、锚点/接地不变量、受影响帧与附件点 delta、受影响剪辑、notCoveredChanges、metadata 保护命中。
+- `src/studio/dispatch.js`：store/CLI 文档类型无关化（/1、/2、character/1 统一修订/候选/幂等/恢复语义）。
+- 播放材料：`observe.buildCharacterViews` 逐帧 PNG + 自包含 `player.html`（data URL 内嵌、剪辑毫秒时长、暂停/步进/切剪辑）；计时改墙钟累加 + rAF/interval 双驱动（实证修复隐藏标签页 rAF 暂停导致的不前进）。
+- 样例 `examples/studio/rustclaw.studio.json`（由配方具体化生成）与 `examples/studio/m5-demo.mjs` 六步演示。
+- 新测试 19 项（character-doc 7、character 9、integration-m5 2）；全套件 312/312。
+
+### 实际执行的命令与结果
+
+- `npm test`：312/312（293 前轮 + 19 新增，零回归）。
+- 等价性锚点：样例文档编译与 `bakeHumanoid(rustclaw)` 13 帧逐字节一致（renderHash `11c587dd:d890d15f`）。
+- `node examples/studio/m5-demo.mjs --out work/studio-m5`：palette.set V（12 rig 帧 + dead notCovered，4 剪辑，锚点/接地保持）→ 提交 r2；rig.set thigh 探索（OK/UNCHANGED/OK，接地保持）→ 提交 r3；guns.fwd.len 7→9（恰 8 个 fwd 帧，muzzle Δ≈(+2,0)，留作未提交候选证据）；恢复 r1 → r4 哈希精确一致；导出 13 帧 4 剪辑 manifest 过既有校验。
+- 浏览器播放验证（真实 Chromium 经 HTTP 打开 player.html）：剪辑 run_fwd 帧计数 1/6 → 4/6（wait_for 命中）→ 2/6（截图），实际观看播放并留截图；随后关闭标签页、停止静态服务。
+
+### 产物与复现
+
+- `work/studio-m5/`：demo-summary、revisions r1–r4、candidates（含枪口联动证据）、previews（逐帧 PNG + player.html）、export（多帧 manifest）。
+- 复现：`node examples/studio/m5-demo.mjs --out work/studio-m5`；播放：`node tools/static-server.mjs work/studio-m5 <port>` 后浏览器打开 `previews/r1-base/r1-base.player.html`。
+
+### 技术结论
+
+- M5 验收逐条实测通过：同一修改在约定动作中保持身份、接地、附件关系与材质一致；
+  报告自动且精确到帧/附件点；未适配姿态明确列出；播放材料真实播放。
+
+### 视觉结论与评审来源
+
+- 实施者自审（非独立评审）：查看 r1/r2 stand_fwd 对比（目镜带 青#39d0c4 → 金#ffd23d，其余逐像素不变）；
+  浏览器实际观看 run_fwd 播放（帧前进、接地稳定、无闪烁抖动）。美术维持既有配方水平，不宣称提升或同级。
+
+### 未验证项/限制
+
+- 帧覆盖（逐帧参数）、任意姿态/骨架/生物、角色 pixels/structure 保护类别、APNG/GIF 编码导出均未实现（如实记录）。
+- prone/dive/ball 姿态样例未覆盖（模板支持绘制但未适配不变量检查，按 notCovered 处理）。
+- 播放页在极端慢速设备上的观感未测；跨浏览器仅 Chromium 实测。
+
+### 与原计划的偏差
+
+- 接地不变量从"整个包围盒"修正为"底缘"（顶缘随腿长/体高合法变化，初版误报实证后修正）；
+  播放器计时改墙钟累加（隐藏标签页实证驱动修复）。两处均属实现期正确性修正，语义更准。
+
+### 下一项可执行任务（M6 第一项）
+
+核对 `tools/release.mjs` 载荷白名单：`src`/`bin` 已整体携带，但 `examples/studio/`、
+`docs/studio-cli.md` 与 ADR-0008–0011 不会自动进载荷；先跑 `node tools/release.mjs --check`
+记录现状差异并按已批准发布范围决定携带方式，不重建载荷。
+
 ## S4 PGA Studio M4（2026-09-28，ADR-0010）
 
 阶段：M4（风格与构造能力）。
