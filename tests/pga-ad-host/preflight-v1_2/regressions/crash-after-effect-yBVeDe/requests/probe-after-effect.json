@@ -1,0 +1,20 @@
+{
+  "requestId": "probe-after-effect",
+  "requestHash": "4a7c2867",
+  "status": "done",
+  "result": {
+    "requestId": "probe-after-effect",
+    "action": "accept",
+    "candidateId": "c-3284b056",
+    "head": "r2",
+    "revision": "r2",
+    "parent": "r1",
+    "hashes": {
+      "documentHash": "2047f188",
+      "styleHash": "68402473",
+      "renderHash": "eb48afe6:d0636c59",
+      "toolVersion": "preflight/1"
+    },
+    "unchanged": false
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "candidateId": "c-61232b50",
+  "baseRevision": "r1",
+  "operation": {
+    "id": "ramp.set",
+    "target": "terminal.shell",
+    "ramp": "amber"
+  },
+  "preserveRequest": [],
+  "preserveDoc": [
+    {
+      "kind": "pixels",
+      "target": "terminal.screen"
+    },
+    {
+      "kind": "metadata",
+      "target": "anchor"
+    }
+  ],
+  "doc": {
+    "schemaVersion": "pga-studio/1",
+    "id": "terminal",
+    "seed": 20260928,
+    "renderProfile": {
+      "name": "pixel-flat",
+      "version": 1
+    },
+    "style": {
+      "id": "steel-console",
+      "version": 1,
+      "ramps": {
+        "steel": [
+          "#232830",
+          "#49525f",
+          "#707b8d",
+          "#a6b0c2"
+        ],
+        "screen": [
+          "#04161d",
+          "#0b3a46",
+          "#177383",
+          "#63dcd2"
+        ],
+        "amber": [
+          "#4a3410",
+          "#9c7420",
+          "#ffb13d",
+          "#ffe08a"
+        ]
+      }
+    },
+    "canvas": {
+      "w": 30,
+      "h": 30,
+      "outline": "#120d16"
+    },
+    "nodes": [
+      {
+        "id": "terminal.base",
+        "kind": "panel",
+        "x": 5,
+        "y": 25,
+        "w": 20,
+        "h": 3,
+        "ramp": "steel",
+        "material": "bevel-metal",
+        "layer": 0
+      },
+      {
+        "id": "terminal.shell",
+        "kind": "panel",
+        "x": 2,
+        "y": 2,
+        "w": 26,
+        "h": 23,
+        "ramp": "amber",
+        "material": "bevel-metal",
+        "layer": 1
+      },
+      {
+        "id": "terminal.screen",
+        "kind": "screen",
+        "x": 4,
+        "y": 5,
+        "w": 14,
+        "h": 13,
+        "ramp": "screen",
+        "material": "scanlines",
+        "layer": 2
+      },
+      {
+        "id": "terminal.side_panel",
+        "kind": "panel",
+        "x": 20,
+        "y": 5,
+        "w": 6,
+        "h": 13,
+        "ramp": "amber",
+        "material": "bevel-metal",
+        "layer": 3
+      }
+    ],
+    "anchor": {
+      "x": 15,
+      "y": 28
+    },
+    "attachments": {
+      "screenCenter": {
+        "x": 11,
+        "y": 11.5
+      }
+    },
+    "constraints": [
+      {
+        "kind": "pixels",
+        "target": "terminal.screen",
+        "note": "屏幕像素保护；edit/explore/commit 时强制执行"
+      },
+      {
+        "kind": "metadata",
+        "target": "anchor",
+        "note": "锚点元数据保护；edit/explore/commit 时强制执行"
+      }
+    ]
+  },
+  "hashes": {
+    "documentHash": "760700b6",
+    "styleHash": "68402473",
+    "renderHash": "f645726c:efd6f069",
+    "toolVersion": "preflight/1"
+  },
+  "checks": {
+    "status": "OK",
+    "code": null,
+    "conflicts": [],
+    "diff": {
+      "pixels": 338,
+      "outside": 0,
+      "region": {
+        "x0": 3,
+        "y0": 3,
+        "x1": 29,
+        "y1": 26
+      },
+      "samples": []
+    },
+    "protections": {
+      "pixels": [
+        "terminal.screen"
+      ],
+      "structure": [],
+      "metadata": [
+        "anchor"
+      ]
+    }
+  },
+  "previews": {
+    "base": null,
+    "candidate": {
+      "native": "previews\\c-61232b50\\c-61232b50.native.png",
+      "display": "previews\\c-61232b50\\c-61232b50.display.png"
+    }
+  }
+}

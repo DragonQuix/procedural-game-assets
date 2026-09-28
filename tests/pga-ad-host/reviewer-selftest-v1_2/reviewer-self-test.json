@@ -1,0 +1,85 @@
+{
+  "schema": "pga-reviewer-self-test/1",
+  "status": "PASS",
+  "tests": 9,
+  "failed": [],
+  "results": [
+    {
+      "id": "reviewer-directories-independent",
+      "status": "PASS",
+      "pass": true,
+      "details": {
+        "reviewer1": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviewer-selftest-v1_2\\pair\\reviewer-1",
+        "reviewer2": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviewer-selftest-v1_2\\pair\\reviewer-2",
+        "sharedPath": false
+      }
+    },
+    {
+      "id": "mapping-deterministic-same-seed",
+      "status": "PASS",
+      "pass": true,
+      "details": {
+        "candidateA": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviewer-selftest-v1_2\\work\\run-right",
+        "candidateB": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviewer-selftest-v1_2\\work\\run-left"
+      }
+    },
+    {
+      "id": "mapping-mirrored-per-pair",
+      "status": "PASS",
+      "pass": true,
+      "details": {
+        "altSeedCandidateA": "flipped-by-seed"
+      }
+    },
+    {
+      "id": "key-not-in-reviewer-packages",
+      "status": "PASS",
+      "pass": true,
+      "details": {
+        "leak": null
+      }
+    },
+    {
+      "id": "reviewer2-immutable-while-reviewer1-writes",
+      "status": "PASS",
+      "pass": true,
+      "details": {
+        "filesCompared": 18
+      }
+    },
+    {
+      "id": "review-schema-v2",
+      "status": "PASS",
+      "pass": true,
+      "details": {
+        "schema": "pga-review/2"
+      }
+    },
+    {
+      "id": "unblind-resolves-mirrored-reviews",
+      "status": "PASS",
+      "pass": true,
+      "details": {
+        "caseA": "r1=X/r2=Y -> candidateA",
+        "caseB": "r1=Y/r2=X -> candidateB",
+        "noPreferenceVerdict": "BOTH_NOT_YET"
+      }
+    },
+    {
+      "id": "evaluate-rules-unchanged-vs-v1.1",
+      "status": "PASS",
+      "pass": true,
+      "details": null
+    },
+    {
+      "id": "frozen-materials-identical-to-v1.1",
+      "status": "PASS",
+      "pass": true,
+      "details": {
+        "filesCompared": 187,
+        "differsAt": null
+      }
+    }
+  ],
+  "scope": "Reviewer isolation, mirrored balance, key secrecy, schema, unblinding, frozen equality vs v1.1. No model calls, no aesthetic judgment."
+}

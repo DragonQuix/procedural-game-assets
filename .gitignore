@@ -18,4 +18,13 @@ tests/pga-ad-host/selftest-v1_1/*
 tests/pga-ad-host/runs/
 tests/pga-ad-host/eval/
 tests/pga-ad-host/reviews/
+tests/pga-ad-host/reviews-*/
 tests/pga-ad-host/**/key.json
+tests/pga-ad-host/selftest-v1_2pkg/*
+!tests/pga-ad-host/selftest-v1_2pkg/self-test.json
+tests/pga-ad-host/reviewer-selftest-v1_2/*
+!tests/pga-ad-host/reviewer-selftest-v1_2/reviewer-self-test.json
+tests/pga-ad-host/interventions-smoke.md
+tests/pga-ad-host/preregistration-draft.json
+tests/pga-ad-host/preregistration-v1_2-draft.json
+tests/pga-ad-host/*.console.log
