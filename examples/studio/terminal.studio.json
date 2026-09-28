@@ -24,7 +24,7 @@
     "screenCenter": { "x": 11, "y": 11.5 }
   },
   "constraints": [
-    { "kind": "pixels", "target": "terminal.screen", "note": "屏幕像素保护；v1 仅声明，M2 起强制执行" },
-    { "kind": "metadata", "target": "anchor", "note": "锚点元数据保护；v1 仅声明" }
+    { "kind": "pixels", "target": "terminal.screen", "note": "屏幕像素保护；edit/explore/commit 时强制执行" },
+    { "kind": "metadata", "target": "anchor", "note": "锚点元数据保护；edit/explore/commit 时强制执行" }
   ]
 }

@@ -166,8 +166,7 @@ export function compileStudioDocument(doc, opts = {}) {
   const diagnostics = {
     nodeCount: sceneNodes.length,
     clipped: main.diagnostics.clips,
-    constraintsDeclared: normalized.constraints.length,
-    constraintsEnforced: 0, // 文档内声明计数；强制执行由 store/protect 完成（M2 起）
+    constraintsDeclared: normalized.constraints.length, // 声明计数；强制执行证据见候选 checks（store/protect）
   };
   return { asset, sceneMap, masks, hashes, diagnostics, document: normalized };
 }

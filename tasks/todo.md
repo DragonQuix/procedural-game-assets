@@ -70,8 +70,16 @@
 - [x] CLI state/edit/explore/commit + 工作区模式 inspect/export；退出码 6/7
 - [x] `examples/studio/edit-demo.mjs` 必做演示九步全过；失败注入/过期/重放/重启恢复测试
 - [x] 全套件 271/271；前后图实际查看（屏幕逐像素不变，变化限于机箱右缘）
-- [ ] M3：真实 agent 宿主接入与对照评测（下一项见 plans/agent-studio.md）
-- [ ] M4–M6：风格包、跨帧、发行（未做）
+
+## S3 PGA Studio M3 首轮试点（2026-09-28）
+
+- [x] 预注册试点协议 `docs/plans/agent-studio-m3-pilot.md` 与 agent 合同 `docs/studio-cli.md`
+- [x] 4 个隔离子代理试点（P0 新建/P1 探索接受/P2 材质保护/P3 冲突处理）全部 PASS
+- [x] 客观核验：head/修订/manifest/轨迹 523 行；图像真实到达模型；head 未被污染
+- [x] 试点驱动修复：指南 5 处、误导诊断字段 1 处、样例约束 note 更正；回归 271/271
+- [x] MCP 决策：当前宿主 CLI＋读图成立，暂不添加薄适配（见 verification S3）
+- [ ] M3 完整对照评测（A/B 组、12 任务×重复、跨模型/宿主）：未做，不宣称
+- [ ] M4：风格包与第二种结构资产（下一项见 plans/agent-studio.md）
 
 ## 发现入口与备份收敛（2026-09-26，单独任务）
 
