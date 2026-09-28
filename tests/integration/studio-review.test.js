@@ -111,10 +111,18 @@ test('R3：palette.set / rig.set / art.set 角色链路——edit 与 explore �
   assert.equal(er.committed.revision, 'r5');
   const ep = await assertExploreChain(dir, store, { baseRevision: 'r5', spec: { id: 'palette.set', target: 'V', values: ['#39d0c4', '#ffd23d'] }, pick: (c) => c.value === '#39d0c4' });
   assert.equal(ep.committed.revision, 'r6');
-  const doc = (await store._getCompiled('r6')).document;
+  // art.set 探索：ASCII 行数组作为取值，候选同样可提交、重开、导出
+  const altHead = load(RUSTCLAW).art.head.map((row, i) => (i === 3 ? 'kAAkAAkk' : row));
+  const ea = await assertExploreChain(dir, store, {
+    baseRevision: 'r6',
+    spec: { id: 'art.set', target: 'head', values: [newHead, altHead] },
+    pick: (c) => Array.isArray(c.value) && c.value[3] === 'kAAkAAkk',
+  });
+  assert.equal(ea.committed.revision, 'r7');
+  const doc = (await store._getCompiled('r7')).document;
   assert.equal(doc.rig.thigh, 5);
   assert.equal(doc.palette.V, '#39d0c4');
-  assert.deepEqual(doc.art.head, newHead);
+  assert.deepEqual(doc.art.head, altHead);
 });
 
 function rustclawHeadSwap(doc) {
