@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PGA 网页游戏模板 · 演示切片</title>
+<style>
+  body { margin: 0; background: #17171d; color: #d8d8e0; font: 13px/1.6 system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; }
+  .stage { position: relative; width: min(960px, 100%); margin-top: 12px; }
+  canvas { image-rendering: pixelated; width: 100%; height: auto; display: block; }
+  #hud { position: absolute; inset: 0; pointer-events: none; font-size: 16px; color: #f4f5fa; }
+  [data-hud="stats"] { position: absolute; top: 8px; right: 8px; padding: 2px 8px; background: #101522; }
+  [data-hud="banner"] { position: absolute; top: 40%; width: 100%; text-align: center; background: #101522ed; padding: 8px 0; }
+  [data-hud="title"] { font-size: clamp(20px, 3vw, 32px); font-weight: bold; }
+  p, #dbg { max-width: min(660px, 94vw); overflow-wrap: anywhere; }
+  p { color: #9ab; margin: 8px 0; }
+  kbd { background: #2c2c38; padding: 0 4px; border: 1px solid #444; }
+  #dbg { font-family: ui-monospace, monospace; color: #7fa; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <canvas id="cv" width="960" height="540"></canvas>
+  <div id="hud">
+    <span data-hud="stats"></span>
+    <div data-hud="banner" hidden><div data-hud="title"></div><div data-hud="hint"></div></div>
+  </div>
+</div>
+<div id="dbg"></div>
+<p>
+  <kbd>←</kbd><kbd>→</kbd> 移动　<kbd>↑</kbd> 朝上瞄准　<kbd>J</kbd> 射击　<kbd>K</kbd>/<kbd>空格</kbd> 跳跃　<kbd>Esc</kbd> 暂停　<kbd>R</kbd> 重启<br>
+  目标：击毁全部 3 座炮塔（MISSION CLEAR）；被碰到 3 次或坠落则 MISSION FAILED。<br>
+  本页是 ADR-0005 模板的演示：启动时烘焙（无导出文件），逻辑层无 DOM、固定步长、
+  固定种子；<code>__game.step(n, input)</code> 可逐帧推进，<code>__game.state()</code> 读取快照。
+</p>
+<script type="module" src="/examples/canvas-slice/main.js"></script>
+</body>
+</html>
