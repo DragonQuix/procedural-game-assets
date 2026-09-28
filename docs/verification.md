@@ -256,6 +256,33 @@ HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类
   不据此宣称技能已经能稳定生成同级画面、所有 critic 均能区分风格与质量，或循环必然收敛。
 - 未修改用户级技能、Gauntlet、用户原图或独立试验项目；各软件安装刷新另行执行与验证。
 
+## S7 普通版 0.6.0 多宿主安装（2026-09-28，用户授权）
+
+范围：经用户明确授权，把普通版技能 0.6.0 安装/更新到各宿主 agent 软件。
+循环版安装未动；开发仓库与载荷在授权前已提交并推送（`4613da5`，master → origin）。
+
+### 实际执行与结果
+
+- `node skills/procedural-game-assets/scripts/install.mjs`：主存储
+  `C:\Users\admin\.codex\skills\procedural-game-assets` 由 **0.4.1 升级到 0.6.0**；
+  旧版本备份于 `~/.codex/backups/skills/procedural-game-assets/*-backup-20260928130929`（发现目录之外）。
+  安装后验证通过：SKILL.md、入口一致性、载荷哈希。
+- `register-harnesses.mjs`：8 个宿主 junction 均已指向主存储（保留），无需重建。
+- 版本读回（各入口 `assets/toolkit/package.json` 实测）：`.agents`（Codex 插件层）、`.claude`（Claude Code）、
+  `.cursor`、`.dsh`（DeepSeek Harness 原生）、`.zcode`、`.workbuddy`、`.grok`（Grok build）、
+  `.kimi-code`（Kimi Code CLI）——**全部 0.6.0**。
+- OMP：无自有 skills 目录，其 `~/.omp/agent/config.yml` 的 `skills.customDirectories`
+  指向 workbuddy/zcode/grok/dsh/cursor 的 skills 目录——随这些入口间接获得 0.6.0（配置实测）。
+- 主存储载荷 `verifyTree` 与发行清单一致；从**安装副本**实际运行
+  `examples/studio/smoke.mjs` 通过（documentHash 56963f46、renderHash f645726c:6cebd809，
+  与开发仓库逐位一致）。
+
+### 未验证/边界
+
+- 各宿主重启或新会话后的技能列表刷新：本机脚本无法代替验证（沿用既有记录口径）。
+- 循环版技能安装保持现状（其载荷本轮未重建、未升级）。
+- 备份回滚路径：删除主存储与入口后把上述备份目录改回原名。
+
 ## S6 PGA Studio M6（2026-09-28，0.6.0）
 
 阶段：M6（发行、文档与现有流程接入——有限范围 alpha 发布）。

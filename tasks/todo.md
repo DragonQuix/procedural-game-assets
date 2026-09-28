@@ -110,8 +110,19 @@
 - [x] 循环版不随动：`--skill procedural-game-assets-loop --check` 132 文件一致
 - [x] 干净目录验证：init-project 携带复核、npm test/check、smoke/CLI/m5-demo 实际运行全过
 - [x] 全套件 312/312；哈希跨位置确定（干净目录 == 开发仓库）
-- [ ] 用户级安装升级：未授权，保持原版本（待用户明确授权后执行并复核发现链路）
-- [ ] 后续可选：A/B 对照评测（待独立评测资源）、M4/M5 留空项、MCP（待有不能读文件的宿主）
+
+## S7 普通版 0.6.0 多宿主安装（2026-09-28，用户授权）
+
+- [x] 推送 master 到 origin（`4613da5`）
+- [x] install.mjs：主存储 0.4.1 → 0.6.0（旧版备份 *-backup-20260928130929）
+- [x] 8 宿主 junction 复核；版本读回：Codex/ZCode/DeepSeek Harness/Kimi Code/workbuddy/cursor/Grok build/Claude Code 全 0.6.0
+- [x] OMP 经 customDirectories 间接生效（config 实测）
+- [x] 主存储载荷 verifyTree 一致；安装副本 smoke 实跑通过
+- [ ] 各宿主重启/新会话后的技能列表刷新验证（本机无法代替，沿用既有口径）
+
+### 后续可选
+
+- A/B 对照评测（待独立评测资源）、M4/M5 留空项、MCP（待有不能读文件的宿主）
 
 ## 发现入口与备份收敛（2026-09-26，单独任务）
 
