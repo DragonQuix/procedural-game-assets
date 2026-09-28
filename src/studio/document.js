@@ -1,31 +1,58 @@
 /**
- * studio/document.js — Studio 可编辑文档 v1：校验、规范化与稳定哈希（纯核心，ADR-0001/0008）
+ * studio/document.js — Studio 可编辑文档：校验、规范化与稳定哈希（纯核心，ADR-0001/0008/0010）
  *
  * 文档只含可序列化数据：无函数、无 JS 字符串、无模块路径、无外部 URL。
  * 校验失败一律拒绝（INVALID_DOCUMENT），不静默修正、不猜测未知版本或字段。
  *
- * 文档形状（pga-studio/1，全部字段白名单）：
- *   schemaVersion: 'pga-studio/1'
- *   id:            资产 ID（安全字符，不直接当文件路径）
- *   seed:          显式整数随机种子
- *   renderProfile: { name: 'pixel-flat', version: 1 }
- *   style:         { id, version, ramps: { name: ['#rrggbb' × 4] } }   // shadow/base/light/highlight
- *   canvas:        { w, h, outline? }   // 内画布；outline 默认 #120d16，null = 不描边不扩边
- *   nodes:         [{ id, kind, x, y, w, h, ramp, material, layer }]  // 扁平列表 + layer 序（v1 无父子）
- *   anchor?:       { x, y }（内画布像素边界坐标，默认底边中点）
- *   attachments?:  { name: { x, y } }
- *   constraints?:  [{ kind: 'pixels'|'structure'|'metadata', target, note? }]  // v1 仅声明，M2 起强制执行
+ * 版本词汇：
+ * - pga-studio/1（冻结）：panel/screen 矩形节点（x/y/w/h），material ∈ flat|bevel-metal|scanlines，
+ *   ramp 仅共享色阶名引用。
+ * - pga-studio/2（ADR-0010 扩展）：新增 poly（3–8 整数顶点）与 disc（cx/cy/rx/ry）几何；
+ *   panel/poly/disc 可用 shade-diag 体积概括材质；ramp 可为 { shades:[4色] } 局部覆盖；
+ *   style 可带 meta（license/source/focusRamp/notes）。/1 文档行为不变，两版本共存。
+ *
+ * 公共形状：schemaVersion / id / seed / renderProfile(pixel-flat@1) / style / canvas(内画布) /
+ * nodes（扁平 + layer 序）/ anchor? / attachments? / constraints?（M2 起强制执行）。
+ * 随机命名空间 `studio/1:` 跨模式版本稳定（种子合同独立于模式版本）。
  */
 import { DEFAULT_OUTLINE } from '../bake/frame.js';
 
-export const STUDIO_SCHEMA_VERSION = 'pga-studio/1';
+export const SCHEMA_VERSIONS = Object.freeze(['pga-studio/1', 'pga-studio/2']);
+export const STUDIO_SCHEMA_VERSION = SCHEMA_VERSIONS[0]; // 兼容引用：最旧支持版本
+export const LATEST_SCHEMA_VERSION = SCHEMA_VERSIONS[SCHEMA_VERSIONS.length - 1];
 
-export const NODE_KINDS = Object.freeze(['panel', 'screen']);
-export const MATERIALS_BY_KIND = Object.freeze({
+const KINDS_V1 = Object.freeze(['panel', 'screen']);
+export const NODE_KINDS = Object.freeze(['panel', 'screen', 'poly', 'disc']); // /2 全集
+const MATERIALS_V1 = Object.freeze({
   panel: Object.freeze(['flat', 'bevel-metal']),
   screen: Object.freeze(['flat', 'scanlines']),
 });
+export const MATERIALS_BY_KIND = Object.freeze({
+  panel: Object.freeze(['flat', 'bevel-metal', 'shade-diag']),
+  screen: Object.freeze(['flat', 'scanlines']),
+  poly: Object.freeze(['flat', 'shade-diag']),
+  disc: Object.freeze(['flat', 'shade-diag']),
+});
 export const CONSTRAINT_KINDS = Object.freeze(['pixels', 'structure', 'metadata']);
+
+/** 指定模式版本下某节点类型的材质白名单。 */
+export function materialsFor(kind, schemaVersion) {
+  if (schemaVersion === 'pga-studio/1') return MATERIALS_V1[kind] ?? [];
+  return MATERIALS_BY_KIND[kind] ?? [];
+}
+
+/** 指定模式版本下的几何类型白名单。 */
+export function kindsFor(schemaVersion) {
+  return schemaVersion === 'pga-studio/1' ? KINDS_V1 : NODE_KINDS;
+}
+
+/** 各几何类型的几何字段（其余字段为公共字段）。 */
+export const GEOMETRY_FIELDS = Object.freeze({
+  panel: Object.freeze(['x', 'y', 'w', 'h']),
+  screen: Object.freeze(['x', 'y', 'w', 'h']),
+  poly: Object.freeze(['vertices']),
+  disc: Object.freeze(['cx', 'cy', 'rx', 'ry']),
+});
 
 const LIMITS = Object.freeze({
   canvasMin: 2,
@@ -35,6 +62,9 @@ const LIMITS = Object.freeze({
   rampShades: 4,
   attachmentsMax: 32,
   constraintsMax: 32,
+  verticesMin: 3,
+  verticesMax: 8,
+  metaStringMax: 200,
 });
 
 const ASSET_ID_RE = /^[a-z][a-z0-9._-]{0,63}$/;
@@ -101,6 +131,16 @@ function checkPoint(v, target, canvas, issues) {
   checkFiniteNumber(v.y, `${target}.y`, issues, { min: 0, max: canvas.h });
 }
 
+function checkShades(ramp, target, issues) {
+  if (!Array.isArray(ramp) || ramp.length !== LIMITS.rampShades) {
+    issues.push(issue('INVALID_DOCUMENT', target, `色阶需为 ${LIMITS.rampShades} 级 '#rrggbb' 数组（shadow/base/light/highlight）`));
+    return;
+  }
+  for (const [i, c] of ramp.entries()) {
+    if (typeof c !== 'string' || !HEX_RE.test(c)) issues.push(issue('INVALID_DOCUMENT', `${target}[${i}]`, `非法颜色 ${JSON.stringify(c)}`));
+  }
+}
+
 function validateRamps(style, issues) {
   const ramps = style.ramps;
   if (!isPlainObject(ramps)) {
@@ -118,19 +158,52 @@ function validateRamps(style, issues) {
       continue;
     }
     if (!RAMP_NAME_RE.test(name)) issues.push(issue('INVALID_DOCUMENT', target, `非法色阶名 '${name}'`));
-    const ramp = ramps[name];
-    if (!Array.isArray(ramp) || ramp.length !== LIMITS.rampShades) {
-      issues.push(issue('INVALID_DOCUMENT', target, `色阶需为 ${LIMITS.rampShades} 级 '#rrggbb' 数组（shadow/base/light/highlight）`));
-      continue;
+    checkShades(ramps[name], target, issues);
+  }
+}
+
+function validateStyleMeta(style, version, issues) {
+  if (style.meta === undefined) return;
+  if (version === 'pga-studio/1') {
+    issues.push(issue('INVALID_DOCUMENT', 'style.meta', `pga-studio/1 不支持 style.meta（需要 ${LATEST_SCHEMA_VERSION}）`));
+    return;
+  }
+  if (!isPlainObject(style.meta)) {
+    issues.push(issue('INVALID_DOCUMENT', 'style.meta', '需要对象 { license?, source?, focusRamp?, notes? }'));
+    return;
+  }
+  checkKeys(style.meta, ['license', 'source', 'focusRamp', 'notes'], 'style.meta', issues);
+  for (const key of ['license', 'source', 'notes']) {
+    if (style.meta[key] !== undefined && (typeof style.meta[key] !== 'string' || style.meta[key].length > LIMITS.metaStringMax)) {
+      issues.push(issue('INVALID_DOCUMENT', `style.meta.${key}`, `需要 ≤${LIMITS.metaStringMax} 字符字符串`));
     }
-    for (const [i, c] of ramp.entries()) {
-      if (typeof c !== 'string' || !HEX_RE.test(c)) issues.push(issue('INVALID_DOCUMENT', `${target}[${i}]`, `非法颜色 ${JSON.stringify(c)}`));
+  }
+  if (style.meta.focusRamp !== undefined) {
+    const rampNames = isPlainObject(style.ramps) ? Object.keys(style.ramps) : [];
+    if (typeof style.meta.focusRamp !== 'string' || !rampNames.includes(style.meta.focusRamp)) {
+      issues.push(issue('INVALID_DOCUMENT', 'style.meta.focusRamp', `焦点色阶需为已声明色阶：${JSON.stringify(style.meta.focusRamp)}`));
     }
   }
 }
 
-function validateNodes(doc, issues) {
-  const { nodes, canvas, style } = doc;
+function checkVertices(vertices, target, canvas, issues) {
+  if (!Array.isArray(vertices) || vertices.length < LIMITS.verticesMin || vertices.length > LIMITS.verticesMax) {
+    issues.push(issue('INVALID_DOCUMENT', target, `vertices 需为 ${LIMITS.verticesMin}–${LIMITS.verticesMax} 个顶点`));
+    return;
+  }
+  for (const [i, pt] of vertices.entries()) {
+    const ptTarget = `${target}[${i}]`;
+    if (!Array.isArray(pt) || pt.length !== 2) {
+      issues.push(issue('INVALID_DOCUMENT', ptTarget, '顶点需为 [x, y] 整数对'));
+      continue;
+    }
+    checkFiniteNumber(pt[0], `${ptTarget}[0]`, issues, { integer: true, min: 0, max: canvas.w });
+    checkFiniteNumber(pt[1], `${ptTarget}[1]`, issues, { integer: true, min: 0, max: canvas.h });
+  }
+}
+
+function validateNodes(doc, canvas, version, issues) {
+  const { nodes, style } = doc;
   if (!Array.isArray(nodes) || nodes.length < 1) {
     issues.push(issue('INVALID_DOCUMENT', 'nodes', '至少需要 1 个节点'));
     return;
@@ -138,37 +211,67 @@ function validateNodes(doc, issues) {
   if (nodes.length > LIMITS.nodesMax) issues.push(issue('RESOURCE_LIMIT', 'nodes', `节点数 ${nodes.length} 超过上限 ${LIMITS.nodesMax}`));
   const seen = new Set();
   const rampNames = isPlainObject(style?.ramps) ? new Set(Object.keys(style.ramps)) : new Set();
+  const kinds = kindsFor(version);
   for (const [index, node] of nodes.entries()) {
     const target = `nodes[${index}]${isPlainObject(node) && typeof node.id === 'string' ? `(${node.id})` : ''}`;
     if (!isPlainObject(node)) {
       issues.push(issue('INVALID_DOCUMENT', `nodes[${index}]`, '节点需要对象'));
       continue;
     }
-    checkKeys(node, ['id', 'kind', 'x', 'y', 'w', 'h', 'ramp', 'material', 'layer'], target, issues);
+    checkKeys(node, ['id', 'kind', 'x', 'y', 'w', 'h', 'vertices', 'cx', 'cy', 'rx', 'ry', 'ramp', 'material', 'layer'], target, issues);
     if (typeof node.id !== 'string' || !NODE_ID_RE.test(node.id)) {
       issues.push(issue('INVALID_DOCUMENT', `${target}.id`, `节点 ID 需为点分命名（如 terminal.shell）：${JSON.stringify(node.id)}`));
     } else if (seen.has(node.id)) {
       issues.push(issue('INVALID_DOCUMENT', `${target}.id`, `节点 ID 重复：'${node.id}'`));
     }
     seen.add(node.id);
-    if (!NODE_KINDS.includes(node.kind)) {
-      issues.push(issue('UNSUPPORTED_OPERATION', `${target}.kind`, `未知几何类型 '${node.kind}'（可用：${NODE_KINDS.join(', ')}）`));
+    if (!kinds.includes(node.kind)) {
+      issues.push(issue('UNSUPPORTED_OPERATION', `${target}.kind`, `版本 ${version} 未知几何类型 '${node.kind}'（可用：${kinds.join(', ')}）`));
     }
-    const geomOk =
-      checkFiniteNumber(node.x, `${target}.x`, issues, { integer: true, min: 0, max: canvas.w - 1 }) &
-      checkFiniteNumber(node.y, `${target}.y`, issues, { integer: true, min: 0, max: canvas.h - 1 }) &
-      checkFiniteNumber(node.w, `${target}.w`, issues, { integer: true, min: 1, max: canvas.w }) &
-      checkFiniteNumber(node.h, `${target}.h`, issues, { integer: true, min: 1, max: canvas.h });
-    if (geomOk) {
-      if (node.x + node.w > canvas.w) issues.push(issue('INVALID_DOCUMENT', target, `节点右缘 ${node.x + node.w} 超出内画布宽 ${canvas.w}`));
-      if (node.y + node.h > canvas.h) issues.push(issue('INVALID_DOCUMENT', target, `节点下缘 ${node.y + node.h} 超出内画布高 ${canvas.h}`));
+    // 按类型的几何字段：该类型的字段必须齐全且合法，其他类型的几何字段不得出现
+    const geomFields = GEOMETRY_FIELDS[node.kind] ?? [];
+    for (const f of ['x', 'y', 'w', 'h', 'vertices', 'cx', 'cy', 'rx', 'ry']) {
+      if (!geomFields.includes(f) && node[f] !== undefined) issues.push(issue('INVALID_DOCUMENT', `${target}.${f}`, `类型 '${node.kind}' 不含几何字段 '${f}'`));
     }
-    if (typeof node.ramp !== 'string' || !rampNames.has(node.ramp)) {
-      issues.push(issue('INVALID_DOCUMENT', `${target}.ramp`, `引用不存在的色阶 '${node.ramp}'`));
+    if (node.kind === 'panel' || node.kind === 'screen') {
+      const geomOk =
+        checkFiniteNumber(node.x, `${target}.x`, issues, { integer: true, min: 0, max: canvas.w - 1 }) &
+        checkFiniteNumber(node.y, `${target}.y`, issues, { integer: true, min: 0, max: canvas.h - 1 }) &
+        checkFiniteNumber(node.w, `${target}.w`, issues, { integer: true, min: 1, max: canvas.w }) &
+        checkFiniteNumber(node.h, `${target}.h`, issues, { integer: true, min: 1, max: canvas.h });
+      if (geomOk) {
+        if (node.x + node.w > canvas.w) issues.push(issue('INVALID_DOCUMENT', target, `节点右缘 ${node.x + node.w} 超出内画布宽 ${canvas.w}`));
+        if (node.y + node.h > canvas.h) issues.push(issue('INVALID_DOCUMENT', target, `节点下缘 ${node.y + node.h} 超出内画布高 ${canvas.h}`));
+      }
+    } else if (node.kind === 'poly') {
+      checkVertices(node.vertices, `${target}.vertices`, canvas, issues);
+    } else if (node.kind === 'disc') {
+      const geomOk =
+        checkFiniteNumber(node.cx, `${target}.cx`, issues, { integer: true, min: 0, max: canvas.w }) &
+        checkFiniteNumber(node.cy, `${target}.cy`, issues, { integer: true, min: 0, max: canvas.h }) &
+        checkFiniteNumber(node.rx, `${target}.rx`, issues, { integer: true, min: 1, max: canvas.w }) &
+        checkFiniteNumber(node.ry, `${target}.ry`, issues, { integer: true, min: 1, max: canvas.h });
+      if (geomOk) {
+        if (node.cx - node.rx < 0 || node.cx + node.rx > canvas.w) issues.push(issue('INVALID_DOCUMENT', target, `disc 水平范围 [${node.cx - node.rx}, ${node.cx + node.rx}] 超出内画布宽 ${canvas.w}`));
+        if (node.cy - node.ry < 0 || node.cy + node.ry > canvas.h) issues.push(issue('INVALID_DOCUMENT', target, `disc 垂直范围 [${node.cy - node.ry}, ${node.cy + node.ry}] 超出内画布高 ${canvas.h}`));
+      }
     }
-    const materials = MATERIALS_BY_KIND[node.kind] ?? [];
+    // ramp：共享色阶名引用，或（/2）{ shades } 局部覆盖
+    if (typeof node.ramp === 'string') {
+      if (!rampNames.has(node.ramp)) issues.push(issue('INVALID_DOCUMENT', `${target}.ramp`, `引用不存在的色阶 '${node.ramp}'`));
+    } else if (isPlainObject(node.ramp)) {
+      if (version === 'pga-studio/1') {
+        issues.push(issue('INVALID_DOCUMENT', `${target}.ramp`, `pga-studio/1 的 ramp 仅支持共享色阶名引用（局部覆盖需要 ${LATEST_SCHEMA_VERSION}）`));
+      } else {
+        checkKeys(node.ramp, ['shades'], `${target}.ramp`, issues);
+        checkShades(node.ramp.shades, `${target}.ramp.shades`, issues);
+      }
+    } else {
+      issues.push(issue('INVALID_DOCUMENT', `${target}.ramp`, 'ramp 需为色阶名或 { shades } 局部覆盖'));
+    }
+    const materials = materialsFor(node.kind, version);
     if (!materials.includes(node.material)) {
-      issues.push(issue('UNSUPPORTED_OPERATION', `${target}.material`, `类型 '${node.kind}' 不支持材质 '${node.material}'（可用：${materials.join(', ')}）`));
+      issues.push(issue('UNSUPPORTED_OPERATION', `${target}.material`, `版本 ${version} 的类型 '${node.kind}' 不支持材质 '${node.material}'（可用：${materials.join(', ')}）`));
     }
     if (node.layer !== undefined) checkFiniteNumber(node.layer, `${target}.layer`, issues, { integer: true, min: -1024, max: 1024 });
   }
@@ -207,10 +310,11 @@ export function validateStudioDocument(doc) {
   const issues = [];
   if (!isPlainObject(doc)) return [issue('INVALID_DOCUMENT', '(root)', '文档需要 JSON 对象')];
   checkKeys(doc, ['schemaVersion', 'id', 'seed', 'renderProfile', 'style', 'canvas', 'nodes', 'anchor', 'attachments', 'constraints'], '(root)', issues);
-  if (doc.schemaVersion !== STUDIO_SCHEMA_VERSION) {
-    issues.push(issue('INVALID_DOCUMENT', 'schemaVersion', `未知版本 ${JSON.stringify(doc.schemaVersion)}，本校验器仅支持 '${STUDIO_SCHEMA_VERSION}'`));
+  if (!SCHEMA_VERSIONS.includes(doc.schemaVersion)) {
+    issues.push(issue('INVALID_DOCUMENT', 'schemaVersion', `未知版本 ${JSON.stringify(doc.schemaVersion)}，本校验器仅支持 ${SCHEMA_VERSIONS.map((v) => `'${v}'`).join(' 与 ')}`));
     return issues; // 版本不兼容时不继续猜测其余字段
   }
+  const version = doc.schemaVersion;
   if (typeof doc.id !== 'string' || !ASSET_ID_RE.test(doc.id)) {
     issues.push(issue('INVALID_DOCUMENT', 'id', `资产 ID 需匹配 ${ASSET_ID_RE}：${JSON.stringify(doc.id)}`));
   }
@@ -226,12 +330,13 @@ export function validateStudioDocument(doc) {
   }
   // style
   if (!isPlainObject(doc.style)) {
-    issues.push(issue('INVALID_DOCUMENT', 'style', '需要 { id, version, ramps } 对象'));
+    issues.push(issue('INVALID_DOCUMENT', 'style', '需要 { id, version, ramps, meta? } 对象'));
   } else {
-    checkKeys(doc.style, ['id', 'version', 'ramps'], 'style', issues);
+    checkKeys(doc.style, ['id', 'version', 'ramps', 'meta'], 'style', issues);
     if (typeof doc.style.id !== 'string' || doc.style.id.length === 0 || doc.style.id.length > 64) issues.push(issue('INVALID_DOCUMENT', 'style.id', '需要 1–64 字符风格 ID'));
     checkFiniteNumber(doc.style.version, 'style.version', issues, { integer: true, min: 1 });
     validateRamps(doc.style, issues);
+    validateStyleMeta(doc.style, version, issues);
   }
   // canvas（先行校验，节点/锚点范围依赖它）
   const canvas = { w: 0, h: 0 };
@@ -247,7 +352,7 @@ export function validateStudioDocument(doc) {
       issues.push(issue('INVALID_DOCUMENT', 'canvas.outline', `需要 '#rrggbb' 或 null：${JSON.stringify(doc.canvas.outline)}`));
     }
   }
-  validateNodes({ ...doc, canvas }, issues);
+  validateNodes(doc, canvas, version, issues);
   if (doc.anchor !== undefined) checkPoint(doc.anchor, 'anchor', canvas, issues);
   if (doc.attachments !== undefined) {
     if (!isPlainObject(doc.attachments)) {
@@ -282,25 +387,29 @@ export function normalizeStudioDocument(doc) {
     h: doc.canvas.h,
     outline: doc.canvas.outline === undefined ? DEFAULT_OUTLINE : doc.canvas.outline,
   };
-  const nodes = doc.nodes.map((n, index) => ({
-    id: n.id,
-    kind: n.kind,
-    x: n.x,
-    y: n.y,
-    w: n.w,
-    h: n.h,
-    ramp: n.ramp,
-    material: n.material,
-    layer: n.layer ?? index,
-  }));
+  const nodes = doc.nodes.map((n, index) => {
+    const out = { id: n.id, kind: n.kind };
+    for (const f of GEOMETRY_FIELDS[n.kind]) {
+      out[f] = Array.isArray(n[f]) ? n[f].map((pt) => [...pt]) : n[f];
+    }
+    out.ramp = isPlainObject(n.ramp) ? { shades: [...n.ramp.shades] } : n.ramp;
+    out.material = n.material;
+    out.layer = n.layer ?? index;
+    return out;
+  });
   const ramps = {};
   for (const [name, ramp] of Object.entries(doc.style.ramps)) ramps[name] = [...ramp];
+  const style = { id: doc.style.id, version: doc.style.version, ramps };
+  if (doc.style.meta) {
+    style.meta = {};
+    for (const k of ['license', 'source', 'focusRamp', 'notes']) if (doc.style.meta[k] !== undefined) style.meta[k] = doc.style.meta[k];
+  }
   return {
-    schemaVersion: STUDIO_SCHEMA_VERSION,
+    schemaVersion: doc.schemaVersion,
     id: doc.id,
     seed: doc.seed,
     renderProfile: { name: 'pixel-flat', version: 1 },
-    style: { id: doc.style.id, version: doc.style.version, ramps },
+    style,
     canvas,
     nodes,
     anchor: doc.anchor ? { x: doc.anchor.x, y: doc.anchor.y } : { x: canvas.w / 2, y: canvas.h },

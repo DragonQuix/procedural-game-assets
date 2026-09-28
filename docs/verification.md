@@ -256,6 +256,65 @@ HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类
   不据此宣称技能已经能稳定生成同级画面、所有 critic 均能区分风格与质量，或循环必然收敛。
 - 未修改用户级技能、Gauntlet、用户原图或独立试验项目；各软件安装刷新另行执行与验证。
 
+## S4 PGA Studio M4（2026-09-28，ADR-0010）
+
+阶段：M4（风格与构造能力）。
+依据：`docs/PGA_STUDIO_IMPLEMENTATION_HANDOFF.md` M4/§8.3、ADR-0008/0009/0010、`docs/studio-cli.md`。
+本轮目标：版本化风格词汇与许可、色阶局部覆盖、第二种结构明显不同的资产、
+有限体积概括、留出组合检验。
+
+### 实际完成
+
+- `pga-studio/2`：`poly`（3–8 整数顶点单环，可凹）与 `disc`（整数 cx/cy/rx/ry）几何，
+  按类型隔离几何字段；`shade-diag` 材质（包围盒对角四带体积概括，如实声明为风格化概括）；
+  节点 `ramp` 支持 `{ shades }` 局部覆盖；`style.meta`（license/source/focusRamp/notes，参与 styleHash）。
+  /1 冻结共存：/1 文档拒绝全部 /2 词汇，终端 renderHash 锚点 `f645726c:6cebd809` 不变。
+- 编译器：按类型绘制算子 + 声明 bbox（`nodeRect`）；同值局部覆盖与共享引用渲染逐像素一致（锚点测试）。
+- 操作：`geometry.set` 按类型字段（含 poly vertices）、`ramp.set` 双取值形式；explore 支持 vertices（CLI 接受 JSON 数组）。
+- 样例 `examples/studio/wrench.studio.json`（poly 手柄/凹口钳口 + disc 螺栓 + shade-diag + style.meta）与 `examples/studio/m4-demo.mjs` 四步演示。
+- 新测试 22 项（document-v2 8、compiler-v2 5、studio-m4 6、integration-m4 3）；全套件 293/293。
+- 指南更新：/2 词汇、保守保护语义警示、过窄 poly 丢像素边界、--preserve 元素格式、vertices 探索传参。
+
+### 实际执行的命令与结果
+
+- `npm test`：293/293（271 前轮 + 22 新增，零回归）。
+- `node examples/studio/m4-demo.mjs --out work/studio-m4`：创建 → 非矩形剪影断言（23/38/12 px 均 < bbox）→ 钳口局部覆盖提交（共享 style 逐字节不变）→ 钳口顶点探索（UNCHANGED/OK）→ 手柄平移被螺栓保护捕获（区域内 1px 透变，CANDIDATE_INVALID）→ 导出 manifest 过既有校验。
+- 留出组合试点（隔离子代理，仅凭更新后指南，单轮）：
+  - H1（未见组合新建：disc+panel+poly 壁挂仪表 + style.meta + 指针局部覆盖）：PASS。客观核验：head=r2、共享 style 不变（styleHash r1→r2 同）、指针为局部覆盖、manifest 0 错误。
+  - H2（未见组合编辑：poly 手柄上端缩短 2px，钳口/螺栓不变）：PASS。客观核验：head=r2、handle.vertices=[[5,21],[7,19],[13,14],[11,12]]、jaw/bolt 字段不变、manifest 0 错误。
+- `smoke.mjs`（/1）与 `edit-demo.mjs`（M2）重跑通过，两版本共存。
+
+### 产物与复现
+
+- `work/studio-m4/`（demo-summary、revisions r1–r3、candidates、previews、export）；
+  `work/pilot/h1/`（gauge 文档/工作区/导出/轨迹）、`work/pilot/h2/`（同上）。
+
+### 技术结论
+
+- M4 验收成立：共享风格、轮廓/构造/功能标识明显不同的资产（箱体终端 vs 扳手 vs 仪表）成立，不是换色；
+  局部覆盖写时复制不污染共享风格；保守像素保护语义有真实捕获证据；留出任务由独立 agent 完成且未写进模板参数。
+
+### 视觉结论与评审来源
+
+- 实施者自审（非独立评审）：查看了扳手 r1/r2（钳口局部覆盖变深可见）、仪表 display、M2 前后图；
+  资产可辨识且与文档声明一致。美术质量维持示意样例级（NOT_YET，无标杆不宣称同级）。
+- H1 指针过窄（声明 8px 高、落像 8 像素）为能力边界实例：过窄 poly 栅格化丢像素，已写入指南。
+
+### 未验证项/限制
+
+- 比例/细节尺度建议规则、正反例库、构造件库未做（M4 范围内如实留空）。
+- 跨帧（M5）、发行核对（M6）、A/B 对照评测、MCP 均未做。
+- 凹多边形仅经偶奇填充验证，未支持自交/孔洞（校验不禁止，语义未定义，建议不使用）。
+
+### 与原计划的偏差
+
+- 无实质偏差；`--values` 增 JSON 数组形式与保守保护语义说明属试点驱动的文档/小能力补全。
+
+### 下一项可执行任务（M5 第一项）
+
+选择已有角色配方（如 rustclaw）与既有待机/移动剪辑，冻结"跨帧一致修改"的最小合同：
+资产级共享字段 vs 节点字段 vs 帧覆盖的优先级规则草案与 ADR，先在纸面冻结再实现 solvePose 复用。
+
 ## S3 PGA Studio M3 首轮试点（2026-09-28）
 
 阶段：M3 第一个增量——真实宿主接入验证（预注册试点）。完整 A/B 对照评测未做。

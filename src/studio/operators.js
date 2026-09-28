@@ -10,10 +10,10 @@
  * 并返回 plan（目标、变更字段、旧/新值），供 protect.js 独立计算允许影响区域。
  * 不做：任意形状变形、任意网格/网格点编辑、多节点联动、风格内容修改。
  */
-import { normalizeStudioDocument, StudioDocumentError, MATERIALS_BY_KIND } from './document.js';
+import { normalizeStudioDocument, StudioDocumentError, GEOMETRY_FIELDS, materialsFor } from './document.js';
 
 export const OPERATION_IDS = Object.freeze(['geometry.set', 'material.set', 'ramp.set']);
-const GEOMETRY_FIELDS = Object.freeze(['x', 'y', 'w', 'h']);
+const SCALAR_GEOMETRY_FIELDS = Object.freeze(['x', 'y', 'w', 'h', 'cx', 'cy', 'rx', 'ry']);
 
 /** 操作/候选级错误：code 区分 UNSUPPORTED_OPERATION / CANDIDATE_INVALID。 */
 export class StudioOperationError extends Error {
@@ -100,18 +100,26 @@ export function applyOperation(doc, operation) {
     const params = operation.params;
     if (params === null || typeof params !== 'object' || Array.isArray(params)) fail('INVALID_DOCUMENT', 'geometry.set 需要 params 对象', { target });
     const entries = Object.entries(params);
-    if (entries.length === 0) fail('CANDIDATE_INVALID', 'geometry.set 至少修改一个几何字段（x/y/w/h）', { target, suggestedNextAction: '提供如 {"w": 28} 的 params' });
+    if (entries.length === 0) fail('CANDIDATE_INVALID', 'geometry.set 至少修改一个几何字段', { target, suggestedNextAction: '提供如 {"w": 28} 的 params' });
+    const allowed = GEOMETRY_FIELDS[node.kind] ?? [];
     changedFields = {};
     for (const [field, value] of entries) {
-      if (!GEOMETRY_FIELDS.includes(field)) fail('CANDIDATE_INVALID', `geometry.set 不支持字段 '${field}'（可用：${GEOMETRY_FIELDS.join(', ')}）`, { target });
-      if (!Number.isInteger(value)) fail('CANDIDATE_INVALID', `geometry.set 字段 '${field}' 需要整数 px，收到 ${JSON.stringify(value)}`, { target });
-      changedFields[field] = { from: node[field], to: value };
+      if (!allowed.includes(field)) fail('CANDIDATE_INVALID', `geometry.set：类型 '${node.kind}' 不支持字段 '${field}'（可用：${allowed.join(', ')}）`, { target });
+      if (field === 'vertices') {
+        if (!Array.isArray(value) || value.length < 3 || value.length > 8 || !value.every((pt) => Array.isArray(pt) && pt.length === 2 && pt.every(Number.isInteger))) {
+          fail('CANDIDATE_INVALID', `geometry.set 字段 'vertices' 需要 3–8 个 [x,y] 整数对`, { target });
+        }
+        changedFields[field] = { from: node.vertices, to: value.map((pt) => [...pt]) };
+      } else if (SCALAR_GEOMETRY_FIELDS.includes(field)) {
+        if (!Number.isInteger(value)) fail('CANDIDATE_INVALID', `geometry.set 字段 '${field}' 需要整数 px，收到 ${JSON.stringify(value)}`, { target });
+        changedFields[field] = { from: node[field], to: value };
+      }
     }
     candidate = cloneDocWithNode(normalized, target, (next) => {
-      for (const [field, value] of entries) next[field] = value;
+      for (const [field, value] of entries) next[field] = field === 'vertices' ? value.map((pt) => [...pt]) : value;
     });
   } else if (id === 'material.set') {
-    const options = MATERIALS_BY_KIND[node.kind] ?? [];
+    const options = materialsFor(node.kind, normalized.schemaVersion);
     if (typeof operation.material !== 'string' || !options.includes(operation.material)) {
       fail('CANDIDATE_INVALID', `material.set：类型 '${node.kind}' 不支持材质 '${operation.material}'（可用：${options.join(', ')}）`, { target });
     }
@@ -120,14 +128,29 @@ export function applyOperation(doc, operation) {
       next.material = operation.material;
     });
   } else {
-    // ramp.set
-    if (typeof operation.ramp !== 'string' || !Object.hasOwn(normalized.style.ramps, operation.ramp)) {
-      fail('CANDIDATE_INVALID', `ramp.set：色阶 '${operation.ramp}' 不在风格包中（可用：${Object.keys(normalized.style.ramps).join(', ')}）`, { target });
+    // ramp.set：共享色阶名引用，或（/2）{ shades:[4色] } 局部覆盖
+    const value = operation.ramp;
+    if (typeof value === 'string') {
+      if (!Object.hasOwn(normalized.style.ramps, value)) {
+        fail('CANDIDATE_INVALID', `ramp.set：色阶 '${value}' 不在风格包中（可用：${Object.keys(normalized.style.ramps).join(', ')}）`, { target });
+      }
+      changedFields = { ramp: { from: node.ramp, to: value } };
+      candidate = cloneDocWithNode(normalized, target, (next) => {
+        next.ramp = value;
+      });
+    } else if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+      const shades = value.shades;
+      if (!Array.isArray(shades) || shades.length !== 4 || !shades.every((c) => typeof c === 'string')) {
+        fail('CANDIDATE_INVALID', `ramp.set 局部覆盖需要 { "shades": ["#rrggbb" × 4] }`, { target });
+      }
+      if (normalized.schemaVersion === 'pga-studio/1') fail('CANDIDATE_INVALID', 'ramp.set 局部覆盖需要 pga-studio/2 文档', { target });
+      changedFields = { ramp: { from: node.ramp, to: { shades: [...shades] } } };
+      candidate = cloneDocWithNode(normalized, target, (next) => {
+        next.ramp = { shades: [...shades] };
+      });
+    } else {
+      fail('CANDIDATE_INVALID', `ramp.set 需要色阶名或 { "shades": [...] } 局部覆盖，收到 ${JSON.stringify(value)}`, { target });
     }
-    changedFields = { ramp: { from: node.ramp, to: operation.ramp } };
-    candidate = cloneDocWithNode(normalized, target, (next) => {
-      next.ramp = operation.ramp;
-    });
   }
 
   const newDoc = renormalize(candidate, id, target);
@@ -148,7 +171,15 @@ export function exploreOperation(doc, spec) {
     if (!['id', 'target', 'field', 'values'].includes(key)) fail('INVALID_DOCUMENT', `探索含未知字段 '${key}'`);
   }
   if (!OPERATION_IDS.includes(spec.id)) fail('UNSUPPORTED_OPERATION', `未知操作 '${spec.id}'（可用：${OPERATION_IDS.join(', ')}）`, { target: spec.target ?? null });
-  const fieldOk = spec.id === 'geometry.set' ? GEOMETRY_FIELDS.includes(spec.field) : spec.field === exploreFieldFor(spec.id);
+  let fieldOk;
+  if (spec.id === 'geometry.set') {
+    const probe = normalizeStudioDocument(doc);
+    const node = probe.nodes.find((n) => n.id === spec.target);
+    const allowed = node ? (GEOMETRY_FIELDS[node.kind] ?? []) : SCALAR_GEOMETRY_FIELDS.concat('vertices');
+    fieldOk = allowed.includes(spec.field);
+  } else {
+    fieldOk = spec.field === exploreFieldFor(spec.id);
+  }
   if (!fieldOk) fail('CANDIDATE_INVALID', `操作 '${spec.id}' 不支持探索字段 '${spec.field}'`, { target: spec.target ?? null });
   const out = [];
   for (const value of spec.values) {

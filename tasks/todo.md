@@ -79,7 +79,18 @@
 - [x] 试点驱动修复：指南 5 处、误导诊断字段 1 处、样例约束 note 更正；回归 271/271
 - [x] MCP 决策：当前宿主 CLI＋读图成立，暂不添加薄适配（见 verification S3）
 - [ ] M3 完整对照评测（A/B 组、12 任务×重复、跨模型/宿主）：未做，不宣称
-- [ ] M4：风格包与第二种结构资产（下一项见 plans/agent-studio.md）
+
+## S4 PGA Studio M4（2026-09-28，ADR-0010）
+
+- [x] ADR-0010（版本化词汇 / 局部覆盖 / shade-diag / 保守保护语义）
+- [x] `pga-studio/2`：poly/disc 几何、shade-diag、ramp 局部覆盖、style.meta；/1 冻结共存
+- [x] `examples/studio/wrench.studio.json` 非箱体式样例 + `m4-demo.mjs` 四步演示
+- [x] 新测试 22 项；全套件 293/293；/1 渲染锚点 f645726c:6cebd809 不变
+- [x] 保守保护语义实证（bbox 透明角透变 1px 捕获）
+- [x] 留出组合试点 H1（仪表新建＋局部覆盖）/ H2（poly 顶点缩短）均 PASS，客观核验
+- [x] 指南更新（/2 词汇、保护语义警示、过窄 poly 边界、--preserve 格式）
+- [ ] M4 留空：比例/细节尺度规则、正反例库、构造件库
+- [ ] M5：角色跨帧一致修改（下一项见 plans/agent-studio.md）
 
 ## 发现入口与备份收敛（2026-09-26，单独任务）
 

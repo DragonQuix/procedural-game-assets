@@ -15,9 +15,9 @@ import { Rng } from '../core/rng.js';
 import { assembleFrame, computeBounds } from '../bake/frame.js';
 import { assembleAsset } from '../bake/asset.js';
 import { partSeed } from '../recipes/machine.js';
-import { normalizeStudioDocument, documentHash, styleHash, fnv1aHex, stableStringify } from './document.js';
+import { normalizeStudioDocument, documentHash, styleHash, fnv1aHex, stableStringify, materialsFor } from './document.js';
 
-/** 节点子种子：复用 machine.parts 的子种子算法，独立命名空间单独版本化（ADR-0008 决定 4）。 */
+/** 节点子种子：复用 machine.parts 的子种子算法；命名空间跨模式版本稳定（ADR-0008/0010）。 */
 function nodeSeed(assetSeed, nodeId) {
   return partSeed(assetSeed, `studio/1:${nodeId}`);
 }
@@ -68,17 +68,90 @@ function fillScreenScanlines(p, node, shades, rng) {
   }
 }
 
+/** 节点几何的包围盒（内画布坐标，声明语义；实际像素包围盒见 sceneMap.bounds）。 */
+export function nodeRect(node) {
+  if (node.kind === 'poly') {
+    let x0 = Infinity;
+    let y0 = Infinity;
+    let x1 = -Infinity;
+    let y1 = -Infinity;
+    for (const [vx, vy] of node.vertices) {
+      x0 = Math.min(x0, vx);
+      y0 = Math.min(y0, vy);
+      x1 = Math.max(x1, vx);
+      y1 = Math.max(y1, vy);
+    }
+    return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+  }
+  if (node.kind === 'disc') return { x: node.cx - node.rx, y: node.cy - node.ry, w: node.rx * 2, h: node.ry * 2 };
+  return { x: node.x, y: node.y, w: node.w, h: node.h };
+}
+
+/**
+ * shade-diag：风格化对角体积概括（ADR-0010）。在节点自身包围盒上按对角参数 t
+ * （左上 0 → 右下 1）分带：t<0.15 高光(3)、t<0.4 受光(2)、t<0.75 基色(1)、其余阴影(0)。
+ * 只改已有不透明像素；是风格化概括，不是物理光照；尺寸过小时分带自然塌缩，不制造杂点。
+ */
+function applyShadeDiag(p, node, shades) {
+  const rect = nodeRect(node);
+  const span = Math.max(1, rect.w + rect.h - 2);
+  p.map((x, y) => {
+    const t = (x - rect.x + (y - rect.y)) / span;
+    if (t < 0.15) return shades[3];
+    if (t < 0.4) return shades[2];
+    if (t < 0.75) return shades[1];
+    return shades[0];
+  });
+}
+
+function fillPoly(p, node, shades) {
+  p.poly(node.vertices, shades[1]);
+}
+
+function fillDisc(p, node, shades) {
+  p.ellipse(node.cx, node.cy, node.rx, node.ry, shades[1]);
+}
+
+const SHAPE_FILL = Object.freeze({
+  panel: fillPanel,
+  screen: fillScreenFlat,
+  poly: fillPoly,
+  disc: fillDisc,
+});
+
 const DRAW_OPERATORS = Object.freeze({
   'panel/flat': (p, node, shades) => fillPanel(p, node, shades),
   'panel/bevel-metal': (p, node, shades) => fillPanelBevelMetal(p, node, shades),
+  'panel/shade-diag': (p, node, shades) => {
+    fillPanel(p, node, shades);
+    applyShadeDiag(p, node, shades);
+  },
   'screen/flat': (p, node, shades) => fillScreenFlat(p, node, shades),
   'screen/scanlines': (p, node, shades, rng) => fillScreenScanlines(p, node, shades, rng),
+  'poly/flat': (p, node, shades) => fillPoly(p, node, shades),
+  'poly/shade-diag': (p, node, shades) => {
+    fillPoly(p, node, shades);
+    applyShadeDiag(p, node, shades);
+  },
+  'disc/flat': (p, node, shades) => fillDisc(p, node, shades),
+  'disc/shade-diag': (p, node, shades) => {
+    fillDisc(p, node, shades);
+    applyShadeDiag(p, node, shades);
+  },
 });
 
+/** 节点色阶：共享引用查 style.ramps；{ shades } 局部覆盖直接使用（互不影响同名共享色阶）。 */
+function rampShades(node, ramps) {
+  if (typeof node.ramp === 'string') {
+    const ramp = Object.hasOwn(ramps, node.ramp) ? ramps[node.ramp] : null;
+    if (!ramp) throw new Error(`节点 '${node.id}' 引用不存在的色阶 '${node.ramp}'（内部校验遗漏）`);
+    return ramp;
+  }
+  return node.ramp.shades;
+}
+
 function drawNode(sub, node, ramps, assetSeed) {
-  const ramp = Object.hasOwn(ramps, node.ramp) ? ramps[node.ramp] : null;
-  if (!ramp) throw new Error(`节点 '${node.id}' 引用不存在的色阶 '${node.ramp}'（内部校验遗漏）`);
-  const shades = ramp.map((c) => packColor(c));
+  const shades = rampShades(node, ramps).map((c) => packColor(c));
   const op = DRAW_OPERATORS[`${node.kind}/${node.material}`];
   if (!op) throw new Error(`节点 '${node.id}' 的 ${node.kind}/${node.material} 无绘制算子（内部校验遗漏）`);
   op(sub, node, shades, new Rng(nodeSeed(assetSeed, node.id)));
@@ -126,18 +199,18 @@ export function compileStudioDocument(doc, opts = {}) {
       }
     }
     masks[node.id] = mask;
+    const rect = nodeRect(node); // 声明几何包围盒（poly/disc 由顶点/半径求得），内画布坐标
     sceneNodes.push({
       id: node.id,
       kind: node.kind,
       layer: node.layer,
       ramp: node.ramp,
       material: node.material,
-      // 内画布坐标（绘制坐标系）
-      rect: { x: node.x, y: node.y, w: node.w, h: node.h },
+      rect,
       bounds,
       opaquePixels,
       // 最终帧坐标（含 assembleFrame 的 1px 描边扩边，ADR-0002 padding 平移规则）
-      frameRect: { x: node.x + padPx, y: node.y + padPx, w: node.w, h: node.h },
+      frameRect: { x: rect.x + padPx, y: rect.y + padPx, w: rect.w, h: rect.h },
       frameBounds: bounds ? { x0: bounds.x0 + padPx, y0: bounds.y0 + padPx, x1: bounds.x1 + padPx, y1: bounds.y1 + padPx } : null,
     });
   }
@@ -173,35 +246,51 @@ export function compileStudioDocument(doc, opts = {}) {
 
 /**
  * 节点能力声明（inspect 用）：当前文档下每个节点支持的操作、参数范围与单位。
- * 操作执行自 M2 起；此处为静态范围元数据，供 agent 不猜字段。
+ * 操作由 operators.js 执行；此处为静态范围元数据，供 agent 不猜字段。
  */
 export function describeCapabilities(doc) {
   const normalized = normalizeStudioDocument(doc);
   const { canvas, style } = normalized;
+  const version = normalized.schemaVersion;
   const nodes = {};
   for (const node of normalized.nodes) {
+    let geometryFields;
+    if (node.kind === 'poly') {
+      geometryFields = {
+        vertices: { type: 'array', item: '[x,y] 整数对', minLength: 3, maxLength: 8, x: { min: 0, max: canvas.w }, y: { min: 0, max: canvas.h } },
+      };
+    } else if (node.kind === 'disc') {
+      geometryFields = {
+        cx: { type: 'integer', min: node.rx, max: canvas.w - node.rx },
+        cy: { type: 'integer', min: node.ry, max: canvas.h - node.ry },
+        rx: { type: 'integer', min: 1, max: Math.min(node.cx, canvas.w - node.cx) },
+        ry: { type: 'integer', min: 1, max: Math.min(node.cy, canvas.h - node.cy) },
+      };
+    } else {
+      geometryFields = {
+        x: { type: 'integer', min: 0, max: canvas.w - node.w },
+        y: { type: 'integer', min: 0, max: canvas.h - node.h },
+        w: { type: 'integer', min: 1, max: canvas.w - node.x },
+        h: { type: 'integer', min: 1, max: canvas.h - node.y },
+      };
+    }
+    const rampOp = { status: 'available-m2', options: Object.keys(style.ramps) };
+    if (version !== 'pga-studio/1') {
+      rampOp.localOverride = { form: '{ "shades": ["#rrggbb" × 4] }', note: '节点级局部覆盖，不影响共享色阶与其他节点' };
+    }
     nodes[node.id] = {
       kind: node.kind,
       operations: {
-        'geometry.set': {
-          status: 'available-m2',
-          unit: 'px',
-          fields: {
-            x: { type: 'integer', min: 0, max: canvas.w - node.w },
-            y: { type: 'integer', min: 0, max: canvas.h - node.h },
-            w: { type: 'integer', min: 1, max: canvas.w - node.x },
-            h: { type: 'integer', min: 1, max: canvas.h - node.y },
-          },
-        },
-        'material.set': { status: 'available-m2', options: [...(node.kind === 'panel' ? ['flat', 'bevel-metal'] : ['flat', 'scanlines'])] },
-        'ramp.set': { status: 'available-m2', options: Object.keys(style.ramps) },
+        'geometry.set': { status: 'available-m2', unit: 'px', fields: geometryFields },
+        'material.set': { status: 'available-m2', options: materialsFor(node.kind, version) },
+        'ramp.set': rampOp,
       },
-      example: { operation: 'geometry.set', target: node.id, params: { w: node.w + 2 } },
+      example: { operation: 'geometry.set', target: node.id, params: node.kind === 'poly' ? { vertices: node.vertices.map(([a, b]) => [Math.min(canvas.w, a + 1), b]) } : node.kind === 'disc' ? { rx: node.rx + 1 } : { w: node.w + 2 } },
     };
   }
   return {
     schemaVersion: normalized.schemaVersion,
-    limits: { canvasMax: 512, nodesMax: 64, rampShades: 4 },
+    limits: { canvasMax: 512, nodesMax: 64, rampShades: 4, verticesMax: 8 },
     nodes,
   };
 }

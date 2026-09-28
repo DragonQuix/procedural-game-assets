@@ -27,7 +27,8 @@
 | `review batch`（评审批次） | 对同一候选回收 visual 与 delivery 全部独立裁决的集合 | 两个不同完整批次同时 WOW 才准出，批次不等于候选 |
 | `quality parity`（质量同级） | 在约定用途与审美方向内，整体吸引力、设计控制力和完成度达到标杆档次 | 不是外观相似度；准则见 `docs/visual-quality.md`，循环合同见 ADR-0007 |
 | `design constraints`（设计约束） | 用户明确要求的风格、功能、必要特征与使用条件 | 不从标杆自动继承角色身份、配色或几何；未约束部分允许原创 |
-| `studio document`（Studio 文档） | `pga-studio/1` 可序列化 JSON：显式种子、内画布、扁平节点（稳定 ID + layer 序）、有限几何/材质/色阶声明 | 无函数/模块路径/URL；校验拒绝未知版本与字段；见 ADR-0008 |
+| `studio document`（Studio 文档） | `pga-studio/1`（冻结矩形词汇）或 `pga-studio/2`（+poly/disc、shade-diag、色阶局部覆盖、style.meta）的可序列化 JSON：显式种子、内画布、扁平节点、有限几何/材质/色阶声明 | 无函数/模块路径/URL；未知版本与字段拒绝；见 ADR-0008/0010 |
+| `style pack`（风格包） | 文档内版本化 `style`：命名 4 级色阶 + `meta`（license/source/focusRamp/notes） | 不是模板换色器；节点可用 `{shades}` 局部覆盖而不动共享色阶 |
 | `sceneMap` | Studio 编译输出的编辑侧节点定位数据（最终帧坐标、独立包围盒、层序、支持掩码） | 观察元数据，不进对外 manifest，不进游戏运行时帧结构 |
 | `revision`（修订） | Studio 工作区中一次已提交的不可变文档快照（`r1..rN`，含父指针与来源） | 历史 ID ≠ 内容哈希；恢复是引用旧内容的新修订 |
 | `edit candidate`（编辑候选） | 从某修订派生的未提交文档 + 保护检查结果，内容哈希识别（`c-*`） | 不改变 head；与 pga-loop 的冻结 `candidate` 不同域，见 ADR-0009 |
@@ -69,6 +70,6 @@ examples/godot/         Godot 可选适配样例（非验收前提）
 - 分析：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ART-ANALYSIS.md`
 - 原游戏设计：`E:/Repos/Games/ForOthers/others_003/docs/DESIGN.md`
 - 来源与授权：`docs/provenance.md`
-- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio、0009 Studio 编辑事务）
+- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio、0009 Studio 编辑事务、0010 Studio 风格与构造）
 
 本项目当前没有 `CONTEXT-MAP.md`（未做领域拆分）；如将来拆分领域再建立。

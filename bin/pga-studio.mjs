@@ -96,7 +96,17 @@ function buildOperation() {
     return { id, target, params };
   }
   if (id === 'material.set') return { id, target, material: requireOpt('material', 'material.set 需要 --material <name>') };
-  if (id === 'ramp.set') return { id, target, ramp: requireOpt('ramp', 'ramp.set 需要 --ramp <name>') };
+  if (id === 'ramp.set') {
+    const raw = requireOpt('ramp', 'ramp.set 需要 --ramp <name> 或 --ramp \'{"shades":["#rrggbb"×4]}\'');
+    if (raw.startsWith('{')) {
+      try {
+        return { id, target, ramp: JSON.parse(raw) };
+      } catch (e) {
+        fail('INVALID_DOCUMENT', `--ramp 不是合法 JSON：${e.message}`, 2);
+      }
+    }
+    return { id, target, ramp: raw };
+  }
   return { id, target }; // 未知操作交给 operators 报 UNSUPPORTED_OPERATION
 }
 
@@ -104,7 +114,14 @@ function buildExploreSpec() {
   const id = requireOpt('op', '需要 --op <geometry.set|material.set|ramp.set>');
   const target = requireOpt('target', `操作 ${id} 需要 --target <nodeId>`);
   const field = requireOpt('field', 'explore 需要 --field <字段>');
-  const raw = requireOpt('values', 'explore 需要 --values <逗号分隔取值>');
+  const raw = requireOpt('values', 'explore 需要 --values <逗号分隔取值或 JSON 数组>');
+  if (raw.startsWith('[')) {
+    try {
+      return { id, target, field, values: JSON.parse(raw) };
+    } catch (e) {
+      fail('INVALID_DOCUMENT', `--values 不是合法 JSON 数组：${e.message}`, 2);
+    }
+  }
   const values = raw.split(',').map((s) => {
     const t = s.trim();
     const n = Number(t);
