@@ -1,0 +1,31 @@
+{
+  "id": "hauler",
+  "kind": "prop",
+  "seed": 640917,
+  "clips": {},
+  "frames": [
+    {
+      "id": "hauler",
+      "width": 40,
+      "height": 36,
+      "anchor": {
+        "x": 20,
+        "y": 33
+      },
+      "attachments": {
+        "sensor": {
+          "x": 20,
+          "y": 13.5
+        }
+      },
+      "bounds": {
+        "x0": 6,
+        "y0": 4,
+        "x1": 34,
+        "y1": 34
+      }
+    }
+  ],
+  "hash": "8b708185cb54187927a3889562f3259cbb5718f023ae999f03178fc5b5ddbe4c",
+  "format": "pga-benchmark-output/1"
+}

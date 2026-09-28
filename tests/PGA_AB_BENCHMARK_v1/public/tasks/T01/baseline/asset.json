@@ -1,0 +1,31 @@
+{
+  "id": "relay",
+  "kind": "prop",
+  "seed": 640917,
+  "clips": {},
+  "frames": [
+    {
+      "id": "relay",
+      "width": 40,
+      "height": 36,
+      "anchor": {
+        "x": 20,
+        "y": 33
+      },
+      "attachments": {
+        "screenCenter": {
+          "x": 16,
+          "y": 15
+        }
+      },
+      "bounds": {
+        "x0": 4,
+        "y0": 3,
+        "x1": 36,
+        "y1": 34
+      }
+    }
+  ],
+  "hash": "770b6f4f4029c9236f2befabcfdc8fba0d76bd5e62f0f3e7f5c38a929185a451",
+  "format": "pga-benchmark-output/1"
+}

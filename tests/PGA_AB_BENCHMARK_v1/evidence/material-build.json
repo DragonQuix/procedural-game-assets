@@ -1,0 +1,41 @@
+{
+  "repositoryFingerprint": "454f02737114391eda40c4fa14b02d3daedee3d18a8f6decc2575a1a1b3c12e6",
+  "results": [
+    {
+      "task": "T01",
+      "hash": "770b6f4f4029c9236f2befabcfdc8fba0d76bd5e62f0f3e7f5c38a929185a451",
+      "equal": true,
+      "frames": 1
+    },
+    {
+      "task": "T02",
+      "hash": "8b708185cb54187927a3889562f3259cbb5718f023ae999f03178fc5b5ddbe4c",
+      "equal": true,
+      "frames": 1
+    },
+    {
+      "task": "T03",
+      "hash": "67f4df083f5d619df92955fa42382a82f0a42fbe71f79a7e543f2f2e42d933f4",
+      "equal": true,
+      "frames": 1
+    },
+    {
+      "task": "T04",
+      "hash": "5a17bd1f50d04590100ec3dcef662d09e4fd4a846305de3141766b59698cbb9e",
+      "equal": true,
+      "frames": 1
+    },
+    {
+      "task": "T05",
+      "hash": "e67dd74746dda44627fd8e1ccfcbefcc07c5f5e435bde1ce21ffdc7c0cbb282d",
+      "equal": true,
+      "frames": 1
+    },
+    {
+      "task": "T06",
+      "hash": "1f046f3a40fb48d35b786aaf6a8a95ae7995b2182252ecf05696884d00415c1c",
+      "equal": true,
+      "frames": 7
+    }
+  ]
+}

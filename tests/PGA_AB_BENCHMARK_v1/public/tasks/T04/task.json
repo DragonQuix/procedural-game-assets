@@ -1,0 +1,37 @@
+{
+  "id": "T04",
+  "title": "把占位徽标改成无文字急救标识",
+  "category": "功能识别与局部变体",
+  "frame": "medkit",
+  "brief": "这个箱子的中央只是一个黄色矩形占位标记。请在现有徽标区域内把它改成容易识别的急救/医疗用品标识，不使用文字、数字或现实品牌；外壳、手柄和锁扣保持原样。",
+  "targets": [
+    "medkit.symbol"
+  ],
+  "allowedRectangles": [
+    [
+      13,
+      13,
+      13,
+      11
+    ]
+  ],
+  "holes": [],
+  "preserveAlpha": true,
+  "minChanges": 1,
+  "criteria": [
+    "在正常显示尺度下，标识能让人联想到急救/医疗用途，而不是仍然只有矩形色块。",
+    "线条或像素簇简洁稳定，符号位于底板中合适的位置。",
+    "标识与整体工业像素风一致，不因改图标破坏箱体设计。"
+  ],
+  "protect": "只能修改底板中央公开遮罩内的像素；区域外 RGBA、所有 alpha、锚点与附件点不变。",
+  "schemaVersion": "pga-benchmark-task/1",
+  "seed": 640917,
+  "displayScale": 4,
+  "backgrounds": [
+    "#202028",
+    "#d6d8dc"
+  ],
+  "maxRenderedStates": 12,
+  "sourcesMustRemainEditable": true,
+  "exactTargetImage": false
+}

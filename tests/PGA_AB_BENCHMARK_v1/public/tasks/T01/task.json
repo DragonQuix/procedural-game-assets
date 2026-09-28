@@ -1,0 +1,37 @@
+{
+  "id": "T01",
+  "title": "让主屏幕重新成为视觉重点",
+  "category": "局部明度与焦点",
+  "frame": "relay",
+  "brief": "这是一个现场中继终端。右侧琥珀色面板过于抢眼，主屏幕反而不突出。只调整右侧面板的颜色或材质，让屏幕成为第一视觉落点；右侧仍应能辨认，不要把它简单涂成透明或背景色。",
+  "targets": [
+    "relay.side"
+  ],
+  "allowedRectangles": [
+    [
+      27,
+      8,
+      5,
+      14
+    ]
+  ],
+  "holes": [],
+  "preserveAlpha": true,
+  "minChanges": 1,
+  "criteria": [
+    "正常4倍显示下，主屏幕比侧板更先被注意到。",
+    "侧板仍有结构、存在感与可读性，不是被删掉。",
+    "整体色阶协调，未用更多装饰转移问题。"
+  ],
+  "protect": "除 relay.side 对应的矩形像素外，其他 RGBA 必须与起点完全相同；所有透明度、锚点和附件点不变。",
+  "schemaVersion": "pga-benchmark-task/1",
+  "seed": 640917,
+  "displayScale": 4,
+  "backgrounds": [
+    "#202028",
+    "#d6d8dc"
+  ],
+  "maxRenderedStates": 12,
+  "sourcesMustRemainEditable": true,
+  "exactTargetImage": false
+}

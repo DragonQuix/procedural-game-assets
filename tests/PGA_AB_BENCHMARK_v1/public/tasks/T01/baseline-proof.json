@@ -1,0 +1,14 @@
+{
+  "task": "T01",
+  "hashA": "770b6f4f4029c9236f2befabcfdc8fba0d76bd5e62f0f3e7f5c38a929185a451",
+  "hashD": "770b6f4f4029c9236f2befabcfdc8fba0d76bd5e62f0f3e7f5c38a929185a451",
+  "equal": true,
+  "masks": [
+    {
+      "frame": "relay",
+      "width": 40,
+      "height": 36,
+      "editablePixels": 70
+    }
+  ]
+}

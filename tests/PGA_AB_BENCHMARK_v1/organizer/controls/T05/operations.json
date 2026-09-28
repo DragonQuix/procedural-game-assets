@@ -1,0 +1,50 @@
+[
+  {
+    "id": "geometry.set",
+    "target": "beacon.body",
+    "params": {
+      "x": 12,
+      "y": 17,
+      "w": 14,
+      "h": 14
+    }
+  },
+  {
+    "id": "geometry.set",
+    "target": "beacon.base",
+    "params": {
+      "x": 9,
+      "w": 20
+    }
+  },
+  {
+    "id": "geometry.set",
+    "target": "beacon.mast",
+    "params": {
+      "x": 18,
+      "y": 9,
+      "w": 3,
+      "h": 12
+    }
+  },
+  {
+    "id": "geometry.set",
+    "target": "beacon.light",
+    "params": {
+      "cx": 19,
+      "cy": 8,
+      "rx": 5,
+      "ry": 4
+    }
+  },
+  {
+    "id": "geometry.set",
+    "target": "beacon.battery",
+    "params": {
+      "x": 26,
+      "y": 23,
+      "w": 5,
+      "h": 8
+    }
+  }
+]

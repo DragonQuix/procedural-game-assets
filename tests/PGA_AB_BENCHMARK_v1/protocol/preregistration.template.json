@@ -1,0 +1,49 @@
+{
+  "schema": "pga-benchmark-prereg/1",
+  "status": "FILL_BEFORE_SCORED_RUNS",
+  "repositoryFingerprint": null,
+  "model": {
+    "provider": null,
+    "model_id": null,
+    "version_or_date": null,
+    "reasoning_setting": null,
+    "temperature": null,
+    "seed_supported": null,
+    "seed": null
+  },
+  "host": {
+    "name": null,
+    "version": null,
+    "vision_verified": false,
+    "transcript_capture": null
+  },
+  "arms": [
+    "A",
+    "D"
+  ],
+  "tasks": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06"
+  ],
+  "repeats": 3,
+  "budgets": {
+    "rendered_candidate_states": 12,
+    "token_cap_each_arm": null,
+    "cost_cap_each_arm": null,
+    "time_cap_each_arm": null,
+    "null_means": "not enforced; record honestly"
+  },
+  "primary_metric": "task success = hard constraints + protocol + budget + visual PASS",
+  "reviewers": {
+    "count": 2,
+    "identities": null,
+    "tie_policy": "retain disagreement or preregister independent adjudicator"
+  },
+  "missing_rule": "keep all runs; distinguish UNVERIFIED, TOOL_BLOCKED, INVALID_PROTOCOL, INFRA_FAILED",
+  "analysis": "paired by task/repeat; report task-level breakdown; no guaranteed power or broad causal generalization",
+  "approval": null
+}

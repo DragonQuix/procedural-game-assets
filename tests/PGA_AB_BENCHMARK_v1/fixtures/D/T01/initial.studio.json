@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "pga-studio/2",
+  "id": "relay",
+  "seed": 640917,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "field-service",
+    "version": 1,
+    "ramps": {
+      "steel": [
+        "#232830",
+        "#49525f",
+        "#707b8d",
+        "#a6b0c2"
+      ],
+      "screen": [
+        "#04161d",
+        "#0b3a46",
+        "#177383",
+        "#63dcd2"
+      ],
+      "amber": [
+        "#4a3410",
+        "#9c7420",
+        "#ffb13d",
+        "#ffe08a"
+      ],
+      "quiet": [
+        "#29313b",
+        "#3b4858",
+        "#536276",
+        "#77899c"
+      ],
+      "red": [
+        "#451e25",
+        "#8a3544",
+        "#c35a59",
+        "#e99a7e"
+      ]
+    },
+    "meta": {
+      "source": "benchmark-original; palette adapted from supplied toolkit",
+      "notes": "冷灰结构，少量信号色；图样为实验起点，不是质量上限"
+    }
+  },
+  "canvas": {
+    "w": 38,
+    "h": 34,
+    "outline": "#120d16"
+  },
+  "nodes": [
+    {
+      "id": "relay.base",
+      "kind": "panel",
+      "x": 8,
+      "y": 29,
+      "w": 22,
+      "h": 3,
+      "ramp": "steel",
+      "material": "bevel-metal",
+      "layer": 0
+    },
+    {
+      "id": "relay.shell",
+      "kind": "panel",
+      "x": 4,
+      "y": 3,
+      "w": 30,
+      "h": 26,
+      "ramp": "steel",
+      "material": "bevel-metal",
+      "layer": 1
+    },
+    {
+      "id": "relay.screen",
+      "kind": "screen",
+      "x": 7,
+      "y": 7,
+      "w": 16,
+      "h": 14,
+      "ramp": "screen",
+      "material": "scanlines",
+      "layer": 2
+    },
+    {
+      "id": "relay.side",
+      "kind": "panel",
+      "x": 26,
+      "y": 7,
+      "w": 5,
+      "h": 14,
+      "ramp": "amber",
+      "material": "bevel-metal",
+      "layer": 3
+    },
+    {
+      "id": "relay.key",
+      "kind": "panel",
+      "x": 8,
+      "y": 24,
+      "w": 6,
+      "h": 2,
+      "ramp": "quiet",
+      "material": "flat",
+      "layer": 4
+    }
+  ],
+  "anchor": {
+    "x": 19.0,
+    "y": 32
+  },
+  "attachments": {
+    "screenCenter": {
+      "x": 15,
+      "y": 14
+    }
+  },
+  "constraints": [
+    {
+      "kind": "pixels",
+      "target": "relay.screen"
+    },
+    {
+      "kind": "metadata",
+      "target": "anchor"
+    },
+    {
+      "kind": "metadata",
+      "target": "attachments.screenCenter"
+    }
+  ]
+}

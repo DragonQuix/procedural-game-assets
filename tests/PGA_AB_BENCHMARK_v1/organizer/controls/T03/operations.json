@@ -1,0 +1,12 @@
+[
+  {
+    "id": "material.set",
+    "target": "cutter.jaw",
+    "material": "shade-diag"
+  },
+  {
+    "id": "ramp.set",
+    "target": "cutter.handle",
+    "ramp": "quiet"
+  }
+]

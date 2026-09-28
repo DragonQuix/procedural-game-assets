@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "pga-studio/2",
+  "id": "cutter",
+  "seed": 640917,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "field-service",
+    "version": 1,
+    "ramps": {
+      "steel": [
+        "#232830",
+        "#49525f",
+        "#707b8d",
+        "#a6b0c2"
+      ],
+      "screen": [
+        "#04161d",
+        "#0b3a46",
+        "#177383",
+        "#63dcd2"
+      ],
+      "amber": [
+        "#4a3410",
+        "#9c7420",
+        "#ffb13d",
+        "#ffe08a"
+      ],
+      "quiet": [
+        "#29313b",
+        "#3b4858",
+        "#536276",
+        "#77899c"
+      ],
+      "red": [
+        "#451e25",
+        "#8a3544",
+        "#c35a59",
+        "#e99a7e"
+      ]
+    },
+    "meta": {
+      "source": "benchmark-original; palette adapted from supplied toolkit",
+      "notes": "冷灰结构，少量信号色；图样为实验起点，不是质量上限"
+    }
+  },
+  "canvas": {
+    "w": 30,
+    "h": 30,
+    "outline": "#120d16"
+  },
+  "nodes": [
+    {
+      "id": "cutter.handle",
+      "kind": "poly",
+      "vertices": [
+        [
+          5,
+          26
+        ],
+        [
+          8,
+          27
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          16,
+          10
+        ]
+      ],
+      "ramp": "steel",
+      "material": "flat",
+      "layer": 0
+    },
+    {
+      "id": "cutter.jaw",
+      "kind": "poly",
+      "vertices": [
+        [
+          14,
+          12
+        ],
+        [
+          20,
+          3
+        ],
+        [
+          27,
+          4
+        ],
+        [
+          26,
+          9
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          20,
+          15
+        ]
+      ],
+      "ramp": "steel",
+      "material": "flat",
+      "layer": 1
+    },
+    {
+      "id": "cutter.bolt",
+      "kind": "panel",
+      "x": 7,
+      "y": 22,
+      "w": 3,
+      "h": 3,
+      "ramp": "amber",
+      "material": "bevel-metal",
+      "layer": 2
+    }
+  ],
+  "anchor": {
+    "x": 15.0,
+    "y": 28
+  },
+  "attachments": {
+    "grip": {
+      "x": 10,
+      "y": 22
+    },
+    "tip": {
+      "x": 26,
+      "y": 5
+    }
+  },
+  "constraints": [
+    {
+      "kind": "pixels",
+      "target": "cutter.bolt"
+    },
+    {
+      "kind": "metadata",
+      "target": "anchor"
+    },
+    {
+      "kind": "metadata",
+      "target": "attachments.grip"
+    },
+    {
+      "kind": "metadata",
+      "target": "attachments.tip"
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "status": "PASS",
+  "tests": 23,
+  "results": [
+    {
+      "test": "positive-control",
+      "task": "T01",
+      "arm": "A",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-control",
+      "task": "T01",
+      "arm": "D",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-pair-equality",
+      "task": "T01",
+      "pass": true
+    },
+    {
+      "test": "positive-control",
+      "task": "T02",
+      "arm": "A",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-control",
+      "task": "T02",
+      "arm": "D",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-pair-equality",
+      "task": "T02",
+      "pass": true
+    },
+    {
+      "test": "positive-control",
+      "task": "T03",
+      "arm": "A",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-control",
+      "task": "T03",
+      "arm": "D",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-pair-equality",
+      "task": "T03",
+      "pass": true
+    },
+    {
+      "test": "positive-control",
+      "task": "T04",
+      "arm": "A",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-control",
+      "task": "T04",
+      "arm": "D",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-pair-equality",
+      "task": "T04",
+      "pass": true
+    },
+    {
+      "test": "positive-control",
+      "task": "T05",
+      "arm": "A",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-control",
+      "task": "T05",
+      "arm": "D",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-pair-equality",
+      "task": "T05",
+      "pass": true
+    },
+    {
+      "test": "positive-control",
+      "task": "T06",
+      "arm": "A",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-control",
+      "task": "T06",
+      "arm": "D",
+      "pass": true,
+      "failed": []
+    },
+    {
+      "test": "positive-pair-equality",
+      "task": "T06",
+      "pass": true
+    },
+    {
+      "test": "negative-unchanged",
+      "pass": true,
+      "expected": "nontrivial_edit",
+      "failed": [
+        {
+          "name": "nontrivial_edit",
+          "pass": false,
+          "details": {
+            "changedPixels": 0,
+            "minimum": 1
+          }
+        }
+      ]
+    },
+    {
+      "test": "negative-outside-mask",
+      "pass": true,
+      "expected": "protected_pixels:relay",
+      "failed": [
+        {
+          "name": "protected_pixels:relay",
+          "pass": false,
+          "details": {
+            "outsidePixels": 5
+          }
+        },
+        {
+          "name": "alpha:relay",
+          "pass": false,
+          "details": null
+        }
+      ]
+    },
+    {
+      "test": "negative-metadata-only",
+      "pass": true,
+      "expected": "attachments:relay",
+      "failed": [
+        {
+          "name": "attachments:relay",
+          "pass": false,
+          "details": null
+        }
+      ]
+    },
+    {
+      "test": "negative-submitted-tamper",
+      "pass": true,
+      "expected": "submitted_equals_rebuild",
+      "failed": [
+        {
+          "name": "submitted_equals_rebuild",
+          "pass": false,
+          "details": null
+        }
+      ]
+    },
+    {
+      "test": "blind-export",
+      "pass": true
+    }
+  ],
+  "scope": "No model calls, no blind aesthetic review."
+}

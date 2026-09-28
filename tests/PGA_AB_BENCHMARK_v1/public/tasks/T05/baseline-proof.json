@@ -1,0 +1,14 @@
+{
+  "task": "T05",
+  "hashA": "e67dd74746dda44627fd8e1ccfcbefcc07c5f5e435bde1ce21ffdc7c0cbb282d",
+  "hashD": "e67dd74746dda44627fd8e1ccfcbefcc07c5f5e435bde1ce21ffdc7c0cbb282d",
+  "equal": true,
+  "masks": [
+    {
+      "frame": "beacon",
+      "width": 40,
+      "height": 40,
+      "editablePixels": 1296
+    }
+  ]
+}

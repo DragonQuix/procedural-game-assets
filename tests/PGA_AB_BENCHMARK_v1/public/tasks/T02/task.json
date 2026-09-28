@@ -1,0 +1,57 @@
+{
+  "id": "T02",
+  "title": "把细长壳体改成稳重的重装设备",
+  "category": "轮廓与比例",
+  "frame": "hauler",
+  "brief": "当前壳体过细，像支架而不是重装设备。重新组织主壳体的宽度和位置，使设备看起来稳定、厚实。镜头、徽标与底座保持原样；不要用材质纹理掩盖比例问题。",
+  "targets": [
+    "hauler.shell"
+  ],
+  "allowedRectangles": [
+    [
+      4,
+      3,
+      32,
+      26
+    ]
+  ],
+  "holes": [
+    [
+      7,
+      29,
+      26,
+      4
+    ],
+    [
+      16,
+      10,
+      8,
+      7
+    ],
+    [
+      18,
+      21,
+      4,
+      3
+    ]
+  ],
+  "preserveAlpha": false,
+  "minChanges": 1,
+  "minAlphaChanges": 1,
+  "criteria": [
+    "主壳体与底座、镜头形成稳定的重装比例。",
+    "镜头清晰且没有被壳体或边缘遮挡。",
+    "轮廓比起点更明确，但没有显得失衡或塞满画布。"
+  ],
+  "protect": "只允许在给定壳体调整区变化；镜头、徽标、底座保护区和区域外像素不变。锚点与附件点不变。",
+  "schemaVersion": "pga-benchmark-task/1",
+  "seed": 640917,
+  "displayScale": 4,
+  "backgrounds": [
+    "#202028",
+    "#d6d8dc"
+  ],
+  "maxRenderedStates": 12,
+  "sourcesMustRemainEditable": true,
+  "exactTargetImage": false
+}

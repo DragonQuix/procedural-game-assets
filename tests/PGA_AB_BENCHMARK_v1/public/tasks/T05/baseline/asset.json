@@ -1,0 +1,26 @@
+{
+  "id": "beacon",
+  "kind": "prop",
+  "seed": 640917,
+  "clips": {},
+  "frames": [
+    {
+      "id": "beacon",
+      "width": 40,
+      "height": 40,
+      "anchor": {
+        "x": 20,
+        "y": 37
+      },
+      "attachments": {},
+      "bounds": {
+        "x0": 5,
+        "y0": 5,
+        "x1": 35,
+        "y1": 36
+      }
+    }
+  ],
+  "hash": "e67dd74746dda44627fd8e1ccfcbefcc07c5f5e435bde1ce21ffdc7c0cbb282d",
+  "format": "pga-benchmark-output/1"
+}
