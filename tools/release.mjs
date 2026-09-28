@@ -45,6 +45,7 @@ const PAYLOAD = [
   ['examples/godot', 'examples/godot'],
   ['docs/recipe-guide.md', 'docs/recipe-guide.md'],
   ['docs/visual-review.md', 'docs/visual-review.md'],
+  ['docs/visual-quality.md', 'docs/visual-quality.md'],
   ['docs/provenance.md', 'docs/provenance.md'],
   ['docs/research/asset-loop-landscape.md', 'docs/research/asset-loop-landscape.md'],
   ['docs/adr', 'docs/adr'],
