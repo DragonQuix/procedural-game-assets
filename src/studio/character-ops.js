@@ -95,6 +95,16 @@ export function applyCharacterOperation(doc, operation) {
 }
 
 /**
+ * 角色探索项 → 标准 operation 的唯一转换（探索记录、候选身份哈希与 commit 重执行共用同一份）。
+ * 角色操作统一 { id, target, value }。
+ */
+export function operationFromExplore(spec, value) {
+  if (spec === null || typeof spec !== 'object' || Array.isArray(spec)) fail('INVALID_DOCUMENT', '探索需要对象 { id, target, values }');
+  if (!CHARACTER_OPERATION_IDS.includes(spec.id)) fail('UNSUPPORTED_OPERATION', `未知操作 '${spec.id}'（可用：${CHARACTER_OPERATION_IDS.join(', ')}）`, { target: spec.target ?? null });
+  return { id: spec.id, target: spec.target, value };
+}
+
+/**
  * 角色同基准探索：一个操作目标取有限个值。
  * @param {object} doc 基准文档
  * @param {object} spec { id, target, values }
@@ -109,7 +119,7 @@ export function exploreCharacterOperation(doc, spec) {
   const out = [];
   for (const value of spec.values) {
     try {
-      const { doc: d, plan } = applyCharacterOperation(doc, { id: spec.id, target: spec.target, value });
+      const { doc: d, plan } = applyCharacterOperation(doc, operationFromExplore(spec, value));
       out.push({ value, doc: d, plan });
     } catch (e) {
       if (e instanceof StudioOperationError) out.push({ value, error: { code: e.code, message: e.message } });

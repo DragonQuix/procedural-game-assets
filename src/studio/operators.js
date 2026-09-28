@@ -158,6 +158,19 @@ export function applyOperation(doc, operation) {
 }
 
 /**
+ * 探索项 → 标准 operation 的唯一转换（探索记录、候选身份哈希与 commit 重执行共用同一份）。
+ * geometry.set → { id, target, params: { [field]: value } }；
+ * material.set → { id, target, material: value }；ramp.set → { id, target, ramp: value }。
+ */
+export function operationFromExplore(spec, value) {
+  if (spec === null || typeof spec !== 'object' || Array.isArray(spec)) fail('INVALID_DOCUMENT', '探索需要对象 { id, target, field, values }');
+  if (spec.id === 'geometry.set') return { id: spec.id, target: spec.target, params: { [spec.field]: value } };
+  if (spec.id === 'material.set') return { id: spec.id, target: spec.target, material: value };
+  if (spec.id === 'ramp.set') return { id: spec.id, target: spec.target, ramp: value };
+  fail('UNSUPPORTED_OPERATION', `未知操作 '${spec.id}'（可用：${OPERATION_IDS.join(', ')}）`, { target: spec.target ?? null });
+}
+
+/**
  * 同基准探索：对一个操作的一个字段取有限个值，逐值应用。
  * @param {object} doc 基准文档
  * @param {object} spec { id, target, field, values }
@@ -183,8 +196,7 @@ export function exploreOperation(doc, spec) {
   if (!fieldOk) fail('CANDIDATE_INVALID', `操作 '${spec.id}' 不支持探索字段 '${spec.field}'`, { target: spec.target ?? null });
   const out = [];
   for (const value of spec.values) {
-    const operation =
-      spec.id === 'geometry.set' ? { id: spec.id, target: spec.target, params: { [spec.field]: value } } : { id: spec.id, target: spec.target, [spec.field]: value };
+    const operation = operationFromExplore(spec, value);
     try {
       const { doc: d, plan } = applyOperation(doc, operation);
       out.push({ value, doc: d, plan });

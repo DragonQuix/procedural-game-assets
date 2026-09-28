@@ -19,7 +19,7 @@
 import { mkdir, open, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { stableStringify, fnv1aHex } from '../studio/document.js';
-import { compileAny, applyAnyOperation, exploreAnyOperation, checkAnyCandidate, preserveFromAnyDocument, docKindOf } from '../studio/dispatch.js';
+import { compileAny, applyAnyOperation, exploreAnyOperation, operationFromAnyExplore, checkAnyCandidate, preserveFromAnyDocument, docKindOf } from '../studio/dispatch.js';
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { encodePNG } from '../export/png.js';
 
@@ -325,17 +325,16 @@ export class StudioStore {
         }
         const candidate = compileAny(entry.doc, { toolVersion: this.toolVersion });
         const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan: entry.plan, preserve: mergedPreserve });
-        const candidateId = `c-${fnv1aHex(stableStringify([baseRevision, { id: spec.id, target: spec.target, field: spec.field, value: entry.value }, mergedPreserve]))}`;
+        // 探索项 → 标准 operation 与候选身份：与 edit 同一公式，commit 重执行/重算共用（R3/R5）
+        const operation = operationFromAnyExplore(base.document, spec, entry.value);
+        const candidateId = `c-${fnv1aHex(stableStringify([baseRevision, operation, mergedPreserve]))}`;
         const duplicateOf = checks.status !== 'REJECTED' ? (seen.get(candidate.hashes.renderHash) ?? null) : null;
         if (!duplicateOf) seen.set(candidate.hashes.renderHash, candidateId);
         const previews = await this._writePreviews(candidate, candidateId);
         const record = {
           candidateId,
           baseRevision,
-          operation:
-            docKindOf(base.document) === 'character'
-              ? { id: spec.id, target: spec.target, value: entry.value }
-              : { id: spec.id, target: spec.target, params: { [spec.field]: entry.value } },
+          operation,
           preserve: mergedPreserve,
           doc: candidate.document,
           hashes: candidate.hashes,

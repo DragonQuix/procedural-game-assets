@@ -5,8 +5,9 @@
  * 文档是既有 humanoid 配方的**结构化可编辑数据面**（无函数、无模块路径）：
  * 资产级共享字段（palette / frame / rig）+ 部件字段（art.head / art.torso）+
  * 姿态与剪辑（显式数据，LEG_POSES/runLegs 已具体化为数值）。
- * template.checkedPoseKinds 声明不变量检查适配的姿态种类；未适配姿态在报告中
- * 明确列为 notCovered，不假装覆盖（HANDOFF M5）。
+ * template.checkedPoseKinds 声明不变量检查覆盖的姿态种类；覆盖范围由引擎实际适配能力
+ * （CHECKED_POSE_KINDS_SUPPORTED，当前仅 rig）决定，作者声明其他种类按 UNSUPPORTED_SCOPE 拒绝；
+ * 未适配姿态在报告中明确列为 notCovered，不假装覆盖（HANDOFF M5，审查 §5.1）。
  *
  * M5 最小保护：仅 metadata（anchor / attachments.<名>）；pixels/structure 类别
  * 明确拒绝（未实现，不静默接受）。
@@ -16,6 +17,8 @@ import { DEFAULT_OUTLINE } from '../bake/frame.js';
 
 export const CHARACTER_SCHEMA_VERSION = 'pga-studio/character/1';
 const POSE_KINDS = Object.freeze(['rig', 'prone', 'dead', 'dive', 'ball']);
+/** 引擎实际适配了不变量检查的姿态种类：检查覆盖由引擎能力决定，文档作者不能自报扩大（审查 §5.1）。 */
+export const CHECKED_POSE_KINDS_SUPPORTED = Object.freeze(['rig']);
 const HEX_RE = /^#[0-9a-fA-F]{6}$/;
 const PALETTE_KEY_RE = /^[A-Za-z]$/;
 const ID_RE = /^[a-z][a-z0-9._-]{0,63}$/;
@@ -115,8 +118,15 @@ export function validateCharacterDocument(doc) {
   } else {
     checkKeys(doc.template, ['id', 'version', 'checkedPoseKinds'], 'template', issues);
     if (doc.template.id !== 'humanoid-rig' || doc.template.version !== 1) issues.push(issue('INVALID_DOCUMENT', 'template', `未知模板 ${JSON.stringify(doc.template.id)}@${JSON.stringify(doc.template.version)}（支持 humanoid-rig@1）`));
-    if (!Array.isArray(doc.template.checkedPoseKinds) || doc.template.checkedPoseKinds.length === 0 || doc.template.checkedPoseKinds.some((k) => !POSE_KINDS.includes(k))) {
+    if (!Array.isArray(doc.template.checkedPoseKinds) || doc.template.checkedPoseKinds.length === 0) {
       issues.push(issue('INVALID_DOCUMENT', 'template.checkedPoseKinds', `需为姿态种类子集：${POSE_KINDS.join(', ')}`));
+    } else {
+      for (const k of doc.template.checkedPoseKinds) {
+        if (!POSE_KINDS.includes(k)) issues.push(issue('INVALID_DOCUMENT', 'template.checkedPoseKinds', `未知姿态种类 '${k}'（可用：${POSE_KINDS.join(', ')}）`));
+        else if (!CHECKED_POSE_KINDS_SUPPORTED.includes(k)) {
+          issues.push(issue('UNSUPPORTED_SCOPE', 'template.checkedPoseKinds', `姿态种类 '${k}' 的不变量检查未适配（引擎当前仅支持：${CHECKED_POSE_KINDS_SUPPORTED.join(', ')}）；该类帧会渲染并列为 notCovered，但不能声明为已检查`));
+        }
+      }
     }
   }
   // meta（可选：来源与许可）
