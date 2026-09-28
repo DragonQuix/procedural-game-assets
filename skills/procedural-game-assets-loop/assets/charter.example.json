@@ -1,0 +1,22 @@
+{
+  "protocol": "pga-loop/1",
+  "approval": "",
+  "intent": "",
+  "captureProfile": {
+    "nativeSize": null,
+    "displaySize": null,
+    "background": null,
+    "seed": null,
+    "sampling": null,
+    "command": null
+  },
+  "requiredCritics": ["visual", "delivery"],
+  "comparisons": [{"id":"hero", "reference":"ref.png", "candidate":"render.png"}],
+  "requiredGates": ["determinism", "bounds", "consumer"],
+  "pillars": [
+    {"id": "identity", "critic": "visual", "minimum": 9, "criterion": "按确认的标杆区域检查身份特征、轮廓和比例"},
+    {"id": "finish", "critic": "visual", "minimum": 9, "criterion": "原生和目标显示尺寸下，色块层级、材质色阶与细节达到标杆质量"},
+    {"id": "rebuild", "critic": "delivery", "minimum": 9, "criterion": "仅用交付源码、显式参数与种子即可重复生成相同产物"},
+    {"id": "consume", "critic": "delivery", "minimum": 9, "criterion": "仅按 README 在干净目录显示或播放约定资产，坐标、透明度、尺寸与格式符合约定"}
+  ]
+}

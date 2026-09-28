@@ -14,12 +14,12 @@
  * - 每个宿主都需要各自重启/新会话后才会刷新技能列表，本脚本无法代替验证
  */
 import { mkdir, readlink, rm, symlink } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { backupTo, exists, isSymlink } from './install-core.mjs';
 
 const skillDir = join(dirname(fileURLToPath(import.meta.url)), '..');
-const NAME = 'procedural-game-assets';
+const NAME = basename(skillDir);
 
 /** 默认宿主 skills 目录（相对 --home）。OMP 见头注，不在列表。 */
 const HARNESSES = [

@@ -9,12 +9,12 @@
  * 备份 <backups-root>/<name>/（默认 <codex-home>/backups/skills，发现目录之外）。
  * 安装完成后请在新会话/重启 Codex App 验证发现链路——本脚本无法替你验证。
  */
-import { dirname, join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { install } from './install-core.mjs';
 
 const skillDir = join(dirname(fileURLToPath(import.meta.url)), '..');
-const NAME = 'procedural-game-assets';
+const NAME = basename(skillDir);
 
 const args = process.argv.slice(2);
 const opt = (k, d) => {

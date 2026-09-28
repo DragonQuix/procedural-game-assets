@@ -1,0 +1,4 @@
+interface:
+  display_name: "程序化游戏资产循环版"
+  short_description: "对照标杆循环打磨 2D 资产，独立盲审与交付审计，双批次 WOW 准出"
+  default_prompt: "使用 $procedural-game-assets-loop，先评估我的资产标杆并对齐范围，再以独立子代理盲审循环改进，默认不设预算上限。"

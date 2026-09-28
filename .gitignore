@@ -1,4 +1,7 @@
 node_modules/
+!skills/*/assets/toolkit/node_modules/
+skills/*/assets/toolkit/node_modules/*
+!skills/*/assets/toolkit/node_modules/pngjs/
 output/
 work/
 examples/*/assets/

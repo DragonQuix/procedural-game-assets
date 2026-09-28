@@ -16,9 +16,11 @@
 - 架构、接口、状态流转或长期维护决策相关工作，读取相关 `docs/adr/`；现行范围与路线见 `docs/PLAN.md`，历史验证及其边界见 `docs/verification.md`。
 - 生成计划、任务书或实施说明时，显式引用相关上下文与 ADR，要求实施者以其作为术语、边界和架构决策来源。
 - 保持 ADR-0001 的核心与 IO 分层、ADR-0004 的网页优先与共享烘焙核心、ADR-0005 的轻量 Canvas 模板边界，不恢复已废弃的首版必做 Godot 要求。
+- 资产循环特别版按 ADR-0006 维护：2D 资产范围、独立盲审与交付审计、双批次准出；不把长循环默认施加到普通技能。
 
 ## 修改与发行
 
 - 工具包改动先落开发源，再通过现有发行脚本生成技能载荷；禁止手工修改 `skills/procedural-game-assets/assets/toolkit/` 或重写清单掩盖损坏。
+- `skills/procedural-game-assets-loop/assets/toolkit/` 与其 `scripts/` 同为派生产物；用 `tools/release.mjs --skill procedural-game-assets-loop` 生成，安装脚本开发源仍在普通技能 `scripts/`。
 - 独立试验项目、原游戏、共享安装及用户级技能入口默认只读，修改或替换须有明确授权。
 - 按职责做中文原子提交，不擅自 amend 或推送；没有需要提交的改动就不制造空提交。

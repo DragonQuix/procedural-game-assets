@@ -1,0 +1,2 @@
+# 发行清单按字节校验，Git 不得转换载荷换行。
+skills/*/assets/toolkit/** -text
