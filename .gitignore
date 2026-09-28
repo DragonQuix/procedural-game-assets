@@ -12,3 +12,6 @@ examples/*/assets/
 tests/pga-ad-host/smoke/
 tests/pga-ad-host/selftest-v1/*
 !tests/pga-ad-host/selftest-v1/self-test.json
+tests/pga-ad-host/handoff/
+tests/pga-ad-host/selftest-v1_1/*
+!tests/pga-ad-host/selftest-v1_1/self-test.json

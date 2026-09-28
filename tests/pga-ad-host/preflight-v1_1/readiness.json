@@ -1,0 +1,519 @@
+{
+  "schema": "pga-benchmark-readiness/1",
+  "benchmarkVersion": "1.1",
+  "probeAdapterVersion": "crash-retry/1.1",
+  "status": "READY_TECHNICAL",
+  "repositoryFingerprint": "541db38bfd94645a8f406a192b3a5168fa41a87c588207c2a7bbdfd1fa6b1d8b",
+  "equality": [
+    {
+      "task": "T01",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T02",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T03",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T04",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T05",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T06",
+      "equal": true,
+      "frozenBaselineMatches": true
+    }
+  ],
+  "tests": {
+    "status": "PASS",
+    "exitCode": 0,
+    "testFiles": 39,
+    "error": null
+  },
+  "probeStatus": 0,
+  "probes": [
+    {
+      "id": "explore-commit-material.set",
+      "pass": true,
+      "accepted": {
+        "ok": true,
+        "value": {
+          "requestId": "req-a4d80ee1",
+          "action": "accept",
+          "candidateId": "c-e0935e0c",
+          "head": "r2",
+          "revision": "r2",
+          "parent": "r1",
+          "hashes": {
+            "documentHash": "52b03ba3",
+            "styleHash": "68402473",
+            "renderHash": "f645726c:545829f1",
+            "toolVersion": "preflight/1"
+          },
+          "unchanged": false
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "explore-commit-ramp.set",
+      "pass": true,
+      "accepted": {
+        "ok": true,
+        "value": {
+          "requestId": "req-d390d996",
+          "action": "accept",
+          "candidateId": "c-61232b50",
+          "head": "r2",
+          "revision": "r2",
+          "parent": "r1",
+          "hashes": {
+            "documentHash": "760700b6",
+            "styleHash": "68402473",
+            "renderHash": "f645726c:efd6f069",
+            "toolVersion": "preflight/1"
+          },
+          "unchanged": false
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "stale-history",
+      "pass": true,
+      "stale": {
+        "ok": false,
+        "code": "STALE_REVISION",
+        "message": "expectedHead 'r1' 与当前 head 'r2' 不符"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "crash-retry",
+      "pass": true,
+      "unverified": false,
+      "adapterVersion": "crash-retry/1.1",
+      "coverage": "Two phase-specific injected write exceptions, close/reopen, no duplicate effect, byte-identical history, intended document/RGBA/metadata. Not power-loss/fsync testing.",
+      "subcases": [
+        {
+          "phase": "before-effect",
+          "status": "PASS",
+          "hookEvents": [
+            {
+              "status": "pending",
+              "diskHead": {
+                "head": "r1",
+                "seq": 1
+              },
+              "revisionFiles": [
+                "r1.json"
+              ]
+            }
+          ],
+          "snapshots": {
+            "baseline": {
+              "head": {
+                "head": "r1",
+                "seq": 1
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+              },
+              "ledger": null
+            },
+            "atInjection": {
+              "head": {
+                "head": "r1",
+                "seq": 1
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+              },
+              "ledger": null
+            },
+            "afterFault": {
+              "head": {
+                "head": "r1",
+                "seq": 1
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+              },
+              "ledger": null
+            },
+            "afterReplay": {
+              "head": {
+                "head": "r2",
+                "seq": 2
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+              },
+              "ledger": {
+                "requestId": "probe-before-effect",
+                "requestHash": "4a7c2867",
+                "status": "done",
+                "result": {
+                  "requestId": "probe-before-effect",
+                  "action": "accept",
+                  "candidateId": "c-3284b056",
+                  "head": "r2",
+                  "revision": "r2",
+                  "parent": "r1",
+                  "hashes": {
+                    "documentHash": "2047f188",
+                    "styleHash": "68402473",
+                    "renderHash": "eb48afe6:d0636c59",
+                    "toolVersion": "preflight/1"
+                  },
+                  "unchanged": false
+                }
+              }
+            },
+            "afterAgain": {
+              "head": {
+                "head": "r2",
+                "seq": 2
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+              },
+              "ledger": {
+                "requestId": "probe-before-effect",
+                "requestHash": "4a7c2867",
+                "status": "done",
+                "result": {
+                  "requestId": "probe-before-effect",
+                  "action": "accept",
+                  "candidateId": "c-3284b056",
+                  "head": "r2",
+                  "revision": "r2",
+                  "parent": "r1",
+                  "hashes": {
+                    "documentHash": "2047f188",
+                    "styleHash": "68402473",
+                    "renderHash": "eb48afe6:d0636c59",
+                    "toolVersion": "preflight/1"
+                  },
+                  "unchanged": false
+                }
+              }
+            }
+          },
+          "writes": {
+            "revision": 1,
+            "head": 1
+          },
+          "workspace": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\preflight-v1_1\\regressions\\crash-before-effect-ltaWdr",
+          "first": {
+            "ok": false,
+            "code": "Error",
+            "message": "PREFLIGHT_FAULT_before-effect"
+          },
+          "writesAfterFault": {
+            "revision": 0,
+            "head": 0
+          },
+          "replay": {
+            "ok": true,
+            "value": {
+              "requestId": "probe-before-effect",
+              "action": "accept",
+              "candidateId": "c-3284b056",
+              "head": "r2",
+              "revision": "r2",
+              "parent": "r1",
+              "hashes": {
+                "documentHash": "2047f188",
+                "styleHash": "68402473",
+                "renderHash": "eb48afe6:d0636c59",
+                "toolVersion": "preflight/1"
+              },
+              "unchanged": false
+            }
+          },
+          "again": {
+            "ok": true,
+            "value": {
+              "requestId": "probe-before-effect",
+              "action": "accept",
+              "candidateId": "c-3284b056",
+              "head": "r2",
+              "revision": "r2",
+              "parent": "r1",
+              "hashes": {
+                "documentHash": "2047f188",
+                "styleHash": "68402473",
+                "renderHash": "eb48afe6:d0636c59",
+                "toolVersion": "preflight/1"
+              },
+              "unchanged": false,
+              "idempotentReplay": true
+            }
+          },
+          "assetSha256": "88aef7a99ac747a68e797344761775d37a76e6b788bd1037248ecfadfb3afa46"
+        },
+        {
+          "phase": "after-effect",
+          "status": "PASS",
+          "hookEvents": [
+            {
+              "status": "pending",
+              "diskHead": {
+                "head": "r1",
+                "seq": 1
+              },
+              "revisionFiles": [
+                "r1.json"
+              ]
+            },
+            {
+              "status": "done",
+              "diskHead": {
+                "head": "r2",
+                "seq": 2
+              },
+              "revisionFiles": [
+                "r1.json",
+                "r2.json"
+              ]
+            }
+          ],
+          "snapshots": {
+            "baseline": {
+              "head": {
+                "head": "r1",
+                "seq": 1
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+              },
+              "ledger": null
+            },
+            "atInjection": {
+              "head": {
+                "head": "r2",
+                "seq": 2
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+              },
+              "ledger": {
+                "requestId": "probe-after-effect",
+                "requestHash": "4a7c2867",
+                "status": "pending",
+                "payload": [
+                  "commit",
+                  "accept",
+                  "c-3284b056",
+                  "r1"
+                ]
+              }
+            },
+            "afterFault": {
+              "head": {
+                "head": "r2",
+                "seq": 2
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+              },
+              "ledger": {
+                "requestId": "probe-after-effect",
+                "requestHash": "4a7c2867",
+                "status": "pending",
+                "payload": [
+                  "commit",
+                  "accept",
+                  "c-3284b056",
+                  "r1"
+                ]
+              }
+            },
+            "afterReplay": {
+              "head": {
+                "head": "r2",
+                "seq": 2
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+              },
+              "ledger": {
+                "requestId": "probe-after-effect",
+                "requestHash": "4a7c2867",
+                "status": "done",
+                "result": {
+                  "requestId": "probe-after-effect",
+                  "action": "accept",
+                  "candidateId": "c-3284b056",
+                  "head": "r2",
+                  "revision": "r2",
+                  "parent": "r1",
+                  "hashes": {
+                    "documentHash": "2047f188",
+                    "styleHash": "68402473",
+                    "renderHash": "eb48afe6:d0636c59",
+                    "toolVersion": "preflight/1"
+                  },
+                  "unchanged": false
+                }
+              }
+            },
+            "afterAgain": {
+              "head": {
+                "head": "r2",
+                "seq": 2
+              },
+              "revisions": {
+                "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+              },
+              "ledger": {
+                "requestId": "probe-after-effect",
+                "requestHash": "4a7c2867",
+                "status": "done",
+                "result": {
+                  "requestId": "probe-after-effect",
+                  "action": "accept",
+                  "candidateId": "c-3284b056",
+                  "head": "r2",
+                  "revision": "r2",
+                  "parent": "r1",
+                  "hashes": {
+                    "documentHash": "2047f188",
+                    "styleHash": "68402473",
+                    "renderHash": "eb48afe6:d0636c59",
+                    "toolVersion": "preflight/1"
+                  },
+                  "unchanged": false
+                }
+              }
+            }
+          },
+          "writes": {
+            "revision": 1,
+            "head": 1
+          },
+          "workspace": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\preflight-v1_1\\regressions\\crash-after-effect-rEwmpj",
+          "first": {
+            "ok": false,
+            "code": "Error",
+            "message": "PREFLIGHT_FAULT_after-effect"
+          },
+          "writesAfterFault": {
+            "revision": 1,
+            "head": 1
+          },
+          "replay": {
+            "ok": true,
+            "value": {
+              "requestId": "probe-after-effect",
+              "action": "accept",
+              "candidateId": "c-3284b056",
+              "head": "r2",
+              "revision": "r2",
+              "parent": "r1",
+              "hashes": {
+                "documentHash": "2047f188",
+                "styleHash": "68402473",
+                "renderHash": "eb48afe6:d0636c59",
+                "toolVersion": "preflight/1"
+              },
+              "unchanged": false,
+              "idempotentReplay": true
+            }
+          },
+          "again": {
+            "ok": true,
+            "value": {
+              "requestId": "probe-after-effect",
+              "action": "accept",
+              "candidateId": "c-3284b056",
+              "head": "r2",
+              "revision": "r2",
+              "parent": "r1",
+              "hashes": {
+                "documentHash": "2047f188",
+                "styleHash": "68402473",
+                "renderHash": "eb48afe6:d0636c59",
+                "toolVersion": "preflight/1"
+              },
+              "unchanged": false,
+              "idempotentReplay": true
+            }
+          },
+          "assetSha256": "88aef7a99ac747a68e797344761775d37a76e6b788bd1037248ecfadfb3afa46"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "authoritative-protection",
+      "pass": true,
+      "commit": {
+        "ok": false,
+        "code": "CANDIDATE_INVALID",
+        "message": "候选 'c-4245645f' 落盘状态（OK）与重新校验（REJECTED）不符（文件可能被篡改）"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "invalid-preserve",
+      "pass": true,
+      "result": {
+        "ok": false,
+        "code": "INVALID_DOCUMENT",
+        "message": "preserve[0] 未知保护类别 'pixel'（可用：pixels, structure, metadata）"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "request-path-boundary",
+      "pass": true,
+      "result": {
+        "ok": false,
+        "code": "UNSAFE_PATH",
+        "message": "requestId 非法：\"../../outside-case-fMfRCx\"（只允许字母数字开头、不超过 64 字符的字母数字与 . _ -；禁止路径分隔符、绝对路径与 '..'）"
+      },
+      "outsideFileExists": false,
+      "status": "PASS"
+    },
+    {
+      "id": "metadata-only-protection",
+      "pass": true,
+      "candidateStatus": "REJECTED",
+      "commit": {
+        "ok": false,
+        "code": "CANDIDATE_INVALID",
+        "message": "候选 'c-c4307146' 状态为 REJECTED，未通过保护检查，不能提交"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "pixel-not-channel-count",
+      "pass": true,
+      "reported": 84,
+      "actual": 84,
+      "status": "PASS"
+    }
+  ],
+  "scope": "Frozen baseline + 9 regression probes (crash-retry has two phase-specific subcases) + project tests; does not establish art quality.",
+  "caveat": "v1.1 adapts crash-retry to the verified pending/effect/done contract; both phases are required. See MAINTENANCE_V1_1_CN.md. Hook drift or setup errors are UNVERIFIED, not success. No process-kill or power-loss guarantee."
+}

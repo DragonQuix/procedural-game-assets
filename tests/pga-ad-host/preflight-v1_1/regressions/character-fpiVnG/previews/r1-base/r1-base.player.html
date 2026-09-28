@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>PGA Studio 播放预览 — rustclaw</title>
+<style>
+  body { background: #17171d; color: #d8d8e0; font: 14px/1.5 system-ui, sans-serif; margin: 24px; }
+  h1 { font-size: 16px; } code { color: #8ff0e8; }
+  .stage { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+  canvas { background: #202028; image-rendering: pixelated; border: 1px solid #333; }
+  button { background: #2a2a33; color: inherit; border: 1px solid #444; padding: 4px 10px; margin: 2px; cursor: pointer; }
+  button.active { border-color: #8ff0e8; }
+  .meta { color: #9a9aa5; font-size: 12px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<h1>PGA Studio 播放预览：<code>rustclaw</code></h1>
+<div class="stage">
+  <div>
+    <canvas id="cv"></canvas>
+    <div class="meta" id="info"></div>
+    <div id="ctl">
+      <button data-act="play">播放/暂停</button>
+      <button data-act="prev">‹ 上一帧</button>
+      <button data-act="next">下一帧 ›</button>
+    </div>
+    <div id="clips"></div>
+  </div>
+</div>
+<div class="meta">renderHash=<code>75b6897a:50bb2160</code>；帧内嵌为 data URL，时长来自资产剪辑（毫秒）。</div>
+<script id="pga-data" type="application/json">{"id":"rustclaw","frames":[{"id":"stand_fwd","width":168,"height":192,"dataUrl":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAADACAYAAACQ7CiDAAAExklEQVR4Ae3BwYtddx2H4bdfT1wYOA7nDGlrBKfYyNCGErWUbIwbpV2IomD/ABfFPyHgupCVu0I3dtVVN6XgQqiLOu4ktlKqDKY2MaQkrXOP4UI3SUjdmd8sPORyM+3H3vd5HtrZ2f0UKVQhBSukYIUUrJCCFVKwQgpWSMEKKVghBSukYIUUrJCCFVKwQgpWSMEKKVghBSukYIUUrJCCFVKwQgpWSMEKKVghBSukYIUUrJCCFVKwQgpWSMEKKVghBSukYIUUrJCCFVKwQgpWSMEKKVghBSukYIUUrJCCFVKwQgpWSMEKKVghBSukYIUUrJCCFVKwQgpWSMEKKVghBSukYIUUrJCCFVKwQgpWSMEKKVghBSukYIUUrJCCFVKwQgpWSMEKKVghBSukYIUUrJCCFVKwQgpWSME6tJLlYmId/Tig+1dIwQopWCEF69Cs5WKidf7cFuu4sDfR6scB/W+FFKyQghVSsA4dslxMtM6f2+JB+tE3i9Zv/zHR6scB3VNIwQopWCEF69hwy8VE6/y5LY7S6ZM9rdMnOeTC3kSrHwc2WSEFK6RghRSsQyt5/cVXWMfzO4/Temn3CQ7r0D2FFKyQghVSsA6t5Ke/+gWt1198hVW8tPsEun+FFKyQghVSsI4N148DrQt7E63z57aY86/nfoyOTiEFK6RghRSsY8MtFxNzLuzdpDUcv8M6pk865vTjgO4ppGCFFKyQgnVsmOViovXYo19mzuXrt2hNn3QcpeViotWPA5uskIIVUrBCCtahWWef3KZ1ZrjFZ+nlP060+nFgkxRSsEIKVkjBOjTrzHCLdTy1s8Uq3r1yk9Zw/A6taTExpx8HvkgKKVghBSukYB065OGh57BbrOKpnS3mvHvlJqt4ZvcEq/jdnyeS9OPAOgopWCEFK6RgHRvuK8fu8iA9duo4rTfe/JA5b90oWt8+/TiHXP2AVTz33YFV/OnvHzPn2R+cZc47773PnP1LE61+HFhFIQUrpGCFFKxjw/TjQOuvVydaZ59kLW+8+SHreOe995nz8Y0DWs986wRH6d9XP6D169+8TOtnP3+Bo1RIwQopWCEFe2hnZ/dT9F/LxUTrl9/rOUpv3Sg+Tzt9sYory7usYv/STVr9OLCKQgpWSMEKKViHZr329kTr+e8MrOO1tydaJ762zefpyvIuyQopWCEFK6RgHZr1wrPbtL5/5lHW8ZMfnqT1h79cp/X7v3W0Lu4fsI7dU1vM2b90k6PUjwPrKKRghRSskIJ1bLjlYqL19e2i9erektare0tW8cj2wLyOOU/vbtO6uH9Aqx8HWsvFxDr6cSBJIQUrpGCFFKxDXyj9ONDavzQxpx8HkhVSsEIKVkjBOhTl1DceoXXpnzdYRz8O/D8rpGCFFKyQgnXogbp2cJfWtYMDWk/vbqP7V0jBCilYIQUrpGCFFKyQghVSsA4dcuxYxypu377DKrovMevytRvonkIKVkjBCilYh9Zy7FjHYbeY89G0ZBUPDz2brJCCFVKwQgrWoWgfTUs2WSEFK6RghRSsQ4fcvn2HozR+tWcdl68fsEkKKVghBSukYIUUrJCCFVKwQgrWseH6caB17WBiHf04MOfi/gHr6MeBTVJIwQopWCEF+w8RIcDUNtPSZQAAAABJRU5ErkJggg=="}],"clips":{},"renderHash":"75b6897a:50bb2160"}</script>
+<script>
+const DATA = JSON.parse(document.getElementById('pga-data').textContent);
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const info = document.getElementById('info');
+const byId = new Map(DATA.frames.map((f) => [f.id, f]));
+const images = new Map();
+let clipName = Object.keys(DATA.clips)[0] ?? null;
+let frameIds = clipName ? DATA.clips[clipName].frames : DATA.frames.map((f) => f.id);
+let durations = clipName ? (Array.isArray(DATA.clips[clipName].ms) ? DATA.clips[clipName].ms : frameIds.map(() => DATA.clips[clipName].ms)) : frameIds.map(() => 500);
+let idx = 0;
+let playing = true;
+
+function draw() {
+  const f = byId.get(frameIds[idx]);
+  const img = images.get(f.id);
+  cv.width = f.width;
+  cv.height = f.height;
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  if (img && img.complete) ctx.drawImage(img, 0, 0);
+  info.textContent = (clipName ? '剪辑 ' + clipName + ' · ' : '') + '帧 ' + frameIds[idx] + '（' + (idx + 1) + '/' + frameIds.length + '，' + durations[idx] + 'ms）' + (playing ? ' · 播放中' : ' · 已暂停');
+}
+function select(name) {
+  clipName = name;
+  frameIds = name ? DATA.clips[name].frames : DATA.frames.map((f) => f.id);
+  const ms = name ? DATA.clips[name].ms : 500;
+  durations = Array.isArray(ms) ? ms : frameIds.map(() => ms);
+  idx = 0;
+  acc = 0;
+  for (const b of document.querySelectorAll('#clips button')) b.classList.toggle('active', b.dataset.clip === name);
+  draw();
+}
+const clipsBox = document.getElementById('clips');
+for (const name of Object.keys(DATA.clips)) {
+  const b = document.createElement('button');
+  b.textContent = name;
+  b.dataset.clip = name;
+  b.onclick = () => select(name);
+  clipsBox.appendChild(b);
+}
+document.getElementById('ctl').addEventListener('click', (e) => {
+  const act = e.target.dataset.act;
+  if (act === 'play') playing = !playing;
+  if (act === 'prev') { idx = (idx - 1 + frameIds.length) % frameIds.length; playing = false; }
+  if (act === 'next') { idx = (idx + 1) % frameIds.length; playing = false; }
+  draw();
+});
+function tick(now) {
+  if (playing) {
+    if (!lastTick) lastTick = now;
+    acc += now - lastTick;
+    while (acc >= durations[idx]) { acc -= durations[idx]; idx = (idx + 1) % frameIds.length; }
+    lastTick = now;
+    draw();
+  } else {
+    lastTick = 0;
+  }
+}
+let acc = 0;
+let lastTick = 0;
+let loaded = 0;
+for (const f of DATA.frames) {
+  const img = new Image();
+  img.onload = () => { if (++loaded === DATA.frames.length) { select(clipName); setInterval(() => tick(performance.now()), 50); requestAnimationFrame(function raf(t) { tick(t); requestAnimationFrame(raf); }); } };
+  img.src = f.dataUrl;
+  images.set(f.id, img);
+}
+</script>
+</body>
+</html>

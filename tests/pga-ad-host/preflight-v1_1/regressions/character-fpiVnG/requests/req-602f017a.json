@@ -1,0 +1,91 @@
+{
+  "requestId": "req-602f017a",
+  "requestHash": "602f017a",
+  "status": "done",
+  "result": {
+    "requestId": "req-602f017a",
+    "candidateId": "c-c4307146",
+    "baseRevision": "r1",
+    "head": "r1",
+    "status": "REJECTED",
+    "code": "CANDIDATE_INVALID",
+    "conflicts": [
+      {
+        "kind": "metadata",
+        "target": "attachments.head",
+        "message": "附件点保护命中：帧 'stand_fwd' 的 'head' 变化 {\"dx\":0,\"dy\":-1}"
+      }
+    ],
+    "checks": {
+      "status": "REJECTED",
+      "code": "CANDIDATE_INVALID",
+      "conflicts": [
+        {
+          "kind": "metadata",
+          "target": "attachments.head",
+          "message": "附件点保护命中：帧 'stand_fwd' 的 'head' 变化 {\"dx\":0,\"dy\":-1}"
+        }
+      ],
+      "affectedFrames": [
+        {
+          "id": "stand_fwd",
+          "diffPixels": 0,
+          "changedChannels": 0,
+          "attachmentDeltas": {
+            "head": {
+              "dx": 0,
+              "dy": -1
+            }
+          },
+          "anchorDelta": {
+            "dx": 0,
+            "dy": 0
+          },
+          "groundingChanged": false,
+          "pixelChanged": false,
+          "metadataChanged": true,
+          "frameSizeChanged": false
+        }
+      ],
+      "notCoveredChanges": [],
+      "affectedClips": [],
+      "totalDiffPixels": 0,
+      "pixelChangedFrames": [],
+      "metadataChangedFrames": [
+        "stand_fwd"
+      ],
+      "clipChanged": false,
+      "protections": {
+        "metadata": [
+          "attachments.head"
+        ]
+      }
+    },
+    "hashes": {
+      "documentHash": "17b90058",
+      "styleHash": "1b17cb7b",
+      "renderHash": "75b6897a:aaed6374",
+      "toolVersion": "preflight/1"
+    },
+    "previews": {
+      "base": {
+        "frames": {
+          "stand_fwd": {
+            "native": "previews\\r1-base\\r1-base.stand_fwd.native.png",
+            "display": "previews\\r1-base\\r1-base.stand_fwd.display.png"
+          }
+        },
+        "player": "previews\\r1-base\\r1-base.player.html"
+      },
+      "candidate": {
+        "frames": {
+          "stand_fwd": {
+            "native": "previews\\c-c4307146\\c-c4307146.stand_fwd.native.png",
+            "display": "previews\\c-c4307146\\c-c4307146.stand_fwd.display.png"
+          }
+        },
+        "player": "previews\\c-c4307146\\c-c4307146.player.html"
+      }
+    }
+  }
+}

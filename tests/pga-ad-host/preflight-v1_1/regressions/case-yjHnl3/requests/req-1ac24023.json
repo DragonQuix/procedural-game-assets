@@ -1,0 +1,66 @@
+{
+  "requestId": "req-1ac24023",
+  "requestHash": "1ac24023",
+  "status": "done",
+  "result": {
+    "requestId": "req-1ac24023",
+    "candidateId": "c-c5dd0bda",
+    "baseRevision": "r1",
+    "head": "r1",
+    "status": "OK",
+    "code": null,
+    "conflicts": [],
+    "diff": {
+      "pixels": 82,
+      "outside": 0,
+      "region": {
+        "x0": 2,
+        "y0": 2,
+        "x1": 30,
+        "y1": 27
+      },
+      "samples": []
+    },
+    "checks": {
+      "status": "OK",
+      "code": null,
+      "conflicts": [],
+      "diff": {
+        "pixels": 82,
+        "outside": 0,
+        "region": {
+          "x0": 2,
+          "y0": 2,
+          "x1": 30,
+          "y1": 27
+        },
+        "samples": []
+      },
+      "protections": {
+        "pixels": [
+          "terminal.screen"
+        ],
+        "structure": [],
+        "metadata": [
+          "anchor"
+        ]
+      }
+    },
+    "hashes": {
+      "documentHash": "875011b4",
+      "styleHash": "68402473",
+      "renderHash": "093f2f71:2ecd5fde",
+      "toolVersion": "preflight/1"
+    },
+    "previews": {
+      "base": {
+        "native": "previews\\r1-base\\r1-base.native.png",
+        "display": "previews\\r1-base\\r1-base.display.png"
+      },
+      "candidate": {
+        "native": "previews\\c-c5dd0bda\\c-c5dd0bda.native.png",
+        "display": "previews\\c-c5dd0bda\\c-c5dd0bda.display.png"
+      }
+    }
+  }
+}

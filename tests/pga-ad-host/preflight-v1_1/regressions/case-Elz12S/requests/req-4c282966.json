@@ -1,0 +1,70 @@
+{
+  "requestId": "req-4c282966",
+  "requestHash": "4c282966",
+  "status": "done",
+  "result": {
+    "requestId": "req-4c282966",
+    "candidateId": "c-4245645f",
+    "baseRevision": "r1",
+    "head": "r1",
+    "status": "REJECTED",
+    "code": "CONSTRAINT_CONFLICT",
+    "conflicts": [
+      {
+        "kind": "pixels",
+        "target": "terminal.screen",
+        "message": "操作目标 'terminal.screen' 被声明为像素保护，不能修改；请先解除保护或改选其他节点",
+        "upfront": true
+      }
+    ],
+    "diff": {
+      "pixels": 0,
+      "outside": 0,
+      "region": null,
+      "samples": []
+    },
+    "checks": {
+      "status": "REJECTED",
+      "code": "CONSTRAINT_CONFLICT",
+      "conflicts": [
+        {
+          "kind": "pixels",
+          "target": "terminal.screen",
+          "message": "操作目标 'terminal.screen' 被声明为像素保护，不能修改；请先解除保护或改选其他节点",
+          "upfront": true
+        }
+      ],
+      "diff": {
+        "pixels": 0,
+        "outside": 0,
+        "region": null,
+        "samples": []
+      },
+      "protections": {
+        "pixels": [
+          "terminal.screen"
+        ],
+        "structure": [],
+        "metadata": [
+          "anchor"
+        ]
+      }
+    },
+    "hashes": {
+      "documentHash": "8a22109a",
+      "styleHash": "68402473",
+      "renderHash": "f645726c:f3959c03",
+      "toolVersion": "preflight/1"
+    },
+    "previews": {
+      "base": {
+        "native": "previews\\r1-base\\r1-base.native.png",
+        "display": "previews\\r1-base\\r1-base.display.png"
+      },
+      "candidate": {
+        "native": "previews\\c-4245645f\\c-4245645f.native.png",
+        "display": "previews\\c-4245645f\\c-4245645f.display.png"
+      }
+    }
+  }
+}
