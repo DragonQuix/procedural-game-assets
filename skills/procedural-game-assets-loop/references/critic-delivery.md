@@ -17,5 +17,9 @@ WOW 要求全部支柱和硬检查通过、无 BLOCKER/MAJOR。画面好看不�
 
 回填 `candidateId / reviewId / criticId / contextId`，输出 `verdict / pillars / defects`。
 每项支柱附得分和可复现证据，缺陷含 id、严重度、criterion、expected、actual、
-evidence、recheck。源码路径可在描述中引用；运行事实报告进入独立批次证据目录。
+evidence、recheck；每个 MINOR 还须 nonBlockingReason，解释为何不影响准出。
+证据为 `candidate:<相对文件路径>` 或 `review:<相对文件路径>` 数组；源码路径可在
+描述中引用，运行事实报告进入独立批次证据目录，不引用不存在或未封存的证据。
+交付支柱仍按宪章 minimum 判分；视觉的整体/同级判断不由你代签，也不把外观不同当
+不合规，除非违反用户明确的设计约束。
 仅审计这次资产，不因缺少完整玩法而拒绝范围外事项。

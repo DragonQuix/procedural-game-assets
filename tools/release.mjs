@@ -39,6 +39,7 @@ const PAYLOAD = [
   ['tools/release-manifest.mjs', 'tools/release-manifest.mjs'],
   ['tools/init-project.mjs', 'tools/init-project.mjs'],
   ['tools/asset-loop.mjs', 'tools/asset-loop.mjs'],
+  ['tools/legacy', 'tools/legacy'],
   ['examples/recipes', 'examples/recipes'],
   ['examples/faults', 'examples/faults'],
   ['examples/canvas-slice', 'examples/canvas-slice'],

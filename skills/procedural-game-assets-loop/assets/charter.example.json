@@ -1,5 +1,5 @@
 {
-  "protocol": "pga-loop/1",
+  "protocol": "pga-loop/2",
   "approval": "",
   "intent": "",
   "captureProfile": {
@@ -10,12 +10,35 @@
     "sampling": null,
     "command": null
   },
+  "visualPolicy": {
+    "goal": "quality_parity",
+    "referenceProfile": {
+      "summary": "",
+      "evidence": ["ref.png"],
+      "limitations": ["静态标杆不证明背面、动作过渡或时序要求"]
+    },
+    "creativeFreedom": ["未被用户明确约束的造型、配色、姿势和细节允许原创，不要求复制标杆身份"],
+    "designConstraints": [],
+    "scopes": [
+      {
+        "id": "hero",
+        "kind": "asset",
+        "criterion": "单项静态角色资产；按实际任务修改此范围、必需视图与支柱",
+        "views": [
+          {"id": "native", "kind": "native", "path": "native.png"},
+          {"id": "display", "kind": "display", "path": "render.png"}
+        ]
+      }
+    ]
+  },
   "requiredCritics": ["visual", "delivery"],
-  "comparisons": [{"id":"hero", "reference":"ref.png", "candidate":"render.png"}],
+  "comparisons": [{"id":"hero-display", "scopeId":"hero", "reference":"ref.png", "candidate":"render.png"}],
   "requiredGates": ["determinism", "bounds", "consumer"],
   "pillars": [
-    {"id": "identity", "critic": "visual", "minimum": 9, "criterion": "按确认的标杆区域检查身份特征、轮廓和比例"},
-    {"id": "finish", "critic": "visual", "minimum": 9, "criterion": "原生和目标显示尺寸下，色块层级、材质色阶与细节达到标杆质量"},
+    {"id": "design", "critic": "visual", "scopeId": "hero", "dimension": "design", "basis": "reference", "comparisonIds": ["hero-display"], "criterion": "轮廓、体块、比例和姿态的设计控制力达到同档，不比较几何相似度"},
+    {"id": "hierarchy", "critic": "visual", "scopeId": "hero", "dimension": "hierarchy", "basis": "reference", "comparisonIds": ["hero-display"], "criterion": "焦点、色彩关系、疏密和视觉层级达到同档，不要求相同调色板"},
+    {"id": "finish", "critic": "visual", "scopeId": "hero", "dimension": "finish", "basis": "reference", "comparisonIds": ["hero-display"], "criterion": "边缘、材质概括和细节组织达到同档，原生与目标显示尺寸下均成立"},
+    {"id": "usability", "critic": "visual", "scopeId": "hero", "dimension": "usability", "basis": "requirement", "criterion": "目标尺寸和约定背景下功能信息清楚、不遮挡关键内容"},
     {"id": "rebuild", "critic": "delivery", "minimum": 9, "criterion": "仅用交付源码、显式参数与种子即可重复生成相同产物"},
     {"id": "consume", "critic": "delivery", "minimum": 9, "criterion": "仅按 README 在干净目录显示或播放约定资产，坐标、透明度、尺寸与格式符合约定"}
   ]
