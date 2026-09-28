@@ -15,3 +15,7 @@ tests/pga-ad-host/selftest-v1/*
 tests/pga-ad-host/handoff/
 tests/pga-ad-host/selftest-v1_1/*
 !tests/pga-ad-host/selftest-v1_1/self-test.json
+tests/pga-ad-host/runs/
+tests/pga-ad-host/eval/
+tests/pga-ad-host/reviews/
+tests/pga-ad-host/**/key.json
