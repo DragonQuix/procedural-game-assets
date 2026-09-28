@@ -1,0 +1,8 @@
+{
+  "benchmarkVersion": "1.1",
+  "parentVersion": "1",
+  "taskSetVersion": "1",
+  "probeAdapterVersion": "crash-retry/1.1",
+  "frozenMaterials": "FROZEN_MATERIALS_V1.json",
+  "changeLog": "MAINTENANCE_V1_1_CN.md"
+}

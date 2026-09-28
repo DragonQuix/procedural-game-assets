@@ -1,0 +1,551 @@
+{
+  "status": "PASS",
+  "tests": 2,
+  "scope": "Mutants affect only disposable workspace objects/files, not project source.",
+  "results": [
+    {
+      "name": "broken-recovery",
+      "pass": true,
+      "result": {
+        "pass": false,
+        "unverified": false,
+        "adapterVersion": "crash-retry/1.1",
+        "coverage": "Two phase-specific injected write exceptions, close/reopen, no duplicate effect, byte-identical history, intended document/RGBA/metadata. Not power-loss/fsync testing.",
+        "subcases": [
+          {
+            "phase": "before-effect",
+            "status": "PASS",
+            "hookEvents": [
+              {
+                "status": "pending",
+                "diskHead": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisionFiles": [
+                  "r1.json"
+                ]
+              }
+            ],
+            "snapshots": {
+              "baseline": {
+                "head": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+                },
+                "ledger": null
+              },
+              "atInjection": {
+                "head": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+                },
+                "ledger": null
+              },
+              "afterFault": {
+                "head": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+                },
+                "ledger": null
+              },
+              "afterReplay": {
+                "head": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                  "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+                },
+                "ledger": {
+                  "requestId": "probe-before-effect",
+                  "requestHash": "4a7c2867",
+                  "status": "done",
+                  "result": {
+                    "requestId": "probe-before-effect",
+                    "action": "accept",
+                    "candidateId": "c-3284b056",
+                    "head": "r2",
+                    "revision": "r2",
+                    "parent": "r1",
+                    "hashes": {
+                      "documentHash": "2047f188",
+                      "styleHash": "68402473",
+                      "renderHash": "eb48afe6:d0636c59",
+                      "toolVersion": "preflight/1"
+                    },
+                    "unchanged": false
+                  }
+                }
+              },
+              "afterAgain": {
+                "head": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                  "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+                },
+                "ledger": {
+                  "requestId": "probe-before-effect",
+                  "requestHash": "4a7c2867",
+                  "status": "done",
+                  "result": {
+                    "requestId": "probe-before-effect",
+                    "action": "accept",
+                    "candidateId": "c-3284b056",
+                    "head": "r2",
+                    "revision": "r2",
+                    "parent": "r1",
+                    "hashes": {
+                      "documentHash": "2047f188",
+                      "styleHash": "68402473",
+                      "renderHash": "eb48afe6:d0636c59",
+                      "toolVersion": "preflight/1"
+                    },
+                    "unchanged": false
+                  }
+                }
+              }
+            },
+            "writes": {
+              "revision": 1,
+              "head": 1
+            },
+            "workspace": "/mnt/data/pga_latest_review/evidence/adapter-negative-controls/broken-recovery/crash-before-effect-GRwj9g",
+            "first": {
+              "ok": false,
+              "code": "Error",
+              "message": "PREFLIGHT_FAULT_before-effect"
+            },
+            "writesAfterFault": {
+              "revision": 0,
+              "head": 0
+            },
+            "replay": {
+              "ok": true,
+              "value": {
+                "requestId": "probe-before-effect",
+                "action": "accept",
+                "candidateId": "c-3284b056",
+                "head": "r2",
+                "revision": "r2",
+                "parent": "r1",
+                "hashes": {
+                  "documentHash": "2047f188",
+                  "styleHash": "68402473",
+                  "renderHash": "eb48afe6:d0636c59",
+                  "toolVersion": "preflight/1"
+                },
+                "unchanged": false
+              }
+            },
+            "again": {
+              "ok": true,
+              "value": {
+                "requestId": "probe-before-effect",
+                "action": "accept",
+                "candidateId": "c-3284b056",
+                "head": "r2",
+                "revision": "r2",
+                "parent": "r1",
+                "hashes": {
+                  "documentHash": "2047f188",
+                  "styleHash": "68402473",
+                  "renderHash": "eb48afe6:d0636c59",
+                  "toolVersion": "preflight/1"
+                },
+                "unchanged": false,
+                "idempotentReplay": true
+              }
+            },
+            "assetSha256": "88aef7a99ac747a68e797344761775d37a76e6b788bd1037248ecfadfb3afa46"
+          },
+          {
+            "phase": "after-effect",
+            "status": "FAIL",
+            "hookEvents": [
+              {
+                "status": "pending",
+                "diskHead": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisionFiles": [
+                  "r1.json"
+                ]
+              },
+              {
+                "status": "done",
+                "diskHead": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisionFiles": [
+                  "r1.json",
+                  "r2.json"
+                ]
+              }
+            ],
+            "snapshots": {
+              "baseline": {
+                "head": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+                },
+                "ledger": null
+              },
+              "atInjection": {
+                "head": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                  "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+                },
+                "ledger": {
+                  "requestId": "probe-after-effect",
+                  "requestHash": "4a7c2867",
+                  "status": "pending",
+                  "payload": [
+                    "commit",
+                    "accept",
+                    "c-3284b056",
+                    "r1"
+                  ]
+                }
+              },
+              "afterFault": {
+                "head": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                  "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+                },
+                "ledger": {
+                  "requestId": "probe-after-effect",
+                  "requestHash": "4a7c2867",
+                  "status": "pending",
+                  "payload": [
+                    "commit",
+                    "accept",
+                    "c-3284b056",
+                    "r1"
+                  ]
+                }
+              }
+            },
+            "writes": {
+              "revision": 1,
+              "head": 1
+            },
+            "workspace": "/mnt/data/pga_latest_review/evidence/adapter-negative-controls/broken-recovery/crash-after-effect-zflGVH",
+            "first": {
+              "ok": false,
+              "code": "Error",
+              "message": "PREFLIGHT_FAULT_after-effect"
+            },
+            "writesAfterFault": {
+              "revision": 1,
+              "head": 1
+            },
+            "replay": {
+              "ok": false,
+              "code": "STALE_REVISION",
+              "message": "Deliberately broken recovery"
+            },
+            "reason": "Recovery failed: {\"ok\":false,\"code\":\"STALE_REVISION\",\"message\":\"Deliberately broken recovery\"}\n\nfalse !== true\n",
+            "errorCode": "ERR_ASSERTION"
+          }
+        ]
+      }
+    },
+    {
+      "name": "history-rewrite",
+      "pass": true,
+      "result": {
+        "pass": false,
+        "unverified": false,
+        "adapterVersion": "crash-retry/1.1",
+        "coverage": "Two phase-specific injected write exceptions, close/reopen, no duplicate effect, byte-identical history, intended document/RGBA/metadata. Not power-loss/fsync testing.",
+        "subcases": [
+          {
+            "phase": "before-effect",
+            "status": "FAIL",
+            "hookEvents": [
+              {
+                "status": "pending",
+                "diskHead": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisionFiles": [
+                  "r1.json"
+                ]
+              }
+            ],
+            "snapshots": {
+              "baseline": {
+                "head": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+                },
+                "ledger": null
+              },
+              "atInjection": {
+                "head": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+                },
+                "ledger": null
+              },
+              "afterFault": {
+                "head": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+                },
+                "ledger": null
+              },
+              "afterReplay": {
+                "head": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisions": {
+                  "r1.json": "cbd03c6f7de9504f070e6de63c17534ac459cca7f8df0b77b913ca2e2b50ab38",
+                  "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+                },
+                "ledger": {
+                  "requestId": "probe-before-effect",
+                  "requestHash": "4a7c2867",
+                  "status": "done",
+                  "result": {
+                    "requestId": "probe-before-effect",
+                    "action": "accept",
+                    "candidateId": "c-3284b056",
+                    "head": "r2",
+                    "revision": "r2",
+                    "parent": "r1",
+                    "hashes": {
+                      "documentHash": "2047f188",
+                      "styleHash": "68402473",
+                      "renderHash": "eb48afe6:d0636c59",
+                      "toolVersion": "preflight/1"
+                    },
+                    "unchanged": false
+                  }
+                }
+              }
+            },
+            "writes": {
+              "revision": 1,
+              "head": 1
+            },
+            "workspace": "/mnt/data/pga_latest_review/evidence/adapter-negative-controls/history-rewrite/crash-before-effect-X61m9d",
+            "first": {
+              "ok": false,
+              "code": "Error",
+              "message": "PREFLIGHT_FAULT_before-effect"
+            },
+            "writesAfterFault": {
+              "revision": 0,
+              "head": 0
+            },
+            "replay": {
+              "ok": true,
+              "value": {
+                "requestId": "probe-before-effect",
+                "action": "accept",
+                "candidateId": "c-3284b056",
+                "head": "r2",
+                "revision": "r2",
+                "parent": "r1",
+                "hashes": {
+                  "documentHash": "2047f188",
+                  "styleHash": "68402473",
+                  "renderHash": "eb48afe6:d0636c59",
+                  "toolVersion": "preflight/1"
+                },
+                "unchanged": false
+              }
+            },
+            "reason": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'cbd03c6f7de9504f070e6de63c17534ac459cca7f8df0b77b913ca2e2b50ab38'\n- '1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d'\n",
+            "errorCode": "ERR_ASSERTION"
+          },
+          {
+            "phase": "after-effect",
+            "status": "FAIL",
+            "hookEvents": [
+              {
+                "status": "pending",
+                "diskHead": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisionFiles": [
+                  "r1.json"
+                ]
+              },
+              {
+                "status": "done",
+                "diskHead": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisionFiles": [
+                  "r1.json",
+                  "r2.json"
+                ]
+              }
+            ],
+            "snapshots": {
+              "baseline": {
+                "head": {
+                  "head": "r1",
+                  "seq": 1
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d"
+                },
+                "ledger": null
+              },
+              "atInjection": {
+                "head": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                  "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+                },
+                "ledger": {
+                  "requestId": "probe-after-effect",
+                  "requestHash": "4a7c2867",
+                  "status": "pending",
+                  "payload": [
+                    "commit",
+                    "accept",
+                    "c-3284b056",
+                    "r1"
+                  ]
+                }
+              },
+              "afterFault": {
+                "head": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisions": {
+                  "r1.json": "1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d",
+                  "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+                },
+                "ledger": {
+                  "requestId": "probe-after-effect",
+                  "requestHash": "4a7c2867",
+                  "status": "pending",
+                  "payload": [
+                    "commit",
+                    "accept",
+                    "c-3284b056",
+                    "r1"
+                  ]
+                }
+              },
+              "afterReplay": {
+                "head": {
+                  "head": "r2",
+                  "seq": 2
+                },
+                "revisions": {
+                  "r1.json": "cbd03c6f7de9504f070e6de63c17534ac459cca7f8df0b77b913ca2e2b50ab38",
+                  "r2.json": "22ac665dc290f90109efa0ea1deddcdfec80e219680f7bb45835babbdf55cb75"
+                },
+                "ledger": {
+                  "requestId": "probe-after-effect",
+                  "requestHash": "4a7c2867",
+                  "status": "done",
+                  "result": {
+                    "requestId": "probe-after-effect",
+                    "action": "accept",
+                    "candidateId": "c-3284b056",
+                    "head": "r2",
+                    "revision": "r2",
+                    "parent": "r1",
+                    "hashes": {
+                      "documentHash": "2047f188",
+                      "styleHash": "68402473",
+                      "renderHash": "eb48afe6:d0636c59",
+                      "toolVersion": "preflight/1"
+                    },
+                    "unchanged": false
+                  }
+                }
+              }
+            },
+            "writes": {
+              "revision": 1,
+              "head": 1
+            },
+            "workspace": "/mnt/data/pga_latest_review/evidence/adapter-negative-controls/history-rewrite/crash-after-effect-jIZmCh",
+            "first": {
+              "ok": false,
+              "code": "Error",
+              "message": "PREFLIGHT_FAULT_after-effect"
+            },
+            "writesAfterFault": {
+              "revision": 1,
+              "head": 1
+            },
+            "replay": {
+              "ok": true,
+              "value": {
+                "requestId": "probe-after-effect",
+                "action": "accept",
+                "candidateId": "c-3284b056",
+                "head": "r2",
+                "revision": "r2",
+                "parent": "r1",
+                "hashes": {
+                  "documentHash": "2047f188",
+                  "styleHash": "68402473",
+                  "renderHash": "eb48afe6:d0636c59",
+                  "toolVersion": "preflight/1"
+                },
+                "unchanged": false,
+                "idempotentReplay": true
+              }
+            },
+            "reason": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'cbd03c6f7de9504f070e6de63c17534ac459cca7f8df0b77b913ca2e2b50ab38'\n- '1353a1be0efd5a6c6e47ce6430c7a2bb3066d5a1f8fca9f81e364c16d68ece4d'\n",
+            "errorCode": "ERR_ASSERTION"
+          }
+        ]
+      }
+    }
+  ]
+}

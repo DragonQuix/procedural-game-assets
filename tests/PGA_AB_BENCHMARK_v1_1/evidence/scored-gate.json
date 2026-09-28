@@ -1,0 +1,5 @@
+{
+  "exitCode": 1,
+  "correctlyBlocked": true,
+  "stderr": "file:///mnt/data/PGA_AB_BENCHMARK_v1/organizer/prepare.mjs:14\n const r=await readJson(resolve(o.readiness));if(r.status!=='READY_TECHNICAL'||r.repositoryFingerprint!==hash)throw Error('Readiness does not match this repository or is not passing.');\n                                                                                                                    ^\n\nError: Readiness does not match this repository or is not passing.\n    at file:///mnt/data/PGA_AB_BENCHMARK_v1/organizer/prepare.mjs:14:117\n\nNode.js v22.16.0\n"
+}

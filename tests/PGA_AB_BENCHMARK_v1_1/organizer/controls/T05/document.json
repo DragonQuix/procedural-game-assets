@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "pga-studio/2",
+  "id": "beacon",
+  "seed": 640917,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "field-service",
+    "version": 1,
+    "ramps": {
+      "steel": [
+        "#232830",
+        "#49525f",
+        "#707b8d",
+        "#a6b0c2"
+      ],
+      "screen": [
+        "#04161d",
+        "#0b3a46",
+        "#177383",
+        "#63dcd2"
+      ],
+      "amber": [
+        "#4a3410",
+        "#9c7420",
+        "#ffb13d",
+        "#ffe08a"
+      ],
+      "quiet": [
+        "#29313b",
+        "#3b4858",
+        "#536276",
+        "#77899c"
+      ],
+      "red": [
+        "#451e25",
+        "#8a3544",
+        "#c35a59",
+        "#e99a7e"
+      ]
+    },
+    "meta": {
+      "source": "benchmark-original; palette adapted from supplied toolkit",
+      "notes": "冷灰结构，少量信号色；图样为实验起点，不是质量上限"
+    }
+  },
+  "canvas": {
+    "w": 38,
+    "h": 38,
+    "outline": "#120d16"
+  },
+  "nodes": [
+    {
+      "id": "beacon.base",
+      "kind": "panel",
+      "x": 9,
+      "y": 30,
+      "w": 20,
+      "h": 4,
+      "ramp": "steel",
+      "material": "bevel-metal",
+      "layer": 0
+    },
+    {
+      "id": "beacon.body",
+      "kind": "panel",
+      "x": 12,
+      "y": 17,
+      "w": 14,
+      "h": 14,
+      "ramp": "steel",
+      "material": "bevel-metal",
+      "layer": 1
+    },
+    {
+      "id": "beacon.mast",
+      "kind": "panel",
+      "x": 18,
+      "y": 9,
+      "w": 3,
+      "h": 12,
+      "ramp": "quiet",
+      "material": "flat",
+      "layer": 2
+    },
+    {
+      "id": "beacon.light",
+      "kind": "disc",
+      "cx": 19,
+      "cy": 8,
+      "rx": 5,
+      "ry": 4,
+      "ramp": "amber",
+      "material": "flat",
+      "layer": 3
+    },
+    {
+      "id": "beacon.battery",
+      "kind": "panel",
+      "x": 26,
+      "y": 23,
+      "w": 5,
+      "h": 8,
+      "ramp": "quiet",
+      "material": "bevel-metal",
+      "layer": 4
+    }
+  ],
+  "anchor": {
+    "x": 19.0,
+    "y": 36
+  },
+  "attachments": {},
+  "constraints": [
+    {
+      "kind": "metadata",
+      "target": "anchor"
+    }
+  ]
+}

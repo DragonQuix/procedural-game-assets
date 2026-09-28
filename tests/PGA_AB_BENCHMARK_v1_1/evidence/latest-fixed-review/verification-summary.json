@@ -1,0 +1,42 @@
+{
+  "benchmarkVersion": "1.1",
+  "scope": "Maintenance only: phase-specific crash-retry adapter. No task, stimulus, budget, participant prompt, or scoring changes.",
+  "sourceArchive": "procedural-game-assets-master(2).zip",
+  "sourceArchiveSha256": "da02c6d0a01178ed30ec00c769ebf035fee245d6008d42c6075e019a1fc55b96",
+  "upstreamBenchmarkZipSha256": "54c3f6acc3d10da1c270db4fe0c60919bce412c27f7c35f7869008a847add116",
+  "repositoryFingerprint": "541db38bfd94645a8f406a192b3a5168fa41a87c588207c2a7bbdfd1fa6b1d8b",
+  "sourceFilesModified": [],
+  "nodeVersion": "v22.16.0",
+  "dependency": "pngjs@7.0.0 copied from supplied release payload into isolated audit dependency directory; no network install.",
+  "projectTests": {
+    "testFiles": 39,
+    "tests": 339,
+    "pass": 339,
+    "fail": 0,
+    "skipped": 0
+  },
+  "originalPreflight": "NOT_READY: 8 PASS + crash-retry FAIL",
+  "adaptedPreflight": "READY_TECHNICAL: 9 PASS; crash-retry contains 2 phase-specific passing subcases",
+  "selfTest": {
+    "tests": 23,
+    "pass": 23
+  },
+  "adapterNegativeControls": {
+    "tests": 2,
+    "pass": 2
+  },
+  "releaseChecks": {
+    "normalPayloadFiles": 169,
+    "loopPayloadFiles": 132,
+    "result": "PASS"
+  },
+  "frozenMaterialFileCount": 161,
+  "limits": [
+    "No Git history in uploaded archive; commit 2d5727c is organizer-reported, not independently verified.",
+    "Filesystem exceptions and reopen tested, not SIGKILL, OS power loss, fsync durability, or arbitrary concurrency.",
+    "No participant model trials or aesthetic blind review performed.",
+    "Four organizer smoke directories were not included in the uploaded archive; local existence not independently verified.",
+    "Built-in repositoryFingerprint hashes src plus package.json, not entire repository; record actual commit, benchmark version, host and dependencies as well.",
+    "Embedded reports are audit evidence from an isolated Linux environment; rerun in the user's actual Windows environment."
+  ]
+}

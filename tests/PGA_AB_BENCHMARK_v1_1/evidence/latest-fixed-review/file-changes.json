@@ -1,0 +1,31 @@
+{
+  "modified": [
+    "README_CN.md",
+    "evidence/README.md",
+    "organizer/preflight.mjs",
+    "organizer/readiness-probes.mjs"
+  ],
+  "added": [
+    "BENCHMARK_VERSION.json",
+    "FROZEN_MATERIALS_V1.json",
+    "LATEST_REVIEW_AND_NEXT_STEPS_CN.md",
+    "MAINTENANCE_V1_1_CN.md",
+    "NEXT_COORDINATOR_PROMPT_CN.md",
+    "UPSTREAM_V1_SHA256SUMS.json",
+    "evidence/latest-fixed-review/adapted-v1_1-probe-results.json",
+    "evidence/latest-fixed-review/adapted-v1_1-readiness.json",
+    "evidence/latest-fixed-review/adapter-negative-controls.json",
+    "evidence/latest-fixed-review/adapter.patch",
+    "evidence/latest-fixed-review/loop-release-check.log",
+    "evidence/latest-fixed-review/original-v1-probe-results.json",
+    "evidence/latest-fixed-review/original-v1-readiness.json",
+    "evidence/latest-fixed-review/project-tests.log",
+    "evidence/latest-fixed-review/release-check.log",
+    "evidence/latest-fixed-review/self-test.json",
+    "evidence/latest-fixed-review/verification-summary.json",
+    "organizer/adapter-self-test.mjs",
+    "organizer/crash-retry-v1_1.mjs"
+  ],
+  "removed": [],
+  "note": "The root SHA256SUMS.json is regenerated for v1.1; upstream manifest and failure evidence are retained."
+}

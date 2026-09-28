@@ -1,0 +1,31 @@
+{
+  "id": "T03",
+  "title": "让夹口像金属，手柄退居次要",
+  "category": "材质与视觉层级",
+  "frame": "cutter",
+  "brief": "这把工业夹具的手柄与夹口目前同样平，材质层次不清。为夹口组织有方向的金属明暗，让手柄更沉稳；保留琥珀色铆钉这个小识别点。不能改变轮廓或增加新的零件。",
+  "targets": [
+    "cutter.handle",
+    "cutter.jaw"
+  ],
+  "maskMode": "opaque",
+  "protectNode": "cutter.bolt",
+  "preserveAlpha": true,
+  "minChanges": 1,
+  "criteria": [
+    "夹口的受光与阴影有明确关系，不是随机亮点。",
+    "手柄与夹口有主次但仍属于同一套工具设计。",
+    "原生尺寸与4倍图下都干净，不靠放大掩盖碎点。"
+  ],
+  "protect": "只允许修改原来工具轮廓内部、非铆钉的 RGB；alpha、外轮廓描边、铆钉像素、锚点和附件点不变。",
+  "schemaVersion": "pga-benchmark-task/1",
+  "seed": 640917,
+  "displayScale": 4,
+  "backgrounds": [
+    "#202028",
+    "#d6d8dc"
+  ],
+  "maxRenderedStates": 12,
+  "sourcesMustRemainEditable": true,
+  "exactTargetImage": false
+}

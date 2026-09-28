@@ -1,0 +1,42 @@
+{
+  "id": "T05",
+  "title": "用既有五个部件重组便携救援信标",
+  "category": "较开放的结构重组",
+  "frame": "beacon",
+  "brief": "这是五个摆放不协调的零件：底座、机身、立杆、信号灯与电池。重新布局、调整比例和材质，把它们组织成便携式救援信标。信号灯应位于视觉上的上方，机身和电池要显得可携带，底部必须稳固。允许原创，不要求照抄某张目标图。",
+  "targets": [
+    "beacon.base",
+    "beacon.body",
+    "beacon.mast",
+    "beacon.light",
+    "beacon.battery"
+  ],
+  "allowedRectangles": [
+    [
+      2,
+      2,
+      36,
+      36
+    ]
+  ],
+  "holes": [],
+  "preserveAlpha": false,
+  "minChanges": 10,
+  "minAlphaChanges": 10,
+  "criteria": [
+    "轮廓可读为完整的便携信标，而不是散落零件。",
+    "上方信号灯、承载机身与稳定底座形成合理结构。",
+    "焦点明确、明暗统一，在原生与4倍尺度下均有完成度。"
+  ],
+  "protect": "只用现有五个命名部件；不加新节点、不换几何类型。最终40×40画布内保留至少2px透明边界，锚点不变。原件可移动、缩放、变更材质和局部色阶。",
+  "schemaVersion": "pga-benchmark-task/1",
+  "seed": 640917,
+  "displayScale": 4,
+  "backgrounds": [
+    "#202028",
+    "#d6d8dc"
+  ],
+  "maxRenderedStates": 12,
+  "sourcesMustRemainEditable": true,
+  "exactTargetImage": false
+}

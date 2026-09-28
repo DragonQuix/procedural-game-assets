@@ -1,0 +1,10 @@
+[
+  {
+    "id": "geometry.set",
+    "target": "hauler.shell",
+    "params": {
+      "x": 8,
+      "w": 22
+    }
+  }
+]

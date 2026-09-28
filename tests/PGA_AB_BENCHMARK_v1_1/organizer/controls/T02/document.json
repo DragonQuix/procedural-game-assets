@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "pga-studio/2",
+  "id": "hauler",
+  "seed": 640917,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "field-service",
+    "version": 1,
+    "ramps": {
+      "steel": [
+        "#232830",
+        "#49525f",
+        "#707b8d",
+        "#a6b0c2"
+      ],
+      "screen": [
+        "#04161d",
+        "#0b3a46",
+        "#177383",
+        "#63dcd2"
+      ],
+      "amber": [
+        "#4a3410",
+        "#9c7420",
+        "#ffb13d",
+        "#ffe08a"
+      ],
+      "quiet": [
+        "#29313b",
+        "#3b4858",
+        "#536276",
+        "#77899c"
+      ],
+      "red": [
+        "#451e25",
+        "#8a3544",
+        "#c35a59",
+        "#e99a7e"
+      ]
+    },
+    "meta": {
+      "source": "benchmark-original; palette adapted from supplied toolkit",
+      "notes": "冷灰结构，少量信号色；图样为实验起点，不是质量上限"
+    }
+  },
+  "canvas": {
+    "w": 38,
+    "h": 34,
+    "outline": "#120d16"
+  },
+  "nodes": [
+    {
+      "id": "hauler.base",
+      "kind": "panel",
+      "x": 6,
+      "y": 28,
+      "w": 26,
+      "h": 4,
+      "ramp": "steel",
+      "material": "bevel-metal",
+      "layer": 0
+    },
+    {
+      "id": "hauler.shell",
+      "kind": "panel",
+      "x": 8,
+      "y": 4,
+      "w": 22,
+      "h": 24,
+      "ramp": "steel",
+      "material": "bevel-metal",
+      "layer": 1
+    },
+    {
+      "id": "hauler.lens",
+      "kind": "screen",
+      "x": 15,
+      "y": 9,
+      "w": 8,
+      "h": 7,
+      "ramp": "screen",
+      "material": "scanlines",
+      "layer": 2
+    },
+    {
+      "id": "hauler.badge",
+      "kind": "panel",
+      "x": 17,
+      "y": 20,
+      "w": 4,
+      "h": 3,
+      "ramp": "amber",
+      "material": "flat",
+      "layer": 3
+    }
+  ],
+  "anchor": {
+    "x": 19.0,
+    "y": 32
+  },
+  "attachments": {
+    "sensor": {
+      "x": 19,
+      "y": 12.5
+    }
+  },
+  "constraints": [
+    {
+      "kind": "pixels",
+      "target": "hauler.base"
+    },
+    {
+      "kind": "pixels",
+      "target": "hauler.lens"
+    },
+    {
+      "kind": "pixels",
+      "target": "hauler.badge"
+    },
+    {
+      "kind": "metadata",
+      "target": "anchor"
+    },
+    {
+      "kind": "metadata",
+      "target": "attachments.sensor"
+    }
+  ]
+}
