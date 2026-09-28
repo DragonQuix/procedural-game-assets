@@ -1,0 +1,80 @@
+{
+  "requestId": "req-2d39ec0c",
+  "requestHash": "2d39ec0c",
+  "status": "done",
+  "result": {
+    "requestId": "req-2d39ec0c",
+    "baseRevision": "r1",
+    "head": "r1",
+    "base": {
+      "revision": "r1",
+      "hashes": {
+        "documentHash": "56963f46",
+        "styleHash": "68402473",
+        "renderHash": "f645726c:6cebd809",
+        "toolVersion": "preflight/1"
+      },
+      "previews": {
+        "native": "previews\\r1-base\\r1-base.native.png",
+        "display": "previews\\r1-base\\r1-base.display.png"
+      }
+    },
+    "candidates": [
+      {
+        "candidateId": "c-e0935e0c",
+        "value": "flat",
+        "status": "OK",
+        "code": null,
+        "duplicateOf": null,
+        "conflicts": [],
+        "diff": {
+          "pixels": 94,
+          "outside": 0,
+          "region": {
+            "x0": 3,
+            "y0": 3,
+            "x1": 29,
+            "y1": 26
+          },
+          "samples": []
+        },
+        "checks": {
+          "status": "OK",
+          "code": null,
+          "conflicts": [],
+          "diff": {
+            "pixels": 94,
+            "outside": 0,
+            "region": {
+              "x0": 3,
+              "y0": 3,
+              "x1": 29,
+              "y1": 26
+            },
+            "samples": []
+          },
+          "protections": {
+            "pixels": [
+              "terminal.screen"
+            ],
+            "structure": [],
+            "metadata": [
+              "anchor"
+            ]
+          }
+        },
+        "hashes": {
+          "documentHash": "52b03ba3",
+          "styleHash": "68402473",
+          "renderHash": "f645726c:545829f1",
+          "toolVersion": "preflight/1"
+        },
+        "previews": {
+          "native": "previews\\c-e0935e0c\\c-e0935e0c.native.png",
+          "display": "previews\\c-e0935e0c\\c-e0935e0c.display.png"
+        }
+      }
+    ],
+    "uniqueCount": 1
+  }
+}

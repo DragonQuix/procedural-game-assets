@@ -1,0 +1,20 @@
+{
+  "requestId": "req-d390d996",
+  "requestHash": "d390d996",
+  "status": "done",
+  "result": {
+    "requestId": "req-d390d996",
+    "action": "accept",
+    "candidateId": "c-61232b50",
+    "head": "r2",
+    "revision": "r2",
+    "parent": "r1",
+    "hashes": {
+      "documentHash": "760700b6",
+      "styleHash": "68402473",
+      "renderHash": "f645726c:efd6f069",
+      "toolVersion": "preflight/1"
+    },
+    "unchanged": false
+  }
+}

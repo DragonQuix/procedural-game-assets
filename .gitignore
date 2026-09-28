@@ -7,3 +7,8 @@ work/
 examples/*/assets/
 *.log
 .DS_Store
+
+# PGA A/D 宿主工作区：只入库预检/自检报告；trial 目录可由 organizer/prepare.mjs 重新生成
+tests/pga-ad-host/smoke/
+tests/pga-ad-host/selftest-v1/*
+!tests/pga-ad-host/selftest-v1/self-test.json

@@ -1,0 +1,193 @@
+{
+  "revision": "r1",
+  "parent": null,
+  "doc": {
+    "schemaVersion": "pga-studio/character/1",
+    "id": "rustclaw",
+    "seed": 42,
+    "template": {
+      "id": "humanoid-rig",
+      "version": 1,
+      "checkedPoseKinds": [
+        "rig"
+      ]
+    },
+    "meta": {
+      "source": "materialized from examples/recipes/rustclaw.mjs",
+      "license": "CC0",
+      "notes": "锈爪拾荒者：焊接面罩+青色目镜带+大背包+短粗铆钉枪；待机/跑动/瞄准/下落/跪姿压制"
+    },
+    "frame": {
+      "w": 40,
+      "h": 46,
+      "feetY": 44,
+      "bodyX": 20
+    },
+    "palette": {
+      "A": "#8a4b26",
+      "a": "#5e3018",
+      "V": "#39d0c4",
+      "E": "#8ff0e8",
+      "k": "#241812",
+      "K": "#7a4a24",
+      "L": "#a86a34",
+      "G": "#7a4a24",
+      "g": "#5e3a1c",
+      "B": "#33261c",
+      "b": "#4a382a",
+      "Y": "#c98f3f",
+      "y": "#8a5f26",
+      "P": "#46352a",
+      "p": "#2e2118",
+      "q": "#6b5442",
+      "t": "#3d2b1a",
+      "T": "#5a4028",
+      "C": "#241a12",
+      "m": "#3a3226",
+      "M": "#6b5e4a",
+      "W": "#e8ddc0",
+      "O": "#ff9a3d"
+    },
+    "art": {
+      "head": [
+        "..AAAA..",
+        ".AAAAAa.",
+        "AAAAAAAA",
+        "AAVVVVEk",
+        "AAAVVVkk",
+        ".AAkkkkk",
+        "..kkkk.."
+      ],
+      "torso": [
+        "BB.........",
+        "BBbKKKKKKK.",
+        "BBKKKKLLLKk",
+        "BbKKKLLKKKk",
+        ".bKKKYKKKKk",
+        ".bKKKKKKKk.",
+        "..KKKKKKk..",
+        "..kKKKKk...",
+        "..yYYYYYy.."
+      ]
+    },
+    "rig": {
+      "hipY": -11,
+      "hipSpread": 2,
+      "shoulderBack": [
+        -5,
+        -16
+      ],
+      "shoulderFront": [
+        5,
+        -16
+      ],
+      "thigh": 4,
+      "shin": 4,
+      "thick": 4,
+      "heavyGun": true,
+      "torsoDrop": 1,
+      "guns": {
+        "fwd": {
+          "grip": [
+            7,
+            -14
+          ],
+          "dir": [
+            1,
+            0
+          ],
+          "back": 3,
+          "len": 7
+        },
+        "diagUp": {
+          "grip": [
+            6,
+            -16
+          ],
+          "dir": [
+            0.7071067811865476,
+            -0.7071067811865476
+          ],
+          "back": 3,
+          "len": 7
+        },
+        "up": {
+          "grip": [
+            4,
+            -15
+          ],
+          "dir": [
+            0,
+            -1
+          ],
+          "back": 3,
+          "len": 9
+        },
+        "diagDown": {
+          "grip": [
+            6,
+            -12
+          ],
+          "dir": [
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "back": 3,
+          "len": 7
+        },
+        "down": {
+          "grip": [
+            4,
+            -11
+          ],
+          "dir": [
+            0,
+            1
+          ],
+          "back": 3,
+          "len": 6
+        }
+      },
+      "proneMuzzle": [
+        17,
+        -4
+      ],
+      "ballCenterY": -11
+    },
+    "poses": [
+      {
+        "id": "stand_fwd",
+        "kind": "rig",
+        "legs": [
+          [
+            -9,
+            3
+          ],
+          [
+            11,
+            5
+          ]
+        ],
+        "aim": "fwd"
+      }
+    ],
+    "clips": {},
+    "outline": "#120d16",
+    "constraints": [
+      {
+        "kind": "metadata",
+        "target": "attachments.head"
+      }
+    ]
+  },
+  "hashes": {
+    "documentHash": "dc9d6946",
+    "styleHash": "543858c9",
+    "renderHash": "75b6897a:50bb2160",
+    "toolVersion": "preflight/1"
+  },
+  "source": {
+    "kind": "create"
+  },
+  "toolVersion": "preflight/1"
+}
