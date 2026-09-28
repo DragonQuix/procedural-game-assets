@@ -256,6 +256,57 @@ HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类
   不据此宣称技能已经能稳定生成同级画面、所有 critic 均能区分风格与质量，或循环必然收敛。
 - 未修改用户级技能、Gauntlet、用户原图或独立试验项目；各软件安装刷新另行执行与验证。
 
+## S2 PGA Studio M2（2026-09-28，ADR-0009）
+
+阶段：M2（局部编辑、候选探索和回退——首个可用 MVP）。
+依据：`docs/PGA_STUDIO_IMPLEMENTATION_HANDOFF.md`（方案）、`docs/plans/agent-studio.md`、ADR-0008/0009。
+本轮目标：三个有限操作、同基准候选探索与去重、独立影响区域与三类保护、
+接受/恢复/过期拒绝、幂等与失败不污染 head、必做演示真实运行。
+
+### 实际完成
+
+- `src/studio/operators.js`：`geometry.set`/`material.set`/`ramp.set` 纯函数变换 + plan（目标与逐字段旧/新值）；同基准 `exploreOperation`（非法取值逐条返回不中断，上限 16）。
+- `src/studio/protect.js`：结构（非目标节点与资产级字段逐字段不变、目标只许声明字段变）、像素（允许区域 = 旧∪新几何 + 1px 描边邻域 − 未变更高层支持掩码遮挡；声明区域单独核对）、元数据（anchor/attachments/frameSize）；前置 CONSTRAINT_CONFLICT 与其余 CANDIDATE_INVALID 分开。
+- 编译器新增 per-node 支持掩码（内画布坐标），像素绘制与遮挡计算同源；M1 记录的 sceneMap 掩码缺口补齐。
+- `src/adapters/studio-store.js`：修订/候选/head/幂等台账/单写者锁；临时文件 + 原子替换；残留可识别不自动删；commit 用基准＋操作重新推导+重编译+重新执行保护检查（不信落盘状态）；恢复为引用旧内容的新修订。
+- `bin/pga-studio.mjs` 新增 state/edit/explore/commit 与工作区模式 inspect/export；退出码增 6（冲突）/7（占用）。M1 文档模式与输出文件保持兼容。
+- `examples/studio/edit-demo.mjs`：必做演示九步；`smoke.mjs` 增加工具目录自重清（create 现在拒绝覆盖已有工作区）。
+- 新测试 23 项：operators 7、protect 9、M2 集成 7。
+
+### 实际执行的命令与结果
+
+- `npm test`：271/271 通过（248 前轮 + 23 新增，旧套件零回归）。
+- `node examples/studio/edit-demo.mjs --out work/studio-m2`：九步全过。探索 w∈{24,26,28} → w=26 标 UNCHANGED/duplicateOf=base、uniqueCount=2；接受 w=28 → r2；屏幕修改 CONSTRAINT_CONFLICT 且提交被 CANDIDATE_INVALID 拒绝、head 保持 r2；恢复 r1 → r3 且 renderHash/documentHash 与 r1 精确一致；导出 manifest 过既有校验；幂等重放命中台账不重复接受。
+- `node examples/studio/smoke.mjs --out work/studio-smoke`：M1 合同在新 create（含工作区初始化）下仍通过，可重复运行。
+
+### 产物与复现
+
+- `work/studio-m2/`：demo-summary.json、revisions/r1–r3、candidates/c-*（含拒绝证据）、previews/r1-base 与各候选 native/display PNG、export/（r3 的既有格式导出）。
+- 复现：`node examples/studio/edit-demo.mjs --out work/studio-m2`（工具目录自动重清）。
+
+### 技术结论
+
+- M2 验收逐条实测通过：流程不是"六个 API 名字"而是真实运行；篡改（伪造成 OK、改文档哈希对不上）、过期（expectedHead/基准）、重放、活锁/死锁、临时残留均有专门测试证据，错误候选未污染 head。
+- 保护语义可画面验证：查看 r1 与 w=24/w=28 候选 display 图，仅机箱右缘变化，屏幕区域逐像素不变。
+
+### 视觉结论与评审来源
+
+- 实施者自审（非独立评审）：前后图确认"只改机箱宽度"在画面上严格成立（屏幕逐像素不变，变化限于右缘钢区与描边邻域）。美术质量维持 M1 结论：示意样例 NOT_YET，无标杆不宣称同级。
+
+### 未验证项/限制
+
+- 未做真实 agent 宿主接入与对照评测（M3）、MCP、风格包（M4）、跨帧（M5）、发行核对（M6）。
+- 多写者协同与跨版本合并未实现（单写者 + expectedHead 语义）；大文档性能未测（首版 ≤30×30 全量重渲染）。
+- 锁依赖 pid 存活检查，远程/容器共享文件系统语义未验证。
+
+### 与原计划的偏差
+
+- 无实质偏差。新增 store 级错误码沿用既有清单；CLI 退出码扩 6/7 已在文件头记录。
+
+### 下一项可执行任务（M3 第一项）
+
+真实宿主 CLI＋读图跑通"创建→探索→接受"：新会话 agent 仅凭 JSON 合同与 inspect 能力声明完成，记录调用轨迹与失败类型，再决定 MCP 薄适配是否必要。
+
 ## S1 PGA Studio M0＋M1（2026-09-28，ADR-0008）
 
 阶段：M0（基线/范围/ADR）＋ M1（可编辑文档 → 真实渲染 → 导出）。

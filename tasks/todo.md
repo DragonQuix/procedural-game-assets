@@ -45,7 +45,7 @@
 
 - Godot 增强、音频模块化、Unity、网络服务：见 PLAN.md 冻结项
 
-## S0/S1 PGA Studio M0＋M1（2026-09-28，ADR-0008，本轮）
+## S0/S1 PGA Studio M0＋M1（2026-09-28，ADR-0008）
 
 依据：`../docs/PGA_STUDIO_IMPLEMENTATION_HANDOFF.md`（方案）、`../docs/plans/agent-studio.md`。
 
@@ -59,8 +59,19 @@
 - [x] `examples/studio/terminal.studio.json` 静态样例（base/shell/screen/side_panel）
 - [x] `examples/studio/smoke.mjs`：单命令确定性 smoke（`--out work/studio-smoke`）
 - [x] 新测试：非法文档、确定性、尺寸/padding、锚点、CLI 与旧行为兼容
-- [ ] M2：三个有限操作、同基准候选探索、保护检查、事务与幂等（下一项见 plans/agent-studio.md）
-- [ ] M3–M6：agent 接入评测、风格包、跨帧、发行（未做）
+
+## S2 PGA Studio M2（2026-09-28，ADR-0009）
+
+- [x] ADR-0009（候选事务、独立影响区域保护、工作区存储、幂等台账）
+- [x] `src/studio/operators.js`：geometry.set/material.set/ramp.set 纯变换 + plan
+- [x] `src/studio/protect.js`：结构/像素/元数据三类保护；允许区域独立计算（含层序遮挡）
+- [x] 编译器 per-node 支持掩码（sceneMap 掩码缺口补齐）
+- [x] `src/adapters/studio-store.js`：修订/候选/head/台账/锁；commit 重新校验不信落盘
+- [x] CLI state/edit/explore/commit + 工作区模式 inspect/export；退出码 6/7
+- [x] `examples/studio/edit-demo.mjs` 必做演示九步全过；失败注入/过期/重放/重启恢复测试
+- [x] 全套件 271/271；前后图实际查看（屏幕逐像素不变，变化限于机箱右缘）
+- [ ] M3：真实 agent 宿主接入与对照评测（下一项见 plans/agent-studio.md）
+- [ ] M4–M6：风格包、跨帧、发行（未做）
 
 ## 发现入口与备份收敛（2026-09-26，单独任务）
 

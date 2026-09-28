@@ -9,7 +9,7 @@
  * → inspect（能力声明）→ export（.asset.json + 图集 + manifest，并校验 manifest）
  * 全部产物写入 --out 目录（默认 work/studio-smoke）。
  */
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, rm, writeFile, readdir } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { compileStudioDocument } from '../../src/studio/compiler.js';
@@ -33,6 +33,15 @@ const die = (msg) => {
   console.error(`✗ smoke 失败：${msg}`);
   process.exit(1);
 };
+
+// 输出目录若为本工具生成（含 .pga.json 标记）则先清理，保证可重复运行；否则拒绝覆盖
+try {
+  const entries = await readdir(outDir);
+  if (entries.includes('.pga.json')) await rm(outDir, { recursive: true });
+  else if (entries.length > 0) die(`${outDir} 非空且不是本工具生成的目录`);
+} catch (e) {
+  if (e.code !== 'ENOENT') throw e;
+}
 
 step(`读取样例文档 ${DOC}`);
 const doc = JSON.parse(await readFile(DOC, 'utf8'));

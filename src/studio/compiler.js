@@ -111,13 +111,21 @@ export function compileStudioDocument(doc, opts = {}) {
 
   const main = new PixelPainter(canvas.w, canvas.h, { clip: 'error' });
   const sceneNodes = [];
+  const masks = {};
   for (const { node } of order) {
     const sub = new PixelPainter(canvas.w, canvas.h, { clip: 'error' });
     drawNode(sub, node, normalized.style.ramps, normalized.seed);
     main.blit(sub, 0, 0);
     const bounds = computeBounds(sub);
     let opaquePixels = 0;
-    for (const v of sub.data) if (v >>> 24) opaquePixels++;
+    const mask = new Uint8Array(canvas.w * canvas.h); // 支持掩码：内画布坐标，1 = 本节点不透明
+    for (let i = 0; i < sub.data.length; i++) {
+      if (sub.data[i] >>> 24) {
+        opaquePixels++;
+        mask[i] = 1;
+      }
+    }
+    masks[node.id] = mask;
     sceneNodes.push({
       id: node.id,
       kind: node.kind,
@@ -159,9 +167,9 @@ export function compileStudioDocument(doc, opts = {}) {
     nodeCount: sceneNodes.length,
     clipped: main.diagnostics.clips,
     constraintsDeclared: normalized.constraints.length,
-    constraintsEnforced: 0, // v1 仅声明，强制执行自 M2 起
+    constraintsEnforced: 0, // 文档内声明计数；强制执行由 store/protect 完成（M2 起）
   };
-  return { asset, sceneMap, hashes, diagnostics, document: normalized };
+  return { asset, sceneMap, masks, hashes, diagnostics, document: normalized };
 }
 
 /**
@@ -177,7 +185,7 @@ export function describeCapabilities(doc) {
       kind: node.kind,
       operations: {
         'geometry.set': {
-          status: 'planned-m2',
+          status: 'available-m2',
           unit: 'px',
           fields: {
             x: { type: 'integer', min: 0, max: canvas.w - node.w },
@@ -186,8 +194,8 @@ export function describeCapabilities(doc) {
             h: { type: 'integer', min: 1, max: canvas.h - node.y },
           },
         },
-        'material.set': { status: 'planned-m2', options: [...(node.kind === 'panel' ? ['flat', 'bevel-metal'] : ['flat', 'scanlines'])] },
-        'ramp.set': { status: 'planned-m2', options: Object.keys(style.ramps) },
+        'material.set': { status: 'available-m2', options: [...(node.kind === 'panel' ? ['flat', 'bevel-metal'] : ['flat', 'scanlines'])] },
+        'ramp.set': { status: 'available-m2', options: Object.keys(style.ramps) },
       },
       example: { operation: 'geometry.set', target: node.id, params: { w: node.w + 2 } },
     };

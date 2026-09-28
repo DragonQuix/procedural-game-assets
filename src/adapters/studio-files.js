@@ -1,11 +1,13 @@
 /**
  * adapters/studio-files.js — Studio 文档/预览/导出的文件 IO（ADR-0001：IO 全在适配层）
  *
- * 这里只做：读 JSON 文档、写规范化文档/预览 PNG/sceneMap/既有资产导出、输出目录覆盖保护。
- * 编辑逻辑（校验、编译、视图）全部在 src/studio/ 纯核心；CLI 与本文件共享同一实现，
- * 不在 bin/ 里另写一套。
+ * 两类入口：
+ * - 文档模式（M1）：直接对单个 .studio.json 做 create/inspect/export；
+ * - 工作区模式（M2）：对 StudioStore 的修订做 create/inspect/export，
+ *   编辑候选、探索与提交在 adapters/studio-store.js。
+ * 编辑逻辑（校验、编译、视图、保护）全部在 src/studio/ 纯核心；CLI 与本文件共享同一实现。
  */
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { compileStudioDocument, describeCapabilities } from '../studio/compiler.js';
 import { buildViews } from '../studio/observe.js';
@@ -14,28 +16,9 @@ import { assetToJSON } from './asset-file.js';
 import { encodePNG } from '../export/png.js';
 import { packAtlas, renderAtlasPages } from '../export/atlas.js';
 import { buildManifest } from '../export/manifest.js';
+import { StudioStore, ensureOutDir, writeMarker, StudioOverwriteError } from './studio-store.js';
 
-const MARKER = '.pga.json';
-
-export class StudioOverwriteError extends Error {
-  constructor(dir) {
-    super(`输出目录 ${dir} 非空且不是本工具生成的目录；为避免覆盖你的文件已拒绝。请换空目录或先确认删除。`);
-    this.name = 'StudioOverwriteError';
-    this.code = 'UNSAFE_PATH';
-  }
-}
-
-/** 覆盖保护：目录非空且没有本工具标记时拒绝写入（与 bin/pga.mjs 同一语义）。 */
-async function ensureOutDir(dir) {
-  await mkdir(dir, { recursive: true });
-  const entries = await readdir(dir);
-  if (entries.length === 0 || entries.includes(MARKER)) return;
-  throw new StudioOverwriteError(dir);
-}
-
-async function writeMarker(dir, generator) {
-  await writeFile(join(dir, MARKER), JSON.stringify({ tool: 'procedural-game-assets', generator }) + '\n');
-}
+export { StudioOverwriteError };
 
 /** 从磁盘读取并解析 Studio 文档（解析失败抛出带 INVALID_DOCUMENT 语义的错误）。 */
 export async function readStudioDocument(docPath) {
@@ -74,12 +57,12 @@ async function writePreviews(outDir, compiled, views, nodeId) {
   return files;
 }
 
-function summarize(compiled, docPath, outDir, files) {
+function summarize(compiled, source, outDir, files) {
   return {
     assetId: compiled.asset.id,
     kind: compiled.asset.kind,
     seed: compiled.asset.seed,
-    source: docPath,
+    source,
     inner: compiled.sceneMap.inner,
     final: compiled.sceneMap.final,
     anchor: compiled.asset.frames[0].anchor,
@@ -92,30 +75,61 @@ function summarize(compiled, docPath, outDir, files) {
   };
 }
 
-/**
- * create：校验 + 编译 + 落盘可编辑源文档、sceneMap、native/display 预览。
- * @returns {Promise<object>} 供 CLI 输出的 JSON 摘要
- */
-export async function createFromFile(docPath, outDir, opts = {}) {
-  const doc = await readStudioDocument(docPath);
-  const compiled = compileStudioDocument(doc, { toolVersion: opts.toolVersion });
-  await ensureOutDir(outDir);
-  await writeMarker(outDir, opts.generator ?? 'unknown');
-  const views = buildViews(compiled, { displayScale: opts.displayScale, background: opts.background });
-  const files = await writePreviews(outDir, compiled, views);
+/** 写可编辑源文档与 sceneMap（M1 起的路径与命名保持不变）。 */
+async function writeSourceBundle(outDir, compiled) {
+  const files = {};
   files.document = `${compiled.asset.id}.studio.json`;
   await writeFile(join(outDir, files.document), JSON.stringify(compiled.document, null, 2) + '\n');
   files.scene = `${compiled.asset.id}.scene.json`;
   await writeFile(join(outDir, files.scene), JSON.stringify({ sceneMap: compiled.sceneMap, hashes: compiled.hashes, diagnostics: compiled.diagnostics }, null, 2) + '\n');
-  return summarize(compiled, docPath, outDir, files);
+  return files;
 }
 
 /**
- * inspect：编译 + 返回节点定位、能力声明、诊断与哈希；可选写预览与目标节点裁切图。
+ * create：校验 + 编译 + 初始化 Studio 工作区（r1 与 head）+ 落盘可编辑源文档、
+ * sceneMap、native/display 预览。M1 的输出文件与字段保持不变，新增 head/workspace 字段。
+ */
+export async function createFromFile(docPath, outDir, opts = {}) {
+  const doc = await readStudioDocument(docPath);
+  const { store, revision, compiled } = await StudioStore.create(outDir, doc, {
+    generator: opts.generator,
+    toolVersion: opts.toolVersion,
+    displayScale: opts.displayScale,
+    background: opts.background,
+  });
+  const views = buildViews(compiled, { displayScale: opts.displayScale, background: opts.background });
+  const files = await writePreviews(outDir, compiled, views);
+  Object.assign(files, await writeSourceBundle(outDir, compiled));
+  const summary = summarize(compiled, docPath, outDir, files);
+  summary.head = revision.revision;
+  summary.workspace = outDir;
+  return summary;
+}
+
+/**
+ * inspect（文档模式）：编译 + 返回节点定位、能力声明、诊断与哈希；可选写预览与目标节点裁切图。
  */
 export async function inspectFromFile(docPath, opts = {}) {
   const doc = await readStudioDocument(docPath);
   const compiled = compileStudioDocument(doc, { toolVersion: opts.toolVersion });
+  return inspectCompiled(compiled, docPath, opts);
+}
+
+/**
+ * inspect（工作区模式）：编译指定修订（默认 head），其余同文档模式。
+ */
+export async function inspectWorkspace(wsDir, opts = {}) {
+  const store = await StudioStore.open(wsDir, opts);
+  const revision = opts.revision ?? store.head;
+  const compiled = await store._getCompiled(revision);
+  const summary = await inspectCompiled(compiled, `workspace:${wsDir}#${revision}`, opts);
+  summary.head = store.head;
+  summary.revision = revision;
+  summary.workspaceState = await store.state();
+  return summary;
+}
+
+async function inspectCompiled(compiled, source, opts = {}) {
   const capabilities = describeCapabilities(compiled.document);
   let files = null;
   if (opts.outDir) {
@@ -127,18 +141,14 @@ export async function inspectFromFile(docPath, opts = {}) {
     // 不写盘时也校验节点存在，保持行为一致
     buildViews(compiled, { node: opts.node });
   }
-  const summary = summarize(compiled, docPath, opts.outDir ?? null, files);
+  const summary = summarize(compiled, source, opts.outDir ?? null, files);
   summary.constraints = compiled.document.constraints;
   summary.capabilities = capabilities;
   return summary;
 }
 
-/**
- * export：编译 + 落盘既有资产格式（.asset.json + 图集 PNG + 版本化 manifest）与可编辑源文档。
- */
-export async function exportFromFile(docPath, outDir, opts = {}) {
-  const doc = await readStudioDocument(docPath);
-  const compiled = compileStudioDocument(doc, { toolVersion: opts.toolVersion });
+/** 导出核心：既有资产格式（.asset.json + 图集 PNG + 版本化 manifest）与可编辑源文档。 */
+async function exportCompiled(compiled, source, outDir, opts = {}) {
   const { asset } = compiled;
   await ensureOutDir(outDir);
   await writeMarker(outDir, opts.generator ?? 'unknown');
@@ -157,10 +167,27 @@ export async function exportFromFile(docPath, outDir, opts = {}) {
   files.manifest = `${asset.id}.manifest.json`;
   const manifest = buildManifest(asset, packed, { generator: opts.generator ?? 'unknown', recipeVersion: compiled.document.schemaVersion });
   await writeFile(join(outDir, files.manifest), JSON.stringify(manifest, null, 2) + '\n');
-  files.document = `${asset.id}.studio.json`;
-  await writeFile(join(outDir, files.document), JSON.stringify(compiled.document, null, 2) + '\n');
-  const summary = summarize(compiled, docPath, outDir, files);
+  Object.assign(files, await writeSourceBundle(outDir, compiled));
+  const summary = summarize(compiled, source, outDir, files);
   summary.manifest = { schemaVersion: manifest.schemaVersion, frames: manifest.frames.length, pages: manifest.pages.length };
+  return summary;
+}
+
+/** export（文档模式）。 */
+export async function exportFromFile(docPath, outDir, opts = {}) {
+  const doc = await readStudioDocument(docPath);
+  const compiled = compileStudioDocument(doc, { toolVersion: opts.toolVersion });
+  return exportCompiled(compiled, docPath, outDir, opts);
+}
+
+/** export（工作区模式）：导出指定修订（默认 head）。 */
+export async function exportWorkspace(wsDir, outDir, opts = {}) {
+  const store = await StudioStore.open(wsDir, opts);
+  const revision = opts.revision ?? store.head;
+  const compiled = await store._getCompiled(revision);
+  const summary = await exportCompiled(compiled, `workspace:${wsDir}#${revision}`, outDir, opts);
+  summary.head = store.head;
+  summary.revision = revision;
   return summary;
 }
 

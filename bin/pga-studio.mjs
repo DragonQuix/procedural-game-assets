@@ -1,21 +1,40 @@
 #!/usr/bin/env node
 /**
- * bin/pga-studio.mjs — PGA Studio JSON CLI（ADR-0008；agent 面向的最小子集）
+ * bin/pga-studio.mjs — PGA Studio JSON CLI（ADR-0008/0009）
  *
- *   node bin/pga-studio.mjs create  --doc <file.json> --out <dir> [--display-scale N] [--bg #rrggbb]
- *   node bin/pga-studio.mjs inspect --doc <file.json> [--out <dir>] [--node <id>] [--display-scale N] [--bg #rrggbb]
+ * 文档模式（M1）：
+ *   node bin/pga-studio.mjs create  --doc <file.json> --out <ws> [--display-scale N] [--bg #rrggbb]
+ *   node bin/pga-studio.mjs inspect --doc <file.json> [--out <dir>] [--node <id>]
  *   node bin/pga-studio.mjs export  --doc <file.json> --out <dir> [--max-page N] [--margin N]
  *
- * 合同：stdout 只输出 JSON（成功 { ok:true, result } / 失败 { ok:false, error }）；
- * 人类可读日志一律写 stderr。退出码：0 成功；2 用法/输入错误；3 校验或编译失败；4 覆盖保护拒绝。
+ * 工作区模式（M2）：
+ *   node bin/pga-studio.mjs state   --ws <dir>
+ *   node bin/pga-studio.mjs inspect --ws <dir> [--revision rN] [--out <dir>] [--node <id>]
+ *   node bin/pga-studio.mjs export  --ws <dir> [--revision rN] --out <dir>
+ *   node bin/pga-studio.mjs edit    --ws <dir> --base rN --op <id> --target <node>
+ *                                   [--params '{"w":28}' | --material X | --ramp X]
+ *                                   [--preserve '<json数组>'] [--request-id id]
+ *   node bin/pga-studio.mjs explore --ws <dir> --base rN --op <id> --target <node>
+ *                                   --field w --values 24,26,28 [--preserve '<json数组>'] [--request-id id]
+ *   node bin/pga-studio.mjs commit  --ws <dir> (--accept <candidateId> | --restore rN)
+ *                                   --expected-head rN [--request-id id]
  *
- * M1 范围：create/inspect/export。操作执行、候选探索与事务回退自 M2 起（见 docs/plans/agent-studio.md）。
+ * 合同：stdout 只输出 JSON；人类可读日志一律写 stderr。
+ * 退出码：0 成功；2 用法/输入错误；3 校验/编译/候选失败；4 覆盖或工作区路径保护；6 版本/请求冲突；7 工作区占用。
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createFromFile, inspectFromFile, exportFromFile } from '../src/adapters/studio-files.js';
+import {
+  createFromFile,
+  inspectFromFile,
+  inspectWorkspace,
+  exportFromFile,
+  exportWorkspace,
+  StudioOverwriteError,
+} from '../src/adapters/studio-files.js';
+import { StudioStore, StudioStoreError } from '../src/adapters/studio-store.js';
 import { StudioDocumentError } from '../src/studio/document.js';
-import { StudioOverwriteError } from '../src/adapters/studio-files.js';
+import { StudioOperationError } from '../src/studio/operators.js';
 
 const PKG = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
 const GENERATOR = `procedural-game-assets@${PKG.version}`;
@@ -28,7 +47,7 @@ function emit(payload, code) {
 
 function fail(code, message, exitCode, extra = {}) {
   console.error(`错误：${message}`);
-  emit({ ok: false, error: { code, message, target: extra.target ?? null, details: extra.details ?? null, retryable: false, suggestedNextAction: extra.suggestedNextAction ?? null } }, exitCode);
+  emit({ ok: false, error: { code, message, target: extra.target ?? null, details: extra.details ?? null, retryable: extra.retryable ?? false, suggestedNextAction: extra.suggestedNextAction ?? null } }, exitCode);
 }
 
 const [cmd, ...rest] = process.argv.slice(2);
@@ -47,41 +66,149 @@ function intOpt(name, fallback) {
 
 function requireOpt(name, usage) {
   if (typeof opts[name] !== 'string' || opts[name].length === 0) fail('INVALID_DOCUMENT', usage, 2);
-  return resolve(opts[name]);
+  return opts[name];
 }
 
-async function main() {
-  const common = {
+function jsonOpt(name, fallback) {
+  if (opts[name] === undefined) return fallback;
+  try {
+    return JSON.parse(opts[name]);
+  } catch (e) {
+    fail('INVALID_DOCUMENT', `--${name} 不是合法 JSON：${e.message}`, 2);
+  }
+}
+
+function commonOpts() {
+  return {
     toolVersion: TOOL_VERSION,
     generator: GENERATOR,
     displayScale: intOpt('display-scale', 4),
     background: typeof opts.bg === 'string' ? opts.bg : '#202028',
   };
+}
+
+function buildOperation() {
+  const id = requireOpt('op', '需要 --op <geometry.set|material.set|ramp.set>');
+  const target = requireOpt('target', `操作 ${id} 需要 --target <nodeId>`);
+  if (id === 'geometry.set') {
+    const params = jsonOpt('params', null);
+    if (!params) fail('INVALID_DOCUMENT', `geometry.set 需要 --params '{"w":28}'`, 2);
+    return { id, target, params };
+  }
+  if (id === 'material.set') return { id, target, material: requireOpt('material', 'material.set 需要 --material <name>') };
+  if (id === 'ramp.set') return { id, target, ramp: requireOpt('ramp', 'ramp.set 需要 --ramp <name>') };
+  return { id, target }; // 未知操作交给 operators 报 UNSUPPORTED_OPERATION
+}
+
+function buildExploreSpec() {
+  const id = requireOpt('op', '需要 --op <geometry.set|material.set|ramp.set>');
+  const target = requireOpt('target', `操作 ${id} 需要 --target <nodeId>`);
+  const field = requireOpt('field', 'explore 需要 --field <字段>');
+  const raw = requireOpt('values', 'explore 需要 --values <逗号分隔取值>');
+  const values = raw.split(',').map((s) => {
+    const t = s.trim();
+    const n = Number(t);
+    return t !== '' && Number.isFinite(n) ? n : t;
+  });
+  return { id, target, field, values };
+}
+
+async function main() {
+  const common = commonOpts();
   if (cmd === 'create') {
     const doc = requireOpt('doc', 'create 需要 --doc <file.json>');
-    const out = requireOpt('out', 'create 需要 --out <dir>');
-    return { result: await createFromFile(doc, out, common) };
+    const out = requireOpt('out', 'create 需要 --out <ws>');
+    return { result: await createFromFile(resolve(doc), resolve(out), common) };
   }
   if (cmd === 'inspect') {
-    const doc = requireOpt('doc', 'inspect 需要 --doc <file.json>');
-    const outDir = typeof opts.out === 'string' ? resolve(opts.out) : undefined;
-    const node = typeof opts.node === 'string' ? opts.node : undefined;
-    return { result: await inspectFromFile(doc, { ...common, outDir, node }) };
+    if (opts.ws) {
+      return {
+        result: await inspectWorkspace(resolve(opts.ws), {
+          ...common,
+          revision: typeof opts.revision === 'string' ? opts.revision : undefined,
+          outDir: typeof opts.out === 'string' ? resolve(opts.out) : undefined,
+          node: typeof opts.node === 'string' ? opts.node : undefined,
+        }),
+      };
+    }
+    const doc = requireOpt('doc', 'inspect 需要 --doc <file.json> 或 --ws <dir>');
+    return {
+      result: await inspectFromFile(resolve(doc), { ...common, outDir: typeof opts.out === 'string' ? resolve(opts.out) : undefined, node: typeof opts.node === 'string' ? opts.node : undefined }),
+    };
   }
   if (cmd === 'export') {
-    const doc = requireOpt('doc', 'export 需要 --doc <file.json>');
     const out = requireOpt('out', 'export 需要 --out <dir>');
-    return { result: await exportFromFile(doc, out, { ...common, maxPage: intOpt('max-page', 1024), margin: intOpt('margin', 2) }) };
+    const exportOpts = { ...common, maxPage: intOpt('max-page', 1024), margin: intOpt('margin', 2) };
+    if (opts.ws) {
+      return { result: await exportWorkspace(resolve(opts.ws), resolve(out), { ...exportOpts, revision: typeof opts.revision === 'string' ? opts.revision : undefined }) };
+    }
+    const doc = requireOpt('doc', 'export 需要 --doc <file.json> 或 --ws <dir>');
+    return { result: await exportFromFile(resolve(doc), resolve(out), exportOpts) };
   }
-  fail('UNSUPPORTED_OPERATION', cmd ? `未知命令 '${cmd}'（可用：create, inspect, export）` : '缺少命令（可用：create, inspect, export）', cmd ? 2 : 0);
+  if (cmd === 'state') {
+    const ws = requireOpt('ws', 'state 需要 --ws <dir>');
+    const store = await StudioStore.open(resolve(ws), common);
+    return { result: await store.state() };
+  }
+  if (cmd === 'edit') {
+    const ws = requireOpt('ws', 'edit 需要 --ws <dir>');
+    const base = requireOpt('base', 'edit 需要 --base <revision>');
+    const store = await StudioStore.open(resolve(ws), common);
+    return {
+      result: await store.edit({
+        baseRevision: base,
+        operation: buildOperation(),
+        preserve: jsonOpt('preserve', []),
+        requestId: typeof opts['request-id'] === 'string' ? opts['request-id'] : undefined,
+      }),
+    };
+  }
+  if (cmd === 'explore') {
+    const ws = requireOpt('ws', 'explore 需要 --ws <dir>');
+    const base = requireOpt('base', 'explore 需要 --base <revision>');
+    const store = await StudioStore.open(resolve(ws), common);
+    return {
+      result: await store.explore({
+        baseRevision: base,
+        spec: buildExploreSpec(),
+        preserve: jsonOpt('preserve', []),
+        requestId: typeof opts['request-id'] === 'string' ? opts['request-id'] : undefined,
+      }),
+    };
+  }
+  if (cmd === 'commit') {
+    const ws = requireOpt('ws', 'commit 需要 --ws <dir>');
+    const expectedHead = requireOpt('expected-head', 'commit 需要 --expected-head <revision>');
+    const store = await StudioStore.open(resolve(ws), common);
+    if (opts.accept) {
+      return { result: await store.commit({ action: 'accept', candidateId: String(opts.accept), expectedHead, requestId: typeof opts['request-id'] === 'string' ? opts['request-id'] : undefined }) };
+    }
+    if (opts.restore) {
+      return { result: await store.commit({ action: 'restore', targetRevision: String(opts.restore), expectedHead, requestId: typeof opts['request-id'] === 'string' ? opts['request-id'] : undefined }) };
+    }
+    fail('INVALID_DOCUMENT', 'commit 需要 --accept <candidateId> 或 --restore <revision>', 2);
+  }
+  fail('UNSUPPORTED_OPERATION', cmd ? `未知命令 '${cmd}'（可用：create, inspect, export, state, edit, explore, commit）` : '缺少命令（可用：create, inspect, export, state, edit, explore, commit）', cmd ? 2 : 0);
+}
+
+function exitCodeFor(e) {
+  if (e instanceof StudioOverwriteError) return 4;
+  const code = e?.code;
+  if (code === 'WORKSPACE_BUSY') return 7;
+  if (code === 'STALE_REVISION' || code === 'REQUEST_ID_CONFLICT') return 6;
+  if (code === 'UNSAFE_PATH') return 4;
+  return 3;
 }
 
 try {
   const { result } = await main();
-  emit({ ok: true, command: cmd, result }, 0);
+  const replay = result && result.idempotentReplay === true;
+  emit({ ok: true, command: cmd, ...(replay ? { idempotentReplay: true } : {}), result }, 0);
 } catch (e) {
   if (e instanceof StudioDocumentError) {
     fail('INVALID_DOCUMENT', e.message, 3, { details: { issues: e.issues }, suggestedNextAction: '修正文档后重试；字段白名单与范围见 docs/plans/agent-studio.md' });
+  } else if (e instanceof StudioOperationError || e instanceof StudioStoreError) {
+    fail(e.code, e.message, exitCodeFor(e), { target: e.target, details: e.details, retryable: e.retryable, suggestedNextAction: e.suggestedNextAction });
   } else if (e instanceof StudioOverwriteError) {
     fail('UNSAFE_PATH', e.message, 4);
   } else if (e && e.code === 'INVALID_DOCUMENT') {
