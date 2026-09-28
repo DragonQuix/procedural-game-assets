@@ -1,0 +1,25 @@
+{
+  "inputArchive": "procedural-game-assets-master(1).zip",
+  "archiveSha256": "24e10f751761335d33e4493bc5fd0b9893d0a93fb67c0236215cfe91f4a1d914",
+  "projectVersion": "0.6.0",
+  "newAssets": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05"
+  ],
+  "derivedAsset": {
+    "task": "T06",
+    "source": "examples/studio/rustclaw.studio.json",
+    "modifications": [
+      "only stand_fwd and run0_fwd..run5_fwd",
+      "muted visor palette",
+      "id and constraints adjusted"
+    ]
+  },
+  "sharedColorsSource": "User-supplied terminal/wrench examples with additional local ramps",
+  "licenseNote": "Respect original repository provenance; no blanket new license is inferred from this benchmark.",
+  "noExternalImages": true,
+  "noFontFilesDistributed": true
+}

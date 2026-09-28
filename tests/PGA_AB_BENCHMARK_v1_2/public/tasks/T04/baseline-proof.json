@@ -1,0 +1,14 @@
+{
+  "task": "T04",
+  "hashA": "5a17bd1f50d04590100ec3dcef662d09e4fd4a846305de3141766b59698cbb9e",
+  "hashD": "5a17bd1f50d04590100ec3dcef662d09e4fd4a846305de3141766b59698cbb9e",
+  "equal": true,
+  "masks": [
+    {
+      "frame": "medkit",
+      "width": 40,
+      "height": 36,
+      "editablePixels": 143
+    }
+  ]
+}

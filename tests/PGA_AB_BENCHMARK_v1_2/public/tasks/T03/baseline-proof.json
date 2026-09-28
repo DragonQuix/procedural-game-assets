@@ -1,0 +1,14 @@
+{
+  "task": "T03",
+  "hashA": "67f4df083f5d619df92955fa42382a82f0a42fbe71f79a7e543f2f2e42d933f4",
+  "hashD": "67f4df083f5d619df92955fa42382a82f0a42fbe71f79a7e543f2f2e42d933f4",
+  "equal": true,
+  "masks": [
+    {
+      "frame": "cutter",
+      "width": 32,
+      "height": 32,
+      "editablePixels": 131
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "medkit",
+  "kind": "prop",
+  "seed": 640917,
+  "clips": {},
+  "frames": [
+    {
+      "id": "medkit",
+      "width": 40,
+      "height": 36,
+      "anchor": {
+        "x": 20,
+        "y": 33
+      },
+      "attachments": {
+        "handle": {
+          "x": 20,
+          "y": 4
+        }
+      },
+      "bounds": {
+        "x0": 4,
+        "y0": 2,
+        "x1": 36,
+        "y1": 32
+      }
+    }
+  ],
+  "hash": "5a17bd1f50d04590100ec3dcef662d09e4fd4a846305de3141766b59698cbb9e",
+  "format": "pga-benchmark-output/1"
+}

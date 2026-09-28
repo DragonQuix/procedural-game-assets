@@ -1,0 +1,34 @@
+{
+  "id": "T06",
+  "title": "跨七帧恢复守卫目镜的可读性",
+  "category": "跨帧一致性",
+  "frame": "stand_fwd",
+  "brief": "守卫的目镜现在是低对比灰色。在待机和六帧跑动中，把目镜改成清晰、统一的暖琥珀色信号；同时保留比主体更亮但不刺眼的高光。只修改目镜的两种颜色，不能改头型、盔甲、枪械或动作。",
+  "targets": [
+    "palette.V",
+    "palette.E"
+  ],
+  "maskMode": "colors",
+  "allowedColors": [
+    "#53616d",
+    "#87939d"
+  ],
+  "preserveAlpha": true,
+  "minChanges": 1,
+  "criteria": [
+    "七帧中目镜始终清晰，暖琥珀色与角色其余部分协调。",
+    "目镜主体与高光有层级，不是两块同亮的噪点。",
+    "实际播放待机和跑动时，颜色、身份与既有动作保持一致；未播放则运动项记UNVERIFIED。"
+  ],
+  "protect": "每帧只允许原始 V/E 对应颜色位置的 RGB 改变；其他像素、alpha、各帧尺寸、锚点、全部附件点和剪辑时长不变。只用这7个rig姿态，不含dead等未覆盖姿态。",
+  "schemaVersion": "pga-benchmark-task/1",
+  "seed": 42,
+  "displayScale": 4,
+  "backgrounds": [
+    "#202028",
+    "#d6d8dc"
+  ],
+  "maxRenderedStates": 12,
+  "sourcesMustRemainEditable": true,
+  "exactTargetImage": false
+}

@@ -1,0 +1,10 @@
+{
+  "benchmarkVersion": "1.2",
+  "parentVersion": "1.1",
+  "taskSetVersion": "1",
+  "probeAdapterVersion": "crash-retry/1.1",
+  "blindVersion": "mirrored-balance/1",
+  "reviewSchema": "pga-review/2",
+  "frozenMaterials": "FROZEN_MATERIALS_V1.json",
+  "changeLog": "MAINTENANCE_V1_2_CN.md"
+}

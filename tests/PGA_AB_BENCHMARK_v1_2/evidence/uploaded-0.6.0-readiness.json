@@ -1,0 +1,304 @@
+{
+  "schema": "pga-benchmark-readiness/1",
+  "status": "NOT_READY",
+  "repositoryFingerprint": "454f02737114391eda40c4fa14b02d3daedee3d18a8f6decc2575a1a1b3c12e6",
+  "equality": [
+    {
+      "task": "T01",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T02",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T03",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T04",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T05",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T06",
+      "equal": true,
+      "frozenBaselineMatches": true
+    }
+  ],
+  "tests": {
+    "status": "PASS",
+    "exitCode": 0,
+    "testFiles": 37,
+    "error": null
+  },
+  "probeStatus": 1,
+  "probes": [
+    {
+      "id": "explore-commit-material.set",
+      "pass": false,
+      "accepted": {
+        "ok": false,
+        "code": "CANDIDATE_INVALID",
+        "message": "material.set：类型 'panel' 不支持材质 'undefined'（可用：flat, bevel-metal）"
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "explore-commit-ramp.set",
+      "pass": false,
+      "accepted": {
+        "ok": false,
+        "code": "CANDIDATE_INVALID",
+        "message": "ramp.set 需要色阶名或 { \"shades\": [...] } 局部覆盖，收到 undefined"
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "stale-history",
+      "pass": false,
+      "stale": {
+        "ok": true,
+        "value": {
+          "requestId": "req-ee8a1a08",
+          "action": "accept",
+          "candidateId": "c-c5dd0bda",
+          "head": "r2",
+          "revision": "r2",
+          "parent": "r1",
+          "hashes": {
+            "documentHash": "875011b4",
+            "styleHash": "68402473",
+            "renderHash": "093f2f71:2ecd5fde",
+            "toolVersion": "preflight/1"
+          },
+          "unchanged": false
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "crash-retry",
+      "pass": false,
+      "first": {
+        "ok": false,
+        "code": "Error",
+        "message": "PREFLIGHT_PERSISTENCE_FAULT"
+      },
+      "replay": {
+        "ok": false,
+        "code": "STALE_REVISION",
+        "message": "expectedHead 'r1' 与当前 head 'r2' 不符"
+      },
+      "again": {
+        "ok": false,
+        "code": "STALE_REVISION",
+        "message": "expectedHead 'r1' 与当前 head 'r2' 不符"
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "authoritative-protection",
+      "pass": false,
+      "commit": {
+        "ok": true,
+        "value": {
+          "requestId": "req-3214d08b",
+          "action": "accept",
+          "candidateId": "c-4245645f",
+          "head": "r2",
+          "revision": "r2",
+          "parent": "r1",
+          "hashes": {
+            "documentHash": "8a22109a",
+            "styleHash": "68402473",
+            "renderHash": "f645726c:f3959c03",
+            "toolVersion": "preflight/1"
+          },
+          "unchanged": false
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "invalid-preserve",
+      "pass": false,
+      "result": {
+        "ok": true,
+        "value": {
+          "requestId": "req-286b135e",
+          "candidateId": "c-dec2e1ab",
+          "baseRevision": "r1",
+          "head": "r1",
+          "status": "OK",
+          "code": null,
+          "conflicts": [],
+          "diff": {
+            "pixels": 95,
+            "outside": 0,
+            "region": {
+              "x0": 2,
+              "y0": 2,
+              "x1": 32,
+              "y1": 27
+            },
+            "samples": []
+          },
+          "checks": {
+            "status": "OK",
+            "code": null,
+            "conflicts": [],
+            "diff": {
+              "pixels": 95,
+              "outside": 0,
+              "region": {
+                "x0": 2,
+                "y0": 2,
+                "x1": 32,
+                "y1": 27
+              },
+              "samples": []
+            },
+            "protections": {
+              "pixels": [
+                "terminal.screen"
+              ],
+              "structure": [],
+              "metadata": [
+                "anchor"
+              ]
+            }
+          },
+          "hashes": {
+            "documentHash": "2047f188",
+            "styleHash": "68402473",
+            "renderHash": "eb48afe6:d0636c59",
+            "toolVersion": "preflight/1"
+          },
+          "previews": {
+            "base": {
+              "native": "previews/r1-base/r1-base.native.png",
+              "display": "previews/r1-base/r1-base.display.png"
+            },
+            "candidate": {
+              "native": "previews/c-dec2e1ab/c-dec2e1ab.native.png",
+              "display": "previews/c-dec2e1ab/c-dec2e1ab.display.png"
+            }
+          }
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "request-path-boundary",
+      "pass": false,
+      "result": {
+        "ok": true,
+        "value": {
+          "requestId": "../../outside-case-EALgWN",
+          "candidateId": "c-3284b056",
+          "baseRevision": "r1",
+          "head": "r1",
+          "status": "OK",
+          "code": null,
+          "conflicts": [],
+          "diff": {
+            "pixels": 95,
+            "outside": 0,
+            "region": {
+              "x0": 2,
+              "y0": 2,
+              "x1": 32,
+              "y1": 27
+            },
+            "samples": []
+          },
+          "checks": {
+            "status": "OK",
+            "code": null,
+            "conflicts": [],
+            "diff": {
+              "pixels": 95,
+              "outside": 0,
+              "region": {
+                "x0": 2,
+                "y0": 2,
+                "x1": 32,
+                "y1": 27
+              },
+              "samples": []
+            },
+            "protections": {
+              "pixels": [
+                "terminal.screen"
+              ],
+              "structure": [],
+              "metadata": [
+                "anchor"
+              ]
+            }
+          },
+          "hashes": {
+            "documentHash": "2047f188",
+            "styleHash": "68402473",
+            "renderHash": "eb48afe6:d0636c59",
+            "toolVersion": "preflight/1"
+          },
+          "previews": {
+            "base": {
+              "native": "previews/r1-base/r1-base.native.png",
+              "display": "previews/r1-base/r1-base.display.png"
+            },
+            "candidate": {
+              "native": "previews/c-3284b056/c-3284b056.native.png",
+              "display": "previews/c-3284b056/c-3284b056.display.png"
+            }
+          }
+        }
+      },
+      "outsideFileExists": true,
+      "status": "FAIL"
+    },
+    {
+      "id": "metadata-only-protection",
+      "pass": false,
+      "candidateStatus": "UNCHANGED",
+      "commit": {
+        "ok": true,
+        "value": {
+          "requestId": "req-ebe80711",
+          "action": "accept",
+          "candidateId": "c-c4307146",
+          "head": "r2",
+          "revision": "r2",
+          "parent": "r1",
+          "hashes": {
+            "documentHash": "17b90058",
+            "styleHash": "1b17cb7b",
+            "renderHash": "75b6897a:aaed6374",
+            "toolVersion": "preflight/1"
+          },
+          "unchanged": true
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "pixel-not-channel-count",
+      "pass": false,
+      "reported": 252,
+      "actual": 84,
+      "status": "FAIL"
+    }
+  ],
+  "scope": "Frozen baseline + previous 9 regression probes + project tests; does not establish art quality.",
+  "caveat": "These probes target the supplied 0.6.0 API. A changed implementation can need an explicit adapter. Setup errors are NOT proof of a product defect or of a fix. Review outcomes, never silently bypass."
+}

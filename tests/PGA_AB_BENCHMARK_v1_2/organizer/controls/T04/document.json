@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "pga-studio/2",
+  "id": "medkit",
+  "seed": 640917,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "field-service",
+    "version": 1,
+    "ramps": {
+      "steel": [
+        "#232830",
+        "#49525f",
+        "#707b8d",
+        "#a6b0c2"
+      ],
+      "screen": [
+        "#04161d",
+        "#0b3a46",
+        "#177383",
+        "#63dcd2"
+      ],
+      "amber": [
+        "#4a3410",
+        "#9c7420",
+        "#ffb13d",
+        "#ffe08a"
+      ],
+      "quiet": [
+        "#29313b",
+        "#3b4858",
+        "#536276",
+        "#77899c"
+      ],
+      "red": [
+        "#451e25",
+        "#8a3544",
+        "#c35a59",
+        "#e99a7e"
+      ]
+    },
+    "meta": {
+      "source": "benchmark-original; palette adapted from supplied toolkit",
+      "notes": "冷灰结构，少量信号色；图样为实验起点，不是质量上限"
+    }
+  },
+  "canvas": {
+    "w": 38,
+    "h": 34,
+    "outline": "#120d16"
+  },
+  "nodes": [
+    {
+      "id": "medkit.handle",
+      "kind": "panel",
+      "x": 14,
+      "y": 2,
+      "w": 10,
+      "h": 4,
+      "ramp": "steel",
+      "material": "bevel-metal",
+      "layer": 0
+    },
+    {
+      "id": "medkit.shell",
+      "kind": "panel",
+      "x": 4,
+      "y": 7,
+      "w": 30,
+      "h": 23,
+      "ramp": "steel",
+      "material": "bevel-metal",
+      "layer": 1
+    },
+    {
+      "id": "medkit.plate",
+      "kind": "panel",
+      "x": 11,
+      "y": 11,
+      "w": 16,
+      "h": 14,
+      "ramp": "quiet",
+      "material": "bevel-metal",
+      "layer": 2
+    },
+    {
+      "id": "medkit.symbol",
+      "kind": "poly",
+      "vertices": [
+        [
+          19,
+          15
+        ],
+        [
+          16,
+          13
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          14,
+          18
+        ],
+        [
+          19,
+          22
+        ],
+        [
+          24,
+          18
+        ],
+        [
+          24,
+          15
+        ],
+        [
+          22,
+          13
+        ]
+      ],
+      "ramp": "amber",
+      "material": "flat",
+      "layer": 3
+    },
+    {
+      "id": "medkit.latch",
+      "kind": "panel",
+      "x": 6,
+      "y": 15,
+      "w": 2,
+      "h": 7,
+      "ramp": "steel",
+      "material": "bevel-metal",
+      "layer": 4
+    }
+  ],
+  "anchor": {
+    "x": 19.0,
+    "y": 32
+  },
+  "attachments": {
+    "handle": {
+      "x": 19,
+      "y": 3
+    }
+  },
+  "constraints": [
+    {
+      "kind": "metadata",
+      "target": "anchor"
+    },
+    {
+      "kind": "metadata",
+      "target": "attachments.handle"
+    }
+  ]
+}

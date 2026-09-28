@@ -1,0 +1,162 @@
+// v1.1 maintenance adapter: verify effects, not equality of replay annotations.
+// Only suitable for the explicitly verified pending -> effect -> done contract.
+// Hook drift is UNVERIFIED. A reached hook with violated invariants is FAIL.
+import assert from 'node:assert/strict';
+import { readFile, readdir, mkdtemp } from 'node:fs/promises';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { createHash } from 'node:crypto';
+import { assetHash } from '../runner/common.mjs';
+
+const digest = bytes => createHash('sha256').update(bytes).digest('hex');
+const attempt = async fn => {
+  try { return { ok: true, value: await fn() }; }
+  catch (e) { return { ok: false, code: e.code ?? e.name, message: e.message }; }
+};
+const parse = async p => JSON.parse(await readFile(p, 'utf8'));
+const business = value => {
+  // This single documented diagnostic flag is asserted independently below.
+  const { idempotentReplay, ...result } = value;
+  return result;
+};
+
+export async function checkCrashRetry({ StudioStore, document, options, root, out }) {
+  const { compileAny } = await import(pathToFileURL(join(root, 'src/studio/dispatch.js')).href);
+
+  async function subcase(phase) {
+    const evidence = { phase, status: 'UNVERIFIED', hookEvents: [], snapshots: {}, writes: { revision: 0, head: 0 } };
+    try {
+      const dir = await mkdtemp(join(out, `crash-${phase}-`));
+      evidence.workspace = dir;
+      const { store } = await StudioStore.create(dir, structuredClone(document), options);
+      const c = await store.edit({ baseRevision: 'r1', operation: { id: 'geometry.set', target: 'terminal.shell', params: { w: 28 } } });
+      assert.equal(c.status, 'OK', 'Control must produce an admissible candidate.');
+      const request = { action: 'accept', candidateId: c.candidateId, expectedHead: 'r1', requestId: `probe-${phase}` };
+      const candidate = await parse(join(dir, 'candidates', `${c.candidateId}.json`));
+      const expected = compileAny(candidate.doc, { toolVersion: options.toolVersion });
+      const expectedAssetHash = assetHash(expected.asset);
+      const expectedDocument = candidate.doc;
+      const reqPath = join(dir, 'requests', `${request.requestId}.json`);
+      const sentinel = `PREFLIGHT_FAULT_${phase}`;
+
+      async function snapshot() {
+        const head = await parse(join(dir, 'head.json'));
+        const revisions = {};
+        for (const file of (await readdir(join(dir, 'revisions'))).filter(f => /^r\d+\.json$/.test(f)).sort()) {
+          revisions[file] = digest(await readFile(join(dir, 'revisions', file)));
+        }
+        let ledger = null;
+        try { ledger = await parse(reqPath); }
+        catch (e) { if (e.code !== 'ENOENT') throw e; }
+        return { head, revisions, ledger };
+      }
+      function instrument(instance) {
+        for (const [method, key] of [['_writeRevision', 'revision'], ['_writeHead', 'head']]) {
+          if (typeof instance[method] !== 'function') throw new Error(`Missing persistence observation hook: ${method}`);
+          const original = instance[method].bind(instance);
+          instance[method] = async (...args) => { evidence.writes[key]++; return original(...args); };
+        }
+      }
+      if (typeof store._writeLedger !== 'function' || typeof store._writeRevision !== 'function' || typeof store._writeHead !== 'function') {
+        evidence.reason = 'Persistence hook changed; explicit adapter is required.';
+        return evidence;
+      }
+      instrument(store);
+      evidence.snapshots.baseline = await snapshot();
+      const original = store._writeLedger.bind(store);
+      let injected = false;
+      store._writeLedger = async (requestId, record) => {
+        const at = await snapshot();
+        evidence.hookEvents.push({ status: record?.status ?? null, diskHead: at.head, revisionFiles: Object.keys(at.revisions) });
+        const targetStatus = phase === 'before-effect' ? 'pending' : 'done';
+        if (record?.status === targetStatus && !injected) {
+          injected = true;
+          evidence.snapshots.atInjection = at;
+          throw Error(sentinel);
+        }
+        return original(requestId, record);
+      };
+      evidence.first = await attempt(() => store.commit(request));
+      evidence.snapshots.afterFault = await snapshot();
+      if (!injected) {
+        evidence.reason = 'Expected pending/done hook was not reached. This is not a valid failure-injection test.';
+        return evidence;
+      }
+      assert.equal(evidence.first.ok, false, 'Injected write failure must surface.');
+      assert.equal(evidence.first.message, sentinel, 'Failure must be the injected failure.');
+      const baseline = evidence.snapshots.baseline;
+      const failed = evidence.snapshots.afterFault;
+      assert.equal(failed.revisions['r1.json'], baseline.revisions['r1.json'], 'History r1 must remain byte-identical.');
+      if (phase === 'before-effect') {
+        assert.deepEqual(failed, baseline, 'Before-effect failure must leave head, revisions and this request ledger unchanged.');
+        assert.deepEqual(evidence.writes, { revision: 0, head: 0 }, 'No commit effect may execute before pending succeeds.');
+      } else {
+        assert.deepEqual(failed.head, { head: 'r2', seq: 2 }, 'After-effect injection requires persisted head r2.');
+        assert.deepEqual(Object.keys(failed.revisions), ['r1.json', 'r2.json']);
+        assert.equal(failed.ledger?.status, 'pending', 'Unfinished transaction must be recoverable from a pending record.');
+        assert.deepEqual(evidence.writes, { revision: 1, head: 1 }, 'The intended commit effect has executed exactly once.');
+      }
+      evidence.writesAfterFault = { ...evidence.writes };
+
+      const reopened = await StudioStore.open(dir, options);
+      instrument(reopened);
+      evidence.replay = await attempt(() => reopened.commit(request));
+      assert.equal(evidence.replay.ok, true, `Recovery failed: ${JSON.stringify(evidence.replay)}`);
+      evidence.snapshots.afterReplay = await snapshot();
+      const recovered = evidence.replay.value;
+      assert.equal(recovered.requestId, request.requestId);
+      assert.equal(recovered.action, 'accept');
+      assert.equal(recovered.candidateId, request.candidateId);
+      assert.equal(recovered.revision, 'r2');
+      assert.equal(recovered.head, 'r2');
+      assert.equal(recovered.parent, 'r1');
+      assert.equal(recovered.unchanged, false);
+      assert.deepEqual(recovered.hashes, expected.hashes);
+      if (phase === 'before-effect') assert.notEqual(recovered.idempotentReplay, true, 'First successful execution is not a completed-result replay.');
+      else assert.equal(recovered.idempotentReplay, true, 'Persisted-effect recovery must report replay.');
+
+      const persisted = await parse(join(dir, 'revisions/r2.json'));
+      assert.equal(persisted.revision, 'r2');
+      assert.equal(persisted.parent, 'r1');
+      assert.deepEqual(persisted.doc, expectedDocument, 'Persisted document must equal the intended candidate.');
+      assert.deepEqual(persisted.hashes, expected.hashes);
+      const rebuilt = compileAny(persisted.doc, { toolVersion: options.toolVersion });
+      assert.equal(assetHash(rebuilt.asset), expectedAssetHash, 'Rebuilt RGBA and all canonical metadata must match the intended result.');
+      const after = evidence.snapshots.afterReplay;
+      assert.deepEqual(after.head, { head: 'r2', seq: 2 });
+      assert.deepEqual(Object.keys(after.revisions), ['r1.json', 'r2.json']);
+      assert.equal(after.revisions['r1.json'], baseline.revisions['r1.json']);
+      if (phase === 'after-effect') assert.deepEqual(after.revisions, failed.revisions, 'Recovering a completed effect cannot rewrite either historical revision.');
+      assert.equal(after.ledger?.status, 'done');
+      assert.deepEqual(after.ledger?.result, business(recovered));
+      assert.deepEqual(evidence.writes, { revision: 1, head: 1 }, 'Across failure and recovery, commit effect must execute exactly once.');
+
+      const third = await StudioStore.open(dir, options);
+      instrument(third);
+      evidence.again = await attempt(() => third.commit(request));
+      assert.equal(evidence.again.ok, true);
+      assert.equal(evidence.again.value.idempotentReplay, true);
+      assert.deepEqual(business(recovered), business(evidence.again.value), 'All business fields must remain equal.');
+      evidence.snapshots.afterAgain = await snapshot();
+      assert.deepEqual(evidence.snapshots.afterAgain, after, 'Second retry must not alter head, history or completed ledger.');
+      assert.deepEqual(evidence.writes, { revision: 1, head: 1 }, 'Second retry must not invoke commit persistence.');
+      evidence.assetSha256 = expectedAssetHash;
+      evidence.status = 'PASS';
+      return evidence;
+    } catch (e) {
+      evidence.status = e.code === 'ERR_ASSERTION' ? 'FAIL' : 'UNVERIFIED';
+      evidence.reason = e.message;
+      evidence.errorCode = e.code ?? e.name;
+      return evidence;
+    }
+  }
+  const subcases = [];
+  for (const phase of ['before-effect', 'after-effect']) subcases.push(await subcase(phase));
+  return {
+    pass: subcases.every(c => c.status === 'PASS'),
+    unverified: !subcases.some(c => c.status === 'FAIL') && subcases.some(c => c.status === 'UNVERIFIED'),
+    adapterVersion: 'crash-retry/1.1',
+    coverage: 'Two phase-specific injected write exceptions, close/reopen, no duplicate effect, byte-identical history, intended document/RGBA/metadata. Not power-loss/fsync testing.',
+    subcases,
+  };
+}

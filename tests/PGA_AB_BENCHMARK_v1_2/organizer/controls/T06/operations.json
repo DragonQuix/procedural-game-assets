@@ -1,0 +1,12 @@
+[
+  {
+    "id": "palette.set",
+    "target": "V",
+    "value": "#d4933e"
+  },
+  {
+    "id": "palette.set",
+    "target": "E",
+    "value": "#f5d79a"
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "task": "T06",
+  "hashA": "1f046f3a40fb48d35b786aaf6a8a95ae7995b2182252ecf05696884d00415c1c",
+  "hashD": "1f046f3a40fb48d35b786aaf6a8a95ae7995b2182252ecf05696884d00415c1c",
+  "equal": true,
+  "masks": [
+    {
+      "frame": "stand_fwd",
+      "width": 42,
+      "height": 48,
+      "editablePixels": 8
+    },
+    {
+      "frame": "run0_fwd",
+      "width": 42,
+      "height": 48,
+      "editablePixels": 8
+    },
+    {
+      "frame": "run1_fwd",
+      "width": 42,
+      "height": 48,
+      "editablePixels": 8
+    },
+    {
+      "frame": "run2_fwd",
+      "width": 42,
+      "height": 48,
+      "editablePixels": 8
+    },
+    {
+      "frame": "run3_fwd",
+      "width": 42,
+      "height": 48,
+      "editablePixels": 8
+    },
+    {
+      "frame": "run4_fwd",
+      "width": 42,
+      "height": 48,
+      "editablePixels": 8
+    },
+    {
+      "frame": "run5_fwd",
+      "width": 42,
+      "height": 48,
+      "editablePixels": 8
+    }
+  ]
+}

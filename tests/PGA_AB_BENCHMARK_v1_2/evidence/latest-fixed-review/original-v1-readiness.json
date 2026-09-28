@@ -1,0 +1,200 @@
+{
+  "schema": "pga-benchmark-readiness/1",
+  "status": "NOT_READY",
+  "repositoryFingerprint": "541db38bfd94645a8f406a192b3a5168fa41a87c588207c2a7bbdfd1fa6b1d8b",
+  "equality": [
+    {
+      "task": "T01",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T02",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T03",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T04",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T05",
+      "equal": true,
+      "frozenBaselineMatches": true
+    },
+    {
+      "task": "T06",
+      "equal": true,
+      "frozenBaselineMatches": true
+    }
+  ],
+  "tests": {
+    "status": "PASS",
+    "exitCode": 0,
+    "testFiles": 39,
+    "error": null
+  },
+  "probeStatus": 1,
+  "probes": [
+    {
+      "id": "explore-commit-material.set",
+      "pass": true,
+      "accepted": {
+        "ok": true,
+        "value": {
+          "requestId": "req-a4d80ee1",
+          "action": "accept",
+          "candidateId": "c-e0935e0c",
+          "head": "r2",
+          "revision": "r2",
+          "parent": "r1",
+          "hashes": {
+            "documentHash": "52b03ba3",
+            "styleHash": "68402473",
+            "renderHash": "f645726c:545829f1",
+            "toolVersion": "preflight/1"
+          },
+          "unchanged": false
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "explore-commit-ramp.set",
+      "pass": true,
+      "accepted": {
+        "ok": true,
+        "value": {
+          "requestId": "req-d390d996",
+          "action": "accept",
+          "candidateId": "c-61232b50",
+          "head": "r2",
+          "revision": "r2",
+          "parent": "r1",
+          "hashes": {
+            "documentHash": "760700b6",
+            "styleHash": "68402473",
+            "renderHash": "f645726c:efd6f069",
+            "toolVersion": "preflight/1"
+          },
+          "unchanged": false
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "stale-history",
+      "pass": true,
+      "stale": {
+        "ok": false,
+        "code": "STALE_REVISION",
+        "message": "expectedHead 'r1' 与当前 head 'r2' 不符"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "crash-retry",
+      "pass": false,
+      "first": {
+        "ok": false,
+        "code": "Error",
+        "message": "PREFLIGHT_PERSISTENCE_FAULT"
+      },
+      "replay": {
+        "ok": true,
+        "value": {
+          "requestId": "probe-crash",
+          "action": "accept",
+          "candidateId": "c-3284b056",
+          "head": "r2",
+          "revision": "r2",
+          "parent": "r1",
+          "hashes": {
+            "documentHash": "2047f188",
+            "styleHash": "68402473",
+            "renderHash": "eb48afe6:d0636c59",
+            "toolVersion": "preflight/1"
+          },
+          "unchanged": false
+        }
+      },
+      "again": {
+        "ok": true,
+        "value": {
+          "requestId": "probe-crash",
+          "action": "accept",
+          "candidateId": "c-3284b056",
+          "head": "r2",
+          "revision": "r2",
+          "parent": "r1",
+          "hashes": {
+            "documentHash": "2047f188",
+            "styleHash": "68402473",
+            "renderHash": "eb48afe6:d0636c59",
+            "toolVersion": "preflight/1"
+          },
+          "unchanged": false,
+          "idempotentReplay": true
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "authoritative-protection",
+      "pass": true,
+      "commit": {
+        "ok": false,
+        "code": "CANDIDATE_INVALID",
+        "message": "候选 'c-4245645f' 落盘状态（OK）与重新校验（REJECTED）不符（文件可能被篡改）"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "invalid-preserve",
+      "pass": true,
+      "result": {
+        "ok": false,
+        "code": "INVALID_DOCUMENT",
+        "message": "preserve[0] 未知保护类别 'pixel'（可用：pixels, structure, metadata）"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "request-path-boundary",
+      "pass": true,
+      "result": {
+        "ok": false,
+        "code": "UNSAFE_PATH",
+        "message": "requestId 非法：\"../../outside-case-NERkBA\"（只允许字母数字开头、不超过 64 字符的字母数字与 . _ -；禁止路径分隔符、绝对路径与 '..'）"
+      },
+      "outsideFileExists": false,
+      "status": "PASS"
+    },
+    {
+      "id": "metadata-only-protection",
+      "pass": true,
+      "candidateStatus": "REJECTED",
+      "commit": {
+        "ok": false,
+        "code": "CANDIDATE_INVALID",
+        "message": "候选 'c-c4307146' 状态为 REJECTED，未通过保护检查，不能提交"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "pixel-not-channel-count",
+      "pass": true,
+      "reported": 84,
+      "actual": 84,
+      "status": "PASS"
+    }
+  ],
+  "scope": "Frozen baseline + previous 9 regression probes + project tests; does not establish art quality.",
+  "caveat": "These probes target the supplied 0.6.0 API. A changed implementation can need an explicit adapter. Setup errors are NOT proof of a product defect or of a fix. Review outcomes, never silently bypass."
+}

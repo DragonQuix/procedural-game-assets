@@ -1,0 +1,35 @@
+{
+  "id": "cutter",
+  "kind": "prop",
+  "seed": 640917,
+  "clips": {},
+  "frames": [
+    {
+      "id": "cutter",
+      "width": 32,
+      "height": 32,
+      "anchor": {
+        "x": 16,
+        "y": 29
+      },
+      "attachments": {
+        "grip": {
+          "x": 11,
+          "y": 23
+        },
+        "tip": {
+          "x": 27,
+          "y": 6
+        }
+      },
+      "bounds": {
+        "x0": 5,
+        "y0": 3,
+        "x1": 29,
+        "y1": 29
+      }
+    }
+  ],
+  "hash": "67f4df083f5d619df92955fa42382a82f0a42fbe71f79a7e543f2f2e42d933f4",
+  "format": "pga-benchmark-output/1"
+}
