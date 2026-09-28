@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
-import { cp, mkdir, mkdtemp, readFile, rm } from 'node:fs/promises';
+import { access, cp, mkdir, mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { verifyTree } from '../../tools/release-manifest.mjs';
 
@@ -21,7 +21,28 @@ test('循环版独立载荷：复制后 CLI、专名安装与原版共存', {
   await cp(skill, copied, { recursive: true });
   assert.equal(await verifyTree(join(copied, 'assets/toolkit')), null);
   const output = execFileSync(process.execPath, [join(copied, 'assets/toolkit/tools/asset-loop.mjs'), '--help'], { encoding: 'utf8' });
-  assert.match(output, /pga-loop\/1/);
+  assert.match(output, /^pga-loop\/2/);
+  const legacy = execFileSync(process.execPath, [join(copied, 'assets/toolkit/tools/legacy/asset-loop-v1.mjs'), '--help'], { encoding: 'utf8' });
+  assert.match(legacy, /只读/);
+  const { validateCharter } = await import(pathToFileURL(join(copied, 'assets/toolkit/tools/asset-loop.mjs')).href);
+  const example = JSON.parse(await readFile(join(copied, 'assets/charter.example.json'), 'utf8'));
+  assert.throws(() => validateCharter(example), /对齐授权/);
+  Object.assign(example, { approval: '合成测试授权', intent: '示例结构校验',
+    captureProfile: { nativeSize: [2, 2], displaySize: [2, 2], background: 'transparent', seed: 7, sampling: 'static', command: 'fixture' } });
+  example.visualPolicy.referenceProfile.summary = '合成质量依据';
+  assert.doesNotThrow(() => validateCharter(example));
+  for (const rel of ['SKILL.md', 'references/alignment.md', 'references/loop.md', 'references/tooling.md',
+    'references/critic-blind.md', 'references/critic-visual.md', 'references/critic-delivery.md', 'references/visual-quality.md',
+    'assets/toolkit/docs/visual-quality.md']) {
+    const file = join(copied, rel);
+    const text = await readFile(file, 'utf8');
+    for (const [, target] of text.matchAll(/\[[^\]]*\]\(([^)]+\.(?:md|json))(?:#[^)]*)?\)/g)) {
+      const resolved = resolve(dirname(file), target);
+      const inside = relative(copied, resolved);
+      assert.ok(inside !== '..' && !inside.startsWith(`..${sep}`) && !isAbsolute(inside), `${rel} 引用了包外材料：${target}`);
+      await access(resolved);
+    }
+  }
   const cleanEnv = { ...process.env }; delete cleanEnv.NODE_TEST_CONTEXT;
   const tests = execFileSync(process.execPath, ['--test', 'tests/unit/asset-loop.test.js'], {
     cwd: join(copied, 'assets/toolkit'), encoding: 'utf8', env: cleanEnv,

@@ -256,6 +256,56 @@ HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类
   不据此宣称技能已经能稳定生成同级画面、所有 critic 均能区分风格与质量，或循环必然收敛。
 - 未修改用户级技能、Gauntlet、用户原图或独立试验项目；各软件安装刷新另行执行与验证。
 
+## S6 PGA Studio M6（2026-09-28，0.6.0）
+
+阶段：M6（发行、文档与现有流程接入——有限范围 alpha 发布）。
+依据：HANDOFF M6/§16、`tools/release.mjs`、ADR-0003/0006/0007、AGENTS.md 发行规则。
+本轮目标：Studio 能力经发行脚本进入普通版技能载荷并干净目录验证；
+范围如实标注；循环版与用户级安装不随动。
+
+### 实际完成
+
+- 载荷白名单核对：`bin`/`src`/`tests`/`docs/adr` 为整体携带，Studio 代码与 ADR-0008–0011 已自动进载荷；
+  缺口为 `examples/studio/`（样例与演示入口）与 `docs/studio-cli.md`（agent 合同），已增补进
+  `tools/release.mjs` 的 PAYLOAD（开发源改动，非手改载荷）。
+- `skills/procedural-game-assets/SKILL.md` 新增"PGA Studio（0.6.0 alpha）"章节：
+  入口命令、当前支持范围（道具 /1-/2 与锈爪角色、编辑事务、观察与播放页）、
+  明确边界（不是严格循环、无 GUI/MCP/云服务、样例为工程示意图）。
+- 版本 0.5.0 → 0.6.0；`node tools/release.mjs` 重建普通版载荷：**169 文件**（0.5.0 时 129），
+  生成器 `procedural-game-assets@0.6.0`、来源提交 5ae763a，复制后校验通过。
+- 循环版不随动：`node tools/release.mjs --skill procedural-game-assets-loop --check` 通过（132 文件未变），
+  不因根版本变化自动升级循环版（HANDOFF 规则）。
+- 干净目录验证：`init-project work/release-check`（169 文件携带 + sha256 复核一致）；
+  干净目录 `npm test` 1/1、`npm run check` 通过；在干净目录内经 `vendor/pga/` 实际运行
+  `examples/studio/smoke.mjs`（documentHash/renderHash 与开发仓库逐位一致，跨位置确定性）、
+  `bin/pga-studio.mjs create/explore`（24:OK 26:UNCHANGED 28:OK）、`m5-demo.mjs`（六步全过，含播放页）。
+
+### 实际执行的命令与结果
+
+- `node tools/release.mjs`：载荷 169 文件生成并校验通过。
+- `node tools/release.mjs --skill procedural-game-assets-loop --check`：132 文件一致（未动）。
+- `npm test`（开发仓库）：312/312。
+- 干净目录（work/release-check）：init 复核一致；npm test 1/1；npm run check 通过；smoke/CLI/m5-demo 实际运行通过。
+
+### 技术结论
+
+- 普通版技能载荷自包含 Studio 全链路（代码、样例、指南、测试、播放页），干净项目可可靠使用；
+  发行范围如实标注为 0.6.0 alpha（见 SKILL.md Studio 章节）。
+
+### 未做/边界（如实记录）
+
+- **用户级安装未升级**：各宿主技能安装保持原版本，升级须用户明确授权（AGENTS.md 只读规则）。
+- **循环版载荷未动**：Studio 代码未进入循环版；严格资产循环的准出条件、预算约定与独立评审规则未变；
+  Studio 创作候选不等于循环版冻结候选，本轮无 WOW 声明。
+- `skill-creator` 的 quick_validate.py 本机未找到（R7/R8 曾用），技能结构校验由
+  `tests/integration/skill-release.test.js`（套件内通过）覆盖。
+- A/B 对照评测、MCP、M4 留空项（尺度规则/正反例）与 M5 留空项（帧覆盖/任意骨架）仍未做。
+
+### 下一项可执行任务
+
+无强制后续阶段（M0–M6 全部落地）。建议下一维护项：在获得用户授权后升级各宿主普通版技能安装
+到 0.6.0 并复核发现链路；或按 HANDOFF §10 在拿到独立评测资源时补 A/B 对照试验。
+
 ## S5 PGA Studio M5（2026-09-28，ADR-0011）
 
 阶段：M5（角色、跨帧与资产族）。

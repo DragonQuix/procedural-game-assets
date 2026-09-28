@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "pga-studio/2",
+  "id": "wrench",
+  "seed": 41325,
+  "renderProfile": { "name": "pixel-flat", "version": 1 },
+  "style": {
+    "id": "steel-console",
+    "version": 2,
+    "ramps": {
+      "steel": ["#232830", "#49525f", "#707b8d", "#a6b0c2"],
+      "amber": ["#4a3410", "#9c7420", "#ffb13d", "#ffe08a"]
+    },
+    "meta": {
+      "license": "CC0",
+      "source": "toolkit-original",
+      "focusRamp": "amber",
+      "notes": "钢铁工具风格：钢件用 shade-diag 概括体积，琥珀仅作焦点小面积点缀"
+    }
+  },
+  "canvas": { "w": 24, "h": 24, "outline": "#120d16" },
+  "nodes": [
+    { "id": "wrench.handle", "kind": "poly", "vertices": [[5, 21], [7, 19], [14, 12], [12, 10]], "ramp": "steel", "material": "shade-diag", "layer": 0 },
+    { "id": "wrench.jaw", "kind": "poly", "vertices": [[11, 11], [18, 3], [22, 5], [20, 9], [17, 8], [14, 12]], "ramp": "steel", "material": "shade-diag", "layer": 1 },
+    { "id": "wrench.bolt", "kind": "disc", "cx": 6, "cy": 20, "rx": 2, "ry": 2, "ramp": "amber", "material": "flat", "layer": 2 }
+  ],
+  "anchor": { "x": 12, "y": 22 },
+  "attachments": {
+    "grip": { "x": 8, "y": 17 },
+    "jawTip": { "x": 21, "y": 4 }
+  },
+  "constraints": [
+    { "kind": "pixels", "target": "wrench.bolt", "note": "焦点螺栓像素保护；edit/explore/commit 时强制执行" },
+    { "kind": "metadata", "target": "anchor", "note": "锚点元数据保护；edit/explore/commit 时强制执行" }
+  ]
+}

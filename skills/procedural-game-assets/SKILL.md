@@ -86,6 +86,37 @@ CONTEXT.md、README.md；把模板复制为 `game/` 并把 import 改写成指�
 - **离线导出（可选部署）**：`bin/pga.mjs export` → PNG 图集 + 版本化 manifest；
   与启动烘焙同源，往返切回帧逐像素一致（有测试）。
 
+## PGA Studio：文档驱动的资产创作层（0.6.0 alpha，ADR-0008–0011）
+
+面向具备视觉判断的 agent：不必手写绘图代码，用**可编辑 JSON 文档**逐步制作资产，
+经共享烘焙核心渲染、预览、保护与导出。入口与完整合同：
+[Studio CLI 指南](assets/toolkit/docs/studio-cli.md)（`bin/pga-studio.mjs`，
+stdout 纯 JSON；样例与演示在 `assets/toolkit/examples/studio/`）。
+
+```powershell
+cd <技能目录>/assets/toolkit
+node examples/studio/smoke.mjs --out work/studio-smoke      # M1：文档→渲染→导出
+node examples/studio/edit-demo.mjs --out work/studio-m2      # M2：探索→保护→接受→恢复
+node examples/studio/m5-demo.mjs --out work/studio-m5        # M5：角色跨帧修改+播放页
+node bin/pga-studio.mjs create --doc examples/studio/terminal.studio.json --out work/ws
+node bin/pga-studio.mjs explore --ws work/ws --base r1 --op geometry.set --target terminal.shell --field w --values 24,26,28
+```
+
+当前支持范围（如实标注，不超出声明）：
+
+- **静态道具**（`pga-studio/1` 矩形、`pga-studio/2` 多边形/圆形/体积概括）与
+  **一个角色**（锈爪 humanoid 数据面，13 帧 4 剪辑，跨帧一致修改）。
+- 编辑事务：有限操作（geometry/material/ramp/palette/rig/art.set）、同基准候选探索与去重、
+  像素/结构/元数据保护、接受/恢复/过期拒绝、幂等重试；错误候选不会污染已确认版本。
+- 观察：native/display 预览、节点定位、受影响帧与附件点报告、自包含播放页（真实播放）。
+- 每步命令都有可复查的修订/候选记录与真实 PNG，不是"接口占位"。
+
+明确边界：**不是**严格资产循环（Studio 候选是快速试错，不等于循环版冻结候选或 WOW；
+严格交付仍走 `procedural-game-assets-loop` 的独立评审）；没有 GUI/MCP/云服务；
+样例是工程示意图，不代表美术质量上限——视觉验收仍按本文"视觉评审与普通版边界"执行。
+后续阶段（风格尺度规则、更多资产族、对照评测、发行范围扩大）见
+`docs/plans/agent-studio.md`（开发仓库内文档，不在载荷中）。
+
 ## 关键约束
 
 - 坐标契约：锚点/附件点为帧内像素边界坐标；相对偏移 `attachment - anchor`；

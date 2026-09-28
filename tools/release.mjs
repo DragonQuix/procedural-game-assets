@@ -44,6 +44,8 @@ const PAYLOAD = [
   ['examples/faults', 'examples/faults'],
   ['examples/canvas-slice', 'examples/canvas-slice'],
   ['examples/godot', 'examples/godot'],
+  ['examples/studio', 'examples/studio'],
+  ['docs/studio-cli.md', 'docs/studio-cli.md'],
   ['docs/recipe-guide.md', 'docs/recipe-guide.md'],
   ['docs/visual-review.md', 'docs/visual-review.md'],
   ['docs/visual-quality.md', 'docs/visual-quality.md'],

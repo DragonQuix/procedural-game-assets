@@ -101,7 +101,17 @@
 - [x] 新测试 19 项；全套件 312/312；m5-demo 六步全过
 - [x] 真实浏览器播放验证：run_fwd 帧计数前进并截图；改色前后对比图实际查看
 - [ ] M5 留空：帧覆盖、任意骨架/生物、角色 pixels/structure 保护、APNG/GIF
-- [ ] M6：发行核对（下一项见 plans/agent-studio.md）
+
+## S6 PGA Studio M6（2026-09-28，0.6.0）
+
+- [x] 白名单增补：examples/studio + docs/studio-cli.md 入 PAYLOAD（src/bin/tests/adr 本已整体携带）
+- [x] SKILL.md Studio 章节（alpha 范围与边界如实标注）；版本 0.6.0
+- [x] `node tools/release.mjs` 重建普通版载荷 169 文件并校验通过（来源 5ae763a）
+- [x] 循环版不随动：`--skill procedural-game-assets-loop --check` 132 文件一致
+- [x] 干净目录验证：init-project 携带复核、npm test/check、smoke/CLI/m5-demo 实际运行全过
+- [x] 全套件 312/312；哈希跨位置确定（干净目录 == 开发仓库）
+- [ ] 用户级安装升级：未授权，保持原版本（待用户明确授权后执行并复核发现链路）
+- [ ] 后续可选：A/B 对照评测（待独立评测资源）、M4/M5 留空项、MCP（待有不能读文件的宿主）
 
 ## 发现入口与备份收敛（2026-09-26，单独任务）
 
