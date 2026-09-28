@@ -10,10 +10,17 @@
  *   <ws>/previews/...         证据 PNG（基准/候选 native+display）
  *   <ws>/lock                 单写者锁（pid；持锁进程死亡后允许接管）
  *
- * 约定（HANDOFF §7）：
+ * 约定（HANDOFF §7，含 2026-09-28 审查修复轮收紧）：
  * - edit/explore 绝不移动 head；只有 commit 移动 head，且需 expectedHead 匹配。
  * - 不可变文件先写完整（临时文件 + 原子替换），head 最后更新；`*.tmp-*` 是可识别的未完成残留。
- * - 同 requestId + 同内容重试 → 同一结果；同 requestId + 不同内容 → REQUEST_ID_CONFLICT。
+ * - 同名修订文件已存在时只允许逐字节相同（崩溃重试的幂等接管），否则报 REVISION_CONFLICT；
+ *   历史修订绝不静默覆盖。
+ * - 锁内从磁盘重读 head/seq 与请求台账后再校验 expectedHead 与候选基准——打开时缓存的
+ *   head 只作读取默认值，不作变更依据；state() 每次重读磁盘（新鲜度合同）。
+ * - 请求台账两阶段：先写 pending（含请求指纹）再执行变更，成功后写 done（含结果）。
+ *   同 requestId + 同内容重试 → 同一结果；同 requestId + 不同内容 → REQUEST_ID_CONFLICT。
+ *   重放 pending（上次变更中途失败）时：既定效果已完整持久化（修订文件在链上且内容哈希
+ *   匹配既定推导）则补写 done 返回原结果；无效果则幂等前滚；状态冲突则 STALE_REVISION。
  * - 不自动删除任何文件；状态里如实列出临时残留，清理由调用方明确执行。
  */
 import { mkdir, open, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
@@ -98,15 +105,12 @@ export class StudioStore {
 
   static async open(dir, opts = {}) {
     const store = new StudioStore(dir, opts);
-    let raw;
     try {
-      raw = await readFile(join(dir, 'head.json'), 'utf8');
-    } catch {
+      await store._refreshHead();
+    } catch (e) {
+      if (e instanceof StudioStoreError) throw e;
       fail('UNSAFE_PATH', `${dir} 不是 Studio 工作区（缺少 head.json）`, { suggestedNextAction: '先用 create 初始化工作区' });
     }
-    const head = JSON.parse(raw);
-    store.head = head.head;
-    store.seq = head.seq;
     return store;
   }
 
@@ -131,6 +135,7 @@ export class StudioStore {
   /* ---------- 状态 ---------- */
 
   async state() {
+    await this._refreshHead(); // 新鲜度合同：state 每次重读磁盘 head（R1）
     const revisions = (await readdir(join(this.dir, 'revisions'))).filter((f) => f.endsWith('.json')).sort();
     const candidates = (await readdir(join(this.dir, 'candidates'))).filter((f) => f.endsWith('.json')).sort();
     const candidateInfo = [];
@@ -138,11 +143,24 @@ export class StudioStore {
       const c = JSON.parse(await readFile(join(this.dir, 'candidates', f), 'utf8'));
       candidateInfo.push({ candidateId: c.candidateId, baseRevision: c.baseRevision, operation: c.operation.id, target: c.operation.target, status: c.checks.status });
     }
+    const pendingRequests = [];
+    for (const f of (await readdir(join(this.dir, 'requests'))).filter((f) => f.endsWith('.json')).sort()) {
+      const record = JSON.parse(await readFile(join(this.dir, 'requests', f), 'utf8'));
+      if (record.status === 'pending') pendingRequests.push(record.requestId);
+    }
     const staleTempFiles = (await readdir(this.dir)).filter((f) => f.includes('.tmp-'));
-    return { head: this.head, seq: this.seq, revisions: revisions.map((f) => f.replace('.json', '')), candidates: candidateInfo, staleTempFiles };
+    return { head: this.head, seq: this.seq, revisions: revisions.map((f) => f.replace('.json', '')), candidates: candidateInfo, pendingRequests, staleTempFiles };
   }
 
   /* ---------- 内部：修订 / head / 台账 / 锁 ---------- */
+
+  /** 从磁盘重读 head.json 并刷新缓存（锁内变更前置与 state 新鲜度共用，R1）。 */
+  async _refreshHead() {
+    const raw = await readFile(join(this.dir, 'head.json'), 'utf8');
+    const head = JSON.parse(raw);
+    this.head = head.head;
+    this.seq = head.seq;
+  }
 
   async _writeHead() {
     await writeFileAtomic(join(this.dir, 'head.json'), JSON.stringify({ head: this.head, seq: this.seq }) + '\n');
@@ -159,7 +177,20 @@ export class StudioStore {
       source,
       toolVersion: this.toolVersion,
     };
-    await writeFileAtomic(join(this.dir, 'revisions', `${revision}.json`), JSON.stringify(record, null, 2) + '\n');
+    const content = JSON.stringify(record, null, 2) + '\n';
+    const path = join(this.dir, 'revisions', `${revision}.json`);
+    // 历史修订绝不静默覆盖（R1）：同名文件已存在时只允许逐字节相同
+    // （崩溃重试的幂等接管），否则明确报冲突。
+    let existing = null;
+    try {
+      existing = await readFile(path, 'utf8');
+    } catch {
+      /* 不存在 → 正常写入 */
+    }
+    if (existing !== null && existing !== content) {
+      fail('REVISION_CONFLICT', `修订 '${revision}' 已存在且内容不同；为不覆盖历史已拒绝`, { target: revision, retryable: false, suggestedNextAction: '用 state 核对当前修订；这是完整性保护，不要删除既有修订文件' });
+    }
+    if (existing === null) await writeFileAtomic(path, content);
     this.head = revision;
     this.seq = next;
     this._compiled.set(revision, compiled);
@@ -213,38 +244,134 @@ export class StudioStore {
     await rm(join(this.dir, 'lock'), { force: true });
   }
 
-  async _checkLedger(requestId, requestHash) {
-    const path = join(this.dir, 'requests', `${requestId}.json`);
+  _ledgerPath(requestId) {
+    return join(this.dir, 'requests', `${requestId}.json`);
+  }
+
+  /** 读取请求台账记录；无记录返回 null。 */
+  async _readLedger(requestId) {
     let raw;
     try {
-      raw = await readFile(path, 'utf8');
+      raw = await readFile(this._ledgerPath(requestId), 'utf8');
     } catch {
       return null; // 无记录 → 新请求
     }
-    const record = JSON.parse(raw);
-    if (record.requestHash !== requestHash) {
-      fail('REQUEST_ID_CONFLICT', `requestId '${requestId}' 已用于不同内容的请求`, { target: requestId, retryable: false, suggestedNextAction: '更换 requestId 或重发与原请求完全相同的内容' });
-    }
-    return { ...record.result, idempotentReplay: true };
+    return JSON.parse(raw);
   }
 
-  async _writeLedger(requestId, requestHash, result) {
-    await writeFileAtomic(join(this.dir, 'requests', `${requestId}.json`), JSON.stringify({ requestId, requestHash, result }, null, 2) + '\n');
+  /** 写台账记录（pending 或 done，临时文件 + 原子替换）。 */
+  async _writeLedger(requestId, record) {
+    await writeFileAtomic(this._ledgerPath(requestId), JSON.stringify(record, null, 2) + '\n');
   }
 
-  /** 在锁内执行幂等变更操作。 */
+  async _deleteLedger(requestId) {
+    await rm(this._ledgerPath(requestId), { force: true });
+  }
+
+  /**
+   * 在锁内执行幂等变更操作（R1/R6）。
+   * 流程：锁外只读快速路径（done 记录不可变，读取安全）→ 锁内重读 head 与台账 →
+   * 无记录则写 pending → 执行 → 写 done；fn 失败时尽力删除 pending（head 未移动，
+   * 孤儿修订由重试经 _writeRevision 的逐字节核对幂等接管）。
+   * 重放 pending 走 _recover 恢复路径。
+   */
   async _mutate(requestId, payload, fn) {
     const requestHash = requestHashOf(payload);
-    const replay = await this._checkLedger(requestId, requestHash);
-    if (replay) return replay;
+    const quick = await this._readLedger(requestId);
+    if (quick) {
+      if (quick.requestHash !== requestHash) {
+        fail('REQUEST_ID_CONFLICT', `requestId '${requestId}' 已用于不同内容的请求`, { target: requestId, retryable: false, suggestedNextAction: '更换 requestId 或重发与原请求完全相同的内容' });
+      }
+      if (quick.status !== 'pending') return { ...quick.result, idempotentReplay: true };
+    }
     await this._acquireLock();
     try {
-      const result = await fn();
-      await this._writeLedger(requestId, requestHash, result);
+      await this._refreshHead(); // R1：锁内重读持久化 head，旧实例不得凭缓存变更
+      const record = await this._readLedger(requestId); // R1：锁内再核台账
+      if (record) {
+        if (record.requestHash !== requestHash) {
+          fail('REQUEST_ID_CONFLICT', `requestId '${requestId}' 已用于不同内容的请求`, { target: requestId, retryable: false, suggestedNextAction: '更换 requestId 或重发与原请求完全相同的内容' });
+        }
+        if (record.status !== 'pending') return { ...record.result, idempotentReplay: true };
+        return await this._recover(requestId, requestHash, payload, fn);
+      }
+      await this._writeLedger(requestId, { requestId, requestHash, status: 'pending', payload });
+      let result;
+      try {
+        result = await fn();
+      } catch (e) {
+        await this._deleteLedger(requestId).catch(() => {}); // 尽力清理；删除失败留下的 pending 由恢复路径处理
+        throw e;
+      }
+      await this._writeLedger(requestId, { requestId, requestHash, status: 'done', result });
       return result;
     } finally {
       await this._releaseLock();
     }
+  }
+
+  /**
+   * R6：重放 pending（上次变更在执行后、done 落盘前中断）的恢复。
+   * - edit/explore：效果幂等且不移动 head，直接前滚重执行。
+   * - commit：既定效果已完整持久化（既定修订在链上且内容与既定推导逐字节一致）→
+   *   补写 done 返回原结果；head 仍是基准（无效果，可能有内容相同的孤儿修订）→ 幂等前滚；
+   *   其余状态（槽位被他人内容占据或 head 已移动而效果未持久化）→ STALE_REVISION。
+   */
+  async _recover(requestId, requestHash, payload, fn) {
+    if (payload[0] !== 'commit') {
+      const result = await fn();
+      await this._writeLedger(requestId, { requestId, requestHash, status: 'done', result });
+      return result;
+    }
+    const [, action, subject, expectedHead] = payload; // subject = candidateId（accept）或 targetRevision（restore）
+    const baseSeq = /^r([0-9]+)$/.exec(expectedHead ?? '');
+    const intendedRevision = baseSeq ? `r${Number(baseSeq[1]) + 1}` : null;
+    const persisted = intendedRevision ? await this._readIntendedCommitEffect(requestId, action, subject, expectedHead, intendedRevision) : null;
+    if (persisted) {
+      // 既定效果已在历史链上：返回原结果（head 之后是否继续前进不影响既成事实）
+      await this._writeLedger(requestId, { requestId, requestHash, status: 'done', result: persisted });
+      return { ...persisted, idempotentReplay: true };
+    }
+    if (this.head === expectedHead) {
+      const result = await fn(); // 无效果或仅内容相同的孤儿修订：幂等前滚
+      await this._writeLedger(requestId, { requestId, requestHash, status: 'done', result });
+      return result;
+    }
+    fail('STALE_REVISION', `requestId '${requestId}' 的上次提交中途失败，且当前 head '${this.head}' 既非基准 '${expectedHead}' 也无可核实的既定结果；无法安全恢复`, {
+      target: requestId,
+      retryable: true,
+      suggestedNextAction: '用 state 查看最新 head 与修订内容后，按新基准重新发起请求',
+    });
+  }
+
+  /**
+   * 重推导 commit 的既定效果并核实其已完整持久化：修订文件在链上（parent === 基准）、
+   * 内容与既定推导逐字节一致、内容哈希与重编译一致。全部满足返回原结果对象，否则 null。
+   */
+  async _readIntendedCommitEffect(requestId, action, subject, expectedHead, intendedRevision) {
+    let record;
+    try {
+      record = await this._readRevision(intendedRevision);
+    } catch {
+      return null;
+    }
+    if (record.revision !== intendedRevision || record.parent !== expectedHead) return null;
+    const base = await this._getCompiled(expectedHead);
+    const recompiled = compileAny(record.doc, { toolVersion: this.toolVersion });
+    if (recompiled.hashes.documentHash !== record.hashes.documentHash || recompiled.hashes.renderHash !== record.hashes.renderHash) return null;
+    if (action === 'accept') {
+      const candidate = await this._readCandidate(subject);
+      const { doc: intendedDoc, plan } = applyAnyOperation(base.document, candidate.operation);
+      if (stableStringify(intendedDoc) !== stableStringify(record.doc)) return null;
+      const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: candidate.preserve });
+      return { requestId, action, candidateId: subject, head: intendedRevision, revision: intendedRevision, parent: expectedHead, hashes: record.hashes, unchanged: checks.status === 'UNCHANGED' };
+    }
+    if (action === 'restore') {
+      const target = await this._readRevision(subject);
+      if (stableStringify(target.doc) !== stableStringify(record.doc)) return null;
+      return { requestId, action, restoredFrom: subject, head: intendedRevision, revision: intendedRevision, parent: expectedHead, hashes: record.hashes };
+    }
+    return null;
   }
 
   /* ---------- 预览 ---------- */
