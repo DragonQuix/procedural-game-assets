@@ -61,7 +61,8 @@ node organizer/blind.mjs --repo <项目目录> --left TRIAL --right TRIAL --out 
 node organizer/unblind.mjs --key <out>/key.json --review <out>/reviewer-1/review.json
 ```
 
-prompts/reviewer.md 与 BENCHMARK_VERSION.json、SHA256SUMS.json、organizer/blind.mjs、
-organizer/unblind.mjs（新增）、organizer/reviewer-self-test.mjs（新增）是 v1.2 仅有的
-变化文件；`PROMPTS_CN.md` 中收录的评审提示词为 v1 历史快照，以 `prompts/reviewer.md`
-为准。
+prompts/reviewer.md、BENCHMARK_VERSION.json、SHA256SUMS.json、organizer/blind.mjs、
+organizer/unblind.mjs（新增）、organizer/reviewer-self-test.mjs（新增）、
+organizer/self-test.mjs（blind-export 检查改为核对 reviewer-1/reviewer-2 两包）是
+v1.2 仅有的变化文件；`PROMPTS_CN.md` 中收录的评审提示词为 v1 历史快照，以
+`prompts/reviewer.md` 为准。
