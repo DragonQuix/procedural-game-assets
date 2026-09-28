@@ -256,6 +256,56 @@ HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类
   不据此宣称技能已经能稳定生成同级画面、所有 critic 均能区分风格与质量，或循环必然收敛。
 - 未修改用户级技能、Gauntlet、用户原图或独立试验项目；各软件安装刷新另行执行与验证。
 
+## S1 PGA Studio M0＋M1（2026-09-28，ADR-0008）
+
+阶段：M0（基线/范围/ADR）＋ M1（可编辑文档 → 真实渲染 → 导出）。
+依据：`docs/PGA_STUDIO_IMPLEMENTATION_HANDOFF.md`（方案，非事实）、`docs/plans/agent-studio.md`。
+本轮目标：Studio v1 文档与校验、静态终端样例、纯编译桥、JSON CLI 最小子集、真实预览与导出、smoke 入口、必要测试。
+
+### 实际完成
+
+- 基线核对：根版本 0.5.0；Git 工作区起点仅交接文档未跟踪；基线 `npm test` 实测 218/218（Node v22.23.2），非照抄旧快照结果。
+- `src/studio/document.js`：`pga-studio/1` 白名单校验（未知版本/字段、重复 ID、坏引用、非有限数、越界几何、危险键、上限均拒绝）、规范化（默认描边色/底边中点锚点/layer 下标）、稳定哈希（FNV-1a，纯 JS，无 node:crypto）。
+- `src/studio/compiler.js`：可信算子（panel/screen × flat/bevel-metal/scanlines）逐节点直绘 + 既有 `assembleFrame`/`assembleAsset`；`BakedAsset.kind='prop'`；sceneMap 含最终帧坐标/独立包围盒/层序/不透明像素数；子种子复用 `machine.js` 导出的 `partSeed`（算法未改，命名空间 `studio/1:`）。
+- `src/studio/observe.js`：native/display（最近邻整数倍+明确背景）/target_crop 视图数据，纯函数。
+- `src/adapters/studio-files.js`：文档读取、预览与导出写盘、`.pga.json` 覆盖保护；`bin/pga-studio.mjs`：create/inspect/export，stdout JSON、日志 stderr、退出码 0/2/3/4。
+- `examples/studio/terminal.studio.json`（base/shell/screen/side_panel 四节点）与 `examples/studio/smoke.mjs`。
+- 测试 30 项：非法文档 14、编译 10、CLI 集成 6。
+
+### 实际执行的命令与结果
+
+- `npm test`：248/248 通过（218 基线 + 30 新增，旧套件零回归）。
+- `node examples/studio/smoke.mjs --out work/studio-smoke`：通过。确定性断言（两次编译 documentHash/renderHash/RGBA 全等）、尺寸合同（30×30 → 32×32）、锚点平移、manifest 校验均过。
+  documentHash=`304e83eb`，renderHash=`f645726c:6cebd809`。
+- `node bin/pga-studio.mjs inspect --doc examples/studio/terminal.studio.json --out work/studio-smoke/inspect --node terminal.screen`：JSON 摘要正常，四节点定位、能力声明与裁切图落盘。
+
+### 产物与复现
+
+- `work/studio-smoke/`：terminal.native.png（32×32）、terminal.display.png（8× 带背景）、terminal.studio.json（规范化源文档）、terminal.scene.json、terminal.asset.json、terminal.page0.png、terminal.manifest.json、smoke-summary.json。
+
+### 技术结论
+
+- M1 验收逐条实测通过：同输入重复编译 RGBA 与元数据一致；四节点稳定 ID 与最终帧坐标；30×30 内画布 → 32×32 最终帧且锚点/附件点 +1 平移符合 ADR-0002；非法文档报 `INVALID_DOCUMENT` 不静默修正；图像确由文档经 PixelPainter + assembleFrame 生成（单测断言具体像素色值，非占位图）；旧行为兼容（CLI 集成断言 `pga.mjs validate` 不变）。
+
+### 视觉结论与评审来源
+
+- 实施者自审（非独立评审），实际查看了 native 与 display PNG：终端可辨识——机箱倒角、屏幕字符纹理、琥珀侧板、底座与描边均按文档渲染，零件关系与材质规则确实生效。
+- 这仅证明"文档驱动渲染管线视觉连通"，属于示意样例：不代表美术质量达标，无标杆对照，不宣称质量同级。侧板为纯色 slab、底座与机箱衔接生硬等造型问题留待后续阶段；按 `visual-quality.md` 记：整体美学 NOT_YET（仅示意），技术 PASS。
+
+### 未验证项/限制
+
+- 未做候选编辑/探索/回退/事务（M2）、真实 agent 宿主接入（M3）、遮挡支持掩码（v1 未实现）、跨帧（M5）、发行载荷核对（M6）。
+- `constraints` 仅声明未强制执行；`capabilities` 中操作标记 `planned-m2`。
+- 未在其他 Node 版本/平台验证；未经独立视觉评审。
+
+### 与原计划的偏差
+
+- 无实质偏差。`BakedAsset.kind` 按 ADR-0008 记为 `'prop'`（方案允许两种方式，ADR 选定不新增 kind）；partSeed 采用"导出复用 + 独立命名空间"而非另写算法。
+
+### 下一项可执行任务（M2 第一项）
+
+为 `geometry.set` 实现 `terminal.shell` 的 `w` 参数候选分支：同基准 3 个宽度候选 → 全量重渲染 → 校验 `terminal.screen` 像素保护与 anchor 元数据保护 → 产出前后图与拒绝证据，配套失败注入测试。
+
 ## 未验证项（长期，如实记录）
 
 - 技能发现链路（新会话/重启各宿主后确认）。

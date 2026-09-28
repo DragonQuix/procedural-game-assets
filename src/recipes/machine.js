@@ -26,12 +26,17 @@ import { assembleFrame, DEFAULT_OUTLINE } from '../bake/frame.js';
 import { assembleAsset } from '../bake/asset.js';
 import { flipVariant, damageVariant } from '../bake/variants.js';
 
+/**
+ * 每个部件独立的确定性子种子，不受其他部件影响。
+ * 导出供 Studio 编译器复用同一原则（ADR-0008；Studio 使用独立命名空间，算法不变）。
+ */
 function partSeed(specSeed, partId) {
-  // 每个部件独立的确定性子种子，不受其他部件影响
   let h = 0;
   for (const ch of String(partId)) h = (Math.imul(h, 31) + ch.charCodeAt(0)) | 0;
   return ((typeof specSeed === 'number' ? specSeed : 0) ^ h) >>> 0;
 }
+
+export { partSeed };
 
 export function bakeMachine(spec) {
   if (spec.kind !== 'machine') throw new TypeError(`bakeMachine 收到 kind='${spec.kind}'`);

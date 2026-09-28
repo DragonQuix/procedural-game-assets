@@ -45,6 +45,23 @@
 
 - Godot 增强、音频模块化、Unity、网络服务：见 PLAN.md 冻结项
 
+## S0/S1 PGA Studio M0＋M1（2026-09-28，ADR-0008，本轮）
+
+依据：`../docs/PGA_STUDIO_IMPLEMENTATION_HANDOFF.md`（方案）、`../docs/plans/agent-studio.md`。
+
+- [x] 基线核对：根版本 0.5.0、工作区干净（仅交接文档未跟踪）、全量测试 218/218（Node v22.23.2）
+- [x] ADR-0008（文档 v1/编译桥/子种子复用/sceneMap/CLI 分层）与 plans/agent-studio.md
+- [x] `src/studio/document.js`：`pga-studio/1` 校验、规范化、稳定哈希（documentHash/styleHash）
+- [x] `src/studio/compiler.js`：可信算子直绘 + `assembleFrame`/`assembleAsset`，sceneMap 与 renderHash
+- [x] `src/studio/observe.js`：native/display/target_crop 视图数据（纯函数）
+- [x] `src/adapters/studio-files.js`：文档读取、预览与导出写盘、覆盖保护（IO 层）
+- [x] `bin/pga-studio.mjs`：create/inspect/export JSON CLI（stdout JSON、日志 stderr）
+- [x] `examples/studio/terminal.studio.json` 静态样例（base/shell/screen/side_panel）
+- [x] `examples/studio/smoke.mjs`：单命令确定性 smoke（`--out work/studio-smoke`）
+- [x] 新测试：非法文档、确定性、尺寸/padding、锚点、CLI 与旧行为兼容
+- [ ] M2：三个有限操作、同基准候选探索、保护检查、事务与幂等（下一项见 plans/agent-studio.md）
+- [ ] M3–M6：agent 接入评测、风格包、跨帧、发行（未做）
+
 ## 发现入口与备份收敛（2026-09-26，单独任务）
 
 - [x] 核查：4 个同名入口（0.2.1 / 0.1.0 / 0.2.0 / 初版文档）按内容定版
