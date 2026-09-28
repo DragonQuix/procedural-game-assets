@@ -22,9 +22,11 @@
 | `bank` / `CanvasBank` | 烘焙产物的命名缓存；CanvasBank 由 `adapters/canvas.js` 在启动时构建 | 原项目的 `SpriteBank` 概念；变体按需生成，不无条件预烘四份 |
 | `runtime path`（接入路径） | 资产进入游戏的两种方式：启动烘焙（默认）或离线导出（可选部署），共享烘焙核心 | 见 ADR-0004 |
 | `template`（模板） | `examples/canvas-slice/` 升级形态的轻量 Canvas 网页游戏骨架 | 范围与测试接口见 ADR-0005；不是通用引擎 |
-| `asset loop`（资产循环） | 特别版技能按冻结宪章反复制作、独立评审 2D 程序化资产的流程 | ADR-0006；不代替普通网页游戏入口，不是后台调度器 |
+| `asset loop`（资产循环） | 特别版技能按冻结宪章反复制作、独立评审 2D 程序化资产的流程 | ADR-0006/0007；新任务用 pga-loop/2，不代替普通网页游戏入口，不是后台调度器 |
 | `candidate`（候选） | 同一宪章下冻结的交付文件与视觉/技术证据，以内容哈希识别 | 文件或宪章变化即新候选；旧 WOW 不可沿用 |
 | `review batch`（评审批次） | 对同一候选回收 visual 与 delivery 全部独立裁决的集合 | 两个不同完整批次同时 WOW 才准出，批次不等于候选 |
+| `quality parity`（质量同级） | 在约定用途与审美方向内，整体吸引力、设计控制力和完成度达到标杆档次 | 不是外观相似度；准则见 `docs/visual-quality.md`，循环合同见 ADR-0007 |
+| `design constraints`（设计约束） | 用户明确要求的风格、功能、必要特征与使用条件 | 不从标杆自动继承角色身份、配色或几何；未约束部分允许原创 |
 
 ## 坐标契约（要点，全文见 ADR-0002）
 
@@ -59,6 +61,6 @@ examples/godot/         Godot 可选适配样例（非验收前提）
 - 分析：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ART-ANALYSIS.md`
 - 原游戏设计：`E:/Repos/Games/ForOthers/others_003/docs/DESIGN.md`
 - 来源与授权：`docs/provenance.md`
-- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口）
+- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审）
 
 本项目当前没有 `CONTEXT-MAP.md`（未做领域拆分）；如将来拆分领域再建立。
