@@ -27,6 +27,8 @@
 | `review batch`（评审批次） | 对同一候选回收 visual 与 delivery 全部独立裁决的集合 | 两个不同完整批次同时 WOW 才准出，批次不等于候选 |
 | `quality parity`（质量同级） | 在约定用途与审美方向内，整体吸引力、设计控制力和完成度达到标杆档次 | 不是外观相似度；准则见 `docs/visual-quality.md`，循环合同见 ADR-0007 |
 | `design constraints`（设计约束） | 用户明确要求的风格、功能、必要特征与使用条件 | 不从标杆自动继承角色身份、配色或几何；未约束部分允许原创 |
+| `studio document`（Studio 文档） | `pga-studio/1` 可序列化 JSON：显式种子、内画布、扁平节点（稳定 ID + layer 序）、有限几何/材质/色阶声明 | 无函数/模块路径/URL；校验拒绝未知版本与字段；见 ADR-0008 |
+| `sceneMap` | Studio 编译输出的编辑侧节点定位数据（最终帧坐标、独立包围盒、层序） | 观察元数据，不进对外 manifest，不进游戏运行时帧结构 |
 
 ## 坐标契约（要点，全文见 ADR-0002）
 
@@ -42,12 +44,14 @@ core/      无 DOM、无 FS、无网络、无时钟；只依赖显式参数与�
 geometry/  姿态求解等纯几何；依赖 core
 bake/      帧组装、变体、包围盒、诊断；不创建 Canvas
 recipes/   各类资产配方（人形、机械、植被、道具、地形）
+studio/    agent 创作控制层：文档校验、纯编译、观察视图（ADR-0008）；同为纯核心
 export/    PNG、图集、manifest（可选部署路径，IO 适配层）
-adapters/  Canvas 启动烘焙适配（ADR-0004）；Godot 等为可选适配
-bin/       CLI 入口（受信本地工具）
+adapters/  Canvas 启动烘焙适配（ADR-0004）、Studio 文档/预览文件 IO；Godot 等为可选适配
+bin/       CLI 入口（受信本地工具；pga.mjs 人类可读，pga-studio.mjs 为 JSON）
 tools/     画廊、基线采集、发行打包（release）与项目初始化（init-project）
 skills/procedural-game-assets-loop/  2D 资产循环特别版；与普通技能共享开发源，不共享运行状态
 examples/canvas-slice/  轻量 Canvas 网页游戏模板（ADR-0005）
+examples/studio/        Studio 文档样例与 smoke 入口（ADR-0008）
 examples/godot/         Godot 可选适配样例（非验收前提）
 ```
 
@@ -61,6 +65,6 @@ examples/godot/         Godot 可选适配样例（非验收前提）
 - 分析：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ART-ANALYSIS.md`
 - 原游戏设计：`E:/Repos/Games/ForOthers/others_003/docs/DESIGN.md`
 - 来源与授权：`docs/provenance.md`
-- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审）
+- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio）
 
 本项目当前没有 `CONTEXT-MAP.md`（未做领域拆分）；如将来拆分领域再建立。
