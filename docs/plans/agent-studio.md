@@ -1,8 +1,9 @@
 # PGA Studio 落地计划（agent 创作控制层）
 
-日期：2026-09-28。状态：M0＋M1 已实施（本轮）；M2 起待做。
+日期：2026-09-28。状态：M0＋M1＋M2 已实施；M3 起待做。
 
-术语与边界：`../../CONTEXT.md`；架构决策：`../adr/0008-agent-studio.md`；
+术语与边界：`../../CONTEXT.md`；架构决策：`../adr/0008-agent-studio.md`（文档与编译）、
+`../adr/0009-studio-edit-transactions.md`（候选事务与保护）；
 完整方案与评测设计：`../PGA_STUDIO_IMPLEMENTATION_HANDOFF.md`（方案文档，非事实来源）。
 既有标准：`../visual-quality.md`（技术与视觉分开）、`../verification.md`（验证记录）。
 
@@ -10,9 +11,9 @@
 
 | 阶段 | 目标 | 状态 |
 |---|---|---|
-| M0 基线/范围/ADR | 基线测试、范围冻结、ADR-0008、本计划 | ✅ 本轮 |
-| M1 文档→渲染→导出 | v1 校验、编译桥、sceneMap、CLI create/inspect/export、smoke | ✅ 本轮 |
-| M2 局部编辑/候选/回退 | 三个操作、同基准探索、保护检查、事务与幂等 | 未做 |
+| M0 基线/范围/ADR | 基线测试、范围冻结、ADR-0008、本计划 | ✅ |
+| M1 文档→渲染→导出 | v1 校验、编译桥、sceneMap、CLI create/inspect/export、smoke | ✅ |
+| M2 局部编辑/候选/回退 | 三个操作、同基准探索、保护检查、事务与幂等 | ✅ |
 | M3 agent 接入与对照评测 | 真实宿主跑通、试点任务、失败分类 | 未做 |
 | M4 风格与构造 | 风格包、第二种资产、有限结构分支 | 未做 |
 | M5 角色/跨帧/资产族 | 复用 solvePose，修改跨帧一致 | 未做 |
@@ -27,7 +28,29 @@
 - 操作（M2 才实现执行）：`geometry.set` / `material.set` / `ramp.set`，范围见 inspect 返回的 capabilities。
 - 保护项：v1 仅声明（样例含 screen 像素保护与 anchor 元数据保护），M2 起强制执行。
 
-## M1 验收记录（本轮实测，详见 verification.md 的 S1 节）
+## M2 验收记录（本轮实测，详见 verification.md 的 S2 节）
+
+- 必做演示 `examples/studio/edit-demo.mjs` 九步真实运行通过：创建 → inspect → 探索
+  机箱宽度 {24,26,28} → 屏幕像素/锚点保护逐候选核对 → 接受 w=28（r2）→
+  修改受保护屏幕被 CONSTRAINT_CONFLICT 拒绝且提交再被 CANDIDATE_INVALID 拒绝（head 不受污染）→
+  恢复 r1 得 r3 且 renderHash/documentHash 与 r1 精确一致 → 导出 r3 manifest 通过既有校验 →
+  幂等重放返回同一结果不重复接受。
+- 候选去重：w=26 标注 UNCHANGED 且 duplicateOf=base，uniqueCount=2，不凑多样性。
+- 允许影响区域独立计算：几何操作外扩 1px 描边邻域并减去未变更高层支持掩码遮挡；
+  区域外变化、锚点篡改、非目标节点篡改、未声明字段篡改均有专门拒绝测试。
+- commit 不信任落盘检查：接受时重新推导+重编译+重新执行保护检查，三者不符即拒绝。
+- 并发/重试/崩溃：错误 expectedHead 与过期基准候选 STALE_REVISION；活锁 WORKSPACE_BUSY、
+  死锁接管；`*.tmp-*` 残留可识别不自动删除；台账落盘重启后重放有效。
+- 视觉：查看 r1 基准与 w=24/w=28 候选 display 图——仅机箱右缘变化，屏幕区域逐像素不变，
+  保护语义画面可验证；美术质量仍按 M1 结论（示意样例，NOT_YET），无标杆不宣称同级。
+
+## 下一项可执行任务（M3 第一项）
+
+在真实宿主中用 CLI＋读图跑通一次 M2 流程（由新会话 agent 仅凭
+`bin/pga-studio.mjs` 的 JSON 合同与 inspect 返回的能力声明完成"创建→探索→接受"），
+记录调用轨迹与失败类型（不认识目标/不会选参数/看不到图/判断错误），再决定是否需要 MCP 薄适配。
+
+## M1 验收记录（详见 verification.md 的 S1 节）
 
 - 同文档重复编译 RGBA 与关键元数据哈希一致（smoke 与单测双重覆盖）。
 - 4 个节点均有稳定 ID 与最终帧坐标（scene.json / inspect 输出）。

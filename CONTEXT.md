@@ -28,7 +28,11 @@
 | `quality parity`（质量同级） | 在约定用途与审美方向内，整体吸引力、设计控制力和完成度达到标杆档次 | 不是外观相似度；准则见 `docs/visual-quality.md`，循环合同见 ADR-0007 |
 | `design constraints`（设计约束） | 用户明确要求的风格、功能、必要特征与使用条件 | 不从标杆自动继承角色身份、配色或几何；未约束部分允许原创 |
 | `studio document`（Studio 文档） | `pga-studio/1` 可序列化 JSON：显式种子、内画布、扁平节点（稳定 ID + layer 序）、有限几何/材质/色阶声明 | 无函数/模块路径/URL；校验拒绝未知版本与字段；见 ADR-0008 |
-| `sceneMap` | Studio 编译输出的编辑侧节点定位数据（最终帧坐标、独立包围盒、层序） | 观察元数据，不进对外 manifest，不进游戏运行时帧结构 |
+| `sceneMap` | Studio 编译输出的编辑侧节点定位数据（最终帧坐标、独立包围盒、层序、支持掩码） | 观察元数据，不进对外 manifest，不进游戏运行时帧结构 |
+| `revision`（修订） | Studio 工作区中一次已提交的不可变文档快照（`r1..rN`，含父指针与来源） | 历史 ID ≠ 内容哈希；恢复是引用旧内容的新修订 |
+| `edit candidate`（编辑候选） | 从某修订派生的未提交文档 + 保护检查结果，内容哈希识别（`c-*`） | 不改变 head；与 pga-loop 的冻结 `candidate` 不同域，见 ADR-0009 |
+| `allowed region`（允许影响区域） | 由操作计划与依赖独立计算的像素可变化区域（旧∪新几何、描边邻域、层序遮挡） | 绝不从事后差分反推；区域外变化即违规 |
+| `head` | Studio 工作区当前已确认修订指针（`head.json`，原子替换更新） | 只有 commit 移动它；并发底线是 expectedHead 校验 |
 
 ## 坐标契约（要点，全文见 ADR-0002）
 
@@ -46,7 +50,7 @@ bake/      帧组装、变体、包围盒、诊断；不创建 Canvas
 recipes/   各类资产配方（人形、机械、植被、道具、地形）
 studio/    agent 创作控制层：文档校验、纯编译、观察视图（ADR-0008）；同为纯核心
 export/    PNG、图集、manifest（可选部署路径，IO 适配层）
-adapters/  Canvas 启动烘焙适配（ADR-0004）、Studio 文档/预览文件 IO；Godot 等为可选适配
+adapters/  Canvas 启动烘焙适配（ADR-0004）、Studio 文档/预览 IO 与工作区存储（ADR-0009）；Godot 等为可选适配
 bin/       CLI 入口（受信本地工具；pga.mjs 人类可读，pga-studio.mjs 为 JSON）
 tools/     画廊、基线采集、发行打包（release）与项目初始化（init-project）
 skills/procedural-game-assets-loop/  2D 资产循环特别版；与普通技能共享开发源，不共享运行状态
@@ -65,6 +69,6 @@ examples/godot/         Godot 可选适配样例（非验收前提）
 - 分析：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ART-ANALYSIS.md`
 - 原游戏设计：`E:/Repos/Games/ForOthers/others_003/docs/DESIGN.md`
 - 来源与授权：`docs/provenance.md`
-- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio）
+- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio、0009 Studio 编辑事务）
 
 本项目当前没有 `CONTEXT-MAP.md`（未做领域拆分）；如将来拆分领域再建立。
