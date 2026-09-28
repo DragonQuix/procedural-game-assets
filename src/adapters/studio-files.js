@@ -153,6 +153,7 @@ export async function inspectFromFile(docPath, opts = {}) {
  */
 export async function inspectWorkspace(wsDir, opts = {}) {
   const store = await StudioStore.open(wsDir, opts);
+  await store._refreshHead(); // 新鲜度合同：默认修订取磁盘最新 head（R1）
   const revision = opts.revision ?? store.head;
   const compiled = await store._getCompiled(revision);
   const summary = await inspectCompiled(compiled, `workspace:${wsDir}#${revision}`, opts);
@@ -216,6 +217,7 @@ export async function exportFromFile(docPath, outDir, opts = {}) {
 /** export（工作区模式）：导出指定修订（默认 head）。 */
 export async function exportWorkspace(wsDir, outDir, opts = {}) {
   const store = await StudioStore.open(wsDir, opts);
+  await store._refreshHead(); // 新鲜度合同：默认修订取磁盘最新 head（R1）
   const revision = opts.revision ?? store.head;
   const compiled = await store._getCompiled(revision);
   const summary = await exportCompiled(compiled, `workspace:${wsDir}#${revision}`, outDir, opts);

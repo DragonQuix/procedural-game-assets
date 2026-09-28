@@ -7,7 +7,7 @@
  */
 import { compileStudioDocument, describeCapabilities } from './compiler.js';
 import { applyOperation, exploreOperation, operationFromExplore as propOperationFromExplore } from './operators.js';
-import { checkCandidate, preserveFromDocument } from './protect.js';
+import { checkCandidate, preserveFromDocument, validatePreserve } from './protect.js';
 import { compileCharacterDocument, checkCharacterCandidate } from './character-compiler.js';
 import { describeCharacterCapabilities, CHARACTER_SCHEMA_VERSION } from './character-doc.js';
 import { applyCharacterOperation, exploreCharacterOperation, operationFromExplore as characterOperationFromExplore } from './character-ops.js';
@@ -47,5 +47,7 @@ export function preserveFromAnyDocument(doc) {
   // 角色与道具的 constraints 形状一致（{kind, target}），直接复用映射
   return preserveFromDocument(doc);
 }
+
+export { validatePreserve };
 
 export { CHARACTER_SCHEMA_VERSION };

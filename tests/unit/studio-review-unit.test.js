@@ -13,6 +13,7 @@ import { operationFromAnyExplore } from '../../src/studio/dispatch.js';
 import { compileStudioDocument } from '../../src/studio/compiler.js';
 import { compileCharacterDocument, checkCharacterCandidate } from '../../src/studio/character-compiler.js';
 import { validateCharacterDocument, normalizeCharacterDocument } from '../../src/studio/character-doc.js';
+import { validatePreserve } from '../../src/studio/protect.js';
 import { stableStringify } from '../../src/studio/document.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -162,4 +163,34 @@ test('R2：checkedPoseKinds 由引擎能力决定——作者声明未适配种�
   assert.ok(validateCharacterDocument(bogus).some((i) => i.code === 'INVALID_DOCUMENT' && i.message.includes('未知姿态种类')));
   // 引擎实际支持的声明仍然合法
   assert.deepEqual(validateCharacterDocument(rustclaw), []);
+});
+
+/* ---------- R4：preserve 严格校验（文档级与请求级共用） ---------- */
+
+test('R4：validatePreserve 拒绝未知 kind / 不存在目标 / 多余字段 / 错误形状', () => {
+  const propDoc = compileProp(terminal).document;
+  // 合法项通过并规范化（键序固定供候选身份哈希）
+  assert.deepEqual(validatePreserve([{ kind: 'pixels', target: 'terminal.screen' }], propDoc, 'prop'), [{ kind: 'pixels', target: 'terminal.screen' }]);
+  assert.deepEqual(validatePreserve([{ kind: 'metadata', target: 'anchor', note: 'n' }], propDoc, 'prop'), [{ kind: 'metadata', target: 'anchor', note: 'n' }]);
+  assert.throws(() => validatePreserve([{ kind: 'pixel', target: 'terminal.shell' }], propDoc, 'prop'), (e) => e.code === 'INVALID_DOCUMENT' && e.message.includes('未知保护类别'));
+  assert.throws(() => validatePreserve([{ kind: 'pixels', target: 'terminal.ghost' }], propDoc, 'prop'), (e) => e.code === 'INVALID_DOCUMENT' && e.message.includes('不是已声明节点'));
+  assert.throws(() => validatePreserve([{ kind: 'structure', target: 'terminal.ghost' }], propDoc, 'prop'), (e) => e.code === 'INVALID_DOCUMENT');
+  assert.throws(() => validatePreserve([{ kind: 'metadata', target: 'mystery' }], propDoc, 'prop'), (e) => e.code === 'INVALID_DOCUMENT' && e.message.includes('未知元数据保护目标'));
+  assert.throws(() => validatePreserve([{ kind: 'metadata', target: 'attachments.ghost' }], propDoc, 'prop'), (e) => e.code === 'INVALID_DOCUMENT');
+  assert.throws(() => validatePreserve([{ kind: 'pixels', target: 'terminal.shell', extra: 1 }], propDoc, 'prop'), (e) => e.code === 'INVALID_DOCUMENT' && e.message.includes('未知字段'));
+  assert.throws(() => validatePreserve({ kind: 'pixels', target: 'terminal.shell' }, propDoc, 'prop'), (e) => e.code === 'INVALID_DOCUMENT');
+  assert.throws(() => validatePreserve([['pixels', 'terminal.shell']], propDoc, 'prop'), (e) => e.code === 'INVALID_DOCUMENT');
+  assert.throws(() => validatePreserve([{ kind: 'pixels' }], propDoc, 'prop'), (e) => e.code === 'INVALID_DOCUMENT');
+  // 附件点目标：已声明名可用
+  const withAttachment = structuredClone(terminal);
+  withAttachment.attachments = { port: { x: 5, y: 5 } };
+  assert.deepEqual(validatePreserve([{ kind: 'metadata', target: 'attachments.port' }], compileProp(withAttachment).document, 'prop'), [{ kind: 'metadata', target: 'attachments.port' }]);
+});
+
+test('R4：角色 preserve 仅 metadata——pixels/structure 按 UNSUPPORTED_SCOPE 拒绝', () => {
+  const charDoc = compileChar(rustclaw).document;
+  assert.deepEqual(validatePreserve([{ kind: 'metadata', target: 'attachments.head' }], charDoc, 'character'), [{ kind: 'metadata', target: 'attachments.head' }]);
+  assert.throws(() => validatePreserve([{ kind: 'pixels', target: 'head' }], charDoc, 'character'), (e) => e.code === 'UNSUPPORTED_SCOPE');
+  assert.throws(() => validatePreserve([{ kind: 'structure', target: 'head' }], charDoc, 'character'), (e) => e.code === 'UNSUPPORTED_SCOPE');
+  assert.throws(() => validatePreserve([{ kind: 'metadata', target: 'mystery' }], charDoc, 'character'), (e) => e.code === 'INVALID_DOCUMENT');
 });

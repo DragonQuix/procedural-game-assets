@@ -4,7 +4,8 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,6 +14,7 @@ import { exportWorkspace } from '../../src/adapters/studio-files.js';
 import { validateManifest } from '../../src/export/manifest.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
+const bin = resolve(here, '../../bin/pga-studio.mjs');
 const TERMINAL = resolve(here, '../../examples/studio/terminal.studio.json');
 const WRENCH = resolve(here, '../../examples/studio/wrench.studio.json');
 const RUSTCLAW = resolve(here, '../../examples/studio/rustclaw.studio.json');
@@ -260,4 +262,140 @@ test('R6：edit 的 done 台账失败——重试幂等前滚返回同一候选�
   assert.equal(recovered.restoredFrom, 'r1');
   assert.equal(recovered.idempotentReplay, true);
   assert.equal((await reopened2.state()).head, 'r3');
+});
+
+/* ---------- R4：请求级 preserve 严格校验 ---------- */
+
+test('R4：拼错类别/未知目标/多余字段/错误形状——edit 明确拒绝，不静默忽略', async () => {
+  const { store } = await makeWorkspace(TERMINAL, 'r4');
+  const operation = { id: 'geometry.set', target: 'terminal.shell', params: { w: 28 } };
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, preserve: [{ kind: 'pixel', target: 'terminal.shell' }] }), (e) => e.code === 'INVALID_DOCUMENT' && e.message.includes('未知保护类别'), '拼错 kind 必须拒绝');
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, preserve: [{ kind: 'pixels', target: 'terminal.ghost' }] }), (e) => e.code === 'INVALID_DOCUMENT');
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, preserve: [{ kind: 'metadata', target: 'mystery' }] }), (e) => e.code === 'INVALID_DOCUMENT');
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, preserve: [{ kind: 'pixels', target: 'terminal.shell', extra: 1 }] }), (e) => e.code === 'INVALID_DOCUMENT' && e.message.includes('未知字段'));
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, preserve: { kind: 'pixels', target: 'terminal.shell' } }), (e) => e.code === 'INVALID_DOCUMENT');
+  await assert.rejects(() => store.explore({ baseRevision: 'r1', spec: { id: 'geometry.set', target: 'terminal.shell', field: 'w', values: [24] }, preserve: [{ kind: 'pixel', target: 'terminal.shell' }] }), (e) => e.code === 'INVALID_DOCUMENT', 'explore 同样校验');
+  // 合法 preserve 正常工作且出现在有效保护列表
+  const ok = await store.edit({ baseRevision: 'r1', operation, preserve: [{ kind: 'pixels', target: 'terminal.screen' }] });
+  assert.equal(ok.status, 'OK');
+  assert.ok(ok.checks.protections.pixels.includes('terminal.screen'));
+});
+
+test('R4：角色请求级 pixels/structure 明确拒绝（UNSUPPORTED_SCOPE），合法 metadata 生效', async () => {
+  const { store } = await makeWorkspace(RUSTCLAW, 'r4-char');
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation: { id: 'palette.set', target: 'V', value: '#ffd23d' }, preserve: [{ kind: 'pixels', target: 'head' }] }), (e) => e.code === 'UNSUPPORTED_SCOPE');
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation: { id: 'palette.set', target: 'V', value: '#ffd23d' }, preserve: [{ kind: 'structure', target: 'head' }] }), (e) => e.code === 'UNSUPPORTED_SCOPE');
+  const ok = await store.edit({ baseRevision: 'r1', operation: { id: 'palette.set', target: 'V', value: '#ffd23d' }, preserve: [{ kind: 'metadata', target: 'attachments.head' }] });
+  assert.equal(ok.status, 'OK');
+  assert.deepEqual(ok.checks.protections.metadata, ['anchor', 'attachments.head'], '文档级 anchor + 请求级 attachments.head 合并生效');
+});
+
+/* ---------- R7：文件 ID 白名单与路径边界 ---------- */
+
+test('R7：requestId 路径穿越——明确拒绝且工作区外不产生任何文件', async () => {
+  const { dir, store } = await makeWorkspace(TERMINAL, 'r7');
+  const parent = dirname(dir);
+  const before = readdirSync(parent);
+  const operation = { id: 'geometry.set', target: 'terminal.shell', params: { w: 28 } };
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, requestId: '../../r7-escaped-ledger' }), (e) => e.code === 'UNSAFE_PATH');
+  assert.deepEqual(readdirSync(parent), before, '工作区外不得产生台账文件');
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, requestId: 'a/b' }), (e) => e.code === 'UNSAFE_PATH');
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, requestId: 'a\\b' }), (e) => e.code === 'UNSAFE_PATH');
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, requestId: '..', }), (e) => e.code === 'UNSAFE_PATH');
+  await assert.rejects(() => store.edit({ baseRevision: 'r1', operation, requestId: `x${'1'.repeat(64)}` }), (e) => e.code === 'UNSAFE_PATH');
+  const ok = await store.edit({ baseRevision: 'r1', operation, requestId: 'Req-1.ok_2' });
+  assert.equal(ok.requestId, 'Req-1.ok_2', '合法 requestId 不受影响');
+});
+
+test('R7：revision 与 candidateId 读取路径同样校验', async () => {
+  const { store } = await makeWorkspace(TERMINAL, 'r7-ids');
+  await assert.rejects(() => store.commit({ action: 'restore', targetRevision: '../../outside', expectedHead: 'r1' }), (e) => e.code === 'UNSAFE_PATH');
+  await assert.rejects(() => store.commit({ action: 'restore', targetRevision: 'r1.json', expectedHead: 'r1' }), (e) => e.code === 'UNSAFE_PATH');
+  await assert.rejects(() => store.commit({ action: 'accept', candidateId: '../escape', expectedHead: 'r1' }), (e) => e.code === 'UNSAFE_PATH');
+  await assert.rejects(() => store.commit({ action: 'accept', candidateId: 'c-not-hex!', expectedHead: 'r1' }), (e) => e.code === 'UNSAFE_PATH');
+  assert.equal((await store.state()).head, 'r1', '非法 ID 不得产生任何效果');
+});
+
+/* ---------- R5：commit 重载权威 constraints ---------- */
+
+test('R5：伪造检查状态+清空请求级保护——文档级 constraints 重取，提交拒绝且 head 不污染', async () => {
+  const { dir, store } = await makeWorkspace(TERMINAL, 'r5');
+  // 审查复现：修改受文档 pixels 保护的屏幕 → REJECTED；篡改记录后提交仍必须拒绝
+  const bad = await store.edit({ baseRevision: 'r1', operation: { id: 'geometry.set', target: 'terminal.screen', params: { w: 10 } } });
+  assert.equal(bad.status, 'REJECTED');
+  const cpath = join(dir, 'candidates', `${bad.candidateId}.json`);
+  const forged = JSON.parse(readFileSync(cpath, 'utf8'));
+  forged.preserveRequest = [];
+  forged.preserveDoc = [];
+  forged.checks.status = 'OK';
+  forged.checks.code = null;
+  forged.checks.conflicts = [];
+  writeFileSync(cpath, JSON.stringify(forged, null, 2));
+  await assert.rejects(() => store.commit({ action: 'accept', candidateId: bad.candidateId, expectedHead: 'r1' }), (e) => e.code === 'CANDIDATE_INVALID');
+  assert.equal((await store.state()).head, 'r1', '错误候选不得移动 head');
+});
+
+test('R5：清空请求级保护并重算伪造——候选身份（基准+操作+保护）重算不符即拒绝', async () => {
+  const { dir, store } = await makeWorkspace(TERMINAL, 'r5-req');
+  const protectedEdit = await store.edit({ baseRevision: 'r1', operation: { id: 'geometry.set', target: 'terminal.shell', params: { w: 28 } }, preserve: [{ kind: 'pixels', target: 'terminal.shell' }] });
+  assert.equal(protectedEdit.status, 'REJECTED', '目标受请求级像素保护应前置拒绝');
+  const cpath = join(dir, 'candidates', `${protectedEdit.candidateId}.json`);
+  const forged = JSON.parse(readFileSync(cpath, 'utf8'));
+  forged.preserveRequest = []; // 删掉请求级保护：权威合并变化 → 候选身份必须不符
+  forged.checks.status = 'OK';
+  forged.checks.code = null;
+  forged.checks.conflicts = [];
+  writeFileSync(cpath, JSON.stringify(forged, null, 2));
+  await assert.rejects(() => store.commit({ action: 'accept', candidateId: protectedEdit.candidateId, expectedHead: 'r1' }), (e) => e.code === 'CANDIDATE_INVALID');
+  assert.equal((await store.state()).head, 'r1');
+  // 篡改操作内容同样被身份重算捕获
+  const good = await store.edit({ baseRevision: 'r1', operation: { id: 'geometry.set', target: 'terminal.shell', params: { w: 28 } }, preserve: [{ kind: 'metadata', target: 'anchor' }] });
+  assert.equal(good.status, 'OK');
+  const gpath = join(dir, 'candidates', `${good.candidateId}.json`);
+  const forged2 = JSON.parse(readFileSync(gpath, 'utf8'));
+  forged2.operation = { id: 'geometry.set', target: 'terminal.shell', params: { w: 24 } };
+  writeFileSync(gpath, JSON.stringify(forged2, null, 2));
+  await assert.rejects(() => store.commit({ action: 'accept', candidateId: good.candidateId, expectedHead: 'r1' }), (e) => e.code === 'CANDIDATE_INVALID');
+  assert.equal((await store.state()).head, 'r1');
+  // 旧格式候选（无 preserveRequest）明确拒绝；合法候选（含请求级保护）正常提交
+  const legacyPath = join(dir, 'candidates', `${good.candidateId}.json`);
+  const legacy = JSON.parse(readFileSync(legacyPath, 'utf8'));
+  delete legacy.preserveRequest;
+  writeFileSync(legacyPath, JSON.stringify(legacy, null, 2));
+  await assert.rejects(() => store.commit({ action: 'accept', candidateId: good.candidateId, expectedHead: 'r1' }), (e) => e.code === 'CANDIDATE_INVALID' && e.message.includes('preserveRequest'));
+  const fresh = await store.edit({ baseRevision: 'r1', operation: { id: 'geometry.set', target: 'terminal.shell', params: { w: 24 } }, preserve: [{ kind: 'metadata', target: 'anchor' }] });
+  const accepted = await store.commit({ action: 'accept', candidateId: fresh.candidateId, expectedHead: 'r1' });
+  assert.equal(accepted.revision, 'r2', '身份一致的合法候选正常提交');
+});
+
+/* ---------- R4/R7：CLI 侧合同 ---------- */
+
+test('R4/R7：CLI——非法 preserve 退出 3、未知选项退出 2、路径穿越 requestId 退出 4', () => {
+  const ws = join(mkdtempSync(join(tmpdir(), 'pga-review-cli-')), 'ws');
+  const run = (args) => JSON.parse(execFileSync(process.execPath, [bin, ...args], { encoding: 'utf8' }));
+  run(['create', '--doc', TERMINAL, '--out', ws]);
+  const baseArgs = ['edit', '--ws', ws, '--base', 'r1', '--op', 'geometry.set', '--target', 'terminal.shell', '--params', '{"w":28}'];
+  try {
+    run([...baseArgs, '--preserve', '[{"kind":"pixel","target":"terminal.shell"}]']);
+    assert.fail('拼错 kind 应被拒绝');
+  } catch (e) {
+    assert.equal(e.status, 3);
+    assert.equal(JSON.parse(e.stdout).error.code, 'INVALID_DOCUMENT');
+  }
+  try {
+    run([...baseArgs, '--preserv', '[]']); // 拼错选项名：不得悄悄变成无效参数
+    assert.fail('未知选项应被拒绝');
+  } catch (e) {
+    assert.equal(e.status, 2);
+    assert.match(JSON.parse(e.stdout).error.message, /--preserv/);
+  }
+  try {
+    run([...baseArgs, '--request-id', '../../escaped-cli']);
+    assert.fail('路径穿越 requestId 应被拒绝');
+  } catch (e) {
+    assert.equal(e.status, 4);
+    assert.equal(JSON.parse(e.stdout).error.code, 'UNSAFE_PATH');
+  }
+  const ok = run([...baseArgs, '--request-id', 'cli-ok-1']);
+  assert.equal(ok.ok, true, '合法请求正常工作');
 });

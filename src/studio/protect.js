@@ -11,8 +11,57 @@
  * 首版图像很小，全量重渲染后逐像素差分。
  */
 import { stableStringify } from './document.js';
+import { StudioOperationError } from './operators.js';
 
 const METADATA_TARGETS = Object.freeze(['anchor', 'attachments', 'frameSize']);
+const CHARACTER_METADATA_TARGET_RE = /^(anchor|attachments(\.[a-zA-Z][a-zA-Z0-9_]{0,31})?|frameSize)$/;
+
+/**
+ * 保护项的严格 schema 校验（R4：文档级 constraints 与请求级 preserve 共用）。
+ * 拒绝：非数组、非对象元素、多余字段、未知 kind、不存在/形状错误的 target、
+ * 角色文档的 pixels/structure 类别（UNSUPPORTED_SCOPE，未实现不静默接受）。
+ * @param {Array} preserve 保护项数组
+ * @param {object} doc 规范化文档（target 存在性以其为准）
+ * @param {string} [docKind] 'prop' | 'character'
+ * @returns {Array<{kind:string,target:string,note?:string}>} 规范化副本（键序固定，供候选身份哈希）
+ */
+export function validatePreserve(preserve, doc, docKind = 'prop') {
+  if (!Array.isArray(preserve)) throw new StudioOperationError('INVALID_DOCUMENT', `preserve 需要数组，收到 ${JSON.stringify(preserve)}`);
+  const nodeIds = new Set((doc.nodes ?? []).map((n) => n.id));
+  const attachmentNames = new Set(Object.keys(doc.attachments ?? {}));
+  return preserve.map((p, i) => {
+    const at = `preserve[${i}]`;
+    if (p === null || typeof p !== 'object' || Array.isArray(p)) throw new StudioOperationError('INVALID_DOCUMENT', `${at} 需要对象 { kind, target }`);
+    for (const key of Object.keys(p)) {
+      if (!['kind', 'target', 'note'].includes(key)) throw new StudioOperationError('INVALID_DOCUMENT', `${at} 含未知字段 '${key}'（允许：kind, target, note）`);
+    }
+    if (p.note !== undefined && typeof p.note !== 'string') throw new StudioOperationError('INVALID_DOCUMENT', `${at}.note 需要字符串`);
+    if (typeof p.kind !== 'string' || typeof p.target !== 'string' || p.target.length === 0) {
+      throw new StudioOperationError('INVALID_DOCUMENT', `${at} 需要非空 kind 与 target 字符串`);
+    }
+    if (docKind === 'character') {
+      if (p.kind !== 'metadata') {
+        throw new StudioOperationError('UNSUPPORTED_SCOPE', `${at}：character/1 仅支持 metadata 保护（pixels/structure 未实现），收到 '${p.kind}'`, { target: p.target });
+      }
+      if (!CHARACTER_METADATA_TARGET_RE.test(p.target)) {
+        throw new StudioOperationError('INVALID_DOCUMENT', `${at}.target 需为 anchor / attachments[.<名>] / frameSize：${JSON.stringify(p.target)}`, { target: p.target });
+      }
+    } else {
+      if (!['pixels', 'structure', 'metadata'].includes(p.kind)) {
+        throw new StudioOperationError('INVALID_DOCUMENT', `${at} 未知保护类别 '${p.kind}'（可用：pixels, structure, metadata）`, { target: p.target });
+      }
+      if ((p.kind === 'pixels' || p.kind === 'structure') && !nodeIds.has(p.target)) {
+        throw new StudioOperationError('INVALID_DOCUMENT', `${at} ${p.kind} 保护目标不是已声明节点：'${p.target}'`, { target: p.target, suggestedNextAction: '用 inspect 查看当前节点列表' });
+      }
+      if (p.kind === 'metadata') {
+        const t = p.target;
+        const ok = METADATA_TARGETS.includes(t) || (t.startsWith('attachments.') && attachmentNames.has(t.slice('attachments.'.length)));
+        if (!ok) throw new StudioOperationError('INVALID_DOCUMENT', `${at} 未知元数据保护目标 '${t}'（可用：anchor / attachments[.<已声明名>] / frameSize）`, { target: t });
+      }
+    }
+    return p.note === undefined ? { kind: p.kind, target: p.target } : { kind: p.kind, target: p.target, note: p.note };
+  });
+}
 
 function deepEqual(a, b) {
   return stableStringify(a) === stableStringify(b);

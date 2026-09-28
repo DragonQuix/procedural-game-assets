@@ -5,8 +5,8 @@
  *   <ws>/.pga.json            工具标记（覆盖保护）
  *   <ws>/head.json            { head: 'r3', seq: 3 }——最后一步原子替换，崩溃后仍指向最后完整版本
  *   <ws>/revisions/rN.json    不可变修订 { revision, parent, doc, hashes, source, toolVersion }
- *   <ws>/candidates/c-*.json  未提交候选 { candidateId, baseRevision, operation, preserve, doc, hashes, checks, previews }
- *   <ws>/requests/<id>.json   幂等台账 { requestId, requestHash, result }——重试返回同一结果
+ *   <ws>/candidates/c-*.json  未提交候选 { candidateId, baseRevision, operation, preserveRequest, preserveDoc, doc, hashes, checks, previews }
+ *   <ws>/requests/<id>.json   幂等台账两阶段 { requestId, requestHash, status: 'pending'|'done', payload|result }
  *   <ws>/previews/...         证据 PNG（基准/候选 native+display）
  *   <ws>/lock                 单写者锁（pid；持锁进程死亡后允许接管）
  *
@@ -24,9 +24,9 @@
  * - 不自动删除任何文件；状态里如实列出临时残留，清理由调用方明确执行。
  */
 import { mkdir, open, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, resolve, sep } from 'node:path';
 import { stableStringify, fnv1aHex } from '../studio/document.js';
-import { compileAny, applyAnyOperation, exploreAnyOperation, operationFromAnyExplore, checkAnyCandidate, preserveFromAnyDocument, docKindOf } from '../studio/dispatch.js';
+import { compileAny, applyAnyOperation, exploreAnyOperation, operationFromAnyExplore, checkAnyCandidate, preserveFromAnyDocument, validatePreserve, docKindOf } from '../studio/dispatch.js';
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { encodePNG } from '../export/png.js';
 
@@ -54,6 +54,28 @@ export class StudioOverwriteError extends Error {
 
 function fail(code, message, extra) {
   throw new StudioStoreError(code, message, extra);
+}
+
+/** R7：文件 ID 白名单（CLI 与模块 API 的共享边界）；禁路径分隔符、绝对路径与 '..'。 */
+export const REQUEST_ID_RE = /^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/;
+const REVISION_ID_RE = /^r[0-9]{1,9}$/;
+const CANDIDATE_ID_RE = /^c-[0-9a-f]{8}$/;
+
+export function assertSafeId(id, kind, re = REQUEST_ID_RE) {
+  if (typeof id !== 'string' || !re.test(id)) {
+    fail('UNSAFE_PATH', `${kind} 非法：${JSON.stringify(id)}（只允许字母数字开头、不超过 64 字符的字母数字与 . _ -；禁止路径分隔符、绝对路径与 '..'）`, { target: typeof id === 'string' ? id : null, retryable: false });
+  }
+  return id;
+}
+
+/** R7 双重防线：ID 白名单之外，resolve 后核实路径仍在工作区内。 */
+function workspacePath(wsDir, ...segments) {
+  const root = resolve(wsDir);
+  const p = resolve(join(wsDir, ...segments));
+  if (p !== root && !p.startsWith(root + sep)) {
+    fail('UNSAFE_PATH', `路径越出工作区：${segments.join('/')}`, { retryable: false });
+  }
+  return p;
 }
 
 /** 覆盖保护：目录非空且没有本工具标记时拒绝写入（与 bin/pga.mjs 同一语义）。 */
@@ -168,7 +190,7 @@ export class StudioStore {
 
   async _writeRevision({ doc, parent, source, compiled, bumpSeq }) {
     const next = (bumpSeq ?? this.seq + 1);
-    const revision = `r${next}`;
+    const revision = assertSafeId(`r${next}`, 'revision', REVISION_ID_RE);
     const record = {
       revision,
       parent,
@@ -178,7 +200,7 @@ export class StudioStore {
       toolVersion: this.toolVersion,
     };
     const content = JSON.stringify(record, null, 2) + '\n';
-    const path = join(this.dir, 'revisions', `${revision}.json`);
+    const path = workspacePath(this.dir, 'revisions', `${revision}.json`);
     // 历史修订绝不静默覆盖（R1）：同名文件已存在时只允许逐字节相同
     // （崩溃重试的幂等接管），否则明确报冲突。
     let existing = null;
@@ -200,8 +222,9 @@ export class StudioStore {
   async _readRevision(revision) {
     let raw;
     try {
-      raw = await readFile(join(this.dir, 'revisions', `${revision}.json`), 'utf8');
-    } catch {
+      raw = await readFile(workspacePath(this.dir, 'revisions', `${assertSafeId(revision, 'revision', REVISION_ID_RE)}.json`), 'utf8');
+    } catch (e) {
+      if (e instanceof StudioStoreError) throw e;
       fail('STALE_REVISION', `修订 '${revision}' 不存在`, { target: revision, retryable: false, suggestedNextAction: '用 state 查看当前修订列表' });
     }
     return JSON.parse(raw);
@@ -245,7 +268,7 @@ export class StudioStore {
   }
 
   _ledgerPath(requestId) {
-    return join(this.dir, 'requests', `${requestId}.json`);
+    return workspacePath(this.dir, 'requests', `${assertSafeId(requestId, 'requestId')}.json`);
   }
 
   /** 读取请求台账记录；无记录返回 null。 */
@@ -361,9 +384,17 @@ export class StudioStore {
     if (recompiled.hashes.documentHash !== record.hashes.documentHash || recompiled.hashes.renderHash !== record.hashes.renderHash) return null;
     if (action === 'accept') {
       const candidate = await this._readCandidate(subject);
+      let mergedPreserve;
+      try {
+        mergedPreserve = this._authoritativePreserve(base, candidate);
+      } catch {
+        return null; // 保护记录被篡改的候选无法核实既定效果，按未持久化处理
+      }
+      const expectedCandidateId = `c-${fnv1aHex(stableStringify([expectedHead, candidate.operation, mergedPreserve]))}`;
+      if (expectedCandidateId !== subject || candidate.candidateId !== subject) return null;
       const { doc: intendedDoc, plan } = applyAnyOperation(base.document, candidate.operation);
       if (stableStringify(intendedDoc) !== stableStringify(record.doc)) return null;
-      const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: candidate.preserve });
+      const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: mergedPreserve });
       return { requestId, action, candidateId: subject, head: intendedRevision, revision: intendedRevision, parent: expectedHead, hashes: record.hashes, unchanged: checks.status === 'UNCHANGED' };
     }
     if (action === 'restore') {
@@ -407,15 +438,19 @@ export class StudioStore {
 
   /**
    * edit：从指定基准派生一个未提交候选。绝不移动 head。
-   * 保护项 = 文档 constraints + 请求级 preserve 合并。
+   * 保护项 = 文档 constraints + 请求级 preserve 合并，两侧共用 validatePreserve 严格校验（R4）。
+   * 候选记录拆分 preserveRequest（请求级，commit 权威合并的来源之一）与 preserveDoc（信息性）。
    */
   async edit({ baseRevision, operation, preserve = [], requestId }) {
     const reqId = requestId ?? `req-${fnv1aHex(stableStringify(['edit', baseRevision, operation, preserve]))}`;
     return this._mutate(reqId, ['edit', baseRevision, operation, preserve], async () => {
       const base = await this._getCompiled(baseRevision);
+      const kind = docKindOf(base.document);
+      const preserveRequest = validatePreserve(preserve, base.document, kind); // R4：拼错/未知目标/未知类别在此明确拒绝
+      const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
+      const mergedPreserve = [...preserveDoc, ...preserveRequest];
       const { doc: candDoc, plan } = applyAnyOperation(base.document, operation); // 形状/范围错误向上抛（CANDIDATE_INVALID 等）
       const candidate = compileAny(candDoc, { toolVersion: this.toolVersion });
-      const mergedPreserve = [...preserveFromAnyDocument(base.document), ...preserve];
       const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve });
       const candidateId = `c-${fnv1aHex(stableStringify([baseRevision, operation, mergedPreserve]))}`;
       const previews = { base: await this._writePreviews(base, `${baseRevision}-base`), candidate: await this._writePreviews(candidate, candidateId) };
@@ -423,13 +458,14 @@ export class StudioStore {
         candidateId,
         baseRevision,
         operation,
-        preserve: mergedPreserve,
+        preserveRequest,
+        preserveDoc,
         doc: candidate.document,
         hashes: candidate.hashes,
         checks,
         previews,
       };
-      await writeFileAtomic(join(this.dir, 'candidates', `${candidateId}.json`), JSON.stringify(record, null, 2) + '\n');
+      await writeFileAtomic(workspacePath(this.dir, 'candidates', `${candidateId}.json`), JSON.stringify(record, null, 2) + '\n');
       return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews };
     });
   }
@@ -441,8 +477,11 @@ export class StudioStore {
     const reqId = requestId ?? `req-${fnv1aHex(stableStringify(['explore', baseRevision, spec, preserve]))}`;
     return this._mutate(reqId, ['explore', baseRevision, spec, preserve], async () => {
       const base = await this._getCompiled(baseRevision);
+      const kind = docKindOf(base.document);
+      const preserveRequest = validatePreserve(preserve, base.document, kind); // R4
+      const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
+      const mergedPreserve = [...preserveDoc, ...preserveRequest];
       const entries = exploreAnyOperation(base.document, spec);
-      const mergedPreserve = [...preserveFromAnyDocument(base.document), ...preserve];
       const seen = new Map([[base.hashes.renderHash, 'base']]);
       const candidates = [];
       for (const entry of entries) {
@@ -462,13 +501,14 @@ export class StudioStore {
           candidateId,
           baseRevision,
           operation,
-          preserve: mergedPreserve,
+          preserveRequest,
+          preserveDoc,
           doc: candidate.document,
           hashes: candidate.hashes,
           checks,
           previews: { base: null, candidate: previews },
         };
-        await writeFileAtomic(join(this.dir, 'candidates', `${candidateId}.json`), JSON.stringify(record, null, 2) + '\n');
+        await writeFileAtomic(workspacePath(this.dir, 'candidates', `${candidateId}.json`), JSON.stringify(record, null, 2) + '\n');
         candidates.push({
           candidateId,
           value: entry.value,
@@ -518,6 +558,13 @@ export class StudioStore {
         }
         // 篡改防护：不信落盘的 checks——用基准 + 操作重新推导文档、重编译并重新执行保护检查
         const base = await this._getCompiled(record.baseRevision);
+        // R5：保护列表也不信落盘——从基准修订重取文档级 constraints，与候选的请求级保护
+        // 重新合并并重算候选身份；三者（基准+操作+保护）任一被改动都会改变身份，即拒绝。
+        const mergedPreserve = this._authoritativePreserve(base, record);
+        const expectedCandidateId = `c-${fnv1aHex(stableStringify([record.baseRevision, record.operation, mergedPreserve]))}`;
+        if (expectedCandidateId !== record.candidateId || record.candidateId !== candidateId) {
+          fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的身份（基准+操作+保护）与重新计算不符（文件可能被篡改）`, { target: candidateId });
+        }
         const { doc: rederivedDoc, plan } = applyAnyOperation(base.document, record.operation);
         const recompiled = compileAny(record.doc, { toolVersion: this.toolVersion });
         if (recompiled.hashes.documentHash !== record.hashes.documentHash || recompiled.hashes.renderHash !== record.hashes.renderHash) {
@@ -526,7 +573,7 @@ export class StudioStore {
         if (stableStringify(rederivedDoc) !== stableStringify(record.doc)) {
           fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的文档与操作重新推导结果不符（文件可能被篡改）`, { target: candidateId });
         }
-        const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: record.preserve });
+        const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: mergedPreserve });
         if (checks.status !== record.checks.status) {
           fail('CANDIDATE_INVALID', `候选 '${candidateId}' 落盘状态（${record.checks.status}）与重新校验（${checks.status}）不符（文件可能被篡改）`, { target: candidateId });
         }
@@ -553,11 +600,30 @@ export class StudioStore {
     });
   }
 
+  /**
+   * R5：权威保护合并 = 基准文档的 constraints（重取，候选记录删不掉）+ 候选记录的
+   * 请求级 preserveRequest（严格校验后）。候选记录缺少 preserveRequest 视为旧格式或篡改，拒绝。
+   */
+  _authoritativePreserve(base, candidateRecord) {
+    const kind = docKindOf(base.document);
+    const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
+    if (!Array.isArray(candidateRecord.preserveRequest)) {
+      fail('CANDIDATE_INVALID', `候选 '${candidateRecord.candidateId}' 缺少 preserveRequest 记录（旧格式或文件被篡改）`, { target: candidateRecord.candidateId ?? null });
+    }
+    try {
+      const preserveRequest = validatePreserve(candidateRecord.preserveRequest, base.document, kind);
+      return [...preserveDoc, ...preserveRequest];
+    } catch (e) {
+      fail('CANDIDATE_INVALID', `候选 '${candidateRecord.candidateId}' 的请求级保护记录非法或已被篡改：${e.message}`, { target: candidateRecord.candidateId ?? null });
+    }
+  }
+
   async _readCandidate(candidateId) {
     let raw;
     try {
-      raw = await readFile(join(this.dir, 'candidates', `${candidateId}.json`), 'utf8');
-    } catch {
+      raw = await readFile(workspacePath(this.dir, 'candidates', `${assertSafeId(candidateId, 'candidateId', CANDIDATE_ID_RE)}.json`), 'utf8');
+    } catch (e) {
+      if (e instanceof StudioStoreError) throw e;
       fail('CANDIDATE_INVALID', `候选 '${candidateId}' 不存在`, { target: candidateId });
     }
     return JSON.parse(raw);

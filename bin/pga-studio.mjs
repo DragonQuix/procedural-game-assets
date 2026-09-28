@@ -56,6 +56,22 @@ for (let i = 0; i < rest.length; i++) {
   if (m) opts[m[1]] = m[2] ?? (rest[i + 1] && !rest[i + 1].startsWith('--') ? rest[++i] : true);
 }
 
+/** R4：命令级选项白名单——拼错的选项（如 --preserv）明确报用法错误，不悄悄变成无效参数。 */
+const COMMAND_OPTS = {
+  create: ['doc', 'out', 'display-scale', 'bg'],
+  inspect: ['doc', 'ws', 'revision', 'out', 'node', 'display-scale', 'bg'],
+  export: ['doc', 'ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
+  state: ['ws', 'display-scale', 'bg'],
+  edit: ['ws', 'base', 'op', 'target', 'params', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg'],
+  explore: ['ws', 'base', 'op', 'target', 'field', 'values', 'preserve', 'request-id', 'display-scale', 'bg'],
+  commit: ['ws', 'accept', 'restore', 'expected-head', 'request-id', 'display-scale', 'bg'],
+};
+if (COMMAND_OPTS[cmd]) {
+  for (const key of Object.keys(opts)) {
+    if (!COMMAND_OPTS[cmd].includes(key)) fail('INVALID_DOCUMENT', `命令 '${cmd}' 不支持选项 --${key}（可用：${COMMAND_OPTS[cmd].map((o) => `--${o}`).join(' ')}）`, 2);
+  }
+}
+
 function intOpt(name, fallback) {
   if (opts[name] === undefined) return fallback;
   const n = Number(opts[name]);
