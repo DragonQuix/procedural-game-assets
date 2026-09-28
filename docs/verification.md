@@ -256,6 +256,59 @@ HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类
   不据此宣称技能已经能稳定生成同级画面、所有 critic 均能区分风格与质量，或循环必然收敛。
 - 未修改用户级技能、Gauntlet、用户原图或独立试验项目；各软件安装刷新另行执行与验证。
 
+## S8 Studio 审查修复轮（2026-09-28，R1–R8 + D1）
+
+阶段：按《PGA_STUDIO_REVIEW.md》（0.6.0 独立审查）修复 8 类可靠性缺陷并把 9 个复现场景
+转为正式回归测试；统一文档阶段口径；同步 lockfile 版本元数据。
+依据：审查 §4（缺陷）/§5（合同）/§8（批次与验收）；ADR-0008–0011。
+
+### 实际完成（按审查 §8 批次）
+
+- 批次 A（R3/R2/R8，提交 c2763ad）：operators/character-ops 各提供 `operationFromExplore`，
+  探索记录、候选身份哈希与 commit 重执行共用同一份标准 operation；material.set/ramp.set 探索
+  候选可提交。角色像素/元数据/帧尺寸/剪辑变化分别计算；metadata 保护遍历全部帧（含 notCovered
+  与仅元数据变化帧）；UNCHANGED 须像素与元数据双不变（renderHash 一致）；checkedPoseKinds 限
+  引擎实际支持集（当前仅 rig），作者声明未适配种类按 UNSUPPORTED_SCOPE 拒绝。diffPixels 按
+  像素计（四字节一组），通道级差异另列 changedChannels。
+- 批次 B（R1/R6，提交 5a9b3cc）：_mutate 锁内重读 head/seq 与台账后再校验；同名修订仅允许
+  逐字节相同否则 REVISION_CONFLICT；state() 每次重读磁盘 head。台账两阶段 pending→done：
+  重放 pending 时既定效果在链上且内容匹配则补写 done 返回原结果，无效果则幂等前滚，
+  槽位被他人内容占据则 STALE_REVISION。
+- 批次 C（R4/R5/R7，提交 9faa73a）：validatePreserve 严格 schema（文档级与请求级共用）；
+  CLI 命令级选项白名单；commit 从基准重取文档级 constraints 并重算候选身份比对；
+  requestId/revision/candidateId 白名单 + 工作区遏制复查。
+- 批次 D（D1）：阶段状态表统一为"技术实现完成/部分完成/验证待办/明确不做"；
+  `package-lock.json` 版本 0.5.0 → 0.6.0；studio-cli.md 合同同步；ADR-0009/0011 增补修订段。
+
+### 实际执行的命令与结果
+
+- `npm test`：**339/339**（312 基线 + 27 新增回归，零回归；新增
+  `tests/unit/studio-review-unit.test.js` 13 项、`tests/integration/studio-review.test.js` 14 项）。
+- 复现脚本重放 `node work/review-diag/diag.mjs`（Pass 1 隔离诊断脚本，沙箱自清理）：
+  R1 STALE_REVISION；R2 REJECTED（12 帧附件点保护命中）且提交 CANDIDATE_INVALID；
+  R3 候选 OK、提交 r2；R4 INVALID_DOCUMENT；R5 篡改提交 CANDIDATE_INVALID；
+  R6 重试恢复原结果（r2）；R7 UNSAFE_PATH；R8 报告 7 = 实际 7。
+- 基线说明：本轮起点 312/312（4 次全量复跑中 1 次出现 1 项偶发失败，未能复现定位，保持观察；
+  不据此宣称存在已知回归）。
+
+### 技术结论
+
+- 审查 §8 最低验收逐条落实：复现场景全部转为断言正确行为的正式测试；六类操作（geometry/
+  material/ramp/palette/rig/art.set）均完整走过 edit 与 explore → commit → 重开 → 导出
+  （含 v2 局部色阶对象）；旧实例不覆盖历史；错误候选不移动 head；提交中途失败后同 requestId
+  可恢复原结果；非法保护与非法 ID 明确拒绝；元数据独立受保护。
+
+### 未做/边界（如实记录）
+
+- **未发行**：本轮只改开发源、测试与文档；载荷未重建（`skills/*/assets/toolkit` 保持 0.6.0 既有内容），
+  用户级安装未升级；修复版发行需明确授权后经 `tools/release.mjs` 生成并校验。
+- **本地完整性 ≠ 访问控制**：R5 类校验发现不一致即拒绝，但不防御拥有工作区完全写权限的对手
+  （审查 §4 口径）；本地单写者恢复合同不扩展到多写者协同。
+- M3 A/B 对照评测仍未做（沿用 S3 口径，不宣称弱 agent 收益）；视觉结论不变——本轮无美术改动，
+  渲染锚点（终端 `f645726c:6cebd809`、锈爪 `11c587dd:d890d15f`）经套件回归未变。
+- 旧格式候选（无 preserveRequest）与旧格式台账按安全方向处理（拒绝提交/视为完成记录），
+  既有工作区的未提交候选需重新 edit/explore 生成。
+
 ## S7 普通版 0.6.0 多宿主安装（2026-09-28，用户授权）
 
 范围：经用户明确授权，把普通版技能 0.6.0 安装/更新到各宿主 agent 软件。
@@ -330,8 +383,9 @@ HEAD f319b7c，结束时复核干净）。其验收报告中的"全部完成"类
 
 ### 下一项可执行任务
 
-无强制后续阶段（M0–M6 全部落地）。建议下一维护项：在获得用户授权后升级各宿主普通版技能安装
-到 0.6.0 并复核发现链路；或按 HANDOFF §10 在拿到独立评测资源时补 A/B 对照试验。
+M0–M6 技术实现全部完成；验证待办：M3 A/B 对照评测（未做）、各宿主技能列表刷新确认（本机无法代替）。
+建议下一维护项：在获得用户授权后升级各宿主普通版技能安装并复核发现链路（已于 S7 执行）；
+或按 HANDOFF §10 在拿到独立评测资源时补 A/B 对照试验。
 
 ## S5 PGA Studio M5（2026-09-28，ADR-0011）
 

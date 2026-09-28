@@ -120,6 +120,18 @@
 - [x] 主存储载荷 verifyTree 一致；安装副本 smoke 实跑通过
 - [ ] 各宿主重启/新会话后的技能列表刷新验证（本机无法代替，沿用既有口径）
 
+## S8 Studio 审查修复轮（2026-09-28，R1–R8 + D1）
+
+依据：`../docs/PGA_STUDIO_REVIEW.md`（0.6.0 独立审查）§4/§5/§8/§9；实测见 `../docs/verification.md` S8。
+
+- [x] 批次 A（c2763ad）：R3 探索项统一标准 operation（六类操作 edit/explore→commit→重开→导出全链路）、R2 角色元数据独立保护（含 notCovered 帧、UNCHANGED 双不变、checkedPoseKinds 收紧）、R8 diffPixels 按像素计
+- [x] 批次 B（5a9b3cc）：R1 锁内重读 head/台账、同名修订不覆盖（REVISION_CONFLICT）、state() 新鲜度；R6 台账两阶段 pending→done 与崩溃恢复（原结果恢复/幂等前滚/冲突 STALE）
+- [x] 批次 C（9faa73a）：R4 preserve 严格校验（文档级与请求级共用 + CLI 选项白名单）、R5 commit 重载权威 constraints 并重算候选身份、R7 文件 ID 白名单与路径遏制
+- [x] 批次 D：阶段口径统一（技术实现完成/部分完成/验证待办/明确不做）、package-lock 版本同步 0.6.0、verification.md S8、studio-cli.md 合同同步、ADR-0009/0011 修订段
+- [x] 9 个复现场景全部转为正式回归测试（新增 27 项）；全套件 339/339；复现脚本重放确认正确行为
+- [ ] 修复版载荷发行与用户级安装升级（需明确授权；本轮未发行、未升级）
+- [ ] M3 A/B 对照评测（沿用 S3 口径：未做，不宣称）
+
 ### 后续可选
 
 - A/B 对照评测（待独立评测资源）、M4/M5 留空项、MCP（待有不能读文件的宿主）

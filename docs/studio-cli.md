@@ -46,6 +46,7 @@ Studio 文档（.studio.json，唯一可编辑源）
 - 人类可读日志在 stderr，不要解析。
 - 退出码：0 成功；2 用法/输入错误；3 校验/编译/候选失败；4 覆盖或工作区路径保护；
   6 版本/请求冲突（STALE_REVISION / REQUEST_ID_CONFLICT）；7 工作区占用（WORKSPACE_BUSY，可重试）。
+- 各命令只接受白名单选项：拼错选项名（如 `--preserv`）退出 2，不会悄悄变成无效参数。
 - 图像查看：命令返回的预览路径是仓库内 PNG 文件。用你的图像读取工具实际打开查看——
   **返回路径不等于已看图**；`native` 是原生尺寸，`display` 是最近邻放大的使用预览。
 
@@ -193,9 +194,14 @@ node bin/pga-studio.mjs commit --ws <dir> --restore rN --expected-head rM [--req
 
 - `--expected-head` 必须等于当前 head（用 state 查），否则 STALE_REVISION（退出码 6）。
 - 候选派生基准必须等于当前 head，否则 STALE_REVISION——先看新状态再重新探索。
-- 接受时会重新校验候选（不信落盘结果）；被 REJECTED 或篡改的候选一律拒绝。
+- 接受时会重新校验候选（不信落盘结果）：从基准修订重取文档级 constraints、与候选的请求级
+  保护重新合并并重算候选身份，被 REJECTED 或篡改的候选一律拒绝。
 - restore 创建引用旧内容的新修订（历史不抹除）。
 - 同一 `--request-id` + 相同内容重试返回同一结果（不重复接受）；同 ID 不同内容报 REQUEST_ID_CONFLICT。
+- requestId 只允许字母数字开头、不超过 64 字符的字母数字与 `.` `_` `-`（禁止路径分隔符与 `..`），
+  非法 ID 退出 4；revision（`rN`）与 candidateId（`c-xxxxxxxx`）同样校验。
+- 提交中途失败（如进程崩溃）是可恢复的：用同一 requestId + 相同内容重试——效果已落盘的
+  恢复原提交结果，未落盘的安全重跑；state 的 `pendingRequests` 列出未完成请求。
 
 ### export — 导出既有资产格式
 
@@ -235,10 +241,15 @@ node bin/pga-studio.mjs export --doc <file.json> --out <dir>
 - `palette` 单字符键 → 颜色（ASCII 图与绘制共用）；`art.head/torso` 为 ASCII 像素图（字符须取自调色板或 `.` 空格）。
 - `rig` 骨架参数经 solvePose 求解；`feetY` 是脚底边界行，接地由求解器自动保持。
 - `poses` 姿态为显式数据；`kind ∈ rig|prone|dead|dive|ball`。
-  `template.checkedPoseKinds` 声明**不变量检查适配的姿态种类**（首版 `["rig"]`）；
-  其余姿态照常渲染，但在候选报告中列为 `notCoveredChanges`（明确不假装覆盖）。
+  `template.checkedPoseKinds` 声明**不变量检查覆盖的姿态种类**，但覆盖范围由引擎实际适配能力
+  决定（当前仅 `["rig"]`）：声明其他种类校验期即 UNSUPPORTED_SCOPE 拒绝，不能自报已检查；
+  未适配姿态照常渲染，但在候选报告中列为 `notCoveredChanges`（明确不假装覆盖）。
 - `constraints` 仅 `metadata` 类别：`anchor` / `attachments[.<名>]` / `frameSize`；
   pixels/structure 类别校验期即拒绝（UNSUPPORTED_SCOPE，未实现）。
+- 角色候选检查：锚点（脚底中线）不动、接地（包围盒底缘）不变；像素与元数据变化**分开报告**
+  （`pixelChangedFrames` / `metadataChangedFrames`；`diffPixels` 按像素计，通道级另列
+  `changedChannels`）；显式 metadata 保护对全部帧生效（含 notCovered 帧）；
+  `UNCHANGED` 要求像素与元数据双不变——附件点移动但像素不变的修改会如实报为 OK 并列出元数据变化帧。
 
 角色操作（edit 用 `--op <id> --target <目标> --value <值>`；explore 用 `--values`）：
 
@@ -248,7 +259,6 @@ node bin/pga-studio.mjs export --doc <file.json> --out <dir>
 | `rig.set` | `thigh/shin/thick/hipSpread/hipY/torsoDrop/headDx/headDrop` 或 `guns.<方向>.<len|back>` | 整数（范围见 inspect capabilities） | solvePose 重解；接地保持；枪口等附件点一致联动 |
 | `art.set` | `head` / `torso` | ASCII 行 JSON 数组 | 部件替换；尺寸变化会合法移动头部附件点（报告如实呈现） |
 
-角色候选检查：锚点（脚底中线）不动、接地（包围盒底缘）不变、受影响帧/剪辑/附件点自动报告。
 inspect 的 `capabilities` 给出每个字段当前值与范围；previews 下有逐帧 native/display PNG 与
 **player.html 播放页**（按剪辑时长真实播放，可暂停/步进/切剪辑；动画验收请实际观看播放）。
 
@@ -260,5 +270,7 @@ inspect 的 `capabilities` 给出每个字段当前值与范围；previews 下�
 - `--preserve '<json数组>'` 追加请求级保护项，元素形如
   `[{"kind":"pixels","target":"terminal.shell"},{"kind":"metadata","target":"anchor"}]`，
   与文档内 constraints 合并生效（判责同 §2 的保守语义，别滥加）。
+  保护项严格校验：拼错 kind、不存在或形状错误的 target、多余字段都会明确报错（退出 3），
+  不会被静默忽略——报错就修正后重发，不要换种写法绕过。
 - 样例文档：`examples/studio/terminal.studio.json`（/1 四节点机械终端，内画布 30×30，输出 32×32）、
   `examples/studio/wrench.studio.json`（/2 扳手：poly 手柄/钳口 + disc 螺栓 + shade-diag，输出 26×26）。

@@ -51,6 +51,20 @@ agent 对指定部件做有限修改、比较少量候选、接受或回退，�
 - 候选与历史只属于 Studio 工作区，不进入游戏运行时帧结构与对外 manifest。
 - 后续阶段（多帧、风格包）必须沿用同一事务与保护语义，不得绕开 protect 出图。
 
+## 修订（2026-09-28 审查修复轮，R1/R3–R7）
+
+按《PGA_STUDIO_REVIEW.md》对本决定的实现漏洞做收紧，语义方向不变：
+
+- 锁内从磁盘重读 head/seq 与请求台账后再校验 expectedHead 与候选基准（R1）；
+  同名修订文件仅允许逐字节相同（崩溃重试幂等接管），否则 REVISION_CONFLICT，历史绝不静默覆盖。
+- 幂等台账改两阶段 pending→done（R6）：提交中途失败后同 requestId 重试，既定效果
+  在链上且内容匹配则恢复原结果，无效果则幂等前滚，槽位冲突则 STALE_REVISION。
+- 探索项 → 标准 operation 唯一转换（`operationFromExplore`，R3）；候选身份 =
+  [基准 + 标准 operation + 权威合并保护] 的内容哈希；commit 从基准重取文档级 constraints
+  重算合并与身份（R5），候选记录只存请求级 preserveRequest 与信息性 preserveDoc。
+- requestId/revision/candidateId 白名单 + resolve 后工作区遏制复查（R7）；
+  请求级 preserve 与文档 constraints 共用严格 schema 校验（R4）。
+
 ## 备选方案（已否决）
 
 - **信任候选落盘的检查状态**：候选文件可被手改；commit 必须重新校验，否则保护形同虚设。
