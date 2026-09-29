@@ -4,6 +4,42 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S10 Studio v1.4 开发交付（2026-09-30，未独立认证）
+
+依据：`../CONTEXT.md`、ADR-0013、`plans/studio-v1_4-delivery.md`。
+package/toolkit=0.8.0，document=pga-studio/4。此节只记录 Codex 开发者自检，不是 ZCode 独立结论。
+
+| 范围 | 本轮结果 |
+|---|---|
+| 新增关系、事务、身份 lint、预启动 gate 回归 | 27 PASS / 0 FAIL |
+| 开发源回归（显式排除 v0.2 host-only controls） | 405 PASS / 0 FAIL；被名称过滤的控制解测试不在统计中 |
+| 普通发行载荷回归 | 393 PASS / 0 FAIL / 7 SKIP |
+| v0.2 preparation hash + agent-facing lint | HASH_CHECK_PASS；12 个任务材料文件；没有执行控制解或模型 |
+| 普通载荷发行清单 | 207 文件一致，经 release.mjs 生成 |
+| 循环版载荷 | 132 文件一致，只检查、未重建 |
+| 新 demo | 脚本与 evidence 格式已写，语法检查通过；运行/审图留给 ZCode |
+
+新增测试覆盖 evaluator 的 contact/gap/overlap/tolerance/unsupported/missing-node、两种 follower
+策略与 invariant、整数格、冲突和多个 required relations、preserveRelations 的 true/ID-list/省略、
+protection AND relation、安全域缩减和回退、合同改变失效、inspect、候选篡改、提交/导出/restore、
+旧模式无关系兼容。旧测试没有删除，仅将 schema 支持列表补到 /4。
+
+载荷 7 个 SKIP：原有依赖开发仓库发行/安装目录的 6 项（见 S9.1），以及新的 v0.2 host-only
+controls 测试。正式实验目录不随通用载荷发行，所以该测试明确跳过而不假装覆盖。
+源码控制解测试按本轮职责边界未运行，供 ZCode 独立核验任务可行性和两臂观察等价。
+
+机器记录：`evidence/studio-v1_4/developer-checks.json`。本地日志：`work/studio-v14-source-tests.log`、
+`work/studio-v14-payload-tests.log`。新回归首轮发现 -0 数值规范化问题并已修复。
+Windows autocrlf 导致发行载荷纯换行差异，已在开发源 release 脚本中规范化文本后重新生成，
+没有手改载荷或重写清单掩盖不一致。
+
+v0.1 全目录保持不变，NO-GO 与 qualified evidence 边界见新增产品解释。
+D13=真实 tag v0.7.0/37317b5，D14=0.8.0/20b81c1 candidate snapshot；两臂逐文件哈希已记录。
+v0.2 没有 runs/reviews/results，没有 participant/reviewer/model 调用，也没有正式模型/宿主冻结。
+准备 gate 图像与基线 PNG 不等于执行视觉 gate。独立认证、D14 final freeze 和正式 benchmark 由 ZCode 完成。
+
+相对 v0.7.0，core/recipes/bake/geometry 与既有 v1.3 demo 源未改；循环载荷、用户级技能安装未升级。
+
 ## S9.1 PR #1 合并前修复（2026-09-29）
 
 依据：`../CONTEXT.md`、ADR-0009/0012、`studio-cli.md`。保持原架构；不新增 rebase、

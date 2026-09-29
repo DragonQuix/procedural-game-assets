@@ -48,6 +48,15 @@ test('wrong arm, extra installed file and identity lint all block launch', async
   const good = { ...args, trialRoot: join(args.materialRoot, 'trial2') }; await prepareTrial(good);
   await writeFile(join(good.trialRoot, 'staged/kit/extra.txt'), 'unexpected');
   assert.equal((await launchParticipant({ ...good, createParticipant() { assert.fail(); } })).status, 'LAUNCH_BLOCKED');
+  const prompt = 'Compare the left candidate and Node A.';
+  await writeFile(join(args.materialRoot, 'task/participant.md'), prompt);
+  const changed = structuredClone(args.manifest);
+  changed.tasks.C.common.files = await hashTree(join(args.materialRoot, 'task'));
+  changed.tasks.C.common.sha256 = treeHash(changed.tasks.C.common.files);
+  const lintBlocked = await prepareTrial({ ...args, manifest: changed, trialRoot: join(args.materialRoot, 'trial3') });
+  assert.equal(lintBlocked.status, 'LAUNCH_BLOCKED');
+  assert.match(lintBlocked.reason, /symbolic identity/);
+  assert.equal(lintBlocked.taskExposed, false);
 });
 
 test('v0.2 mirrored review retains X/Y mappings and emits independent files without key leakage', async (t) => {

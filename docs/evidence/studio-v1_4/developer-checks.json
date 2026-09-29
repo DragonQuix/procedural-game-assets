@@ -1,0 +1,21 @@
+{
+  "schema": "pga-developer-checks/1",
+  "date": "2026-09-30",
+  "product": "Studio v1.4",
+  "toolkitVersion": "0.8.0",
+  "independentCertification": "NOT_RUN",
+  "formalBenchmark": "NOT_RUN",
+  "modelCalls": 0,
+  "checks": [
+    { "command": "node --test --test-reporter=spec tests/unit/studio-relations.test.js tests/integration/studio-relations.test.js tests/unit/benchmark-identity.test.js tests/integration/benchmark-payload-gate.test.js", "passed": 27, "failed": 0, "skipped": 0, "kind": "developer-self-check" },
+    { "command": "node --test --test-reporter=spec tests/integration/benchmark-payload-gate.test.js", "passed": 7, "failed": 0, "skipped": 0, "kind": "developer-self-check", "note": "补充真实身份 lint 拒绝断言后单独重跑；不涉及模型调用。" },
+    { "command": "node --test --test-reporter=spec --test-skip-pattern='v0.2 host-only controls' tests/**/*.test.js", "passed": 405, "failed": 0, "skipped": 0, "excludedByName": ["v0.2 host-only controls: true toolkit arms, feasible contracts and observation parity"], "kind": "developer-self-check", "log": "work/studio-v14-source-tests.log" },
+    { "command": "node --test --test-reporter=spec tests/**/*.test.js", "cwd": "skills/procedural-game-assets/assets/toolkit", "passed": 393, "failed": 0, "skipped": 7, "kind": "developer-self-check", "log": "work/studio-v14-payload-tests.log" },
+    { "command": "node tests/PGA_RELATION_BENCHMARK_v0_2/prepare-materials.mjs --check", "result": "HASH_CHECK_PASS", "agentFacingMaterialFiles": 12, "kind": "hash-and-lint-only" },
+    { "command": "node tools/release.mjs --check", "result": "PASS", "fileCount": 207 },
+    { "command": "node tools/release.mjs --skill procedural-game-assets-loop --check", "result": "PASS", "fileCount": 132, "rebuilt": false }
+  ],
+  "deferred": ["ZCode 独立完整测试", "v1.4 demo 执行和真实视觉核验", "v0.2 机械控制解及两臂观察等价独立执行", "vision gate 真实模型输入验证", "D14 final freeze", "正式模型与宿主冻结", "正式 participant/reviewer runs"],
+  "unchanged": ["v0.1 report/analysis/interventions/frozen materials", "src/core", "src/recipes", "src/bake", "src/geometry", "examples/studio/v13-demo.mjs", "循环版载荷", "用户级技能安装"],
+  "notes": ["第一次新增回归 16/17 通过，发现并修复 exact contact 的 -0；修复后 27/27 通过。", "发行脚本在复制后、计算清单前统一文本 CRLF 为 LF；未手工修改派生载荷或清单。", "测试存在或开发者自检通过均不等于独立验证通过，不宣称 agent 收益。"]
+}
