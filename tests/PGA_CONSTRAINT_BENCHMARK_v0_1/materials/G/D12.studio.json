@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "pga-studio/2",
+  "id": "ore-pressure-unit",
+  "seed": 8719,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "constraint-holdout",
+    "version": 1,
+    "ramps": {
+      "shell": [
+        "#28343f",
+        "#53716b",
+        "#98ada0",
+        "#d4dac2"
+      ],
+      "focal": [
+        "#473132",
+        "#98654c",
+        "#d8ab6b",
+        "#eee0b1"
+      ]
+    }
+  },
+  "canvas": {
+    "w": 50,
+    "h": 40,
+    "outline": "#15232a"
+  },
+  "nodes": [
+    {
+      "id": "pump.base",
+      "kind": "panel",
+      "x": 8,
+      "y": 31,
+      "w": 34,
+      "h": 5,
+      "ramp": "shell",
+      "material": "bevel-metal",
+      "layer": 0
+    },
+    {
+      "id": "pump.body",
+      "kind": "panel",
+      "x": 17,
+      "y": 6,
+      "w": 16,
+      "h": 25,
+      "ramp": "shell",
+      "material": "bevel-metal",
+      "layer": 1
+    },
+    {
+      "id": "pump.gauge",
+      "kind": "panel",
+      "x": 20,
+      "y": 15,
+      "w": 10,
+      "h": 8,
+      "ramp": "focal",
+      "material": "bevel-metal",
+      "layer": 2
+    },
+    {
+      "id": "pump.readout",
+      "kind": "panel",
+      "x": 23,
+      "y": 17,
+      "w": 4,
+      "h": 4,
+      "ramp": "shell",
+      "material": "bevel-metal",
+      "layer": 3
+    }
+  ],
+  "anchor": {
+    "x": 25,
+    "y": 36
+  },
+  "attachments": {
+    "sensor": {
+      "x": 25,
+      "y": 19
+    }
+  },
+  "constraints": [
+    {
+      "kind": "pixels",
+      "target": "pump.base"
+    },
+    {
+      "kind": "pixels",
+      "target": "pump.gauge"
+    },
+    {
+      "kind": "metadata",
+      "target": "anchor"
+    },
+    {
+      "kind": "metadata",
+      "target": "attachments"
+    }
+  ]
+}

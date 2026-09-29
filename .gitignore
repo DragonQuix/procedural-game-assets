@@ -32,3 +32,7 @@ tests/pga-ad-host/*.console.log
 
 # v1.2 scored 批次归档（冻结 preregistration/manifest/分析汇总；参试原始数据仍在忽略目录）
 !tests/pga-ad-host/archives-v1_2/
+
+# 新实验冻结工具包携带唯一依赖；不是新安装。
+!tests/PGA_CONSTRAINT_BENCHMARK_v0_1/frozen/*/node_modules/
+!tests/PGA_CONSTRAINT_BENCHMARK_v0_1/frozen/*/node_modules/pngjs/
