@@ -13,6 +13,8 @@
 - D13：冻结本轮开发源的独立载荷，逐文件 SHA-256 见 preparation-manifest.json。
   正式候选路径取 manifest.toolkits.D13.path；0.7.0 定版追加新快照，初期草案快照保留于
   archivedToolkits，不参加实验。这样无需覆盖任何已生成载荷。
+  PR #1 修复后正式候选更新为 `D13-0.7.0-4cd1666`（source=`4cd1666`），旧 `D13-0.7.0`
+  与初期 `D13` 均保留。`--finalize` 按版本和源提交追加目录，拒绝覆盖与未提交产品源。
 - `materials/G`、`materials/P`：全新 hold-out 布局，不来自两份 demo 或 v1.2 正式资产。
   D12/D13 起始 RGBA 完全一致。D12 用旧 constraints；D13 另外携带最终资产合同。
   独立 evaluate 对两组始终施加同一个最终 pixel/metadata/node 合同。
@@ -34,7 +36,8 @@ attachments、bounds、信号灯与插座不变。尺寸与像素以 task-contra
 
 候选预算=6 个不同、实际物化并可被观察的渲染状态，排除基线和同状态确定性复编译；
 已物化但被拒绝的候选仍计数。safe-domain 校验探针只返回可行值和失败诊断，不提供图像、
-审美排名或选择候选；其试编译数单列 validationProbeCount，不计为可观察候选。
+审美排名或选择候选；其调用数单列 validationProbeCount（包括 apply 阶段拒绝），实际试编译
+次数另记 validation.trialCompiles，不计为可观察候选。同次 explore 复用域不重复计探针。
 因此计算预算不相同，不把候选数等同于总渲染成本。本轮明确评估功能包而非等算力效果。
 
 Primary 1：提交、确定性、共同保护合同、几何目标、协议、预算与双 reviewer MEETS 全部通过
@@ -66,6 +69,9 @@ D12 基线发生率为 0 时判 INCONCLUSIVE，不事后改阈值。最多只报
 `node tests/PGA_CONSTRAINT_BENCHMARK_v0_1/prepare-materials.mjs --check` 校验冻结载荷和材料，
 并要求不存在 runs/reviews/results/execution-freeze-manifest。prepare 只允许新目录，拒绝覆盖。
 preparation-manifest.json 记录 experimentRunsCreated=0、modelCalls=0；protocol execution.started=false。
+清单另记录协议 SHA-256 和共同观察纯模块/依赖的哈希；共同观察从当前 D13 冻结目录取模块，
+只给两组相同 frame 观察接口，不向 D12 暴露新编辑能力。check 核对全部旧快照、起始像素、
+控制解、三种共同观察输出，以及对 D12/D13 真实编译结果施加的同一独立最终合同。
 
 冻结前还需选定模型/宿主、验证共享计数 runner 与宿主证据通道、签署全部材料及提示词 SHA-256，
 获得正式执行授权。目前不是 READY_TO_RUN；本轮不会补跑这些 agent 实验。

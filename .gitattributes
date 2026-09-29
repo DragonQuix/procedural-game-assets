@@ -2,3 +2,4 @@
 skills/*/assets/toolkit/** -text
 tests/PGA_CONSTRAINT_BENCHMARK_v0_1/frozen/** -text
 tests/PGA_CONSTRAINT_BENCHMARK_v0_1/materials/** -text
+tests/PGA_CONSTRAINT_BENCHMARK_v0_1/protocol-draft.json -text

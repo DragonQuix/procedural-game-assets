@@ -11,12 +11,15 @@ import { createProtectedDocument, compileStudioDocument } from '../../src/studio
 import { applyOperation } from '../../src/studio/operators.js';
 import { checkCandidate, preserveFromDocument } from '../../src/studio/protect.js';
 import { encodePNG } from '../../src/export/png.js';
+import { checkAssetProtection } from '../../src/studio/protection-contract.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const kit = dirname(fileURLToPath(import.meta.url));
 const frozen = join(kit, 'frozen');
 const oldCommit = '4fd4330';
 const json = async (file, value) => { await mkdir(dirname(file), { recursive: true }); await writeFile(file, JSON.stringify(value, null, 2) + '\n'); };
+const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
+const sharedObservationFiles = ['src/observe/frame-views.js', 'src/core/raster.js', 'src/core/transform.js'];
 async function hashTree(dir) {
   const files = {};
   async function walk(current) {
@@ -31,34 +34,70 @@ async function hashTree(dir) {
 if (process.argv.includes('--finalize')) {
   const manifest = JSON.parse(await readFile(join(kit, 'preparation-manifest.json')));
   for (const arm of ['D12', 'D13']) assert.deepEqual(await hashTree(join(frozen, manifest.toolkits[arm].path ?? arm)), manifest.toolkits[arm].files);
-  const path = 'D13-0.7.0';
+  for (const archived of Object.values(manifest.archivedToolkits ?? {})) assert.deepEqual(await hashTree(join(frozen, archived.path)), archived.files);
+  assert.deepEqual(await hashTree(join(kit, 'materials')), manifest.materials);
+  const source = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
+  assert.equal(execFileSync('git', ['diff', 'HEAD', '--', 'src', 'bin', 'package.json', 'package-lock.json'], { cwd: root, encoding: 'utf8' }), '', '先提交产品源，再追加可追溯快照');
+  const version = JSON.parse(await readFile(join(root, 'package.json'))).version;
+  const path = `D13-${version}-${source.slice(0, 7)}`;
   await mkdir(join(frozen, path));
   for (const name of ['src', 'bin', 'package.json', 'package-lock.json']) await cp(join(root, name), join(frozen, path, name), { recursive: true });
   await cp(join(root, 'node_modules/pngjs'), join(frozen, path, 'node_modules/pngjs'), { recursive: true });
-  manifest.archivedToolkits = { 'D13-initial-draft': { ...manifest.toolkits.D13, path: 'D13' } };
-  manifest.toolkits.D13 = { path, source: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(), files: await hashTree(join(frozen, path)) };
+  const previous = manifest.toolkits.D13, previousPath = previous.path ?? 'D13';
+  manifest.archivedToolkits = { ...manifest.archivedToolkits, [previousPath]: { ...previous, path: previousPath } };
+  manifest.toolkits.D13 = { path, source, files: await hashTree(join(frozen, path)) };
+  manifest.protocolSha256 = sha256(await readFile(join(kit, 'protocol-draft.json')));
+  manifest.sharedObservationFiles = {};
+  for (const file of sharedObservationFiles) {
+    const hash = sha256(await readFile(join(root, file)));
+    assert.equal(hash, previous.files[file], `共同观察实现不能随本轮修复改变：${file}`);
+    manifest.sharedObservationFiles[file] = hash;
+  }
   await json(join(kit, 'preparation-manifest.json'), manifest);
-  console.log('D13 0.7.0 草案快照已追加；旧快照保留，未执行实验');
+  console.log(`${path} 草案快照已追加；全部旧快照保留，未执行实验`);
 } else if (process.argv.includes('--check')) {
   const manifest = JSON.parse(await readFile(join(kit, 'preparation-manifest.json')));
   for (const arm of ['D12', 'D13']) assert.deepEqual(await hashTree(join(frozen, manifest.toolkits[arm].path ?? arm)), manifest.toolkits[arm].files);
   for (const archived of Object.values(manifest.archivedToolkits ?? {})) assert.deepEqual(await hashTree(join(frozen, archived.path)), archived.files);
   assert.deepEqual(await hashTree(join(kit, 'materials')), manifest.materials);
+  const protocol = JSON.parse(await readFile(join(kit, 'protocol-draft.json')));
+  assert.equal(protocol.status, 'DRAFT_NOT_RUN');
+  assert.equal(protocol.approvedToExecute, false);
+  assert.deepEqual(protocol.execution, { started: false, participantRuns: 0, reviews: 0, results: null });
+  assert.equal(manifest.experimentRunsCreated, 0); assert.equal(manifest.modelCalls, 0);
+  if (manifest.protocolSha256) assert.equal(sha256(await readFile(join(kit, 'protocol-draft.json'))), manifest.protocolSha256);
+  for (const [file, hash] of Object.entries(manifest.sharedObservationFiles ?? {})) {
+    assert.equal(manifest.toolkits.D13.files[file], hash);
+  }
   const armModules = {};
   for (const arm of ['D12', 'D13']) armModules[arm] = await import(pathToFileURL(join(frozen, manifest.toolkits[arm].path ?? arm, 'src/studio/dispatch.js')));
+  const { candidateContactSheet, targetCrop, diffOverlay } = await import(pathToFileURL(join(frozen, manifest.toolkits.D13.path ?? 'D13', 'src/observe/frame-views.js')));
   for (const [task, spec] of Object.entries(materials())) {
-    const pixels = [];
+    const starts = [], pixels = [], views = [];
+    const contract = JSON.parse(await readFile(join(kit, 'materials', task, 'task-contract.json'))).protection;
+    assert.deepEqual(contract, createProtectedDocument(spec.baseline, spec.protection).protection);
+    const contractBaseline = compileStudioDocument(contract.baseline);
     for (const arm of ['D12', 'D13']) {
       const api = armModules[arm], doc = JSON.parse(await readFile(join(kit, 'materials', task, `${arm}.studio.json`)));
       const before = api.compileAny(doc), next = api.applyAnyOperation(doc, spec.control), after = api.compileAny(next.doc);
+      assert.deepEqual(doc, arm === 'D12' ? spec.baseline : createProtectedDocument(spec.baseline, spec.protection));
       assert.equal(api.checkAnyCandidate({ baseCompiled: before, candidateCompiled: after, plan: next.plan, preserve: api.preserveFromAnyDocument(doc) }).status, 'OK');
       if (arm === 'D13') assert.equal(after.protection.status, 'PASS');
+      // 独立最终合同作用于两组真实编译结果；不向 D12 注入编辑能力或重烘焙它的输出。
+      assert.equal(checkAssetProtection(contract, contractBaseline, { ...after, document: { ...after.document, protection: contract } }).status, 'PASS');
+      starts.push(before.asset.frames[0].rgba);
       pixels.push(after.asset.frames[0].rgba);
+      const baseFrame = before.asset.frames[0], finalFrame = after.asset.frames[0];
+      views.push({ crop: targetCrop(baseFrame, { rect: before.sceneMap.nodes.find((n) => n.id === spec.control.target).frameRect, scale: 4 }),
+        sheet: candidateContactSheet([{ frame: baseFrame }, { frame: finalFrame }], { scale: 4 }),
+        diff: diffOverlay(baseFrame, finalFrame, { scale: 4 }) });
     }
+    assert.deepEqual(starts[0], starts[1]);
     assert.deepEqual(pixels[0], pixels[1]);
+    assert.deepEqual(views[0], views[1]);
   }
   for (const name of ['runs', 'reviews', 'results', 'execution-freeze-manifest.json']) assert.ok(!(await readdir(kit)).includes(name), `意外实验产物 ${name}`);
-  console.log(JSON.stringify({ status: 'PASS', experiment: 'NOT_RUN', toolkitFiles: Object.fromEntries(Object.entries(manifest.toolkits).map(([a, v]) => [a, Object.keys(v.files).length])) }));
+  console.log(JSON.stringify({ status: 'PASS', experiment: 'NOT_RUN', baselinePixelsEqual: true, sharedObservationsEqual: true, independentFinalContract: 'PASS', toolkitFiles: Object.fromEntries(Object.entries(manifest.toolkits).map(([a, v]) => [a, Object.keys(v.files).length])) }));
 } else if (process.argv.includes('--prepare')) {
   await mkdir(frozen); // 不覆盖冻结载荷；新冻结必须用新包目录。
   const files = execFileSync('git', ['ls-tree', '-r', '--name-only', oldCommit, '--', 'src', 'bin', 'package.json', 'package-lock.json'], { cwd: root, encoding: 'utf8' }).trim().split(/\r?\n/);
