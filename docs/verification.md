@@ -4,6 +4,103 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S9.1 PR #1 合并前修复（2026-09-29）
+
+依据：`../CONTEXT.md`、ADR-0009/0012、`studio-cli.md`。保持原架构；不新增 rebase、
+不改 hold-out、candidate budget 或 Go/No-Go，不运行 12-run。下列为本次实际重新验证，
+下方 S9 保留原交付时的历史计数。
+
+| 实际命令/范围 | 结果 |
+|---|---|
+| `node --test --test-reporter=spec tests/unit/studio-geometry-safe.test.js tests/integration/studio-safe.test.js tests/integration/studio-observation.test.js tests/integration/studio-contract.test.js` | 22 PASS、0 FAIL、0 SKIP |
+| `node --test --test-reporter=spec "tests/**/*.test.js"`（开发源） | 377 PASS、0 FAIL、0 SKIP |
+| 同一全套命令（普通技能 assets/toolkit 目录） | 366 PASS、0 FAIL、6 SKIP；总计 372 |
+| `node examples/studio/v13-demo.mjs --out work/pr1-v13-demo --evidence work/pr1-v13-evidence` | Demo A/B PASS |
+| 普通载荷内同一 demo，输出到仓库 `work/pr1-portable-demo`、`work/pr1-portable-evidence` | Demo A/B PASS |
+| `node tools/release.mjs`、`node tools/release.mjs --check` | 192 文件一致；仅普通载荷重建 |
+| `node tools/release.mjs --skill procedural-game-assets-loop --check` | 132 文件一致；未重建 |
+| `node tests/PGA_CONSTRAINT_BENCHMARK_v0_1/prepare-materials.mjs --finalize`、`--check` | 追加 D13-0.7.0-4cd1666（68 文件），D12 64 文件、全部旧快照和材料一致；NOT_RUN |
+| `git diff --check` | 通过 |
+
+日志：`work/pr1-focused-tests.log`、`work/pr1-source-tests.log`、`work/pr1-payload-tests.log`；
+机器摘要：`evidence/studio-v1_3/pr1-verification.json`。
+
+新增 7 项顶层测试并扩充旧断言。260×260 fixture 的理论域 pixelWork=35,694,880，
+超过生产默认 32,000,000；inspect 保留 SEARCH_LIMIT，无 partial safeRange。合法 edit
+以 POINT_FALLBACK 真实编译并提交；explore 的 [24,35,300,26] 四次点检查中三次进入编译，
+仅两个合法项物化；保护违规和 apply 越界均无候选/PNG。小资产完整域只枚举一次，后续复用
+不重复计探针。另验证 maxSearch 超限回退及非 SEARCH_LIMIT 异常不被吞掉。
+
+safeBinding 核对字段、固定参数（稳定键顺序）和合同哈希，不授权自报 values。
+观察与 commit 共用身份、派生内容、哈希及保护重验；VALID 才出图，REJECTED/STALE/TAMPERED
+只留显式诊断。accept/restore 后 baseline 不变的断言通过，无 implicit rebase。
+
+普通载荷 6 个 SKIP 的完整测试名称：
+
+1. `真实载荷链：init → 冒烟测试 → --check → 静态服务 HTTP`
+2. `安装核心`
+3. `循环版独立载荷：复制后 CLI、专名安装与原版共存`
+4. `Git 携带：保留 pngjs 与精确字节，autocrlf=true 检出后仍通过清单`
+5. `register-harnesses`
+6. `普通技能可独立携带：视觉标准随清单发行，入口与诊断链接均在包内可读`
+
+这些测试依赖开发仓库技能/安装/发行目录，在开发源全部通过；没有 Studio v1.3
+protection、geometry、safe-domain 或观察核心测试被跳过。
+
+新 D13 source=`4cd1666`，旧 `D13` 与 `D13-0.7.0` 保留于 archivedToolkits。
+manifest 更新逐文件哈希、协议 SHA-256 与共同观察模块哈希；check 验证两组起始 RGBA、
+控制解 RGBA、crop/contact sheet/diff 输出一致，真实编译结果通过同一独立 final contract。
+协议、hold-out、旧冻结工具、共享观察纯层与 core/recipes/bake/geometry 相对 `7b359bc`
+无差异。模型/宿主/推理配置和批准仍未冻结，participant/review/modelCalls 均为 0。
+
+## S9 Studio v1.3 / 工具包 0.7.0（2026-09-29）
+
+依据：`CONTEXT.md`、ADR-0012、`plans/studio-v1_3-delivery.md`。v1.2 终审的正式解释已归档于
+`experiments/pga-ab-v1_2-final-audited.md`，原始 scored/review/key/technical/preregistration/manifest
+没有改写；接手时用户已有未跟踪的审计/评估资料在实现期间只读保留，
+后续按用户要求分为评估/冻结资料与终审证据两个原子提交原样入库。
+
+| 实际命令/范围 | 结果 |
+|---|---|
+| `node --test --test-reporter=spec "tests/**/*.test.js"`（开发源） | 370 PASS、0 FAIL、0 SKIP |
+| 同一命令（普通技能 assets/toolkit 目录） | 359 PASS、0 FAIL、6 SKIP（依赖开发仓库安装/发行目录的顶层测试；其子项不展开） |
+| `node tests/PGA_AB_BENCHMARK_v1_2/organizer/reviewer-self-test.mjs --repo . --out work/studio-v13-reviewer-isolation` | 9/9 PASS |
+| `node tests/PGA_AB_BENCHMARK_v1_2/organizer/self-test.mjs --repo . --out work/studio-v13-material-selftest` | 23/23 PASS，只有机械控制解，无模型调用 |
+| `node examples/studio/v13-demo.mjs --out work/studio-v13-demo-final --evidence docs/evidence/studio-v1_3` | A/B 实际链路 PASS，真实 PNG/JSON 入库 |
+| 从普通载荷运行同一 demo（out=work/studio-v13-portable-demo） | A/B PASS，无外部开发源依赖 |
+| `node tools/release.mjs`、`node tools/release.mjs --check` | 普通载荷 192 文件，全部哈希一致 |
+| `node tools/release.mjs --skill procedural-game-assets-loop --check` | 循环载荷 132 文件一致，未重建 |
+| `node tests/PGA_CONSTRAINT_BENCHMARK_v0_1/prepare-materials.mjs --check` | D12 64/D13 68 文件一致、控制解合法且像素相同；NOT_RUN |
+| `git diff --check` | 通过 |
+
+开发源 339 个既有测试 + 31 个新增测试；未删除断言。因 /3 已正式支持，三处旧版本断言更新
+支持列表并把未知版本样本改为 /999，仍验证未知版本拒绝。旧核心、配方、烘焙源相对起点
+87db710 无差异；终端/锈爪 hash 与 60 帧旧角色逐像素回归继续通过。未发现旧资产回归。
+
+T05 等价回归精确得到 27px、bounds={x0:7,y0:38,x1:34,y1:39}，operation footprint PASS，
+asset contract REJECTED；edit 提前返回 REJECTED_UNSAFE、无候选文件。另构造具有一致文档/hash
+但伪报 OK 的候选，commit 重编译仍拒绝。文件 export、工作区 submit 均拒绝非法最终编译。
+像素/metadata/node 多类保护独立；restore 保留合同并生成新修订。
+
+Demo A 主体由 20×26 变为 30×18、centerX=23、bottomY=33；底座、仪表、anchor、attachments
+保持。Demo B 的非法移动产生 34px 违规，bounds={x0:7,y0:29,x1:25,y1:31}，无合法候选；
+合法 resize 后提交保护 PASS。实施者打开实际前后 PNG，仅作工程示意自审，没有独立视觉评级。
+
+新 harness 独立维护在 tools/benchmark，不修改 v1.2 冻结包。测试覆盖缺必要动画播放向总判定
+传播 U、严格 schema、五 verdict、镜像解盲和 reviewer 隔离。CONFIRMED 必须有真实宿主输入
+关联；合成测试事件不代表真实评审观察。
+必要动画还要求每位 reviewer 对每个 clip 的宿主时序图像输入证据；仅有播放自述与
+静帧输入证据时，主结果仍为 UNVERIFIED，不能认证完整 taskSuccess PASS。
+
+新实验是 DRAFT_NOT_RUN：12-run 草案、真实旧版本源码载荷、hold-out 与共同最终合同已准备；
+没有创建 runs/reviews/results 或执行冻结清单，没有 participant/reviewer 模型调用。
+待选定模型/宿主、完成共同计数 runner 与宿主证据通道验证并正式授权后才可冻结运行。
+普通技能载荷排除了历史实验包和宿主数据，避免将冻结/私有证据误打进通用发行。
+
+限制：语义变换只支持矩形；角色资产合同、依赖图和多变量最近可行解未实现。safe domain
+有限试编译不输出候选图，单独报告成本，不意味着两 arm 等算力。合同不防止有全部文件
+写权限的人重写基线及记录。循环版与用户级安装未升级；本轮未 push，不宣称弱 agent 能力改善。
+
 ## 自动化测试
 
 | 时间 | 范围 | 结果 |

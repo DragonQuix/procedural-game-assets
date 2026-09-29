@@ -7,6 +7,7 @@
  */
 import { PixelPainter } from '../core/raster.js';
 import { scaleNearest } from '../core/transform.js';
+import { targetCrop } from '../observe/frame-views.js';
 
 /** 帧 → { width, height, rgba } 普通数据。 */
 function frameView(frame) {
@@ -19,22 +20,6 @@ function withBackground(painter, background) {
   out.rect(0, 0, painter.w, painter.h, background);
   out.blit(painter, 0, 0);
   return { width: out.w, height: out.h, rgba: out.toRGBA() };
-}
-
-/** 从最终帧裁出矩形区域（边界坐标，自动夹取到帧内）。 */
-function cropFrame(frame, rect, contextPx = 2) {
-  const src = PixelPainter.fromRGBA(frame.width, frame.height, frame.rgba);
-  const x0 = Math.max(0, rect.x - contextPx);
-  const y0 = Math.max(0, rect.y - contextPx);
-  const x1 = Math.min(frame.width, rect.x + rect.w + contextPx);
-  const y1 = Math.min(frame.height, rect.y + rect.h + contextPx);
-  const w = Math.max(1, x1 - x0);
-  const h = Math.max(1, y1 - y0);
-  const out = new PixelPainter(w, h, { clip: 'error' });
-  for (let y = 0; y < h; y++) {
-    for (let x = 0; x < w; x++) out.data[y * w + x] = src.data[(y0 + y) * src.w + (x0 + x)];
-  }
-  return { width: w, height: h, rgba: out.toRGBA(), origin: { x: x0, y: y0 } };
 }
 
 /**
@@ -69,7 +54,9 @@ export function buildViews(compiled, opts = {}) {
   if (opts.node !== undefined) {
     const entry = compiled.sceneMap.nodes.find((n) => n.id === opts.node);
     if (!entry) throw new RangeError(`sceneMap 中不存在节点 '${opts.node}'`);
-    views.crop = { ...cropFrame(frame, entry.frameRect), nodeId: entry.id };
+    views.target_crop = targetCrop(frame, { rect: entry.frameRect, contextPx: 2, scale, identity: { revision: opts.revision ?? null, candidateId: opts.candidateId ?? null, documentHash: compiled.hashes.documentHash, nodeId: entry.id } });
+    views.crop = { ...views.target_crop.native, nodeId: entry.id };
+    views.meta.target_crop = views.target_crop.meta;
   }
   return views;
 }

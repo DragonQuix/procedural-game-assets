@@ -12,6 +12,9 @@ import { join } from 'node:path';
 import { compileAny, describeAnyCapabilities } from '../studio/dispatch.js';
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { stableStringify } from '../studio/document.js';
+import { assertProtection } from '../studio/protection-contract.js';
+import { inspectSafeDomains } from '../studio/safe-domain.js';
+import { writeObservationBundle } from './observation-files.js';
 import { assetToJSON } from './asset-file.js';
 import { encodePNG } from '../export/png.js';
 import { packAtlas, renderAtlasPages } from '../export/atlas.js';
@@ -66,7 +69,12 @@ async function writePreviews(outDir, compiled, views, nodeId) {
   if (views.crop) {
     files.crop = previewFileName('crop', compiled, nodeId);
     await writeFile(join(outDir, files.crop), encodePNG(views.crop.width, views.crop.height, views.crop.rgba));
+    const cropDisplay = views.target_crop.display;
+    files.cropDisplay = previewFileName('crop-display', compiled, nodeId);
+    await writeFile(join(outDir, files.cropDisplay), encodePNG(cropDisplay.width, cropDisplay.height, cropDisplay.rgba));
   }
+  files.observation = `${compiled.asset.id}.observation.json`;
+  await writeFile(join(outDir, files.observation), JSON.stringify(views.meta, null, 2) + '\n');
   return files;
 }
 
@@ -153,9 +161,10 @@ export async function inspectFromFile(docPath, opts = {}) {
  */
 export async function inspectWorkspace(wsDir, opts = {}) {
   const store = await StudioStore.open(wsDir, opts);
+  await store._refreshHead(); // 新鲜度合同：默认修订取磁盘最新 head（R1）
   const revision = opts.revision ?? store.head;
   const compiled = await store._getCompiled(revision);
-  const summary = await inspectCompiled(compiled, `workspace:${wsDir}#${revision}`, opts);
+  const summary = await inspectCompiled(compiled, `workspace:${wsDir}#${revision}`, { ...opts, revision });
   summary.head = store.head;
   summary.revision = revision;
   summary.workspaceState = await store.state();
@@ -168,7 +177,7 @@ async function inspectCompiled(compiled, source, opts = {}) {
   if (opts.outDir) {
     await ensureOutDir(opts.outDir);
     await writeMarker(opts.outDir, opts.generator ?? 'unknown');
-    const views = buildAnyViews(compiled, { displayScale: opts.displayScale, background: opts.background, node: opts.node });
+    const views = buildAnyViews(compiled, { displayScale: opts.displayScale, background: opts.background, node: opts.node, revision: opts.revision });
     files = await writePreviews(opts.outDir, compiled, views, opts.node);
   } else if (opts.node !== undefined) {
     // 不写盘时也校验节点存在，保持行为一致（角色文档无节点裁切，--node 仅道具模式）
@@ -176,12 +185,15 @@ async function inspectCompiled(compiled, source, opts = {}) {
   }
   const summary = summarize(compiled, source, opts.outDir ?? null, files);
   summary.constraints = compiled.document.constraints;
+  summary.protection = compiled.protection;
   summary.capabilities = capabilities;
+  if (opts.node && compiled.document.schemaVersion === 'pga-studio/3') summary.safeDomain = inspectSafeDomains(compiled, { revision: opts.revision ?? null, target: opts.node, maxSearch: opts.maxSearch });
   return summary;
 }
 
 /** 导出核心：既有资产格式（.asset.json + 图集 PNG + 版本化 manifest）与可编辑源文档。 */
 async function exportCompiled(compiled, source, outDir, opts = {}) {
+  assertProtection(compiled);
   const { asset } = compiled;
   await ensureOutDir(outDir);
   await writeMarker(outDir, opts.generator ?? 'unknown');
@@ -203,6 +215,7 @@ async function exportCompiled(compiled, source, outDir, opts = {}) {
   Object.assign(files, await writeSourceBundle(outDir, compiled));
   const summary = summarize(compiled, source, outDir, files);
   summary.manifest = { schemaVersion: manifest.schemaVersion, frames: manifest.frames.length, pages: manifest.pages.length };
+  summary.protection = compiled.protection;
   return summary;
 }
 
@@ -216,6 +229,7 @@ export async function exportFromFile(docPath, outDir, opts = {}) {
 /** export（工作区模式）：导出指定修订（默认 head）。 */
 export async function exportWorkspace(wsDir, outDir, opts = {}) {
   const store = await StudioStore.open(wsDir, opts);
+  await store._refreshHead(); // 新鲜度合同：默认修订取磁盘最新 head（R1）
   const revision = opts.revision ?? store.head;
   const compiled = await store._getCompiled(revision);
   const summary = await exportCompiled(compiled, `workspace:${wsDir}#${revision}`, outDir, opts);
@@ -225,3 +239,35 @@ export async function exportWorkspace(wsDir, outDir, opts = {}) {
 }
 
 export { stableStringify };
+// Studio 的 submit 是最终导出的同义入口，不再引入另一条编译链。
+export const submitWorkspace = exportWorkspace;
+
+export async function observeWorkspace(wsDir, outDir, { revision, candidateIds = [], node, displayScale = 4, ...opts } = {}) {
+  const store = await StudioStore.open(wsDir, opts);
+  await store._refreshHead();
+  revision ??= store.head;
+  if (!Array.isArray(candidateIds) || candidateIds.length > 16) throw new RangeError('观察最多 16 个已有候选');
+  const base = await store._getCompiled(revision);
+  if (base.kind === 'character') throw new RangeError('当前候选拼图入口只支持单帧；角色继续使用播放材料');
+  const candidates = [], validation = { revision, head: store.head, candidates: [] };
+  for (const candidateId of candidateIds) {
+    try {
+      const record = await store._readCandidate(candidateId);
+      const candidateBase = record.baseRevision === revision ? base : await store._getCompiled(record.baseRevision);
+      const { compiled, checks } = store._verifyCandidate(candidateId, record, candidateBase);
+      const stale = record.baseRevision !== revision || record.baseRevision !== store.head;
+      const status = stale ? 'STALE' : ['OK', 'UNCHANGED'].includes(checks.status) ? 'VALID' : 'REJECTED';
+      const identity = { candidateId, revision: record.baseRevision, documentHash: compiled.hashes.documentHash, status };
+      validation.candidates.push({ ...identity, displayed: status === 'VALID', protection: compiled.protection,
+        checkStatus: checks.status, conflicts: checks.conflicts,
+        ...(stale ? { reason: record.baseRevision !== revision ? 'BASE_REVISION_MISMATCH' : 'STALE_REVISION' } : {}) });
+      if (status === 'VALID') candidates.push({ frame: compiled.asset.frames[0], identity });
+    } catch (e) {
+      validation.candidates.push({ candidateId, status: 'TAMPERED', displayed: false,
+        error: { code: e.code ?? 'INVALID_CANDIDATE_RECORD', message: e.message }, conflicts: e.details?.conflicts ?? [] });
+    }
+  }
+  const target = node ? base.sceneMap.nodes.find((n) => n.id === node) : null;
+  if (node && !target) throw new RangeError('观察目标节点不存在');
+  return writeObservationBundle(outDir, { base: { frame: base.asset.frames[0], identity: { revision, documentHash: base.hashes.documentHash } }, candidates, crop: target?.frameRect, scale: displayScale, validation });
+}

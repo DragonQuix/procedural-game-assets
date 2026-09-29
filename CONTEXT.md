@@ -36,6 +36,8 @@
 | `character document`（角色文档） | `pga-studio/character/1`：humanoid 配方的结构化数据面（palette/frame/rig/art/poses/clips） | 经既有 bakeHumanoid 编译；不变量仅适配 checkedPoseKinds；见 ADR-0011 |
 | `grounding`（接地） | 角色帧包围盒底缘（贴地）在修改前后不变 | 顶缘随体高/腿长合法变化；由 solvePose 自动保持 |
 | `head` | Studio 工作区当前已确认修订指针（`head.json`，原子替换更新） | 只有 commit 移动它；并发底线是 expectedHead 校验 |
+| `asset protection contract`（资产级保护合同） | `pga-studio/3.protection` 的冻结基线、最终帧像素区/掩码、metadataPaths 与 nodeIds | `pga-protection/1`；最终重新编译的 RGBA/元数据为权威，不等于 operation footprint；见 ADR-0012 |
+| `safe domain`（安全域） | 指定 revision/documentHash 下，固定其它参数，有限枚举试编译得到的合法整数集合 | 不是多个区间的安全笛卡尔积；探针不输出图像，不计可观察候选，但单列计算量 |
 
 ## 坐标契约（要点，全文见 ADR-0002）
 
@@ -52,6 +54,7 @@ geometry/  姿态求解等纯几何；依赖 core
 bake/      帧组装、变体、包围盒、诊断；不创建 Canvas
 recipes/   各类资产配方（人形、机械、植被、道具、地形）
 studio/    agent 创作控制层：文档校验、纯编译、观察视图（ADR-0008）；同为纯核心
+observe/   只依赖标准帧的共享观察视图；两实验 arm 可复用，不进入最终资产
 export/    PNG、图集、manifest（可选部署路径，IO 适配层）
 adapters/  Canvas 启动烘焙适配（ADR-0004）、Studio 文档/预览 IO 与工作区存储（ADR-0009）；Godot 等为可选适配
 bin/       CLI 入口（受信本地工具；pga.mjs 人类可读，pga-studio.mjs 为 JSON）

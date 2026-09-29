@@ -12,7 +12,8 @@
  */
 import { normalizeStudioDocument, StudioDocumentError, GEOMETRY_FIELDS, materialsFor } from './document.js';
 
-export const OPERATION_IDS = Object.freeze(['geometry.set', 'material.set', 'ramp.set']);
+export const GEOMETRY_TRANSFORMS = Object.freeze(['widen_about_center', 'squash_keep_base', 'resize_about_anchor']);
+export const OPERATION_IDS = Object.freeze(['geometry.set', 'material.set', 'ramp.set', ...GEOMETRY_TRANSFORMS]);
 const SCALAR_GEOMETRY_FIELDS = Object.freeze(['x', 'y', 'w', 'h', 'cx', 'cy', 'rx', 'ry']);
 
 /** 操作/候选级错误：code 区分 UNSUPPORTED_OPERATION / CANDIDATE_INVALID。 */
@@ -82,6 +83,35 @@ function renormalize(candidateDoc, opId, target) {
   }
 }
 
+function transformGeometry(node, operation) {
+  const { id, params, target } = operation;
+  if (!['panel', 'screen'].includes(node.kind)) fail('UNSUPPORTED', `${id} 不支持 ${node.kind}，不会退化为普通 resize`, { target });
+  if (!params || typeof params !== 'object' || Array.isArray(params)) fail('INVALID_DOCUMENT', `${id} 需要 params`, { target });
+  const allowed = id === 'widen_about_center' ? ['deltaWidth'] : id === 'squash_keep_base' ? ['deltaHeight'] : ['deltaWidth', 'deltaHeight', 'targetWidth', 'targetHeight', 'anchor'];
+  for (const key of Object.keys(params)) if (!allowed.includes(key)) fail('INVALID_DOCUMENT', `${id} 未知参数 ${key}`, { target });
+  const size = (axis, current) => {
+    const delta = params[`delta${axis}`], absolute = params[`target${axis}`];
+    if (delta !== undefined && absolute !== undefined) fail('INVALID_DOCUMENT', `${axis} 的 delta 与 target 不能同时指定`, { target });
+    if ([delta, absolute].some((v) => v !== undefined && !Number.isInteger(v))) fail('CANDIDATE_INVALID', '尺寸参数需要整数', { target });
+    return absolute ?? current + (delta ?? 0);
+  };
+  if (id === 'widen_about_center' && !Number.isInteger(params.deltaWidth)) fail('INVALID_DOCUMENT', '需要 deltaWidth 整数', { target });
+  if (id === 'squash_keep_base' && (!Number.isInteger(params.deltaHeight) || params.deltaHeight > 0)) fail('INVALID_DOCUMENT', '需要 deltaHeight <= 0 整数', { target });
+  if (id === 'resize_about_anchor' && !['deltaWidth', 'deltaHeight', 'targetWidth', 'targetHeight'].some((k) => params[k] !== undefined)) fail('INVALID_DOCUMENT', 'resize 至少需要一个尺寸参数', { target });
+  const presets = { center: { x: 0.5, y: 0.5 }, 'bottom-center': { x: 0.5, y: 1 }, 'top-left': { x: 0, y: 0 } };
+  const rawAnchor = id === 'widen_about_center' ? 'center' : id === 'squash_keep_base' ? 'bottom-center' : params.anchor;
+  const anchor = typeof rawAnchor === 'string' ? presets[rawAnchor] : rawAnchor;
+  if (!anchor || typeof anchor !== 'object' || Array.isArray(anchor) || Object.keys(anchor).some((k) => !['x', 'y'].includes(k)) || ![anchor.x, anchor.y].every((v) => typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1)) fail('INVALID_DOCUMENT', 'anchor 需为 center / bottom-center / top-left 或局部 normalized {x,y}', { target });
+  const oldGeometry = { x: node.x, y: node.y, w: node.w, h: node.h };
+  const w = size('Width', node.w), h = size('Height', node.h);
+  const anchorPoint = { x: node.x + node.w * anchor.x, y: node.y + node.h * anchor.y };
+  const newGeometry = { x: anchorPoint.x - w * anchor.x, y: anchorPoint.y - h * anchor.y, w, h };
+  if (!Object.values(newGeometry).every(Number.isInteger)) fail('REJECTED_UNSAFE', '整数像素无法精确保留锚点；不做取整或中心漂移', { target, details: { oldGeometry, newGeometry, anchorPoint } });
+  const delta = Object.fromEntries(Object.keys(oldGeometry).map((k) => [k, newGeometry[k] - oldGeometry[k]]));
+  return { oldGeometry, newGeometry, delta, anchor: { ...anchor }, anchorPoint,
+    preservedInvariant: id === 'widen_about_center' ? 'centerX' : id === 'squash_keep_base' ? 'bottomY' : 'anchorPoint' };
+}
+
 /**
  * 应用一个受约束操作。
  * @param {object} doc 规范化（或可规范化的）Studio 文档；不会被修改
@@ -95,8 +125,13 @@ export function applyOperation(doc, operation) {
   const node = findNode(normalized, target, id);
   let candidate;
   let changedFields;
+  let geometry;
 
-  if (id === 'geometry.set') {
+  if (GEOMETRY_TRANSFORMS.includes(id)) {
+    geometry = transformGeometry(node, operation);
+    changedFields = Object.fromEntries(Object.entries(geometry.newGeometry).filter(([k, v]) => v !== node[k]).map(([k, v]) => [k, { from: node[k], to: v }]));
+    candidate = cloneDocWithNode(normalized, target, (next) => Object.assign(next, geometry.newGeometry));
+  } else if (id === 'geometry.set') {
     const params = operation.params;
     if (params === null || typeof params !== 'object' || Array.isArray(params)) fail('INVALID_DOCUMENT', 'geometry.set 需要 params 对象', { target });
     const entries = Object.entries(params);
@@ -154,7 +189,20 @@ export function applyOperation(doc, operation) {
   }
 
   const newDoc = renormalize(candidate, id, target);
-  return { doc: newDoc, plan: { id, target, changedFields } };
+  return { doc: newDoc, plan: { id, target, changedFields, ...(geometry ? { geometry } : {}) } };
+}
+
+/**
+ * 探索项 → 标准 operation 的唯一转换（探索记录、候选身份哈希与 commit 重执行共用同一份）。
+ * geometry.set → { id, target, params: { [field]: value } }；
+ * material.set → { id, target, material: value }；ramp.set → { id, target, ramp: value }。
+ */
+export function operationFromExplore(spec, value) {
+  if (spec === null || typeof spec !== 'object' || Array.isArray(spec)) fail('INVALID_DOCUMENT', '探索需要对象 { id, target, field, values }');
+  if (spec.id === 'geometry.set' || GEOMETRY_TRANSFORMS.includes(spec.id)) return { id: spec.id, target: spec.target, params: { ...spec.params, [spec.field]: value } };
+  if (spec.id === 'material.set') return { id: spec.id, target: spec.target, material: value };
+  if (spec.id === 'ramp.set') return { id: spec.id, target: spec.target, ramp: value };
+  fail('UNSUPPORTED_OPERATION', `未知操作 '${spec.id}'（可用：${OPERATION_IDS.join(', ')}）`, { target: spec.target ?? null });
 }
 
 /**
@@ -168,7 +216,7 @@ export function exploreOperation(doc, spec) {
   if (!Array.isArray(spec.values) || spec.values.length < 1) fail('INVALID_DOCUMENT', '探索需要非空 values 数组');
   if (spec.values.length > 16) fail('RESOURCE_LIMIT', `探索取值 ${spec.values.length} 超过上限 16`);
   for (const key of Object.keys(spec)) {
-    if (!['id', 'target', 'field', 'values'].includes(key)) fail('INVALID_DOCUMENT', `探索含未知字段 '${key}'`);
+    if (!['id', 'target', 'field', 'values', 'params'].includes(key)) fail('INVALID_DOCUMENT', `探索含未知字段 '${key}'`);
   }
   if (!OPERATION_IDS.includes(spec.id)) fail('UNSUPPORTED_OPERATION', `未知操作 '${spec.id}'（可用：${OPERATION_IDS.join(', ')}）`, { target: spec.target ?? null });
   let fieldOk;
@@ -177,14 +225,15 @@ export function exploreOperation(doc, spec) {
     const node = probe.nodes.find((n) => n.id === spec.target);
     const allowed = node ? (GEOMETRY_FIELDS[node.kind] ?? []) : SCALAR_GEOMETRY_FIELDS.concat('vertices');
     fieldOk = allowed.includes(spec.field);
+  } else if (GEOMETRY_TRANSFORMS.includes(spec.id)) {
+    fieldOk = (spec.id === 'widen_about_center' ? ['deltaWidth'] : spec.id === 'squash_keep_base' ? ['deltaHeight'] : ['deltaWidth', 'deltaHeight', 'targetWidth', 'targetHeight']).includes(spec.field);
   } else {
     fieldOk = spec.field === exploreFieldFor(spec.id);
   }
   if (!fieldOk) fail('CANDIDATE_INVALID', `操作 '${spec.id}' 不支持探索字段 '${spec.field}'`, { target: spec.target ?? null });
   const out = [];
   for (const value of spec.values) {
-    const operation =
-      spec.id === 'geometry.set' ? { id: spec.id, target: spec.target, params: { [spec.field]: value } } : { id: spec.id, target: spec.target, [spec.field]: value };
+    const operation = operationFromExplore(spec, value);
     try {
       const { doc: d, plan } = applyOperation(doc, operation);
       out.push({ value, doc: d, plan });

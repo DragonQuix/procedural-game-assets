@@ -46,6 +46,7 @@ Studio 文档（.studio.json，唯一可编辑源）
 - 人类可读日志在 stderr，不要解析。
 - 退出码：0 成功；2 用法/输入错误；3 校验/编译/候选失败；4 覆盖或工作区路径保护；
   6 版本/请求冲突（STALE_REVISION / REQUEST_ID_CONFLICT）；7 工作区占用（WORKSPACE_BUSY，可重试）。
+- 各命令只接受白名单选项：拼错选项名（如 `--preserv`）退出 2，不会悄悄变成无效参数。
 - 图像查看：命令返回的预览路径是仓库内 PNG 文件。用你的图像读取工具实际打开查看——
   **返回路径不等于已看图**；`native` 是原生尺寸，`display` 是最近邻放大的使用预览。
 
@@ -193,9 +194,14 @@ node bin/pga-studio.mjs commit --ws <dir> --restore rN --expected-head rM [--req
 
 - `--expected-head` 必须等于当前 head（用 state 查），否则 STALE_REVISION（退出码 6）。
 - 候选派生基准必须等于当前 head，否则 STALE_REVISION——先看新状态再重新探索。
-- 接受时会重新校验候选（不信落盘结果）；被 REJECTED 或篡改的候选一律拒绝。
+- 接受时会重新校验候选（不信落盘结果）：从基准修订重取文档级 constraints、与候选的请求级
+  保护重新合并并重算候选身份，被 REJECTED 或篡改的候选一律拒绝。
 - restore 创建引用旧内容的新修订（历史不抹除）。
 - 同一 `--request-id` + 相同内容重试返回同一结果（不重复接受）；同 ID 不同内容报 REQUEST_ID_CONFLICT。
+- requestId 只允许字母数字开头、不超过 64 字符的字母数字与 `.` `_` `-`（禁止路径分隔符与 `..`），
+  非法 ID 退出 4；revision（`rN`）与 candidateId（`c-xxxxxxxx`）同样校验。
+- 提交中途失败（如进程崩溃）是可恢复的：用同一 requestId + 相同内容重试——效果已落盘的
+  恢复原提交结果，未落盘的安全重跑；state 的 `pendingRequests` 列出未完成请求。
 
 ### export — 导出既有资产格式
 
@@ -235,10 +241,15 @@ node bin/pga-studio.mjs export --doc <file.json> --out <dir>
 - `palette` 单字符键 → 颜色（ASCII 图与绘制共用）；`art.head/torso` 为 ASCII 像素图（字符须取自调色板或 `.` 空格）。
 - `rig` 骨架参数经 solvePose 求解；`feetY` 是脚底边界行，接地由求解器自动保持。
 - `poses` 姿态为显式数据；`kind ∈ rig|prone|dead|dive|ball`。
-  `template.checkedPoseKinds` 声明**不变量检查适配的姿态种类**（首版 `["rig"]`）；
-  其余姿态照常渲染，但在候选报告中列为 `notCoveredChanges`（明确不假装覆盖）。
+  `template.checkedPoseKinds` 声明**不变量检查覆盖的姿态种类**，但覆盖范围由引擎实际适配能力
+  决定（当前仅 `["rig"]`）：声明其他种类校验期即 UNSUPPORTED_SCOPE 拒绝，不能自报已检查；
+  未适配姿态照常渲染，但在候选报告中列为 `notCoveredChanges`（明确不假装覆盖）。
 - `constraints` 仅 `metadata` 类别：`anchor` / `attachments[.<名>]` / `frameSize`；
   pixels/structure 类别校验期即拒绝（UNSUPPORTED_SCOPE，未实现）。
+- 角色候选检查：锚点（脚底中线）不动、接地（包围盒底缘）不变；像素与元数据变化**分开报告**
+  （`pixelChangedFrames` / `metadataChangedFrames`；`diffPixels` 按像素计，通道级另列
+  `changedChannels`）；显式 metadata 保护对全部帧生效（含 notCovered 帧）；
+  `UNCHANGED` 要求像素与元数据双不变——附件点移动但像素不变的修改会如实报为 OK 并列出元数据变化帧。
 
 角色操作（edit 用 `--op <id> --target <目标> --value <值>`；explore 用 `--values`）：
 
@@ -248,7 +259,6 @@ node bin/pga-studio.mjs export --doc <file.json> --out <dir>
 | `rig.set` | `thigh/shin/thick/hipSpread/hipY/torsoDrop/headDx/headDrop` 或 `guns.<方向>.<len|back>` | 整数（范围见 inspect capabilities） | solvePose 重解；接地保持；枪口等附件点一致联动 |
 | `art.set` | `head` / `torso` | ASCII 行 JSON 数组 | 部件替换；尺寸变化会合法移动头部附件点（报告如实呈现） |
 
-角色候选检查：锚点（脚底中线）不动、接地（包围盒底缘）不变、受影响帧/剪辑/附件点自动报告。
 inspect 的 `capabilities` 给出每个字段当前值与范围；previews 下有逐帧 native/display PNG 与
 **player.html 播放页**（按剪辑时长真实播放，可暂停/步进/切剪辑；动画验收请实际观看播放）。
 
@@ -260,5 +270,104 @@ inspect 的 `capabilities` 给出每个字段当前值与范围；previews 下�
 - `--preserve '<json数组>'` 追加请求级保护项，元素形如
   `[{"kind":"pixels","target":"terminal.shell"},{"kind":"metadata","target":"anchor"}]`，
   与文档内 constraints 合并生效（判责同 §2 的保守语义，别滥加）。
+  保护项严格校验：拼错 kind、不存在或形状错误的 target、多余字段都会明确报错（退出 3），
+  不会被静默忽略——报错就修正后重发，不要换种写法绕过。
 - 样例文档：`examples/studio/terminal.studio.json`（/1 四节点机械终端，内画布 30×30，输出 32×32）、
   `examples/studio/wrench.studio.json`（/2 扳手：poly 手柄/钳口 + disc 螺栓 + shade-diag，输出 26×26）。
+# Studio v1.3 补充合同（工具包 0.7.0）
+
+依据：`../CONTEXT.md`、ADR-0001/0002/0009/0010/0011/0012。以下为新增路径，
+旧 /1、/2、character/1 的渲染及低层编辑语义不变。
+
+## 资产级保护
+
+通过 `createProtectedDocument(baseDoc, rules)` 创建 `pga-studio/3` 文档；工作区创建时
+冻结起点，edit 无权改合同。序列化结构如下（baseline 是完整无合同 /1 或 /2 文档）：
+
+```json
+{
+  "schemaVersion": "pga-protection/1",
+  "coordinateSpace": "final-frame",
+  "baseline": { "schemaVersion": "pga-studio/2" },
+  "protectedRegions": [{ "x": 8, "y": 9, "w": 2, "h": 1, "mask": [1, 0] }],
+  "allowedMutationRegions": [{ "x": 2, "y": 2, "w": 36, "h": 36 }],
+  "metadataPaths": ["anchor", "attachments", "bounds"],
+  "nodeIds": ["machine.focal"]
+}
+```
+
+上例 baseline 仅示意字段，不是可执行完整文档。矩形右下排他；mask 为按行的 w*h 个 0/1，
+省略 mask 即整矩形受保护。allowedMutationRegions 可省略；存在时其并集外所有像素受保护。
+metadataPaths 支持 anchor[.x/.y]、attachments[.name[.x/.y]]、bounds[.x0/.y0/.x1/.y1]、width、height。
+所有检查为 AND，不因像素没变而跳过 metadata/node。最终帧含 padding 与 outline，不能只检查内画布。
+
+compile 返回 protection=PASS/REJECTED/NOT_CONFIGURED；裸 compile 可用于失败诊断，不等于导出授权。
+store/CLI 在 create、commit、restore、export/submit 的最终编译上强制检查；无合同不声称全局 PASS。
+合同及基线参与文档哈希、v3 候选身份。只读观察可包含失败诊断，但 overlay 不进入导出资产。
+
+protection.baseline 在 workspace 生命周期内保持初始冻结状态。accept candidate 不改变该
+baseline，restore 也不改变；后续所有 revision 仍相对同一个 frozen baseline 验证，不相对
+上一已接受修订重新设定基准。如果要把当前已接受状态作为新的保护基准，应以该状态创建新的
+protected document/workspace；当前版本没有 implicit rebase，也没有 rebase 操作。
+
+## 几何与安全域
+
+```powershell
+node bin/pga-studio.mjs inspect --ws work/ws --node machine.body
+node bin/pga-studio.mjs edit --ws work/ws --base r1 --op widen_about_center --target machine.body --params '{"deltaWidth":4}'
+node bin/pga-studio.mjs edit --ws work/ws --base r2 --op squash_keep_base --target machine.body --params '{"deltaHeight":-2}'
+node bin/pga-studio.mjs edit --ws work/ws --base r3 --op resize_about_anchor --target machine.body --params '{"targetWidth":24,"targetHeight":16,"anchor":"bottom-center"}'
+node bin/pga-studio.mjs explore --ws work/ws --base r4 --op widen_about_center --target machine.body --field deltaWidth --values=-2,0,2
+```
+
+三个语义操作只支持 panel/screen；其它类型 UNSUPPORTED，不静默退化。分别保 centerX、bottomY、
+anchorPoint；resize 的 anchor 必须明确指定 center/bottom-center/top-left 或局部 normalized {x,y}。
+同轴 delta 与 target 互斥。输出 oldGeometry/newGeometry/delta/preservedInvariant。
+坐标不能精确落在整数栅格时拒绝，不允许半像素取整漂移。当前扁平节点没有显式 base/dependency
+关系，不猜节点名字，也不自动移动焦点、附件或其它部件；这些约束由最终像素/metadata合同检查。
+
+`inspect --node` 对 /3 返回字段 theoreticalRange/safeRange、constraints、recommendedTransforms，
+均带 revision/documentHash/contractHash。每个字段固定其它参数，通过真实 apply→compile→protect
+逐一枚举；结果含不连续 intervals 与精确 values、逐非法值原因及编译异常。
+默认 maxSearch=512，硬上限 1024；另限 count*W*H*nodes <= 32,000,000。超限 SEARCH_LIMIT，
+不输出局部范围冒充完整结果。时间近似 O(N*W*H*(nodes+regions))，含冻结基线重编译；
+空间一次编译 O(W*H*nodes)，另保留 O(N) 诊断。未启用缓存；cacheKey 绑定全文、修订、操作、
+目标、固定参数与保护。未来缓存只能优化，不能成为授权来源。
+
+`edit --safe-binding '<inspect返回的某字段域JSON>'` 可显式检查旧域身份；无 binding 仍重新计算。
+身份包含 revision、documentHash、operator、target、field、fixedParams、contractHash。
+从实际 operation.params 中移除 binding.field 对应的请求值后，剩余参数必须与 fixedParams
+稳定序列化一致（包括 anchor 的对象字段，不依赖键顺序）。binding 只标识域，不授权其 values；
+当前修订总要重新验证，即使 binding 自报 COMPLETE 或把非法值写进 safeRange 也不能通过。
+修订变化后需重新 inspect；恢复相同内容也会生成新 revision。一个低层多字段请求只做精确点检查，
+不承诺求最近合法参数元组。单字段非法请求返回 REJECTED_UNSAFE、requestedValue、safeDomain、
+reason、nearestLegalValues、recommendedTransform，不 clamp。explore 同基准分支，拒绝项没有
+candidateId、不写候选 PNG；renderedCandidates/uniqueCount 与 rejectedVariations 分开报告。
+安全性试编译不输出可观察候选，其计算量在 search.trialCompiles 单列，不代表免费计算。
+
+完整域超出资源预算时，inspect 保持 SEARCH_LIMIT，不返回部分 safeRange。单字段 edit 仅在
+SEARCH_LIMIT 时回退到当前请求的 apply→compile→protect：合法预检为 SAFE，候选照常产生
+OK/UNCHANGED，返回 validationMode=POINT_FALLBACK、safeDomain.status=SEARCH_LIMIT；非法为
+REJECTED_UNSAFE，保留冲突或编译错误，nearestLegalValues=[]。其他枚举异常直接抛出。
+explore 在同一请求内只求一次同身份完整域；超限则逐个验证显式 values，不扩大候选列表。
+validationProbeCount 统计实际单点验证调用（包括 apply 阶段拒绝），validation.trialCompiles
+单列进入编译的次数；复用完整域的后续项两者为 0，不重复计费，也不把验证探针算为候选。
+
+## 共享观察与最终交付
+
+```powershell
+node bin/pga-studio.mjs observe --ws work/ws --revision r4 --candidates '["c-12345678"]' --node machine.body --out work/views
+node bin/pga-studio.mjs submit --ws work/ws --out work/final
+```
+
+observe 仅消费同基准已存在候选，输出原生/4x 最近邻 contact sheet、crop 和 diff，以及可复现
+坐标、倍率、revision/candidate/documentHash。PNG 中索引对应 observation.json 的身份标签。
+观察与 commit 共用 candidateId、派生操作、内容哈希及最终编译保护重验。observation.json 的
+validation.candidates 区分 VALID、REJECTED、STALE、TAMPERED，并记录 displayed、保护结果或
+错误；只有 VALID 进入拼图、crop 和 diff。真实保护失败为 REJECTED，自报状态与重验不符为
+TAMPERED；基准不符或不再基于当前 head 为 STALE。旧修订观察也不会把过期候选标为可提交。
+这是本地 agent 工作流一致性检查，不是对完全文件写权限的安全隔离。
+共享纯函数在 `src/observe/frame-views.js`，任意 arm 可传标准 frame 使用；IO 在
+`src/adapters/observation-files.js`。submit 是 workspace export 的同一最终编译入口。
+
+---

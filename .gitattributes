@@ -1,2 +1,5 @@
 # 发行清单按字节校验，Git 不得转换载荷换行。
 skills/*/assets/toolkit/** -text
+tests/PGA_CONSTRAINT_BENCHMARK_v0_1/frozen/** -text
+tests/PGA_CONSTRAINT_BENCHMARK_v0_1/materials/** -text
+tests/PGA_CONSTRAINT_BENCHMARK_v0_1/protocol-draft.json -text

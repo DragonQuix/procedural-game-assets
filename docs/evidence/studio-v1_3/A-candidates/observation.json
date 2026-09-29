@@ -1,0 +1,276 @@
+{
+  "schemaVersion": "pga-observation/1",
+  "observations": [
+    {
+      "kind": "candidate_contact_sheet",
+      "scale": 4,
+      "sampling": "nearest",
+      "background": "#202028",
+      "cells": [
+        {
+          "index": 0,
+          "label": "r3",
+          "revision": "r3",
+          "documentHash": "e4031b47",
+          "frameId": "harbor-compressor",
+          "nativeRect": {
+            "x": 2,
+            "y": 9,
+            "w": 48,
+            "h": 44
+          },
+          "displayRect": {
+            "x": 8,
+            "y": 36,
+            "w": 192,
+            "h": 176
+          }
+        },
+        {
+          "index": 1,
+          "label": "c-28b353fa",
+          "candidateId": "c-28b353fa",
+          "revision": "r3",
+          "documentHash": "77b3370b",
+          "frameId": "harbor-compressor",
+          "nativeRect": {
+            "x": 52,
+            "y": 9,
+            "w": 48,
+            "h": 44
+          },
+          "displayRect": {
+            "x": 208,
+            "y": 36,
+            "w": 192,
+            "h": 176
+          }
+        },
+        {
+          "index": 2,
+          "label": "c-9d7f9a11",
+          "candidateId": "c-9d7f9a11",
+          "revision": "r3",
+          "documentHash": "e4031b47",
+          "frameId": "harbor-compressor",
+          "nativeRect": {
+            "x": 102,
+            "y": 9,
+            "w": 48,
+            "h": 44
+          },
+          "displayRect": {
+            "x": 408,
+            "y": 36,
+            "w": 192,
+            "h": 176
+          }
+        },
+        {
+          "index": 3,
+          "label": "c-130b6637",
+          "candidateId": "c-130b6637",
+          "revision": "r3",
+          "documentHash": "d9d2e47d",
+          "frameId": "harbor-compressor",
+          "nativeRect": {
+            "x": 152,
+            "y": 9,
+            "w": 48,
+            "h": 44
+          },
+          "displayRect": {
+            "x": 608,
+            "y": 36,
+            "w": 192,
+            "h": 176
+          }
+        }
+      ],
+      "files": {
+        "native": "contact-sheet.native.png",
+        "display": "contact-sheet.display.png"
+      }
+    },
+    {
+      "kind": "diff_overlay",
+      "scale": 4,
+      "sampling": "nearest",
+      "base": {
+        "revision": "r3",
+        "documentHash": "e4031b47"
+      },
+      "candidate": {
+        "candidateId": "c-28b353fa",
+        "revision": "r3",
+        "documentHash": "77b3370b"
+      },
+      "changedPixelCount": 79,
+      "changedBounds": {
+        "x0": 9,
+        "y0": 15,
+        "x1": 39,
+        "y1": 34
+      },
+      "color": "#ff40a0",
+      "observationOnly": true,
+      "files": {
+        "native": "diff-1.native.png",
+        "display": "diff-1.display.png"
+      }
+    },
+    {
+      "kind": "diff_overlay",
+      "scale": 4,
+      "sampling": "nearest",
+      "base": {
+        "revision": "r3",
+        "documentHash": "e4031b47"
+      },
+      "candidate": {
+        "candidateId": "c-9d7f9a11",
+        "revision": "r3",
+        "documentHash": "e4031b47"
+      },
+      "changedPixelCount": 0,
+      "changedBounds": null,
+      "color": "#ff40a0",
+      "observationOnly": true,
+      "files": {
+        "native": "diff-2.native.png",
+        "display": "diff-2.display.png"
+      }
+    },
+    {
+      "kind": "diff_overlay",
+      "scale": 4,
+      "sampling": "nearest",
+      "base": {
+        "revision": "r3",
+        "documentHash": "e4031b47"
+      },
+      "candidate": {
+        "candidateId": "c-130b6637",
+        "revision": "r3",
+        "documentHash": "d9d2e47d"
+      },
+      "changedPixelCount": 91,
+      "changedBounds": {
+        "x0": 8,
+        "y0": 15,
+        "x1": 40,
+        "y1": 34
+      },
+      "color": "#ff40a0",
+      "observationOnly": true,
+      "files": {
+        "native": "diff-3.native.png",
+        "display": "diff-3.display.png"
+      }
+    },
+    {
+      "kind": "target_crop",
+      "frameId": "harbor-compressor",
+      "revision": "r3",
+      "documentHash": "e4031b47",
+      "scale": 4,
+      "sampling": "nearest",
+      "requestedRect": {
+        "x": 10,
+        "y": 16,
+        "w": 28,
+        "h": 18
+      },
+      "contextPx": 0,
+      "crop": {
+        "x": 10,
+        "y": 16,
+        "w": 28,
+        "h": 18
+      },
+      "files": {
+        "native": "crop-0.native.png",
+        "display": "crop-0.display.png"
+      }
+    },
+    {
+      "kind": "target_crop",
+      "frameId": "harbor-compressor",
+      "candidateId": "c-28b353fa",
+      "revision": "r3",
+      "documentHash": "77b3370b",
+      "scale": 4,
+      "sampling": "nearest",
+      "requestedRect": {
+        "x": 10,
+        "y": 16,
+        "w": 28,
+        "h": 18
+      },
+      "contextPx": 0,
+      "crop": {
+        "x": 10,
+        "y": 16,
+        "w": 28,
+        "h": 18
+      },
+      "files": {
+        "native": "crop-1.native.png",
+        "display": "crop-1.display.png"
+      }
+    },
+    {
+      "kind": "target_crop",
+      "frameId": "harbor-compressor",
+      "candidateId": "c-9d7f9a11",
+      "revision": "r3",
+      "documentHash": "e4031b47",
+      "scale": 4,
+      "sampling": "nearest",
+      "requestedRect": {
+        "x": 10,
+        "y": 16,
+        "w": 28,
+        "h": 18
+      },
+      "contextPx": 0,
+      "crop": {
+        "x": 10,
+        "y": 16,
+        "w": 28,
+        "h": 18
+      },
+      "files": {
+        "native": "crop-2.native.png",
+        "display": "crop-2.display.png"
+      }
+    },
+    {
+      "kind": "target_crop",
+      "frameId": "harbor-compressor",
+      "candidateId": "c-130b6637",
+      "revision": "r3",
+      "documentHash": "d9d2e47d",
+      "scale": 4,
+      "sampling": "nearest",
+      "requestedRect": {
+        "x": 10,
+        "y": 16,
+        "w": 28,
+        "h": 18
+      },
+      "contextPx": 0,
+      "crop": {
+        "x": 10,
+        "y": 16,
+        "w": 28,
+        "h": 18
+      },
+      "files": {
+        "native": "crop-3.native.png",
+        "display": "crop-3.display.png"
+      }
+    }
+  ],
+  "outDir": "E:\\Repos\\Tools\\procedural-game-assets\\docs\\evidence\\studio-v1_3\\A-candidates"
+}

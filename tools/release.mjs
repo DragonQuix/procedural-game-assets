@@ -40,6 +40,7 @@ const PAYLOAD = [
   ['tools/init-project.mjs', 'tools/init-project.mjs'],
   ['tools/asset-loop.mjs', 'tools/asset-loop.mjs'],
   ['tools/legacy', 'tools/legacy'],
+  ['tools/benchmark', 'tools/benchmark'],
   ['examples/recipes', 'examples/recipes'],
   ['examples/faults', 'examples/faults'],
   ['examples/canvas-slice', 'examples/canvas-slice'],
@@ -57,7 +58,7 @@ const PAYLOAD = [
 ];
 
 /** 载荷内排除的派生/本地文件 */
-const EXCLUDE = /[\\/]assets([\\/]|$)|demo-capture\.png$|node_modules[\\/]\.package-lock/;
+const EXCLUDE = /[\\/]assets([\\/]|$)|demo-capture\.png$|node_modules[\\/]\.package-lock|[\\/]tests[\\/](?:pga-ad-host|PGA_AB_BENCHMARK_[^\\/]+|PGA_CONSTRAINT_BENCHMARK_[^\\/]+)(?:[\\/]|$)/;
 
 async function build() {
   const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));

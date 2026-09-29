@@ -5,6 +5,27 @@
 
 ## 已完成（验证记录见 docs/verification.md）
 
+## S9 Studio v1.3（2026-09-29）
+
+依据：`../CONTEXT.md`、`../docs/PLAN.md`、ADR-0001/0002/0008–0012；无 CONTEXT-MAP.md。
+
+- [x] PR #1：SEARCH_LIMIT 单点回退与同次 explore 复用完整域，不阻塞合法单点
+- [x] PR #1：safeBinding 字段/固定参数/合同身份，观察 VALID/REJECTED/STALE/TAMPERED
+- [x] PR #1：基线生命周期文档，新增 7 项测试；源 377 PASS、载荷 366 PASS/6 SKIP
+- [x] PR #1：追加 D13-0.7.0-4cd1666、保留旧快照；起始像素/共同观察/独立合同复核，实验未运行
+
+- [x] v1.2 superseding audited interpretation，旧 scored/raw/review/key/freeze 全部保留
+- [x] /3 资产级合同、T05 27px 回归、metadata/node 独立保护、commit/submit 最终编译重验
+- [x] 矩形三语义 transform，有限试编译安全域、修订绑定、非法探索提前拒绝
+- [x] 共享 crop/contact sheet/diff overlay，与最终资产分离
+- [x] 新 harness 的严格 review schema、动画传播、真实宿主 vision 分类；旧隔离自检 9/9
+- [x] 两份全新 demo 实际运行，PNG/JSON 见 `../docs/evidence/studio-v1_3/`
+- [x] PGA_CONSTRAINT_BENCHMARK_v0_1 草案、真实旧源码冻结与新 hold-out；未运行
+- [ ] 正式冻结模型/宿主、共同计数 runner、宿主输入证据通道及执行授权后才可运行 12-run
+- [ ] 视觉/弱 agent 能力收益：本轮没有实验结论，不宣称改善
+
+## P0–P7 历史
+
 - [x] P0 基线与契约（cfac45e）
 - [x] P1 无 DOM 像素核心（05598a8）
 - [x] P2 角色闭环：60 帧逐像素回归、rustclaw、最低画廊（3b966dc）

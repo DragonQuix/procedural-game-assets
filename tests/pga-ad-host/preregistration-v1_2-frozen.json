@@ -1,0 +1,133 @@
+{
+  "schema": "pga-benchmark-prereg/1.2-frozen",
+  "status": "FROZEN",
+  "frozenAt": "2026-09-29T07:32:55+08:00",
+  "approvedBy": "用户 2026-09-29 批准 PGA A/D Benchmark v1.2 scored batch（十五阶段执行授权）",
+  "benchmarkVersion": "1.2",
+  "benchmarkPackage": "PGA_AB_BENCHMARK_v1_2",
+  "technicalGate": {
+    "gate": "preflight READY_TECHNICAL --run-tests",
+    "technicalGateVersion": "1.1",
+    "technicalGateVersion_note": "readiness.json 内部记录值；v1.2 只修改 reviewer 基础设施，未修改 technical preflight，不为改标签而重做已验证的 preflight",
+    "probeAdapterVersion": "crash-retry/1.1",
+    "readinessFile": "tests/pga-ad-host/preflight-v1_2/readiness.json",
+    "readinessFileSha256": "fa62cc5b74fc7591fac2541dfc8e63e806dc9ffab7c777d3ed65f99ba53d0e82",
+    "projectTests": "39 files / 339 passed / 0 failed / 0 skipped"
+  },
+  "repositoryFingerprint": "541db38bfd94645a8f406a192b3a5168fa41a87c588207c2a7bbdfd1fa6b1d8b",
+  "repositoryCommit": "4fd4330 (master; fingerprint covers src/ and package.json)",
+  "participantModel": {
+    "provider": "bigmodel-individual-coding-plan",
+    "exact_model_id": "GLM-5.3-Flash（ZCode 会话模型）",
+    "version_or_date": null,
+    "version_or_date_note": "宿主不暴露模型构建日期/快照号，如实 null，不猜测补版本号"
+  },
+  "participantReasoning": {
+    "setting": "default",
+    "note": "宿主仅提供会话默认推理设置，如实冻结 default；A/D 36 次全部一致"
+  },
+  "reviewerModel": {
+    "provider": "bigmodel-individual-coding-plan",
+    "exact_model_id": "GLM-5.3-Flash（与参试者同会话模型；每位 reviewer 为全新子代理）",
+    "version_or_date": null
+  },
+  "reviewerReasoning": {
+    "setting": "default"
+  },
+  "participantHost": "ZCode CLI (win32, Node v22.23.2)；参试者为提示词级隔离的全新子代理，仅获知自己 trial 的绝对路径与统一执行指令（trial 内 PROMPT.md 为最高优先级）",
+  "reviewerHost": "ZCode CLI 同上；每位 reviewer 仅获知自己 reviewer-N 包的绝对路径与统一评审指令（包内 PROMPT.md 为最高优先级）",
+  "visionCapability": {
+    "verified": true,
+    "evidence": "smoke 与 v1.2 dry-run 中全部执行/评审子代理经宿主文件读取工具以视觉输入查看 PNG 并完成像素级核对；scored 每轮回收时按轨迹与产出一致性复核",
+    "limitation": "子代理逐步 transcript 由宿主会话持有；T06 动画维度若宿主无法实际播放则记 UNVERIFIED，不以静态拼图冒充播放"
+  },
+  "isolationLimitation": "子代理为全新上下文（提示词级隔离），共享宿主文件系统无法硬隔离；以统一指令约束 + 回收核验，记录为实验限制",
+  "candidateBudget": 12,
+  "budgets": {
+    "rendered_candidate_states": 12,
+    "token_cap_each_arm": null,
+    "cost_cap_each_arm": null,
+    "time_cap_each_arm": null,
+    "null_means": "not enforced; record honestly；token 宿主可观测则逐 run 记录，费用/墙钟不可靠取得记 null/UNKNOWN"
+  },
+  "tasks": ["T01", "T02", "T03", "T04", "T05", "T06"],
+  "repeats": 3,
+  "arms": ["A", "D"],
+  "totalRuns": 36,
+  "pairedComparisons": 18,
+  "reviewersPerPair": 2,
+  "totalReviews": 36,
+  "reviewerPositionPolicy": "MIRRORED_BALANCE",
+  "reviewerMappingSeed": "pga-ab-benchmark/v1_2/blind-mapping/1",
+  "reviewSchema": "pga-review/2",
+  "pairOrder": "protocol/pair-order.json",
+  "pairOrderSha256": "87d8d5f34d125fd73a8f6600431d8e88863d4c39027bcf28a1917b743644d9d1",
+  "promptHashes": {
+    "participantPromptA": "bfa0a3957ccd0e867570ff594b203db6a73a3e42efd08ea7eb940278388bd7c0 (prompts/A.md)",
+    "participantPromptD": "be25e3f433da40dc54c207c1494198674b55ca2f617d914ab9eabe3488d11ee8 (prompts/D.md)",
+    "reviewerPrompt": "213862ee7e175f1ec46790fcb8e9c445b2b3e6c01c6635062434ac48044971c4 (prompts/reviewer.md)",
+    "organizerPrepare": "fcd873305b965c2b96e64b8d86644b740f953835c751d33a59d9998e5e161ebe"
+  },
+  "toolHashes": {
+    "evaluate": "776e317ffaf0e9453999b28710bd298ec2700aa8959d2cb9b4e0cf7d7b466e5e",
+    "blind": "2bf365d7734149f7343acf4c5131c0f424ea13e46e77a6bb496534707e7bae13"
+  },
+  "statisticalRules": {
+    "candidateVisualStatus": {
+      "PASS": "两位 reviewer 均对同一候选给 MEETS",
+      "NOT_YET": "两位 reviewer 均给 NOT_YET",
+      "DISAGREEMENT": "一位 MEETS、一位 NOT_YET",
+      "UNVERIFIED": "任一 reviewer 给 UNVERIFIED",
+      "rule": "机械规则；不用主持人事后裁决把 DISAGREEMENT 变成 PASS 或 NOT_YET；blockingIssue/topStrength/topConcern/confidence 仅用于解释"
+    },
+    "taskSuccess": {
+      "PASS_requires_all": ["submitted=true", "technical=PASS", "protocol compliance=PASS", "candidate budget=PASS", "candidateVisualStatus=PASS"],
+      "otherwise": "保留真实分类：TECHNICAL_FAIL / PROTOCOL_FAIL / BUDGET_FAIL / VISUAL_NOT_YET / VISUAL_DISAGREEMENT / UNVERIFIED / TOOL_BLOCKED / INFRA_FAILED",
+      "rule": "不得删除失败运行后补一个成功运行替代"
+    },
+    "pairwiseVisual": {
+      "raw": "每位 reviewer 的五分类原始判断完整保存（X_PREFERRED/Y_PREFERRED/NO_MEANINGFUL_DIFFERENCE/BOTH_NOT_YET/UNVERIFIED），全部 scored 执行结束并最终解盲后才转换成 A/D",
+      "pairLevelPreference": {
+        "CONSENSUS_A": "两位 reviewer 都偏好 A",
+        "CONSENSUS_D": "两位 reviewer 都偏好 D",
+        "NO_MEANINGFUL_DIFFERENCE": "两位都明确判断没有有意义差异",
+        "BOTH_NOT_YET": "两位都判断两者均未达到要求",
+        "MIXED": "其他所有有效但不一致的组合",
+        "UNVERIFIED": "存在导致该 pair 无法可靠比较的必要材料缺失"
+      },
+      "rule": "不设第三位 reviewer 对 MIXED 做事后仲裁；本批次保留真实分歧"
+    },
+    "primary": "A 与 D 各自的 taskSuccess 结果及任务/重复层级明细；报告原始计数，不只给百分比",
+    "secondary": ["candidateVisualStatus", "pairLevelPreference", "每位 reviewer 原始 pairwiseResult", "technical failure", "protocol failure", "candidate count", "tool/action count（若可靠取得）", "retries/errors", "submit success"],
+    "forbidden": "不创建事后加权总分；不把同一 pair 的两位 reviewer 冒充两个独立任务样本；以 18 个 task×repeat pair 为主要配对单位，同时保留 reviewer 原始判断",
+    "scope": "有限任务集试点，不宣称统计功效足以推广到所有 agent、所有 2D 风格或商业级质量"
+  },
+  "failureRules": {
+    "participantToolFailure": "agent 已开始读取任务或执行制作后出现的 Studio 错误、代码错误、错误操作、提交失败等，属于该 run 的结果，不自动重跑",
+    "organizerLaunchFailure": "participant 实际看到任务、开始制作之前的纯基础设施失败（子代理未创建成功、trial 未挂载、宿主崩溃）允许从同一冻结起点重新启动该 slot；保留失败 launch 记录并说明为何不计作 participant run",
+    "noResampling": "agent 已开始任务后，不得因结果不好重新抽一次",
+    "reviewerSame": "reviewer 纯启动失败可重新创建；已看到候选并开始评价后，不因结论异常而替换"
+  },
+  "executionOrder": "先完成全部 36 次 participant runs 并生成 execution-freeze manifest（含整体 SHA-256），之后统一 evaluate → blind → 36 独立 review → 记录 firstFormalUnblindTimestamp → 统一解盲 → 分析。participant 阶段不产生或查看正式视觉 A/D 统计",
+  "noAdaptation": "36 次执行期间：不查看/不汇报当前 A/D 领先情况；不因某 arm 表现、任务反复失败或 Studio 美术局限改变提示词/工具/预算；不给某 arm 额外美术建议；不增加候选；不替失败 run 修图；不追加补偿性 run",
+  "noEarlyUnblinding": "36 participant runs 与 36 reviewer outputs 全部冻结前，禁止使用 unblind.mjs 读取正式结果；key.json 按逻辑封存；首次统一解盲记录 firstFormalUnblindTimestamp",
+  "reportingConstraints": "结论仅限本次冻结的 6 项程序化像素资产任务、指定 agent/宿主与预算条件；不得宣称'所有较弱 agent 都能生成高质量 2D 图像'；无明显优势时如实报告，不为得到想要的结论继续调参",
+  "midExperimentChangePolicy": "任何 Studio、任务、执行提示词、blind、reviewer prompt、预算、evaluate 或结果规则变更，立即终止当前 scored batch；版本升级后重新 preflight、preregister、运行，不混合前后结果",
+  "stopConditions": [
+    "frozen Studio/任务/提示词/evaluate/blind 发生任何变化",
+    "实际 participant model 或 reviewer model 发生不可忽略的改变",
+    "repository source fingerprint 变化",
+    "benchmark frozen materials 变化",
+    "发现会使 A/D 条件不再可比的系统性基础设施问题",
+    "无法保持正式结果不提前解盲",
+    "大量 participant 无法真正获得图像输入",
+    "发现 trial 之间发生结果泄漏"
+  ],
+  "notStopConditions": ["某一组表现差", "某任务反复失败（记录并继续）"],
+  "outputs": "runs-v1_2/（Git ignored）；execution-freeze manifest、evaluate 36 份、18 个 blind key、36 份 review、解盲与分析均留主持人侧；归档性冻结文件与最终汇总报告按数据隔离约定入库",
+  "approval": {
+    "approved": true,
+    "approvedAt": "2026-09-29T07:32:55+08:00",
+    "scope": "完成 preregistration 冻结后直接执行全部 36 次 participant runs 及后续 evaluate、blind、36 独立 review 与最终统一解盲，无需逐 pair 请求批准"
+  }
+}

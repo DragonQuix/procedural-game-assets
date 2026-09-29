@@ -1,0 +1,319 @@
+{
+  "schema": "pga-v13-demo/1",
+  "status": "PASS",
+  "asset": "tidal-vault",
+  "benchmarkRun": false,
+  "rejected": {
+    "requestId": "req-0009c069",
+    "baseRevision": "r1",
+    "head": "r1",
+    "status": "REJECTED_UNSAFE",
+    "requestedValue": 25,
+    "safeDomain": {
+      "status": "COMPLETE",
+      "revision": "r1",
+      "documentHash": "199bef77",
+      "contractHash": "7c3763db",
+      "operator": "geometry.set",
+      "target": "vault.base",
+      "field": "y",
+      "fixedParams": {},
+      "theoreticalRange": [
+        0,
+        29
+      ],
+      "safeRange": {
+        "intervals": [
+          [
+            3,
+            23
+          ]
+        ],
+        "values": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      },
+      "constraints": {
+        "document": [],
+        "contract": "PASS",
+        "preserve": []
+      },
+      "condition": "仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全",
+      "cacheKey": "6ed4b6e6",
+      "cache": "disabled",
+      "search": {
+        "tested": 30,
+        "maxSearch": 512,
+        "trialCompiles": 27,
+        "pixelWork": 92160
+      },
+      "rejected": [
+        {
+          "value": 0,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "vault.base",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "c8f2ad1e",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 52,
+              "changedBounds": {
+                "x0": 7,
+                "y0": 0,
+                "x1": 25,
+                "y1": 3
+              },
+              "message": "52 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 1,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "vault.base",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "554ca51d",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 34,
+              "changedBounds": {
+                "x0": 7,
+                "y0": 1,
+                "x1": 25,
+                "y1": 3
+              },
+              "message": "34 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 2,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "vault.base",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "54338730",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 16,
+              "changedBounds": {
+                "x0": 8,
+                "y0": 2,
+                "x1": 24,
+                "y1": 3
+              },
+              "message": "16 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 24,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "vault.base",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "9a809002",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 16,
+              "changedBounds": {
+                "x0": 8,
+                "y0": 29,
+                "x1": 24,
+                "y1": 30
+              },
+              "message": "16 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 25,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "vault.base",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "95cf8b71",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 34,
+              "changedBounds": {
+                "x0": 7,
+                "y0": 29,
+                "x1": 25,
+                "y1": 31
+              },
+              "message": "34 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 26,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "vault.base",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "e58a4694",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 52,
+              "changedBounds": {
+                "x0": 7,
+                "y0": 29,
+                "x1": 25,
+                "y1": 32
+              },
+              "message": "52 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 27,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[0](vault.base)：节点下缘 31 超出内画布高 30"
+          }
+        },
+        {
+          "value": 28,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[0](vault.base)：节点下缘 32 超出内画布高 30"
+          }
+        },
+        {
+          "value": 29,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[0](vault.base)：节点下缘 33 超出内画布高 30"
+          }
+        }
+      ]
+    },
+    "validation": {
+      "tested": 30,
+      "maxSearch": 512,
+      "trialCompiles": 27,
+      "pixelWork": 92160
+    },
+    "reason": "CANDIDATE_INVALID",
+    "conflicts": [
+      {
+        "kind": "pixels",
+        "protectionType": "pixels",
+        "affectedNode": "vault.base",
+        "operator": "geometry.set",
+        "revision": "r1",
+        "documentHash": "95cf8b71",
+        "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+        "changedPixelCount": 34,
+        "changedBounds": {
+          "x0": 7,
+          "y0": 29,
+          "x1": 25,
+          "y1": 31
+        },
+        "message": "34 个最终 RGBA 像素违反资产级合同"
+      }
+    ],
+    "nearestLegalValues": [
+      23,
+      22,
+      21
+    ],
+    "recommendedTransform": "squash_keep_base",
+    "candidateId": null,
+    "renderedCandidates": 0
+  },
+  "legal": {
+    "oldGeometry": {
+      "x": 10,
+      "y": 8,
+      "w": 10,
+      "h": 15
+    },
+    "newGeometry": {
+      "x": 8,
+      "y": 5,
+      "w": 14,
+      "h": 18
+    },
+    "delta": {
+      "x": -2,
+      "y": -3,
+      "w": 4,
+      "h": 3
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 1
+    },
+    "anchorPoint": {
+      "x": 15,
+      "y": 23
+    },
+    "preservedInvariant": "anchorPoint"
+  },
+  "final": {
+    "revision": "r2",
+    "hashes": {
+      "documentHash": "b0fe2e8c",
+      "styleHash": "1be5bffc",
+      "renderHash": "fb3baeac:6aaea750",
+      "toolVersion": "unknown"
+    },
+    "protection": {
+      "status": "PASS",
+      "contractHash": "7c3763db",
+      "baselineDocumentHash": "9913f321",
+      "baselineRenderHash": "c9265a79:756476f3",
+      "changedPixelCount": 0,
+      "conflicts": []
+    }
+  }
+}

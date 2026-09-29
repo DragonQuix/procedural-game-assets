@@ -1,0 +1,77 @@
+{
+  "checks": [
+    {
+      "name": "36 distinct slots",
+      "pass": true
+    },
+    {
+      "name": "complete slot mapping",
+      "pass": true
+    },
+    {
+      "name": "all frozen checks",
+      "pass": true
+    },
+    {
+      "name": "35/1 technical",
+      "pass": true
+    },
+    {
+      "name": "no rebuild discrepancies",
+      "pass": true
+    },
+    {
+      "name": "all candidate identities and protections",
+      "pass": true
+    },
+    {
+      "name": "all revision derivations",
+      "pass": true
+    },
+    {
+      "name": "original primary and pairs reproduced",
+      "pass": true
+    },
+    {
+      "name": "13/4/1/0 success matrix",
+      "pass": true
+    },
+    {
+      "name": "animation sensitivity 15/12",
+      "pass": true
+    },
+    {
+      "name": "fallback sensitivity 15/13",
+      "pass": true
+    },
+    {
+      "name": "exactly two original parser rejections",
+      "pass": true
+    },
+    {
+      "name": "all 27 violation coordinates",
+      "pass": true
+    },
+    {
+      "name": "T02 only repeats 1 and 3 rejected",
+      "pass": true
+    },
+    {
+      "name": "all original input bytes preserved",
+      "pass": true
+    },
+    {
+      "name": "no tracked source modifications",
+      "pass": true
+    }
+  ],
+  "checkCount": 16,
+  "frozenChecks": 3349,
+  "originalFilesChecked": 6816,
+  "originalBytesChanged": [],
+  "sourceModified": false,
+  "candidates": 92,
+  "revisions": 64,
+  "gitStatus": "?? tests/pga-ad-host/audit-v1_2/\n?? tests/pga-ad-host/eval-v1_2/\n?? tests/pga-ad-host/preregistration-v1_2-frozen.json\n?? tests/pga-ad-host/scored-analysis-v1_2.json\n?? tests/pga-ad-host/scored-summary-v1_2.csv\n?? tests/pga-ad-host/v1_2-freeze-manifest.json\n",
+  "note": "自检验证计算与不可变输入，不补齐缺失的宿主协议/看图证据。"
+}

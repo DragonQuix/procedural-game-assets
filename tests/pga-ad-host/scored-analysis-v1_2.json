@@ -1,0 +1,1154 @@
+{
+  "schema": "pga-scored-analysis/1.2",
+  "generatedAt": "2026-09-29T03:46:47.590Z",
+  "firstFormalUnblindTimestamp": "2026-09-29T11:44:27+08:00",
+  "pairsCount": 18,
+  "primary": {
+    "A": {
+      "PASS": 17,
+      "VISUAL_DISAGREEMENT": 1
+    },
+    "D": {
+      "PASS": 14,
+      "VISUAL_DISAGREEMENT": 3,
+      "TECHNICAL_FAIL": 1
+    },
+    "counts": {
+      "A": 18,
+      "D": 18
+    }
+  },
+  "secondary": {
+    "pairLevelPreference": {
+      "NO_MEANINGFUL_DIFFERENCE": 2,
+      "CONSENSUS_A": 7,
+      "CONSENSUS_D": 2,
+      "MIXED": 7
+    },
+    "candidateVisualStatus": {
+      "A": {
+        "PASS": 17,
+        "DISAGREEMENT": 1
+      },
+      "D": {
+        "PASS": 15,
+        "DISAGREEMENT": 3
+      }
+    },
+    "technical": {
+      "A": {
+        "PASS": 18
+      },
+      "D": {
+        "PASS": 17,
+        "FAIL": 1
+      }
+    }
+  },
+  "notes": [
+    "T05-r1/reviewer-2: allowedPairwiseResult omitted; verdict \"X_PREFERRED\" verified legal; mapped as X→reviewer-2 source",
+    "T05-r3/reviewer-1: allowedPairwiseResult omitted; verdict \"X_PREFERRED\" verified legal; mapped as X→reviewer-1 source"
+  ],
+  "pairs": [
+    {
+      "pair": "T01-r1",
+      "task": "T01",
+      "repeat": 1,
+      "candidateA": "A",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "NO_MEANINGFUL_DIFFERENCE",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": null,
+          "preferredArm": null,
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r1\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "NO_MEANINGFUL_DIFFERENCE",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": null,
+          "preferredArm": null,
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r1\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "NO_MEANINGFUL_DIFFERENCE",
+      "runs": {
+        "A": {
+          "trialId": "T01-A-r1",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T01-D-r1",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T02-r1",
+      "task": "T02",
+      "repeat": 1,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T02-A-r1",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r1\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "NOT_YET"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T02-A-r1",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r1\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "CONSENSUS_A",
+      "runs": {
+        "A": {
+          "trialId": "T02-A-r1",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T02-D-r1",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "DISAGREEMENT",
+          "candidatesSelfReported": 5,
+          "taskSuccess": "VISUAL_DISAGREEMENT",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T03-r1",
+      "task": "T03",
+      "repeat": 1,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T03-D-r1",
+          "preferredArm": "D",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r1\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T03-D-r1",
+          "preferredArm": "D",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r1\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "CONSENSUS_D",
+      "runs": {
+        "A": {
+          "trialId": "T03-A-r1",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T03-D-r1",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 5,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T04-r1",
+      "task": "T04",
+      "repeat": 1,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "NO_MEANINGFUL_DIFFERENCE",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": null,
+          "preferredArm": null,
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r1\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T04-A-r1",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r1\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "MIXED",
+      "runs": {
+        "A": {
+          "trialId": "T04-A-r1",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 1,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T04-D-r1",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 6,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T05-r1",
+      "task": "T05",
+      "repeat": 1,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T05-D-r1",
+          "preferredArm": "D",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r1\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T05-A-r1",
+          "preferredArm": "A",
+          "via": "equivalent-mechanical-mapping (allowedPairwiseResult omitted by reviewer; verdict verified against schema enum)",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r1\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "MIXED",
+      "runs": {
+        "A": {
+          "trialId": "T05-A-r1",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T05-D-r1",
+          "arm": "D",
+          "technical": "FAIL",
+          "failures": [
+            "protected_pixels:beacon({\"outsidePixels\":27})"
+          ],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 9,
+          "taskSuccess": "TECHNICAL_FAIL",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T06-r1",
+      "task": "T06",
+      "repeat": 1,
+      "candidateA": "A",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "NO_MEANINGFUL_DIFFERENCE",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": null,
+          "preferredArm": null,
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "NO_MEANINGFUL_DIFFERENCE",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": null,
+          "preferredArm": null,
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "NO_MEANINGFUL_DIFFERENCE",
+      "runs": {
+        "A": {
+          "trialId": "T06-A-r1",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 1,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T06-D-r1",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 6,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T03-r2",
+      "task": "T03",
+      "repeat": 2,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T03-A-r2",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r2\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "NOT_YET"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T03-A-r2",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r2\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "CONSENSUS_A",
+      "runs": {
+        "A": {
+          "trialId": "T03-A-r2",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 2,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T03-D-r2",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "DISAGREEMENT",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "VISUAL_DISAGREEMENT",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T04-r2",
+      "task": "T04",
+      "repeat": 2,
+      "candidateA": "A",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T04-A-r2",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r2\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T04-A-r2",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r2\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "CONSENSUS_A",
+      "runs": {
+        "A": {
+          "trialId": "T04-A-r2",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 2,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T04-D-r2",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 5,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T05-r2",
+      "task": "T05",
+      "repeat": 2,
+      "candidateA": "A",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T05-A-r2",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r2\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T05-D-r2",
+          "preferredArm": "D",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r2\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "MIXED",
+      "runs": {
+        "A": {
+          "trialId": "T05-A-r2",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 4,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T05-D-r2",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 6,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T06-r2",
+      "task": "T06",
+      "repeat": 2,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "NO_MEANINGFUL_DIFFERENCE",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": null,
+          "preferredArm": null,
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r2\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T06-A-r2",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r2\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "MIXED",
+      "runs": {
+        "A": {
+          "trialId": "T06-A-r2",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 2,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T06-D-r2",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 6,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T01-r2",
+      "task": "T01",
+      "repeat": 2,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T01-D-r2",
+          "preferredArm": "D",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r2\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T01-D-r2",
+          "preferredArm": "D",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r2\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "CONSENSUS_D",
+      "runs": {
+        "A": {
+          "trialId": "T01-A-r2",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 2,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T01-D-r2",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T02-r2",
+      "task": "T02",
+      "repeat": 2,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "NOT_YET"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T02-D-r2",
+          "preferredArm": "D",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r2\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T02-A-r2",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r2\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "MIXED",
+      "runs": {
+        "A": {
+          "trialId": "T02-A-r2",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "DISAGREEMENT",
+          "candidatesSelfReported": 2,
+          "taskSuccess": "VISUAL_DISAGREEMENT",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T02-D-r2",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 2,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T05-r3",
+      "task": "T05",
+      "repeat": 3,
+      "candidateA": "A",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T05-A-r3",
+          "preferredArm": "A",
+          "via": "equivalent-mechanical-mapping (allowedPairwiseResult omitted by reviewer; verdict verified against schema enum)",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r3\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T05-A-r3",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r3\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "CONSENSUS_A",
+      "runs": {
+        "A": {
+          "trialId": "T05-A-r3",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 7,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T05-D-r3",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 7,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T06-r3",
+      "task": "T06",
+      "repeat": 3,
+      "candidateA": "A",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "NO_MEANINGFUL_DIFFERENCE",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": null,
+          "preferredArm": null,
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r3\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T06-D-r3",
+          "preferredArm": "D",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r3\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "MIXED",
+      "runs": {
+        "A": {
+          "trialId": "T06-A-r3",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 2,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T06-D-r3",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 6,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T01-r3",
+      "task": "T01",
+      "repeat": 3,
+      "candidateA": "A",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "NO_MEANINGFUL_DIFFERENCE",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": null,
+          "preferredArm": null,
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r3\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T01-A-r3",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r3\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "MIXED",
+      "runs": {
+        "A": {
+          "trialId": "T01-A-r3",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 2,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T01-D-r3",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 5,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T02-r3",
+      "task": "T02",
+      "repeat": 3,
+      "candidateA": "A",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T02-A-r3",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r3\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T02-A-r3",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r3\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "CONSENSUS_A",
+      "runs": {
+        "A": {
+          "trialId": "T02-A-r3",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 4,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T02-D-r3",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 8,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T03-r3",
+      "task": "T03",
+      "repeat": 3,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T03-A-r3",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r3\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "NOT_YET"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T03-A-r3",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r3\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "CONSENSUS_A",
+      "runs": {
+        "A": {
+          "trialId": "T03-A-r3",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 2,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T03-D-r3",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "DISAGREEMENT",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "VISUAL_DISAGREEMENT",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    },
+    {
+      "pair": "T04-r3",
+      "task": "T04",
+      "repeat": 3,
+      "candidateA": "D",
+      "reviewers": [
+        {
+          "reviewerId": "reviewer-1",
+          "verdict": "Y_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "MEDIUM",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T04-A-r3",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r3\\reviewer-1\\review.json"
+        },
+        {
+          "reviewerId": "reviewer-2",
+          "verdict": "X_PREFERRED",
+          "taskFit": {
+            "X": "MEETS",
+            "Y": "MEETS"
+          },
+          "confidence": "HIGH",
+          "preferredRun": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T04-A-r3",
+          "preferredArm": "A",
+          "via": "unblind.mjs",
+          "reviewFile": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r3\\reviewer-2\\review.json"
+        }
+      ],
+      "pairLevelPreference": "CONSENSUS_A",
+      "runs": {
+        "A": {
+          "trialId": "T04-A-r3",
+          "arm": "A",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        },
+        "D": {
+          "trialId": "T04-D-r3",
+          "arm": "D",
+          "technical": "PASS",
+          "failures": [],
+          "candidateVisualStatus": "PASS",
+          "candidatesSelfReported": 3,
+          "taskSuccess": "PASS",
+          "submitted": true,
+          "protocolCompliance": "PASS",
+          "candidateBudget": "PASS"
+        }
+      }
+    }
+  ]
+}

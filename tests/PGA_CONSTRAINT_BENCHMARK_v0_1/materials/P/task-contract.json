@@ -1,0 +1,157 @@
+{
+  "task": "P",
+  "requiredClips": [],
+  "requiredViews": [
+    "X.native.png",
+    "Y.native.png"
+  ],
+  "objectives": {
+    "target": "relay.body",
+    "minWidth": 20,
+    "maxHeight": 16,
+    "centerX": 17,
+    "bottomY": 35
+  },
+  "protection": {
+    "schemaVersion": "pga-protection/1",
+    "coordinateSpace": "final-frame",
+    "protectedRegions": [
+      {
+        "x": 13,
+        "y": 6,
+        "w": 10,
+        "h": 4
+      }
+    ],
+    "metadataPaths": [
+      "anchor",
+      "attachments",
+      "bounds"
+    ],
+    "nodeIds": [
+      "relay.signal",
+      "relay.socket"
+    ],
+    "allowedMutationRegions": [
+      {
+        "x": 3,
+        "y": 3,
+        "w": 30,
+        "h": 38
+      }
+    ],
+    "baseline": {
+      "schemaVersion": "pga-studio/2",
+      "id": "relay-stack",
+      "seed": 8719,
+      "renderProfile": {
+        "name": "pixel-flat",
+        "version": 1
+      },
+      "style": {
+        "id": "constraint-holdout",
+        "version": 1,
+        "ramps": {
+          "shell": [
+            "#28343f",
+            "#53716b",
+            "#98ada0",
+            "#d4dac2"
+          ],
+          "focal": [
+            "#473132",
+            "#98654c",
+            "#d8ab6b",
+            "#eee0b1"
+          ]
+        }
+      },
+      "canvas": {
+        "w": 34,
+        "h": 42,
+        "outline": "#15232a"
+      },
+      "nodes": [
+        {
+          "id": "relay.base",
+          "kind": "panel",
+          "x": 6,
+          "y": 35,
+          "w": 22,
+          "h": 3,
+          "ramp": "shell",
+          "material": "bevel-metal",
+          "layer": 0
+        },
+        {
+          "id": "relay.body",
+          "kind": "panel",
+          "x": 10,
+          "y": 16,
+          "w": 14,
+          "h": 19,
+          "ramp": "shell",
+          "material": "bevel-metal",
+          "layer": 1
+        },
+        {
+          "id": "relay.mast",
+          "kind": "panel",
+          "x": 15,
+          "y": 8,
+          "w": 4,
+          "h": 8,
+          "ramp": "shell",
+          "material": "bevel-metal",
+          "layer": 1
+        },
+        {
+          "id": "relay.signal",
+          "kind": "panel",
+          "x": 12,
+          "y": 5,
+          "w": 10,
+          "h": 4,
+          "ramp": "focal",
+          "material": "bevel-metal",
+          "layer": 2
+        },
+        {
+          "id": "relay.socket",
+          "kind": "panel",
+          "x": 14,
+          "y": 23,
+          "w": 6,
+          "h": 5,
+          "ramp": "focal",
+          "material": "bevel-metal",
+          "layer": 2
+        }
+      ],
+      "anchor": {
+        "x": 17,
+        "y": 38
+      },
+      "attachments": {
+        "signal": {
+          "x": 17,
+          "y": 7
+        }
+      },
+      "constraints": [
+        {
+          "kind": "pixels",
+          "target": "relay.signal"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments"
+        }
+      ]
+    }
+  }
+}

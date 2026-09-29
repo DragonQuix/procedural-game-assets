@@ -1,0 +1,3259 @@
+{
+  "schema": "pga-v13-demo/1",
+  "status": "PASS",
+  "asset": "harbor-compressor",
+  "benchmarkRun": false,
+  "inspect": {
+    "revision": "r1",
+    "documentHash": "0524a6bc",
+    "fields": {
+      "x": {
+        "status": "COMPLETE",
+        "revision": "r1",
+        "documentHash": "0524a6bc",
+        "contractHash": "2c9cb211",
+        "operator": "geometry.set",
+        "target": "compressor.body",
+        "field": "x",
+        "fixedParams": {},
+        "theoreticalRange": [
+          0,
+          45
+        ],
+        "safeRange": {
+          "intervals": [
+            [
+              2,
+              24
+            ]
+          ],
+          "values": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24
+          ]
+        },
+        "constraints": {
+          "document": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ],
+          "contract": "PASS",
+          "preserve": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ]
+        },
+        "condition": "仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全",
+        "cacheKey": "f3d8f47a",
+        "cache": "disabled",
+        "search": {
+          "tested": 46,
+          "maxSearch": 512,
+          "trialCompiles": 27,
+          "pixelWork": 582912
+        },
+        "rejected": [
+          {
+            "value": 0,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "49dd7b86",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 54,
+                "changedBounds": {
+                  "x0": 0,
+                  "y0": 7,
+                  "x1": 2,
+                  "y1": 35
+                },
+                "message": "54 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "92c11bb3",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 26,
+                "changedBounds": {
+                  "x0": 1,
+                  "y0": 8,
+                  "x1": 2,
+                  "y1": 34
+                },
+                "message": "26 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 25,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "92f382ff",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 26,
+                "changedBounds": {
+                  "x0": 46,
+                  "y0": 8,
+                  "x1": 47,
+                  "y1": 34
+                },
+                "message": "26 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 26,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "25b5a8f0",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 54,
+                "changedBounds": {
+                  "x0": 46,
+                  "y0": 7,
+                  "x1": 48,
+                  "y1": 35
+                },
+                "message": "54 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 27,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 47 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 28,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 48 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 29,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 49 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 30,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 50 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 31,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 51 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 32,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 52 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 33,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 53 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 34,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 54 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 35,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 55 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 36,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 56 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 37,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 57 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 38,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 58 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 39,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 59 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 40,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 60 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 41,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 61 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 42,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 62 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 43,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 63 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 44,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 64 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 45,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 65 超出内画布宽 46"
+            }
+          }
+        ]
+      },
+      "y": {
+        "status": "COMPLETE",
+        "revision": "r1",
+        "documentHash": "0524a6bc",
+        "contractHash": "2c9cb211",
+        "operator": "geometry.set",
+        "target": "compressor.body",
+        "field": "y",
+        "fixedParams": {},
+        "theoreticalRange": [
+          0,
+          41
+        ],
+        "safeRange": {
+          "intervals": [
+            [
+              2,
+              7
+            ]
+          ],
+          "values": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "constraints": {
+          "document": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ],
+          "contract": "PASS",
+          "preserve": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ]
+        },
+        "condition": "仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全",
+        "cacheKey": "a674e119",
+        "cache": "disabled",
+        "search": {
+          "tested": 42,
+          "maxSearch": 512,
+          "trialCompiles": 17,
+          "pixelWork": 532224
+        },
+        "rejected": [
+          {
+            "value": 0,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "5553b0eb",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 42,
+                "changedBounds": {
+                  "x0": 13,
+                  "y0": 0,
+                  "x1": 35,
+                  "y1": 2
+                },
+                "message": "42 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "a9ba9d16",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 20,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 1,
+                  "x1": 34,
+                  "y1": 2
+                },
+                "message": "20 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 8,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 20 个变化像素",
+                "pixels": 20
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "57a0cae3",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 20,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 35
+                },
+                "message": "20 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 9,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 40 个变化像素",
+                "pixels": 40
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "f73984ae",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 40,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 36
+                },
+                "message": "40 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 10,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 60 个变化像素",
+                "pixels": 60
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "b1d085c0",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 60,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 37
+                },
+                "message": "60 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 11,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 80 个变化像素",
+                "pixels": 80
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "fe3058ad",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 80,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 38
+                },
+                "message": "80 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 12,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "b56d842e",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 100,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 39
+                },
+                "message": "100 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 13,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "15d4ca63",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 100,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 39
+                },
+                "message": "100 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 14,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "f4dcac34",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 100,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 39
+                },
+                "message": "100 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 15,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "bb2a1501",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 120,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 43
+                },
+                "message": "120 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 16,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "05aeb012",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 142,
+                "changedBounds": {
+                  "x0": 13,
+                  "y0": 34,
+                  "x1": 35,
+                  "y1": 44
+                },
+                "message": "142 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 17,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 43 超出内画布高 42"
+            }
+          },
+          {
+            "value": 18,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 44 超出内画布高 42"
+            }
+          },
+          {
+            "value": 19,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 45 超出内画布高 42"
+            }
+          },
+          {
+            "value": 20,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 46 超出内画布高 42"
+            }
+          },
+          {
+            "value": 21,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 47 超出内画布高 42"
+            }
+          },
+          {
+            "value": 22,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 48 超出内画布高 42"
+            }
+          },
+          {
+            "value": 23,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 49 超出内画布高 42"
+            }
+          },
+          {
+            "value": 24,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 50 超出内画布高 42"
+            }
+          },
+          {
+            "value": 25,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 51 超出内画布高 42"
+            }
+          },
+          {
+            "value": 26,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 52 超出内画布高 42"
+            }
+          },
+          {
+            "value": 27,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 53 超出内画布高 42"
+            }
+          },
+          {
+            "value": 28,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 54 超出内画布高 42"
+            }
+          },
+          {
+            "value": 29,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 55 超出内画布高 42"
+            }
+          },
+          {
+            "value": 30,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 56 超出内画布高 42"
+            }
+          },
+          {
+            "value": 31,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 57 超出内画布高 42"
+            }
+          },
+          {
+            "value": 32,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 58 超出内画布高 42"
+            }
+          },
+          {
+            "value": 33,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 59 超出内画布高 42"
+            }
+          },
+          {
+            "value": 34,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 60 超出内画布高 42"
+            }
+          },
+          {
+            "value": 35,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 61 超出内画布高 42"
+            }
+          },
+          {
+            "value": 36,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 62 超出内画布高 42"
+            }
+          },
+          {
+            "value": 37,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 63 超出内画布高 42"
+            }
+          },
+          {
+            "value": 38,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 64 超出内画布高 42"
+            }
+          },
+          {
+            "value": 39,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 65 超出内画布高 42"
+            }
+          },
+          {
+            "value": 40,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 66 超出内画布高 42"
+            }
+          },
+          {
+            "value": 41,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 67 超出内画布高 42"
+            }
+          }
+        ]
+      },
+      "w": {
+        "status": "COMPLETE",
+        "revision": "r1",
+        "documentHash": "0524a6bc",
+        "contractHash": "2c9cb211",
+        "operator": "geometry.set",
+        "target": "compressor.body",
+        "field": "w",
+        "fixedParams": {},
+        "theoreticalRange": [
+          1,
+          46
+        ],
+        "safeRange": {
+          "intervals": [
+            [
+              1,
+              31
+            ]
+          ],
+          "values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ]
+        },
+        "constraints": {
+          "document": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ],
+          "contract": "PASS",
+          "preserve": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ]
+        },
+        "condition": "仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全",
+        "cacheKey": "8f8db0ff",
+        "cache": "disabled",
+        "search": {
+          "tested": 46,
+          "maxSearch": 512,
+          "trialCompiles": 33,
+          "pixelWork": 582912
+        },
+        "rejected": [
+          {
+            "value": 32,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "cb753c37",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 26,
+                "changedBounds": {
+                  "x0": 46,
+                  "y0": 8,
+                  "x1": 47,
+                  "y1": 34
+                },
+                "message": "26 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 33,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "c192a38c",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 54,
+                "changedBounds": {
+                  "x0": 46,
+                  "y0": 7,
+                  "x1": 48,
+                  "y1": 35
+                },
+                "message": "54 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 34,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 47 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 35,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 48 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 36,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 49 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 37,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 50 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 38,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 51 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 39,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 52 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 40,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 53 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 41,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 54 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 42,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 55 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 43,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 56 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 44,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 57 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 45,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 58 超出内画布宽 46"
+            }
+          },
+          {
+            "value": 46,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点右缘 59 超出内画布宽 46"
+            }
+          }
+        ]
+      },
+      "h": {
+        "status": "COMPLETE",
+        "revision": "r1",
+        "documentHash": "0524a6bc",
+        "contractHash": "2c9cb211",
+        "operator": "geometry.set",
+        "target": "compressor.body",
+        "field": "h",
+        "fixedParams": {},
+        "theoreticalRange": [
+          1,
+          42
+        ],
+        "safeRange": {
+          "intervals": [
+            [
+              1,
+              26
+            ]
+          ],
+          "values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26
+          ]
+        },
+        "constraints": {
+          "document": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ],
+          "contract": "PASS",
+          "preserve": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ]
+        },
+        "condition": "仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全",
+        "cacheKey": "0b82e82a",
+        "cache": "disabled",
+        "search": {
+          "tested": 42,
+          "maxSearch": 512,
+          "trialCompiles": 35,
+          "pixelWork": 532224
+        },
+        "rejected": [
+          {
+            "value": 27,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 20 个变化像素",
+                "pixels": 20
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "4e3e53e9",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 20,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 35
+                },
+                "message": "20 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 28,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 40 个变化像素",
+                "pixels": 40
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "b6ef0a86",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 40,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 36
+                },
+                "message": "40 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 29,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 60 个变化像素",
+                "pixels": 60
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "a3217a6b",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 60,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 37
+                },
+                "message": "60 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 30,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 80 个变化像素",
+                "pixels": 80
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "a64e5d79",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 80,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 38
+                },
+                "message": "80 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 31,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "c313658c",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 100,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 39
+                },
+                "message": "100 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 32,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "7ea851df",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 100,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 39
+                },
+                "message": "100 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 33,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "2540e69a",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 100,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 39
+                },
+                "message": "100 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 34,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "01e2a9dd",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 120,
+                "changedBounds": {
+                  "x0": 14,
+                  "y0": 34,
+                  "x1": 34,
+                  "y1": 43
+                },
+                "message": "120 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 35,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "target": "compressor.base",
+                "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+                "pixels": 100
+              },
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "geometry.set",
+                "revision": "r1",
+                "documentHash": "c8a31dd0",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 142,
+                "changedBounds": {
+                  "x0": 13,
+                  "y0": 34,
+                  "x1": 35,
+                  "y1": 44
+                },
+                "message": "142 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 36,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 43 超出内画布高 42"
+            }
+          },
+          {
+            "value": 37,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 44 超出内画布高 42"
+            }
+          },
+          {
+            "value": 38,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 45 超出内画布高 42"
+            }
+          },
+          {
+            "value": 39,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 46 超出内画布高 42"
+            }
+          },
+          {
+            "value": 40,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 47 超出内画布高 42"
+            }
+          },
+          {
+            "value": 41,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 48 超出内画布高 42"
+            }
+          },
+          {
+            "value": 42,
+            "reason": "CANDIDATE_INVALID",
+            "error": {
+              "code": "CANDIDATE_INVALID",
+              "name": "StudioOperationError",
+              "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 49 超出内画布高 42"
+            }
+          }
+        ]
+      }
+    },
+    "recommendedTransforms": {
+      "widen_about_center": {
+        "status": "COMPLETE",
+        "revision": "r1",
+        "documentHash": "0524a6bc",
+        "contractHash": "2c9cb211",
+        "operator": "widen_about_center",
+        "target": "compressor.body",
+        "field": "deltaWidth",
+        "fixedParams": {},
+        "theoreticalRange": [
+          -19,
+          26
+        ],
+        "safeRange": {
+          "intervals": [
+            [
+              -18,
+              -18
+            ],
+            [
+              -16,
+              -16
+            ],
+            [
+              -14,
+              -14
+            ],
+            [
+              -12,
+              -12
+            ],
+            [
+              -10,
+              -10
+            ],
+            [
+              -8,
+              -8
+            ],
+            [
+              -6,
+              -6
+            ],
+            [
+              -4,
+              -4
+            ],
+            [
+              -2,
+              -2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              8,
+              8
+            ],
+            [
+              10,
+              10
+            ],
+            [
+              12,
+              12
+            ],
+            [
+              14,
+              14
+            ],
+            [
+              16,
+              16
+            ],
+            [
+              18,
+              18
+            ],
+            [
+              20,
+              20
+            ],
+            [
+              22,
+              22
+            ]
+          ],
+          "values": [
+            -18,
+            -16,
+            -14,
+            -12,
+            -10,
+            -8,
+            -6,
+            -4,
+            -2,
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22
+          ]
+        },
+        "constraints": {
+          "document": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ],
+          "contract": "PASS",
+          "preserve": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ]
+        },
+        "condition": "仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全",
+        "cacheKey": "dac81c19",
+        "cache": "disabled",
+        "search": {
+          "tested": 46,
+          "maxSearch": 512,
+          "trialCompiles": 23,
+          "pixelWork": 582912
+        },
+        "rejected": [
+          {
+            "value": -19,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": -17,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": -15,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": -13,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": -11,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": -9,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": -7,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": -5,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": -3,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": -1,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 1,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 3,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 5,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 7,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 9,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 11,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 13,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 15,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 17,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 19,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 21,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 23,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 24,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "widen_about_center",
+                "revision": "r1",
+                "documentHash": "dafdfe29",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 52,
+                "changedBounds": {
+                  "x0": 1,
+                  "y0": 8,
+                  "x1": 47,
+                  "y1": 34
+                },
+                "message": "52 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 25,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 26,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "widen_about_center",
+                "revision": "r1",
+                "documentHash": "ec35e2d6",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 108,
+                "changedBounds": {
+                  "x0": 0,
+                  "y0": 7,
+                  "x1": 48,
+                  "y1": 35
+                },
+                "message": "108 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          }
+        ]
+      },
+      "squash_keep_base": {
+        "status": "COMPLETE",
+        "revision": "r1",
+        "documentHash": "0524a6bc",
+        "contractHash": "2c9cb211",
+        "operator": "squash_keep_base",
+        "target": "compressor.body",
+        "field": "deltaHeight",
+        "fixedParams": {},
+        "theoreticalRange": [
+          -25,
+          0
+        ],
+        "safeRange": {
+          "intervals": [
+            [
+              -25,
+              0
+            ]
+          ],
+          "values": [
+            -25,
+            -24,
+            -23,
+            -22,
+            -21,
+            -20,
+            -19,
+            -18,
+            -17,
+            -16,
+            -15,
+            -14,
+            -13,
+            -12,
+            -11,
+            -10,
+            -9,
+            -8,
+            -7,
+            -6,
+            -5,
+            -4,
+            -3,
+            -2,
+            -1,
+            0
+          ]
+        },
+        "constraints": {
+          "document": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ],
+          "contract": "PASS",
+          "preserve": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ]
+        },
+        "condition": "仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全",
+        "cacheKey": "ab3c1f5c",
+        "cache": "disabled",
+        "search": {
+          "tested": 26,
+          "maxSearch": 512,
+          "trialCompiles": 26,
+          "pixelWork": 329472
+        },
+        "rejected": []
+      },
+      "resize_about_anchor": {
+        "status": "COMPLETE",
+        "revision": "r1",
+        "documentHash": "0524a6bc",
+        "contractHash": "2c9cb211",
+        "operator": "resize_about_anchor",
+        "target": "compressor.body",
+        "field": "targetWidth",
+        "fixedParams": {
+          "anchor": "bottom-center"
+        },
+        "theoreticalRange": [
+          1,
+          46
+        ],
+        "safeRange": {
+          "intervals": [
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              8,
+              8
+            ],
+            [
+              10,
+              10
+            ],
+            [
+              12,
+              12
+            ],
+            [
+              14,
+              14
+            ],
+            [
+              16,
+              16
+            ],
+            [
+              18,
+              18
+            ],
+            [
+              20,
+              20
+            ],
+            [
+              22,
+              22
+            ],
+            [
+              24,
+              24
+            ],
+            [
+              26,
+              26
+            ],
+            [
+              28,
+              28
+            ],
+            [
+              30,
+              30
+            ],
+            [
+              32,
+              32
+            ],
+            [
+              34,
+              34
+            ],
+            [
+              36,
+              36
+            ],
+            [
+              38,
+              38
+            ],
+            [
+              40,
+              40
+            ],
+            [
+              42,
+              42
+            ]
+          ],
+          "values": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38,
+            40,
+            42
+          ]
+        },
+        "constraints": {
+          "document": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ],
+          "contract": "PASS",
+          "preserve": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base"
+            },
+            {
+              "kind": "pixels",
+              "target": "compressor.optic"
+            }
+          ]
+        },
+        "condition": "仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全",
+        "cacheKey": "29c16259",
+        "cache": "disabled",
+        "search": {
+          "tested": 46,
+          "maxSearch": 512,
+          "trialCompiles": 23,
+          "pixelWork": 582912
+        },
+        "rejected": [
+          {
+            "value": 1,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 3,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 5,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 7,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 9,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 11,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 13,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 15,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 17,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 19,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 21,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 23,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 25,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 27,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 29,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 31,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 33,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 35,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 37,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 39,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 41,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 43,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 44,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "resize_about_anchor",
+                "revision": "r1",
+                "documentHash": "dafdfe29",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 52,
+                "changedBounds": {
+                  "x0": 1,
+                  "y0": 8,
+                  "x1": 47,
+                  "y1": 34
+                },
+                "message": "52 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          },
+          {
+            "value": 45,
+            "reason": "REJECTED_UNSAFE",
+            "error": {
+              "code": "REJECTED_UNSAFE",
+              "name": "StudioOperationError",
+              "message": "整数像素无法精确保留锚点；不做取整或中心漂移"
+            }
+          },
+          {
+            "value": 46,
+            "reason": "CANDIDATE_INVALID",
+            "conflicts": [
+              {
+                "kind": "pixels",
+                "protectionType": "pixels",
+                "affectedNode": "compressor.body",
+                "operator": "resize_about_anchor",
+                "revision": "r1",
+                "documentHash": "ec35e2d6",
+                "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+                "changedPixelCount": 108,
+                "changedBounds": {
+                  "x0": 0,
+                  "y0": 7,
+                  "x1": 48,
+                  "y1": 35
+                },
+                "message": "108 个最终 RGBA 像素违反资产级合同"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rejectedLowLevel": {
+    "requestId": "req-846fa34f",
+    "baseRevision": "r1",
+    "head": "r1",
+    "status": "REJECTED_UNSAFE",
+    "requestedValue": 28,
+    "safeDomain": {
+      "status": "COMPLETE",
+      "revision": "r1",
+      "documentHash": "0524a6bc",
+      "contractHash": "2c9cb211",
+      "operator": "geometry.set",
+      "target": "compressor.body",
+      "field": "h",
+      "fixedParams": {},
+      "theoreticalRange": [
+        1,
+        42
+      ],
+      "safeRange": {
+        "intervals": [
+          [
+            1,
+            26
+          ]
+        ],
+        "values": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      },
+      "constraints": {
+        "document": [
+          {
+            "kind": "pixels",
+            "target": "compressor.base"
+          },
+          {
+            "kind": "pixels",
+            "target": "compressor.optic"
+          }
+        ],
+        "contract": "PASS",
+        "preserve": [
+          {
+            "kind": "pixels",
+            "target": "compressor.base"
+          },
+          {
+            "kind": "pixels",
+            "target": "compressor.optic"
+          }
+        ]
+      },
+      "condition": "仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全",
+      "cacheKey": "0b82e82a",
+      "cache": "disabled",
+      "search": {
+        "tested": 42,
+        "maxSearch": 512,
+        "trialCompiles": 35,
+        "pixelWork": 532224
+      },
+      "rejected": [
+        {
+          "value": 27,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base",
+              "message": "像素保护区域 'compressor.base' 内发现 20 个变化像素",
+              "pixels": 20
+            },
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "compressor.body",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "4e3e53e9",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 20,
+              "changedBounds": {
+                "x0": 14,
+                "y0": 34,
+                "x1": 34,
+                "y1": 35
+              },
+              "message": "20 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 28,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base",
+              "message": "像素保护区域 'compressor.base' 内发现 40 个变化像素",
+              "pixels": 40
+            },
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "compressor.body",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "b6ef0a86",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 40,
+              "changedBounds": {
+                "x0": 14,
+                "y0": 34,
+                "x1": 34,
+                "y1": 36
+              },
+              "message": "40 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 29,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base",
+              "message": "像素保护区域 'compressor.base' 内发现 60 个变化像素",
+              "pixels": 60
+            },
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "compressor.body",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "a3217a6b",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 60,
+              "changedBounds": {
+                "x0": 14,
+                "y0": 34,
+                "x1": 34,
+                "y1": 37
+              },
+              "message": "60 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 30,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base",
+              "message": "像素保护区域 'compressor.base' 内发现 80 个变化像素",
+              "pixels": 80
+            },
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "compressor.body",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "a64e5d79",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 80,
+              "changedBounds": {
+                "x0": 14,
+                "y0": 34,
+                "x1": 34,
+                "y1": 38
+              },
+              "message": "80 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 31,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base",
+              "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+              "pixels": 100
+            },
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "compressor.body",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "c313658c",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 100,
+              "changedBounds": {
+                "x0": 14,
+                "y0": 34,
+                "x1": 34,
+                "y1": 39
+              },
+              "message": "100 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 32,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base",
+              "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+              "pixels": 100
+            },
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "compressor.body",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "7ea851df",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 100,
+              "changedBounds": {
+                "x0": 14,
+                "y0": 34,
+                "x1": 34,
+                "y1": 39
+              },
+              "message": "100 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 33,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base",
+              "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+              "pixels": 100
+            },
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "compressor.body",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "2540e69a",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 100,
+              "changedBounds": {
+                "x0": 14,
+                "y0": 34,
+                "x1": 34,
+                "y1": 39
+              },
+              "message": "100 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 34,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base",
+              "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+              "pixels": 100
+            },
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "compressor.body",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "01e2a9dd",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 120,
+              "changedBounds": {
+                "x0": 14,
+                "y0": 34,
+                "x1": 34,
+                "y1": 43
+              },
+              "message": "120 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 35,
+          "reason": "CANDIDATE_INVALID",
+          "conflicts": [
+            {
+              "kind": "pixels",
+              "target": "compressor.base",
+              "message": "像素保护区域 'compressor.base' 内发现 100 个变化像素",
+              "pixels": 100
+            },
+            {
+              "kind": "pixels",
+              "protectionType": "pixels",
+              "affectedNode": "compressor.body",
+              "operator": "geometry.set",
+              "revision": "r1",
+              "documentHash": "c8a31dd0",
+              "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+              "changedPixelCount": 142,
+              "changedBounds": {
+                "x0": 13,
+                "y0": 34,
+                "x1": 35,
+                "y1": 44
+              },
+              "message": "142 个最终 RGBA 像素违反资产级合同"
+            }
+          ]
+        },
+        {
+          "value": 36,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 43 超出内画布高 42"
+          }
+        },
+        {
+          "value": 37,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 44 超出内画布高 42"
+          }
+        },
+        {
+          "value": 38,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 45 超出内画布高 42"
+          }
+        },
+        {
+          "value": 39,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 46 超出内画布高 42"
+          }
+        },
+        {
+          "value": 40,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 47 超出内画布高 42"
+          }
+        },
+        {
+          "value": 41,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 48 超出内画布高 42"
+          }
+        },
+        {
+          "value": 42,
+          "reason": "CANDIDATE_INVALID",
+          "error": {
+            "code": "CANDIDATE_INVALID",
+            "name": "StudioOperationError",
+            "message": "geometry.set 使文档非法：nodes[1](compressor.body)：节点下缘 49 超出内画布高 42"
+          }
+        }
+      ]
+    },
+    "validation": {
+      "tested": 42,
+      "maxSearch": 512,
+      "trialCompiles": 35,
+      "pixelWork": 532224
+    },
+    "reason": "CANDIDATE_INVALID",
+    "conflicts": [
+      {
+        "kind": "pixels",
+        "target": "compressor.base",
+        "message": "像素保护区域 'compressor.base' 内发现 40 个变化像素",
+        "pixels": 40
+      },
+      {
+        "kind": "pixels",
+        "protectionType": "pixels",
+        "affectedNode": "compressor.body",
+        "operator": "geometry.set",
+        "revision": "r1",
+        "documentHash": "b6ef0a86",
+        "suggestedInspectAction": "inspect --ws <workspace> --revision <base> --node <affectedNode>",
+        "changedPixelCount": 40,
+        "changedBounds": {
+          "x0": 14,
+          "y0": 34,
+          "x1": 34,
+          "y1": 36
+        },
+        "message": "40 个最终 RGBA 像素违反资产级合同"
+      }
+    ],
+    "nearestLegalValues": [
+      26,
+      25,
+      24
+    ],
+    "recommendedTransform": "squash_keep_base",
+    "candidateId": null,
+    "renderedCandidates": 0
+  },
+  "widen": {
+    "oldGeometry": {
+      "x": 13,
+      "y": 7,
+      "w": 20,
+      "h": 26
+    },
+    "newGeometry": {
+      "x": 9,
+      "y": 7,
+      "w": 28,
+      "h": 26
+    },
+    "delta": {
+      "x": -4,
+      "y": 0,
+      "w": 8,
+      "h": 0
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "anchorPoint": {
+      "x": 23,
+      "y": 20
+    },
+    "preservedInvariant": "centerX"
+  },
+  "squash": {
+    "oldGeometry": {
+      "x": 9,
+      "y": 7,
+      "w": 28,
+      "h": 26
+    },
+    "newGeometry": {
+      "x": 9,
+      "y": 15,
+      "w": 28,
+      "h": 18
+    },
+    "delta": {
+      "x": 0,
+      "y": 8,
+      "w": 0,
+      "h": -8
+    },
+    "anchor": {
+      "x": 0.5,
+      "y": 1
+    },
+    "anchorPoint": {
+      "x": 23,
+      "y": 33
+    },
+    "preservedInvariant": "bottomY"
+  },
+  "explore": [
+    {
+      "value": -2,
+      "candidateId": "c-28b353fa",
+      "status": "OK",
+      "geometry": {
+        "oldGeometry": {
+          "x": 9,
+          "y": 15,
+          "w": 28,
+          "h": 18
+        },
+        "newGeometry": {
+          "x": 10,
+          "y": 15,
+          "w": 26,
+          "h": 18
+        },
+        "delta": {
+          "x": 1,
+          "y": 0,
+          "w": -2,
+          "h": 0
+        },
+        "anchor": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "anchorPoint": {
+          "x": 23,
+          "y": 24
+        },
+        "preservedInvariant": "centerX"
+      }
+    },
+    {
+      "value": 0,
+      "candidateId": "c-9d7f9a11",
+      "status": "UNCHANGED",
+      "geometry": {
+        "oldGeometry": {
+          "x": 9,
+          "y": 15,
+          "w": 28,
+          "h": 18
+        },
+        "newGeometry": {
+          "x": 9,
+          "y": 15,
+          "w": 28,
+          "h": 18
+        },
+        "delta": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "anchor": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "anchorPoint": {
+          "x": 23,
+          "y": 24
+        },
+        "preservedInvariant": "centerX"
+      }
+    },
+    {
+      "value": 2,
+      "candidateId": "c-130b6637",
+      "status": "OK",
+      "geometry": {
+        "oldGeometry": {
+          "x": 9,
+          "y": 15,
+          "w": 28,
+          "h": 18
+        },
+        "newGeometry": {
+          "x": 8,
+          "y": 15,
+          "w": 30,
+          "h": 18
+        },
+        "delta": {
+          "x": -1,
+          "y": 0,
+          "w": 2,
+          "h": 0
+        },
+        "anchor": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "anchorPoint": {
+          "x": 23,
+          "y": 24
+        },
+        "preservedInvariant": "centerX"
+      }
+    }
+  ],
+  "contactSheet": {
+    "kind": "candidate_contact_sheet",
+    "scale": 4,
+    "sampling": "nearest",
+    "background": "#202028",
+    "cells": [
+      {
+        "index": 0,
+        "label": "r3",
+        "revision": "r3",
+        "documentHash": "e4031b47",
+        "frameId": "harbor-compressor",
+        "nativeRect": {
+          "x": 2,
+          "y": 9,
+          "w": 48,
+          "h": 44
+        },
+        "displayRect": {
+          "x": 8,
+          "y": 36,
+          "w": 192,
+          "h": 176
+        }
+      },
+      {
+        "index": 1,
+        "label": "c-28b353fa",
+        "candidateId": "c-28b353fa",
+        "revision": "r3",
+        "documentHash": "77b3370b",
+        "frameId": "harbor-compressor",
+        "nativeRect": {
+          "x": 52,
+          "y": 9,
+          "w": 48,
+          "h": 44
+        },
+        "displayRect": {
+          "x": 208,
+          "y": 36,
+          "w": 192,
+          "h": 176
+        }
+      },
+      {
+        "index": 2,
+        "label": "c-9d7f9a11",
+        "candidateId": "c-9d7f9a11",
+        "revision": "r3",
+        "documentHash": "e4031b47",
+        "frameId": "harbor-compressor",
+        "nativeRect": {
+          "x": 102,
+          "y": 9,
+          "w": 48,
+          "h": 44
+        },
+        "displayRect": {
+          "x": 408,
+          "y": 36,
+          "w": 192,
+          "h": 176
+        }
+      },
+      {
+        "index": 3,
+        "label": "c-130b6637",
+        "candidateId": "c-130b6637",
+        "revision": "r3",
+        "documentHash": "d9d2e47d",
+        "frameId": "harbor-compressor",
+        "nativeRect": {
+          "x": 152,
+          "y": 9,
+          "w": 48,
+          "h": 44
+        },
+        "displayRect": {
+          "x": 608,
+          "y": 36,
+          "w": 192,
+          "h": 176
+        }
+      }
+    ],
+    "files": {
+      "native": "contact-sheet.native.png",
+      "display": "contact-sheet.display.png"
+    }
+  },
+  "final": {
+    "revision": "r4",
+    "hashes": {
+      "documentHash": "d9d2e47d",
+      "styleHash": "1be5bffc",
+      "renderHash": "f40e5029:28c3b4bb",
+      "toolVersion": "unknown"
+    },
+    "protection": {
+      "status": "PASS",
+      "contractHash": "2c9cb211",
+      "baselineDocumentHash": "f906432c",
+      "baselineRenderHash": "c47c8070:f1f6f62b",
+      "changedPixelCount": 0,
+      "conflicts": []
+    },
+    "geometry": {
+      "id": "compressor.body",
+      "kind": "panel",
+      "x": 8,
+      "y": 15,
+      "w": 30,
+      "h": 18,
+      "ramp": "rust",
+      "material": "shade-diag",
+      "layer": 1
+    }
+  }
+}

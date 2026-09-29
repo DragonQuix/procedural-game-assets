@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "pga-observation/1",
+  "observations": [
+    {
+      "kind": "candidate_contact_sheet",
+      "scale": 4,
+      "sampling": "nearest",
+      "background": "#202028",
+      "cells": [
+        {
+          "index": 0,
+          "label": "r1",
+          "revision": "r1",
+          "frameId": "harbor-compressor",
+          "nativeRect": {
+            "x": 2,
+            "y": 9,
+            "w": 48,
+            "h": 44
+          },
+          "displayRect": {
+            "x": 8,
+            "y": 36,
+            "w": 192,
+            "h": 176
+          }
+        },
+        {
+          "index": 1,
+          "label": "A-final",
+          "revision": "final",
+          "candidateId": "A-final",
+          "frameId": "harbor-compressor",
+          "nativeRect": {
+            "x": 52,
+            "y": 9,
+            "w": 48,
+            "h": 44
+          },
+          "displayRect": {
+            "x": 208,
+            "y": 36,
+            "w": 192,
+            "h": 176
+          }
+        }
+      ],
+      "files": {
+        "native": "contact-sheet.native.png",
+        "display": "contact-sheet.display.png"
+      }
+    },
+    {
+      "kind": "diff_overlay",
+      "scale": 4,
+      "sampling": "nearest",
+      "base": {
+        "revision": "r1"
+      },
+      "candidate": {
+        "revision": "final",
+        "candidateId": "A-final"
+      },
+      "changedPixelCount": 485,
+      "changedBounds": {
+        "x0": 8,
+        "y0": 7,
+        "x1": 40,
+        "y1": 34
+      },
+      "color": "#ff40a0",
+      "observationOnly": true,
+      "files": {
+        "native": "diff-1.native.png",
+        "display": "diff-1.display.png"
+      }
+    }
+  ],
+  "outDir": "E:\\Repos\\Tools\\procedural-game-assets\\docs\\evidence\\studio-v1_3\\A"
+}

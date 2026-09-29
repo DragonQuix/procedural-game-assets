@@ -1,0 +1,8 @@
+{
+  "run": "T06-D-r2",
+  "path": "C:/Users/admin/.fastctx/jobs/j-ojzdgz/output.log",
+  "sha256": "0f87bf6057dbec11f26c0e132d621746beb3ee90a54711100d31f41e5e5e4406",
+  "text": "[eval]:1\nconst http=require('http'),fs=require('fs'),path=require('path');const root=process.cwd();const srv=http.createServer((req,res)=>{const p=path.normalize(decodeURIComponent(req.url.split('?')[0])).replace(/^([\\/\\])+/, '');const f=path.join(root,p||'previews/state-001/viewer.html');if(!f.startsWith(root)){res.writeHead(403);res.end();return;}fs.readFile(f,(e,d)=>{if(e){res.writeHead(404);res.end('nf');return;}const ext=path.extname(f).toLowerCase();const mime={'.html':'text/html','.png':'image/png','.json':'application/json'}[ext]||'application/octet-stream';res.writeHead(200,{'content-type':mime});res.end(d);});});srv.listen(8931,'127.0.0.1',()=>console.log('serving on 8931'));\n                                                                                                                                                                                                            ^\nExpected ',', got 'string literal'\n\nSyntaxError: Invalid regular expression flags\n    at makeContextifyScript (node:internal/vm:185:14)\n    at compileScript (node:internal/process/execution:383:10)\n    at evalTypeScript (node:internal/process/execution:256:22)\n    at node:internal/main/eval_string:74:3\n\nNode.js v22.23.2\n",
+  "status": "CONFIRMED_SERVER_START_FAILED",
+  "limitation": "仅证明该次临时HTTP服务因SyntaxError未启动；不证明浏览器插件调用或模型图像输入。"
+}
