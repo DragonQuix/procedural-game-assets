@@ -11,6 +11,9 @@
 - CONFIRMED 需要主持人提供有 artifact SHA-256、callId、modelContextId 和成功 modelInput
   关联的 host-transcript 事件；review 自述只到 SELF_REPORTED。事件不能由 reviewer 代填。
   主结果还要求两位 reviewer 均有 CONFIRMED 证据，否则 UNVERIFIED。
+- 有必要动画时，主结果还要求每位 reviewer 对每个候选/clip 均有 animation-playback 宿主
+  输入事件，关联模型上下文与至少两张不同帧 hash、递增时间；单纯播放自述为 SELF_REPORTED，
+  不能仅凭静帧输入 CONFIRMED 升级为完整 taskSuccess PASS。
 - `blind.mjs`：两个独立目录，X/Y 镜像、seed/task/repeat 确定映射；key 只在主持人目录。
   当前新打包器只支持静态任务；有 requiredClips 时拒绝，不能以静图假装动画材料。
 - `unblind.mjs KEY REVIEW TASK_CONTRACT [HOST_EVENTS]`：先严格校验，再解盲。

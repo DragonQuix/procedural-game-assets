@@ -12,8 +12,8 @@
 
 | 实际命令/范围 | 结果 |
 |---|---|
-| `node --test --test-reporter=spec "tests/**/*.test.js"`（开发源） | 369 PASS、0 FAIL、0 SKIP |
-| 同一命令（普通技能 assets/toolkit 目录） | 358 PASS、0 FAIL、6 SKIP（依赖开发仓库安装/发行目录的顶层测试；其子项不展开） |
+| `node --test --test-reporter=spec "tests/**/*.test.js"`（开发源） | 370 PASS、0 FAIL、0 SKIP |
+| 同一命令（普通技能 assets/toolkit 目录） | 359 PASS、0 FAIL、6 SKIP（依赖开发仓库安装/发行目录的顶层测试；其子项不展开） |
 | `node tests/PGA_AB_BENCHMARK_v1_2/organizer/reviewer-self-test.mjs --repo . --out work/studio-v13-reviewer-isolation` | 9/9 PASS |
 | `node tests/PGA_AB_BENCHMARK_v1_2/organizer/self-test.mjs --repo . --out work/studio-v13-material-selftest` | 23/23 PASS，只有机械控制解，无模型调用 |
 | `node examples/studio/v13-demo.mjs --out work/studio-v13-demo-final --evidence docs/evidence/studio-v1_3` | A/B 实际链路 PASS，真实 PNG/JSON 入库 |
@@ -23,7 +23,7 @@
 | `node tests/PGA_CONSTRAINT_BENCHMARK_v0_1/prepare-materials.mjs --check` | D12 64/D13 68 文件一致、控制解合法且像素相同；NOT_RUN |
 | `git diff --check` | 通过 |
 
-开发源 339 个既有测试 + 30 个新增测试；未删除断言。因 /3 已正式支持，三处旧版本断言更新
+开发源 339 个既有测试 + 31 个新增测试；未删除断言。因 /3 已正式支持，三处旧版本断言更新
 支持列表并把未知版本样本改为 /999，仍验证未知版本拒绝。旧核心、配方、烘焙源相对起点
 87db710 无差异；终端/锈爪 hash 与 60 帧旧角色逐像素回归继续通过。未发现旧资产回归。
 
@@ -39,6 +39,8 @@ Demo A 主体由 20×26 变为 30×18、centerX=23、bottomY=33；底座、仪�
 新 harness 独立维护在 tools/benchmark，不修改 v1.2 冻结包。测试覆盖缺必要动画播放向总判定
 传播 U、严格 schema、五 verdict、镜像解盲和 reviewer 隔离。CONFIRMED 必须有真实宿主输入
 关联；合成测试事件不代表真实评审观察。
+必要动画还要求每位 reviewer 对每个 clip 的宿主时序图像输入证据；仅有播放自述与
+静帧输入证据时，主结果仍为 UNVERIFIED，不能认证完整 taskSuccess PASS。
 
 新实验是 DRAFT_NOT_RUN：12-run 草案、真实旧版本源码载荷、hold-out 与共同最终合同已准备；
 没有创建 runs/reviews/results 或执行冻结清单，没有 participant/reviewer 模型调用。

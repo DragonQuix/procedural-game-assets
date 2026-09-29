@@ -1,6 +1,6 @@
 {
   "generator": "procedural-game-assets@0.7.0",
-  "builtFrom": "7ae903d45de6ae3206d3b4c2499b2103a735c5ba",
+  "builtFrom": "b0e7c6dfafc5be6ae66d630a01912ec5402e5956",
   "fileCount": 192,
   "pathRoot": "工具包根（携带后的 vendor/pga/）；files 键为相对该根的 POSIX 路径",
   "files": {
@@ -158,7 +158,7 @@
     "tests/unit/asset-loop.test.js": "e4ea7005ba446047aaaff73cea6ad5d21a5ed48633078dd2298b7d6c0d6e0cbe",
     "tests/unit/atlas.test.js": "9c6294291d943cb1603fb7935db6e5e0ea93c422f968fa9240a0903cfaf14f22",
     "tests/unit/bake.test.js": "b77c40f28787768409ea444c5c1a147e5f791d9af9744608572d4220bd186125",
-    "tests/unit/benchmark-review.test.js": "30b1bb251274ee884081d1db62eeb2290f4f0c948fbcd4761866845ec52d63ef",
+    "tests/unit/benchmark-review.test.js": "2325462869762fbee3bc3a0371ad2b35d2387b48fd31a33a1979033237de3ecb",
     "tests/unit/bmp.test.js": "9bf8d183e56b28c3abc4320a013e0caa690da58d208f2a81f62310ad0464d3fa",
     "tests/unit/canvas-bank.test.js": "bcfe6920daa7e413e913daddfb2af8757b86b73effdfef16affd61237a36af57",
     "tests/unit/frame-observation.test.js": "150e935541499a1098c462b894867bacbe24d3dc2261a717fb0ab6f62eebdf95",
@@ -185,8 +185,8 @@
     "tests/unit/transform.test.js": "bc6df2ad0a4db7a1d3c335a82886c9dda8921ecbfb646751afffef999b49861c",
     "tools/asset-loop.mjs": "bf93bea8cd587050b53cf80c2d7323c78a070a0fadaa00cde44657e90e4eb5da",
     "tools/benchmark/blind.mjs": "b40fade0c73d08328e58c2608091d145424ab26e5199cd2d3b1e37bd3726d570",
-    "tools/benchmark/README.md": "c4a6fc4e1e92b2dcaf999282a352087a8a88fd2ef534e371a495a29951c6e539",
-    "tools/benchmark/review.mjs": "8ec88cc4038bfb7a9a76a5ec0179fc148065579f670247891a872aa80c2ba79d",
+    "tools/benchmark/README.md": "03f9dbe83c96b0188a5da2eb66f82af7f8f970c1283e61472725660f81ba3595",
+    "tools/benchmark/review.mjs": "2798309bc7413bfe3895b65f21af0d82777b5a78d474b3f2a6005b9b0ac6a721",
     "tools/benchmark/unblind.mjs": "5444183031b68b4674a2dea0f3b2fee040c2b66bcd2b88fbecec3e6638a93ae7",
     "tools/gallery/app.js": "bc42c4d957e04fb4585234ae27478e3c9285bf74e426f64cacf9eeae1599d341",
     "tools/gallery/index.html": "4a8d3c376f342dc1190039dd2c98bb5b39a0948b7a53a23ccbe1ce0f2e56ef48",

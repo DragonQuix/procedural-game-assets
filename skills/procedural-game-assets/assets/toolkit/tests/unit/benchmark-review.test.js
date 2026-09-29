@@ -43,3 +43,12 @@ test('vision 仅按宿主证据分类，不因文字描述准确自动 CONFIRMED
   assert.equal(classifyVisionEvidence(['X.png'], [{ ...event, modelContextId: null }]), 'SELF_REPORTED');
   assert.equal(classifyVisionEvidence(['X.png', 'Y.png'], [event]), 'SELF_REPORTED');
 });
+
+test('播放自述不能凭静帧宿主证据获得完全 PASS；每个必要 clip 需真实时序输入关联', () => {
+  const inputs = ['X.png', 'Y.png'].map((view) => ({ source: 'host-transcript', kind: 'image-input', view, success: true, modelInput: true, callId: 'call', modelContextId: 'ctx', sha256: 'a'.repeat(64) }));
+  const score = (events) => taskSuccess({ submitted: true, technical: 'PASS', protocol: 'PASS', budget: 'PASS', runId: 'A', reviews: [1, 2].map((slot) => unblindReview(key, review(slot), { ...contract, hostEvents: events })) });
+  assert.equal(score(inputs), 'UNVERIFIED');
+  const playback = ['X', 'Y'].flatMap((candidate) => ['idle', 'run'].map((clip) => ({ source: 'host-transcript', kind: 'animation-playback', candidate, clip, success: true, modelInput: true, callId: 'play', modelContextId: 'ctx', frameInputs: [{ timeMs: 0, sha256: 'a'.repeat(64) }, { timeMs: 200, sha256: 'b'.repeat(64) }] })));
+  assert.equal(score([...inputs, ...playback]), 'PASS');
+  assert.equal(score([...inputs, ...playback.filter((e) => e.clip !== 'run')]), 'UNVERIFIED');
+});
