@@ -305,6 +305,11 @@ compile 返回 protection=PASS/REJECTED/NOT_CONFIGURED；裸 compile 可用于�
 store/CLI 在 create、commit、restore、export/submit 的最终编译上强制检查；无合同不声称全局 PASS。
 合同及基线参与文档哈希、v3 候选身份。只读观察可包含失败诊断，但 overlay 不进入导出资产。
 
+protection.baseline 在 workspace 生命周期内保持初始冻结状态。accept candidate 不改变该
+baseline，restore 也不改变；后续所有 revision 仍相对同一个 frozen baseline 验证，不相对
+上一已接受修订重新设定基准。如果要把当前已接受状态作为新的保护基准，应以该状态创建新的
+protected document/workspace；当前版本没有 implicit rebase，也没有 rebase 操作。
+
 ## 几何与安全域
 
 ```powershell
