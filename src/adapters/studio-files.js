@@ -12,6 +12,7 @@ import { join } from 'node:path';
 import { compileAny, describeAnyCapabilities } from '../studio/dispatch.js';
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { stableStringify } from '../studio/document.js';
+import { assertProtection } from '../studio/protection-contract.js';
 import { assetToJSON } from './asset-file.js';
 import { encodePNG } from '../export/png.js';
 import { packAtlas, renderAtlasPages } from '../export/atlas.js';
@@ -177,12 +178,14 @@ async function inspectCompiled(compiled, source, opts = {}) {
   }
   const summary = summarize(compiled, source, opts.outDir ?? null, files);
   summary.constraints = compiled.document.constraints;
+  summary.protection = compiled.protection;
   summary.capabilities = capabilities;
   return summary;
 }
 
 /** 导出核心：既有资产格式（.asset.json + 图集 PNG + 版本化 manifest）与可编辑源文档。 */
 async function exportCompiled(compiled, source, outDir, opts = {}) {
+  assertProtection(compiled);
   const { asset } = compiled;
   await ensureOutDir(outDir);
   await writeMarker(outDir, opts.generator ?? 'unknown');
@@ -204,6 +207,7 @@ async function exportCompiled(compiled, source, outDir, opts = {}) {
   Object.assign(files, await writeSourceBundle(outDir, compiled));
   const summary = summarize(compiled, source, outDir, files);
   summary.manifest = { schemaVersion: manifest.schemaVersion, frames: manifest.frames.length, pages: manifest.pages.length };
+  summary.protection = compiled.protection;
   return summary;
 }
 
@@ -227,3 +231,5 @@ export async function exportWorkspace(wsDir, outDir, opts = {}) {
 }
 
 export { stableStringify };
+// Studio 的 submit 是最终导出的同义入口，不再引入另一条编译链。
+export const submitWorkspace = exportWorkspace;

@@ -29,6 +29,7 @@ import { stableStringify, fnv1aHex } from '../studio/document.js';
 import { compileAny, applyAnyOperation, exploreAnyOperation, operationFromAnyExplore, checkAnyCandidate, preserveFromAnyDocument, validatePreserve, docKindOf } from '../studio/dispatch.js';
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { encodePNG } from '../export/png.js';
+import { assertProtection } from '../studio/protection-contract.js';
 
 const MARKER = '.pga.json';
 
@@ -149,6 +150,7 @@ export class StudioStore {
     await writeMarker(dir, store.generator);
     for (const sub of ['revisions', 'candidates', 'requests', 'previews']) await mkdir(join(dir, sub), { recursive: true });
     const compiled = compileAny(doc, { toolVersion: store.toolVersion });
+    assertProtection(compiled);
     const revision = await store._writeRevision({ doc: compiled.document, parent: null, source: { kind: 'create' }, compiled, bumpSeq: 1 });
     await store._writeHead();
     return { store, revision, compiled };
@@ -231,9 +233,14 @@ export class StudioStore {
   }
 
   async _getCompiled(revision) {
-    if (this._compiled.has(revision)) return this._compiled.get(revision);
     const record = await this._readRevision(revision);
-    const compiled = compileAny(record.doc, { toolVersion: this.toolVersion });
+    const compiled = compileAny(record.doc, { toolVersion: this.toolVersion, protectionContext: { revision } });
+    // 保护合同沿修订链不变；缓存与候选副本均不作权威来源。
+    if (record.parent) {
+      const parent = await this._readRevision(record.parent);
+      if (stableStringify(parent.doc.protection) !== stableStringify(record.doc.protection)) fail('PROTECTION_VIOLATION', '修订链中的保护合同发生变化');
+    }
+    assertProtection(compiled);
     this._compiled.set(revision, compiled);
     return compiled;
   }
@@ -394,7 +401,8 @@ export class StudioStore {
       if (expectedCandidateId !== subject || candidate.candidateId !== subject) return null;
       const { doc: intendedDoc, plan } = applyAnyOperation(base.document, candidate.operation);
       if (stableStringify(intendedDoc) !== stableStringify(record.doc)) return null;
-      const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: mergedPreserve });
+      const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: mergedPreserve, revision: expectedHead });
+      if (!['OK', 'UNCHANGED'].includes(checks.status)) return null;
       return { requestId, action, candidateId: subject, head: intendedRevision, revision: intendedRevision, parent: expectedHead, hashes: record.hashes, unchanged: checks.status === 'UNCHANGED' };
     }
     if (action === 'restore') {
@@ -451,7 +459,7 @@ export class StudioStore {
       const mergedPreserve = [...preserveDoc, ...preserveRequest];
       const { doc: candDoc, plan } = applyAnyOperation(base.document, operation); // 形状/范围错误向上抛（CANDIDATE_INVALID 等）
       const candidate = compileAny(candDoc, { toolVersion: this.toolVersion });
-      const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve });
+      const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve, revision: baseRevision });
       const candidateId = `c-${fnv1aHex(stableStringify([baseRevision, operation, mergedPreserve]))}`;
       const previews = { base: await this._writePreviews(base, `${baseRevision}-base`), candidate: await this._writePreviews(candidate, candidateId) };
       const record = {
@@ -490,7 +498,7 @@ export class StudioStore {
           continue;
         }
         const candidate = compileAny(entry.doc, { toolVersion: this.toolVersion });
-        const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan: entry.plan, preserve: mergedPreserve });
+        const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan: entry.plan, preserve: mergedPreserve, revision: baseRevision });
         // 探索项 → 标准 operation 与候选身份：与 edit 同一公式，commit 重执行/重算共用（R3/R5）
         const operation = operationFromAnyExplore(base.document, spec, entry.value);
         const candidateId = `c-${fnv1aHex(stableStringify([baseRevision, operation, mergedPreserve]))}`;
@@ -573,7 +581,7 @@ export class StudioStore {
         if (stableStringify(rederivedDoc) !== stableStringify(record.doc)) {
           fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的文档与操作重新推导结果不符（文件可能被篡改）`, { target: candidateId });
         }
-        const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: mergedPreserve });
+        const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: mergedPreserve, revision: record.baseRevision });
         if (checks.status !== record.checks.status) {
           fail('CANDIDATE_INVALID', `候选 '${candidateId}' 落盘状态（${record.checks.status}）与重新校验（${checks.status}）不符（文件可能被篡改）`, { target: candidateId });
         }
@@ -591,7 +599,9 @@ export class StudioStore {
       }
       if (action === 'restore') {
         const target = await this._readRevision(targetRevision);
-        const compiled = compileAny(target.doc, { toolVersion: this.toolVersion });
+        const compiled = await this._getCompiled(targetRevision);
+        const current = await this._getCompiled(this.head);
+        if (stableStringify(current.document.protection) !== stableStringify(compiled.document.protection)) fail('PROTECTION_VIOLATION', '恢复不能解除当前资产保护合同');
         const revision = await this._writeRevision({ doc: target.doc, parent: this.head, source: { kind: 'restore', from: targetRevision }, compiled });
         await this._writeHead();
         return { requestId: reqId, action, restoredFrom: targetRevision, head: this.head, revision: revision.revision, parent: revision.parent, hashes: revision.hashes };

@@ -12,6 +12,7 @@
  */
 import { stableStringify } from './document.js';
 import { StudioOperationError } from './operators.js';
+import { checkAssetProtection } from './protection-contract.js';
 
 const METADATA_TARGETS = Object.freeze(['anchor', 'attachments', 'frameSize']);
 const CHARACTER_METADATA_TARGET_RE = /^(anchor|attachments(\.[a-zA-Z][a-zA-Z0-9_]{0,31})?|frameSize)$/;
@@ -130,7 +131,7 @@ export function checkCandidate(args) {
   const conflicts = [];
 
   /* ---------- 结构完整性（始终执行，不只依赖声明） ---------- */
-  for (const field of ['seed', 'canvas', 'style', 'anchor', 'attachments']) {
+  for (const field of ['seed', 'canvas', 'style', 'anchor', 'attachments', 'protection']) {
     if (!deepEqual(baseDoc[field], candDoc[field])) {
       conflicts.push({ kind: 'structure', target: field, message: `资产级字段 '${field}' 在候选中被修改（${plan.id} 不应触碰）` });
     }
@@ -232,12 +233,20 @@ export function checkCandidate(args) {
     }
   }
 
+  const taskContract = checkAssetProtection(baseDoc.protection, baseCompiled.protectionBaseline, candidateCompiled, { target: plan.target, operator: plan.id, revision: args.revision });
+  const operationFootprintStatus = diff.outside ? 'REJECTED' : 'PASS';
+  const documentPreserveStatus = conflicts.length ? 'REJECTED' : 'PASS';
+  conflicts.push(...taskContract.conflicts);
   const rejected = conflicts.length > 0;
   const constraintConflict = conflicts.some((c) => c.upfront);
   return {
     status: rejected ? 'REJECTED' : diff.pixels === 0 ? 'UNCHANGED' : 'OK',
     code: rejected ? (constraintConflict ? 'CONSTRAINT_CONFLICT' : 'CANDIDATE_INVALID') : null,
     conflicts,
+    operationFootprintStatus,
+    documentPreserveStatus,
+    taskContractStatus: taskContract.status,
+    taskContract,
     diff,
     protections: {
       pixels: pixelPreserve.map((p) => p.target),

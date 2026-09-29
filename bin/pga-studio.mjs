@@ -61,6 +61,7 @@ const COMMAND_OPTS = {
   create: ['doc', 'out', 'display-scale', 'bg'],
   inspect: ['doc', 'ws', 'revision', 'out', 'node', 'display-scale', 'bg'],
   export: ['doc', 'ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
+  submit: ['ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
   state: ['ws', 'display-scale', 'bg'],
   edit: ['ws', 'base', 'op', 'target', 'params', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg'],
   explore: ['ws', 'base', 'op', 'target', 'field', 'values', 'preserve', 'request-id', 'display-scale', 'bg'],
@@ -197,7 +198,8 @@ async function main() {
       result: await inspectFromFile(resolve(doc), { ...common, outDir: typeof opts.out === 'string' ? resolve(opts.out) : undefined, node: typeof opts.node === 'string' ? opts.node : undefined }),
     };
   }
-  if (cmd === 'export') {
+  if (cmd === 'export' || cmd === 'submit') {
+    if (cmd === 'submit') requireOpt('ws', 'submit 需要 --ws <workspace>');
     const out = requireOpt('out', 'export 需要 --out <dir>');
     const exportOpts = { ...common, maxPage: intOpt('max-page', 1024), margin: intOpt('margin', 2) };
     if (opts.ws) {
@@ -272,6 +274,8 @@ try {
     fail(e.code, e.message, exitCodeFor(e), { target: e.target, details: e.details, retryable: e.retryable, suggestedNextAction: e.suggestedNextAction });
   } else if (e instanceof StudioOverwriteError) {
     fail('UNSAFE_PATH', e.message, 4);
+  } else if (e && e.code === 'PROTECTION_VIOLATION') {
+    fail(e.code, e.message, 3, { details: e.details });
   } else if (e && e.code === 'INVALID_DOCUMENT') {
     fail('INVALID_DOCUMENT', e.message, 3);
   } else if (e && e.code === 'ENOENT') {
