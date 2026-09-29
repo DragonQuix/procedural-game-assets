@@ -30,6 +30,7 @@ import { compileAny, applyAnyOperation, exploreAnyOperation, operationFromAnyExp
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { encodePNG } from '../export/png.js';
 import { assertProtection } from '../studio/protection-contract.js';
+import { preflightGeometry, validateSafeBinding } from '../studio/safe-domain.js';
 
 const MARKER = '.pga.json';
 
@@ -110,6 +111,12 @@ function pidAlive(pid) {
 
 function requestHashOf(payload) {
   return fnv1aHex(stableStringify(payload));
+}
+
+export function candidateIdentity(baseRevision, base, operation, preserve) {
+  const identity = [baseRevision, operation, preserve];
+  if (base.document.schemaVersion === 'pga-studio/3') identity.push(base.hashes.documentHash, base.protection.contractHash ?? null);
+  return `c-${fnv1aHex(stableStringify(identity))}`;
 }
 
 export class StudioStore {
@@ -397,7 +404,7 @@ export class StudioStore {
       } catch {
         return null; // 保护记录被篡改的候选无法核实既定效果，按未持久化处理
       }
-      const expectedCandidateId = `c-${fnv1aHex(stableStringify([expectedHead, candidate.operation, mergedPreserve]))}`;
+      const expectedCandidateId = candidateIdentity(expectedHead, base, candidate.operation, mergedPreserve);
       if (expectedCandidateId !== subject || candidate.candidateId !== subject) return null;
       const { doc: intendedDoc, plan } = applyAnyOperation(base.document, candidate.operation);
       if (stableStringify(intendedDoc) !== stableStringify(record.doc)) return null;
@@ -449,18 +456,23 @@ export class StudioStore {
    * 保护项 = 文档 constraints + 请求级 preserve 合并，两侧共用 validatePreserve 严格校验（R4）。
    * 候选记录拆分 preserveRequest（请求级，commit 权威合并的来源之一）与 preserveDoc（信息性）。
    */
-  async edit({ baseRevision, operation, preserve = [], requestId }) {
-    const reqId = requestId ?? `req-${fnv1aHex(stableStringify(['edit', baseRevision, operation, preserve]))}`;
-    return this._mutate(reqId, ['edit', baseRevision, operation, preserve], async () => {
+  async edit({ baseRevision, operation, preserve = [], requestId, safeBinding }) {
+    const payload = ['edit', baseRevision, operation, preserve, ...(safeBinding === undefined ? [] : [safeBinding])];
+    const reqId = requestId ?? `req-${fnv1aHex(stableStringify(payload))}`;
+    return this._mutate(reqId, payload, async () => {
       const base = await this._getCompiled(baseRevision);
+      validateSafeBinding(safeBinding, base, baseRevision, operation);
+      if (base.document.schemaVersion === 'pga-studio/3' && baseRevision !== this.head) fail('STALE_REVISION', 'v1.3 编辑需要当前 head；请重新 inspect');
       const kind = docKindOf(base.document);
       const preserveRequest = validatePreserve(preserve, base.document, kind); // R4：拼错/未知目标/未知类别在此明确拒绝
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
       const mergedPreserve = [...preserveDoc, ...preserveRequest];
+      const unsafe = preflightGeometry(base, operation, { revision: baseRevision, preserve: mergedPreserve });
+      if (unsafe) return { requestId: reqId, baseRevision, head: this.head, ...unsafe, candidateId: null, renderedCandidates: 0 };
       const { doc: candDoc, plan } = applyAnyOperation(base.document, operation); // 形状/范围错误向上抛（CANDIDATE_INVALID 等）
       const candidate = compileAny(candDoc, { toolVersion: this.toolVersion });
       const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve, revision: baseRevision });
-      const candidateId = `c-${fnv1aHex(stableStringify([baseRevision, operation, mergedPreserve]))}`;
+      const candidateId = candidateIdentity(baseRevision, base, operation, mergedPreserve);
       const previews = { base: await this._writePreviews(base, `${baseRevision}-base`), candidate: await this._writePreviews(candidate, candidateId) };
       const record = {
         candidateId,
@@ -474,7 +486,7 @@ export class StudioStore {
         previews,
       };
       await writeFileAtomic(workspacePath(this.dir, 'candidates', `${candidateId}.json`), JSON.stringify(record, null, 2) + '\n');
-      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews };
+      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews, geometry: plan.geometry ?? null, renderedCandidates: 1 };
     });
   }
 
@@ -485,6 +497,7 @@ export class StudioStore {
     const reqId = requestId ?? `req-${fnv1aHex(stableStringify(['explore', baseRevision, spec, preserve]))}`;
     return this._mutate(reqId, ['explore', baseRevision, spec, preserve], async () => {
       const base = await this._getCompiled(baseRevision);
+      if (base.document.schemaVersion === 'pga-studio/3' && baseRevision !== this.head) fail('STALE_REVISION', 'v1.3 探索需要当前 head；请重新 inspect');
       const kind = docKindOf(base.document);
       const preserveRequest = validatePreserve(preserve, base.document, kind); // R4
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
@@ -493,6 +506,12 @@ export class StudioStore {
       const seen = new Map([[base.hashes.renderHash, 'base']]);
       const candidates = [];
       for (const entry of entries) {
+        const operation = operationFromAnyExplore(base.document, spec, entry.value);
+        const unsafe = preflightGeometry(base, operation, { revision: baseRevision, preserve: mergedPreserve });
+        if (unsafe) {
+          candidates.push({ value: entry.value, ...unsafe, candidateId: null, renderedCandidates: 0 });
+          continue;
+        }
         if (entry.error) {
           candidates.push({ value: entry.value, status: 'ERROR', error: entry.error });
           continue;
@@ -500,8 +519,7 @@ export class StudioStore {
         const candidate = compileAny(entry.doc, { toolVersion: this.toolVersion });
         const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan: entry.plan, preserve: mergedPreserve, revision: baseRevision });
         // 探索项 → 标准 operation 与候选身份：与 edit 同一公式，commit 重执行/重算共用（R3/R5）
-        const operation = operationFromAnyExplore(base.document, spec, entry.value);
-        const candidateId = `c-${fnv1aHex(stableStringify([baseRevision, operation, mergedPreserve]))}`;
+        const candidateId = candidateIdentity(baseRevision, base, operation, mergedPreserve);
         const duplicateOf = checks.status !== 'REJECTED' ? (seen.get(candidate.hashes.renderHash) ?? null) : null;
         if (!duplicateOf) seen.set(candidate.hashes.renderHash, candidateId);
         const previews = await this._writePreviews(candidate, candidateId);
@@ -528,6 +546,7 @@ export class StudioStore {
           checks,
           hashes: candidate.hashes,
           previews,
+          geometry: entry.plan.geometry ?? null,
         });
       }
       const basePreviews = await this._writePreviews(base, `${baseRevision}-base`);
@@ -537,7 +556,9 @@ export class StudioStore {
         head: this.head,
         base: { revision: baseRevision, hashes: base.hashes, previews: basePreviews },
         candidates,
-        uniqueCount: candidates.filter((c) => c.status !== 'ERROR' && !c.duplicateOf).length,
+        uniqueCount: candidates.filter((c) => c.candidateId && !c.duplicateOf).length,
+        renderedCandidates: candidates.filter((c) => c.candidateId).length,
+        rejectedVariations: candidates.filter((c) => c.status === 'REJECTED_UNSAFE').length,
       };
     });
   }
@@ -569,7 +590,7 @@ export class StudioStore {
         // R5：保护列表也不信落盘——从基准修订重取文档级 constraints，与候选的请求级保护
         // 重新合并并重算候选身份；三者（基准+操作+保护）任一被改动都会改变身份，即拒绝。
         const mergedPreserve = this._authoritativePreserve(base, record);
-        const expectedCandidateId = `c-${fnv1aHex(stableStringify([record.baseRevision, record.operation, mergedPreserve]))}`;
+        const expectedCandidateId = candidateIdentity(record.baseRevision, base, record.operation, mergedPreserve);
         if (expectedCandidateId !== record.candidateId || record.candidateId !== candidateId) {
           fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的身份（基准+操作+保护）与重新计算不符（文件可能被篡改）`, { target: candidateId });
         }

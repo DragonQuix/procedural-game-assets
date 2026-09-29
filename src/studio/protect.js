@@ -11,7 +11,7 @@
  * 首版图像很小，全量重渲染后逐像素差分。
  */
 import { stableStringify } from './document.js';
-import { StudioOperationError } from './operators.js';
+import { StudioOperationError, GEOMETRY_TRANSFORMS } from './operators.js';
 import { checkAssetProtection } from './protection-contract.js';
 
 const METADATA_TARGETS = Object.freeze(['anchor', 'attachments', 'frameSize']);
@@ -194,7 +194,7 @@ export function checkCandidate(args) {
     const { final } = baseCompiled.sceneMap;
     const baseTarget = baseCompiled.sceneMap.nodes.find((n) => n.id === plan.target);
     const candTarget = candidateCompiled.sceneMap.nodes.find((n) => n.id === plan.target);
-    const dilation = plan.id === 'geometry.set' ? 1 : 0; // 几何变化需覆盖 1px 描边邻域；材质/色阶只改矩形内部
+    const dilation = plan.id === 'geometry.set' || GEOMETRY_TRANSFORMS.includes(plan.id) ? 1 : 0;
     const region = rectDilatedUnion([baseTarget?.frameRect, candTarget?.frameRect], dilation, final.w, final.h);
     // 未变更高层节点的遮挡：其覆盖处最终像素不可能因本操作变化，从允许区域剔除
     const targetLayer = baseTarget?.layer ?? 0;

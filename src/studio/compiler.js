@@ -299,6 +299,11 @@ export function describeCapabilities(doc) {
         'geometry.set': { status: 'available-m2', unit: 'px', fields: geometryFields },
         'material.set': { status: 'available-m2', options: materialsFor(node.kind, version) },
         'ramp.set': rampOp,
+        ...(['panel', 'screen'].includes(node.kind) ? {
+          widen_about_center: { status: 'available-v1.3', params: ['deltaWidth'], invariant: 'centerX', integerPolicy: 'reject-fractional-position' },
+          squash_keep_base: { status: 'available-v1.3', params: ['deltaHeight <= 0'], invariant: 'bottomY' },
+          resize_about_anchor: { status: 'available-v1.3', params: ['deltaWidth|targetWidth', 'deltaHeight|targetHeight', 'anchor'], anchors: ['center', 'bottom-center', 'top-left', '{x,y} normalized'], invariant: 'anchorPoint' },
+        } : { semanticTransforms: { status: 'UNSUPPORTED' } }),
       },
       example: { operation: 'geometry.set', target: node.id, params: node.kind === 'poly' ? { vertices: node.vertices.map(([a, b]) => [Math.min(canvas.w, a + 1), b]) } : node.kind === 'disc' ? { rx: node.rx + 1 } : { w: node.w + 2 } },
     };

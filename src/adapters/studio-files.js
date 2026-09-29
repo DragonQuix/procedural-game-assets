@@ -13,6 +13,7 @@ import { compileAny, describeAnyCapabilities } from '../studio/dispatch.js';
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { stableStringify } from '../studio/document.js';
 import { assertProtection } from '../studio/protection-contract.js';
+import { inspectSafeDomains } from '../studio/safe-domain.js';
 import { assetToJSON } from './asset-file.js';
 import { encodePNG } from '../export/png.js';
 import { packAtlas, renderAtlasPages } from '../export/atlas.js';
@@ -157,7 +158,7 @@ export async function inspectWorkspace(wsDir, opts = {}) {
   await store._refreshHead(); // 新鲜度合同：默认修订取磁盘最新 head（R1）
   const revision = opts.revision ?? store.head;
   const compiled = await store._getCompiled(revision);
-  const summary = await inspectCompiled(compiled, `workspace:${wsDir}#${revision}`, opts);
+  const summary = await inspectCompiled(compiled, `workspace:${wsDir}#${revision}`, { ...opts, revision });
   summary.head = store.head;
   summary.revision = revision;
   summary.workspaceState = await store.state();
@@ -180,6 +181,7 @@ async function inspectCompiled(compiled, source, opts = {}) {
   summary.constraints = compiled.document.constraints;
   summary.protection = compiled.protection;
   summary.capabilities = capabilities;
+  if (opts.node && compiled.document.schemaVersion === 'pga-studio/3') summary.safeDomain = inspectSafeDomains(compiled, { revision: opts.revision ?? null, target: opts.node, maxSearch: opts.maxSearch });
   return summary;
 }
 

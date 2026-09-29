@@ -63,8 +63,8 @@ const COMMAND_OPTS = {
   export: ['doc', 'ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
   submit: ['ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
   state: ['ws', 'display-scale', 'bg'],
-  edit: ['ws', 'base', 'op', 'target', 'params', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg'],
-  explore: ['ws', 'base', 'op', 'target', 'field', 'values', 'preserve', 'request-id', 'display-scale', 'bg'],
+  edit: ['ws', 'base', 'op', 'target', 'params', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg', 'safe-binding'],
+  explore: ['ws', 'base', 'op', 'target', 'field', 'values', 'params', 'preserve', 'request-id', 'display-scale', 'bg'],
   commit: ['ws', 'accept', 'restore', 'expected-head', 'request-id', 'display-scale', 'bg'],
 };
 if (COMMAND_OPTS[cmd]) {
@@ -115,7 +115,7 @@ function buildOperation() {
       return { id, target, value: raw };
     }
   }
-  if (id === 'geometry.set') {
+  if (['geometry.set', 'widen_about_center', 'squash_keep_base', 'resize_about_anchor'].includes(id)) {
     const params = jsonOpt('params', null);
     if (!params) fail('INVALID_DOCUMENT', `geometry.set 需要 --params '{"w":28}'`, 2);
     return { id, target, params };
@@ -162,7 +162,7 @@ function buildExploreSpec() {
   const raw = requireOpt('values', 'explore 需要 --values <逗号分隔取值或 JSON 数组>');
   if (raw.startsWith('[')) {
     try {
-      return { id, target, field, values: JSON.parse(raw) };
+      return { id, target, field, values: JSON.parse(raw), ...(opts.params ? { params: jsonOpt('params') } : {}) };
     } catch (e) {
       fail('INVALID_DOCUMENT', `--values 不是合法 JSON 数组：${e.message}`, 2);
     }
@@ -172,7 +172,7 @@ function buildExploreSpec() {
     const n = Number(t);
     return t !== '' && Number.isFinite(n) ? n : t;
   });
-  return { id, target, field, values };
+  return { id, target, field, values, ...(opts.params ? { params: jsonOpt('params') } : {}) };
 }
 
 async function main() {
@@ -221,6 +221,7 @@ async function main() {
       result: await store.edit({
         baseRevision: base,
         operation: buildOperation(),
+        safeBinding: jsonOpt('safe-binding', undefined),
         preserve: jsonOpt('preserve', []),
         requestId: typeof opts['request-id'] === 'string' ? opts['request-id'] : undefined,
       }),
