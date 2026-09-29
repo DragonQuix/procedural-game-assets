@@ -30,6 +30,7 @@ test('explore 混合合法/非法值，同基准分支，拒绝项不计候选',
   assert.equal(e.uniqueCount, 2);
   assert.equal(e.renderedCandidates, 2);
   assert.equal(e.rejectedVariations, 1);
+  assert.ok(e.validationProbeCount > e.renderedCandidates);
   assert.equal((await store.state()).head, 'r1');
   assert.equal((await store.state()).candidates.length, 2);
   assert.equal(e.candidates[2].geometry.oldGeometry.w, 23);

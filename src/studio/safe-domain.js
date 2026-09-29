@@ -32,7 +32,7 @@ export function theoreticalRange(doc, target, operator, field) {
   return fields[field];
 }
 
-export function evaluateSafeOperation(compiled, operation, { revision = null, preserve = [] } = {}) {
+export function evaluateSafeOperation(compiled, operation, { revision = null, preserve = preserveFromAnyDocument(compiled.document) } = {}) {
   let trialCompiles = 0;
   try {
     const { doc, plan } = applyAnyOperation(compiled.document, operation);
@@ -102,14 +102,15 @@ export function preflightGeometry(compiled, operation, options = {}) {
     const field = fields[0], params = { ...operation.params }; delete params[field];
     domain = enumerateSafeDomain({ compiled, operator: operation.id, target: operation.target, field, params, ...options });
     const requestedValue = operation.params[field];
-    if (domain.safeRange.values.includes(requestedValue)) return null;
+    if (domain.safeRange.values.includes(requestedValue)) return { status: 'SAFE', validation: domain.search };
     const diagnosis = domain.rejected.find((r) => r.value === requestedValue) ?? { reason: 'OUTSIDE_THEORETICAL_RANGE' };
-    return { status: 'REJECTED_UNSAFE', requestedValue, safeDomain: domain, reason: diagnosis.reason, conflicts: diagnosis.conflicts ?? [],
+    return { status: 'REJECTED_UNSAFE', requestedValue, safeDomain: domain, validation: domain.search, reason: diagnosis.reason, conflicts: diagnosis.conflicts ?? [],
       nearestLegalValues: [...domain.safeRange.values].sort((a, b) => Math.abs(a - requestedValue) - Math.abs(b - requestedValue) || a - b).slice(0, 3),
       recommendedTransform: field === 'h' || field === 'y' ? 'squash_keep_base' : 'widen_about_center' };
   }
   const result = evaluateSafeOperation(compiled, operation, options);
-  return result.legal ? null : { status: 'REJECTED_UNSAFE', requestedValue: operation.params,
+  const validation = { tested: 1, trialCompiles: result.trialCompiles };
+  return result.legal ? { status: 'SAFE', validation } : { status: 'REJECTED_UNSAFE', requestedValue: operation.params, validation,
     safeDomain: { status: 'POINT_CHECK', revision: options.revision ?? null, documentHash: compiled.hashes.documentHash, legal: false },
     reason: result.reason, conflicts: result.conflicts ?? [], checks: result.checks, error: result.error,
     nearestLegalValues: [], recommendedTransform: 'resize_about_anchor' };

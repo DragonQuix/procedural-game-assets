@@ -38,7 +38,7 @@ import { StudioOperationError } from '../src/studio/operators.js';
 
 const PKG = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
 const GENERATOR = `procedural-game-assets@${PKG.version}`;
-const TOOL_VERSION = `${PKG.version}/pga-studio-1`;
+const TOOL_VERSION = `${PKG.version}/pga-studio-1.3`;
 
 function emit(payload, code) {
   process.stdout.write(JSON.stringify(payload, null, 2) + '\n');

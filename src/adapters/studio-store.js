@@ -395,6 +395,7 @@ export class StudioStore {
     if (record.revision !== intendedRevision || record.parent !== expectedHead) return null;
     const base = await this._getCompiled(expectedHead);
     const recompiled = compileAny(record.doc, { toolVersion: this.toolVersion });
+    if (recompiled.protection?.status === 'REJECTED') return null;
     if (recompiled.hashes.documentHash !== record.hashes.documentHash || recompiled.hashes.renderHash !== record.hashes.renderHash) return null;
     if (action === 'accept') {
       const candidate = await this._readCandidate(subject);
@@ -468,7 +469,7 @@ export class StudioStore {
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
       const mergedPreserve = [...preserveDoc, ...preserveRequest];
       const unsafe = preflightGeometry(base, operation, { revision: baseRevision, preserve: mergedPreserve });
-      if (unsafe) return { requestId: reqId, baseRevision, head: this.head, ...unsafe, candidateId: null, renderedCandidates: 0 };
+      if (unsafe?.status === 'REJECTED_UNSAFE') return { requestId: reqId, baseRevision, head: this.head, ...unsafe, candidateId: null, renderedCandidates: 0 };
       const { doc: candDoc, plan } = applyAnyOperation(base.document, operation); // 形状/范围错误向上抛（CANDIDATE_INVALID 等）
       const candidate = compileAny(candDoc, { toolVersion: this.toolVersion });
       const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve, revision: baseRevision });
@@ -480,13 +481,14 @@ export class StudioStore {
         operation,
         preserveRequest,
         preserveDoc,
+        validation: unsafe?.validation ?? null,
         doc: candidate.document,
         hashes: candidate.hashes,
         checks,
         previews,
       };
       await writeFileAtomic(workspacePath(this.dir, 'candidates', `${candidateId}.json`), JSON.stringify(record, null, 2) + '\n');
-      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews, geometry: plan.geometry ?? null, renderedCandidates: 1 };
+      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews, geometry: plan.geometry ?? null, renderedCandidates: 1, validation: unsafe?.validation ?? null };
     });
   }
 
@@ -508,7 +510,7 @@ export class StudioStore {
       for (const entry of entries) {
         const operation = operationFromAnyExplore(base.document, spec, entry.value);
         const unsafe = preflightGeometry(base, operation, { revision: baseRevision, preserve: mergedPreserve });
-        if (unsafe) {
+        if (unsafe?.status === 'REJECTED_UNSAFE') {
           candidates.push({ value: entry.value, ...unsafe, candidateId: null, renderedCandidates: 0 });
           continue;
         }
@@ -529,6 +531,7 @@ export class StudioStore {
           operation,
           preserveRequest,
           preserveDoc,
+          validation: unsafe?.validation ?? null,
           doc: candidate.document,
           hashes: candidate.hashes,
           checks,
@@ -547,6 +550,7 @@ export class StudioStore {
           hashes: candidate.hashes,
           previews,
           geometry: entry.plan.geometry ?? null,
+          validation: unsafe?.validation ?? null,
         });
       }
       const basePreviews = await this._writePreviews(base, `${baseRevision}-base`);
@@ -559,6 +563,7 @@ export class StudioStore {
         uniqueCount: candidates.filter((c) => c.candidateId && !c.duplicateOf).length,
         renderedCandidates: candidates.filter((c) => c.candidateId).length,
         rejectedVariations: candidates.filter((c) => c.status === 'REJECTED_UNSAFE').length,
+        validationProbeCount: candidates.reduce((n, c) => n + (c.validation?.trialCompiles ?? 0), 0),
       };
     });
   }
