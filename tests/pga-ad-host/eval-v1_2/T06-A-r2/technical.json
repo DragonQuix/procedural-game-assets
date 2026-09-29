@@ -1,0 +1,326 @@
+{
+  "schema": "pga-benchmark-evaluation/1",
+  "task": "T06",
+  "arm": "A",
+  "repeat": 2,
+  "mode": "scored",
+  "technicalStatus": "PASS",
+  "checks": [
+    {
+      "name": "frozen_repository",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "deterministic_rebuild",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "submitted_equals_rebuild",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "asset_identity",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "frame_ids",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "clips",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:stand_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:stand_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:stand_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:stand_fwd",
+      "pass": true,
+      "details": {
+        "outsidePixels": 0
+      }
+    },
+    {
+      "name": "alpha:stand_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "each_frame_edited:stand_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:run0_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:run0_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:run0_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:run0_fwd",
+      "pass": true,
+      "details": {
+        "outsidePixels": 0
+      }
+    },
+    {
+      "name": "alpha:run0_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "each_frame_edited:run0_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:run1_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:run1_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:run1_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:run1_fwd",
+      "pass": true,
+      "details": {
+        "outsidePixels": 0
+      }
+    },
+    {
+      "name": "alpha:run1_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "each_frame_edited:run1_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:run2_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:run2_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:run2_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:run2_fwd",
+      "pass": true,
+      "details": {
+        "outsidePixels": 0
+      }
+    },
+    {
+      "name": "alpha:run2_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "each_frame_edited:run2_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:run3_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:run3_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:run3_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:run3_fwd",
+      "pass": true,
+      "details": {
+        "outsidePixels": 0
+      }
+    },
+    {
+      "name": "alpha:run3_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "each_frame_edited:run3_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:run4_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:run4_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:run4_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:run4_fwd",
+      "pass": true,
+      "details": {
+        "outsidePixels": 0
+      }
+    },
+    {
+      "name": "alpha:run4_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "each_frame_edited:run4_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:run5_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:run5_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:run5_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:run5_fwd",
+      "pass": true,
+      "details": {
+        "outsidePixels": 0
+      }
+    },
+    {
+      "name": "alpha:run5_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "each_frame_edited:run5_fwd",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "nontrivial_edit",
+      "pass": true,
+      "details": {
+        "changedPixels": 56,
+        "minimum": 1
+      }
+    }
+  ],
+  "frames": [
+    {
+      "id": "stand_fwd",
+      "changedPixels": 8,
+      "alphaChangedPixels": 0,
+      "outsideAllowedPixels": 0
+    },
+    {
+      "id": "run0_fwd",
+      "changedPixels": 8,
+      "alphaChangedPixels": 0,
+      "outsideAllowedPixels": 0
+    },
+    {
+      "id": "run1_fwd",
+      "changedPixels": 8,
+      "alphaChangedPixels": 0,
+      "outsideAllowedPixels": 0
+    },
+    {
+      "id": "run2_fwd",
+      "changedPixels": 8,
+      "alphaChangedPixels": 0,
+      "outsideAllowedPixels": 0
+    },
+    {
+      "id": "run3_fwd",
+      "changedPixels": 8,
+      "alphaChangedPixels": 0,
+      "outsideAllowedPixels": 0
+    },
+    {
+      "id": "run4_fwd",
+      "changedPixels": 8,
+      "alphaChangedPixels": 0,
+      "outsideAllowedPixels": 0
+    },
+    {
+      "id": "run5_fwd",
+      "changedPixels": 8,
+      "alphaChangedPixels": 0,
+      "outsideAllowedPixels": 0
+    }
+  ],
+  "totalChangedPixels": 56,
+  "visualStatus": "UNVERIFIED",
+  "protocolAdherence": "UNVERIFIED",
+  "budgetStatus": "UNVERIFIED",
+  "limitations": [
+    "Not an aesthetic judgment.",
+    "Host transcript must verify tools, budget and vision use.",
+    "A source component-count compliance needs review.",
+    "Run candidate code only in a trusted isolated environment."
+  ]
+}

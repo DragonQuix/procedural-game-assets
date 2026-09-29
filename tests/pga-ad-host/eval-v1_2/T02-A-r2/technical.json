@@ -1,0 +1,96 @@
+{
+  "schema": "pga-benchmark-evaluation/1",
+  "task": "T02",
+  "arm": "A",
+  "repeat": 2,
+  "mode": "scored",
+  "technicalStatus": "PASS",
+  "checks": [
+    {
+      "name": "frozen_repository",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "deterministic_rebuild",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "submitted_equals_rebuild",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "asset_identity",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "frame_ids",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "clips",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:hauler",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:hauler",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:hauler",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:hauler",
+      "pass": true,
+      "details": {
+        "outsidePixels": 0
+      }
+    },
+    {
+      "name": "nontrivial_edit",
+      "pass": true,
+      "details": {
+        "changedPixels": 354,
+        "minimum": 1
+      }
+    },
+    {
+      "name": "silhouette_changed",
+      "pass": true,
+      "details": {
+        "alphaChangedPixels": 230,
+        "minimum": 1
+      }
+    }
+  ],
+  "frames": [
+    {
+      "id": "hauler",
+      "changedPixels": 354,
+      "alphaChangedPixels": 230,
+      "outsideAllowedPixels": 0
+    }
+  ],
+  "totalChangedPixels": 354,
+  "visualStatus": "UNVERIFIED",
+  "protocolAdherence": "UNVERIFIED",
+  "budgetStatus": "UNVERIFIED",
+  "limitations": [
+    "Not an aesthetic judgment.",
+    "Host transcript must verify tools, budget and vision use.",
+    "A source component-count compliance needs review.",
+    "Run candidate code only in a trusted isolated environment."
+  ]
+}

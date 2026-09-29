@@ -1,0 +1,93 @@
+{
+  "schema": "pga-benchmark-evaluation/1",
+  "task": "T03",
+  "arm": "D",
+  "repeat": 3,
+  "mode": "scored",
+  "technicalStatus": "PASS",
+  "checks": [
+    {
+      "name": "frozen_repository",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "deterministic_rebuild",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "submitted_equals_rebuild",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "asset_identity",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "frame_ids",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "clips",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:cutter",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:cutter",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:cutter",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:cutter",
+      "pass": true,
+      "details": {
+        "outsidePixels": 0
+      }
+    },
+    {
+      "name": "alpha:cutter",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "nontrivial_edit",
+      "pass": true,
+      "details": {
+        "changedPixels": 82,
+        "minimum": 1
+      }
+    }
+  ],
+  "frames": [
+    {
+      "id": "cutter",
+      "changedPixels": 82,
+      "alphaChangedPixels": 0,
+      "outsideAllowedPixels": 0
+    }
+  ],
+  "totalChangedPixels": 82,
+  "visualStatus": "UNVERIFIED",
+  "protocolAdherence": "UNVERIFIED",
+  "budgetStatus": "UNVERIFIED",
+  "limitations": [
+    "Not an aesthetic judgment.",
+    "Host transcript must verify tools, budget and vision use.",
+    "A source component-count compliance needs review.",
+    "Run candidate code only in a trusted isolated environment."
+  ]
+}

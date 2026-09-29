@@ -1,0 +1,19 @@
+{
+  "schema": "pga-freeze-manifest/1.2",
+  "frozenAt": "2026-09-29T07:32:55+08:00",
+  "benchmarkVersion": "1.2",
+  "technicalGateVersion": "1.1 (readiness internal value; preflight unchanged in v1.2)",
+  "files": {
+    "preregistration-v1_2-frozen.json": "014dc42a97fb41dc58fdb83c8be95782db335f428a614703f70c5d02fe56e0de",
+    "preflight-v1_2/readiness.json": "fa62cc5b74fc7591fac2541dfc8e63e806dc9ffab7c777d3ed65f99ba53d0e82",
+    "PGA_AB_BENCHMARK_v1_2/protocol/pair-order.json": "87d8d5f34d125fd73a8f6600431d8e88863d4c39027bcf28a1917b743644d9d1",
+    "PGA_AB_BENCHMARK_v1_2/prompts/A.md": "bfa0a3957ccd0e867570ff594b203db6a73a3e42efd08ea7eb940278388bd7c0",
+    "PGA_AB_BENCHMARK_v1_2/prompts/D.md": "be25e3f433da40dc54c207c1494198674b55ca2f617d914ab9eabe3488d11ee8",
+    "PGA_AB_BENCHMARK_v1_2/prompts/reviewer.md": "213862ee7e175f1ec46790fcb8e9c445b2b3e6c01c6635062434ac48044971c4",
+    "PGA_AB_BENCHMARK_v1_2/organizer/evaluate.mjs": "776e317ffaf0e9453999b28710bd298ec2700aa8959d2cb9b4e0cf7d7b466e5e",
+    "PGA_AB_BENCHMARK_v1_2/organizer/blind.mjs": "2bf365d7734149f7343acf4c5131c0f424ea13e46e77a6bb496534707e7bae13",
+    "PGA_AB_BENCHMARK_v1_2/organizer/prepare.mjs": "fcd873305b965c2b96e64b8d86644b740f953835c751d33a59d9998e5e161ebe",
+    "PGA_AB_BENCHMARK_v1_2/SHA256SUMS.json": "46f53735f217283652bc674d3c69132b6d9b28b5fbfab0361b63c05e9fa324a1"
+  },
+  "immutability": "从第一条 scored trial prepare 开始，preregistration-v1_2-frozen.json 不得修改；如需修改，当前 scored batch 作废并重新预注册。本 manifest 由主持人侧与归档副本双份保存。"
+}

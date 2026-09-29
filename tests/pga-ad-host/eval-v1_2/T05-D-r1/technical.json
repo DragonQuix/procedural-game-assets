@@ -1,0 +1,101 @@
+{
+  "schema": "pga-benchmark-evaluation/1",
+  "task": "T05",
+  "arm": "D",
+  "repeat": 1,
+  "mode": "scored",
+  "technicalStatus": "FAIL",
+  "checks": [
+    {
+      "name": "frozen_repository",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "deterministic_rebuild",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "submitted_equals_rebuild",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "asset_identity",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "frame_ids",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "clips",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "dimensions:beacon",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "anchor:beacon",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "attachments:beacon",
+      "pass": true,
+      "details": null
+    },
+    {
+      "name": "protected_pixels:beacon",
+      "pass": false,
+      "details": {
+        "outsidePixels": 27
+      }
+    },
+    {
+      "name": "nontrivial_edit",
+      "pass": true,
+      "details": {
+        "changedPixels": 648,
+        "minimum": 10
+      }
+    },
+    {
+      "name": "silhouette_changed",
+      "pass": true,
+      "details": {
+        "alphaChangedPixels": 336,
+        "minimum": 10
+      }
+    },
+    {
+      "name": "five_original_component_types",
+      "pass": true,
+      "details": null
+    }
+  ],
+  "frames": [
+    {
+      "id": "beacon",
+      "changedPixels": 648,
+      "alphaChangedPixels": 336,
+      "outsideAllowedPixels": 27
+    }
+  ],
+  "totalChangedPixels": 648,
+  "visualStatus": "UNVERIFIED",
+  "protocolAdherence": "UNVERIFIED",
+  "budgetStatus": "UNVERIFIED",
+  "limitations": [
+    "Not an aesthetic judgment.",
+    "Host transcript must verify tools, budget and vision use.",
+    "A source component-count compliance needs review.",
+    "Run candidate code only in a trusted isolated environment."
+  ]
+}
