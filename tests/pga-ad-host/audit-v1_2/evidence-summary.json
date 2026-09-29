@@ -1,0 +1,192 @@
+{
+  "chronology": {
+    "firstWrapperEvent": "2026-09-28T23:37:08.847Z",
+    "lastSubmit": "2026-09-29T02:08:43.633Z",
+    "executionFreeze": "2026-09-29T02:11:32.884Z",
+    "evaluate": {
+      "count": 36,
+      "min": "2026-09-29T02:11:49.649Z",
+      "max": "2026-09-29T02:11:56.621Z"
+    },
+    "reviews": {
+      "count": 36,
+      "min": "2026-09-29T02:19:47.211Z",
+      "max": "2026-09-29T03:43:13.372Z"
+    },
+    "firstFormalUnblind": "2026-09-29T11:44:27+08:00",
+    "submissionsPerRun": [
+      {
+        "run": "T01-A-r1",
+        "count": 1
+      },
+      {
+        "run": "T01-D-r1",
+        "count": 1
+      },
+      {
+        "run": "T02-A-r1",
+        "count": 1
+      },
+      {
+        "run": "T02-D-r1",
+        "count": 1
+      },
+      {
+        "run": "T03-A-r1",
+        "count": 1
+      },
+      {
+        "run": "T03-D-r1",
+        "count": 1
+      },
+      {
+        "run": "T04-A-r1",
+        "count": 1
+      },
+      {
+        "run": "T04-D-r1",
+        "count": 1
+      },
+      {
+        "run": "T05-A-r1",
+        "count": 1
+      },
+      {
+        "run": "T05-D-r1",
+        "count": 1
+      },
+      {
+        "run": "T06-A-r1",
+        "count": 1
+      },
+      {
+        "run": "T06-D-r1",
+        "count": 1
+      },
+      {
+        "run": "T03-A-r2",
+        "count": 1
+      },
+      {
+        "run": "T03-D-r2",
+        "count": 1
+      },
+      {
+        "run": "T04-A-r2",
+        "count": 1
+      },
+      {
+        "run": "T04-D-r2",
+        "count": 1
+      },
+      {
+        "run": "T05-A-r2",
+        "count": 1
+      },
+      {
+        "run": "T05-D-r2",
+        "count": 1
+      },
+      {
+        "run": "T06-A-r2",
+        "count": 1
+      },
+      {
+        "run": "T06-D-r2",
+        "count": 1
+      },
+      {
+        "run": "T01-A-r2",
+        "count": 1
+      },
+      {
+        "run": "T01-D-r2",
+        "count": 1
+      },
+      {
+        "run": "T02-A-r2",
+        "count": 1
+      },
+      {
+        "run": "T02-D-r2",
+        "count": 1
+      },
+      {
+        "run": "T05-A-r3",
+        "count": 1
+      },
+      {
+        "run": "T05-D-r3",
+        "count": 1
+      },
+      {
+        "run": "T06-A-r3",
+        "count": 1
+      },
+      {
+        "run": "T06-D-r3",
+        "count": 1
+      },
+      {
+        "run": "T01-A-r3",
+        "count": 1
+      },
+      {
+        "run": "T01-D-r3",
+        "count": 1
+      },
+      {
+        "run": "T02-A-r3",
+        "count": 1
+      },
+      {
+        "run": "T02-D-r3",
+        "count": 1
+      },
+      {
+        "run": "T03-A-r3",
+        "count": 1
+      },
+      {
+        "run": "T03-D-r3",
+        "count": 1
+      },
+      {
+        "run": "T04-A-r3",
+        "count": 1
+      },
+      {
+        "run": "T04-D-r3",
+        "count": 1
+      }
+    ],
+    "note": "mtime 与日志没有第三方可信时间戳；可以检验现存证据顺序，不能证明没有历史删除、先读 key 或临时修改后恢复。"
+  },
+  "unblindRejected": [
+    {
+      "pair": "T05-r1",
+      "reviewer": "reviewer-2"
+    },
+    {
+      "pair": "T05-r3",
+      "reviewer": "reviewer-1"
+    }
+  ],
+  "candidateCount": 92,
+  "revisionCount": 64,
+  "visionCounts": {
+    "participants": {
+      "CONFIRMED": 0,
+      "SELF_REPORTED": 36,
+      "UNVERIFIED": 0,
+      "FAILED": 0
+    },
+    "reviewers": {
+      "CONFIRMED": 0,
+      "SELF_REPORTED": 36,
+      "UNVERIFIED": 0,
+      "FAILED": 0
+    }
+  },
+  "note": "CONFIRMED 限宿主图像输入调用与关联图像证据。现有报告与截图支持自述，但不能证明图像确实进入 participant/reviewer 的模型上下文。"
+}

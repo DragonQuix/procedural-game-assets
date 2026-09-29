@@ -1,0 +1,5304 @@
+{
+  "candidates": [
+    {
+      "run": "T01-D-r1",
+      "candidate": "c-19b3ba04",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": {
+          "shades": [
+            "#2e2210",
+            "#4a3614",
+            "#6b5220",
+            "#8a6c30"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r1",
+      "candidate": "c-93c53b34",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": {
+          "shades": [
+            "#241a0e",
+            "#3f2f18",
+            "#5f4a26",
+            "#7d653a"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r1",
+      "candidate": "c-e1f7aceb",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": "quiet"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r2",
+      "candidate": "c-66898ef6",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": "steel"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r2",
+      "candidate": "c-e1f7aceb",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": "quiet"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r2",
+      "candidate": "c-ec2c00f4",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": {
+          "shades": [
+            "#241b0e",
+            "#4e3d1d",
+            "#7a6330",
+            "#a58a52"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r3",
+      "candidate": "c-1fa63d81",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": {
+          "shades": [
+            "#2b2721",
+            "#4c4331",
+            "#77683f",
+            "#9c8757"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r3",
+      "candidate": "c-66898ef6",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": "steel"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r3",
+      "candidate": "c-ce2eba46",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": "red"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r3",
+      "candidate": "c-dd215fce",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": {
+          "shades": [
+            "#322d24",
+            "#5c5138",
+            "#8f7c52",
+            "#bfae82"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T01-D-r3",
+      "candidate": "c-e1f7aceb",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "relay.side",
+        "ramp": "quiet"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "relay.screen"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.screenCenter"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 70,
+        "outside": 0,
+        "region": {
+          "x0": 27,
+          "y0": 8,
+          "x1": 32,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r1",
+      "candidate": "c-0f2a2ff8",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 8,
+          "w": 24
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 343,
+        "outside": 0,
+        "region": {
+          "x0": 8,
+          "y0": 4,
+          "x1": 34,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r1",
+      "candidate": "c-1499be4f",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 9,
+          "w": 22
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 292,
+        "outside": 0,
+        "region": {
+          "x0": 9,
+          "y0": 4,
+          "x1": 33,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r1",
+      "candidate": "c-ae203a8c",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 8,
+          "w": 24,
+          "y": 3,
+          "h": 26
+        }
+      },
+      "status": "REJECTED",
+      "recheck": "REJECTED",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base",
+          "message": "像素保护区域 'hauler.base' 内发现 23 个变化像素",
+          "pixels": 23
+        }
+      ],
+      "diff": {
+        "pixels": 432,
+        "outside": 0,
+        "region": {
+          "x0": 8,
+          "y0": 3,
+          "x1": 34,
+          "y1": 31
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r1",
+      "candidate": "c-d43b3ec7",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 7,
+          "w": 26,
+          "y": 4,
+          "h": 25
+        }
+      },
+      "status": "REJECTED",
+      "recheck": "REJECTED",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base",
+          "message": "像素保护区域 'hauler.base' 内发现 24 个变化像素",
+          "pixels": 24
+        }
+      ],
+      "diff": {
+        "pixels": 433,
+        "outside": 0,
+        "region": {
+          "x0": 7,
+          "y0": 4,
+          "x1": 35,
+          "y1": 31
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r1",
+      "candidate": "c-d9be8a96",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 8,
+          "w": 24,
+          "y": 4,
+          "h": 25
+        }
+      },
+      "status": "REJECTED",
+      "recheck": "REJECTED",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base",
+          "message": "像素保护区域 'hauler.base' 内发现 23 个变化像素",
+          "pixels": 23
+        }
+      ],
+      "diff": {
+        "pixels": 380,
+        "outside": 0,
+        "region": {
+          "x0": 8,
+          "y0": 4,
+          "x1": 34,
+          "y1": 31
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r2",
+      "candidate": "c-1499be4f",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 9,
+          "w": 22
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 292,
+        "outside": 0,
+        "region": {
+          "x0": 9,
+          "y0": 4,
+          "x1": 33,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r2",
+      "candidate": "c-d3728e35",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 10,
+          "w": 20
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 242,
+        "outside": 0,
+        "region": {
+          "x0": 10,
+          "y0": 4,
+          "x1": 32,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r3",
+      "candidate": "c-1499be4f",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 9,
+          "w": 22
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 292,
+        "outside": 0,
+        "region": {
+          "x0": 9,
+          "y0": 4,
+          "x1": 33,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r3",
+      "candidate": "c-165ada2c",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 9,
+          "y": 5,
+          "w": 20,
+          "h": 23
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 269,
+        "outside": 0,
+        "region": {
+          "x0": 9,
+          "y0": 4,
+          "x1": 31,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r3",
+      "candidate": "c-16674a63",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 11,
+          "w": 18
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 192,
+        "outside": 0,
+        "region": {
+          "x0": 11,
+          "y0": 4,
+          "x1": 31,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r3",
+      "candidate": "c-2523ab21",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 9,
+          "w": 20
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 242,
+        "outside": 0,
+        "region": {
+          "x0": 9,
+          "y0": 4,
+          "x1": 31,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r3",
+      "candidate": "c-7f01ca7d",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 10,
+          "y": 6,
+          "w": 20,
+          "h": 23
+        }
+      },
+      "status": "REJECTED",
+      "recheck": "REJECTED",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base",
+          "message": "像素保护区域 'hauler.base' 内发现 20 个变化像素",
+          "pixels": 20
+        }
+      ],
+      "diff": {
+        "pixels": 309,
+        "outside": 0,
+        "region": {
+          "x0": 10,
+          "y0": 4,
+          "x1": 32,
+          "y1": 31
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r3",
+      "candidate": "c-8663870a",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 8,
+          "w": 22
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 292,
+        "outside": 0,
+        "region": {
+          "x0": 8,
+          "y0": 4,
+          "x1": 32,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r3",
+      "candidate": "c-bb991ab5",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 10,
+          "y": 7,
+          "w": 20,
+          "h": 22
+        }
+      },
+      "status": "REJECTED",
+      "recheck": "REJECTED",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base",
+          "message": "像素保护区域 'hauler.base' 内发现 20 个变化像素",
+          "pixels": 20
+        }
+      ],
+      "diff": {
+        "pixels": 315,
+        "outside": 0,
+        "region": {
+          "x0": 10,
+          "y0": 4,
+          "x1": 32,
+          "y1": 31
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T02-D-r3",
+      "candidate": "c-d3728e35",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "hauler.shell",
+        "params": {
+          "x": 10,
+          "w": 20
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "hauler.base"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.lens"
+        },
+        {
+          "kind": "pixels",
+          "target": "hauler.badge"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.sensor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 242,
+        "outside": 0,
+        "region": {
+          "x0": 10,
+          "y0": 4,
+          "x1": 32,
+          "y1": 30
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r1",
+      "candidate": "c-35497718",
+      "base": "r1",
+      "operation": {
+        "id": "material.set",
+        "target": "cutter.jaw",
+        "material": "shade-diag"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 27,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 4,
+          "x1": 28,
+          "y1": 16
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r1",
+      "candidate": "c-59f3cd42",
+      "base": "r2",
+      "operation": {
+        "id": "ramp.set",
+        "target": "cutter.handle",
+        "ramp": "quiet"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 55,
+        "outside": 0,
+        "region": {
+          "x0": 6,
+          "y0": 11,
+          "x1": 21,
+          "y1": 28
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r1",
+      "candidate": "c-69376831",
+      "base": "r3",
+      "operation": {
+        "id": "ramp.set",
+        "target": "cutter.jaw",
+        "ramp": {
+          "shades": [
+            "#171c25",
+            "#3f4959",
+            "#a2afc4",
+            "#dbe3f0"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 76,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 4,
+          "x1": 28,
+          "y1": 16
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r1",
+      "candidate": "c-7a950a54",
+      "base": "r3",
+      "operation": {
+        "id": "ramp.set",
+        "target": "cutter.jaw",
+        "ramp": {
+          "shades": [
+            "#1c212b",
+            "#454f5f",
+            "#94a2b8",
+            "#d0d9e8"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 76,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 4,
+          "x1": 28,
+          "y1": 16
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r1",
+      "candidate": "c-a2f5058c",
+      "base": "r3",
+      "operation": {
+        "id": "ramp.set",
+        "target": "cutter.jaw",
+        "ramp": {
+          "shades": [
+            "#242a36",
+            "#4d5868",
+            "#8a96ac",
+            "#c5cfe0"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 76,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 4,
+          "x1": 28,
+          "y1": 16
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r2",
+      "candidate": "c-35497718",
+      "base": "r1",
+      "operation": {
+        "id": "material.set",
+        "target": "cutter.jaw",
+        "material": "shade-diag"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 27,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 4,
+          "x1": 28,
+          "y1": 16
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r2",
+      "candidate": "c-59f3cd42",
+      "base": "r2",
+      "operation": {
+        "id": "ramp.set",
+        "target": "cutter.handle",
+        "ramp": "quiet"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 55,
+        "outside": 0,
+        "region": {
+          "x0": 6,
+          "y0": 11,
+          "x1": 21,
+          "y1": 28
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r2",
+      "candidate": "c-eb1ea6b6",
+      "base": "r3",
+      "operation": {
+        "id": "material.set",
+        "target": "cutter.handle",
+        "material": "shade-diag"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 1,
+        "outside": 0,
+        "region": {
+          "x0": 6,
+          "y0": 11,
+          "x1": 21,
+          "y1": 28
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r3",
+      "candidate": "c-35497718",
+      "base": "r1",
+      "operation": {
+        "id": "material.set",
+        "target": "cutter.jaw",
+        "material": "shade-diag"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 27,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 4,
+          "x1": 28,
+          "y1": 16
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r3",
+      "candidate": "c-59f3cd42",
+      "base": "r2",
+      "operation": {
+        "id": "ramp.set",
+        "target": "cutter.handle",
+        "ramp": "quiet"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 55,
+        "outside": 0,
+        "region": {
+          "x0": 6,
+          "y0": 11,
+          "x1": 21,
+          "y1": 28
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T03-D-r3",
+      "candidate": "c-eb1ea6b6",
+      "base": "r3",
+      "operation": {
+        "id": "material.set",
+        "target": "cutter.handle",
+        "material": "shade-diag"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "pixels",
+          "target": "cutter.bolt"
+        },
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.grip"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.tip"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 1,
+        "outside": 0,
+        "region": {
+          "x0": 6,
+          "y0": 11,
+          "x1": 21,
+          "y1": 28
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r1",
+      "candidate": "c-30783700",
+      "base": "r3",
+      "operation": {
+        "id": "material.set",
+        "target": "medkit.symbol",
+        "material": "shade-diag"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 15,
+        "outside": 0,
+        "region": {
+          "x0": 16,
+          "y0": 16,
+          "x1": 26,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r1",
+      "candidate": "c-36e7887d",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "medkit.symbol",
+        "ramp": {
+          "shades": [
+            "#451e25",
+            "#c35a59",
+            "#e99a7e",
+            "#f7c9a8"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 40,
+        "outside": 0,
+        "region": {
+          "x0": 18,
+          "y0": 14,
+          "x1": 23,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r1",
+      "candidate": "c-6375036c",
+      "base": "r2",
+      "operation": {
+        "id": "geometry.set",
+        "target": "medkit.symbol",
+        "params": {
+          "vertices": [
+            [
+              20,
+              22
+            ],
+            [
+              25,
+              18
+            ],
+            [
+              25,
+              15
+            ],
+            [
+              22,
+              15
+            ],
+            [
+              20,
+              17
+            ],
+            [
+              18,
+              15
+            ],
+            [
+              15,
+              15
+            ],
+            [
+              15,
+              18
+            ]
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 36,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 13,
+          "x1": 27,
+          "y1": 24
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r1",
+      "candidate": "c-e056da52",
+      "base": "r1",
+      "operation": {
+        "id": "ramp.set",
+        "target": "medkit.symbol",
+        "ramp": "red"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 40,
+        "outside": 0,
+        "region": {
+          "x0": 18,
+          "y0": 14,
+          "x1": 23,
+          "y1": 22
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r1",
+      "candidate": "c-e26ad46e",
+      "base": "r2",
+      "operation": {
+        "id": "geometry.set",
+        "target": "medkit.symbol",
+        "params": {
+          "vertices": [
+            [
+              19,
+              21
+            ],
+            [
+              24,
+              17
+            ],
+            [
+              24,
+              14
+            ],
+            [
+              21,
+              14
+            ],
+            [
+              19,
+              16
+            ],
+            [
+              17,
+              14
+            ],
+            [
+              14,
+              14
+            ],
+            [
+              14,
+              17
+            ]
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 32,
+        "outside": 0,
+        "region": {
+          "x0": 14,
+          "y0": 13,
+          "x1": 26,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r1",
+      "candidate": "c-fcb0c892",
+      "base": "r2",
+      "operation": {
+        "id": "geometry.set",
+        "target": "medkit.symbol",
+        "params": {
+          "vertices": [
+            [
+              19,
+              21
+            ],
+            [
+              23,
+              17
+            ],
+            [
+              23,
+              14
+            ],
+            [
+              21,
+              14
+            ],
+            [
+              19,
+              16
+            ],
+            [
+              17,
+              14
+            ],
+            [
+              15,
+              14
+            ],
+            [
+              15,
+              17
+            ]
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 26,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 13,
+          "x1": 25,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r2",
+      "candidate": "c-30783700",
+      "base": "r3",
+      "operation": {
+        "id": "material.set",
+        "target": "medkit.symbol",
+        "material": "shade-diag"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 28,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 13,
+          "x1": 25,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r2",
+      "candidate": "c-3be7865e",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "medkit.symbol",
+        "params": {
+          "vertices": [
+            [
+              18,
+              12
+            ],
+            [
+              19,
+              16
+            ],
+            [
+              20,
+              12
+            ],
+            [
+              22,
+              12
+            ],
+            [
+              24,
+              17
+            ],
+            [
+              19,
+              22
+            ],
+            [
+              14,
+              17
+            ],
+            [
+              16,
+              12
+            ]
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 29,
+        "outside": 0,
+        "region": {
+          "x0": 14,
+          "y0": 12,
+          "x1": 26,
+          "y1": 24
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r2",
+      "candidate": "c-b9dd7cb3",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "medkit.symbol",
+        "params": {
+          "vertices": [
+            [
+              18,
+              12
+            ],
+            [
+              19,
+              15
+            ],
+            [
+              20,
+              12
+            ],
+            [
+              22,
+              12
+            ],
+            [
+              24,
+              16
+            ],
+            [
+              19,
+              22
+            ],
+            [
+              14,
+              16
+            ],
+            [
+              16,
+              12
+            ]
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 29,
+        "outside": 0,
+        "region": {
+          "x0": 14,
+          "y0": 12,
+          "x1": 26,
+          "y1": 24
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r2",
+      "candidate": "c-f55f5a1a",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "medkit.symbol",
+        "params": {
+          "vertices": [
+            [
+              18,
+              12
+            ],
+            [
+              19,
+              16
+            ],
+            [
+              20,
+              12
+            ],
+            [
+              22,
+              12
+            ],
+            [
+              24,
+              16
+            ],
+            [
+              19,
+              22
+            ],
+            [
+              14,
+              16
+            ],
+            [
+              16,
+              12
+            ]
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 30,
+        "outside": 0,
+        "region": {
+          "x0": 14,
+          "y0": 12,
+          "x1": 26,
+          "y1": 24
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r2",
+      "candidate": "c-feca2aa4",
+      "base": "r2",
+      "operation": {
+        "id": "ramp.set",
+        "target": "medkit.symbol",
+        "ramp": {
+          "shades": [
+            "#6b2730",
+            "#c9484f",
+            "#ef766a",
+            "#ffcf9e"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 61,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 13,
+          "x1": 25,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r3",
+      "candidate": "c-3566bc97",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "medkit.symbol",
+        "params": {
+          "vertices": [
+            [
+              19,
+              22
+            ],
+            [
+              14,
+              17
+            ],
+            [
+              14,
+              13
+            ],
+            [
+              16,
+              13
+            ],
+            [
+              19,
+              15
+            ],
+            [
+              22,
+              13
+            ],
+            [
+              25,
+              13
+            ],
+            [
+              25,
+              17
+            ]
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 39,
+        "outside": 0,
+        "region": {
+          "x0": 14,
+          "y0": 13,
+          "x1": 27,
+          "y1": 24
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r3",
+      "candidate": "c-5746e08b",
+      "base": "r2",
+      "operation": {
+        "id": "ramp.set",
+        "target": "medkit.symbol",
+        "ramp": "red"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 63,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 14,
+          "x1": 26,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T04-D-r3",
+      "candidate": "c-593f6548",
+      "base": "r2",
+      "operation": {
+        "id": "ramp.set",
+        "target": "medkit.symbol",
+        "ramp": {
+          "shades": [
+            "#571c17",
+            "#c0392b",
+            "#e8604c",
+            "#ffa58c"
+          ]
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.handle"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 63,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 14,
+          "x1": 26,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-165374dc",
+      "base": "r2",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.body",
+        "params": {
+          "x": 10,
+          "y": 17,
+          "w": 19,
+          "h": 16
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 271,
+        "outside": 0,
+        "region": {
+          "x0": 7,
+          "y0": 12,
+          "x1": 33,
+          "y1": 35
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-2ce433d7",
+      "base": "r6",
+      "operation": {
+        "id": "ramp.set",
+        "target": "beacon.battery",
+        "ramp": "quiet"
+      },
+      "status": "UNCHANGED",
+      "recheck": "UNCHANGED",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 0,
+        "outside": 0,
+        "region": {
+          "x0": 29,
+          "y0": 25,
+          "x1": 34,
+          "y1": 34
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-544e25cf",
+      "base": "r7",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.light",
+        "params": {
+          "cx": 19,
+          "cy": 8,
+          "rx": 4,
+          "ry": 4
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 40,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 4,
+          "x1": 25,
+          "y1": 14
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-55f653cf",
+      "base": "r3",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.mast",
+        "params": {
+          "x": 18,
+          "y": 11,
+          "w": 2,
+          "h": 6
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 56,
+        "outside": 0,
+        "region": {
+          "x0": 18,
+          "y0": 5,
+          "x1": 23,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-586adc68",
+      "base": "r4",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.light",
+        "params": {
+          "cx": 19,
+          "cy": 8,
+          "rx": 3,
+          "ry": 3
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 100,
+        "outside": 0,
+        "region": {
+          "x0": 7,
+          "y0": 5,
+          "x1": 24,
+          "y1": 16
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-8f1f6c48",
+      "base": "r5",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.battery",
+        "params": {
+          "x": 28,
+          "y": 24,
+          "w": 5,
+          "h": 9
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 126,
+        "outside": 0,
+        "region": {
+          "x0": 25,
+          "y0": 16,
+          "x1": 35,
+          "y1": 35
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-ba56d1c9",
+      "base": "r8",
+      "operation": {
+        "id": "material.set",
+        "target": "beacon.light",
+        "material": "shade-diag"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 25,
+        "outside": 0,
+        "region": {
+          "x0": 16,
+          "y0": 5,
+          "x1": 24,
+          "y1": 13
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-c0363bd6",
+      "base": "r6",
+      "operation": {
+        "id": "ramp.set",
+        "target": "beacon.battery",
+        "ramp": "steel"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 45,
+        "outside": 0,
+        "region": {
+          "x0": 29,
+          "y0": 25,
+          "x1": 34,
+          "y1": 34
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-c9b92e2b",
+      "base": "r6",
+      "operation": {
+        "id": "ramp.set",
+        "target": "beacon.battery",
+        "ramp": "screen"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 45,
+        "outside": 0,
+        "region": {
+          "x0": 29,
+          "y0": 25,
+          "x1": 34,
+          "y1": 34
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r1",
+      "candidate": "c-d35cd1d5",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.base",
+        "params": {
+          "x": 6,
+          "y": 33,
+          "w": 27,
+          "h": 4
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 233,
+        "outside": 0,
+        "region": {
+          "x0": 5,
+          "y0": 30,
+          "x1": 35,
+          "y1": 39
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r2",
+      "candidate": "c-0f2c9e1c",
+      "base": "r4",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.mast",
+        "params": {
+          "x": 19,
+          "y": 11,
+          "w": 2,
+          "h": 7
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 22,
+        "outside": 0,
+        "region": {
+          "x0": 18,
+          "y0": 5,
+          "x1": 23,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r2",
+      "candidate": "c-594917ce",
+      "base": "r5",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.battery",
+        "params": {
+          "x": 27,
+          "y": 21,
+          "w": 6,
+          "h": 8
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 105,
+        "outside": 0,
+        "region": {
+          "x0": 25,
+          "y0": 16,
+          "x1": 35,
+          "y1": 31
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r2",
+      "candidate": "c-6352b134",
+      "base": "r2",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.body",
+        "params": {
+          "x": 11,
+          "y": 18,
+          "w": 18,
+          "h": 15
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 288,
+        "outside": 0,
+        "region": {
+          "x0": 7,
+          "y0": 12,
+          "x1": 33,
+          "y1": 35
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r2",
+      "candidate": "c-65a7fbf1",
+      "base": "r6",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.light",
+        "params": {
+          "cx": 20,
+          "cy": 7,
+          "rx": 5,
+          "ry": 5
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 56,
+        "outside": 0,
+        "region": {
+          "x0": 15,
+          "y0": 2,
+          "x1": 27,
+          "y1": 14
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r2",
+      "candidate": "c-82379c80",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.base",
+        "params": {
+          "x": 9,
+          "y": 32,
+          "w": 22,
+          "h": 4
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 193,
+        "outside": 0,
+        "region": {
+          "x0": 5,
+          "y0": 30,
+          "x1": 35,
+          "y1": 38
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r2",
+      "candidate": "c-c0442cc0",
+      "base": "r3",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.light",
+        "params": {
+          "cx": 20,
+          "cy": 7,
+          "rx": 4,
+          "ry": 4
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 123,
+        "outside": 0,
+        "region": {
+          "x0": 7,
+          "y0": 3,
+          "x1": 26,
+          "y1": 16
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r3",
+      "candidate": "c-2f4e7e4a",
+      "base": "r7",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.light",
+        "params": {
+          "cx": 20,
+          "cy": 9,
+          "rx": 4,
+          "ry": 4
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 45,
+        "outside": 0,
+        "region": {
+          "x0": 16,
+          "y0": 5,
+          "x1": 26,
+          "y1": 15
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r3",
+      "candidate": "c-2ff17b9d",
+      "base": "r2",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.mast",
+        "params": {
+          "x": 19,
+          "y": 11,
+          "w": 2,
+          "h": 6
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 56,
+        "outside": 0,
+        "region": {
+          "x0": 18,
+          "y0": 5,
+          "x1": 23,
+          "y1": 23
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r3",
+      "candidate": "c-46ee5cbc",
+      "base": "r3",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.light",
+        "params": {
+          "cx": 20,
+          "cy": 9,
+          "rx": 3,
+          "ry": 3
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 100,
+        "outside": 0,
+        "region": {
+          "x0": 7,
+          "y0": 6,
+          "x1": 25,
+          "y1": 16
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r3",
+      "candidate": "c-8e3e262e",
+      "base": "r1",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.body",
+        "params": {
+          "x": 13,
+          "y": 17,
+          "w": 14,
+          "h": 15
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 269,
+        "outside": 0,
+        "region": {
+          "x0": 7,
+          "y0": 12,
+          "x1": 33,
+          "y1": 34
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r3",
+      "candidate": "c-9c580233",
+      "base": "r5",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.base",
+        "params": {
+          "x": 11,
+          "y": 32,
+          "w": 18,
+          "h": 3
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 144,
+        "outside": 0,
+        "region": {
+          "x0": 5,
+          "y0": 30,
+          "x1": 35,
+          "y1": 37
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r3",
+      "candidate": "c-ac8e3f25",
+      "base": "r4",
+      "operation": {
+        "id": "geometry.set",
+        "target": "beacon.battery",
+        "params": {
+          "x": 25,
+          "y": 20,
+          "w": 6,
+          "h": 9
+        }
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 51,
+        "outside": 0,
+        "region": {
+          "x0": 25,
+          "y0": 16,
+          "x1": 33,
+          "y1": 31
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T05-D-r3",
+      "candidate": "c-c7b740cb",
+      "base": "r6",
+      "operation": {
+        "id": "material.set",
+        "target": "beacon.light",
+        "material": "shade-diag"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        }
+      ],
+      "conflicts": [],
+      "diff": {
+        "pixels": 14,
+        "outside": 0,
+        "region": {
+          "x0": 18,
+          "y0": 7,
+          "x1": 24,
+          "y1": 13
+        },
+        "samples": []
+      }
+    },
+    {
+      "run": "T06-D-r1",
+      "candidate": "c-1130d8eb",
+      "base": "r2",
+      "operation": {
+        "id": "palette.set",
+        "target": "E",
+        "value": "#ffe08a"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r1",
+      "candidate": "c-6fb5e61c",
+      "base": "r1",
+      "operation": {
+        "id": "palette.set",
+        "target": "V",
+        "value": "#f0a83c"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r1",
+      "candidate": "c-7ba80bf7",
+      "base": "r1",
+      "operation": {
+        "id": "palette.set",
+        "target": "V",
+        "value": "#c9821e"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r1",
+      "candidate": "c-b1d7682e",
+      "base": "r2",
+      "operation": {
+        "id": "palette.set",
+        "target": "E",
+        "value": "#ffd061"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r1",
+      "candidate": "c-d4297ae8",
+      "base": "r1",
+      "operation": {
+        "id": "palette.set",
+        "target": "V",
+        "value": "#e09a28"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r1",
+      "candidate": "c-d5c7327b",
+      "base": "r2",
+      "operation": {
+        "id": "palette.set",
+        "target": "E",
+        "value": "#f2c46a"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r2",
+      "candidate": "c-593675f7",
+      "base": "r1",
+      "operation": {
+        "id": "palette.set",
+        "target": "V",
+        "value": "#dda02e"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r2",
+      "candidate": "c-606eee0b",
+      "base": "r2",
+      "operation": {
+        "id": "palette.set",
+        "target": "E",
+        "value": "#eab04f"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r2",
+      "candidate": "c-74568099",
+      "base": "r2",
+      "operation": {
+        "id": "palette.set",
+        "target": "E",
+        "value": "#ffd98a"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r2",
+      "candidate": "c-ae48fca1",
+      "base": "r1",
+      "operation": {
+        "id": "palette.set",
+        "target": "V",
+        "value": "#c9821c"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r2",
+      "candidate": "c-e1bf6f03",
+      "base": "r1",
+      "operation": {
+        "id": "palette.set",
+        "target": "V",
+        "value": "#b5731f"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r2",
+      "candidate": "c-fb3b67ed",
+      "base": "r2",
+      "operation": {
+        "id": "palette.set",
+        "target": "E",
+        "value": "#f5c468"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r3",
+      "candidate": "c-063ead8a",
+      "base": "r1",
+      "operation": {
+        "id": "palette.set",
+        "target": "V",
+        "value": "#b45f1a"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r3",
+      "candidate": "c-0afb8eef",
+      "base": "r1",
+      "operation": {
+        "id": "palette.set",
+        "target": "V",
+        "value": "#ef9a2e"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r3",
+      "candidate": "c-0c3c3989",
+      "base": "r1",
+      "operation": {
+        "id": "palette.set",
+        "target": "V",
+        "value": "#d97c1f"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r3",
+      "candidate": "c-74568099",
+      "base": "r2",
+      "operation": {
+        "id": "palette.set",
+        "target": "E",
+        "value": "#ffd98a"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r3",
+      "candidate": "c-ae6bf3a8",
+      "base": "r2",
+      "operation": {
+        "id": "palette.set",
+        "target": "E",
+        "value": "#f0a848"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    },
+    {
+      "run": "T06-D-r3",
+      "candidate": "c-f2b32b6a",
+      "base": "r2",
+      "operation": {
+        "id": "palette.set",
+        "target": "E",
+        "value": "#ffc45e"
+      },
+      "status": "OK",
+      "recheck": "OK",
+      "docMatches": true,
+      "idMatches": true,
+      "renderHashMatches": true,
+      "checksMatch": true,
+      "preserve": [
+        {
+          "kind": "metadata",
+          "target": "anchor"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.head"
+        },
+        {
+          "kind": "metadata",
+          "target": "attachments.muzzle"
+        }
+      ],
+      "conflicts": []
+    }
+  ],
+  "revisions": [
+    {
+      "run": "T01-D-r1",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T01-D-r1",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-19b3ba04",
+        "operation": {
+          "id": "ramp.set",
+          "target": "relay.side",
+          "ramp": {
+            "shades": [
+              "#2e2210",
+              "#4a3614",
+              "#6b5220",
+              "#8a6c30"
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T01-D-r2",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T01-D-r2",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-ec2c00f4",
+        "operation": {
+          "id": "ramp.set",
+          "target": "relay.side",
+          "ramp": {
+            "shades": [
+              "#241b0e",
+              "#4e3d1d",
+              "#7a6330",
+              "#a58a52"
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T01-D-r3",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T01-D-r3",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-dd215fce",
+        "operation": {
+          "id": "ramp.set",
+          "target": "relay.side",
+          "ramp": {
+            "shades": [
+              "#322d24",
+              "#5c5138",
+              "#8f7c52",
+              "#bfae82"
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T02-D-r1",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T02-D-r1",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-0f2a2ff8",
+        "operation": {
+          "id": "geometry.set",
+          "target": "hauler.shell",
+          "params": {
+            "x": 8,
+            "w": 24
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T02-D-r2",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T02-D-r2",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-d3728e35",
+        "operation": {
+          "id": "geometry.set",
+          "target": "hauler.shell",
+          "params": {
+            "x": 10,
+            "w": 20
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T02-D-r3",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T02-D-r3",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-2523ab21",
+        "operation": {
+          "id": "geometry.set",
+          "target": "hauler.shell",
+          "params": {
+            "x": 9,
+            "w": 20
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r1",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r1",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-35497718",
+        "operation": {
+          "id": "material.set",
+          "target": "cutter.jaw",
+          "material": "shade-diag"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r1",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-59f3cd42",
+        "operation": {
+          "id": "ramp.set",
+          "target": "cutter.handle",
+          "ramp": "quiet"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r1",
+      "revision": "r4",
+      "parent": "r3",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-7a950a54",
+        "operation": {
+          "id": "ramp.set",
+          "target": "cutter.jaw",
+          "ramp": {
+            "shades": [
+              "#1c212b",
+              "#454f5f",
+              "#94a2b8",
+              "#d0d9e8"
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r2",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r2",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-35497718",
+        "operation": {
+          "id": "material.set",
+          "target": "cutter.jaw",
+          "material": "shade-diag"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r2",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-59f3cd42",
+        "operation": {
+          "id": "ramp.set",
+          "target": "cutter.handle",
+          "ramp": "quiet"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r3",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r3",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-35497718",
+        "operation": {
+          "id": "material.set",
+          "target": "cutter.jaw",
+          "material": "shade-diag"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T03-D-r3",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-59f3cd42",
+        "operation": {
+          "id": "ramp.set",
+          "target": "cutter.handle",
+          "ramp": "quiet"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T04-D-r1",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T04-D-r1",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-36e7887d",
+        "operation": {
+          "id": "ramp.set",
+          "target": "medkit.symbol",
+          "ramp": {
+            "shades": [
+              "#451e25",
+              "#c35a59",
+              "#e99a7e",
+              "#f7c9a8"
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T04-D-r1",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-6375036c",
+        "operation": {
+          "id": "geometry.set",
+          "target": "medkit.symbol",
+          "params": {
+            "vertices": [
+              [
+                20,
+                22
+              ],
+              [
+                25,
+                18
+              ],
+              [
+                25,
+                15
+              ],
+              [
+                22,
+                15
+              ],
+              [
+                20,
+                17
+              ],
+              [
+                18,
+                15
+              ],
+              [
+                15,
+                15
+              ],
+              [
+                15,
+                18
+              ]
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T04-D-r2",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T04-D-r2",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-3be7865e",
+        "operation": {
+          "id": "geometry.set",
+          "target": "medkit.symbol",
+          "params": {
+            "vertices": [
+              [
+                18,
+                12
+              ],
+              [
+                19,
+                16
+              ],
+              [
+                20,
+                12
+              ],
+              [
+                22,
+                12
+              ],
+              [
+                24,
+                17
+              ],
+              [
+                19,
+                22
+              ],
+              [
+                14,
+                17
+              ],
+              [
+                16,
+                12
+              ]
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T04-D-r2",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-feca2aa4",
+        "operation": {
+          "id": "ramp.set",
+          "target": "medkit.symbol",
+          "ramp": {
+            "shades": [
+              "#6b2730",
+              "#c9484f",
+              "#ef766a",
+              "#ffcf9e"
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T04-D-r3",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T04-D-r3",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-3566bc97",
+        "operation": {
+          "id": "geometry.set",
+          "target": "medkit.symbol",
+          "params": {
+            "vertices": [
+              [
+                19,
+                22
+              ],
+              [
+                14,
+                17
+              ],
+              [
+                14,
+                13
+              ],
+              [
+                16,
+                13
+              ],
+              [
+                19,
+                15
+              ],
+              [
+                22,
+                13
+              ],
+              [
+                25,
+                13
+              ],
+              [
+                25,
+                17
+              ]
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T04-D-r3",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-593f6548",
+        "operation": {
+          "id": "ramp.set",
+          "target": "medkit.symbol",
+          "ramp": {
+            "shades": [
+              "#571c17",
+              "#c0392b",
+              "#e8604c",
+              "#ffa58c"
+            ]
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r1",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r1",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-d35cd1d5",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.base",
+          "params": {
+            "x": 6,
+            "y": 33,
+            "w": 27,
+            "h": 4
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r1",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-165374dc",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.body",
+          "params": {
+            "x": 10,
+            "y": 17,
+            "w": 19,
+            "h": 16
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r1",
+      "revision": "r4",
+      "parent": "r3",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-55f653cf",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.mast",
+          "params": {
+            "x": 18,
+            "y": 11,
+            "w": 2,
+            "h": 6
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r1",
+      "revision": "r5",
+      "parent": "r4",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-586adc68",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.light",
+          "params": {
+            "cx": 19,
+            "cy": 8,
+            "rx": 3,
+            "ry": 3
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r1",
+      "revision": "r6",
+      "parent": "r5",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-8f1f6c48",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.battery",
+          "params": {
+            "x": 28,
+            "y": 24,
+            "w": 5,
+            "h": 9
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r1",
+      "revision": "r7",
+      "parent": "r6",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-c9b92e2b",
+        "operation": {
+          "id": "ramp.set",
+          "target": "beacon.battery",
+          "ramp": "screen"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r1",
+      "revision": "r8",
+      "parent": "r7",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-544e25cf",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.light",
+          "params": {
+            "cx": 19,
+            "cy": 8,
+            "rx": 4,
+            "ry": 4
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r1",
+      "revision": "r9",
+      "parent": "r8",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-ba56d1c9",
+        "operation": {
+          "id": "material.set",
+          "target": "beacon.light",
+          "material": "shade-diag"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r2",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r2",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-82379c80",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.base",
+          "params": {
+            "x": 9,
+            "y": 32,
+            "w": 22,
+            "h": 4
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r2",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-6352b134",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.body",
+          "params": {
+            "x": 11,
+            "y": 18,
+            "w": 18,
+            "h": 15
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r2",
+      "revision": "r4",
+      "parent": "r3",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-c0442cc0",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.light",
+          "params": {
+            "cx": 20,
+            "cy": 7,
+            "rx": 4,
+            "ry": 4
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r2",
+      "revision": "r5",
+      "parent": "r4",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-0f2c9e1c",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.mast",
+          "params": {
+            "x": 19,
+            "y": 11,
+            "w": 2,
+            "h": 7
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r2",
+      "revision": "r6",
+      "parent": "r5",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-594917ce",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.battery",
+          "params": {
+            "x": 27,
+            "y": 21,
+            "w": 6,
+            "h": 8
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r2",
+      "revision": "r7",
+      "parent": "r6",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-65a7fbf1",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.light",
+          "params": {
+            "cx": 20,
+            "cy": 7,
+            "rx": 5,
+            "ry": 5
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r3",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r3",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-8e3e262e",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.body",
+          "params": {
+            "x": 13,
+            "y": 17,
+            "w": 14,
+            "h": 15
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r3",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-2ff17b9d",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.mast",
+          "params": {
+            "x": 19,
+            "y": 11,
+            "w": 2,
+            "h": 6
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r3",
+      "revision": "r4",
+      "parent": "r3",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-46ee5cbc",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.light",
+          "params": {
+            "cx": 20,
+            "cy": 9,
+            "rx": 3,
+            "ry": 3
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r3",
+      "revision": "r5",
+      "parent": "r4",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-ac8e3f25",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.battery",
+          "params": {
+            "x": 25,
+            "y": 20,
+            "w": 6,
+            "h": 9
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r3",
+      "revision": "r6",
+      "parent": "r5",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-9c580233",
+        "operation": {
+          "id": "geometry.set",
+          "target": "beacon.base",
+          "params": {
+            "x": 11,
+            "y": 32,
+            "w": 18,
+            "h": 3
+          }
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r3",
+      "revision": "r7",
+      "parent": "r6",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-c7b740cb",
+        "operation": {
+          "id": "material.set",
+          "target": "beacon.light",
+          "material": "shade-diag"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T05-D-r3",
+      "revision": "r8",
+      "parent": "r7",
+      "source": {
+        "kind": "restore",
+        "from": "r7"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T06-D-r1",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T06-D-r1",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-d4297ae8",
+        "operation": {
+          "id": "palette.set",
+          "target": "V",
+          "value": "#e09a28"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T06-D-r1",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-b1d7682e",
+        "operation": {
+          "id": "palette.set",
+          "target": "E",
+          "value": "#ffd061"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T06-D-r2",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T06-D-r2",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-ae48fca1",
+        "operation": {
+          "id": "palette.set",
+          "target": "V",
+          "value": "#c9821c"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T06-D-r2",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-fb3b67ed",
+        "operation": {
+          "id": "palette.set",
+          "target": "E",
+          "value": "#f5c468"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T06-D-r3",
+      "revision": "r1",
+      "parent": null,
+      "source": {
+        "kind": "create"
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T06-D-r3",
+      "revision": "r2",
+      "parent": "r1",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-0c3c3989",
+        "operation": {
+          "id": "palette.set",
+          "target": "V",
+          "value": "#d97c1f"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    },
+    {
+      "run": "T06-D-r3",
+      "revision": "r3",
+      "parent": "r2",
+      "source": {
+        "kind": "accept",
+        "candidateId": "c-f2b32b6a",
+        "operation": {
+          "id": "palette.set",
+          "target": "E",
+          "value": "#ffc45e"
+        },
+        "unchanged": false
+      },
+      "docMatches": true,
+      "renderHashMatches": true
+    }
+  ]
+}

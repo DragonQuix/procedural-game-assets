@@ -1,0 +1,542 @@
+[
+  {
+    "pair": "T01-r1",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r1\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T01\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"NO_MEANINGFUL_DIFFERENCE\",\n  \"preferredRun\": null,\n  \"preferredRole\": null,\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T01-r1",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r1\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T01\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"NO_MEANINGFUL_DIFFERENCE\",\n  \"preferredRun\": null,\n  \"preferredRole\": null,\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T02-r1",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r1\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T02\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T02-A-r1\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T02-r1",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r1\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T02\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T02-A-r1\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"NOT_YET\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T03-r1",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r1\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T03\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T03-D-r1\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T03-r1",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r1\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T03\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T03-D-r1\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T04-r1",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r1\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T04\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"NO_MEANINGFUL_DIFFERENCE\",\n  \"preferredRun\": null,\n  \"preferredRole\": null,\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T04-r1",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r1\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T04\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T04-A-r1\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T05-r1",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r1\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T05\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T05-D-r1\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T05-r1",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r1\\reviewer-2\\review.json"
+    ],
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "file:///E:/Repos/Tools/procedural-game-assets/tests/PGA_AB_BENCHMARK_v1_2/organizer/unblind.mjs:14\r\nif(!review.allowedPairwiseResult.includes(verdict))throw Error('Bad pairwiseResult: '+verdict);\r\n                                 ^\r\n\r\nTypeError: Cannot read properties of undefined (reading 'includes')\r\n    at file:///E:/Repos/Tools/procedural-game-assets/tests/PGA_AB_BENCHMARK_v1_2/organizer/unblind.mjs:14:34\r\n\r\nNode.js v22.23.2\r\n"
+  },
+  {
+    "pair": "T06-r1",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T06\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"NO_MEANINGFUL_DIFFERENCE\",\n  \"preferredRun\": null,\n  \"preferredRole\": null,\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T06-r1",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T06\",\n  \"repeat\": 1,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"NO_MEANINGFUL_DIFFERENCE\",\n  \"preferredRun\": null,\n  \"preferredRole\": null,\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T03-r2",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r2\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T03\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T03-A-r2\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T03-r2",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r2\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T03\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T03-A-r2\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"NOT_YET\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T04-r2",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r2\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T04\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T04-A-r2\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T04-r2",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r2\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T04\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T04-A-r2\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T05-r2",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r2\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T05\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T05-A-r2\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T05-r2",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r2\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T05\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T05-D-r2\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T06-r2",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r2\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T06\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"NO_MEANINGFUL_DIFFERENCE\",\n  \"preferredRun\": null,\n  \"preferredRole\": null,\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T06-r2",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r2\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T06\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T06-A-r2\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T01-r2",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r2\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T01\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T01-D-r2\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T01-r2",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r2\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T01\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T01-D-r2\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T02-r2",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r2\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T02\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T02-D-r2\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"NOT_YET\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T02-r2",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r2\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r2\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T02\",\n  \"repeat\": 2,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T02-A-r2\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T05-r3",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r3\\reviewer-1\\review.json"
+    ],
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "file:///E:/Repos/Tools/procedural-game-assets/tests/PGA_AB_BENCHMARK_v1_2/organizer/unblind.mjs:14\r\nif(!review.allowedPairwiseResult.includes(verdict))throw Error('Bad pairwiseResult: '+verdict);\r\n                                 ^\r\n\r\nTypeError: Cannot read properties of undefined (reading 'includes')\r\n    at file:///E:/Repos/Tools/procedural-game-assets/tests/PGA_AB_BENCHMARK_v1_2/organizer/unblind.mjs:14:34\r\n\r\nNode.js v22.23.2\r\n"
+  },
+  {
+    "pair": "T05-r3",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T05-r3\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T05\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T05-A-r3\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T06-r3",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r3\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T06\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"NO_MEANINGFUL_DIFFERENCE\",\n  \"preferredRun\": null,\n  \"preferredRole\": null,\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T06-r3",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r3\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T06\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T06-D-r3\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T01-r3",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r3\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T01\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"NO_MEANINGFUL_DIFFERENCE\",\n  \"preferredRun\": null,\n  \"preferredRole\": null,\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T01-r3",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T01-r3\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T01\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T01-A-r3\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T02-r3",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r3\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T02\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T02-A-r3\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T02-r3",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T02-r3\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T02\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T02-A-r3\",\n  \"preferredRole\": \"candidateA\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T03-r3",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r3\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T03\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T03-A-r3\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T03-r3",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T03-r3\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T03\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T03-A-r3\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"NOT_YET\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T04-r3",
+    "reviewer": "reviewer-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r3\\reviewer-1\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T04\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-1\",\n  \"verdict\": \"Y_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T04-A-r3\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"MEDIUM\",\n  \"mirroredPeer\": \"reviewer-2\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "pair": "T04-r3",
+    "reviewer": "reviewer-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\PGA_AB_BENCHMARK_v1_2\\organizer\\unblind.mjs",
+      "--key",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r3\\key.json",
+      "--review",
+      "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T04-r3\\reviewer-2\\review.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\n  \"schema\": \"pga-unblind/1\",\n  \"task\": \"T04\",\n  \"repeat\": 3,\n  \"reviewerId\": \"reviewer-2\",\n  \"verdict\": \"X_PREFERRED\",\n  \"preferredRun\": \"E:\\\\Repos\\\\Tools\\\\procedural-game-assets\\\\tests\\\\pga-ad-host\\\\runs-v1_2\\\\T04-A-r3\",\n  \"preferredRole\": \"candidateB\",\n  \"taskFit\": {\n    \"X\": \"MEETS\",\n    \"Y\": \"MEETS\"\n  },\n  \"confidence\": \"HIGH\",\n  \"mirroredPeer\": \"reviewer-1\"\n}\n",
+    "stderr": ""
+  }
+]

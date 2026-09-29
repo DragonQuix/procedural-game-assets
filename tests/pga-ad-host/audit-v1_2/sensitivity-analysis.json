@@ -1,0 +1,2841 @@
+{
+  "A_frozen_field_rule": {
+    "summary": {
+      "A": {
+        "PASS": 17,
+        "VISUAL_DISAGREEMENT": 1
+      },
+      "D": {
+        "PASS": 14,
+        "VISUAL_DISAGREEMENT": 3,
+        "TECHNICAL_FAIL": 1
+      },
+      "visual": {
+        "A": {
+          "PASS": 17,
+          "DISAGREEMENT": 1
+        },
+        "D": {
+          "PASS": 15,
+          "DISAGREEMENT": 3
+        }
+      },
+      "pairResults": {
+        "NO_MEANINGFUL_DIFFERENCE": 2,
+        "CONSENSUS_A": 7,
+        "CONSENSUS_D": 2,
+        "MIXED": 7
+      },
+      "pairedSuccess": {
+        "bothPass": 13,
+        "AOnly": 4,
+        "DOnly": 1,
+        "neitherPass": 0
+      },
+      "byTask": {
+        "T01": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T02": {
+          "A": [
+            "PASS",
+            "VISUAL_DISAGREEMENT",
+            "PASS"
+          ],
+          "D": [
+            "VISUAL_DISAGREEMENT",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T03": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "VISUAL_DISAGREEMENT",
+            "VISUAL_DISAGREEMENT"
+          ]
+        },
+        "T04": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T05": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "TECHNICAL_FAIL",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T06": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      },
+      "statistics": {
+        "mcnemarExactTwoSided": 0.375,
+        "consensusSignExactTwoSided": 0.1796875,
+        "A_successWilson95": [
+          0.7424269921812741,
+          0.990124809021697
+        ],
+        "D_successWilson95": [
+          0.5478541568378739,
+          0.9099907189139831
+        ],
+        "A_consensusConditionalWilson95": [
+          0.45258896910698887,
+          0.9367748928821533
+        ],
+        "note": "描述性；18 pairs 嵌套于 6 tasks，独立性近似，UNVERIFIED 不等于已证失败。"
+      }
+    },
+    "matrix": [
+      {
+        "pair": "T01-r1",
+        "task": "T01",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "NO_MEANINGFUL_DIFFERENCE",
+        "pairResult": "NO_MEANINGFUL_DIFFERENCE"
+      },
+      {
+        "pair": "T02-r1",
+        "task": "T02",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T03-r1",
+        "task": "T03",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "D",
+        "pairResult": "CONSENSUS_D"
+      },
+      {
+        "pair": "T04-r1",
+        "task": "T04",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T05-r1",
+        "task": "T05",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "FAIL",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "TECHNICAL_FAIL",
+        "reviewer1": "D",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T06-r1",
+        "task": "T06",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "NO_MEANINGFUL_DIFFERENCE",
+        "pairResult": "NO_MEANINGFUL_DIFFERENCE"
+      },
+      {
+        "pair": "T03-r2",
+        "task": "T03",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T04-r2",
+        "task": "T04",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T05-r2",
+        "task": "T05",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "D",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T06-r2",
+        "task": "T06",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T01-r2",
+        "task": "T01",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "D",
+        "pairResult": "CONSENSUS_D"
+      },
+      {
+        "pair": "T02-r2",
+        "task": "T02",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "DISAGREEMENT",
+        "D_visual": "PASS",
+        "A_success": "VISUAL_DISAGREEMENT",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T05-r3",
+        "task": "T05",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T06-r3",
+        "task": "T06",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "D",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T01-r3",
+        "task": "T01",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T02-r3",
+        "task": "T02",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T03-r3",
+        "task": "T03",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T04-r3",
+        "task": "T04",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      }
+    ],
+    "rows": [
+      {
+        "run": "T01-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r1",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T03-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "TECHNICAL_FAIL",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r2",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T04-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r2",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "NOT_YET",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r3",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T04-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      }
+    ]
+  },
+  "B_animation_required": {
+    "summary": {
+      "A": {
+        "PASS": 15,
+        "UNVERIFIED": 2,
+        "VISUAL_DISAGREEMENT": 1
+      },
+      "D": {
+        "PASS": 12,
+        "VISUAL_DISAGREEMENT": 3,
+        "TECHNICAL_FAIL": 1,
+        "UNVERIFIED": 2
+      },
+      "visual": {
+        "A": {
+          "PASS": 15,
+          "UNVERIFIED": 2,
+          "DISAGREEMENT": 1
+        },
+        "D": {
+          "PASS": 13,
+          "DISAGREEMENT": 3,
+          "UNVERIFIED": 2
+        }
+      },
+      "pairResults": {
+        "NO_MEANINGFUL_DIFFERENCE": 2,
+        "CONSENSUS_A": 7,
+        "CONSENSUS_D": 2,
+        "MIXED": 5,
+        "UNVERIFIED": 2
+      },
+      "pairedSuccess": {
+        "bothPass": 11,
+        "AOnly": 4,
+        "DOnly": 1,
+        "neitherPass": 2
+      },
+      "byTask": {
+        "T01": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T02": {
+          "A": [
+            "PASS",
+            "VISUAL_DISAGREEMENT",
+            "PASS"
+          ],
+          "D": [
+            "VISUAL_DISAGREEMENT",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T03": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "VISUAL_DISAGREEMENT",
+            "VISUAL_DISAGREEMENT"
+          ]
+        },
+        "T04": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T05": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "TECHNICAL_FAIL",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T06": {
+          "A": [
+            "PASS",
+            "UNVERIFIED",
+            "UNVERIFIED"
+          ],
+          "D": [
+            "PASS",
+            "UNVERIFIED",
+            "UNVERIFIED"
+          ]
+        }
+      },
+      "statistics": {
+        "mcnemarExactTwoSided": 0.375,
+        "consensusSignExactTwoSided": 0.1796875,
+        "A_successWilson95": [
+          0.6077796189608428,
+          0.9416342319413856
+        ],
+        "D_successWilson95": [
+          0.43749467295945105,
+          0.837212252491663
+        ],
+        "A_consensusConditionalWilson95": [
+          0.45258896910698887,
+          0.9367748928821533
+        ],
+        "note": "描述性；18 pairs 嵌套于 6 tasks，独立性近似，UNVERIFIED 不等于已证失败。"
+      }
+    },
+    "matrix": [
+      {
+        "pair": "T01-r1",
+        "task": "T01",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "NO_MEANINGFUL_DIFFERENCE",
+        "pairResult": "NO_MEANINGFUL_DIFFERENCE"
+      },
+      {
+        "pair": "T02-r1",
+        "task": "T02",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T03-r1",
+        "task": "T03",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "D",
+        "pairResult": "CONSENSUS_D"
+      },
+      {
+        "pair": "T04-r1",
+        "task": "T04",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T05-r1",
+        "task": "T05",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "FAIL",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "TECHNICAL_FAIL",
+        "reviewer1": "D",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T06-r1",
+        "task": "T06",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "NO_MEANINGFUL_DIFFERENCE",
+        "pairResult": "NO_MEANINGFUL_DIFFERENCE"
+      },
+      {
+        "pair": "T03-r2",
+        "task": "T03",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T04-r2",
+        "task": "T04",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T05-r2",
+        "task": "T05",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "D",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T06-r2",
+        "task": "T06",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "UNVERIFIED",
+        "D_visual": "UNVERIFIED",
+        "A_success": "UNVERIFIED",
+        "D_success": "UNVERIFIED",
+        "reviewer1": "UNVERIFIED",
+        "reviewer2": "UNVERIFIED",
+        "pairResult": "UNVERIFIED"
+      },
+      {
+        "pair": "T01-r2",
+        "task": "T01",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "D",
+        "pairResult": "CONSENSUS_D"
+      },
+      {
+        "pair": "T02-r2",
+        "task": "T02",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "DISAGREEMENT",
+        "D_visual": "PASS",
+        "A_success": "VISUAL_DISAGREEMENT",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T05-r3",
+        "task": "T05",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T06-r3",
+        "task": "T06",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "UNVERIFIED",
+        "D_visual": "UNVERIFIED",
+        "A_success": "UNVERIFIED",
+        "D_success": "UNVERIFIED",
+        "reviewer1": "UNVERIFIED",
+        "reviewer2": "D",
+        "pairResult": "UNVERIFIED"
+      },
+      {
+        "pair": "T01-r3",
+        "task": "T01",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T02-r3",
+        "task": "T02",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T03-r3",
+        "task": "T03",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T04-r3",
+        "task": "T04",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      }
+    ],
+    "rows": [
+      {
+        "run": "T01-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r1",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T03-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "TECHNICAL_FAIL",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r2",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T04-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r2",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "UNVERIFIED"
+        ]
+      },
+      {
+        "run": "T06-D-r2",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "UNVERIFIED"
+        ]
+      },
+      {
+        "run": "T01-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r2",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "NOT_YET",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r3",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r3",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r3",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T04-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      }
+    ]
+  },
+  "fallback_strict": {
+    "summary": {
+      "A": {
+        "PASS": 15,
+        "UNVERIFIED": 2,
+        "VISUAL_DISAGREEMENT": 1
+      },
+      "D": {
+        "PASS": 13,
+        "VISUAL_DISAGREEMENT": 3,
+        "TECHNICAL_FAIL": 1,
+        "UNVERIFIED": 1
+      },
+      "visual": {
+        "A": {
+          "PASS": 15,
+          "UNVERIFIED": 2,
+          "DISAGREEMENT": 1
+        },
+        "D": {
+          "PASS": 13,
+          "DISAGREEMENT": 3,
+          "UNVERIFIED": 2
+        }
+      },
+      "pairResults": {
+        "NO_MEANINGFUL_DIFFERENCE": 2,
+        "CONSENSUS_A": 6,
+        "CONSENSUS_D": 2,
+        "MIXED": 6,
+        "UNVERIFIED": 2
+      },
+      "pairedSuccess": {
+        "bothPass": 12,
+        "AOnly": 3,
+        "DOnly": 1,
+        "neitherPass": 2
+      },
+      "byTask": {
+        "T01": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T02": {
+          "A": [
+            "PASS",
+            "VISUAL_DISAGREEMENT",
+            "PASS"
+          ],
+          "D": [
+            "VISUAL_DISAGREEMENT",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T03": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "VISUAL_DISAGREEMENT",
+            "VISUAL_DISAGREEMENT"
+          ]
+        },
+        "T04": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T05": {
+          "A": [
+            "UNVERIFIED",
+            "PASS",
+            "UNVERIFIED"
+          ],
+          "D": [
+            "TECHNICAL_FAIL",
+            "PASS",
+            "UNVERIFIED"
+          ]
+        },
+        "T06": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        }
+      },
+      "statistics": {
+        "mcnemarExactTwoSided": 0.625,
+        "consensusSignExactTwoSided": 0.2890625,
+        "A_successWilson95": [
+          0.6077796189608428,
+          0.9416342319413856
+        ],
+        "D_successWilson95": [
+          0.4912734343970254,
+          0.8750024662044601
+        ],
+        "A_consensusConditionalWilson95": [
+          0.40927543031016883,
+          0.9285207872478909
+        ],
+        "note": "描述性；18 pairs 嵌套于 6 tasks，独立性近似，UNVERIFIED 不等于已证失败。"
+      }
+    },
+    "matrix": [
+      {
+        "pair": "T01-r1",
+        "task": "T01",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "NO_MEANINGFUL_DIFFERENCE",
+        "pairResult": "NO_MEANINGFUL_DIFFERENCE"
+      },
+      {
+        "pair": "T02-r1",
+        "task": "T02",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T03-r1",
+        "task": "T03",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "D",
+        "pairResult": "CONSENSUS_D"
+      },
+      {
+        "pair": "T04-r1",
+        "task": "T04",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T05-r1",
+        "task": "T05",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "FAIL",
+        "A_visual": "UNVERIFIED",
+        "D_visual": "UNVERIFIED",
+        "A_success": "UNVERIFIED",
+        "D_success": "TECHNICAL_FAIL",
+        "reviewer1": "D",
+        "reviewer2": "UNVERIFIED",
+        "pairResult": "UNVERIFIED"
+      },
+      {
+        "pair": "T06-r1",
+        "task": "T06",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "NO_MEANINGFUL_DIFFERENCE",
+        "pairResult": "NO_MEANINGFUL_DIFFERENCE"
+      },
+      {
+        "pair": "T03-r2",
+        "task": "T03",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T04-r2",
+        "task": "T04",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T05-r2",
+        "task": "T05",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "D",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T06-r2",
+        "task": "T06",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T01-r2",
+        "task": "T01",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "D",
+        "pairResult": "CONSENSUS_D"
+      },
+      {
+        "pair": "T02-r2",
+        "task": "T02",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "DISAGREEMENT",
+        "D_visual": "PASS",
+        "A_success": "VISUAL_DISAGREEMENT",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T05-r3",
+        "task": "T05",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "UNVERIFIED",
+        "D_visual": "UNVERIFIED",
+        "A_success": "UNVERIFIED",
+        "D_success": "UNVERIFIED",
+        "reviewer1": "UNVERIFIED",
+        "reviewer2": "A",
+        "pairResult": "UNVERIFIED"
+      },
+      {
+        "pair": "T06-r3",
+        "task": "T06",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "D",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T01-r3",
+        "task": "T01",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T02-r3",
+        "task": "T02",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T03-r3",
+        "task": "T03",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T04-r3",
+        "task": "T04",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      }
+    ],
+    "rows": [
+      {
+        "run": "T01-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r1",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T03-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r1",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "MEETS",
+          "UNVERIFIED"
+        ]
+      },
+      {
+        "run": "T05-D-r1",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "TECHNICAL_FAIL",
+        "reviewerFits": [
+          "MEETS",
+          "UNVERIFIED"
+        ]
+      },
+      {
+        "run": "T06-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r2",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T04-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r2",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "NOT_YET",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r3",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r3",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r3",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T04-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      }
+    ]
+  },
+  "animation_and_fallback_strict": {
+    "summary": {
+      "A": {
+        "PASS": 13,
+        "UNVERIFIED": 4,
+        "VISUAL_DISAGREEMENT": 1
+      },
+      "D": {
+        "PASS": 11,
+        "VISUAL_DISAGREEMENT": 3,
+        "TECHNICAL_FAIL": 1,
+        "UNVERIFIED": 3
+      },
+      "visual": {
+        "A": {
+          "PASS": 13,
+          "UNVERIFIED": 4,
+          "DISAGREEMENT": 1
+        },
+        "D": {
+          "PASS": 11,
+          "DISAGREEMENT": 3,
+          "UNVERIFIED": 4
+        }
+      },
+      "pairResults": {
+        "NO_MEANINGFUL_DIFFERENCE": 2,
+        "CONSENSUS_A": 6,
+        "CONSENSUS_D": 2,
+        "MIXED": 4,
+        "UNVERIFIED": 4
+      },
+      "pairedSuccess": {
+        "bothPass": 10,
+        "AOnly": 3,
+        "DOnly": 1,
+        "neitherPass": 4
+      },
+      "byTask": {
+        "T01": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T02": {
+          "A": [
+            "PASS",
+            "VISUAL_DISAGREEMENT",
+            "PASS"
+          ],
+          "D": [
+            "VISUAL_DISAGREEMENT",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T03": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "VISUAL_DISAGREEMENT",
+            "VISUAL_DISAGREEMENT"
+          ]
+        },
+        "T04": {
+          "A": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ],
+          "D": [
+            "PASS",
+            "PASS",
+            "PASS"
+          ]
+        },
+        "T05": {
+          "A": [
+            "UNVERIFIED",
+            "PASS",
+            "UNVERIFIED"
+          ],
+          "D": [
+            "TECHNICAL_FAIL",
+            "PASS",
+            "UNVERIFIED"
+          ]
+        },
+        "T06": {
+          "A": [
+            "PASS",
+            "UNVERIFIED",
+            "UNVERIFIED"
+          ],
+          "D": [
+            "PASS",
+            "UNVERIFIED",
+            "UNVERIFIED"
+          ]
+        }
+      },
+      "statistics": {
+        "mcnemarExactTwoSided": 0.625,
+        "consensusSignExactTwoSided": 0.2890625,
+        "A_successWilson95": [
+          0.4912734343970254,
+          0.8750024662044601
+        ],
+        "D_successWilson95": [
+          0.3861904160223791,
+          0.7969475342783638
+        ],
+        "A_consensusConditionalWilson95": [
+          0.40927543031016883,
+          0.9285207872478909
+        ],
+        "note": "描述性；18 pairs 嵌套于 6 tasks，独立性近似，UNVERIFIED 不等于已证失败。"
+      }
+    },
+    "matrix": [
+      {
+        "pair": "T01-r1",
+        "task": "T01",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "NO_MEANINGFUL_DIFFERENCE",
+        "pairResult": "NO_MEANINGFUL_DIFFERENCE"
+      },
+      {
+        "pair": "T02-r1",
+        "task": "T02",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T03-r1",
+        "task": "T03",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "D",
+        "pairResult": "CONSENSUS_D"
+      },
+      {
+        "pair": "T04-r1",
+        "task": "T04",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T05-r1",
+        "task": "T05",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "FAIL",
+        "A_visual": "UNVERIFIED",
+        "D_visual": "UNVERIFIED",
+        "A_success": "UNVERIFIED",
+        "D_success": "TECHNICAL_FAIL",
+        "reviewer1": "D",
+        "reviewer2": "UNVERIFIED",
+        "pairResult": "UNVERIFIED"
+      },
+      {
+        "pair": "T06-r1",
+        "task": "T06",
+        "repeat": 1,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "NO_MEANINGFUL_DIFFERENCE",
+        "pairResult": "NO_MEANINGFUL_DIFFERENCE"
+      },
+      {
+        "pair": "T03-r2",
+        "task": "T03",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T04-r2",
+        "task": "T04",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T05-r2",
+        "task": "T05",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "D",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T06-r2",
+        "task": "T06",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "UNVERIFIED",
+        "D_visual": "UNVERIFIED",
+        "A_success": "UNVERIFIED",
+        "D_success": "UNVERIFIED",
+        "reviewer1": "UNVERIFIED",
+        "reviewer2": "UNVERIFIED",
+        "pairResult": "UNVERIFIED"
+      },
+      {
+        "pair": "T01-r2",
+        "task": "T01",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "D",
+        "pairResult": "CONSENSUS_D"
+      },
+      {
+        "pair": "T02-r2",
+        "task": "T02",
+        "repeat": 2,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "DISAGREEMENT",
+        "D_visual": "PASS",
+        "A_success": "VISUAL_DISAGREEMENT",
+        "D_success": "PASS",
+        "reviewer1": "D",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T05-r3",
+        "task": "T05",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "UNVERIFIED",
+        "D_visual": "UNVERIFIED",
+        "A_success": "UNVERIFIED",
+        "D_success": "UNVERIFIED",
+        "reviewer1": "UNVERIFIED",
+        "reviewer2": "A",
+        "pairResult": "UNVERIFIED"
+      },
+      {
+        "pair": "T06-r3",
+        "task": "T06",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "UNVERIFIED",
+        "D_visual": "UNVERIFIED",
+        "A_success": "UNVERIFIED",
+        "D_success": "UNVERIFIED",
+        "reviewer1": "UNVERIFIED",
+        "reviewer2": "D",
+        "pairResult": "UNVERIFIED"
+      },
+      {
+        "pair": "T01-r3",
+        "task": "T01",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "NO_MEANINGFUL_DIFFERENCE",
+        "reviewer2": "A",
+        "pairResult": "MIXED"
+      },
+      {
+        "pair": "T02-r3",
+        "task": "T02",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T03-r3",
+        "task": "T03",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "DISAGREEMENT",
+        "A_success": "PASS",
+        "D_success": "VISUAL_DISAGREEMENT",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      },
+      {
+        "pair": "T04-r3",
+        "task": "T04",
+        "repeat": 3,
+        "A_technical": "PASS",
+        "D_technical": "PASS",
+        "A_visual": "PASS",
+        "D_visual": "PASS",
+        "A_success": "PASS",
+        "D_success": "PASS",
+        "reviewer1": "A",
+        "reviewer2": "A",
+        "pairResult": "CONSENSUS_A"
+      }
+    ],
+    "rows": [
+      {
+        "run": "T01-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r1",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T03-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r1",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "MEETS",
+          "UNVERIFIED"
+        ]
+      },
+      {
+        "run": "T05-D-r1",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "TECHNICAL_FAIL",
+        "reviewerFits": [
+          "MEETS",
+          "UNVERIFIED"
+        ]
+      },
+      {
+        "run": "T06-A-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r1",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r2",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T04-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r2",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "UNVERIFIED"
+        ]
+      },
+      {
+        "run": "T06-D-r2",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "UNVERIFIED"
+        ]
+      },
+      {
+        "run": "T01-A-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r2",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "NOT_YET",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r2",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-A-r3",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T05-D-r3",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-A-r3",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T06-D-r3",
+        "visual": "UNVERIFIED",
+        "taskSuccess": "UNVERIFIED",
+        "reviewerFits": [
+          "UNVERIFIED",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T01-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T02-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T03-D-r3",
+        "visual": "DISAGREEMENT",
+        "taskSuccess": "VISUAL_DISAGREEMENT",
+        "reviewerFits": [
+          "MEETS",
+          "NOT_YET"
+        ]
+      },
+      {
+        "run": "T04-A-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      },
+      {
+        "run": "T04-D-r3",
+        "visual": "PASS",
+        "taskSuccess": "PASS",
+        "reviewerFits": [
+          "MEETS",
+          "MEETS"
+        ]
+      }
+    ]
+  }
+}

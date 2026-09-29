@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
+const out=path.dirname(fileURLToPath(import.meta.url)),repo=path.resolve(out,'../../..');
+const j=n=>JSON.parse(fs.readFileSync(path.join(out,n),'utf8'));
+const a=j('audit-results.json'),f=j('freeze-checks.json'),s=j('sensitivity-analysis.json'),c=j('candidate-and-revision-audit.json'),u=j('frozen-unblind-replay.json'),t=j('t05-d-r1-coordinates.json')[0],inv=j('initial-experiment-inventory.json');
+const checks=[];
+function test(name,fn){fn();checks.push({name,pass:true});}
+test('36 distinct slots',()=>assert.equal(new Set(a.rows.map(r=>r.run)).size,36));
+test('complete slot mapping',()=>assert.deepEqual([...f.expectedSlots].sort(),[...f.observedSlots].sort()));
+test('all frozen checks',()=>assert.equal(f.failures.length,0));
+test('35/1 technical',()=>assert.deepEqual(a.technical,{PASS:35,FAIL:1}));
+test('no rebuild discrepancies',()=>assert(a.rows.every(r=>r.deterministic&&r.submittedEqualsRebuild&&r.technicalFrameAgreement&&r.submissionHashMatches)));
+test('all candidate identities and protections',()=>assert(c.candidates.every(r=>r.docMatches&&r.idMatches&&r.renderHashMatches&&r.checksMatch)));
+test('all revision derivations',()=>assert(c.revisions.every(r=>r.docMatches&&r.renderHashMatches)));
+test('original primary and pairs reproduced',()=>assert(a.comparison.primary&&a.comparison.pairs&&!a.comparison.rowDifferences.length));
+test('13/4/1/0 success matrix',()=>assert.deepEqual(s.A_frozen_field_rule.summary.pairedSuccess,{bothPass:13,AOnly:4,DOnly:1,neitherPass:0}));
+test('animation sensitivity 15/12',()=>{assert.equal(s.B_animation_required.summary.A.PASS,15);assert.equal(s.B_animation_required.summary.D.PASS,12);});
+test('fallback sensitivity 15/13',()=>{assert.equal(s.fallback_strict.summary.A.PASS,15);assert.equal(s.fallback_strict.summary.D.PASS,13);});
+test('exactly two original parser rejections',()=>assert.deepEqual(u.filter(r=>r.exitCode!==0).map(r=>r.pair+'/'+r.reviewer),['T05-r1/reviewer-2','T05-r3/reviewer-1']));
+test('all 27 violation coordinates',()=>assert.deepEqual(t.outside.map(p=>[p.x,p.y]),Array.from({length:27},(_,i)=>[i+7,38])));
+test('T02 only repeats 1 and 3 rejected',()=>assert.deepEqual([...new Set(c.candidates.filter(r=>r.status==='REJECTED').map(r=>r.run))].sort(),['T02-D-r1','T02-D-r3']));
+const changed=[];for(const x of inv){if(!fs.existsSync(x.path)||crypto.createHash('sha256').update(fs.readFileSync(x.path)).digest('hex')!==x.sha256)changed.push(x.path);}
+test('all original input bytes preserved',()=>assert.deepEqual(changed,[]));
+const diff=execFileSync('git',['diff','--stat'],{cwd:repo,encoding:'utf8'}).trim();
+test('no tracked source modifications',()=>assert.equal(diff,''));
+const result={checks,checkCount:checks.length,frozenChecks:f.checks.length,originalFilesChecked:inv.length,originalBytesChanged:changed,sourceModified:false,candidates:c.candidates.length,revisions:c.revisions.length,gitStatus:execFileSync('git',['status','--short'],{cwd:repo,encoding:'utf8'}),note:'自检验证计算与不可变输入，不补齐缺失的宿主协议/看图证据。'};
+fs.writeFileSync(path.join(out,'validation.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));

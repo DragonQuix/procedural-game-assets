@@ -6,7 +6,8 @@
 事实来源：`tests/pga-ad-host/audit-v1_2/audit-report.md`、`audit-results.json`、
 `complete-tables.md`、`sensitivity-analysis.json`；根因证据为
 `t05-d-r1-coordinates.json`、`t05-d-r1-reconstruction.json`。
-这些审计文件在接手时为用户已有未跟踪文件，本轮只读，不代为提交。
+这些审计文件在接手时为用户已有未跟踪文件，v1.3 实现期间只读保留。
+后续按用户的提交与推送要求原样入库；没有重算或改写审计结论及冻结数据。
 
 | 解释口径 | A taskSuccess | D taskSuccess |
 |---|---|---|

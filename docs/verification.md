@@ -8,7 +8,8 @@
 
 依据：`CONTEXT.md`、ADR-0012、`plans/studio-v1_3-delivery.md`。v1.2 终审的正式解释已归档于
 `experiments/pga-ab-v1_2-final-audited.md`，原始 scored/review/key/technical/preregistration/manifest
-没有改写；接手时用户已有未跟踪的审计/评估目录仍保持未跟踪。
+没有改写；接手时用户已有未跟踪的审计/评估资料在实现期间只读保留，
+后续按用户要求分为评估/冻结资料与终审证据两个原子提交原样入库。
 
 | 实际命令/范围 | 结果 |
 |---|---|

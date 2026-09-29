@@ -1,0 +1,1665 @@
+[
+  {
+    "role": "participant",
+    "id": "T01-A-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "每次候选：改 `candidate.mjs` 中 relay.side 组件的色阶（结构与 bevel 映射不变）→ `node run.mjs render` → 实际查看 dark/light 4x PNG → 比较决定。",
+      "提交前把 `candidate.mjs` 恢复为该版本后执行 `node run.mjs submit`，成功写入 `final/`，artifactHash 与 state-003 完全一致（2fd9ac2f1b1f3b9a24185ac00a68d2252b49d192318eb29a9dcb4b157d250a2e，确定性重渲染）。已实际查看 `final/relay.dark.png`、`final/relay.light.png`、`final/relay.native.png` 确认与所选候选一致。锚点 (20,33) 与附件点 screenCenter (16,15) 与基线 asset.json 相同；透明度未改（不涉及 alpha 变化，diff 仅限 mask 内 RGB/RGBA 相同通道内变化）。",
+      "## 实际查看过的图片（图像读取工具，全部取得真实图像内容）",
+      "## 工具错误与外部干预",
+      "- 工具错误：无。`node run.mjs render`（4 次）与 `node run.mjs submit`（1 次）全部成功。",
+      "## 未验证事项（UNVERIFIED）",
+      "- UNVERIFIED：\"主屏幕比侧板更先被注意到\"是单一观察者对 4 倍图的主观视觉判断，未做多人大样本盲评或眼动验证。",
+      "- UNVERIFIED：最终美术通过与否待主持人/盲审判定；技术像素保护通过不等于美术通过。",
+      "- 播放项：本资产 clips 为空（单帧静态 prop），无动画可实际播放；不是播放失败，而是没有播放项。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T01-D-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "- 起始问题（实际查看 `input/baseline/relay.native.png` 与 `studio/relay.display.png` 后确认）：右侧琥珀条使用共享 amber 色阶（`#4a3410/#9c7420/#ffb13d/#ffe08a`）+ bevel-metal，其亮部 `#ffb13d`、`#ffe08a` 在亮度和饱和度上都压过主屏幕的暗青色矩阵，第一眼落在侧板而不是屏幕。",
+      "## 实际查看过的图像",
+      "## 工具错误与干预",
+      "- 无其他工具错误；无宿主或人工干预；未遇到 TOOL_BLOCKED。",
+      "- 本任务为静帧道具，无动画，无\"播放\"验证项；锚点（20,33）与附件点（screenCenter 16,15）由工具约束保证未变（inspect 声明 + commit 保护检查 OK），我未另行做像素级逐点比对全帧 RGBA（工具的 allowed-mask 保护检查是唯一合规依据，任务判据以工具检查为准）。",
+      "- \"正常 4 倍显示下屏幕更先被注意\"是基于实际查看 4 倍候选图与基准图的主观美术判断，非仪器测量。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T02-A-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 播放检查",
+      "本资产为单帧 prop，无 clips（起始即无动画），viewer 无可播放动画。动画播放记 UNVERIFIED（不适用单帧静态资产，无法执行播放验证）。",
+      "## 工具错误与外部干预",
+      "- 无工具错误。`node run.mjs render` 三次均成功。",
+      "- 动画播放：资产无 clips，播放验证不适用/UNVERIFIED。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T02-D-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "候选 1（w=24）：任务要求\"稳定、厚实\"。24 宽是保护检查允许下最接近底座宽度（26）的居中方案，底座保留 1px 台阶感读作坚实底脚；镜头（中心 x=20）与徽标（中心 x=20）在加宽后仍居中，无遮挡。候选 5（w=22）同样合法但体量感略弱。候选 2/3/4 证明改 y/h 会破坏底座保护区，故保持 y=5, h=24。最终 r2 在深/浅背景与原生尺寸下实际查看：轮廓明确、比例稳重、画面不拥塞（左右各留 8px），镜头清晰。",
+      "## 实际查看过的图像",
+      "- 引擎行为观察（3 次复现，未绕过、未修工具）：对 `hauler.shell` 的任何 y/h 修改（即使保持底边 y=29 不变）会在受保护的 `hauler.base` 区域产生 23-24 个变化像素并被拒（c-d43b3ec7、c-d9be8a96、c-ae203a8c）；仅改 x/w 则通过。该行为把可行解限制为\"只改宽度\"。机制未从源码验证，标 UNVERIFIED。",
+      "- y/h 修改导致基座像素变化的渲染机制成因：UNVERIFIED（仅凭三次拒绝结果与被拒图归纳）。",
+      "- 本任务为 prop 类静帧资产，无动画播放项；TASK 未要求播放，角色播放要求不适用。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T03-A-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图片",
+      "- 剪辑：`clips: {}`，prop 资产与基线相同，无可播放动画，故无播放验证项（非角色任务）",
+      "- 美术判据为自评：三判据（明暗关系、主次、双尺寸干净）均基于本人对渲染图的实际查看，无宿主或第三方盲审结论。",
+      "- 未做放大倍率以外的显示环境测试；未统计 token/费用（无宿主统计，不编造）；用时未精确记录（UNVERIFIED）。",
+      "## 工具错误与外部干预",
+      "- 无工具错误（4 次 `node run.mjs render` 全部成功，logs/events.jsonl 无 error 记录）。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T03-D-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "| 1 | c-35497718 | r1 | material.set cutter.jaw → shade-diag | 接受 → r2。夹口出现 27px 受光带 + 基色本体，方向成立但对比仍弱（预览已实际查看） |",
+      "| 2 | c-59f3cd42 | r2 | ramp.set cutter.handle → quiet（#3b4858 基色，flat） | 接受 → r3。手柄变深沉，主次分离（预览已实际查看） |",
+      "| 3 | c-69376831 | r3 | explore ramp.set cutter.jaw 局部覆盖 高对比档 body #3f4959 / lit #a2afc4 | 拒绝。本体与手柄色几乎合并，只靠亮边区分，金属\"体量感\"弱（预览已实际查看） |",
+      "| 4 | c-7a950a54 | r3 | explore ramp.set cutter.jaw 局部覆盖 中对比档 body #454f5f / lit #94a2b8 | **接受 → r4（最终）**（预览已实际查看） |",
+      "| 5 | c-a2f5058c | r3 | explore ramp.set cutter.jaw 局部覆盖 低对比档 body #4d5868 / lit #8a96ac | 拒绝。方向关系偏弱，不如中对比档明确（预览已实际查看） |",
+      "- 原生尺寸与 4 倍（深背景 #202028 / 浅背景 #d6d8dc）均实际查看：色块干净，无碎点、无噪点。",
+      "## 实际查看过的图片清单",
+      "- 角色动画播放不适用：本资产为静态 prop（单帧，无 clips），无需播放验证。",
+      "- 未编造 token、费用或用时：宿主未提供该统计，全部 UNVERIFIED。",
+      "## 工具错误与外部干预",
+      "- 无工具错误；所有 studio/render/submit 调用退出码 0。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T04-A-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "修改前实际查看的起始图：",
+      "遮罩确认：用只读脚本解析 `input/allowed-mask.medkit.bin`（40x36 最终导出帧坐标，含 1px 外描边），允许区为 x 13..25、y 13..23（143 像素），与 `input/TASK.md` 及 `input/task.json` 的 allowedRectangles [13,13,13,11] 一致；并实际查看 `input/allowed-mask.medkit.png` 与 `input/allowed-mask.medkit.4x.png` 确认白色区域位置。换算到 38x34 绘图画布为 x 12..24、y 12..22。",
+      "## 未验证 / UNVERIFIED",
+      "- 美术判据为本人按 STYLE_GUIDE 与 TASK.md 判据作出的看图判断，未经独立盲审；\"能让人联想到急救\"的人群层面效果 UNVERIFIED。",
+      "- 本资产为单帧静态 prop，无可播放动画；PROMPT 中\"角色任务要实际播放\"一条不适用（非角色）。viewer.html 未做交互操作检查（仅由主持人流水线生成）。",
+      "## 工具错误与外部干预",
+      "## 实际查看过的图片清单"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T04-D-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图像",
+      "## 工具错误与外部干预",
+      "- 无工具错误；所有 studio edit/explore/commit、render、submit 调用一次成功，无 TOOL_BLOCKED。",
+      "- 本资产为单帧静态 prop，无动画可播放；不适用播放验证。",
+      "- \"心形能否让评分者联想到急救/医疗\"是美术判断：在 4 倍显示尺度下我判断可读且达意，但因单 poly 8 顶点的硬约束无法做出标准\"+\"字，这是本工具能力下取舍后的最优方向，未经过宿主侧人工盲审验证（UNVERIFIED）。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T05-A-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图片（全部为视觉读取，非推断）",
+      "- 播放验证：本资产为静态单帧（clips 为空），无动画可播，播放检查不适用（N/A）。",
+      "## 工具错误与外部干预",
+      "- 无渲染/提交工具错误。一次非工具性流程问题：首次用 Write 覆盖 candidate.mjs 被拒（文件此前仅经 FastCtx 读取），按先 Read 后 Write 完成改写，无影响。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T05-D-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图像文件清单",
+      "- 焦点与明暗：琥珀灯盘（rx4、shade-diag）是唯一高饱和焦点；电池用 screen 青色小面积区分功能（steel 对照版与机身混在一起，被拒绝）；机身/底座保持 steel bevel-metal，立杆 quiet 压暗作连接件。原生与 4×、深浅两背景均实际查看，完成度可接受。",
+      "## 工具错误",
+      "无其他工具错误；无外部干预；未绕过引擎直接改 revision/candidate/head/图像；未修改 run.mjs、_runner、input、common、run.json、日志。",
+      "- 本任务为静态 prop，无动画播放项；不适用。",
+      "- 美术判据为主观评估：我基于实际查看的图认定达标，但\"轮廓可读/完成度\"无客观分，UNVERIFIED（评分属主持人）。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T06-A-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "UNVERIFIED",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "T06：守卫目镜在待机与六帧跑动中为低对比灰色（V `#53616d` 主体 + E `#87939d` 单像素高光）。实际查看起始图后确认的问题：",
+      "## 实际查看过的图片",
+      "## 未验证事项（UNVERIFIED）",
+      "- 动画实际播放：UNVERIFIED。尝试用本地浏览器打开 `viewer.html` 播放 run_fwd，但本执行环境报 \"Browser is not available in subagent\"，无法实际播放。替代证据（静态）：七帧除 8 个目镜像素外与 baseline 逐字节一致（动作与 baseline 完全相同），且七帧目镜颜色、位置恒定（run0/run3 头部位移为起始既有一致行为），故\"播放时颜色、身份、动作一致\"在像素层面成立，但未经过真实播放确认，按规则记 UNVERIFIED。",
+      "## 工具错误与干预",
+      "- 浏览器播放尝试失败：\"Browser is not available in subagent\"（如上，记 UNVERIFIED）。为播放尝试曾启动仅本机的临时静态服务（端口 8477），未实际使用即已终止（job j-1c9wgj killed），端口与进程已清理。",
+      "- 无其他工具错误；无外部人工干预。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T06-D-r1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "UNVERIFIED",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图像",
+      "- 七帧目镜清晰、统一暖琥珀、与角色协调：已逐帧实际查看（深背景 7 帧全查，浅背景查 stand/run0/run3），通过。",
+      "- 实际播放：播放项 UNVERIFIED（未在浏览器实际播放 player.html）。补偿性证据：7 帧逐帧静态核对，颜色、身份（头型/盔甲/枪械/姿态）逐帧一致，姿态与剪辑本身未被修改。",
+      "- 动画实际播放（运动项）UNVERIFIED，理由如上。",
+      "## 工具错误与干预"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T03-A-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "只改 `candidate.mjs`（A 组直接代码编辑）：几何多边形顶点、bolt 组件、`assembleFrame`（outline/anchor/attachments）与 `assembleAsset` 全部保持原样；新增 `shadeMetal()` 仅重着色仍为起始平灰的像素（按构造等于允许修改集），配色为同族冷灰、单一顶部偏左光源。每轮 `node run.mjs render` 后用 Read 工具实际查看 native/dark/light PNG。",
+      "## 实际查看过的图片清单（Read 工具逐张打开）",
+      "未打开 viewer.html（同帧数据的 PNG 已逐张查看）；无动画 clip（clips 为空），“角色任务实际播放”一项对本静态 prop 不适用。",
+      "## 未验证事项（UNKNOWN / UNVERIFIED）",
+      "- 美术判据满足度为本人对照判据的自评，UNVERIFIED 为客观评分；技术合规已用像素脚本验证。",
+      "- viewer.html 的交互播放未人工点开（无浏览器操作），相关结论仅基于导出 PNG 与确定性哈希。",
+      "## 工具错误记录（均未消耗渲染候选）"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T03-D-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "- 实际查看 `input/baseline/cutter.native.png`（32x32 原生）与 `studio/cutter.display.png`（128x128 4倍）：一把左下-右上走向的工业夹具，手柄与夹口同为单一平涂 `#49525f`（钢色阶 base），无明暗分区，材质层次不清；左下有琥珀色铆钉（9px，受像素保护）。",
+      "- 另实际查看 `input/allowed-mask.cutter.4x.png`：白色允许区为工具轮廓内部，铆钉处留黑。",
+      "1. `c-35497718`（base r1）：`material.set cutter.jaw shade-diag`。27px 变化，全部在夹口包围盒内，保护检查 OK。实际查看 display 图：夹口左上侧出现受光带 `#707b8d`，其余保持基色 `#49525f`，对角分界干净。已 commit → r2。备注：夹口像素的 t 范围（约 0.26–0.74）只落入受光/基色两带，故无高光/阴影像素；轮廓暗边承担阴影侧，明暗方向一致（左上受光）。",
+      "2. `c-59f3cd42`（base r2）：`ramp.set cutter.handle quiet`（基色 `#3b4858`，同族冷灰、更暗更沉）。55px 变化，0 越界，保护 OK。实际查看 display 图：手柄明显退居次要，夹口主导；色彩计数仅剩钢色两带 + quiet 基色 + 琥珀 9px + 轮廓，无碎色。已 commit → r3（最终选择）。",
+      "3. `c-eb1ea6b6`（base r3，未提交）：`material.set cutter.handle shade-diag`（quiet 手柄加对角分带）。仅 1px 变化：(15,13) `#3b4858`→`#536276`，为 jaw-手柄交界处的孤立亮点。实际查看 display 图上肉眼几乎不可辨；按像素证据与风格指南\"不靠碎点\"判为随机亮点风险，拒绝。head 保持 r3。",
+      "- 原生 32x32 与 4x 预览均实际查看：深背景 `#202028` 与浅背景 `#d6d8dc` 下轮廓干净、无碎点。",
+      "## 实际查看过的图片（以视觉输入打开）",
+      "## 工具错误",
+      "- 无其他工具错误；无外部干预；未修改 run.mjs、_runner、input、common、initial.studio.json、修订文档、candidate 记录、head、约束、toolkit 或图像；未删除任何失败轨迹。",
+      "- 本任务为 prop 静态资产，无动画播放项；\"角色任务要实际播放\"不适用。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T04-A-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图片",
+      "- \"让人联想到急救/医疗\"是视觉判据，以上为本人看图判断，未经第三方盲评（UNVERIFIED 主观维度）。",
+      "- 本资产为单帧静态 prop，无动画剪辑，故无需播放验证；\"角色任务要实际播放\"不适用。",
+      "## 工具错误与外部干预",
+      "- 无工具错误。`node run.mjs render` 两次均成功，`submit` 成功。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T04-D-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图像",
+      "## 未验证 / 限制（UNKNOWN / UNVERIFIED）",
+      "- UNVERIFIED：心形相对十字在\"急救/医疗联想\"上的判分优劣，无宿主评分，不作断言。",
+      "## 工具错误与外部干预",
+      "- 无工具错误。所有 studio/render/submit 调用返回 ok。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T05-A-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图片清单",
+      "说明：state-001 未逐张查看，其 assetHash 与基线哈希一致（`e67dd747…`），像素等同已实际查看过的起始图；`previews/state-003/beacon.native.png` 与 `previews/state-004/beacon.light.png` 未单独查看（当轮以另一背景/native 判定，最终所选 state-005 已三版本全看）。`final/` 下输出经字节比对与 state-005 完全一致（确定性重渲染，不算新状态）。",
+      "- 本任务为单帧 prop，`clips` 为空，无动画可播放；\"角色任务要实际播放\"不适用，播放项记 N/A 而非 UNVERIFIED。",
+      "## 工具错误与外部干预",
+      "- 工具错误：无。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T05-D-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "T05：用五个既有部件（beacon.base / body / mast / light / battery）重组便携救援信标。修改前实际查看了起始原生图 `input/baseline/beacon.native.png` 与 4 倍显示图 `studio/beacon.display.png`。起始问题：信号灯（琥珀圆盘）偏在左上角、未居中；立杆像偏离中线的烟囱并压在机身上；电池整块嵌进机身右侧、读不出独立部件；机身 24×18 过大不像可携带；底座虽有但整体是散落零件的堆叠。",
+      "## 实际查看过的图像（Read 工具以视觉输入打开）",
+      "- 本资产为单帧静态 prop，无 clips/attachments，动画播放不适用。",
+      "- 无宿主统计，token、费用与精确用时未记录（UNVERIFIED），不编造。",
+      "- 工具错误：无。外部干预：无。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T06-A-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "SELF_REPORTED_WITH_SCREENSHOTS",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T06-A-r2\\inspect\\play-run-a.png",
+        "sha256": "7cd82f679834eb984c6e7aba0f3f17f821a9ad0fc7b36bb6e5a58aefa20fa32d",
+        "bytes": 21892,
+        "mtime": "2026-09-29T01:20:07.741Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T06-A-r2\\inspect\\play-run-b.png",
+        "sha256": "5da9b5c7e9a8cd2b99da9cefc063fa52d8a61f0d3d5ebfb3561ceccc8bbe64b1",
+        "bytes": 21956,
+        "mtime": "2026-09-29T01:20:08.653Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T06-A-r2\\inspect\\play-run-c.png",
+        "sha256": "a5b31361b81f02b5b9e43215ea000d30222929e273a6e629c394acc64d53aff5",
+        "bytes": 21923,
+        "mtime": "2026-09-29T01:20:09.607Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T06-A-r2\\inspect\\play-stand-a.png",
+        "sha256": "27a3617196245f947746d6b9054026423a25b7210dfd6da3805f9ee543508d9a",
+        "bytes": 22051,
+        "mtime": "2026-09-29T01:20:45.166Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\runs-v1_2\\T06-A-r2\\inspect\\play-stand-paused.png",
+        "sha256": "27a3617196245f947746d6b9054026423a25b7210dfd6da3805f9ee543508d9a",
+        "bytes": 22051,
+        "mtime": "2026-09-29T01:20:46.657Z"
+      }
+    ],
+    "reportExcerpts": [
+      "## 实际查看过的图片（均为工具读取 PNG 的真实视觉输入）",
+      "实际播放截图（state-003 viewer，经本地 HTTP 服务 + agent-browser 真实浏览器播放）：`inspect/play-run-a.png`、`play-run-b.png`、`play-run-c.png`（run_fwd 播放中相隔约 0.35–0.4s 的三张截图，显示三个不同跑动帧，目镜琥珀色在运动中保持一致）、`inspect/play-stand-a.png`、`play-stand-paused.png`（stand_fwd 单帧待机，播放/暂停正常）",
+      "仅修改资产源文件并用本目录 toolkit 既有 bake 路径渲染（`node run.mjs render/submit`）。检查与看图使用自建只读脚本（`inspect/verify.mjs`、`inspect/crop-head.mjs`），属允许的正常编码/手工比较，不渲染新候选。实际播放用 `inspect/serve.mjs`（临时本地 HTTP 服务，端口 8471，播完已停止）+ 本机已安装的 agent-browser CLI 打开 trial 自带 viewer.html；页面完全本地自包含，无联网找答案。未使用 Studio/语义编辑/候选探索引擎/外部图像生成模型。播放截图是同一候选状态的多帧查看，按规则不计候选。",
+      "## 工具错误（均已解决或绕过）",
+      "4. control-browser 插件（node_repl）报 \"Browser is not available in subagent\"，无法在该子代理内使用；改用本机 agent-browser CLI 完成真实播放。",
+      "无渲染/提交工具错误。渲染、提交全部经 `node run.mjs` 完成，未绕过。",
+      "- 播放在深色背景下验证（viewer 默认背景）；浅色背景下的播放未单独切换 `Dark / light` 按钮，浅背景仅有静帧 4 倍图证据。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T06-D-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "UNVERIFIED",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图片",
+      "## 工具错误与干预",
+      "- 尝试实际播放：`mcp__node_repl__js` 返回错误 \"Browser is not available in subagent\"，本子代理环境无浏览器。",
+      "  为播放尝试在 trial 内起临时本地静态服务的 `node -e` 后台命令因 shell 转义破坏正则而 SyntaxError 退出（exit 1），服务未启动、无残留进程（job j-ojzdgz，日志已留存于 C:/Users/admin/.fastctx/jobs/j-ojzdgz/output.log）。浏览器不可用在先，该服务已无用途，未重试。",
+      "- 实际播放（stand_fwd 1000ms、run_fwd 6 帧 × 110ms 的连续观感、运动连贯性）：UNVERIFIED。子代理环境浏览器不可用（见上）。替代依据：7 帧静态图中目镜颜色、身份一致，动作与起始图逐帧同构（改动仅为 V/E 两色的 RGB）；剪辑时长来自 state 元数据，未实际播放。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T01-A-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "viewer.html 未打开（无浏览器播放条件）；本资产无动画 clips，无播放验证需求，记为不适用而非 UNVERIFIED 的播放项。",
+      "## 工具错误与干预",
+      "- 未打开 viewer.html（无动画可播），原生图与两个固定背景 4 倍图均已实际查看。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T01-D-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "- `input/allowed-mask.relay.png` / `allowed-mask.relay.4x.png` 已实际查看：白色允许区即右侧面板矩形（与 inspect 报告的 diff region (27,8)-(32,22) 一致）。",
+      "## 实际查看过的图片清单",
+      "## 工具错误与偏差记录",
+      "- 无 studio 工具错误（explore/edit/commit/render 全部 ok=true，exitCode 0）。",
+      "- 本资产为 prop，无动画，无需播放验证（N/A，非 UNVERIFIED）。",
+      "- 美术判据（屏幕第一落点、侧板可读性、色阶协调）为本人基于实际查看图片的判断，未经第三方盲审。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T02-A-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 起始图确认（修改前实际查看）",
+      "## 候选记录（每次真实渲染的不同状态，共 2 个，未超 12 上限）",
+      "1. **state-001（候选 1）**：把壳体从 14px 宽改为 24px 宽（x7–30），落在 26px 底座上每侧留 1px 裙边；顶部两段 1px 斜切（bevel），保持原有\"左上受光、右下背光\"的四色阶描边方式；镜头、徽标、底座组件代码原样保留。渲染后实际查看 native/dark/light：比例明显变稳重，镜头清晰。",
+      "2. **state-002（候选 2）**：在候选 1 基础上把壳体底部暗边从 1 行加到 2 行（y26–27），让机体\"坐\"进底座上方的阴影里，增强厚实感。渲染后实际查看 native/dark/light 并与候选 1 对比：阴影带使重量感更强，无失衡。",
+      "## 实际查看过的图片清单",
+      "## 工具错误",
+      "无渲染或提交工具错误。（初一次 glob 调用因我传参格式错误被 InputValidationError 拒绝，属我的调用问题，重试成功，与实验框架无关。）",
+      "- 本资产为单帧静态 prop（clips 为空），无动画可播放；\"实际播放\"不适用，静态图已逐张查看。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T02-D-r2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图像",
+      "- 工具错误：无。",
+      "- 未播放动画（本任务为单帧 prop，无动画要求）。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T05-A-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "- 原生 40×40 与 4 倍预览（深/浅背景）均实际查看，形体与细节在两个尺度下可读。",
+      "## 实际查看过的图片清单",
+      "## 未验证事项（UNVERIFIED）",
+      "- 美术判据（轮廓可读性、结构合理性、焦点与完成度）为本人基于实际看图的判断，未经独立盲审，UNVERIFIED。",
+      "- 本资产为单帧静态 prop，任务与源文件均未定义 clips，无可播放动画；\"实际播放\"一项对本任务不适用（无动画可播），非回避。",
+      "- 宿主端最终技术检查与评分结果未知，UNVERIFIED。",
+      "## 工具错误与外部干预",
+      "- 工具错误：无。`node run.mjs render` 7 次、`node run.mjs submit` 1 次均成功。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T05-D-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "实际查看起始图后记录的问题：",
+      "## 实际查看过的图片",
+      "未实际查看的生成物：input/baseline/beacon.dark.png、beacon.light.png（起始深浅背景版，未打开）；input/baseline/viewer.html、state-001/viewer.html（未打开）。角色动画不适用于本 prop 任务，无播放验证项。",
+      "## 工具错误",
+      "- 4x 起始基线图（input/baseline 下无此文件）：起始 4x 判断基于 studio/beacon.display.png（r1 渲染），两者应为同内容，但未做像素比对——UNVERIFIED。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T06-A-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "UNVERIFIED",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "已实际查看：`input/baseline/stand_fwd.native.png`、`stand_fwd.light.png`、`stand_fwd.dark.png`、`run0_fwd.native.png`、`run3_fwd.light.png`、`input/allowed-mask.stand_fwd.4x.png`、`allowed-mask.run0_fwd.4x.png`。看到的问题：目镜灰蓝与头部棕色、暗部轮廓对比弱，在明暗两种背景下都偏\"糊\"，读不出信号色；遮罩白区确认只覆盖目镜 8 像素。",
+      "1. 候选1：依据风格指南\"暗部→主体→受光→少量高光\"与任务\"暖琥珀、协调、不刺眼\"，选饱和琥珀主体 #ea9c2d 与更亮暖高光 #ffd57e。渲染并实际查看 4 倍图与头部放大裁切（明/暗背景，stand/run0/run1/run3）：目镜清晰、统一，高光像素明显更亮但仍是暖色。逐帧程序化合规检查：每帧恰 8 像素变化，全部在遮罩白区，仅原 V/E 两色，alpha 不变。保留。",
+      "## 实际查看过的图片清单",
+      "## 未验证事项（UNVERIFIED）",
+      "- 实际播放：本环境无法连续感知动画播放。已做逐帧静态核对（七帧中身份、颜色、动作姿态与基线一致，仅目镜变色），真实播放观感记 UNVERIFIED。",
+      "## 工具错误与干预"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T06-D-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "UNVERIFIED",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "- 先实际查看了起始图 `studio/field-guard.stand_fwd.native.png`（原生）与 `studio/field-guard.stand_fwd.display.png`（4倍）。目镜是低对比蓝灰条：主体 V=#53616d（7px），高光 E=#87939d（1px，位于目镜右上角），被 A=#8a4b26 兜帽包围，几乎读不出\"目镜/信号\"身份。",
+      "## 实际查看过的图片",
+      "- 实际动画播放（stand + run_fwd 六帧连播）未在播放器中真实进行（本环境无法播放 HTML 播放器）：运动项记 UNVERIFIED。替代证据：7 帧逐一放大目视，目镜在各姿态均清晰、位置随姿态正确移动（run0/run3 低 1px 与基线一致）。",
+      "## 工具错误与干预",
+      "- 无工具错误（所有 studio/render/submit 调用 exit 0）。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T01-A-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "实际查看了 `input/baseline/relay.native.png`（40x36 帧）与 4 倍预览 `relay.dark.png`、`relay.light.png`，以及 `input/allowed-mask.relay.png`、`allowed-mask.relay.4x.png`。",
+      "1. **state-001**（assetHash a20b36e4...）：暗青铜/低饱和暖灰配色 `#262013/#3d3522/#55492e/#71633f`。实际查看 native + dark + light：屏幕明显成为第一落点，但侧板偏中性橄榄灰，读作\"暗槽\"，暖色身份弱。",
+      "2. **state-002**（assetHash e8c1c3c4...，最终选择）：暗琥珀配色（上表）。实际查看 native + dark + light：屏幕青色数据行成为第一视觉落点；侧板保留 bevel 结构、存在感与暖色身份，仍可辨认；色阶与既有琥珀信号色族协调。备份：`candidate.origin-backup.mjs`（起点）、两次渲染的 previews 目录均保留。",
+      "## 实际查看过的图片",
+      "- 本资产为单帧 prop，无 clips，无可播放动画；\"实际播放\"不适用（无动画可播）。",
+      "## 工具错误与外部干预",
+      "- 无工具错误；未收到外部干预。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T01-D-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "- 实际查看了 `input/baseline/relay.native.png`（原生）与 `studio/relay.display.png`（4倍）：现场中继终端，冷灰金属外壳，左侧大块深青屏幕带青色文字行与光标，右侧 5px 宽琥珀竖板（amber 色阶 `#4a3410/#9c7420/#ffb13d/#ffe08a`），屏幕下方有 quiet 色小块按键与底部基座。",
+      "- 实际查看了 `input/allowed-mask.relay.png` 与 `allowed-mask.relay.4x.png`：白色允许区恰好覆盖右侧板矩形（final 帧 x∈[27,32), y∈[8,22) 一带），其余像素全部保护。",
+      "- `render` 后实际查看 state-001 的 native/dark/light 三图（深背景 #202028 与浅背景 #d6d8dc 下层次关系均成立），随后 `submit`。",
+      "## 实际查看过的图像（Read 工具逐张打开）",
+      "## 工具错误",
+      "- 角色任务不适用（本任务为 prop，无动画可播放）。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T02-A-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 起始图观察（实际查看后）",
+      "用 input/allowed-mask.hauler.bin（40×36，0/1 值，可编辑 764 像素，与 baseline-proof.json 一致）逐像素比对 final RGBA 与 input/baseline/hauler.rgba：state-004 改动 333 像素，全部落在可编辑掩码内，保护区违规 0；anchor/attachments 与 baseline 完全一致。state-001、state-002 未逐像素自检（同源同法，风险低），UNVERIFIED 仅限这两个中间态的像素级核对。",
+      "## 实际查看过的图像",
+      "- 本资产为单帧 prop，无 clips，viewer 播放项不适用；未在浏览器打开 viewer.html，播放能力记 UNVERIFIED（不适用）。",
+      "- 工具错误：mcp__fastctx__glob 三次调用均因参数校验错误（pattern 类型）失败，改用 find（经 fastctx run）列出文件，未影响资产制作；Edit 工具首次因\"文件未先 Read\"被拒，Read 后成功，非框架错误。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T02-D-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图片（Read 工具，视觉输入）",
+      "## 工具错误与外部干预",
+      "- 未提交候选的浅背景预览未生成（工具对候选仅输出默认深背景 display 图）；浅背景在 commit 后经 render（state-001/final）实际查看通过。",
+      "- 像素保护、遮罩合规由工具核验与遮罩定义推算；最终导出帧的逐像素遮罩核验属主持人验收，UNVERIFIED。",
+      "- 本任务为静态道具，无动画可播放；不适用播放验证。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T03-A-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 实际查看过的图片清单",
+      "候选渲染（previews/，每个状态的 native + dark + light 三张都已实际查看）：",
+      "最终（final/，submit 的确定性重渲染，提交后实际查看确认与 state-002 一致）：",
+      "- 本资产为单帧静态 prop（clips 为空），无动画可播放；PROMPT 的\"角色任务要实际播放\"不适用，viewer.html 可打开做静态查看。",
+      "## 工具错误与外部干预",
+      "- 无工具错误：两次 `node run.mjs render` 与一次 `node run.mjs submit` 均一次成功，无渲染失败轨迹。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T03-D-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "起始图实际查看结论：左下—右上斜置工具，通体一个平色，只有左下一颗琥珀色铆钉；夹口（右上段）与手柄完全无区分。",
+      "## 实际查看过的图片",
+      "候选3说明：handle 多边形走向与 shade-diag 分带方向（x+y 近似恒定）几乎平行，分带塌缩，仅 1 像素变化，视觉与 r3 无差别，无改进价值，故拒绝。该候选图已实际查看确认。",
+      "- 原生尺寸与深底 #202028 / 浅底 #d6d8dc 渲染均实际查看，干净无碎点。",
+      "## 未验证事项（UNKNOWN / UNVERIFIED）",
+      "## 工具错误与外部干预",
+      "- 无工具错误。所有 state/inspect/edit/commit/render/submit 调用一次成功。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T04-A-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "未用完的候选额度：9。没有失败渲染或工具错误；三个候选均为一次渲染成功。",
+      "## 实际查看过的图片",
+      "- 本资产为单帧静态道具，无 clips，不适用动画实际播放检查；viewer.html 已随 final 交付。",
+      "## 工具错误与外部干预",
+      "- 工具错误：无。三次 `node run.mjs render` 与一次 `node run.mjs submit` 均成功。"
+    ]
+  },
+  {
+    "role": "participant",
+    "id": "T04-D-r3",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "materialEvidence": [],
+    "reportExcerpts": [
+      "## 已实际查看的图片（全部通过文件读取工具打开，非推测）",
+      "- 交叉验证过遮罩换算（最终帧 = 内画布 +1），但\"最终导出帧坐标\"的换算基于 inspect 的 inner 38x34 / final 40x36 与锚点偏移推导，UNVERIFIED 之处：若宿主以其他方式定义帧原点，允许区结论可能偏移（不过 engine checks outside:0 与 task 遮罩肉眼比对一致，风险低）。",
+      "- 本任务为静态 prop，无动画可播放；\"角色任务要实际播放\"不适用。",
+      "## 工具错误与外部干预",
+      "- 无工具错误；所有 studio state/inspect/edit/commit、render 调用一次成功。"
+    ]
+  },
+  {
+    "role": "reviewer",
+    "id": "T01-r1/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/relay.dark.png",
+      "baseline/relay.light.png",
+      "baseline/relay.native.png",
+      "baseline/asset.json",
+      "X/relay.dark.png",
+      "X/relay.light.png",
+      "X/relay.native.png",
+      "Y/relay.dark.png",
+      "Y/relay.light.png",
+      "Y/relay.native.png",
+      "common/STYLE_GUIDE.md",
+      "common/style-swatches.png",
+      "compare.html",
+      "包内自制的深/浅背景 8x 三联对比图与侧板放大裁剪（_crops/，查看后已删除）"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为 40x36 单帧静态道具（asset.json 无 clips，compare.html 无动画项），不存在待机/跑动播放维度，playbackViewed 保持 false 且不构成判断缺口。已实际查看全部 9 张 PNG（4 倍深/浅与原生）并在包内自制放大裁剪核对侧板结构。无法从现有材料判断的项：RGBA 逐像素保护、遮罩与锚点合规由独立脚本负责，我仅确认可见范围内机身、屏幕、底座与起点一致、未见面板外改动；交付物（可再渲染源、REPORT.md、候选状态数）不在评审包内，未纳入判断。两侧均为『仅压暗琥珀面板』的保守解法，判据全部达成，无阻塞性问题；X 侧板存在感裕度略大，Y 更沉稳，差异细微故不判偏好。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T01-r1/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/relay.dark.png",
+      "baseline/relay.light.png",
+      "baseline/relay.native.png",
+      "X/relay.dark.png",
+      "X/relay.light.png",
+      "X/relay.native.png",
+      "Y/relay.dark.png",
+      "Y/relay.light.png",
+      "Y/relay.native.png",
+      "common/style-swatches.png",
+      "compare.html（读取源码确认三个条目 clips 均为空、本任务为静态道具；内嵌 base64 原生图经只读脚本解码用于差异定位，未做浏览器渲染）"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为静态道具（asset.json 与 compare.html 中 clips 均为空），不存在待机/跑动等可播放动画，playbackViewed 如实记为 false，不涉及运动维度。判定 taskFit=MEETS 基于 4 倍预览与原生图在两种规定背景下的实际查看；改动范围定位（两者各 70 像素、限定在 x=27-31/y=8-21 的侧板矩形）由只读像素对比得出，仅用于理解改动分布与描述可见差异，RGBA 逐像素一致与遮罩合规的精确验证归独立脚本，本评审不据此宣称。X/Y 之间的成对结论置信度为 MEDIUM：差异真实存在但幅度小，若必须二选一，X 在主判据（屏幕第一落点）上稍占优、Y 在侧板存在感上稍占优，综合不构成可靠优劣。本试点无外部商业标杆，MEETS 仅指满足任务预判据，不代表商业级质量。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T02-r1/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/hauler.dark.png",
+      "baseline/hauler.light.png",
+      "baseline/hauler.native.png",
+      "X/hauler.dark.png",
+      "X/hauler.light.png",
+      "X/hauler.native.png",
+      "Y/hauler.dark.png",
+      "Y/hauler.light.png",
+      "Y/hauler.native.png",
+      "common/style-swatches.png",
+      "compare.html（源码阅读：内嵌同一 Start/X/Y 三帧的 native+4倍查看器，深浅背景切换；本环境以直接读取包内 PNG 替代浏览器渲染）",
+      "baseline/asset.json"
+    ],
+    "materialEvidence": [],
+    "notes": "评审基于实际读取包内PNG（先4倍深/浅背景预览、后原生图、对照起点），并对三张原生图做了逐像素着色核查以确认结构宽度、居中性与保护内容（镜头/徽标集合与起点逐像素一致；底座29–33行一致；两候选均仅第28行顶缝接触阴影随新壳体足迹改动，X另在(33,28)补1个轮廓像素）。allowed-mask未包含在本评审包内，上述第28行改动是否落在允许区内无法由我核实，精确保护校验以独立脚本为准，我不据此宣称合规或不合规。T02为静态道具（asset.json与compare.html中clips均为空），不存在待机/跑动等运动维度，playbackViewed=false不构成遗漏。X与Y均判MEETS，成对选择属接近的美学判断（居中平衡 vs 更大厚度），故置信度取MEDIUM而非HIGH。本试点无外部商业美术标杆，结论仅限本任务内的可读性、完成度与改善，不代表行业或商业级水平。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T02-r1/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "PROMPT.md",
+      "TASK.md",
+      "common/STYLE_GUIDE.md",
+      "common/style-swatches.png",
+      "compare.html",
+      "baseline/asset.json",
+      "baseline/hauler.dark.png",
+      "baseline/hauler.light.png",
+      "baseline/hauler.native.png",
+      "X/hauler.dark.png",
+      "X/hauler.light.png",
+      "X/hauler.native.png",
+      "Y/hauler.dark.png",
+      "Y/hauler.light.png",
+      "Y/hauler.native.png"
+    ],
+    "materialEvidence": [],
+    "notes": "1) 本包未包含 allowed-mask.*.png，保护区合规无法由我判定：两候选在壳体-底座交界行（原生第28行）都让壳体覆盖了原底座顶面描边段，是否越界交由独立脚本验证，我不据此下结论。2) compare.html 与 baseline/asset.json 显示本资产为静态 prop（clips 为空），无待机/跑动等动画维度，故 playbackViewed=false 且不涉及运动判断。3) 交付物中的可再渲染源、REPORT.md、锚点/附件点导出不在本评审包内，交付完整性不在本次判断范围；锚点(20,33)与附件点sensor(20,13.5)在两候选的可见像素上仍落在被保留的底座与镜头块上。4) 我不基于唯一轮廓、特定RGB或像素相似度评分，也未宣称任何一侧RGBA逐像素一致；成对结论只回答'哪侧更符合任务'，X在均衡性上明显更符合，Y的整体厚重感仍优于起点。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T03-r1/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/cutter.dark.png",
+      "baseline/cutter.light.png",
+      "baseline/cutter.native.png",
+      "X/cutter.dark.png",
+      "X/cutter.light.png",
+      "X/cutter.native.png",
+      "Y/cutter.dark.png",
+      "Y/cutter.light.png",
+      "Y/cutter.native.png",
+      "common/style-swatches.png"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务是 32x32 静态道具（asset.json 中 clips 为空），无待机/跑动等动画维度，playbackViewed 保持 false 且不适用。逐像素的 alpha/描边/铆钉/锚点保护不在视觉评审断言范围内，留给独立脚本验证；视觉上两者铆钉位置颜色与外轮廓均未见破坏。原生 32x32 图像非常小，个别杂点的绝对排查超出肉眼可靠范围，此点按『未见明显杂点』记录而非绝对断言。X 与 Y 的差距真实可见但幅度不大，主判据是夹口亮部强度与夹口-手柄主次清晰度。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T03-r1/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/cutter.native.png",
+      "baseline/cutter.dark.png",
+      "baseline/cutter.light.png",
+      "X/cutter.native.png",
+      "X/cutter.dark.png",
+      "X/cutter.light.png",
+      "Y/cutter.native.png",
+      "Y/cutter.dark.png",
+      "Y/cutter.light.png",
+      "common/style-swatches.png"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为静态道具（asset.json 与 compare.html 中 clips 均为空），无可播放动画，playbackViewed 保持 false，动画维度不适用而非跳过。铆钉像素、alpha、外轮廓描边与锚点的逐像素保护由独立脚本负责，本评审仅记录三图中均未见对铆钉或轮廓的可见破坏，不据此宣称逐像素一致。各候选的 REPORT.md、可再渲染源文件等交付物不在本包内，交付完整性无法从现有材料判断（UNVERIFIED）。X/Y 的成对优势幅度小，若需更强结论需更高放大率的逐像素对照，当前判断基于包内原生图与4倍图的目视比较。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T04-r1/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "X/medkit.dark.png",
+      "X/medkit.light.png",
+      "X/medkit.native.png",
+      "Y/medkit.dark.png",
+      "Y/medkit.light.png",
+      "Y/medkit.native.png",
+      "baseline/medkit.dark.png",
+      "baseline/medkit.light.png",
+      "baseline/medkit.native.png",
+      "common/style-swatches.png",
+      "compare.html"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为静态道具，compare.html 中 clips 为空，无动画可播放，playbackViewed 如实记 false。判定为两侧均 MEETS 属高置信；成对结论取 NO_MEANINGFUL_DIFFERENCE 是因为三项判据下两侧互有小优、差距在取舍范围内，故整体置信 MEDIUM。无法从现有材料判断：遮罩外像素与 alpha 是否逐像素不变（PROMPT 规定由独立脚本精确验证，我不以肉眼宣称）；可再渲染源文件、REPORT.md 等交付物不在包内，未评价；不评价编辑方式、成本或工具归属。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T04-r1/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/medkit.native.png",
+      "baseline/medkit.dark.png",
+      "baseline/medkit.light.png",
+      "X/medkit.native.png",
+      "X/medkit.dark.png",
+      "X/medkit.light.png",
+      "Y/medkit.native.png",
+      "Y/medkit.dark.png",
+      "Y/medkit.light.png",
+      "common/style-swatches.png",
+      "compare.html（内嵌 Start/X/Y 单帧，clips 为空）"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为单帧道具（compare.html 中 clips 为空），无动画需要播放，playbackViewed 如实记 false，不涉及动画维度判断。遮罩外 RGBA、alpha、锚点与附件点的逐像素一致性无法凭肉眼验证，按提示词交给独立脚本；包内也未提供 allowed-mask 图，故只能确认'除面板中央符号外未见可见改动'。两侧均以相同背景（#202028/#d6d8dc）与相同倍率（原生+固定4倍）对比，未依据唯一轮廓、特定 RGB 或像素相似度评分。置信度定为 MEDIUM 的原因：X 优于 Y 的成对判断较有把握，但'心形是否足以联想急救/医疗用途'含观者文化语境的主观成分，Y 的 MEETS 判定保留这一不确定性。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T05-r1/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/beacon.native.png",
+      "baseline/beacon.dark.png",
+      "baseline/beacon.light.png",
+      "X/beacon.native.png",
+      "X/beacon.dark.png",
+      "X/beacon.light.png",
+      "Y/beacon.native.png",
+      "Y/beacon.dark.png",
+      "Y/beacon.light.png",
+      "compare.html"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为静态道具（baseline/asset.json 中 clips 为空），无待机/跑动动画可播放，运动相关维度不适用，playbackViewed 如实记 false。评审包内未提供 allowed-mask.*.png，且 PROMPT 规定像素保护由独立脚本验证，故本评审未判定遮罩合规，也未以肉眼宣称RGBA逐像素一致；仅从4倍图观察两候选内容均未贴边，2px透明边界看起来得到保留，此为可见印象而非像素级断言。无法从现有材料判断：遮罩保护是否逐像素合规、交付物（可再渲染源、REPORT.md等）是否齐全、以及各自是否用满或超出12个候选状态。置信度取 MEDIUM：两者差距不大且画幅仅40x40，判断依据以4倍图上的结构与可读性为准。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T05-r1/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/beacon.dark.png",
+      "baseline/beacon.light.png",
+      "baseline/beacon.native.png",
+      "baseline/asset.json",
+      "X/beacon.dark.png",
+      "X/beacon.light.png",
+      "X/beacon.native.png",
+      "Y/beacon.dark.png",
+      "Y/beacon.light.png",
+      "Y/beacon.native.png",
+      "common/style-swatches.png",
+      "compare.html"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为静物 prop，compare.html 中两侧 clips 均为空，不存在动画维度；playbackViewed=false 不涉及任何运动判断。包内未提供 allowed-mask.*.png、X/Y 各自的 asset.json、锚点/附件点或 REPORT.md：遮罩合规、至少2px透明边界、锚点不变无法由视觉判断，只能目测两候选四周留白存在，像素级保护一致性由独立脚本负责，我未据此下结论。两候选均无阻断性可见问题，Y 也满足任务明确要求，差异是完成度与一体感的程度差而非合格与否。无法从现有材料判断的内容：两侧的编辑方式与工具（也不应猜测）、被保护像素是否逐像素保持、交付清单中可再渲染源文件与报告是否存在。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T06-r1/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "SELF_REPORTED",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "compare.html（经临时本地只读 HTTP 服务器在无头 Edge 中打开：Start/X/Y 三节，逐帧切换查看 4x canvas，深背景 #202028 与浅背景 #d6d8dc 均查看，并实际点击 Play/pause 播放 stand_fwd 与 run_fwd）",
+      "播放期间连拍截图：X_runplay_01/04/07/10、Y_runplay_02/05/08/11、X_standplay_00、Y_standplay_00（真实播放中捕获，run 帧序经采样记录为 run0→run5 循环）",
+      "4x 逐帧截图（深背景）：Start_stand_fwd、Start_run0_fwd、Start_run2_fwd、Start_run4_fwd；X_stand_fwd 与 X_run0..run5_fwd 全部七帧；Y_stand_fwd 与 Y_run0..run5_fwd 全部七帧",
+      "4x 逐帧截图（浅背景）：X_stand_fwd、Y_stand_fwd、X_run2_fwd、Y_run2_fwd",
+      "目镜区域 12 倍最近邻放大对比图（起点 baseline | X | Y 并排，基于各包 native.png 裁剪，7 帧全覆盖：zoom_stand_fwd、zoom_run0..run5_fwd）",
+      "原生尺寸图：X/stand_fwd.native.png、Y/stand_fwd.native.png",
+      "common/STYLE_GUIDE.md、common/style-swatches.png、baseline/asset.json、TASK.md、PROMPT.md"
+    ],
+    "materialEvidence": [],
+    "notes": "方法与限制：宿主浏览器工具在子代理中不可用，改为在评审包目录上启动临时本地只读 HTTP 服务器（127.0.0.1:8971），用无头 Edge 打开 compare.html 实际播放并截图；播放期间的辅助截图存于系统临时目录，评审结束后已删除，评审包与项目文件未被修改。运动相关判断基于真实播放（playbackViewed=true），非静态拼图。色值统计仅作为层级与跨帧一致性的辅助证据，未作为美学评分依据。未验证、由独立脚本负责的项目：RGBA 逐像素保护、遮罩约束、锚点/附件点/剪辑时长等技术合规；本包不含 REPORT.md 等交付文档，交付完整性不在本次判断范围。'最多12个已渲染候选状态'为过程约束，无法从静态结果包核验。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T06-r1/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "SELF_REPORTED_WITH_PLAYBACK_SCRIPT_AND_SCREENSHOTS",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "compare.html（本地无头 Chromium 实际加载并点击 Play，播放 Start/X/Y 的 stand_fwd 与 run_fwd）",
+      "baseline/stand_fwd.dark.png",
+      "baseline/run0_fwd.dark.png",
+      "baseline/run1_fwd.dark.png",
+      "baseline/run2_fwd.dark.png",
+      "baseline/run3_fwd.dark.png",
+      "baseline/run4_fwd.dark.png",
+      "baseline/run5_fwd.dark.png",
+      "X/stand_fwd.dark.png",
+      "X/run0_fwd.dark.png",
+      "X/run1_fwd.dark.png",
+      "X/run2_fwd.dark.png",
+      "X/run3_fwd.dark.png",
+      "X/run4_fwd.dark.png",
+      "X/run5_fwd.dark.png",
+      "X/stand_fwd.native.png",
+      "X/stand_fwd.light.png",
+      "X/run3_fwd.light.png",
+      "Y/stand_fwd.dark.png",
+      "Y/run0_fwd.dark.png",
+      "Y/run1_fwd.dark.png",
+      "Y/run2_fwd.dark.png",
+      "Y/run3_fwd.dark.png",
+      "Y/run4_fwd.dark.png",
+      "Y/run5_fwd.dark.png",
+      "Y/stand_fwd.native.png",
+      "Y/stand_fwd.light.png",
+      "Y/run3_fwd.light.png",
+      "_zoom/start_playrun_0.png",
+      "_zoom/start_playrun_3.png",
+      "_zoom/start_playstand_0.png",
+      "_zoom/start_playstand_1.png",
+      "_zoom/start_static_0_stand_fwd.png 至 start_static_6_run5_fwd.png（7张，播放中画布逐帧截图）",
+      "_zoom/x_playrun_0.png 至 x_playrun_5.png（6张，X run_fwd 实际播放采样）",
+      "_zoom/x_playstand_0.png",
+      "_zoom/x_playstand_1.png",
+      "_zoom/x_static_0_stand_fwd.png 至 x_static_6_run5_fwd.png（7张，播放中画布逐帧截图）",
+      "_zoom/x_light_static_0.png",
+      "_zoom/x_light_static_3.png",
+      "_zoom/y_playrun_0.png 至 y_playrun_5.png（6张，Y run_fwd 实际播放采样）",
+      "_zoom/y_playstand_0.png",
+      "_zoom/y_playstand_1.png",
+      "_zoom/y_static_0_stand_fwd.png 至 y_static_6_run5_fwd.png（7张，播放中画布逐帧截图）",
+      "_zoom/y_light_static_0.png",
+      "_zoom/y_light_static_3.png",
+      "_zoom/crop_baseline_stand_fwd.png",
+      "_zoom/crop_X_stand_fwd.png 至 crop_X_run5_fwd.png（7张，头部区域16倍最近邻裁剪）",
+      "_zoom/crop_Y_stand_fwd.png 至 crop_Y_run5_fwd.png（7张，头部区域16倍最近邻裁剪）"
+    ],
+    "materialEvidence": [
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\playback.cjs",
+        "sha256": "49b7c4ca650e5c361be69832b3fb024f5d4a36a22a190e6722363c3afa265c0e",
+        "bytes": 2747,
+        "mtime": "2026-09-29T03:03:58.036Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\start_playrun_0.png",
+        "sha256": "1fcc74332c3e579edfdc9bda25b571c4665222e44da107b3547d5d85828ee967",
+        "bytes": 2984,
+        "mtime": "2026-09-29T03:04:14.950Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\start_playrun_1.png",
+        "sha256": "c18e2db4c5d0d53d6a516dba71b1d2acf5ae880d1398f9c446118f55c0395649",
+        "bytes": 2931,
+        "mtime": "2026-09-29T03:04:15.081Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\start_playrun_2.png",
+        "sha256": "3446f7c303d6e6e1b1b76d104daaa65c2891e053a9dd2e74750a77cea54abef5",
+        "bytes": 2925,
+        "mtime": "2026-09-29T03:04:15.201Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\start_playrun_3.png",
+        "sha256": "a772ef4cf7740fe22b908232d3eb99b2f7f001135b6e22cbb27d06825ee3d0c2",
+        "bytes": 2930,
+        "mtime": "2026-09-29T03:04:15.324Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\start_playrun_4.png",
+        "sha256": "91d74a6c1066a8fc0ca6f9265ae23d02dcedd936d1d695b3413b80617f0a3f69",
+        "bytes": 2889,
+        "mtime": "2026-09-29T03:04:15.443Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\start_playrun_5.png",
+        "sha256": "e5ee431d2b134e5815d155eccfb29cb13a7712be608703963b2b8ab5deb9638c",
+        "bytes": 2908,
+        "mtime": "2026-09-29T03:04:15.581Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\start_playstand_0.png",
+        "sha256": "2ffc6c9b234c3c539b0de80162ebf1c37a21e36e4ee9bc2894ce045c918ac655",
+        "bytes": 2883,
+        "mtime": "2026-09-29T03:04:15.915Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\start_playstand_1.png",
+        "sha256": "2ffc6c9b234c3c539b0de80162ebf1c37a21e36e4ee9bc2894ce045c918ac655",
+        "bytes": 2883,
+        "mtime": "2026-09-29T03:04:16.275Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\x_playrun_0.png",
+        "sha256": "1e9d297c54bb2cc3038f65df17681fec75ea158b2c4d2ef9c68706981ef1ff4b",
+        "bytes": 2985,
+        "mtime": "2026-09-29T03:04:17.342Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\x_playrun_1.png",
+        "sha256": "2104206510a15cd72ba2e081701c7df976d926e95658e9995954e40fdee0cc8d",
+        "bytes": 2937,
+        "mtime": "2026-09-29T03:04:17.465Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\x_playrun_2.png",
+        "sha256": "8ea45cef9e6cbd29790217e5005e480bdcb316896d25ab844d7b3245cc3fa0db",
+        "bytes": 2934,
+        "mtime": "2026-09-29T03:04:17.588Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\x_playrun_3.png",
+        "sha256": "377a3dfc03e5efc14feed45ddf84f6f5b7ff7b87b6a107f8026d2ff2ed499c7b",
+        "bytes": 2935,
+        "mtime": "2026-09-29T03:04:17.714Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\x_playrun_4.png",
+        "sha256": "320dcfc3dc18bf73c692d86d30f99de6b14a2f7b593f340ee09ce994e4d1522c",
+        "bytes": 2892,
+        "mtime": "2026-09-29T03:04:17.840Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\x_playrun_5.png",
+        "sha256": "cc24f31bfe52a3b2693cb936b174f4b6c28c2d7f582e2a4a13bd996841e4d5fe",
+        "bytes": 2910,
+        "mtime": "2026-09-29T03:04:17.973Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\x_playstand_0.png",
+        "sha256": "f2729591849e86612ad96917fbd02d2353081a63adc56648761450d61052a705",
+        "bytes": 2890,
+        "mtime": "2026-09-29T03:04:18.297Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\x_playstand_1.png",
+        "sha256": "f2729591849e86612ad96917fbd02d2353081a63adc56648761450d61052a705",
+        "bytes": 2890,
+        "mtime": "2026-09-29T03:04:18.656Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\y_playrun_0.png",
+        "sha256": "d2724f8937d4dd07ca9bf9fd7a9b321e7a9f162cb14c7d775bdd66de5cc4ee04",
+        "bytes": 2989,
+        "mtime": "2026-09-29T03:04:19.689Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\y_playrun_1.png",
+        "sha256": "493d44751db4fbd67df60dd0ef53b409112c5f4db34e68d77c47611598f0e210",
+        "bytes": 2940,
+        "mtime": "2026-09-29T03:04:19.814Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\y_playrun_2.png",
+        "sha256": "dfb4e57c4be25bb4d7de872eca5c66870749dc03f284b82fb19674bbb2a97c66",
+        "bytes": 2937,
+        "mtime": "2026-09-29T03:04:19.956Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\y_playrun_3.png",
+        "sha256": "589c5f2a9a3adb7a6701846bcf9868cfcc787df37e599a58e87918dacf4af8fc",
+        "bytes": 2939,
+        "mtime": "2026-09-29T03:04:20.089Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\y_playrun_4.png",
+        "sha256": "d0f438c7959242b53aae599c39526764089b60fcf8759a414ec379955c429525",
+        "bytes": 2896,
+        "mtime": "2026-09-29T03:04:20.215Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\y_playrun_5.png",
+        "sha256": "f0158cfad272906095bf4cd5bb033c1b903652fa6771a3567a1c3f178b98a612",
+        "bytes": 2913,
+        "mtime": "2026-09-29T03:04:20.339Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\y_playstand_0.png",
+        "sha256": "cb4a839bae00c835d557f482ce605c94b8d5595d96d7482d9caaaba6744dbb3d",
+        "bytes": 2894,
+        "mtime": "2026-09-29T03:04:20.665Z"
+      },
+      {
+        "path": "E:\\Repos\\Tools\\procedural-game-assets\\tests\\pga-ad-host\\reviews-v1_2-scored\\T06-r1\\reviewer-2\\_zoom\\y_playstand_1.png",
+        "sha256": "cb4a839bae00c835d557f482ce605c94b8d5595d96d7482d9caaaba6744dbb3d",
+        "bytes": 2894,
+        "mtime": "2026-09-29T03:04:21.014Z"
+      }
+    ],
+    "notes": "评审环境限制：浏览器工具在子代理不可用，改用本地无头Chromium加载临时HTTP服务上的compare.html，点击Play后按时序采样截图，运动判断基于真实播放观察而非静态拼图；观察用放大（画布3倍渲染、头部16倍最近邻裁剪）仅用于评审，无滤镜，不影响被评资产。未验证项：允许遮罩的逐像素合规、RGBA与起点非目镜像素的精确一致、锚点/附件点/剪辑时长，这些按PROMPT由独立脚本负责，本评审仅确认可见范围内未发现头型、盔甲、枪械或动作的可见改变。X与Y均满足任务三项视觉判据且无阻塞性问题；两者差异低于可靠感知阈值，故pairwise为NO_MEANINGFUL_DIFFERENCE而非任一方 preferred。评审辅助产物（_zoom/目录截图与playback.cjs、局部放大图）为本人评审输出，留在本包内。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T03-r2/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/cutter.dark.png",
+      "baseline/cutter.light.png",
+      "baseline/cutter.native.png",
+      "X/cutter.dark.png",
+      "X/cutter.light.png",
+      "X/cutter.native.png",
+      "Y/cutter.dark.png",
+      "Y/cutter.light.png",
+      "Y/cutter.native.png",
+      "common/style-swatches.png",
+      "compare.html（文本源码，确认各条目为单帧32x32、原生+4倍固定条件、clips为空无动画）"
+    ],
+    "materialEvidence": [],
+    "notes": "1) 本任务是单帧道具（compare.html中clips为空），无待机/跑动动画需要播放，playbackViewed如实记为false，运动维度不适用。2) 除用读取工具直接查看全部PNG外，我对baseline/X/Y三个原生PNG输出了只读的亮度文本网格（stdout，未创建任何文件），用于核实'有组织的明暗vs随机亮点'与原生尺寸干净度；不据此宣称RGBA逐像素一致，保护合规以独立脚本为准——我从静态材料只能确认轮廓行、缺口内部像素与铆钉位置未见可见改动。3) X的taskFit是边界判断，处于MEETS的下限（要求各条以最低限度满足）；无论X定为MEETS还是NOT_YET，Y_PREFERRED的成对结论不变。4) 无法从本包材料得到的判断：TASK.md交付清单中的可再渲染源文件、REPORT.md不在评审包内，交付完整性无法核实；alpha与遮罩的精确合规由独立脚本负责，本评审仅记录可见层面。5) 未评价代码、成本、agent能力或技术实现，不猜测X/Y的制作方式；本试点无外部商业标杆，结论限于本任务内的可读性、完成度与改善，不外推为行业或商业级。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T03-r2/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/cutter.dark.png",
+      "baseline/cutter.light.png",
+      "baseline/cutter.native.png",
+      "X/cutter.dark.png",
+      "X/cutter.light.png",
+      "X/cutter.native.png",
+      "Y/cutter.dark.png",
+      "Y/cutter.light.png",
+      "Y/cutter.native.png",
+      "common/style-swatches.png",
+      "compare.html"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为静态单帧工具资产（compare.html 中 clips 为空，无待机/跑动动画可播放），动画维度不适用，故 playbackViewed=false。评审以直接查看的 PNG 视觉输入为主，只读像素级辅助核对仅用于确认明暗的空间分布、保护点存在性与 4 倍图/原生一致性，不用于按特定 RGB 或像素相似度评分；RGBA 逐像素保护的精确验证仍以独立脚本为准。铆钉与轮廓保护在两侧的可见层面均未发现破坏。未查看执行轨迹、成本、工具信息或其他评审者输出。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T04-r2/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "PROMPT.md",
+      "TASK.md",
+      "common/STYLE_GUIDE.md",
+      "common/style-swatches.png",
+      "compare.html",
+      "baseline/medkit.native.png",
+      "baseline/medkit.dark.png",
+      "baseline/medkit.light.png",
+      "X/medkit.native.png",
+      "X/medkit.dark.png",
+      "X/medkit.light.png",
+      "Y/medkit.native.png",
+      "Y/medkit.dark.png",
+      "Y/medkit.light.png",
+      "baseline/asset.json",
+      "review.template.json"
+    ],
+    "materialEvidence": [],
+    "notes": "本包为静态道具（asset.json clips为空，compare.html无动画条目），无运动维度需要播放验证，playbackViewed如实记false。包内未提供 allowed-mask.*.png 与 REPORT.md，遮罩合规与像素级保护无法肉眼裁决，按要求不凭肉眼宣称RGBA逐像素一致，交由独立脚本；此限制对X/Y同等适用，不影响上述可见判断。两侧均通过任务要求，X_PREFERRED仅表示在'医疗联想直接性'这一首要可见判据上的优先，不构成对Y的否定。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T04-r2/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/medkit.native.png",
+      "baseline/medkit.dark.png",
+      "baseline/medkit.light.png",
+      "X/medkit.dark.png",
+      "X/medkit.light.png",
+      "X/medkit.native.png",
+      "Y/medkit.dark.png",
+      "Y/medkit.light.png",
+      "Y/medkit.native.png",
+      "common/style-swatches.png",
+      "compare.html（条件说明：三方均为同一40x36帧+固定4倍最近邻预览+深#202028/浅#d6d8dc背景，clips为空）"
+    ],
+    "materialEvidence": [],
+    "notes": "无法从现有材料得到的判断：包内未提供allowed-mask遮罩图，修改是否精确限定在遮罩内、区域外RGBA是否逐像素不变，无法凭视觉宣称（该精确验证由独立脚本负责，本评审只覆盖可见层面）。本任务为静态道具（compare.html中clips为空），不存在动画播放维度，playbackViewed如实记false。三图倍率经PNG头部核对：预览图为160x144即4倍最近邻，原生为40x36，两侧条件一致。评审只基于可见图像，未推断制作方式，未参考任何其他评审者输出。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T05-r2/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/beacon.dark.png",
+      "baseline/beacon.light.png",
+      "baseline/beacon.native.png",
+      "X/beacon.dark.png",
+      "X/beacon.light.png",
+      "X/beacon.native.png",
+      "Y/beacon.dark.png",
+      "Y/beacon.light.png",
+      "Y/beacon.native.png",
+      "common/style-swatches.png"
+    ],
+    "materialEvidence": [],
+    "notes": "1) 本任务为 prop 资产，compare.html 中三个条目均无 clips，无动画可播放，故 playbackViewed=false，未评价任何运动维度。2) 评审包内 X/Y 仅含三张 PNG，未提供各自的 asset.json、REPORT.md、遮罩或可再渲染源文件，因此锚点是否保持 (20,37)、至少 2px 透明边界、'只用五部件'的精确合规以及交付物完整性无法从包内材料判断，相关结论只基于可见画面；未观察到可见的约束破坏。3) 判断仅覆盖 TASK.md 的三条视觉判据；无外部商业标杆，结论限于本任务内可读性、完成度与改善程度。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T05-r2/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/beacon.native.png",
+      "baseline/beacon.light.png",
+      "baseline/beacon.dark.png",
+      "X/beacon.native.png",
+      "X/beacon.light.png",
+      "X/beacon.dark.png",
+      "Y/beacon.native.png",
+      "Y/beacon.light.png",
+      "Y/beacon.dark.png",
+      "common/style-swatches.png",
+      "compare.html"
+    ],
+    "materialEvidence": [],
+    "notes": "材料边界：(1) 包内未提供 allowed-mask 遮罩文件，也没有 X/Y 的 asset.json、锚点/附件点或 REPORT.md，被保护像素是否保持、锚点是否不变、交付是否齐全无法从本包判断，精确验证由独立脚本负责，本评审只覆盖三个视觉判据。(2) 本任务为静态道具，compare.html 与包内文件均无动画剪辑，无播放维度需要验证，playbackViewed 如实记 false。(3) 2px 透明边界仅凭肉眼确认“未贴边”，逐像素核验不在视觉评审范围。(4) 两侧均无阻塞性问题；X 优先的方向较明确但幅度中等，故置信度取 MEDIUM 而非 HIGH。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T06-r2/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "UNVERIFIED",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "compare.html（源码已读；本子代理环境无可用浏览器，未能实际渲染/播放，见 notes）",
+      "baseline/stand_fwd.dark.png",
+      "baseline/stand_fwd.light.png",
+      "baseline/run0_fwd.dark.png",
+      "X/stand_fwd.dark.png",
+      "X/run0_fwd.dark.png",
+      "X/run1_fwd.dark.png",
+      "X/run2_fwd.dark.png",
+      "X/run3_fwd.dark.png",
+      "X/run4_fwd.dark.png",
+      "X/run5_fwd.dark.png",
+      "X/stand_fwd.light.png",
+      "X/run2_fwd.light.png",
+      "X/stand_fwd.native.png",
+      "X/run2_fwd.native.png",
+      "Y/stand_fwd.dark.png",
+      "Y/run0_fwd.dark.png",
+      "Y/run1_fwd.dark.png",
+      "Y/run2_fwd.dark.png",
+      "Y/run3_fwd.dark.png",
+      "Y/run4_fwd.dark.png",
+      "Y/run5_fwd.dark.png",
+      "Y/stand_fwd.light.png",
+      "Y/run2_fwd.light.png",
+      "Y/stand_fwd.native.png",
+      "Y/run2_fwd.native.png"
+    ],
+    "materialEvidence": [],
+    "notes": "1) 环境限制：本子代理无法启动浏览器（browser runtime 报 'Browser is not available in subagent'），compare.html 仅读了源码、未实际渲染播放；按协议 playbackViewed=false，一切运动/播放一致性判断记 UNVERIFIED，未以静态拼图冒充播放。2) 任务判据一、二基于逐帧目视判断，取色仅用于核实所见颜色与层级，未以像素相似度评分；整个包内未见 allowed-mask 文件，遮罩合规的精确验证留给独立脚本，此处不宣称 RGBA 逐像素合规。3) 亮背景仅抽查 stand/run2（4倍图）+ 七帧暗背景全看；4倍图为 168x192，原生 42x48，两者所见一致。4) 结论：X、Y 均达到可验证的任务要求，无阻塞性问题；差异很小，不强行选赢家。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T06-r2/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "UNVERIFIED",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/stand_fwd.light.png",
+      "baseline/run0_fwd.light.png",
+      "baseline/run3_fwd.light.png",
+      "X/stand_fwd.light.png",
+      "X/run0_fwd.light.png",
+      "X/run1_fwd.light.png",
+      "X/run2_fwd.light.png",
+      "X/run3_fwd.light.png",
+      "X/run4_fwd.light.png",
+      "X/run5_fwd.light.png",
+      "X/stand_fwd.dark.png",
+      "X/run0_fwd.dark.png",
+      "X/run3_fwd.dark.png",
+      "Y/stand_fwd.light.png",
+      "Y/run0_fwd.light.png",
+      "Y/run1_fwd.light.png",
+      "Y/run2_fwd.light.png",
+      "Y/run3_fwd.light.png",
+      "Y/run4_fwd.light.png",
+      "Y/run5_fwd.light.png",
+      "Y/stand_fwd.dark.png",
+      "Y/run0_fwd.dark.png",
+      "Y/run3_fwd.dark.png",
+      "compare.html（源码，含内嵌帧与播放控件）"
+    ],
+    "materialEvidence": [],
+    "notes": "1) 播放限制：本评审会话所在子代理环境无法启动浏览器，compare.html 只能读源码确认其结构（内嵌帧、4倍画布、Play/pause、Dark/light），无法实际播放待机与跑动，故播放Viewed=false，运动相关维度对两侧均记 UNVERIFIED，未以静态拼图冒充播放。作为替代，对七帧做了静态逐帧一致性检查：目镜颜色逐帧统一、非目镜像素零变化——这只支持静态一致性，不能替代播放验证。2) 判断方式：以上像素值仅作为放大镜式的定位与层级佐证，最终评分依据4倍深浅背景预览的可见观感；遮罩合规的精确验证留给独立脚本，本评审仅报告未见可见破坏，不据此宣称逐像素合规。3) 成对结论：两侧静态判据全部达标、改动范围同样干净，差距只在琥珀明度带来的信号清晰度这一处可感知差异，故选 X_PREFERRED 而置信度为 MEDIUM；若计入播放维度，两侧该维度同为 UNVERIFIED，不改变排序但限制置信度上限。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T01-r2/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/relay.dark.png",
+      "baseline/relay.light.png",
+      "baseline/relay.native.png",
+      "X/relay.dark.png",
+      "X/relay.light.png",
+      "X/relay.native.png",
+      "Y/relay.dark.png",
+      "Y/relay.light.png",
+      "Y/relay.native.png",
+      "common/style-swatches.png"
+    ],
+    "materialEvidence": [],
+    "notes": "已逐一查看 baseline/X/Y 的深底、浅底 4 倍图与原生图及公共色阶条；compare.html 内嵌帧与对应 PNG 逐字节一致，且 clips 为空——本资产是静态道具，无待机/跑动等动画可播，故 playbackViewed=false 且无运动维度判断。遮罩的逐像素保护一致性由独立脚本负责：我仅确认可见改动局限于右侧面板区域，不据此宣称 RGBA 完全一致。像素位置/颜色数据只用于定位与描述改动区域和视觉显著性对比，未作为相似度评分。本包内无法判断：REPORT.md、可再渲染源文件、锚点/附件点交付完整度，以及 12 个已渲染候选状态上限的遵守情况；这些不在评审材料中，相关维度不给出结论。X 与 Y 差异较小且方向一致，判 X 略优基于判据二的余量，置信度为 MEDIUM 而非 HIGH。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T01-r2/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/relay.native.png",
+      "baseline/relay.dark.png",
+      "baseline/relay.light.png",
+      "X/relay.native.png",
+      "X/relay.dark.png",
+      "X/relay.light.png",
+      "Y/relay.native.png",
+      "Y/relay.dark.png",
+      "Y/relay.light.png",
+      "common/style-swatches.png"
+    ],
+    "materialEvidence": [],
+    "notes": "两侧倍率与背景条件一致：native 为 40x36 原生帧，dark/light 为 160x144 的 4 倍最近邻预览（#202028 / #d6d8dc）。本资产为静态终端，compare.html 中无动画 clips，无需播放验证，不存在因未播放而未验证的运动维度，故 playbackViewed 如实记 false。逐像素保护一致性未由本评审宣称，由独立脚本负责；我的像素定位仅用于说明可见差异的位置与幅度。两侧差异幅度有限（仅侧板一档色值），Y 的优势集中在侧板可读性与整体协调，故置信度为 MEDIUM。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T02-r2/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "PROMPT.md",
+      "TASK.md",
+      "common/STYLE_GUIDE.md",
+      "common/style-swatches.png",
+      "compare.html",
+      "baseline/asset.json",
+      "baseline/hauler.native.png",
+      "baseline/hauler.light.png",
+      "baseline/hauler.dark.png",
+      "X/hauler.native.png",
+      "X/hauler.light.png",
+      "X/hauler.dark.png",
+      "Y/hauler.native.png",
+      "Y/hauler.light.png",
+      "Y/hauler.dark.png",
+      "review.template.json"
+    ],
+    "materialEvidence": [],
+    "notes": "这是静态道具任务，compare.html中clips为空，无需播放验证，playbackViewed如实记false。以下内容无法从本包材料判断，不作断言：(1) allowed-mask.*.png未随包提供，X的6px接缝重涂与Y的底座加厚行是否落在允许区内无法核实，保护约束的精确验证由独立脚本负责；(2) 候选的锚点/附件点元数据不在包内（仅起点asset.json），只能从图面确认镜头与底座下部未动、传感器附件落点视觉不变；(3) 交付物（可再渲染源文件、REPORT.md、候选状态数≤12）不在视觉包内，未验证。X的taskFit=MEETS指三个视觉判据与可见约束均达成；Y判NOT_YET是因'底座保持原样'被可见违背，即使其主目标（改比例）完成度更高。成对结论X_PREFERRED的理由：在都满足主目标的前提下，X对不可破坏内容的遵守明显更干净，Y的额外体积感收益不足以抵消对明确约束的可见偏离。此判断限于本实验预设任务内的可读性、完成度与改善，不代表商业级或行业标杆水平。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T02-r2/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/hauler.native.png",
+      "baseline/hauler.light.png",
+      "baseline/hauler.dark.png",
+      "X/hauler.native.png",
+      "X/hauler.light.png",
+      "X/hauler.dark.png",
+      "Y/hauler.native.png",
+      "Y/hauler.light.png",
+      "Y/hauler.dark.png",
+      "compare.html",
+      "common/STYLE_GUIDE.md",
+      "common/style-swatches.png",
+      "baseline/asset.json"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为静态道具（compare.html中clips为空），无动画可播放，运动维度不适用；playbackViewed如实记false。任务说明提到的allowed-mask.*.png未包含在本评审包内，保护区是否逐像素合规（尤其y=28行、以及区域外像素不变）只能由独立脚本精确验证，我仅报告可见改动位置。交付物（可再渲染源文件、REPORT.md、锚点/附件点文件）与12个已渲染候选状态上限也无法从本包材料核对，相关判断不在本次评审范围内。视觉判断基于9张PNG（三方各自的原生图与固定4倍深/浅背景预览）的直接查看与只读像素测量，未参考任何执行轨迹、工具信息或其他评审者输出。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T05-r3/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/beacon.dark.png",
+      "baseline/beacon.light.png",
+      "baseline/beacon.native.png",
+      "X/beacon.dark.png",
+      "X/beacon.light.png",
+      "X/beacon.native.png",
+      "Y/beacon.dark.png",
+      "Y/beacon.light.png",
+      "Y/beacon.native.png",
+      "common/style-swatches.png",
+      "compare.html",
+      "baseline/asset.json"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为静态道具资产，compare.html中clips为空、无动画可播，playbackViewed如实记false，运动维度不适用。两项技术约束无法由静态图判定、留给独立脚本：40×40画布内至少2px透明边界（视觉上X与Y均未见内容贴边，但不据此宣称逐像素合规）与锚点不变。'只用现有五个部件、不加新节点'也无法从成图直接验证，未将其计入美术判断；X右侧的格栅块与Y右侧的突出块在视觉上可读为起点中既有部件的重组与材质调整。评审不涉及作者、工具、成本或代码。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T05-r3/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/beacon.dark.png",
+      "baseline/beacon.light.png",
+      "baseline/beacon.native.png",
+      "X/beacon.dark.png",
+      "X/beacon.light.png",
+      "X/beacon.native.png",
+      "Y/beacon.dark.png",
+      "Y/beacon.light.png",
+      "Y/beacon.native.png",
+      "common/style-swatches.png"
+    ],
+    "materialEvidence": [],
+    "notes": "无法从现有材料判断：锚点 (20,37) 是否精确保持、RGBA 逐像素保护与 allowed-mask 合规属技术检查，且评审包未提供遮罩文件，不以肉眼宣称；交付物（可再渲染源文件、REPORT.md、附件点/剪辑清单）不在评审包内，未评价。本任务为静态道具，无角色动画要求，无播放项，故 playbackViewed 为 false 不构成缺失。compare.html 为内嵌 base64 的查看器，数据与包内 PNG 相同，评审以直接读取的 PNG 为准。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T06-r3/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "UNVERIFIED",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "compare.html（已读取，但本环境无法真实播放，见 notes）",
+      "common/STYLE_GUIDE.md",
+      "common/style-swatches.png",
+      "baseline/stand_fwd.dark.png",
+      "baseline/stand_fwd.light.png",
+      "baseline/stand_fwd.native.png",
+      "baseline/run0_fwd.dark.png",
+      "X/stand_fwd.dark.png",
+      "X/stand_fwd.light.png",
+      "X/stand_fwd.native.png",
+      "X/run0_fwd.dark.png",
+      "X/run1_fwd.dark.png",
+      "X/run1_fwd.light.png",
+      "X/run2_fwd.dark.png",
+      "X/run2_fwd.native.png",
+      "X/run3_fwd.dark.png",
+      "X/run4_fwd.dark.png",
+      "X/run5_fwd.dark.png",
+      "X/run5_fwd.light.png",
+      "Y/stand_fwd.dark.png",
+      "Y/stand_fwd.light.png",
+      "Y/stand_fwd.native.png",
+      "Y/run0_fwd.dark.png",
+      "Y/run1_fwd.light.png",
+      "Y/run2_fwd.dark.png",
+      "Y/run2_fwd.native.png",
+      "Y/run3_fwd.dark.png",
+      "Y/run4_fwd.dark.png",
+      "Y/run5_fwd.light.png"
+    ],
+    "materialEvidence": [],
+    "notes": "评审环境无法真实播放compare.html（在不违反『只读取本包内文件』约束的前提下没有可用的本地浏览器回放通道），故playbackViewed=false；判据三『实际播放时颜色、身份与动作一致』按协议记为UNVERIFIED，不因静态帧恒定而声称动画已验证。静态判据一（七帧目镜清晰、暖琥珀协调）与判据二（主体/高光层级）已通过4倍图、原生图与起点对照实际看图判定，两候选均满足，故taskFit记MEETS但置信度取MEDIUM而非HIGH。无法从现有材料判断的项目：真实播放下的观感（闪烁感、节奏中的可读性）、遮罩逐像素精确合规、锚点/附件点/剪辑时长与REPORT.md等交付物（未包含在本包）。两案成对结论为NO_MEANINGFUL_DIFFERENCE：差异仅为琥珀色调深浅的口味选择，各自都完整满足静态任务要求。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T06-r3/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "SELF_REPORTED",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "PROMPT.md",
+      "TASK.md",
+      "common/STYLE_GUIDE.md",
+      "common/style-swatches.png",
+      "baseline/stand_fwd.dark.png",
+      "baseline/stand_fwd.native.png",
+      "baseline/run0_fwd.light.png",
+      "baseline/run1_fwd.light.png",
+      "baseline/run2_fwd.light.png",
+      "baseline/run3_fwd.light.png",
+      "baseline/run4_fwd.light.png",
+      "baseline/run5_fwd.light.png",
+      "X/stand_fwd.light.png",
+      "X/run0_fwd.light.png",
+      "X/run1_fwd.light.png",
+      "X/run2_fwd.light.png",
+      "X/run3_fwd.light.png",
+      "X/run4_fwd.light.png",
+      "X/run5_fwd.light.png",
+      "Y/stand_fwd.light.png",
+      "Y/run0_fwd.light.png",
+      "Y/run1_fwd.light.png",
+      "Y/run2_fwd.light.png",
+      "Y/run3_fwd.light.png",
+      "Y/run4_fwd.light.png",
+      "Y/run5_fwd.light.png",
+      "compare.html（本地HTTP服务+无头Chromium打开并实际播放）",
+      "播放截图（查看后已删除的临时目录 _review_play/）：Start_run_00/03/06、X_run_00/02/05/08、Y_run_00/02/05/08、X_stand_a、Y_stand_a、zoom_dark_stand_fwd、zoom_dark_run0_fwd、zoom_light_stand_fwd、visor_grid_dark、visor_grid_light、debug_grid"
+    ],
+    "materialEvidence": [],
+    "notes": "播放方式：浏览器插件在子代理中不可用，改在评审包目录上启动临时HTTP服务器并用无头Chromium打开compare.html，对Start/X/Y三组分别选择run_fwd/stand_fwd剪辑并点击Play，采集播放中的canvas截图后逐张目视核对；服务器与临时截图目录已在评审结束后清理。visor_grid_light.png因绘制层叠问题实际仍为深背景，浅背景判断依据页面按钮切换后的zoom_light_*横条与X/Y的light 4倍原图。无法从现有材料判断的项：allowed-mask的精确遮罩合规（遮罩文件不在评审包内）与RGBA逐像素一致性（由独立脚本负责，本评审只做颜色改动落点的可见性核对）；交付完整性（可再渲染源文件、REPORT.md、锚点/附件点/剪辑元数据不在评审包内）；候选的制作方式不做猜测。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T01-r3/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/relay.dark.png",
+      "baseline/relay.light.png",
+      "baseline/relay.native.png",
+      "X/relay.dark.png",
+      "X/relay.light.png",
+      "X/relay.native.png",
+      "Y/relay.dark.png",
+      "Y/relay.light.png",
+      "Y/relay.native.png",
+      "common/style-swatches.png"
+    ],
+    "materialEvidence": [],
+    "notes": "本资产无动画剪辑（asset.json 与 compare.html 中 clips 为空），无播放维度可验证，也未声称任何运动已验证。包内未提供 allowed-mask.*.png，遮罩合规未在视觉端检查，交给独立脚本。无法从现有材料得到：逐像素 RGBA 保护是否通过；除面板矩形外是否存在肉眼不可见的改动；REPORT.md 等交付物（评审包中未包含）。图像渲染尺寸较小（原生 40x36，4 倍 160x144），细部色阶判断存在天然限度。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T01-r3/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/relay.dark.png",
+      "baseline/relay.light.png",
+      "X/relay.dark.png",
+      "X/relay.light.png",
+      "X/relay.native.png",
+      "Y/relay.dark.png",
+      "Y/relay.light.png",
+      "Y/relay.native.png",
+      "common/style-swatches.png"
+    ],
+    "materialEvidence": [],
+    "notes": "本资产为静态道具（asset.json与compare.html中clips均为空），不存在待机/跑动动画，运动维度不适用，无从播放。compare.html已读取源码，内嵌与包内PNG相同的Start/X/Y三帧（原生+4倍、深浅背景切换），实际图像证据来自直接读取的PNG文件。两候选在可见范围内仅右侧面板区域发生变化，其余部分与起点未见可见差异；RGBA逐像素保护由独立脚本验证，本评审不做逐像素一致的声明。未查看执行轨迹、成本、工具信息或其他评审者输出。Y的优势幅度有限，属可辩驳的偏好而非压倒性差距。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T02-r3/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/hauler.dark.png",
+      "baseline/hauler.light.png",
+      "baseline/hauler.native.png",
+      "X/hauler.dark.png",
+      "X/hauler.light.png",
+      "X/hauler.native.png",
+      "Y/hauler.dark.png",
+      "Y/hauler.light.png",
+      "Y/hauler.native.png"
+    ],
+    "materialEvidence": [],
+    "notes": "1) 评审包内未提供 allowed-mask.*.png，保护区合规无法从现有材料判断；可见事实是：两候选都把底座顶面倒角行（y=28）加宽以衔接新壳体（X收成两端1px台阶，Y为两端3px台阶），底座主体行未动；y=28是否属于底座保护区留待独立脚本核验，我不凭肉眼宣称逐像素一致。2) compare.html为静态页（clips为空），本任务为道具资产无动画，无需播放，playbackViewed如实记false。3) 我做了包内逐像素比对以核对初看印象：Y并非与起点相同（约242像素变化，壳体每侧加宽约3px），仅看4x预览容易误判为未改动；X约333像素变化。4) 本评审只依据可见图像与任务/风格材料，未接触任何执行轨迹、成本、工具或作者信息；结论限于本实验任务内，不表示商业级或行业顶级。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T02-r3/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/hauler.native.png",
+      "baseline/hauler.dark.png",
+      "baseline/hauler.light.png",
+      "X/hauler.native.png",
+      "X/hauler.dark.png",
+      "X/hauler.light.png",
+      "Y/hauler.native.png",
+      "Y/hauler.dark.png",
+      "Y/hauler.light.png",
+      "common/style-swatches.png",
+      "compare.html（内嵌 Start/X/Y 三帧，与包内 PNG 一致）"
+    ],
+    "materialEvidence": [],
+    "notes": "本资产为 prop（asset.json 无 clips），无待机/跑动动画可播，playback 相关维度不适用，playbackViewed 如实记 false。遮罩 allowed-mask 未包含在本包内，因此'保护区外像素不变'的精确验证无法由肉眼完成，按 PROMPT 约定留给独立脚本；两侧在可见层面上屏幕、琥珀徽标与底座均未见改动或遮挡。两个候选均达任务要求，Y 胜出的幅度是中等而非压倒性：X 同样可接受，只是形体表达更保守。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T03-r3/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "PROMPT.md",
+      "TASK.md",
+      "common/STYLE_GUIDE.md",
+      "common/style-swatches.png",
+      "compare.html",
+      "baseline/asset.json",
+      "baseline/cutter.native.png",
+      "baseline/cutter.dark.png",
+      "baseline/cutter.light.png",
+      "X/cutter.native.png",
+      "X/cutter.dark.png",
+      "X/cutter.light.png",
+      "Y/cutter.native.png",
+      "Y/cutter.dark.png",
+      "Y/cutter.light.png"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为道具资产，compare.html 中 clips 为空，不存在待机/跑动等可播放动画，故 playbackViewed 如实记 false，评审不涉及运动维度。除逐张查看 PNG（原生+4倍、深/浅背景）外，另以内存方式读取 32x32 像素网格核对明暗组织与颜色分布（未创建任何临时文件）；网格层面轮廓、描边与铆钉与起点一致，但 RGBA 逐像素保护验证仍以独立脚本结论为准，评审仅声明可见层面无破坏。baseline/cutter.rgba 与 baseline/viewer.html 未另行查看，PNG 已覆盖同等视觉信息。此对比仅针对本试点任务内的可读性、完成度与改善，不代表商业级或行业顶级结论。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T03-r3/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/cutter.native.png",
+      "baseline/cutter.dark.png",
+      "baseline/cutter.light.png",
+      "X/cutter.native.png",
+      "X/cutter.dark.png",
+      "X/cutter.light.png",
+      "Y/cutter.native.png",
+      "Y/cutter.dark.png",
+      "Y/cutter.light.png",
+      "common/style-swatches.png"
+    ],
+    "materialEvidence": [],
+    "notes": "本任务为静态道具，compare.html 无动画剪辑，无运动维度需要播放验证，playbackViewed 如实记 false。包内未提供 allowed-mask 文件，X/Y 的 asset.json 亦不在包内，锚点/附件点元数据无法直接核对；从图像层面看轮廓、描边、铆钉、锚点所在区域均未见可见破坏。判断局限：像素明暗结构以只读脚本辅助确认，美术优劣结论仍基于对原生图与双背景4倍预览的实际观看；无外部商业标杆，结论限于本任务内的可读性、完成度与改善幅度。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T04-r3/reviewer-1",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "baseline/medkit.native.png",
+      "baseline/medkit.dark.png",
+      "baseline/medkit.light.png",
+      "X/medkit.native.png",
+      "X/medkit.dark.png",
+      "X/medkit.light.png",
+      "Y/medkit.native.png",
+      "Y/medkit.dark.png",
+      "Y/medkit.light.png",
+      "common/style-swatches.png",
+      "compare.html（文本结构；静态道具，clips 为空，无可播放动画）"
+    ],
+    "materialEvidence": [],
+    "notes": "1) 本任务为静态道具，compare.html 中 clips 为空，无动画可播放，playbackViewed 记为 false，不存在动画维度判定。2) 遮罩内外的 RGBA 逐像素一致性不凭肉眼宣称，由独立脚本验证；我在可见层面未发现遮罩区域外的改动。3) 包内未提供 REPORT.md、可再渲染源文件与 allowed-mask 图像，交付物完整性无法从本包判断，本评审仅覆盖成图视觉判据，不因此调整 taskFit。4) 本试点无外部商业标杆，结论限于任务规定的可读性、完成度与改善，不代表商业级水准。"
+  },
+  {
+    "role": "reviewer",
+    "id": "T04-r3/reviewer-2",
+    "imageInput": "SELF_REPORTED",
+    "playback": "NOT_APPLICABLE",
+    "toolCallEvidence": "MISSING",
+    "actualViews": [
+      "PROMPT.md",
+      "TASK.md",
+      "review.template.json",
+      "common/STYLE_GUIDE.md",
+      "common/style-swatches.png",
+      "compare.html",
+      "baseline/asset.json",
+      "baseline/medkit.dark.png",
+      "baseline/medkit.light.png",
+      "baseline/medkit.native.png",
+      "X/medkit.dark.png",
+      "X/medkit.light.png",
+      "X/medkit.native.png",
+      "Y/medkit.dark.png",
+      "Y/medkit.light.png",
+      "Y/medkit.native.png"
+    ],
+    "materialEvidence": [],
+    "notes": "本资产为静态道具，compare.html源码中Start/X/Y均无clips，无动画可播放，运动维度不适用；playbackViewed如实记为false。判断局限：'正常显示尺度可辨认'是单人观看原生图与4倍图后的结论；allowed-mask未包含在包内，遮罩内逐像素合规与RGBA保护精度不由肉眼判定，交由独立脚本；包内也未见REPORT.md或可再渲染源，交付完整性无法从本材料评价。X为红底白十字而非白底红十字，属游戏中常见的急救表达方式，未认定为现实品牌问题。Y的心形红色(#c3392b)比公共红阶(#c35a59)更橙更饱和，风格指南明确允许新色，不作为扣分项。按要求未给出单一数字总分。"
+  }
+]

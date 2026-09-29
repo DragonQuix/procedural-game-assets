@@ -1,0 +1,2805 @@
+[
+  {
+    "pair": "T01-r1",
+    "task": "T01",
+    "repeat": 1,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+    "preference": "NO_MEANINGFUL_DIFFERENCE",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T01",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/relay.dark.png",
+        "baseline/relay.light.png",
+        "baseline/relay.native.png",
+        "baseline/asset.json",
+        "X/relay.dark.png",
+        "X/relay.light.png",
+        "X/relay.native.png",
+        "Y/relay.dark.png",
+        "Y/relay.light.png",
+        "Y/relay.native.png",
+        "common/STYLE_GUIDE.md",
+        "common/style-swatches.png",
+        "compare.html",
+        "包内自制的深/浅背景 8x 三联对比图与侧板放大裁剪（_crops/，查看后已删除）"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "注意力层次明显反转：亮青色屏幕内容在 4 倍深、浅两种背景下都先于侧板被注意到；同时侧板逐像素保留了边框、内芯与高光的结构，硬边无抗锯齿，深浅背景上都仍可辨认为一块功能面板，未被涂成透明或背景色。",
+          "topConcern": "新的橄榄青铜色偏浑浊的黄褐调，与冷灰机身和青色屏幕并置时略显发闷；侧板存在感比起点明显降低（仍达标，但色相关系不算最干净）。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "同样把第一视觉落点让给屏幕，且面板色更沉稳，整体色阶协调；边框、内芯、高光结构完整保留，硬边表达未破坏，深浅背景上侧板均可辨认。",
+          "topConcern": "侧板比 X 更暗一档，存在感与可读性的裕度更小，小尺寸下略接近一块熄灭的凹槽；仍满足『仍应能辨认』，但余量不大。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "起点右侧琥珀面板（填充约#9c7420、高光#ffb13d）与青色屏幕争夺注意；X 与 Y 用同一思路把面板压暗为暗青铜/褐色系（X 填充约#5f4a1e，Y 约#4a3614，均落在公共琥珀色阶的暗段方向），且逐像素保留原有边框/内芯/高光布局，未添加灯光、模糊或装饰。在 4 倍深背景#202028 与浅背景#d6d8dc 下，两者的亮青色屏幕都明显先于侧板被注意到，侧板也都有结构与存在感、未被删掉或涂平。TASK.md 的三条视觉判据两侧均满足；X 与 Y 的差别只是压暗幅度与色相的细微程度（X 略亮略黄、Y 略暗略棕），不足以在任务判据上可靠地区分优劣。",
+      "confidence": "HIGH",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "本任务为 40x36 单帧静态道具（asset.json 无 clips，compare.html 无动画项），不存在待机/跑动播放维度，playbackViewed 保持 false 且不构成判断缺口。已实际查看全部 9 张 PNG（4 倍深/浅与原生）并在包内自制放大裁剪核对侧板结构。无法从现有材料判断的项：RGBA 逐像素保护、遮罩与锚点合规由独立脚本负责，我仅确认可见范围内机身、屏幕、底座与起点一致、未见面板外改动；交付物（可再渲染源、REPORT.md、候选状态数）不在评审包内，未纳入判断。两侧均为『仅压暗琥珀面板』的保守解法，判据全部达成，无阻塞性问题；X 侧板存在感裕度略大，Y 更沉稳，差异细微故不判偏好。"
+    },
+    "reviewSha256": "f314bb6f40b6ef5c20dd029bce4475026bda70abd2a185149b61259da9576c79"
+  },
+  {
+    "pair": "T01-r1",
+    "task": "T01",
+    "repeat": 1,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+    "preference": "NO_MEANINGFUL_DIFFERENCE",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T01",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/relay.dark.png",
+        "baseline/relay.light.png",
+        "baseline/relay.native.png",
+        "X/relay.dark.png",
+        "X/relay.light.png",
+        "X/relay.native.png",
+        "Y/relay.dark.png",
+        "Y/relay.light.png",
+        "Y/relay.native.png",
+        "common/style-swatches.png",
+        "compare.html（读取源码确认三个条目 clips 均为空、本任务为静态道具；内嵌 base64 原生图经只读脚本解码用于差异定位，未做浏览器渲染）"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "侧板从亮琥珀整体压暗为低饱和暗棕，压暗幅度更足，深浅两种背景下主屏幕都明确成为第一视觉落点；面板的高光/主体/暗部三档色阶、顶部亮帽与边框结构全部保留，侧板仍可辨认，未被删除或涂成背景色。",
+          "topConcern": "压暗较狠后侧板三档之间的亮度差被压缩，暗档与机身暗部的亮度接近，面板的琥珀材质感减弱、存在感处于下限附近，读起来偏暗沉；这是可见的风格代价，但未达到阻碍任务通过的程度。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "同样把右侧琥珀面板整体压暗并完整保留三档色阶与边框结构，屏幕在深浅两种背景下都不再被侧板压制、成为第一落点；侧板的轮廓与存在感保持得比 X 稍好，仍能读出这是一块独立面板。",
+          "topConcern": "压暗幅度比 X 略轻，侧板高光档的暖棕仍相对明显，是两者中残留抢眼倾向稍多的一侧；不过在 4 倍显示下已不与主屏幕争夺注意力，不构成实质问题。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照三个视觉判据：1) 第一落点——两侧都只把右侧琥珀面板由亮琥珀三档（高光约 #ffb13d/主体 #9c7420/暗部 #4a3410）压暗为暗棕三档，X 为 #6b5220/#4a3614/#2e2210，Y 为 #7a6128/#5f4a1e/#2e2410，屏幕本身未动；在深背景 #202028 和浅背景 #d6d8dc 的 4 倍图上，青色主屏幕都比暗棕侧板更先被注意到。2) 侧板可读性——两者都保留面板矩形轮廓、顶帽高光、三档色阶与右侧冷灰边框，侧板仍有结构和存在感，均未涂成透明或背景色。3) 整体协调——两者都只对侧板原色阶做同色相压暗重映射，未新增任何装饰或转移问题的元素。X 与 Y 是同一策略的两个微调版本，对应像素每档仅差约 6-8% 亮度（X 略暗、Y 略亮），在 4 倍与原生图下都能察觉但方向一致、各判据上互有毫厘之得，不足以可靠判定一侧更符合任务。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "本任务为静态道具（asset.json 与 compare.html 中 clips 均为空），不存在待机/跑动等可播放动画，playbackViewed 如实记为 false，不涉及运动维度。判定 taskFit=MEETS 基于 4 倍预览与原生图在两种规定背景下的实际查看；改动范围定位（两者各 70 像素、限定在 x=27-31/y=8-21 的侧板矩形）由只读像素对比得出，仅用于理解改动分布与描述可见差异，RGBA 逐像素一致与遮罩合规的精确验证归独立脚本，本评审不据此宣称。X/Y 之间的成对结论置信度为 MEDIUM：差异真实存在但幅度小，若必须二选一，X 在主判据（屏幕第一落点）上稍占优、Y 在侧板存在感上稍占优，综合不构成可靠优劣。本试点无外部商业标杆，MEETS 仅指满足任务预判据，不代表商业级质量。"
+    },
+    "reviewSha256": "adb3af8019848d6cc17c424b22d43c6359313a9595bb45fc5698e8872fb0476d"
+  },
+  {
+    "pair": "T02-r1",
+    "task": "T02",
+    "repeat": 1,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T02",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/hauler.dark.png",
+        "baseline/hauler.light.png",
+        "baseline/hauler.native.png",
+        "X/hauler.dark.png",
+        "X/hauler.light.png",
+        "X/hauler.native.png",
+        "Y/hauler.dark.png",
+        "Y/hauler.light.png",
+        "Y/hauler.native.png",
+        "common/style-swatches.png",
+        "compare.html（源码阅读：内嵌同一 Start/X/Y 三帧的 native+4倍查看器，深浅背景切换；本环境以直接读取包内 PNG 替代浏览器渲染）",
+        "baseline/asset.json"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "对『细得像支架』的起点问题纠正得最直接：主壳体从16px宽加宽到26px、几乎与底座同宽，整体读作厚重的重装箱体；镜头与徽标像素与起点完全一致、无遮挡，硬边无抗锯齿、无纹理掩盖，轮廓比起点明确且未塞满画布。",
+          "topConcern": "壳体中心（x8–33，中心20.5）比底座/画幅中心（19.5）右偏1px：右侧壳体轮廓与底座右缘连成一条直线、右侧基肩消失，左侧仍留2px基肩，镜头/徽标在新机身内也随之略偏左；4倍预览并排可见轻微失衡，稍削弱『稳坐台座』的读感。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "主壳体对称加宽（16→24px）并保持居中，底座左右各留2px对称基肩，顶部两级收阶让轮廓比起点更明确，壳体-底座-镜头形成稳定的重装比例；镜头与徽标原样保留、清晰无遮挡，硬边风格与色阶关系保持。",
+          "topConcern": "加宽幅度小于X（24px对26px），宽大面板围绕小镜头留白偏多，厚重感略弱于X；底座顶缝行（第28行）接触阴影随新壳体足迹有少量像素改动（该行是否在允许区内无法从包内材料核实）。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "任务核心是把『过细、像支架』的壳体改成稳重厚实的重装设备，且不得失衡。实测结构：起点壳体16px宽（x12–27）坐在28px宽底座（x6–33）上；X壳体26px（x8–33）最厚实但整体右偏1px、右侧与底座边缘齐平成一条直线，左侧留2px基肩；Y壳体24px（x8–31）居中、两侧各2px对称基肩、顶部两级收阶。两候选的镜头（x16–23，含青色高光）与琥珀徽标像素均与起点一致且无遮挡，底座可见面（29–33行）与起点一致，轮廓均比起点明确、整体宽28/40未塞满画布，均为硬边无噪点表达。成对取舍取决于『稳重/不失衡』：Y以居中与对称基肩更稳定，X的1px右偏与右侧齐平带来可见的轻微失衡，故优先Y；两者均满足任务明确要求。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "评审基于实际读取包内PNG（先4倍深/浅背景预览、后原生图、对照起点），并对三张原生图做了逐像素着色核查以确认结构宽度、居中性与保护内容（镜头/徽标集合与起点逐像素一致；底座29–33行一致；两候选均仅第28行顶缝接触阴影随新壳体足迹改动，X另在(33,28)补1个轮廓像素）。allowed-mask未包含在本评审包内，上述第28行改动是否落在允许区内无法由我核实，精确保护校验以独立脚本为准，我不据此宣称合规或不合规。T02为静态道具（asset.json与compare.html中clips均为空），不存在待机/跑动等运动维度，playbackViewed=false不构成遗漏。X与Y均判MEETS，成对选择属接近的美学判断（居中平衡 vs 更大厚度），故置信度取MEDIUM而非HIGH。本试点无外部商业美术标杆，结论仅限本任务内的可读性、完成度与改善，不代表行业或商业级水平。"
+    },
+    "reviewSha256": "f2bd1f99297e520f0eed2cd8de62870c793f34fc3bd788317825be4589c5525c"
+  },
+  {
+    "pair": "T02-r1",
+    "task": "T02",
+    "repeat": 1,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "NOT_YET"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T02",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "PROMPT.md",
+        "TASK.md",
+        "common/STYLE_GUIDE.md",
+        "common/style-swatches.png",
+        "compare.html",
+        "baseline/asset.json",
+        "baseline/hauler.dark.png",
+        "baseline/hauler.light.png",
+        "baseline/hauler.native.png",
+        "X/hauler.dark.png",
+        "X/hauler.light.png",
+        "X/hauler.native.png",
+        "Y/hauler.dark.png",
+        "Y/hauler.light.png",
+        "Y/hauler.native.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "在镜头块、琥珀徽标、底座三者原样保留且无遮挡的前提下，把主壳体从约16px的细高塔身加宽到24px（原生x8–31），并保持与底座、画布、镜头同一中线；顶部2px斜切肩部让整体清晰读作厚重平稳的柜式重装设备，4x与原生图下轮廓都比起点明确得多，左右各留对称的底座沿边，画布余量未显得塞满。",
+          "topConcern": "加宽后的壳体两侧是大片平坦的空白灰面，只有肩部斜切和左/上高光柱做变化，观感略显单调；另外壳体与底座交界一行（原生第28行）的底座顶面深色描边在壳体宽度范围内被壳体延伸取代，两候选均有此变化，本包未附允许区遮罩，我无法判断该交界是否属于可改范围。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "NOT_YET",
+          "topStrength": "同样原样保留了镜头块、琥珀徽标与底座，镜头无遮挡；壳体加宽到约26px，厚重感明显，硬边、无抗锯齿、冷灰+信号色的表达与起点和公共风格一致，没有用纹理掩盖比例问题。",
+          "topConcern": "壳体在底座上的落位偏右：壳体右缘（原生x33）与底座右缘（x33）完全齐平，右侧看不到任何底座沿边，左侧仅剩约1px沿边；壳体质量中心比底座中线偏右约1px，镜头块也因此偏离壳体中线（左灰边约7px、右约9px）。4x预览下这种左右不对称清晰可见，与任务'稳定'的目标和判据'没有显得失衡'直接相悖。",
+          "blockingIssue": true
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "起点为约16px宽的细高塔身（原生x12–27）坐在28px宽底座（x6–33）上，正是任务所指的'像支架'比例。X把壳体加宽到24px（x8–31）且与底座中线、画布中线、镜头块（x16–23、行10–16）中线完全对齐，左右底座沿边对称，镜头与琥珀徽标（x18–21、行21–23）逐块保留、无遮挡，三条视觉判据均满足。Y同样保留镜头与徽标且加宽到26px（x8–33），但壳体右缘与底座右缘齐平、仅左侧留沿边，质量落位比底座中线偏右约1px，在规定的4x最近邻观察条件下左右沿边不等宽清晰可见，违反'没有显得失衡'判据并削弱'稳定'目标。两者都未添加纹理、模糊或抗锯齿，配色保持在起点的钢灰/屏青/琥珀体系内。以上基于对两背景4x预览与原生帧的实际查看及轮廓逐行核对。",
+      "confidence": "HIGH",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "1) 本包未包含 allowed-mask.*.png，保护区合规无法由我判定：两候选在壳体-底座交界行（原生第28行）都让壳体覆盖了原底座顶面描边段，是否越界交由独立脚本验证，我不据此下结论。2) compare.html 与 baseline/asset.json 显示本资产为静态 prop（clips 为空），无待机/跑动等动画维度，故 playbackViewed=false 且不涉及运动判断。3) 交付物中的可再渲染源、REPORT.md、锚点/附件点导出不在本评审包内，交付完整性不在本次判断范围；锚点(20,33)与附件点sensor(20,13.5)在两候选的可见像素上仍落在被保留的底座与镜头块上。4) 我不基于唯一轮廓、特定RGB或像素相似度评分，也未宣称任何一侧RGBA逐像素一致；成对结论只回答'哪侧更符合任务'，X在均衡性上明显更符合，Y的整体厚重感仍优于起点。"
+    },
+    "reviewSha256": "b179200790ee69f45f8090fe7e85262aea4fc764f253198b9f160657ffb788d8"
+  },
+  {
+    "pair": "T03-r1",
+    "task": "T03",
+    "repeat": 1,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "D",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T03",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/cutter.dark.png",
+        "baseline/cutter.light.png",
+        "baseline/cutter.native.png",
+        "X/cutter.dark.png",
+        "X/cutter.light.png",
+        "X/cutter.native.png",
+        "Y/cutter.dark.png",
+        "Y/cutter.light.png",
+        "Y/cutter.native.png",
+        "common/style-swatches.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "夹口有一套方向一致的金属明暗：顶部受光边缘高光、中灰受光面、下缘转暗，手柄保持接近原稿的深色退居次要，深浅两背景下主次关系都清楚。",
+          "topConcern": "夹口受光面偏大偏亮、对比偏高，4倍图下有略偏『一大块亮面』的倾向，金属灰阶层次还有细化空间。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "沿上缘的受光高光方向一致、过渡干净，手柄芯部保持深色，原生尺寸与4倍图都清楚可读，轮廓与琥珀铆钉可见未变。",
+          "topConcern": "夹口受光面明度偏收敛，与手柄上缘细条高光的明度差距不大，夹口对手柄的主次强调弱于任务期望，金属感不如更强对比的方案明确。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "在深背景、浅背景和原生三张图中，X 的夹口亮部明显更大更亮：顶缘高光到中灰受光面再到下缘暗部关系完整，手柄几乎保持原稿深色，夹口-手柄主次最清楚，最贴合『夹口像金属、手柄退居次要』。Y 用同一上光源逻辑但高光更细、沿整个上缘更均匀分布，夹口受光面明度与手柄高光条接近，主次关系较弱。两者轮廓与琥珀铆钉均可见未变，原生与4倍图下均未见到明显杂点。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "本任务是 32x32 静态道具（asset.json 中 clips 为空），无待机/跑动等动画维度，playbackViewed 保持 false 且不适用。逐像素的 alpha/描边/铆钉/锚点保护不在视觉评审断言范围内，留给独立脚本验证；视觉上两者铆钉位置颜色与外轮廓均未见破坏。原生 32x32 图像非常小，个别杂点的绝对排查超出肉眼可靠范围，此点按『未见明显杂点』记录而非绝对断言。X 与 Y 的差距真实可见但幅度不大，主判据是夹口亮部强度与夹口-手柄主次清晰度。",
+      "comparisonConditions": "所有成图均按 compare.html 固定条件查看：32x32 原生 + 4倍最近邻，深背景 #202028 / 浅背景 #d6d8dc，两侧条件一致。"
+    },
+    "reviewSha256": "3d4b9bfd988c3c847d27e17ff043e438565db2815eddf037ef9813828cb6c740"
+  },
+  {
+    "pair": "T03-r1",
+    "task": "T03",
+    "repeat": 1,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "D",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T03",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/cutter.native.png",
+        "baseline/cutter.dark.png",
+        "baseline/cutter.light.png",
+        "X/cutter.native.png",
+        "X/cutter.dark.png",
+        "X/cutter.light.png",
+        "Y/cutter.native.png",
+        "Y/cutter.dark.png",
+        "Y/cutter.light.png",
+        "common/style-swatches.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "在不改变轮廓、保留琥珀铆钉的前提下建立了同一光源下的明暗坡度：头部夹口出现明显更亮的受光面，柄身自上缘受光带渐入暗部，金属感比起点明确且整体干净。",
+          "topConcern": "柄身受光带延伸较长、整体亮度抬升略多，夹口与手柄的主次差距拉得不够开，'手柄退居次要'的效果相对偏弱。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "夹口的受光与阴影关系最清晰：头部亮面与下方暗面、沿上缘的连续高光构成一致的方向光，柄身保持较暗，主次分明且与起点同属一套工具设计。",
+          "topConcern": "上缘高光线条较细、对比偏高，原生尺寸下略偏勾边观感，金属体面感较依赖头部亮面支撑。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照起点三图：起点夹口与手柄近乎同一平涂值。X 与 Y 都保留轮廓与琥珀铆钉，加入方向一致的上下明暗关系且原生与4倍图下均未见散点噪点，均满足三条视觉判据。差异在幅度：Y 的夹口亮面/暗面与上缘高光对比更明确、柄身更暗，更贴合'夹口像金属、手柄退居次要'；X 改善方向相同但对比略软、柄身受光带更长，主次拉开稍弱。该差距为小幅而非压倒性。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "本任务为静态道具（asset.json 与 compare.html 中 clips 均为空），无可播放动画，playbackViewed 保持 false，动画维度不适用而非跳过。铆钉像素、alpha、外轮廓描边与锚点的逐像素保护由独立脚本负责，本评审仅记录三图中均未见对铆钉或轮廓的可见破坏，不据此宣称逐像素一致。各候选的 REPORT.md、可再渲染源文件等交付物不在本包内，交付完整性无法从现有材料判断（UNVERIFIED）。X/Y 的成对优势幅度小，若需更强结论需更高放大率的逐像素对照，当前判断基于包内原生图与4倍图的目视比较。"
+    },
+    "reviewSha256": "3fc2bbcccb369888fbdb1e2abfa187c3a68d4ddb9f9b953be3ef2c90dfa3da00"
+  },
+  {
+    "pair": "T04-r1",
+    "task": "T04",
+    "repeat": 1,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+    "preference": "NO_MEANINGFUL_DIFFERENCE",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T04",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "X/medkit.dark.png",
+        "X/medkit.light.png",
+        "X/medkit.native.png",
+        "Y/medkit.dark.png",
+        "Y/medkit.light.png",
+        "Y/medkit.native.png",
+        "baseline/medkit.dark.png",
+        "baseline/medkit.light.png",
+        "baseline/medkit.native.png",
+        "common/style-swatches.png",
+        "compare.html"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "中央嵌板内的红色像素心形带深色描边和左上高光，形体完整、居中，与箱体左上受光方向一致；深浅两种背景和原生尺度下都能让人联想到医疗/生命用途，不再是矩形色块。",
+          "topConcern": "心形单独看的急救指向略弱于十字，更偏游戏内'生命值/血包'惯例，语义依赖箱体语境支撑；表现趣味（描边+高光）是其优点，但也让符号比必要的几何稍微复杂。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "白色像素十字是最直接的急救符号，深色嵌板上对比强，笔画稳定、居中，原生 40x36 尺度下辨识度最高。",
+          "topConcern": "十字为纯几何加少量阴影，表现最素，形体趣味略逊于带描边高光的处理；白色亮度相对箱体色阶偏亮，但仍在风格允许的局部新色范围内。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照 TASK.md 三个视觉判据：(1) 急救联想——X 用红色心形、Y 用白色十字，都把起点中央的琥珀矩形占位换成了可辨认的医疗符号，深背景#202028、浅背景#d6d8dc 和原生尺度下均成立；(2) 简洁稳定与位置——两者符号都居中于嵌板内、笔画干净、无琥珀残留或杂点，X 的心形另有描边稳定轮廓；(3) 风格一致——两侧的箱体外壳、手柄、锁扣与起点外观一致，未见遮罩外可见改动或硬边像素风破坏。差异仅在符号语义侧重（十字更直接指向急救，心形更偏游戏血包惯例）与表现趣味，两侧各占一优，不足以判哪侧明显更符合任务。",
+      "confidence": "MEDIUM",
+      "notes": "本任务为静态道具，compare.html 中 clips 为空，无动画可播放，playbackViewed 如实记 false。判定为两侧均 MEETS 属高置信；成对结论取 NO_MEANINGFUL_DIFFERENCE 是因为三项判据下两侧互有小优、差距在取舍范围内，故整体置信 MEDIUM。无法从现有材料判断：遮罩外像素与 alpha 是否逐像素不变（PROMPT 规定由独立脚本精确验证，我不以肉眼宣称）；可再渲染源文件、REPORT.md 等交付物不在包内，未评价；不评价编辑方式、成本或工具归属。"
+    },
+    "reviewSha256": "518362d016b16be568faac6d1b36034bb66b28e6c735947ec3a753e11c55c1f0"
+  },
+  {
+    "pair": "T04-r1",
+    "task": "T04",
+    "repeat": 1,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T04",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/medkit.native.png",
+        "baseline/medkit.dark.png",
+        "baseline/medkit.light.png",
+        "X/medkit.native.png",
+        "X/medkit.dark.png",
+        "X/medkit.light.png",
+        "Y/medkit.native.png",
+        "Y/medkit.dark.png",
+        "Y/medkit.light.png",
+        "common/style-swatches.png",
+        "compare.html（内嵌 Start/X/Y 单帧，clips 为空）"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "面板中央占位黄块被替换为等宽臂的浅色像素十字，硬边、无可见抗锯齿，在凹面板内居中稳定；原生 40x36 与深/浅背景 4 倍图下都能立刻读出急救十字含义。外壳、提手、左侧扣件与面板边框相对起点未见可见改动。",
+          "topConcern": "十字用色接近纯白，亮于共享色阶中最亮的钢灰（#a6b0c2），略微超出公共色阶范围；属允许的局部新色，影响很小，但与箱体高光同为浅色系，功能性信号感弱于彩色信号块。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "占位黄块替换为带暗部收边的红色像素心形，形体完整、左右对称，硬边像素风与箱体一致，居中于凹面板，深/浅背景与原生尺度下都清晰可读，并保留了面板中心的暖色信号重点（红色在共享 red 色阶内）。",
+          "topConcern": "红色心形单独看更常联想'生命值/喜爱'，指向'喜爱'的歧义明显；在急救箱语境下能联想到医疗/生命，但作为急救/医疗用品标识的指向性弱于十字，不满足'容易识别'的最高把握。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照起点：两侧都只替换了底板中央凹面板内的黄色矩形占位块，外壳、顶部提手、左侧扣件与面板边框在深/浅背景 4 倍图与原生图中均与起点视觉一致，未见可见破坏。X 的浅色像素十字是最直接、歧义最小的急救标识，硬边简洁、居中稳定，符合'线条简洁稳定、位置合适'判据；Y 的红色像素心形工艺同样干净稳定，但在游戏语境之外更易读作'喜爱'符号，作为急救标识的联想强度低于十字。两者均无文字、数字或现实品牌，风格与工业像素风一致。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "本任务为单帧道具（compare.html 中 clips 为空），无动画需要播放，playbackViewed 如实记 false，不涉及动画维度判断。遮罩外 RGBA、alpha、锚点与附件点的逐像素一致性无法凭肉眼验证，按提示词交给独立脚本；包内也未提供 allowed-mask 图，故只能确认'除面板中央符号外未见可见改动'。两侧均以相同背景（#202028/#d6d8dc）与相同倍率（原生+固定4倍）对比，未依据唯一轮廓、特定 RGB 或像素相似度评分。置信度定为 MEDIUM 的原因：X 优于 Y 的成对判断较有把握，但'心形是否足以联想急救/医疗用途'含观者文化语境的主观成分，Y 的 MEETS 判定保留这一不确定性。"
+    },
+    "reviewSha256": "7b8baccbc197fba5956c1b55cd151b50fc6cfa4fbc7afbe1a5ec683dc0004c09"
+  },
+  {
+    "pair": "T05-r1",
+    "task": "T05",
+    "repeat": 1,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "D",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T05",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/beacon.native.png",
+        "baseline/beacon.dark.png",
+        "baseline/beacon.light.png",
+        "X/beacon.native.png",
+        "X/beacon.dark.png",
+        "X/beacon.light.png",
+        "Y/beacon.native.png",
+        "Y/beacon.dark.png",
+        "Y/beacon.light.png",
+        "compare.html"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "轮廓最直接读作便携救援信标：琥珀色信号灯经细立杆明显抬升到视觉上方，灯体带受光高光成为明确焦点；底座、深灰机身、立杆、信号灯、右侧青色电池柱五个部件均可辨认，整体连贯不再散落，深浅两种背景下均清晰可读。",
+          "topConcern": "机身偏素，缺少提手等携带提示，可携带感主要靠小体积和侧挂电池暗示；立杆在原生尺度仅约1px宽，灯与机身的连接在原生图上略显瘦弱。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "整体完成度高：宽底座稳固，机身带有顶盖、正面散热细节和右侧带竖纹的侧挂模块，读作一台可携带设备，琥珀信号灯位于顶部成为焦点，明暗关系统一，硬边像素干净。",
+          "topConcern": "信号灯仅以短座贴近机身顶部，抬升感弱；灯座暗部与顶盖阴影略糊，灯与机身的衔接不够清爽；浅灰顶盖与底座在浅背景#d6d8dc上对比下降，顶部边缘可读性略受影响；右侧竖纹模块更像提手或散热鳍，电池身份不明显，五个部件中立杆几乎不可辨。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "起点图中琥珀色灯块悬空、零件互不相连；X与Y都把它重组为连贯整体且信号灯位于视觉上方、底部稳固，均满足三项视觉判据。差距在可读性细节：X以立杆把灯明显抬升，'上方信号灯'的结构语义最强，且青色电池部件明确可辨，在深浅两背景下均保持清晰；Y机身细节更丰富、更有携带设备感，但灯的抬升弱、灯座衔接略糊，浅灰顶盖在浅背景下对比下降，电池与立杆两个部件的身份不易辨认。综合看X对任务核心语义（信标+可辨电池+双背景完成度）的达成更直接。",
+      "confidence": "MEDIUM",
+      "notes": "本任务为静态道具（baseline/asset.json 中 clips 为空），无待机/跑动动画可播放，运动相关维度不适用，playbackViewed 如实记 false。评审包内未提供 allowed-mask.*.png，且 PROMPT 规定像素保护由独立脚本验证，故本评审未判定遮罩合规，也未以肉眼宣称RGBA逐像素一致；仅从4倍图观察两候选内容均未贴边，2px透明边界看起来得到保留，此为可见印象而非像素级断言。无法从现有材料判断：遮罩保护是否逐像素合规、交付物（可再渲染源、REPORT.md等）是否齐全、以及各自是否用满或超出12个候选状态。置信度取 MEDIUM：两者差距不大且画幅仅40x40，判断依据以4倍图上的结构与可读性为准。"
+    },
+    "reviewSha256": "2a2fb45bcc0896fcddf7199e0a4fe5248ce34703fa9d2199650a94266f746a4f"
+  },
+  {
+    "pair": "T05-r1",
+    "task": "T05",
+    "repeat": 1,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [
+      "allowedPairwiseResult",
+      "allowedTaskFit",
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T05",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/beacon.dark.png",
+        "baseline/beacon.light.png",
+        "baseline/beacon.native.png",
+        "baseline/asset.json",
+        "X/beacon.dark.png",
+        "X/beacon.light.png",
+        "X/beacon.native.png",
+        "Y/beacon.dark.png",
+        "Y/beacon.light.png",
+        "Y/beacon.native.png",
+        "common/style-swatches.png",
+        "compare.html"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "结构一体化最强：琥珀信号灯通过带沿口的颈座稳固承接在机身顶部，轮廓自上而下呈灯-颈-机身-加宽底座的阶梯收放，一眼读成一台完整的便携信标而不是散落零件；机身正面有内嵌面板加三枚指示点，承载机身的身份清楚，全图只有琥珀一处暖色强调，焦点集中，顶部受光关系一致，在深浅两种背景的原生与4倍尺度下都保持完成度。",
+          "topConcern": "右侧侧挂单元与机身同为冷灰，只靠亮度差区分，作为电池的身份略含糊；机身暗部与深背景明度接近，深背景下底座轮廓主要靠顶部亮线支撑，原生尺度下这一区域的层次有所压缩。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "信号灯位于立杆顶端，位置高度在两侧候选中最突出，琥珀灯球受光与体积感分明，是明确的视觉焦点；青绿色电池做了功能色区分，部件身份比X的侧挂单元更易读；灯-杆-机身-底座的结构成立，底座加宽且有顶部亮线，稳定感足够。",
+          "topConcern": "机身正面几乎没有任何内部细节，完成度低于X，机身作为承载主体略显空；细杆加圆球的组合在原生尺度下读法略偏操纵杆或立杆灯，信标一体感弱一档；青色与琥珀形成两个强调色，虽然青绿属于公共色板，焦点仍被轻微分散。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "keyEvidence": "三个视觉判据上两侧都达标：轮廓均读成完整便携信标，均为上方信号灯、承载机身、加宽底座的结构，焦点均为琥珀灯。决定性差异在结构衔接与完成度：X 的灯通过带沿口颈座与机身实体衔接，机身有内嵌面板与指示点，全图单一暖色强调，焦点最集中；Y 用细杆衔接灯球，机身正面近乎空白，且青色电池与琥珀灯构成双重强调，一体感与完成度在4倍与原生尺度下都可见地低一档。该差异在深浅两种背景下方向一致，不是背景或倍率造成的错觉。",
+      "confidence": "MEDIUM",
+      "notes": "本任务为静物 prop，compare.html 中两侧 clips 均为空，不存在动画维度；playbackViewed=false 不涉及任何运动判断。包内未提供 allowed-mask.*.png、X/Y 各自的 asset.json、锚点/附件点或 REPORT.md：遮罩合规、至少2px透明边界、锚点不变无法由视觉判断，只能目测两候选四周留白存在，像素级保护一致性由独立脚本负责，我未据此下结论。两候选均无阻断性可见问题，Y 也满足任务明确要求，差异是完成度与一体感的程度差而非合格与否。无法从现有材料判断的内容：两侧的编辑方式与工具（也不应猜测）、被保护像素是否逐像素保持、交付清单中可再渲染源文件与报告是否存在。"
+    },
+    "reviewSha256": "07e731ebc203470265371a043ccbdde823ed36adb754ec8d57443c710a264f0b"
+  },
+  {
+    "pair": "T06-r1",
+    "task": "T06",
+    "repeat": 1,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+    "preference": "NO_MEANINGFUL_DIFFERENCE",
+    "confidence": "HIGH",
+    "playbackViewed": true,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T06",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "compare.html（经临时本地只读 HTTP 服务器在无头 Edge 中打开：Start/X/Y 三节，逐帧切换查看 4x canvas，深背景 #202028 与浅背景 #d6d8dc 均查看，并实际点击 Play/pause 播放 stand_fwd 与 run_fwd）",
+        "播放期间连拍截图：X_runplay_01/04/07/10、Y_runplay_02/05/08/11、X_standplay_00、Y_standplay_00（真实播放中捕获，run 帧序经采样记录为 run0→run5 循环）",
+        "4x 逐帧截图（深背景）：Start_stand_fwd、Start_run0_fwd、Start_run2_fwd、Start_run4_fwd；X_stand_fwd 与 X_run0..run5_fwd 全部七帧；Y_stand_fwd 与 Y_run0..run5_fwd 全部七帧",
+        "4x 逐帧截图（浅背景）：X_stand_fwd、Y_stand_fwd、X_run2_fwd、Y_run2_fwd",
+        "目镜区域 12 倍最近邻放大对比图（起点 baseline | X | Y 并排，基于各包 native.png 裁剪，7 帧全覆盖：zoom_stand_fwd、zoom_run0..run5_fwd）",
+        "原生尺寸图：X/stand_fwd.native.png、Y/stand_fwd.native.png",
+        "common/STYLE_GUIDE.md、common/style-swatches.png、baseline/asset.json、TASK.md、PROMPT.md"
+      ],
+      "playbackViewed": true,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "七帧（待机+六帧跑动）目镜统一改为清晰的暖琥珀色主体，右端带一至两像素更亮的金黄高光，与头盔橙红及冷灰盔甲协调，深浅两种背景下均可读；跨帧色值一致、随头部锚点同步移动，实际播放时颜色与身份稳定。",
+          "topConcern": "高光只有一至两像素，正常观看尺寸下主体与高光的层级感偏弱，需放大到 4 倍以上才能确认层级存在；不算破坏性缺陷，但是可感知的克制取舍。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "同样在全部七帧把低对比灰蓝目镜替换为统一暖琥珀主体加更亮高光，位置和色值跨帧一致，实际播放（stand 与 run 循环）中颜色、身份与既有动作保持稳定，浅背景下依然清晰。",
+          "topConcern": "与 X 的可见差异仅是目镜主体与高光两处色值的微小偏移，放大后也难以可靠区分；高光面积同样很小，原生尺寸下层级不易察觉。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "1) 12 倍最近邻放大目镜对比（7 帧全覆盖，起点|X|Y 并排）：起点的低对比灰蓝目镜在 X 与 Y 中均被替换为统一琥珀主体加右端更亮高光，头型、盔甲、枪械与动作轮廓与起点一致，未见越界改动。2) 在真实浏览器中实际播放 compare.html：X 与 Y 的 run_fwd 均按 run0→run5 循环播放（连拍帧序采样记录确认），stand_fwd 正常；播放中两者目镜颜色统一、身份与动作连续。3) 深背景 #202028 与浅背景 #d6d8dc 下目镜均清晰，符合'清晰、统一的暖琥珀色信号'要求；主体与高光存在亮度层级，不是两块同亮噪点。4) X 与 Y 的差异仅在目镜区的主体色与高光色两处微小色值偏移，4 倍放大下视觉上仍难可靠区分，故不强行选赢家。",
+      "confidence": "HIGH",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "方法与限制：宿主浏览器工具在子代理中不可用，改为在评审包目录上启动临时本地只读 HTTP 服务器（127.0.0.1:8971），用无头 Edge 打开 compare.html 实际播放并截图；播放期间的辅助截图存于系统临时目录，评审结束后已删除，评审包与项目文件未被修改。运动相关判断基于真实播放（playbackViewed=true），非静态拼图。色值统计仅作为层级与跨帧一致性的辅助证据，未作为美学评分依据。未验证、由独立脚本负责的项目：RGBA 逐像素保护、遮罩约束、锚点/附件点/剪辑时长等技术合规；本包不含 REPORT.md 等交付文档，交付完整性不在本次判断范围。'最多12个已渲染候选状态'为过程约束，无法从静态结果包核验。"
+    },
+    "reviewSha256": "f179f45d337b1dc6837762194583534626ac8dcff8e47e45c51a64fadce75d23"
+  },
+  {
+    "pair": "T06-r1",
+    "task": "T06",
+    "repeat": 1,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+    "preference": "NO_MEANINGFUL_DIFFERENCE",
+    "confidence": "HIGH",
+    "playbackViewed": true,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T06",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "compare.html（本地无头 Chromium 实际加载并点击 Play，播放 Start/X/Y 的 stand_fwd 与 run_fwd）",
+        "baseline/stand_fwd.dark.png",
+        "baseline/run0_fwd.dark.png",
+        "baseline/run1_fwd.dark.png",
+        "baseline/run2_fwd.dark.png",
+        "baseline/run3_fwd.dark.png",
+        "baseline/run4_fwd.dark.png",
+        "baseline/run5_fwd.dark.png",
+        "X/stand_fwd.dark.png",
+        "X/run0_fwd.dark.png",
+        "X/run1_fwd.dark.png",
+        "X/run2_fwd.dark.png",
+        "X/run3_fwd.dark.png",
+        "X/run4_fwd.dark.png",
+        "X/run5_fwd.dark.png",
+        "X/stand_fwd.native.png",
+        "X/stand_fwd.light.png",
+        "X/run3_fwd.light.png",
+        "Y/stand_fwd.dark.png",
+        "Y/run0_fwd.dark.png",
+        "Y/run1_fwd.dark.png",
+        "Y/run2_fwd.dark.png",
+        "Y/run3_fwd.dark.png",
+        "Y/run4_fwd.dark.png",
+        "Y/run5_fwd.dark.png",
+        "Y/stand_fwd.native.png",
+        "Y/stand_fwd.light.png",
+        "Y/run3_fwd.light.png",
+        "_zoom/start_playrun_0.png",
+        "_zoom/start_playrun_3.png",
+        "_zoom/start_playstand_0.png",
+        "_zoom/start_playstand_1.png",
+        "_zoom/start_static_0_stand_fwd.png 至 start_static_6_run5_fwd.png（7张，播放中画布逐帧截图）",
+        "_zoom/x_playrun_0.png 至 x_playrun_5.png（6张，X run_fwd 实际播放采样）",
+        "_zoom/x_playstand_0.png",
+        "_zoom/x_playstand_1.png",
+        "_zoom/x_static_0_stand_fwd.png 至 x_static_6_run5_fwd.png（7张，播放中画布逐帧截图）",
+        "_zoom/x_light_static_0.png",
+        "_zoom/x_light_static_3.png",
+        "_zoom/y_playrun_0.png 至 y_playrun_5.png（6张，Y run_fwd 实际播放采样）",
+        "_zoom/y_playstand_0.png",
+        "_zoom/y_playstand_1.png",
+        "_zoom/y_static_0_stand_fwd.png 至 y_static_6_run5_fwd.png（7张，播放中画布逐帧截图）",
+        "_zoom/y_light_static_0.png",
+        "_zoom/y_light_static_3.png",
+        "_zoom/crop_baseline_stand_fwd.png",
+        "_zoom/crop_X_stand_fwd.png 至 crop_X_run5_fwd.png（7张，头部区域16倍最近邻裁剪）",
+        "_zoom/crop_Y_stand_fwd.png 至 crop_Y_run5_fwd.png（7张，头部区域16倍最近邻裁剪）"
+      ],
+      "playbackViewed": true,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "待机加六帧跑动的目镜全部统一为清晰的暖琥珀色，面前部保留一块更亮的黄高光形成主体/高光两层；与锈红头盔和棕褐装具协调，深背景#202028与浅背景#d6d8dc下都醒目不刺眼；实际播放中每帧目镜颜色一致、角色身份与既有动作保持不变。",
+          "topConcern": "改动非常克制：每帧只有目镜区8个像素换色，其中亮高光仅约1个像素，主体与高光的层级虽然成立，但在固定4倍预览下很细微，需要放大或播放时的注意力才能确认层级关系；目镜作为信号色的面积没有增加，远距离辨识提升有限。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "同样在全部七帧把低对比灰蓝目镜改为统一暖琥珀主体加更亮黄高光，层级清晰、无噪点，深浅背景下均可读，播放中颜色、身份与动作稳定，与角色其余部分协调。",
+          "topConcern": "与X同样克制：目镜每帧仅8像素换色、高光约1像素，层级在4倍预览下偏细微；相对X的选色差异（主体约227,155,50对224,154,40，高光约248,206,116对255,208,97）在4倍图、原生图与播放中均不可感知，不构成可见的优劣。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "1) 运动判据已实测：在本地浏览器实际加载compare.html并点击Play，分别播放Start/X/Y的run_fwd（110ms×6帧循环）与stand_fwd；X与Y的播放采样截到六个不同跑步姿势且与起点动作逐一对应，待机两次采样完全静止，各帧目镜始终为同一暖琥珀+亮黄高光，颜色、身份、动作一致。2) 起点对照：基线目镜为低对比灰蓝色带，播放采样中同样可见；X/Y把它改为清晰暖琥珀，改善明确。3) 层级判据：16倍最近邻头部裁剪显示两候选目镜均为暖琥珀主体加面前部更亮的黄高光，两色块连续、无同亮噪点；深浅两背景的4倍图与原生图一致。4) 只改目镜：像素定位显示两候选每帧均只有目镜区8个像素相对起点改变，头型、盔甲、枪械与动作像素未动（遮罩级精确合规由独立脚本验证，此处仅陈述可见范围）。5) 成对差异：X与Y的全部逐帧差异集中在同一目镜区内极小的色移（每像素各通道不超过约19/255），在4倍预览、原生图、深浅背景与实际播放中均无法可靠区分，因此不选赢家。",
+      "confidence": "HIGH",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "评审环境限制：浏览器工具在子代理不可用，改用本地无头Chromium加载临时HTTP服务上的compare.html，点击Play后按时序采样截图，运动判断基于真实播放观察而非静态拼图；观察用放大（画布3倍渲染、头部16倍最近邻裁剪）仅用于评审，无滤镜，不影响被评资产。未验证项：允许遮罩的逐像素合规、RGBA与起点非目镜像素的精确一致、锚点/附件点/剪辑时长，这些按PROMPT由独立脚本负责，本评审仅确认可见范围内未发现头型、盔甲、枪械或动作的可见改变。X与Y均满足任务三项视觉判据且无阻塞性问题；两者差异低于可靠感知阈值，故pairwise为NO_MEANINGFUL_DIFFERENCE而非任一方 preferred。评审辅助产物（_zoom/目录截图与playback.cjs、局部放大图）为本人评审输出，留在本包内。"
+    },
+    "reviewSha256": "223e5200ed5d3c632c48e1e8bd1d28c99c01a94e5dbee9cd1fae4827b111698d"
+  },
+  {
+    "pair": "T03-r2",
+    "task": "T03",
+    "repeat": 2,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T03",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/cutter.dark.png",
+        "baseline/cutter.light.png",
+        "baseline/cutter.native.png",
+        "X/cutter.dark.png",
+        "X/cutter.light.png",
+        "X/cutter.native.png",
+        "Y/cutter.dark.png",
+        "Y/cutter.light.png",
+        "Y/cutter.native.png",
+        "common/style-swatches.png",
+        "compare.html（文本源码，确认各条目为单帧32x32、原生+4倍固定条件、clips为空无动画）"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "在轮廓、铆钉与缺口像素未动的前提下，给夹口建立了方向一致的受光/背光分区（左上受光面约亮一档、右下背光），并把手柄整体压暗一档，使夹口与手柄初步分出主次；原生与4倍、深浅两种背景下都干净无碎点。",
+          "topConcern": "对比偏弱：夹口受光面与背光面只差约一档灰阶，原生尺寸下夹口的金属感和主次关系仍不够醒目；与起点并排时更像一次保守的提亮加压暗，'夹口像金属'只是最低限度达成。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "夹口的金属明暗有明确的自上而下关系：顶面出现两档高光，向下经受光面逐级过渡到暗面与缺口旁阴影，头部与手柄交界处有亮色束带分隔，手柄整体退为暗部；主次关系在原生与4倍、深浅两种背景下一眼可读，且仍属同一冷灰钢色系，琥珀铆钉与轮廓原样保留，原生与4倍均干净。",
+          "topConcern": "头部与手柄交界处的亮色束带是最大胆的改动，细看容易被读成新增的箍环/零件（虽然只是轮廓内部改色，未见新增轮廓或描边）；顶部高光偏亮，但面积很小，仍在'少量高光'的表达范围内。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "起点32x32原生图的亮度网格显示夹口与手柄几乎同处一个平灰档位，正是任务指出的'材质层次不清'。X在夹口左上侧做出约一档的受光分区并将手柄压暗一档，方向正确但对比弱；Y在夹口顶部建立两档高光并向下逐级过渡到阴影，头部下方有束带分隔，手柄压暗两档，铆钉位置与颜色、外轮廓行列在网格中与起点一致，未见可见破坏。三个视觉判据上：X的受光/阴影关系存在但醒目度低，Y的关系明确且非随机亮点；两者的原生与4倍图都干净。主次关系与金属感上Y明显更强，故Y更符合任务。",
+      "confidence": "HIGH",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "1) 本任务是单帧道具（compare.html中clips为空），无待机/跑动动画需要播放，playbackViewed如实记为false，运动维度不适用。2) 除用读取工具直接查看全部PNG外，我对baseline/X/Y三个原生PNG输出了只读的亮度文本网格（stdout，未创建任何文件），用于核实'有组织的明暗vs随机亮点'与原生尺寸干净度；不据此宣称RGBA逐像素一致，保护合规以独立脚本为准——我从静态材料只能确认轮廓行、缺口内部像素与铆钉位置未见可见改动。3) X的taskFit是边界判断，处于MEETS的下限（要求各条以最低限度满足）；无论X定为MEETS还是NOT_YET，Y_PREFERRED的成对结论不变。4) 无法从本包材料得到的判断：TASK.md交付清单中的可再渲染源文件、REPORT.md不在评审包内，交付完整性无法核实；alpha与遮罩的精确合规由独立脚本负责，本评审仅记录可见层面。5) 未评价代码、成本、agent能力或技术实现，不猜测X/Y的制作方式；本试点无外部商业标杆，结论限于本任务内的可读性、完成度与改善，不外推为行业或商业级。"
+    },
+    "reviewSha256": "d41767b2433b97ba96f529e70cf58f80c55abf690053531a4f62760be7affa36"
+  },
+  {
+    "pair": "T03-r2",
+    "task": "T03",
+    "repeat": 2,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "NOT_YET"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T03",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/cutter.dark.png",
+        "baseline/cutter.light.png",
+        "baseline/cutter.native.png",
+        "X/cutter.dark.png",
+        "X/cutter.light.png",
+        "X/cutter.native.png",
+        "Y/cutter.dark.png",
+        "Y/cutter.light.png",
+        "Y/cutter.native.png",
+        "common/style-swatches.png",
+        "compare.html"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "夹口建立了有方向的金属明暗：上缘两级高光经中间调过渡到腹面暗部，受光与阴影成片连贯、方向一致，材质层次清楚；手柄整体换用更暗的色阶并保留自身亮棱-主体-暗棱的小结构，明显退居次要，同时与夹口同属冷灰蓝系并保留琥珀铆钉，仍是同一套工具设计。",
+          "topConcern": "对比幅度比起点重口：夹口与手柄交界处有少量单像素暗点、尾部有几处单像素交替，原生尺寸下略显细碎（属棱线延续而非随机噪点）；浅背景下手柄左缘的亮棱线较醒目。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "NOT_YET",
+          "topStrength": "改动克制且干净：夹口上缘有一条方向一致的受光亮带，手柄换用暗一档的色阶；轮廓、alpha 与琥珀铆钉完全未动，原生图与 4 倍预览一致，无放大修饰或碎点。",
+          "topConcern": "幅度不足：夹口只有受光边，主体仍保持起点原色平涂、缺少对应的阴影侧，\"受光与阴影有明确关系\"只建立了一半；手柄暗档与原主体的亮度差约仅 4%，4 倍图上主次关系难以察觉，任务核心诉求\"手柄退居次要\"在成图上基本不可见。",
+          "blockingIssue": true
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照三个视觉判据：（1）受光与阴影关系——X 的夹口从上缘高光带向下连续过渡到腹面暗部，多层成片、方向一致；Y 的夹口只有上缘一条亮带，主体仍为起点原色，阴影侧缺失。（2）主次与同一设计——X 手柄整体压暗、与夹口拉开明显层级且同属冷灰蓝系加琥珀铆钉；Y 手柄仅暗约一档（亮度差约 4%），主次在 4 倍图上几乎不可辨。（3）原生与 4 倍干净——两侧的 4 倍预览与原生 32x32 图逐像素一致（忠实最近邻放大，无放大修饰），色阶均成片或沿棱线连续，无随机碎点。两侧的 alpha 轮廓与铆钉像素经只读辅助核对均与起点一致。",
+      "confidence": "HIGH",
+      "notes": "本任务为静态单帧工具资产（compare.html 中 clips 为空，无待机/跑动动画可播放），动画维度不适用，故 playbackViewed=false。评审以直接查看的 PNG 视觉输入为主，只读像素级辅助核对仅用于确认明暗的空间分布、保护点存在性与 4 倍图/原生一致性，不用于按特定 RGB 或像素相似度评分；RGBA 逐像素保护的精确验证仍以独立脚本为准。铆钉与轮廓保护在两侧的可见层面均未发现破坏。未查看执行轨迹、成本、工具信息或其他评审者输出。"
+    },
+    "reviewSha256": "45cf164b568d1f09df4f738eb036b4446980dd230a5b7b9ff1fad2ed90625913"
+  },
+  {
+    "pair": "T04-r2",
+    "task": "T04",
+    "repeat": 2,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T04",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "PROMPT.md",
+        "TASK.md",
+        "common/STYLE_GUIDE.md",
+        "common/style-swatches.png",
+        "compare.html",
+        "baseline/medkit.native.png",
+        "baseline/medkit.dark.png",
+        "baseline/medkit.light.png",
+        "X/medkit.native.png",
+        "X/medkit.dark.png",
+        "X/medkit.light.png",
+        "Y/medkit.native.png",
+        "Y/medkit.dark.png",
+        "Y/medkit.light.png",
+        "baseline/asset.json",
+        "review.template.json"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "占位的黄色矩形被替换为红底白十字，这是最直白的急救标识：在4倍预览下（深、浅两种背景）和原生尺度都能立刻读出急救/医疗用途；十字居中、笔画等宽、硬边无抗锯齿，红与白的小面积信号色用法与工业像素风一致，箱体外壳、手柄、左侧锁扣与起点逐处对照均未见可见改动。",
+          "topConcern": "红色填充覆盖了整个中央内嵌面板（起点该处是深色内嵌面板加小块琥珀矩形），可见改动面积明显大于原占位块；面板原有的深色内嵌观感被红场取代。包内未附 allowed-mask 文件，该范围是否完全落在允许遮罩内无法用肉眼判定，只能交由独立脚本核实。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "保留了起点深色内嵌面板，仅在其上绘制一颗红色像素心形：轮廓完整、左右对称、硬边稳定，居中放置，深背景和浅背景下均能清晰读出图形；对原设计的干预最小，箱体外壳、手柄、锁扣与起点对照均未见可见改动。",
+          "topConcern": "心形是健康/生命值式的联想，而非急救箱的惯用徽标：单独看也可能读作爱心或通用生命符号，与'急救/医疗用品'的关联比十字更间接。就本任务第一判据而言仍能联想到医疗/生命用途、不再是矩形色块，达到要求，但指向性弱于X。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照TASK.md三判据：(1) 医疗联想——X的红底白十字是急救箱最惯用标识，正常显示尺度一眼可读；Y的红色心形也能联想到健康/医疗且不再是色块，但单独存在爱心、生命值等歧义，指向性较弱。(2) 线条与位置——两者符号均居中、硬边、无抗锯齿、无杂点，稳定度相当；X十字笔画等宽干净，Y心形对称完整。(3) 风格一致与不破坏箱体——将X、Y分别与起点在深/浅背景4倍图逐处对照，外壳轮廓、手柄、左侧锁扣、箱体色阶均未见可见改动；X用红场替换深色内嵌面板改动面积更大但仍符合硬边信号色用法，Y改动最小。两侧均未用文字、数字或可辨识的现实品牌图形。综合看两者均达标，X在首要判据（急救/医疗联想的直接性）上明显更强，故优先X。",
+      "confidence": "MEDIUM",
+      "notes": "本包为静态道具（asset.json clips为空，compare.html无动画条目），无运动维度需要播放验证，playbackViewed如实记false。包内未提供 allowed-mask.*.png 与 REPORT.md，遮罩合规与像素级保护无法肉眼裁决，按要求不凭肉眼宣称RGBA逐像素一致，交由独立脚本；此限制对X/Y同等适用，不影响上述可见判断。两侧均通过任务要求，X_PREFERRED仅表示在'医疗联想直接性'这一首要可见判据上的优先，不构成对Y的否定。"
+    },
+    "reviewSha256": "2749a89cc0a41dc14be1762b2fdb8d067aeeee4149a654b1a2b278c8780e23ad"
+  },
+  {
+    "pair": "T04-r2",
+    "task": "T04",
+    "repeat": 2,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T04",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/medkit.native.png",
+        "baseline/medkit.dark.png",
+        "baseline/medkit.light.png",
+        "X/medkit.dark.png",
+        "X/medkit.light.png",
+        "X/medkit.native.png",
+        "Y/medkit.dark.png",
+        "Y/medkit.light.png",
+        "Y/medkit.native.png",
+        "common/style-swatches.png",
+        "compare.html（条件说明：三方均为同一40x36帧+固定4倍最近邻预览+深#202028/浅#d6d8dc背景，clips为空）"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "中央占位色块已被替换为居中的红色像素心形，轮廓简洁稳定、硬边干净，在4倍与40x36原生尺度下都清晰可辨，红色与冷灰箱体对比明确，未见破坏外壳、手柄与左侧锁扣的设计。",
+          "topConcern": "心形在游戏语境中最先容易被读作\"生命值/爱心\"而非医疗用品；相对急救场景更标准的符号（十字、心+电击/AED），它作为急救/医疗标识的联想方向在正常显示尺度下不够确定。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "中央改为红底白十字，是本任务三判据下最直接、最不易误读的急救/医疗符号；十字居中、臂宽一致、硬边稳定，40x36原生与4倍、深浅两种背景下都能立即识别。",
+          "topConcern": "红色底块明显大于原占位色块并基本占满内嵌面板的可视区，面板观感变化较大；红底白十字与瑞士国旗几何相近，作为通用医疗符号一般不视为现实品牌，但存在该联想。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "两侧都把起点中央的琥珀色矩形占位换成了居中、硬边、稳定的符号，且与起点对照下手柄、左侧锁扣、外壳轮廓均未见可见改动，后两条视觉判据（简洁稳定、风格一致）两侧相当。差别集中在第一判据（能让人联想到急救/医疗用途）：Y的红底白十字在原生与4倍、深浅背景下都能立即读作医疗标识，几乎不存在误读空间；X的红色心形同样整洁协调，但在游戏语境中更常被读作生命值/爱心符号，医疗联想的确定性明显弱于Y。因此判Y更符合任务，两侧均无阻塞性可见问题。",
+      "confidence": "HIGH",
+      "notes": "无法从现有材料得到的判断：包内未提供allowed-mask遮罩图，修改是否精确限定在遮罩内、区域外RGBA是否逐像素不变，无法凭视觉宣称（该精确验证由独立脚本负责，本评审只覆盖可见层面）。本任务为静态道具（compare.html中clips为空），不存在动画播放维度，playbackViewed如实记false。三图倍率经PNG头部核对：预览图为160x144即4倍最近邻，原生为40x36，两侧条件一致。评审只基于可见图像，未推断制作方式，未参考任何其他评审者输出。"
+    },
+    "reviewSha256": "ce3d72bf8b78701a67a74c94a087f1d85be6b76079274b7e7265cee931b5651c"
+  },
+  {
+    "pair": "T05-r2",
+    "task": "T05",
+    "repeat": 2,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T05",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/beacon.dark.png",
+        "baseline/beacon.light.png",
+        "baseline/beacon.native.png",
+        "X/beacon.dark.png",
+        "X/beacon.light.png",
+        "X/beacon.native.png",
+        "Y/beacon.dark.png",
+        "Y/beacon.light.png",
+        "Y/beacon.native.png",
+        "common/style-swatches.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "重组后的轮廓完整可读为便携信标：琥珀信号灯带高光置于立杆顶端，机身居中承接，下方宽底座稳固；暗部-主体-受光-高光的色阶关系在深/浅两种背景与原生、4倍两种尺度下都保持一致，信号灯是明确的视觉焦点。",
+          "topConcern": "第五个部件（电池）的可读性偏弱：机身右侧的小块更接近把手/卡扣的读法，'机身和电池显得可携带'这一意图只被部分传达。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "结构重组正确且稳定：较大的琥珀信号灯明确位于立杆上方，机身紧凑、宽底座贴地，整体轮廓在原生与4倍尺度、深浅背景下都能读作一个完整的便携信标而不是散落零件。",
+          "topConcern": "明暗关系偏平：信号灯是无高光的平涂琥珀圆盘，机身以近似均匀的暗色块为主，整张图几乎没有第二个明暗层次，按 STYLE_GUIDE 的色阶要求（暗部/主体/受光/少量高光）完成度明显低于同类可行解，原生尺度下焦点感弱。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照起点：原作信号灯（琥珀圆）搁在机身左上角、立杆与灯脱开，是'散落零件'状态。X 与 Y 都修复了这一核心问题——灯在杆顶、机身居中、底座贴地，结构判据（上方信号灯/承载机身/稳定底座）两侧均满足。决定性差异在第三判据（焦点明确、明暗统一、双尺度完成度）：X 的信号灯带亮黄高光，暗部-机身-受光顶边-高光的层级在深背景与浅背景下均成立，原生 40x40 下灯仍清晰可读为点亮状态；Y 的灯为平涂琥珀圆加暗色描边、无机身高光，明暗事件几乎只有'琥珀对深灰'一处，完成度较低但轮廓与结构仍达标。共享色板中 amber 档（#4a3410–#ffe08a）显示高光档是族内合法色，X 使用亮档强化信号灯焦点属风格内选择。两侧在 4 倍图上均未见越出透明边界的可见迹象，但边界/锚点/遮罩的精确验证按 PROMPT 归独立脚本，不在此宣称。",
+      "confidence": "HIGH",
+      "notes": "1) 本任务为 prop 资产，compare.html 中三个条目均无 clips，无动画可播放，故 playbackViewed=false，未评价任何运动维度。2) 评审包内 X/Y 仅含三张 PNG，未提供各自的 asset.json、REPORT.md、遮罩或可再渲染源文件，因此锚点是否保持 (20,37)、至少 2px 透明边界、'只用五部件'的精确合规以及交付物完整性无法从包内材料判断，相关结论只基于可见画面；未观察到可见的约束破坏。3) 判断仅覆盖 TASK.md 的三条视觉判据；无外部商业标杆，结论限于本任务内可读性、完成度与改善程度。"
+    },
+    "reviewSha256": "745b30a32f98f5dd93ae180ea9782a1c65348fea1dc62a881af80681c26df321"
+  },
+  {
+    "pair": "T05-r2",
+    "task": "T05",
+    "repeat": 2,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "D",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T05",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/beacon.native.png",
+        "baseline/beacon.light.png",
+        "baseline/beacon.dark.png",
+        "X/beacon.native.png",
+        "X/beacon.light.png",
+        "X/beacon.dark.png",
+        "Y/beacon.native.png",
+        "Y/beacon.light.png",
+        "Y/beacon.dark.png",
+        "common/style-swatches.png",
+        "compare.html"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "顶部琥珀信号灯形体圆整、高光位置明确，经细立杆连接方形机身与横条底座，形成连贯的“顶灯—立杆—机身—底座”便携信标轮廓；深浅两种背景、原生与4倍尺度下焦点都最醒目，明暗关系统一。",
+          "topConcern": "机身正面偏平，右侧凸块的功能读法含糊（把手或电池盒均可），五个部件中电池的分件表达最弱。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "梯形收分的机身分上下两段色阶并有右侧凸块，承载机身有体积层次，底座横置稳定，同样构成上方信号灯、承载机身与稳定底座的合理结构。",
+          "topConcern": "顶部信号灯圆形边缘有多处像素状突起，4倍图下轮廓毛糙，焦点形体的干净度和完成度被削弱。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照起点：起始图信号灯偏左悬空、立杆顶端无灯、零件散落不协调。X 与 Y 都把五件重组为连贯的便携信标，视觉上均未贴到 40×40 画布边缘。主要差距在焦点形体：X 的琥珀灯圆形规则、边缘干净、高光明确，4倍与原生尺度下轮廓都完整；Y 的灯缘有多处像素突起，放大后毛糙。Y 的机身分段色阶与体积层次更好，但不足以抵消焦点形体的瑕疵，故 X 略优先。",
+      "confidence": "MEDIUM",
+      "notes": "材料边界：(1) 包内未提供 allowed-mask 遮罩文件，也没有 X/Y 的 asset.json、锚点/附件点或 REPORT.md，被保护像素是否保持、锚点是否不变、交付是否齐全无法从本包判断，精确验证由独立脚本负责，本评审只覆盖三个视觉判据。(2) 本任务为静态道具，compare.html 与包内文件均无动画剪辑，无播放维度需要验证，playbackViewed 如实记 false。(3) 2px 透明边界仅凭肉眼确认“未贴边”，逐像素核验不在视觉评审范围。(4) 两侧均无阻塞性问题；X 优先的方向较明确但幅度中等，故置信度取 MEDIUM 而非 HIGH。"
+    },
+    "reviewSha256": "761b1da62d5f2dc834261365f6747ed44e292cefaf2aa53c9d6d3b9631cf76cb"
+  },
+  {
+    "pair": "T06-r2",
+    "task": "T06",
+    "repeat": 2,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+    "preference": "NO_MEANINGFUL_DIFFERENCE",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T06",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "compare.html（源码已读；本子代理环境无可用浏览器，未能实际渲染/播放，见 notes）",
+        "baseline/stand_fwd.dark.png",
+        "baseline/stand_fwd.light.png",
+        "baseline/run0_fwd.dark.png",
+        "X/stand_fwd.dark.png",
+        "X/run0_fwd.dark.png",
+        "X/run1_fwd.dark.png",
+        "X/run2_fwd.dark.png",
+        "X/run3_fwd.dark.png",
+        "X/run4_fwd.dark.png",
+        "X/run5_fwd.dark.png",
+        "X/stand_fwd.light.png",
+        "X/run2_fwd.light.png",
+        "X/stand_fwd.native.png",
+        "X/run2_fwd.native.png",
+        "Y/stand_fwd.dark.png",
+        "Y/run0_fwd.dark.png",
+        "Y/run1_fwd.dark.png",
+        "Y/run2_fwd.dark.png",
+        "Y/run3_fwd.dark.png",
+        "Y/run4_fwd.dark.png",
+        "Y/run5_fwd.dark.png",
+        "Y/stand_fwd.light.png",
+        "Y/run2_fwd.light.png",
+        "Y/stand_fwd.native.png",
+        "Y/run2_fwd.native.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "七帧目镜统一换成两级暖琥珀色（主体 #C9821C + 高光 #F5C468），只改了原目镜的两种灰色（#53616D/#87939D），头型、盔甲、枪械、动作逐帧可见保持；主体-高光层级分明，色相仍在角色锈棕暖色族内，深浅两背景下都清晰。",
+          "topConcern": "主体琥珀 #C9821C 与头盔锈棕 #8A4B26 同属暖棕族，作为'信号色'的对比度是两个候选里较克制的一侧；另外跑动/待机的运动一致性在本环境无法实际播放验证，只能记 UNVERIFIED。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "七帧目镜统一换成更亮的暖琥珀（主体 #E8962F + 高光 #FFDF9E），对头盔与深浅两背景的辨识度最高、信号感最强；同样只改原目镜两色，七帧位置与颜色完全一致，头型、盔甲、枪械、动作可见保持。",
+          "topConcern": "高光 #FFDF9E 偏亮偏奶白，是两案中最接近'不刺眼'边界的取值（深背景下该单像素较亮眼）；运动一致性同样因无法实际播放而记 UNVERIFIED。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对起始帧与两个候选做整帧对照（4倍图逐帧目视 + 只读取色核实所见）：两侧都只在目镜原有两色位置发生颜色替换——灰主体 #53616D(83,97,109) 与灰高光 #87939D(135,147,157)；X 换为 #C9821C/#F5C468，Y 换为 #E8962F/#FFDF9E，且 stand 与 run0-5 七帧使用完全相同的两色、相同的像素位置（run0/run3 随头部既有下沉偏移），目镜外无任何可见改动。两者都满足可静态验证的三判据中的前两条：七帧目镜清晰、暖琥珀与角色锈棕配色协调；主体 7px + 高光 1px 的两级层级明确，不是同亮噪点。两案的差距是互补的取值权衡（Y 主体信号对比更强、X 高光更收敛），不足以稳定分出高下。第三判据（实际播放时颜色、身份与动作一致）对两侧均记 UNVERIFIED：本子代理环境浏览器不可用，compare.html 无法实际播放。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "1) 环境限制：本子代理无法启动浏览器（browser runtime 报 'Browser is not available in subagent'），compare.html 仅读了源码、未实际渲染播放；按协议 playbackViewed=false，一切运动/播放一致性判断记 UNVERIFIED，未以静态拼图冒充播放。2) 任务判据一、二基于逐帧目视判断，取色仅用于核实所见颜色与层级，未以像素相似度评分；整个包内未见 allowed-mask 文件，遮罩合规的精确验证留给独立脚本，此处不宣称 RGBA 逐像素合规。3) 亮背景仅抽查 stand/run2（4倍图）+ 七帧暗背景全看；4倍图为 168x192，原生 42x48，两者所见一致。4) 结论：X、Y 均达到可验证的任务要求，无阻塞性问题；差异很小，不强行选赢家。"
+    },
+    "reviewSha256": "76d492974d060acaa3a97d3150e8896048c577bdd2fe7e5a00a8f9ad9ef7a8da"
+  },
+  {
+    "pair": "T06-r2",
+    "task": "T06",
+    "repeat": 2,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T06",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/stand_fwd.light.png",
+        "baseline/run0_fwd.light.png",
+        "baseline/run3_fwd.light.png",
+        "X/stand_fwd.light.png",
+        "X/run0_fwd.light.png",
+        "X/run1_fwd.light.png",
+        "X/run2_fwd.light.png",
+        "X/run3_fwd.light.png",
+        "X/run4_fwd.light.png",
+        "X/run5_fwd.light.png",
+        "X/stand_fwd.dark.png",
+        "X/run0_fwd.dark.png",
+        "X/run3_fwd.dark.png",
+        "Y/stand_fwd.light.png",
+        "Y/run0_fwd.light.png",
+        "Y/run1_fwd.light.png",
+        "Y/run2_fwd.light.png",
+        "Y/run3_fwd.light.png",
+        "Y/run4_fwd.light.png",
+        "Y/run5_fwd.light.png",
+        "Y/stand_fwd.dark.png",
+        "Y/run0_fwd.dark.png",
+        "Y/run3_fwd.dark.png",
+        "compare.html（源码，含内嵌帧与播放控件）"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "七帧目镜统一改为明亮暖琥珀（主体+前上一颗更淡的高光点），主体/高光层级清楚；琥珀亮度与饱和度明显高于周围盔甲棕，把起点低对比灰色问题解决得最彻底，深浅两种背景下都一眼可读；高光亮度与枪口既有白色反光同档，不刺眼。",
+          "topConcern": "本环境无法打开浏览器，未能实际播放待机与跑动，运动一致性判断按规则只能记 UNVERIFIED；静态上七帧仅目镜8个像素变化、未见任何可见破坏，但播放项无法背书。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "七帧目镜统一改为较深的暖琥珀（主体+更淡高光点），层级同样清楚；色相与角色锈棕/皮革色系最贴，整体协调感好，深浅背景下都清晰可读，高光柔和不出戏。",
+          "topConcern": "琥珀主体在明度与色相上更接近周围头盔棕（起点 #8a4b26）与皮革色，作为功能信号色的跳出感略弱于更亮的一侧，但仍明显可辨；播放项同样因环境无法打开浏览器记 UNVERIFIED。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "任务核心痛点是目镜低对比灰色：起点目镜主体为灰蓝 #53616d、高光 #87939d。X 在全部七帧把同样的8个目镜像素统一改为主体 #e8962f + 高光 #ffdf9e，Y 同样8像素改为 #c9821c + #f5c468；两者都保留主体暗、高光亮的两级层级，不是两块同亮噪点；高光亮度都未超过资产既有最亮像素（枪口反光 #e8ddc0），不刺眼。逐帧对照起点，七帧中除目镜8像素外头型、盔甲、枪械、动作、alpha 全部未变，目镜位置随各帧头部起落正确跟随（run0/run3 下落一行），身份与动作在静态上完全一致。两者都满足静态可验的全部判据；差异仅在琥珀色的明度选择：X 更亮更饱和，对低对比问题的解决更果断、信号感更强；Y 更深更融入色板，协调但跳出感稍弱。",
+      "confidence": "MEDIUM",
+      "notes": "1) 播放限制：本评审会话所在子代理环境无法启动浏览器，compare.html 只能读源码确认其结构（内嵌帧、4倍画布、Play/pause、Dark/light），无法实际播放待机与跑动，故播放Viewed=false，运动相关维度对两侧均记 UNVERIFIED，未以静态拼图冒充播放。作为替代，对七帧做了静态逐帧一致性检查：目镜颜色逐帧统一、非目镜像素零变化——这只支持静态一致性，不能替代播放验证。2) 判断方式：以上像素值仅作为放大镜式的定位与层级佐证，最终评分依据4倍深浅背景预览的可见观感；遮罩合规的精确验证留给独立脚本，本评审仅报告未见可见破坏，不据此宣称逐像素合规。3) 成对结论：两侧静态判据全部达标、改动范围同样干净，差距只在琥珀明度带来的信号清晰度这一处可感知差异，故选 X_PREFERRED 而置信度为 MEDIUM；若计入播放维度，两侧该维度同为 UNVERIFIED，不改变排序但限制置信度上限。",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ]
+    },
+    "reviewSha256": "76d202679e18b2605960941d9455bf7c4f5a50bcd7152c5079a16bc59f98c761"
+  },
+  {
+    "pair": "T01-r2",
+    "task": "T01",
+    "repeat": 2,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "D",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T01",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/relay.dark.png",
+        "baseline/relay.light.png",
+        "baseline/relay.native.png",
+        "X/relay.dark.png",
+        "X/relay.light.png",
+        "X/relay.native.png",
+        "Y/relay.dark.png",
+        "Y/relay.light.png",
+        "Y/relay.native.png",
+        "common/style-swatches.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "把抢眼的琥珀侧板降为柔和的卡其橄榄色，同时完整保留原有亮/中/暗的四级明暗结构；改动后屏幕上的青色文字成为全图最亮、最饱和的元素，在深浅两种背景下都是第一视觉落点，侧板又仍是可辨认、有存在感的暖色附件，与冷灰机身形成协调的次要重音。",
+          "topConcern": "降调相对保守：卡其高光在非屏幕元素中仍偏亮偏暖，侧板保留的注意力比必要的略多，视线在屏幕与侧板之间的回摆比 Y 明显一点。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "对侧板的压制最彻底：更深的灰橄榄色让屏幕无可争议地成为第一落点，同时保住四级明暗结构与独立的橄榄色调，侧板是被弱化而不是被删除。",
+          "topConcern": "深背景下侧板明度接近机身暗灰，存在感与可读性被削弱，橄榄色显得略闷、材质辨识度不如 X 的暖卡其清晰。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "起点中亮橙琥珀侧板（高光约 RGB 255,177,61）明显压过暗青屏幕；X 与 Y 都只改动了右侧面板矩形（原生 40x36 帧内约 x27-31、y8-21，共 70 像素），以同样的四级明暗结构换入柔和橄榄色：X 为较亮较暖的卡其橄榄（165,138,82 / 122,99,48），Y 为更深更灰的橄榄（123,110,73 / 93,81,48）。改后屏幕青色文字（最亮约 99,220,210）是两背景下最亮最饱和的元素，两者都满足『屏幕最先被注意』；差别只在侧板存在感与压制程度的一维取舍——X 在判据二（侧板仍有结构、存在感与可读性）上余量更大，且暖橄榄与原资产身份衔接更自然；Y 压制更狠但深背景下面板更贴近机身暗灰。两者均未加装饰、描边或滤镜，面板外未见可见改动。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "已逐一查看 baseline/X/Y 的深底、浅底 4 倍图与原生图及公共色阶条；compare.html 内嵌帧与对应 PNG 逐字节一致，且 clips 为空——本资产是静态道具，无待机/跑动等动画可播，故 playbackViewed=false 且无运动维度判断。遮罩的逐像素保护一致性由独立脚本负责：我仅确认可见改动局限于右侧面板区域，不据此宣称 RGBA 完全一致。像素位置/颜色数据只用于定位与描述改动区域和视觉显著性对比，未作为相似度评分。本包内无法判断：REPORT.md、可再渲染源文件、锚点/附件点交付完整度，以及 12 个已渲染候选状态上限的遵守情况；这些不在评审材料中，相关维度不给出结论。X 与 Y 差异较小且方向一致，判 X 略优基于判据二的余量，置信度为 MEDIUM 而非 HIGH。"
+    },
+    "reviewSha256": "a9b8cfc511412570833d0a855307163472f316a086ecfa12b92d4231f1f3443f"
+  },
+  {
+    "pair": "T01-r2",
+    "task": "T01",
+    "repeat": 2,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "D",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T01",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/relay.native.png",
+        "baseline/relay.dark.png",
+        "baseline/relay.light.png",
+        "X/relay.native.png",
+        "X/relay.dark.png",
+        "X/relay.light.png",
+        "Y/relay.native.png",
+        "Y/relay.dark.png",
+        "Y/relay.light.png",
+        "common/style-swatches.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "侧板由高饱和亮琥珀降为低明度暗橄榄土色后，深浅两种背景下主屏幕（青色文字状态屏）都明确成为第一视觉落点，改动明显只落在侧板区域，画面其余部分保持原样。",
+          "topConcern": "侧板压得过暗且色相偏灰绿，存在感与可读性明显减弱：深背景下接近机身的阴影块，浅背景下面板身份感弱，暗态下已不易读出它原是琥珀面板；好在仍有高光列、主体与暗边的色阶结构，未被涂成透明或背景色，不构成阻塞。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "侧板改为暗琥珀褐并保留左侧高光列、主体、右侧暗边的完整色阶结构，屏幕成为第一落点的同时面板仍能读出是暗态琥珀，深浅两种背景下与冷灰机身的搭配更协调。",
+          "topConcern": "暗化后侧板与机身的明度对比整体仍偏低，屏幕取得第一落点主要靠屏幕自身亮度支撑，侧板的视觉分量下降较多。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照起点（右侧为亮琥珀竖板：高光 #ffe08a、主体 #ffb13d、暗部 #9c7420），X 与 Y 的可见改动都集中在侧板矩形区域（约 x27-31、y8-21，共 70 像素），屏幕与机身与起点一致：X 侧板主体约 #5d5130（暗橄榄土色，高光列 #7b6e49），Y 侧板主体约 #7a6330（暗琥珀褐，高光列 #a58a52）。两者都让主屏幕成为第一视觉落点，侧板都保留分段结构且未涂成透明或背景色；差别在侧板色值一档明度与色相：X 更暗更灰绿，面板身份与存在感弱化到接近机身阴影；Y 保留暖琥珀身份与更清楚的色阶层次，协调性更好。该差异在深、浅两种背景的 4 倍预览下均可感知。",
+      "confidence": "MEDIUM",
+      "notes": "两侧倍率与背景条件一致：native 为 40x36 原生帧，dark/light 为 160x144 的 4 倍最近邻预览（#202028 / #d6d8dc）。本资产为静态终端，compare.html 中无动画 clips，无需播放验证，不存在因未播放而未验证的运动维度，故 playbackViewed 如实记 false。逐像素保护一致性未由本评审宣称，由独立脚本负责；我的像素定位仅用于说明可见差异的位置与幅度。两侧差异幅度有限（仅侧板一档色值），Y 的优势集中在侧板可读性与整体协调，故置信度为 MEDIUM。"
+    },
+    "reviewSha256": "3781af43d7123fec45e8f94f381b3a3b5d33bb0ce95e8a0a1ebf9911026c0602"
+  },
+  {
+    "pair": "T02-r2",
+    "task": "T02",
+    "repeat": 2,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "NOT_YET"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "D",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T02",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "PROMPT.md",
+        "TASK.md",
+        "common/STYLE_GUIDE.md",
+        "common/style-swatches.png",
+        "compare.html",
+        "baseline/asset.json",
+        "baseline/hauler.native.png",
+        "baseline/hauler.light.png",
+        "baseline/hauler.dark.png",
+        "X/hauler.native.png",
+        "X/hauler.light.png",
+        "X/hauler.dark.png",
+        "Y/hauler.native.png",
+        "Y/hauler.light.png",
+        "Y/hauler.dark.png",
+        "review.template.json"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "主壳体从约16px加宽到约22px、高度不变，镜头（青色屏）与徽标（琥珀方块）逐像素保持原位，底座外形与起点一致；整机能稳定落在底座上，轮廓比起点明显更敦实，且未超出原画幅边界。",
+          "topConcern": "加宽幅度保守：22px宽的正面只有左侧1px亮列加整片中间调，大面积平坦，'厚重感'成立但形体略单薄；另外壳体与底座交接的第28行有6px颜色被重涂（起点处壳体描边压在底座色带上，现在为连续色带），4倍图下几乎不可见，但是否落在冻结允许区内需脚本确认。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "NOT_YET",
+          "topStrength": "三者中'重装设备'感最强：壳体加宽到约26px并做出三段斜切顶肩，体积感与轮廓明确度都明显高于起点，镜头与徽标完整清晰、无遮挡，画布边距未变、不显拥挤。",
+          "topConcern": "底座可见外观被改变：顶面暗带由1行（第28行）加厚为2行（第27-28行），并在原为透明背景处（第27行左右两侧）新增不透明像素，同时壳体缩短1行。任务明确要求'底座保持原样'，这是肉眼可见的偏离；该区域是否属于冻结允许区，本包未附allowed-mask文件，无法由我核实（精确校验归脚本）。",
+          "blockingIssue": true
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照起点逐像素比对：镜头（青色区cols17-22,rows11-15）与徽标（琥珀区cols18-21,rows21-23）在X、Y中均与起点逐像素一致，无遮挡。壳体:底座宽度比由起点约16/28变为X约22/28、Y约26/28，两者都明显更稳厚，Y的体积感更强。约束面差异是关键：X仅动壳体行加第28行内6px接缝重涂，底座可见外形不变；Y把底座顶部暗带加厚1行并在原背景处新增不透明像素，与'底座保持原样'的明确要求可见冲突。三图均为11色硬边像素、无半透明（无抗锯齿/噪点），4倍预览为准确的160x144最近邻放大，深浅两背景齐备。三个视觉判据（稳定重装比例、镜头清晰、轮廓更明确且不失衡不拥挤）X与Y均达成，差别在约束遵守与改善幅度。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "这是静态道具任务，compare.html中clips为空，无需播放验证，playbackViewed如实记false。以下内容无法从本包材料判断，不作断言：(1) allowed-mask.*.png未随包提供，X的6px接缝重涂与Y的底座加厚行是否落在允许区内无法核实，保护约束的精确验证由独立脚本负责；(2) 候选的锚点/附件点元数据不在包内（仅起点asset.json），只能从图面确认镜头与底座下部未动、传感器附件落点视觉不变；(3) 交付物（可再渲染源文件、REPORT.md、候选状态数≤12）不在视觉包内，未验证。X的taskFit=MEETS指三个视觉判据与可见约束均达成；Y判NOT_YET是因'底座保持原样'被可见违背，即使其主目标（改比例）完成度更高。成对结论X_PREFERRED的理由：在都满足主目标的前提下，X对不可破坏内容的遵守明显更干净，Y的额外体积感收益不足以抵消对明确约束的可见偏离。此判断限于本实验预设任务内的可读性、完成度与改善，不代表商业级或行业标杆水平。"
+    },
+    "reviewSha256": "15cdd6ff2b713e2b9eb0ebeecbc6b422bd5d89dc171037b607a695276befae8d"
+  },
+  {
+    "pair": "T02-r2",
+    "task": "T02",
+    "repeat": 2,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T02",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/hauler.native.png",
+        "baseline/hauler.light.png",
+        "baseline/hauler.dark.png",
+        "X/hauler.native.png",
+        "X/hauler.light.png",
+        "X/hauler.dark.png",
+        "Y/hauler.native.png",
+        "Y/hauler.light.png",
+        "Y/hauler.dark.png",
+        "compare.html",
+        "common/STYLE_GUIDE.md",
+        "common/style-swatches.png",
+        "baseline/asset.json"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "主壳体从16px宽的细塔重组织为26px宽、带三级圆角的厚重块体，且左右对称、正好落在底座与镜头的共同中轴上（壳体中心x=19.5=底座中心=镜头中心），稳定感和厚重感显著强于起点；镜头、徽标像素原样保留且完全无遮挡，左上光源的明暗模型与10色硬边调色板与起点一致。",
+          "topConcern": "壳体宽度（26px）已接近底座最宽处（28px），底座读作薄垫层，壳体与底座的宽度层级被明显压平；另外壳体底部暗色带覆盖了底座顶部斜切行y=28的10个像素，使壳体与底座轮廓在该行略有粘连（该行是否在允许区内无法从本包判断，掩膜未随包提供）。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "在明显加厚壳体（16px到22px，读作厚实机柜）的同时保留了比X更清楚的壳体-底座层级关系，底座仍作为明显的承托台存在；硬边执行干净，调色板与左上光源照明方向与起点一致。",
+          "topConcern": "壳体未居中：壳体中心x=20.5，比底座与镜头共同中心x=19.5偏右1px，底座露出量左4px、右2px（4倍图下为8px对4px），呈现轻微右偏失衡，正是任务第三判据提醒的\"失衡\"；壳体同样以6个像素覆盖了底座顶部斜切行y=28（同样因掩膜缺席无法判定是否越界）。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "起点主壳体仅16px宽（x=12..27）架在28px底座上，呈细杆/支架态。X把壳体加宽到26px（x=7..32）且完全对称居中：壳体、底座、镜头三者中轴一致，镜头盒(x17-22,y11-15)与徽标(x18-21,y21-23)与起点逐像素相同、四周留白充分、无遮挡，轮廓读作一件敦实的重装设备，未塞满40x36画布。Y加宽到22px（x=10..31），同样明显更厚实，但壳体中心比底座/镜头中轴右偏1px，底座左右露出4px对2px，4倍图下可辨的轻微失衡。两者均保持同一起点10色调色板、无半透明像素（硬边无抗锯齿），改动像素仅限壳体区（X改动354px，Y改动242px，各含少量y=28行重叠）。X的代价（底座垫层读感变薄）比Y的代价（可见的位置性失衡）对本案\"稳定、厚实、不失衡\"的目标影响更小，故取X。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "本任务为静态道具（compare.html中clips为空），无动画可播放，运动维度不适用；playbackViewed如实记false。任务说明提到的allowed-mask.*.png未包含在本评审包内，保护区是否逐像素合规（尤其y=28行、以及区域外像素不变）只能由独立脚本精确验证，我仅报告可见改动位置。交付物（可再渲染源文件、REPORT.md、锚点/附件点文件）与12个已渲染候选状态上限也无法从本包材料核对，相关判断不在本次评审范围内。视觉判断基于9张PNG（三方各自的原生图与固定4倍深/浅背景预览）的直接查看与只读像素测量，未参考任何执行轨迹、工具信息或其他评审者输出。"
+    },
+    "reviewSha256": "89b3ea308640dd74b884f3fbd7cace58bf12a66bc7e1605c84bdc5a19ac01989"
+  },
+  {
+    "pair": "T05-r3",
+    "task": "T05",
+    "repeat": 3,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [
+      "allowedPairwiseResult",
+      "allowedTaskFit",
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T05",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/beacon.dark.png",
+        "baseline/beacon.light.png",
+        "baseline/beacon.native.png",
+        "X/beacon.dark.png",
+        "X/beacon.light.png",
+        "X/beacon.native.png",
+        "Y/beacon.dark.png",
+        "Y/beacon.light.png",
+        "Y/beacon.native.png",
+        "common/style-swatches.png",
+        "compare.html",
+        "baseline/asset.json"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "部件组织清晰：厚重底座、承载机身、右侧带格栅细节的电池块、经短杆顶置的大号琥珀信号灯，形成完整可读的便携信标轮廓；机身有暗部、主体、受光边到横向凹槽的明暗层次，琥珀灯与高光构成明确视觉焦点，深浅两种背景与原生、4倍尺度下轮廓与细节均可读。",
+          "topConcern": "立杆偏短，信号灯几乎直接坐在机身上方，'杆举灯'的信标特征表达被压缩；深背景下右侧电池块与机身明度接近，分界辨识度稍弱。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "轮廓干净、比例修长协调：细杆把信号灯明确举到视觉上方，底座、机身、侧块、杆、灯的顺序完整，整体读作一个便携信标而非散落零件，两种背景与两种尺度下均可读。",
+          "topConcern": "明暗层次较平：机身大面积接近单色，仅左侧竖高光提供体积感，右侧突出块与机身明度接近、深背景下分界不清；底座是浅色薄条，'底部稳固'的表达弱；琥珀灯较小，焦点强度不足，整体完成度低于对手。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "keyEvidence": "对照TASK.md三个视觉判据：(1) 轮廓可读为完整便携信标——X与Y均满足，起点中漂浮分离的琥珀圆点在两者中都已整合到顶部结构；(2) 上方信号灯、承载机身与稳定底座——两者结构顺序均正确，但X的底座厚重、机身宽厚承载感强，Y的底座为薄条、稳固感明显较弱；(3) 焦点与明暗统一——X的琥珀灯更大更亮、机身有暗部/主体/受光/凹槽的完整色阶关系和电池格栅细节，Y机身大面积单色、层次平、灯小焦点弱。以上在深背景#202028、浅背景#d6d8dc及原生、4倍两种尺度下逐一核对，结论一致。X在三个判据上均可见地更好，Y没有任一判据占优，但两者都不构成阻断性问题。",
+      "confidence": "HIGH",
+      "notes": "本任务为静态道具资产，compare.html中clips为空、无动画可播，playbackViewed如实记false，运动维度不适用。两项技术约束无法由静态图判定、留给独立脚本：40×40画布内至少2px透明边界（视觉上X与Y均未见内容贴边，但不据此宣称逐像素合规）与锚点不变。'只用现有五个部件、不加新节点'也无法从成图直接验证，未将其计入美术判断；X右侧的格栅块与Y右侧的突出块在视觉上可读为起点中既有部件的重组与材质调整。评审不涉及作者、工具、成本或代码。"
+    },
+    "reviewSha256": "f2b46a7ed8e0283ab1d0d94973464562b2139106feea9c439d75ddfcb64569e0"
+  },
+  {
+    "pair": "T05-r3",
+    "task": "T05",
+    "repeat": 3,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T05",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/beacon.dark.png",
+        "baseline/beacon.light.png",
+        "baseline/beacon.native.png",
+        "X/beacon.dark.png",
+        "X/beacon.light.png",
+        "X/beacon.native.png",
+        "Y/beacon.dark.png",
+        "Y/beacon.light.png",
+        "Y/beacon.native.png",
+        "common/style-swatches.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "五个部件被组织成连贯的信标：琥珀信号灯位于立杆顶端、方形机身居中承载、右侧电池块与加宽底座形成稳定底部；机身亮暗面加描边的色阶干净，深浅两种背景与原生/4倍尺度下轮廓都能读为完整便携信标，无散落感。",
+          "topConcern": "立杆在原生尺度仅约1像素宽，与较小信号灯的连接偏单薄；右侧电池块与机身的体量关系略含糊，可携带感主要来自整体小巧，部件本身的可携带特征表达较弱。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "信号灯更大且琥珀色阶多级完整，是明确的视觉焦点；机身带倒角与正面凹槽、右侧电池呈分节结构、立杆更粗并与灯连接可信，宽底座收底，结构层次在双背景双尺度下完成度稳定。",
+          "topConcern": "机身宽扁且暗部面积大，可携带感弱于更紧凑的方案，正面横槽略带固定设备箱倾向；深背景下机身暗部与背景的区分主要依赖描边维持。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "两侧都解决了起始图的主要可见问题（信号灯原挂在机身左上侧面、立杆与灯分离、零件散落）：信号灯均移至立杆顶端，机身居中承载，底座加宽稳定，轮廓在原生与4倍、深浅两种背景下均可读为完整便携信标，TASK.md 的三个视觉判据两侧均满足。差异集中在完成细节：Y 的立杆原生约2像素、信号灯更大且色阶分级清楚，焦点更明确，右侧电池分节可读为电池，结构与连接更扎实；X 的约1像素细杆配小灯连接感较弱，但整体更紧凑轻便。任务文本中可携带一项偏向 X，结构合理与焦点完成度两项偏向 Y，后者权重更高但差距不大。可见范围内两侧内容均与画布边缘留有空隙，未见触边或遮罩写入成图的可见破坏。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "无法从现有材料判断：锚点 (20,37) 是否精确保持、RGBA 逐像素保护与 allowed-mask 合规属技术检查，且评审包未提供遮罩文件，不以肉眼宣称；交付物（可再渲染源文件、REPORT.md、附件点/剪辑清单）不在评审包内，未评价。本任务为静态道具，无角色动画要求，无播放项，故 playbackViewed 为 false 不构成缺失。compare.html 为内嵌 base64 的查看器，数据与包内 PNG 相同，评审以直接读取的 PNG 为准。"
+    },
+    "reviewSha256": "8a44b4cdfbf5bd3bea03ba018bd81ac1313eb47a2be80c84b913016fa17c7b6d"
+  },
+  {
+    "pair": "T06-r3",
+    "task": "T06",
+    "repeat": 3,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+    "preference": "NO_MEANINGFUL_DIFFERENCE",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T06",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "compare.html（已读取，但本环境无法真实播放，见 notes）",
+        "common/STYLE_GUIDE.md",
+        "common/style-swatches.png",
+        "baseline/stand_fwd.dark.png",
+        "baseline/stand_fwd.light.png",
+        "baseline/stand_fwd.native.png",
+        "baseline/run0_fwd.dark.png",
+        "X/stand_fwd.dark.png",
+        "X/stand_fwd.light.png",
+        "X/stand_fwd.native.png",
+        "X/run0_fwd.dark.png",
+        "X/run1_fwd.dark.png",
+        "X/run1_fwd.light.png",
+        "X/run2_fwd.dark.png",
+        "X/run2_fwd.native.png",
+        "X/run3_fwd.dark.png",
+        "X/run4_fwd.dark.png",
+        "X/run5_fwd.dark.png",
+        "X/run5_fwd.light.png",
+        "Y/stand_fwd.dark.png",
+        "Y/stand_fwd.light.png",
+        "Y/stand_fwd.native.png",
+        "Y/run0_fwd.dark.png",
+        "Y/run1_fwd.light.png",
+        "Y/run2_fwd.dark.png",
+        "Y/run2_fwd.native.png",
+        "Y/run3_fwd.dark.png",
+        "Y/run4_fwd.dark.png",
+        "Y/run5_fwd.light.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "目镜在全部7帧中变成一整块统一、清晰的暖琥珀信号色，并保留起点同位置的高光像素且比主体更亮；从头盔棕色皮革中明显跳出，深浅两背景都可读，身份与动作轮廓完全未被改动。",
+          "topConcern": "主体琥珀偏亮偏饱和，是两案中更响的一档；『不刺眼』的平衡部分压在仅1像素的浅色高光上，属于口味级偏亮，不构成实质问题。另外本评审未实际播放动画，运动一致性未验证（这是评审环境限制，不是候选缺陷）。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "同样把目镜统一改成暖琥珀并保留更亮的1像素高光，色相更深、更贴近角色皮革/青铜暖色系，协调性非常好，同时在深浅两背景下都保持清晰可读。",
+          "topConcern": "较深的琥珀相对X信号感稍弱，与身体皮革棕的色相距离更近（实际观察仍清晰可辨）；同样地，本评审未实际播放动画，运动一致性未验证（评审环境限制，不是候选缺陷）。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "起点目镜为7像素低对比灰(#53616D)+1像素高光(#87939D)。两候选在全部7帧中只把这8个像素改色、坐标与起点完全对应（待机在(19-23,24-25)，run0/run3随头部起伏整体下移1行，与起点逐帧位置一致），其余像素、alpha与42x48尺寸未变；X用主体#EA9C2D+高光#FFD57E，Y用#D97C1F+#FFC45E，各自全程恒定不跳变，均无残留冷灰目镜像素。视觉上两者的目镜主体与高光层级清楚、暖琥珀与角色棕色系协调、深背景#202028与浅背景#d6d8dc下都可读。两案差异只在琥珀的深浅口味，不足以可靠分出高下。逐像素遮罩合规由独立脚本负责，本评审仅陈述可见与抽样证据，不据此宣称RGBA逐像素一致。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "评审环境无法真实播放compare.html（在不违反『只读取本包内文件』约束的前提下没有可用的本地浏览器回放通道），故playbackViewed=false；判据三『实际播放时颜色、身份与动作一致』按协议记为UNVERIFIED，不因静态帧恒定而声称动画已验证。静态判据一（七帧目镜清晰、暖琥珀协调）与判据二（主体/高光层级）已通过4倍图、原生图与起点对照实际看图判定，两候选均满足，故taskFit记MEETS但置信度取MEDIUM而非HIGH。无法从现有材料判断的项目：真实播放下的观感（闪烁感、节奏中的可读性）、遮罩逐像素精确合规、锚点/附件点/剪辑时长与REPORT.md等交付物（未包含在本包）。两案成对结论为NO_MEANINGFUL_DIFFERENCE：差异仅为琥珀色调深浅的口味选择，各自都完整满足静态任务要求。"
+    },
+    "reviewSha256": "f3fb08a2b0c2cd09e0293e37e192526d759e3c82634decf2c585ea3245b36382"
+  },
+  {
+    "pair": "T06-r3",
+    "task": "T06",
+    "repeat": 3,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "D",
+    "confidence": "MEDIUM",
+    "playbackViewed": true,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T06",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "PROMPT.md",
+        "TASK.md",
+        "common/STYLE_GUIDE.md",
+        "common/style-swatches.png",
+        "baseline/stand_fwd.dark.png",
+        "baseline/stand_fwd.native.png",
+        "baseline/run0_fwd.light.png",
+        "baseline/run1_fwd.light.png",
+        "baseline/run2_fwd.light.png",
+        "baseline/run3_fwd.light.png",
+        "baseline/run4_fwd.light.png",
+        "baseline/run5_fwd.light.png",
+        "X/stand_fwd.light.png",
+        "X/run0_fwd.light.png",
+        "X/run1_fwd.light.png",
+        "X/run2_fwd.light.png",
+        "X/run3_fwd.light.png",
+        "X/run4_fwd.light.png",
+        "X/run5_fwd.light.png",
+        "Y/stand_fwd.light.png",
+        "Y/run0_fwd.light.png",
+        "Y/run1_fwd.light.png",
+        "Y/run2_fwd.light.png",
+        "Y/run3_fwd.light.png",
+        "Y/run4_fwd.light.png",
+        "Y/run5_fwd.light.png",
+        "compare.html（本地HTTP服务+无头Chromium打开并实际播放）",
+        "播放截图（查看后已删除的临时目录 _review_play/）：Start_run_00/03/06、X_run_00/02/05/08、Y_run_00/02/05/08、X_stand_a、Y_stand_a、zoom_dark_stand_fwd、zoom_dark_run0_fwd、zoom_light_stand_fwd、visor_grid_dark、visor_grid_light、debug_grid"
+      ],
+      "playbackViewed": true,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "目镜在待机与六帧跑动中换成统一的暖橙主体并保留明显更亮的琥珀高光，主体-高光层级清晰；逐帧与起点对比改动只落在目镜带内（每帧仅8像素、恰好两种新颜色），头型、盔甲、枪械与动作完全未动；实际播放待机与跑动时颜色稳定、身份与既有动作一致，深浅两种背景下都清晰。",
+          "topConcern": "目镜主体橙色与头发橙棕属同族色，整帧视距下与头发的第一眼分离度低于更亮的方案，信号感稍弱（但仍清晰可辨）。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "目镜为醒目的金琥珀信号色，与周围头发和盔甲分离度高，七帧统一、深浅背景下都清晰；改动同样只落在目镜带内（每帧8像素、两种新颜色），播放中颜色、身份与动作保持一致。",
+          "topConcern": "目镜主体本身已接近高光亮度，右上高光与主体的层级偏弱，接近一片亮；对照判据“主体与高光有层级，不是两块同亮的噪点”，是两侧中较弱的一侧（高光仍可辨，未完全失败）。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "三条视觉判据中：判据一（七帧目镜清晰、暖琥珀与角色协调）与判据三（播放一致）两侧相当；决定性差异在判据二（主体与高光层级）。逐帧与起点对比显示两侧改动同样干净：每帧仅目镜带内8个像素变色、恰好两种新颜色、无目镜外溢出（X：主体rgb(217,124,31)+高光rgb(255,196,94)；Y：主体rgb(234,156,45)+高光rgb(255,213,126)；run0/run3帧目镜带随头部姿态整体下移1像素，与起点姿态一致）。三组七帧并排放大网格（深背景为主、浅背景经页面按钮切换核实）中，X读作“橙琥珀灯面+明显更亮的反光点”，层级分明；Y主体已亮，高光与主体亮度接近，层级读感偏平。实际播放（本地HTTP服务+无头Chromium点击Play，采集播放中canvas帧）确认两侧待机与跑动均无跳色、无闪变，动作与起点一致。色值仅用于描述层级与落点，不作为评分标准。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "播放方式：浏览器插件在子代理中不可用，改在评审包目录上启动临时HTTP服务器并用无头Chromium打开compare.html，对Start/X/Y三组分别选择run_fwd/stand_fwd剪辑并点击Play，采集播放中的canvas截图后逐张目视核对；服务器与临时截图目录已在评审结束后清理。visor_grid_light.png因绘制层叠问题实际仍为深背景，浅背景判断依据页面按钮切换后的zoom_light_*横条与X/Y的light 4倍原图。无法从现有材料判断的项：allowed-mask的精确遮罩合规（遮罩文件不在评审包内）与RGBA逐像素一致性（由独立脚本负责，本评审只做颜色改动落点的可见性核对）；交付完整性（可再渲染源文件、REPORT.md、锚点/附件点/剪辑元数据不在评审包内）；候选的制作方式不做猜测。"
+    },
+    "reviewSha256": "1d20a8cd7a2938f4950bcb577ed529f51d82123de46e6b2afafeef7329446b03"
+  },
+  {
+    "pair": "T01-r3",
+    "task": "T01",
+    "repeat": 3,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+    "preference": "NO_MEANINGFUL_DIFFERENCE",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T01",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/relay.dark.png",
+        "baseline/relay.light.png",
+        "baseline/relay.native.png",
+        "X/relay.dark.png",
+        "X/relay.light.png",
+        "X/relay.native.png",
+        "Y/relay.dark.png",
+        "Y/relay.light.png",
+        "Y/relay.native.png",
+        "common/style-swatches.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "把右侧面板从高饱和亮琥珀改为暗橄榄青铜调，4倍显示下主屏幕（暗底上亮青色文本行）明确成为第一视觉落点；面板保留顶部受光带与下部暗带，结构与存在感仍在，没有被删掉。",
+          "topConcern": "面板仍偏亮偏暖（接近公共琥珀阶的中段），在三个候选观感里保留的视觉拉力相对最多，层级翻转不如更暗的处理彻底；属于程度问题，不构成不达标。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "面板压得更暗（接近公共琥珀阶暗段），屏幕的第一落点地位最明确，同时面板顶亮下暗的纵向结构仍可辨认，深浅两种背景下都仍是可读的独立模块。",
+          "topConcern": "面板明度压得较低，深背景下存在感被削弱到接近陷入阴影的模块，材料辨识略逊于更亮的处理；仍是可读的功能性弱化，不构成不达标。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+      "keyEvidence": "起点图中右侧亮琥珀面板明显先于屏幕被注意到。X 与 Y 都只改了右侧面板矩形区域：在深背景、浅背景 4 倍图与原生图中，屏幕文本行、机身、支脚与轮廓均看不到可见改动（逐像素一致性由独立脚本验证，不作肉眼断言）。改色后两者的屏幕都是全图对比度最高、最先落视的元素；面板都保留受光/暗部结构，符合『侧板仍有结构、存在感与可读性』；两者都没有加装饰、模糊或抗锯齿，硬边保持。X 与 Y 的差异只在面板压暗程度：X 保留更多面板存在感、Y 的屏幕主导更彻底，各在一条次要判据上略优，未见任一侧出现会改变达结论定的实质缺陷，因此判为差异很小。",
+      "confidence": "MEDIUM",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "notes": "本资产无动画剪辑（asset.json 与 compare.html 中 clips 为空），无播放维度可验证，也未声称任何运动已验证。包内未提供 allowed-mask.*.png，遮罩合规未在视觉端检查，交给独立脚本。无法从现有材料得到：逐像素 RGBA 保护是否通过；除面板矩形外是否存在肉眼不可见的改动；REPORT.md 等交付物（评审包中未包含）。图像渲染尺寸较小（原生 40x36，4 倍 160x144），细部色阶判断存在天然限度。"
+    },
+    "reviewSha256": "7d736c5f92b619151cc9fc123e1c54dfdcf05e5605f05fa2417db8e80f649028"
+  },
+  {
+    "pair": "T01-r3",
+    "task": "T01",
+    "repeat": 3,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T01",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/relay.dark.png",
+        "baseline/relay.light.png",
+        "X/relay.dark.png",
+        "X/relay.light.png",
+        "X/relay.native.png",
+        "Y/relay.dark.png",
+        "Y/relay.light.png",
+        "Y/relay.native.png",
+        "common/style-swatches.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "侧板由亮琥珀降为低饱和橄榄色调并保留顶帽与暗部分层结构，主屏幕的青色读数在4倍深浅两背景下都成为最先被注意的元素；未添加任何额外装饰。",
+          "topConcern": "橄榄绿色相在冷灰机身加青色屏幕的配色中略显突兀、稍偏浑浊；侧板中段大面积同色较平淡，存在感比原琥珀板和Y的铜色略弱。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "侧板改为暗青铜/棕色，保留顶部受光边与明暗分层，仍能清楚辨认是同一设备的暖色侧板；压低饱和与明度后主屏幕明显成为第一视觉落点，色阶与机身、屏幕协调。",
+          "topConcern": "侧板整体偏暗且中段较均匀，内部层次有限；浅背景下与机身的区分更多依赖色相而非明度对比。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "两条判据核心均达成：4倍深浅两背景下，主屏幕的青色显示内容都比被压暗/降饱和的侧板更先吸引注意；侧板均保留矩形轮廓、受光边与暗部分层，未被涂透明或背景色，也无新增装饰。可见差异在色相处理：Y将原琥珀压成同族暗铜色，暖色身份与整体色阶保留更完整；X改为橄榄绿，注意力反转同样有效，但绿色相与灰/青配色略欠协调、侧板存在感稍弱。据此Y略更符合任务，但差距不大，两候选均满足三条视觉判据。",
+      "confidence": "MEDIUM",
+      "notes": "本资产为静态道具（asset.json与compare.html中clips均为空），不存在待机/跑动动画，运动维度不适用，无从播放。compare.html已读取源码，内嵌与包内PNG相同的Start/X/Y三帧（原生+4倍、深浅背景切换），实际图像证据来自直接读取的PNG文件。两候选在可见范围内仅右侧面板区域发生变化，其余部分与起点未见可见差异；RGBA逐像素保护由独立脚本验证，本评审不做逐像素一致的声明。未查看执行轨迹、成本、工具信息或其他评审者输出。Y的优势幅度有限，属可辩驳的偏好而非压倒性差距。"
+    },
+    "reviewSha256": "a11f8cbfeedf970d8b401f0fe5f8bfced0424b31677158bc569dca6f61938702"
+  },
+  {
+    "pair": "T02-r3",
+    "task": "T02",
+    "repeat": 3,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T02",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/hauler.dark.png",
+        "baseline/hauler.light.png",
+        "baseline/hauler.native.png",
+        "X/hauler.dark.png",
+        "X/hauler.light.png",
+        "X/hauler.native.png",
+        "Y/hauler.dark.png",
+        "Y/hauler.light.png",
+        "Y/hauler.native.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "主壳体被真正重新组织：顶部保留较窄的上段，下方接明显加宽的机身（最宽约26px），整体居中落在底座上，机身下部还有一道板缝/凹槽细节；轮廓从起点单一细塔变为台阶式的厚重设备剪影，重装比例最直接。镜头面板与青色高光、琥珀徽标、底座主体均保持原样且无遮挡。",
+          "topConcern": "加宽后的机身与底座几乎同宽（约26px对28px），底座作为独立承托层级的对比被削弱；底部凹槽内侧沿用机身色，细节偏浅，只起轻微作用。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "壳体从约16px宽整体加宽到约22px、接近方形，稳定厚实感有实际提升，同时镜头面板、徽标、底座完全逐像素保留，处理克制、无失衡。",
+          "topConcern": "轮廓形态与起点完全相同（同一个矩形，只加了宽度），没有体现任务所说的重新组织；厚重感的改善幅度有限，整体仍偏竖直柜体的读感，轮廓比起点更明确这一条只算弱满足。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照TASK.md三个视觉判据（深浅背景4x预览与40x36原生图均已查看，两侧同条件）：判据1稳定重装比例——X机身重组为上窄下宽两段式，宽机身约26px居中压在底座上，最厚重；Y将壳体加宽到约22px接近方形，比例也有实质改善，但幅度小于X。判据2镜头清晰无遮挡——两者镜头面板（含青色高光像素）均未改动、无壳体或边缘遮挡。判据3轮廓更明确且不塞满——X轮廓由单一细塔变为窄顶台+宽机身+底部板缝的台阶式剪影，画布左右仍留白约7px，不显拥挤；Y轮廓形状与起点相同仅加宽，明确度提升最弱。两候选徽标与底座主体（y=29-33）均未改动，均在起点原bounds内。",
+      "confidence": "HIGH",
+      "notes": "1) 评审包内未提供 allowed-mask.*.png，保护区合规无法从现有材料判断；可见事实是：两候选都把底座顶面倒角行（y=28）加宽以衔接新壳体（X收成两端1px台阶，Y为两端3px台阶），底座主体行未动；y=28是否属于底座保护区留待独立脚本核验，我不凭肉眼宣称逐像素一致。2) compare.html为静态页（clips为空），本任务为道具资产无动画，无需播放，playbackViewed如实记false。3) 我做了包内逐像素比对以核对初看印象：Y并非与起点相同（约242像素变化，壳体每侧加宽约3px），仅看4x预览容易误判为未改动；X约333像素变化。4) 本评审只依据可见图像与任务/风格材料，未接触任何执行轨迹、成本、工具或作者信息；结论限于本实验任务内，不表示商业级或行业顶级。"
+    },
+    "reviewSha256": "f8ea4bfcc8db4db3d5cb28d8f2073dbec977e89cf0d25b5c3f83a2791d167a96"
+  },
+  {
+    "pair": "T02-r3",
+    "task": "T02",
+    "repeat": 3,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T02",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/hauler.native.png",
+        "baseline/hauler.dark.png",
+        "baseline/hauler.light.png",
+        "X/hauler.native.png",
+        "X/hauler.dark.png",
+        "X/hauler.light.png",
+        "Y/hauler.native.png",
+        "Y/hauler.dark.png",
+        "Y/hauler.light.png",
+        "common/style-swatches.png",
+        "compare.html（内嵌 Start/X/Y 三帧，与包内 PNG 一致）"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "主壳体相对起点明显加宽并保持居中，压在原底座上形成稳定厚实的比例；屏幕、琥珀色徽标、底座外观均未见变化且清晰可见；硬边无抗锯齿，深浅两种背景下读图一致。",
+          "topConcern": "加宽后仍是一个较平直的方碑式块体，形体重组幅度保守，'重装设备'的机械感弱于更有形体变化的做法；顶部边线左右角处理略有不对称，4倍图下可察觉但不成问题。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "壳体被真正重组：下宽上收的梯形主体加顶部窄帽，底部落在原底座上，稳定感和重型设备感明显强于起点；轮廓比起点明确得多且未塞满画布；屏幕、徽标、底座外观均未见变化且清晰，硬边干净无噪点纹理。",
+          "topConcern": "顶部帽块与前身下部新增的横向接缝线是起点没有的新元素，位置合理但若允许区约束更严可能越界；RGBA逐像素保护无法凭肉眼确认，只能交由独立脚本核实。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "任务核心是纠正'过细像支架'的壳体比例。对照起点：X 通过对称加宽主壳体达到稳定厚实，三条视觉判据（稳定比例、镜头无遮挡、轮廓更明确且不失衡）均满足，但形体仍偏平板；Y 在加宽之外还重组织了形体（梯形收分+顶部窄帽），底宽落在原底座上使'稳定重型设备'的读法最直接，轮廓改善幅度更大，且同样保留屏幕、徽标与底座的可见外观。两侧在深/浅背景与原生/4倍条件下均保持硬边像素表达，未见抗锯齿、模糊或纹理掩盖比例的迹象。成对比较中 Y 的形体重组对任务意图的回应更充分，差异可见且可靠。",
+      "confidence": "MEDIUM",
+      "notes": "本资产为 prop（asset.json 无 clips），无待机/跑动动画可播，playback 相关维度不适用，playbackViewed 如实记 false。遮罩 allowed-mask 未包含在本包内，因此'保护区外像素不变'的精确验证无法由肉眼完成，按 PROMPT 约定留给独立脚本；两侧在可见层面上屏幕、琥珀徽标与底座均未见改动或遮挡。两个候选均达任务要求，Y 胜出的幅度是中等而非压倒性：X 同样可接受，只是形体表达更保守。"
+    },
+    "reviewSha256": "18c0507b97fb84866e02b803ecb044bc351bab89c5c5b3e0dc9a90e764c634d0"
+  },
+  {
+    "pair": "T03-r3",
+    "task": "T03",
+    "repeat": 3,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T03",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "PROMPT.md",
+        "TASK.md",
+        "common/STYLE_GUIDE.md",
+        "common/style-swatches.png",
+        "compare.html",
+        "baseline/asset.json",
+        "baseline/cutter.native.png",
+        "baseline/cutter.dark.png",
+        "baseline/cutter.light.png",
+        "X/cutter.native.png",
+        "X/cutter.dark.png",
+        "X/cutter.light.png",
+        "Y/cutter.native.png",
+        "Y/cutter.dark.png",
+        "Y/cutter.light.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "夹口沿刃口上侧组织出一条方向明确的受光带，与背光侧形成固定的明暗朝向；手柄整体压暗一档、显得更沉稳；轮廓、描边、暗色缺口与琥珀铆钉全部保留，原生与4倍图都干净无碎点。",
+          "topConcern": "明暗组织偏保守：夹口背光面基本保持起始的平坦中间色，缺少阴影侧的纵深；手柄是单一平色，自身没有受光/背光关系。夹口与手柄的亮度差很小，主次关系在原生尺寸下不容易读出。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "夹口形成完整且有方向的金属色阶：顶缘近白高光、受光边、亮面、阴影面到最深暗缘层次连续、朝向一致，不是随机亮点；颈肩处受光边明确降档，手柄用同一套色阶语言但更暗、更低调，主次清晰又属同一设计；轮廓、缺口与铆钉完整保留，两尺寸下都干净。",
+          "topConcern": "夹口顶缘的近白高光在4倍深背景下略显抢眼；颈肩过渡的第一行手柄上残留1像素宽的受光色，是高光渐隐的痕迹而非随机噪点，但原生尺寸下略微可辨。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "在相同深/浅背景与相同4倍条件下对照起点：Y 的夹口具备从高光到阴影的连续方向性关系，且在颈肩处让位给明显更暗的手柄，判据一（受光与阴影有明确关系）与判据二（主次分明、同一套设计）均可见成立；X 同样有组织（夹口受光带加手柄整体压暗，方向一致），但背光面与手柄都接近平色，主次弱、金属感弱，仅勉强满足判据一和二。两者轮廓描边位置与颜色、铆钉均与起点一致，原生与4倍图都无碎点或抗锯齿（判据三两侧都通过）。未发现轮廓改变、新增零件、遮罩写入成图或抗锯齿等可见破坏。",
+      "confidence": "HIGH",
+      "notes": "本任务为道具资产，compare.html 中 clips 为空，不存在待机/跑动等可播放动画，故 playbackViewed 如实记 false，评审不涉及运动维度。除逐张查看 PNG（原生+4倍、深/浅背景）外，另以内存方式读取 32x32 像素网格核对明暗组织与颜色分布（未创建任何临时文件）；网格层面轮廓、描边与铆钉与起点一致，但 RGBA 逐像素保护验证仍以独立脚本结论为准，评审仅声明可见层面无破坏。baseline/cutter.rgba 与 baseline/viewer.html 未另行查看，PNG 已覆盖同等视觉信息。此对比仅针对本试点任务内的可读性、完成度与改善，不代表商业级或行业顶级结论。"
+    },
+    "reviewSha256": "aaa3f9dfdcdb52572d6f28f37c40039bad3ee243615eaa19134095125eefc87a"
+  },
+  {
+    "pair": "T03-r3",
+    "task": "T03",
+    "repeat": 3,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "NOT_YET"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T03",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/cutter.native.png",
+        "baseline/cutter.dark.png",
+        "baseline/cutter.light.png",
+        "X/cutter.native.png",
+        "X/cutter.dark.png",
+        "X/cutter.light.png",
+        "Y/cutter.native.png",
+        "Y/cutter.dark.png",
+        "Y/cutter.light.png",
+        "common/style-swatches.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "夹口到手柄形成一套完整、有方向的金属明暗系统：头部顶缘亮高光、左上面受光、右下侧核心阴影按连续色带递进，铆钉后方握把尾部顺势压暗，手柄整体退居暗部只留一条细受光边。主次关系一眼可读，且全部新色仍落在冷钢色系内，与起点同属一套设计。",
+          "topConcern": "头部顶缘高光的亮度超过了琥珀铆钉，一定程度上削弱了铆钉作为唯一小识别点的焦点地位；32px 小件上六级明暗台阶偏细密，但均为连续色带与贴边高光，不属碎点或随机亮点。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "NOT_YET",
+          "topStrength": "处理干净克制：左上一条受光带与整体压暗一档的手柄构成同方向的明暗逻辑，轮廓、描边、铆钉原样保留，原生与4倍图都无噪点、无抗锯齿。",
+          "topConcern": "任务核心'让夹口像金属'只被很轻地触及：夹口齿部与头部大部分区域仍保持起始的平坦中间色，没有高出受光带的亮台阶，头与手柄之间的明度差只有两三档且相邻色阶差很小，深背景下金属质感与主次关系都偏弱，更像整体轻微提亮压暗而非为夹口组织的金属明暗。",
+          "blockingIssue": true
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "三个视觉判据的可见依据：(1) 夹口受光/阴影关系——X 在头部形成'顶缘高光-左上受光-右下阴影'的连续递进，齿缝保持深色使开口更立体，光向全件一致，非随机亮点；Y 只有左上一条受光带，齿部与头部右侧基本维持起始平坦色，关系存在但很弱。(2) 主次与同套设计——X 头部与手柄明度差大、层级分明，新色均在冷钢灰蓝家族内，轮廓描边未动；Y 有主次但对比温和，深背景下不够醒目。(3) 原生与4倍干净度——两侧的4倍图均为最近邻精确放大，硬边无抗锯齿、无孤立碎点，背景为规定的深浅两色。两项候选的轮廓 alpha、外描边像素、琥珀铆钉像素与起点完全一致（以只读方式核对像素结构佐证；遮罩级精确合规以独立脚本为准）。未看执行轨迹、工具归属与成本，不评价技术实现。",
+      "confidence": "HIGH",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "本任务为静态道具，compare.html 无动画剪辑，无运动维度需要播放验证，playbackViewed 如实记 false。包内未提供 allowed-mask 文件，X/Y 的 asset.json 亦不在包内，锚点/附件点元数据无法直接核对；从图像层面看轮廓、描边、铆钉、锚点所在区域均未见可见破坏。判断局限：像素明暗结构以只读脚本辅助确认，美术优劣结论仍基于对原生图与双背景4倍预览的实际观看；无外部商业标杆，结论限于本任务内的可读性、完成度与改善幅度。"
+    },
+    "reviewSha256": "a5a7c6747d235c1254190d213b82affde5a0e4f3ad53c5a0c6170333695482e5"
+  },
+  {
+    "pair": "T04-r3",
+    "task": "T04",
+    "repeat": 3,
+    "reviewer": "reviewer-1",
+    "mapping": {
+      "X": "D",
+      "Y": "A"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "Y_PREFERRED",
+    "preference": "A",
+    "confidence": "MEDIUM",
+    "playbackViewed": false,
+    "missing": [],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T04",
+      "reviewerSlot": 1,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "baseline/medkit.native.png",
+        "baseline/medkit.dark.png",
+        "baseline/medkit.light.png",
+        "X/medkit.native.png",
+        "X/medkit.dark.png",
+        "X/medkit.light.png",
+        "Y/medkit.native.png",
+        "Y/medkit.dark.png",
+        "Y/medkit.light.png",
+        "common/style-swatches.png",
+        "compare.html（文本结构；静态道具，clips 为空，无可播放动画）"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "黄色占位矩形被替换为居中的红色像素心形，形状对称、硬边干净并带暗红内层次；在原生尺度和固定4倍深/浅背景下均清晰可辨，与冷灰金属箱体的工业像素风一致。",
+          "topConcern": "红心在游戏视觉语言中更常读作“生命/回血”，对任务要求的“急救/医疗用品标识”指向比十字类符号间接一档；这是程度问题，不构成阻断。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "中央面板内改为红底白色十字，是急救箱最通用的识别符号，联想直接无歧义；十字规整居中、像素干净，原生尺度与深/浅背景下都清楚。",
+          "topConcern": "未发现实质可见缺陷；相对观察是中央红色底块的视觉重量明显大于起点占位，在最小显示尺度下最吸引视线，属于符号功能而非缺陷级问题。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "Y_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照起点，两侧的可见改动都集中在底板中央原黄色矩形区域内：X 为居中红心，Y 为红底白十字；箱体外壳、顶部手柄、左侧锁扣与面板边框在可见层面均与起点一致。两者都满足三条视觉判据（联想医疗、符号简洁稳定且居中、硬边像素风不破坏箱体）。关键差异在联想直接性：红底白十字对“急救/医疗用品标识”是最通用、零歧义的符号；红心也可联想医疗/恢复，但更偏“生命值”含义，指向稍间接。",
+      "confidence": "MEDIUM",
+      "allowedConfidence": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ],
+      "notes": "1) 本任务为静态道具，compare.html 中 clips 为空，无动画可播放，playbackViewed 记为 false，不存在动画维度判定。2) 遮罩内外的 RGBA 逐像素一致性不凭肉眼宣称，由独立脚本验证；我在可见层面未发现遮罩区域外的改动。3) 包内未提供 REPORT.md、可再渲染源文件与 allowed-mask 图像，交付物完整性无法从本包判断，本评审仅覆盖成图视觉判据，不因此调整 taskFit。4) 本试点无外部商业标杆，结论限于任务规定的可读性、完成度与改善，不代表商业级水准。"
+    },
+    "reviewSha256": "c81b98d9ccf74ea80ccbae5bb34496e9aa4a332a737b70e607b565a07b75500b"
+  },
+  {
+    "pair": "T04-r3",
+    "task": "T04",
+    "repeat": 3,
+    "reviewer": "reviewer-2",
+    "mapping": {
+      "X": "A",
+      "Y": "D"
+    },
+    "taskFit": {
+      "X": "MEETS",
+      "Y": "MEETS"
+    },
+    "pairwiseResult": "X_PREFERRED",
+    "preference": "A",
+    "confidence": "HIGH",
+    "playbackViewed": false,
+    "missing": [
+      "allowedConfidence"
+    ],
+    "invalid": [],
+    "raw": {
+      "schema": "pga-review/2",
+      "task": "T04",
+      "reviewerSlot": 2,
+      "reviewerId": "anonymous-visual-reviewer",
+      "actualViews": [
+        "PROMPT.md",
+        "TASK.md",
+        "review.template.json",
+        "common/STYLE_GUIDE.md",
+        "common/style-swatches.png",
+        "compare.html",
+        "baseline/asset.json",
+        "baseline/medkit.dark.png",
+        "baseline/medkit.light.png",
+        "baseline/medkit.native.png",
+        "X/medkit.dark.png",
+        "X/medkit.light.png",
+        "X/medkit.native.png",
+        "Y/medkit.dark.png",
+        "Y/medkit.light.png",
+        "Y/medkit.native.png"
+      ],
+      "playbackViewed": false,
+      "candidates": {
+        "X": {
+          "taskFit": "MEETS",
+          "topStrength": "中央徽标改为红底白十字，是最直接的急救符号；在40x36原生图和4倍图上都能立即联想到医疗/急救用途，不再有任何矩形色块残留。十字几何干净：红区约在14-25列/14-23行，竖条约2像素宽（19-20列）、横条约2像素高（18-19行），在红区内水平垂直均居中，硬边无抗锯齿，暗红描边与自左上向右下的细明暗过渡和箱体既有勾边、受光方向一致。",
+          "topConcern": "红色底板几乎填满整个面板内区（仅留1像素暗边），成为整件资产中面积最大、饱和度最高的色块，信号色面积明显超出小面积点缀的习惯；另外评审包内没有allowed-mask文件，红区与十字是否全部落在允许修改遮罩内无法用视觉材料确认，只能由独立技术脚本核查。",
+          "blockingIssue": false
+        },
+        "Y": {
+          "taskFit": "MEETS",
+          "topStrength": "面板中央的红色心形轮廓清晰，在游戏视觉语境下能联想到健康/医疗用途，满足'不再是矩形色块'的核心要求；改动局限在中央面板内区，外壳、提手、锁扣与锚点、附件点相关像素与起点一致。",
+          "topConcern": "心形顶部凹口左右不对称：第14行左叶约3像素宽（15-17列）而右叶约4像素宽（22-25列），第15行左块4像素（15-18列）、右块5像素（21-25列），以底部尖端所在的20列为镜像轴在19↔21列出现错位，4倍图上可察觉轻微歪斜；且心形为单一红色平涂，无描边、无明暗分阶，比箱体其余部分的勾边加色阶表达更简，融合度略弱。",
+          "blockingIssue": false
+        }
+      },
+      "pairwiseResult": "X_PREFERRED",
+      "allowedPairwiseResult": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ],
+      "allowedTaskFit": [
+        "MEETS",
+        "NOT_YET",
+        "UNVERIFIED"
+      ],
+      "keyEvidence": "对照起点40x36帧逐行核对：X和Y都只改动了中央面板内区，外壳、提手、锁扣、左侧锁片以及锚点(20,33)、附件点(20,4)所在区域的像素与起点完全相同，未见图标外区域被改动。X的面板内是红底白十字，居中、左右上下对称、硬边，暗红描边与箱体勾边逻辑一致，原生尺度即可读为急救符号；Y的面板内是红色平涂心形，能读出心形/健康含义，但顶部凹口偏斜约1像素，单色无描边。在符号直接性（十字比心形更指向急救）和工艺稳定性（对称、明暗整合）上X均更强，故选X。",
+      "confidence": "HIGH",
+      "notes": "本资产为静态道具，compare.html源码中Start/X/Y均无clips，无动画可播放，运动维度不适用；playbackViewed如实记为false。判断局限：'正常显示尺度可辨认'是单人观看原生图与4倍图后的结论；allowed-mask未包含在包内，遮罩内逐像素合规与RGBA保护精度不由肉眼判定，交由独立脚本；包内也未见REPORT.md或可再渲染源，交付完整性无法从本材料评价。X为红底白十字而非白底红十字，属游戏中常见的急救表达方式，未认定为现实品牌问题。Y的心形红色(#c3392b)比公共红阶(#c35a59)更橙更饱和，风格指南明确允许新色，不作为扣分项。按要求未给出单一数字总分。"
+    },
+    "reviewSha256": "b6e1b45e127602fc540aaea17f6f6a7a6c3798e904929166ddc01a2fdbd2766f"
+  }
+]
