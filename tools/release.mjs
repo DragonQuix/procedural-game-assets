@@ -9,8 +9,8 @@
  * 用法：node tools/release.mjs [--check] [--skill procedural-game-assets-loop]
  * --check 只校验不重新生成；默认入口为 procedural-game-assets。
  */
-import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
+import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { MANIFEST_NAME, hashTree, verifyTree } from './release-manifest.mjs';
@@ -60,6 +60,18 @@ const PAYLOAD = [
 /** 载荷内排除的派生/本地文件 */
 const EXCLUDE = /[\\/]assets([\\/]|$)|demo-capture\.png$|node_modules[\\/]\.package-lock|[\\/]tests[\\/](?:pga-ad-host|PGA_AB_BENCHMARK_[^\\/]+|PGA_CONSTRAINT_BENCHMARK_[^\\/]+|PGA_RELATION_BENCHMARK_[^\\/]+)(?:[\\/]|$)/;
 
+// Git autocrlf affects the development checkout, not the portable payload identity.
+async function normalizePayloadText(dir) {
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) await normalizePayloadText(path);
+    else if (['.js', '.mjs', '.json', '.md', '.html', '.css', '.gd', '.tscn', '.godot', '.txt', '.ps1'].includes(extname(path))) {
+      const bytes = await readFile(path);
+      if (!bytes.includes(0) && bytes.includes(Buffer.from('\r\n'))) await writeFile(path, bytes.toString('utf8').replaceAll('\r\n', '\n'));
+    }
+  }
+}
+
 async function build() {
   const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
   await rm(payloadDir, { recursive: true, force: true });
@@ -77,6 +89,7 @@ async function build() {
       filter: (s) => !EXCLUDE.test(s),
     });
   }
+  await normalizePayloadText(payloadDir);
   let commit = 'unknown';
   try {
     commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();

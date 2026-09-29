@@ -32,8 +32,6 @@
   `plans/agent-studio.md`；agent 合同见 `studio-cli.md`。不改变普通/循环版入口与准出规则；
   循环版载荷不随动（保持 0.5.0），用户级安装升级另行授权。
 
-## 已完成（均验证过，见 verification.md）
-
 ## 当前开发交付（待独立认证）
 
 - Studio v1.4 / 0.8.0：显式 contact、有限 follower 修复、最终关系合同与安全域共用检查链。
