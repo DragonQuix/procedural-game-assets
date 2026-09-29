@@ -43,3 +43,12 @@ tests/PGA_CONSTRAINT_BENCHMARK_v0_1/runs-invalid/
 tests/PGA_CONSTRAINT_BENCHMARK_v0_1/reviews/
 tests/PGA_CONSTRAINT_BENCHMARK_v0_1/organizer/trial-map.json
 tests/PGA_CONSTRAINT_BENCHMARK_v0_1/organizer/freeze-inputs.json
+
+# v0.2 独立工具快照与共享观察依赖；正式原始试次仍不入库。
+!tests/PGA_RELATION_BENCHMARK_v0_2/frozen/*/node_modules/
+!tests/PGA_RELATION_BENCHMARK_v0_2/frozen/*/node_modules/pngjs/
+!tests/PGA_RELATION_BENCHMARK_v0_2/shared/node_modules/
+!tests/PGA_RELATION_BENCHMARK_v0_2/shared/node_modules/pngjs/
+tests/PGA_RELATION_BENCHMARK_v0_2/runs/
+tests/PGA_RELATION_BENCHMARK_v0_2/reviews/
+tests/PGA_RELATION_BENCHMARK_v0_2/runs-invalid/

@@ -43,7 +43,7 @@ Codex 本轮只写 demo；独立运行和视觉核验由 ZCode 完成。无服�
 
 v0.1 NO-GO 原样保留，INT-01 使其为 qualified evidence；产品解释单独存档。
 v0.2 两任务为全新 hold-out，D13 为真实 v0.7.0，D14 为 0.8.0 candidate snapshot。
-正式 final freeze、模型/宿主、vision gate 图像、事件计数 schema、执行顺序及启动 host adapter
+正式 final freeze、模型/宿主、vision gate 图像核验、事件计数 schema、执行顺序及启动 host adapter
 均由 ZCode 运行前冻结。没有正式模型调用或正式 runs。详见实验 README 与 protocol-draft.json。
 
 仅重建普通技能仓库载荷，不更新循环载荷、用户级技能安装、其他游戏或 v0.1 原数据。

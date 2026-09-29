@@ -3,3 +3,8 @@ skills/*/assets/toolkit/** -text
 tests/PGA_CONSTRAINT_BENCHMARK_v0_1/frozen/** -text
 tests/PGA_CONSTRAINT_BENCHMARK_v0_1/materials/** -text
 tests/PGA_CONSTRAINT_BENCHMARK_v0_1/protocol-draft.json -text
+tests/PGA_RELATION_BENCHMARK_v0_2/frozen/** -text
+tests/PGA_RELATION_BENCHMARK_v0_2/shared/** -text
+tests/PGA_RELATION_BENCHMARK_v0_2/materials/** -text
+tests/PGA_RELATION_BENCHMARK_v0_2/protocol-draft.json -text
+tests/PGA_RELATION_BENCHMARK_v0_2/vision/** -text

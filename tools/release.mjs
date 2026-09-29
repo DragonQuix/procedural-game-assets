@@ -58,7 +58,7 @@ const PAYLOAD = [
 ];
 
 /** 载荷内排除的派生/本地文件 */
-const EXCLUDE = /[\\/]assets([\\/]|$)|demo-capture\.png$|node_modules[\\/]\.package-lock|[\\/]tests[\\/](?:pga-ad-host|PGA_AB_BENCHMARK_[^\\/]+|PGA_CONSTRAINT_BENCHMARK_[^\\/]+)(?:[\\/]|$)/;
+const EXCLUDE = /[\\/]assets([\\/]|$)|demo-capture\.png$|node_modules[\\/]\.package-lock|[\\/]tests[\\/](?:pga-ad-host|PGA_AB_BENCHMARK_[^\\/]+|PGA_CONSTRAINT_BENCHMARK_[^\\/]+|PGA_RELATION_BENCHMARK_[^\\/]+)(?:[\\/]|$)/;
 
 async function build() {
   const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
