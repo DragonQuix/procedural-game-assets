@@ -11,6 +11,7 @@
  * 不做：任意形状变形、任意网格/网格点编辑、多节点联动、风格内容修改。
  */
 import { normalizeStudioDocument, StudioDocumentError, GEOMETRY_FIELDS, materialsFor } from './document.js';
+import { resolveRelations } from './relation-resolution.js';
 
 export const GEOMETRY_TRANSFORMS = Object.freeze(['widen_about_center', 'squash_keep_base', 'resize_about_anchor']);
 export const OPERATION_IDS = Object.freeze(['geometry.set', 'material.set', 'ramp.set', ...GEOMETRY_TRANSFORMS]);
@@ -44,7 +45,7 @@ function checkOperationShape(operation) {
     fail('INVALID_DOCUMENT', '操作需要对象 { id, target, ... }');
   }
   for (const key of Object.keys(operation)) {
-    if (!['id', 'target', 'params', 'material', 'ramp'].includes(key)) {
+    if (!['id', 'target', 'params', 'material', 'ramp', 'preserveRelations'].includes(key)) {
       fail('INVALID_DOCUMENT', `操作含未知字段 '${key}'`, { target: operation.target ?? null });
     }
   }
@@ -53,6 +54,10 @@ function checkOperationShape(operation) {
   }
   if (typeof operation.target !== 'string' || operation.target.length === 0) {
     fail('INVALID_DOCUMENT', `操作 '${operation.id}' 需要非空 target`, { target: null });
+  }
+  if (operation.preserveRelations !== undefined && (!GEOMETRY_TRANSFORMS.includes(operation.id) ||
+      !(typeof operation.preserveRelations === 'boolean' || Array.isArray(operation.preserveRelations)))) {
+    fail('INVALID_DOCUMENT', 'preserveRelations 只用于 semantic transform，值为 boolean 或关系 ID 数组');
   }
 }
 
@@ -188,8 +193,15 @@ export function applyOperation(doc, operation) {
     }
   }
 
-  const newDoc = renormalize(candidate, id, target);
-  return { doc: newDoc, plan: { id, target, changedFields, ...(geometry ? { geometry } : {}) } };
+  let newDoc = renormalize(candidate, id, target);
+  let resolution;
+  if (operation.preserveRelations !== undefined && operation.preserveRelations !== false) {
+    try { resolution = resolveRelations(newDoc, operation.preserveRelations, target); }
+    catch (e) { if (e.code === 'RELATION_CONFLICT') fail(e.code, e.message, { target, details: e.details }); else throw e; }
+    newDoc = renormalize(resolution.doc, id, target);
+  }
+  return { doc: newDoc, plan: { id, target, changedFields, ...(geometry ? { geometry } : {}),
+    ...(resolution ? { changes: [{ target, changedFields }, ...resolution.changes], relationRepairs: resolution.repairs, selectedRelationIds: resolution.selectedRelationIds, relationTrialCompiles: resolution.trialCompiles } : {}) } };
 }
 
 /**
@@ -199,7 +211,7 @@ export function applyOperation(doc, operation) {
  */
 export function operationFromExplore(spec, value) {
   if (spec === null || typeof spec !== 'object' || Array.isArray(spec)) fail('INVALID_DOCUMENT', '探索需要对象 { id, target, field, values }');
-  if (spec.id === 'geometry.set' || GEOMETRY_TRANSFORMS.includes(spec.id)) return { id: spec.id, target: spec.target, params: { ...spec.params, [spec.field]: value } };
+  if (spec.id === 'geometry.set' || GEOMETRY_TRANSFORMS.includes(spec.id)) return { id: spec.id, target: spec.target, params: { ...spec.params, [spec.field]: value }, ...(spec.preserveRelations === undefined ? {} : { preserveRelations: spec.preserveRelations }) };
   if (spec.id === 'material.set') return { id: spec.id, target: spec.target, material: value };
   if (spec.id === 'ramp.set') return { id: spec.id, target: spec.target, ramp: value };
   fail('UNSUPPORTED_OPERATION', `未知操作 '${spec.id}'（可用：${OPERATION_IDS.join(', ')}）`, { target: spec.target ?? null });
@@ -216,7 +228,7 @@ export function exploreOperation(doc, spec) {
   if (!Array.isArray(spec.values) || spec.values.length < 1) fail('INVALID_DOCUMENT', '探索需要非空 values 数组');
   if (spec.values.length > 16) fail('RESOURCE_LIMIT', `探索取值 ${spec.values.length} 超过上限 16`);
   for (const key of Object.keys(spec)) {
-    if (!['id', 'target', 'field', 'values', 'params'].includes(key)) fail('INVALID_DOCUMENT', `探索含未知字段 '${key}'`);
+    if (!['id', 'target', 'field', 'values', 'params', 'preserveRelations'].includes(key)) fail('INVALID_DOCUMENT', `探索含未知字段 '${key}'`);
   }
   if (!OPERATION_IDS.includes(spec.id)) fail('UNSUPPORTED_OPERATION', `未知操作 '${spec.id}'（可用：${OPERATION_IDS.join(', ')}）`, { target: spec.target ?? null });
   let fieldOk;

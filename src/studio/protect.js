@@ -13,6 +13,7 @@
 import { stableStringify } from './document.js';
 import { StudioOperationError, GEOMETRY_TRANSFORMS } from './operators.js';
 import { checkAssetProtection } from './protection-contract.js';
+import { evaluateRelations } from './relations.js';
 
 const METADATA_TARGETS = Object.freeze(['anchor', 'attachments', 'frameSize']);
 const CHARACTER_METADATA_TARGET_RE = /^(anchor|attachments(\.[a-zA-Z][a-zA-Z0-9_]{0,31})?|frameSize)$/;
@@ -129,9 +130,11 @@ export function checkCandidate(args) {
   const baseDoc = baseCompiled.document;
   const candDoc = candidateCompiled.document;
   const conflicts = [];
+  const changes = plan.changes ?? [{ target: plan.target, changedFields: plan.changedFields }];
+  const changedNodes = new Map(changes.map((c) => [c.target, c.changedFields]));
 
   /* ---------- 结构完整性（始终执行，不只依赖声明） ---------- */
-  for (const field of ['seed', 'canvas', 'style', 'anchor', 'attachments', 'protection']) {
+  for (const field of ['seed', 'canvas', 'style', 'anchor', 'attachments', 'protection', 'relations']) {
     if (!deepEqual(baseDoc[field], candDoc[field])) {
       conflicts.push({ kind: 'structure', target: field, message: `资产级字段 '${field}' 在候选中被修改（${plan.id} 不应触碰）` });
     }
@@ -144,11 +147,11 @@ export function checkCandidate(args) {
   for (const [id, baseNode] of baseNodes) {
     const candNode = candNodes.get(id);
     if (!candNode) continue;
-    if (id !== plan.target) {
+    if (!changedNodes.has(id)) {
       if (!deepEqual(baseNode, candNode)) conflicts.push({ kind: 'structure', target: id, message: `非目标节点 '${id}' 被修改` });
     } else {
       for (const key of Object.keys(baseNode)) {
-        const change = plan.changedFields[key];
+        const change = changedNodes.get(id)[key];
         if (change) {
           if (!deepEqual(baseNode[key], change.from) || !deepEqual(candNode[key], change.to)) {
             conflicts.push({ kind: 'structure', target: id, message: `目标节点字段 '${key}' 与操作计划不符（篡改或非授权修改）` });
@@ -165,7 +168,7 @@ export function checkCandidate(args) {
   const structurePreserve = preserve.filter((p) => p.kind === 'structure');
   const metadataPreserve = preserve.filter((p) => p.kind === 'metadata');
   for (const p of [...pixelPreserve, ...structurePreserve]) {
-    if (p.target === plan.target) {
+    if (changedNodes.has(p.target)) {
       conflicts.push({ kind: p.kind, target: p.target, message: `操作目标 '${p.target}' 被声明为${p.kind === 'pixels' ? '像素' : '结构'}保护，不能修改；请先解除保护或改选其他节点`, upfront: true });
     }
   }
@@ -192,21 +195,24 @@ export function checkCandidate(args) {
     conflicts.push({ kind: 'metadata', target: 'frameSize', message: `最终帧尺寸变化 ${baseFrame.width}×${baseFrame.height} → ${candFrame.width}×${candFrame.height}` });
   } else if (!conflicts.some((c) => c.upfront)) {
     const { final } = baseCompiled.sceneMap;
-    const baseTarget = baseCompiled.sceneMap.nodes.find((n) => n.id === plan.target);
-    const candTarget = candidateCompiled.sceneMap.nodes.find((n) => n.id === plan.target);
     const dilation = plan.id === 'geometry.set' || GEOMETRY_TRANSFORMS.includes(plan.id) ? 1 : 0;
-    const region = rectDilatedUnion([baseTarget?.frameRect, candTarget?.frameRect], dilation, final.w, final.h);
-    // 未变更高层节点的遮挡：其覆盖处最终像素不可能因本操作变化，从允许区域剔除
-    const targetLayer = baseTarget?.layer ?? 0;
     const allowed = new Uint8Array(final.w * final.h);
-    if (region) {
-      for (let y = region.y0; y < region.y1; y++) for (let x = region.x0; x < region.x1; x++) allowed[y * final.w + x] = 1;
+    const rects = [];
+    for (const target of changedNodes.keys()) {
+      const baseTarget = baseCompiled.sceneMap.nodes.find((n) => n.id === target);
+      const candTarget = candidateCompiled.sceneMap.nodes.find((n) => n.id === target);
+      rects.push(baseTarget?.frameRect, candTarget?.frameRect);
+      const local = rectDilatedUnion([baseTarget?.frameRect, candTarget?.frameRect], dilation, final.w, final.h);
+      const mask = new Uint8Array(allowed.length);
+      if (local) for (let y = local.y0; y < local.y1; y++) for (let x = local.x0; x < local.x1; x++) mask[y * final.w + x] = 1;
+      for (const n of baseCompiled.sceneMap.nodes) {
+        if (changedNodes.has(n.id) || n.layer <= (baseTarget?.layer ?? 0)) continue;
+        const cover = maskToFinal(baseCompiled, n.id);
+        for (let i = 0; i < mask.length; i++) if (cover[i]) mask[i] = 0;
+      }
+      for (let i = 0; i < allowed.length; i++) if (mask[i]) allowed[i] = 1;
     }
-    for (const n of baseCompiled.sceneMap.nodes) {
-      if (n.id === plan.target || n.layer <= targetLayer) continue;
-      const cover = maskToFinal(baseCompiled, n.id);
-      for (let i = 0; i < allowed.length; i++) if (cover[i]) allowed[i] = 0;
-    }
+    const region = rectDilatedUnion(rects, dilation, final.w, final.h);
     const diffPixels = diffFrames(baseFrame, candFrame);
     const outsideSamples = [];
     let outside = 0;
@@ -237,6 +243,8 @@ export function checkCandidate(args) {
   const operationFootprintStatus = diff.outside ? 'REJECTED' : 'PASS';
   const documentPreserveStatus = conflicts.length ? 'REJECTED' : 'PASS';
   conflicts.push(...taskContract.conflicts);
+  const relations = evaluateRelations(candidateCompiled, { revision: args.revision, relations: baseDoc.relations ?? [] });
+  conflicts.push(...relations.conflicts);
   const rejected = conflicts.length > 0;
   const constraintConflict = conflicts.some((c) => c.upfront);
   return {
@@ -247,6 +255,9 @@ export function checkCandidate(args) {
     documentPreserveStatus,
     taskContractStatus: taskContract.status,
     taskContract,
+    relations,
+    relationStatus: relations.status,
+    relationRepairs: plan.relationRepairs ?? [],
     diff,
     protections: {
       pixels: pixelPreserve.map((p) => p.target),
