@@ -14,6 +14,7 @@ import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { stableStringify } from '../studio/document.js';
 import { assertProtection } from '../studio/protection-contract.js';
 import { inspectSafeDomains } from '../studio/safe-domain.js';
+import { writeObservationBundle } from './observation-files.js';
 import { assetToJSON } from './asset-file.js';
 import { encodePNG } from '../export/png.js';
 import { packAtlas, renderAtlasPages } from '../export/atlas.js';
@@ -68,7 +69,12 @@ async function writePreviews(outDir, compiled, views, nodeId) {
   if (views.crop) {
     files.crop = previewFileName('crop', compiled, nodeId);
     await writeFile(join(outDir, files.crop), encodePNG(views.crop.width, views.crop.height, views.crop.rgba));
+    const cropDisplay = views.target_crop.display;
+    files.cropDisplay = previewFileName('crop-display', compiled, nodeId);
+    await writeFile(join(outDir, files.cropDisplay), encodePNG(cropDisplay.width, cropDisplay.height, cropDisplay.rgba));
   }
+  files.observation = `${compiled.asset.id}.observation.json`;
+  await writeFile(join(outDir, files.observation), JSON.stringify(views.meta, null, 2) + '\n');
   return files;
 }
 
@@ -171,7 +177,7 @@ async function inspectCompiled(compiled, source, opts = {}) {
   if (opts.outDir) {
     await ensureOutDir(opts.outDir);
     await writeMarker(opts.outDir, opts.generator ?? 'unknown');
-    const views = buildAnyViews(compiled, { displayScale: opts.displayScale, background: opts.background, node: opts.node });
+    const views = buildAnyViews(compiled, { displayScale: opts.displayScale, background: opts.background, node: opts.node, revision: opts.revision });
     files = await writePreviews(opts.outDir, compiled, views, opts.node);
   } else if (opts.node !== undefined) {
     // 不写盘时也校验节点存在，保持行为一致（角色文档无节点裁切，--node 仅道具模式）
@@ -235,3 +241,21 @@ export async function exportWorkspace(wsDir, outDir, opts = {}) {
 export { stableStringify };
 // Studio 的 submit 是最终导出的同义入口，不再引入另一条编译链。
 export const submitWorkspace = exportWorkspace;
+
+export async function observeWorkspace(wsDir, outDir, { revision, candidateIds = [], node, displayScale = 4, ...opts } = {}) {
+  const store = await StudioStore.open(wsDir, opts);
+  revision ??= store.head;
+  if (!Array.isArray(candidateIds) || candidateIds.length > 16) throw new RangeError('观察最多 16 个已有候选');
+  const base = await store._getCompiled(revision);
+  if (base.kind === 'character') throw new RangeError('当前候选拼图入口只支持单帧；角色继续使用播放材料');
+  const candidates = [];
+  for (const candidateId of candidateIds) {
+    const record = await store._readCandidate(candidateId);
+    if (record.baseRevision !== revision) throw new RangeError('contact sheet 候选必须来自同一基准');
+    const compiled = compileAny(record.doc);
+    candidates.push({ frame: compiled.asset.frames[0], identity: { candidateId, revision, documentHash: compiled.hashes.documentHash } });
+  }
+  const target = node ? base.sceneMap.nodes.find((n) => n.id === node) : null;
+  if (node && !target) throw new RangeError('观察目标节点不存在');
+  return writeObservationBundle(outDir, { base: { frame: base.asset.frames[0], identity: { revision, documentHash: base.hashes.documentHash } }, candidates, crop: target?.frameRect, scale: displayScale });
+}

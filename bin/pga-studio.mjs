@@ -29,6 +29,7 @@ import {
   inspectWorkspace,
   exportFromFile,
   exportWorkspace,
+  observeWorkspace,
   StudioOverwriteError,
 } from '../src/adapters/studio-files.js';
 import { StudioStore, StudioStoreError } from '../src/adapters/studio-store.js';
@@ -62,6 +63,7 @@ const COMMAND_OPTS = {
   inspect: ['doc', 'ws', 'revision', 'out', 'node', 'display-scale', 'bg'],
   export: ['doc', 'ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
   submit: ['ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
+  observe: ['ws', 'revision', 'out', 'candidates', 'node', 'display-scale', 'bg'],
   state: ['ws', 'display-scale', 'bg'],
   edit: ['ws', 'base', 'op', 'target', 'params', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg', 'safe-binding'],
   explore: ['ws', 'base', 'op', 'target', 'field', 'values', 'params', 'preserve', 'request-id', 'display-scale', 'bg'],
@@ -177,6 +179,7 @@ function buildExploreSpec() {
 
 async function main() {
   const common = commonOpts();
+  if (cmd === 'observe') return { result: await observeWorkspace(resolve(requireOpt('ws', 'observe 需要 --ws')), resolve(requireOpt('out', 'observe 需要 --out')), { ...common, revision: opts.revision, candidateIds: jsonOpt('candidates', []), node: opts.node }) };
   if (cmd === 'create') {
     const doc = requireOpt('doc', 'create 需要 --doc <file.json>');
     const out = requireOpt('out', 'create 需要 --out <ws>');
