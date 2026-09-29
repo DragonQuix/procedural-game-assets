@@ -14,20 +14,20 @@ const terminal = JSON.parse(readFileSync(join(here, '../../examples/studio/termi
 
 const has = (doc, frag) => validateStudioDocument(doc).some((i) => `${i.target}|${i.code}|${i.message}`.includes(frag));
 
-test('/2 样例合法；/1 样例在双版本校验器下依然合法且版本保留', () => {
+test('/2 样例合法；/1 样例在多版本校验器下依然合法且版本保留', () => {
   assert.deepEqual(validateStudioDocument(wrench), []);
   assert.deepEqual(validateStudioDocument(terminal), []);
   assert.equal(normalizeStudioDocument(wrench).schemaVersion, 'pga-studio/2');
   assert.equal(normalizeStudioDocument(terminal).schemaVersion, 'pga-studio/1');
-  assert.deepEqual(SCHEMA_VERSIONS, ['pga-studio/1', 'pga-studio/2']);
+  assert.deepEqual(SCHEMA_VERSIONS, ['pga-studio/1', 'pga-studio/2', 'pga-studio/3']);
   // 规范化保留 /2 结构
   const norm = normalizeStudioDocument(wrench);
   assert.deepEqual(norm.nodes.find((n) => n.id === 'wrench.handle').vertices, wrench.nodes[0].vertices);
   assert.equal(norm.style.meta.focusRamp, 'amber');
 });
 
-test('未知版本仍拒绝（/3 不存在）', () => {
-  const doc = { ...structuredClone(wrench), schemaVersion: 'pga-studio/3' };
+test('未知版本仍拒绝（/999 不存在）', () => {
+  const doc = { ...structuredClone(wrench), schemaVersion: 'pga-studio/999' };
   const issues = validateStudioDocument(doc);
   assert.equal(issues.length, 1);
   assert.equal(issues[0].target, 'schemaVersion');

@@ -44,7 +44,7 @@ test('规范化缺省值：outline 缺省给默认描边色，anchor 缺省为�
 });
 
 test('拒绝：未知 schemaVersion，且不继续猜测其余字段', () => {
-  const doc = { ...structuredClone(sample), schemaVersion: 'pga-studio/3' };
+  const doc = { ...structuredClone(sample), schemaVersion: 'pga-studio/999' };
   const issues = validateStudioDocument(doc);
   assert.equal(issues.length, 1);
   assert.equal(issues[0].target, 'schemaVersion');

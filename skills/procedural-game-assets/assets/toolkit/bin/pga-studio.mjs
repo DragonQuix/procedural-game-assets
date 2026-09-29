@@ -29,6 +29,7 @@ import {
   inspectWorkspace,
   exportFromFile,
   exportWorkspace,
+  observeWorkspace,
   StudioOverwriteError,
 } from '../src/adapters/studio-files.js';
 import { StudioStore, StudioStoreError } from '../src/adapters/studio-store.js';
@@ -37,7 +38,7 @@ import { StudioOperationError } from '../src/studio/operators.js';
 
 const PKG = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
 const GENERATOR = `procedural-game-assets@${PKG.version}`;
-const TOOL_VERSION = `${PKG.version}/pga-studio-1`;
+const TOOL_VERSION = `${PKG.version}/pga-studio-1.3`;
 
 function emit(payload, code) {
   process.stdout.write(JSON.stringify(payload, null, 2) + '\n');
@@ -54,6 +55,24 @@ const opts = {};
 for (let i = 0; i < rest.length; i++) {
   const m = rest[i].match(/^--([\w-]+)(?:=(.*))?$/);
   if (m) opts[m[1]] = m[2] ?? (rest[i + 1] && !rest[i + 1].startsWith('--') ? rest[++i] : true);
+}
+
+/** R4：命令级选项白名单——拼错的选项（如 --preserv）明确报用法错误，不悄悄变成无效参数。 */
+const COMMAND_OPTS = {
+  create: ['doc', 'out', 'display-scale', 'bg'],
+  inspect: ['doc', 'ws', 'revision', 'out', 'node', 'display-scale', 'bg'],
+  export: ['doc', 'ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
+  submit: ['ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
+  observe: ['ws', 'revision', 'out', 'candidates', 'node', 'display-scale', 'bg'],
+  state: ['ws', 'display-scale', 'bg'],
+  edit: ['ws', 'base', 'op', 'target', 'params', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg', 'safe-binding'],
+  explore: ['ws', 'base', 'op', 'target', 'field', 'values', 'params', 'preserve', 'request-id', 'display-scale', 'bg'],
+  commit: ['ws', 'accept', 'restore', 'expected-head', 'request-id', 'display-scale', 'bg'],
+};
+if (COMMAND_OPTS[cmd]) {
+  for (const key of Object.keys(opts)) {
+    if (!COMMAND_OPTS[cmd].includes(key)) fail('INVALID_DOCUMENT', `命令 '${cmd}' 不支持选项 --${key}（可用：${COMMAND_OPTS[cmd].map((o) => `--${o}`).join(' ')}）`, 2);
+  }
 }
 
 function intOpt(name, fallback) {
@@ -98,7 +117,7 @@ function buildOperation() {
       return { id, target, value: raw };
     }
   }
-  if (id === 'geometry.set') {
+  if (['geometry.set', 'widen_about_center', 'squash_keep_base', 'resize_about_anchor'].includes(id)) {
     const params = jsonOpt('params', null);
     if (!params) fail('INVALID_DOCUMENT', `geometry.set 需要 --params '{"w":28}'`, 2);
     return { id, target, params };
@@ -145,7 +164,7 @@ function buildExploreSpec() {
   const raw = requireOpt('values', 'explore 需要 --values <逗号分隔取值或 JSON 数组>');
   if (raw.startsWith('[')) {
     try {
-      return { id, target, field, values: JSON.parse(raw) };
+      return { id, target, field, values: JSON.parse(raw), ...(opts.params ? { params: jsonOpt('params') } : {}) };
     } catch (e) {
       fail('INVALID_DOCUMENT', `--values 不是合法 JSON 数组：${e.message}`, 2);
     }
@@ -155,11 +174,12 @@ function buildExploreSpec() {
     const n = Number(t);
     return t !== '' && Number.isFinite(n) ? n : t;
   });
-  return { id, target, field, values };
+  return { id, target, field, values, ...(opts.params ? { params: jsonOpt('params') } : {}) };
 }
 
 async function main() {
   const common = commonOpts();
+  if (cmd === 'observe') return { result: await observeWorkspace(resolve(requireOpt('ws', 'observe 需要 --ws')), resolve(requireOpt('out', 'observe 需要 --out')), { ...common, revision: opts.revision, candidateIds: jsonOpt('candidates', []), node: opts.node }) };
   if (cmd === 'create') {
     const doc = requireOpt('doc', 'create 需要 --doc <file.json>');
     const out = requireOpt('out', 'create 需要 --out <ws>');
@@ -181,7 +201,8 @@ async function main() {
       result: await inspectFromFile(resolve(doc), { ...common, outDir: typeof opts.out === 'string' ? resolve(opts.out) : undefined, node: typeof opts.node === 'string' ? opts.node : undefined }),
     };
   }
-  if (cmd === 'export') {
+  if (cmd === 'export' || cmd === 'submit') {
+    if (cmd === 'submit') requireOpt('ws', 'submit 需要 --ws <workspace>');
     const out = requireOpt('out', 'export 需要 --out <dir>');
     const exportOpts = { ...common, maxPage: intOpt('max-page', 1024), margin: intOpt('margin', 2) };
     if (opts.ws) {
@@ -203,6 +224,7 @@ async function main() {
       result: await store.edit({
         baseRevision: base,
         operation: buildOperation(),
+        safeBinding: jsonOpt('safe-binding', undefined),
         preserve: jsonOpt('preserve', []),
         requestId: typeof opts['request-id'] === 'string' ? opts['request-id'] : undefined,
       }),
@@ -256,6 +278,8 @@ try {
     fail(e.code, e.message, exitCodeFor(e), { target: e.target, details: e.details, retryable: e.retryable, suggestedNextAction: e.suggestedNextAction });
   } else if (e instanceof StudioOverwriteError) {
     fail('UNSAFE_PATH', e.message, 4);
+  } else if (e && e.code === 'PROTECTION_VIOLATION') {
+    fail(e.code, e.message, 3, { details: e.details });
   } else if (e && e.code === 'INVALID_DOCUMENT') {
     fail('INVALID_DOCUMENT', e.message, 3);
   } else if (e && e.code === 'ENOENT') {

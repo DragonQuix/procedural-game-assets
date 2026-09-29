@@ -1,0 +1,18 @@
+{
+  "schema": "pga-v13-verification/1",
+  "platform": "Windows",
+  "node": "v22.23.2",
+  "sourceTests": { "tests": 369, "pass": 369, "fail": 0, "skip": 0 },
+  "payloadTests": { "tests": 364, "pass": 358, "fail": 0, "skip": 6 },
+  "reviewerIsolationSelfTest": { "tests": 9, "pass": 9, "fail": 0 },
+  "frozenMaterialsSelfTest": { "tests": 23, "pass": 23, "fail": 0 },
+  "ordinaryRelease": { "version": "0.7.0", "files": 192, "integrity": "PASS" },
+  "loopRelease": { "files": 132, "integrity": "PASS", "rebuilt": false },
+  "demoA": "PASS",
+  "demoB": "PASS",
+  "portableDemo": "PASS",
+  "benchmark": { "status": "DRAFT_NOT_RUN", "participantRuns": 0, "reviews": 0 },
+  "modelBenefit": "UNVERIFIED",
+  "independentVisualReview": "NOT_RUN",
+  "globalInstallChanged": false
+}

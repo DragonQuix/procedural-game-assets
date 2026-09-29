@@ -4,6 +4,51 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S9 Studio v1.3 / 工具包 0.7.0（2026-09-29）
+
+依据：`CONTEXT.md`、ADR-0012、`plans/studio-v1_3-delivery.md`。v1.2 终审的正式解释已归档于
+`experiments/pga-ab-v1_2-final-audited.md`，原始 scored/review/key/technical/preregistration/manifest
+没有改写；接手时用户已有未跟踪的审计/评估目录仍保持未跟踪。
+
+| 实际命令/范围 | 结果 |
+|---|---|
+| `node --test --test-reporter=spec "tests/**/*.test.js"`（开发源） | 369 PASS、0 FAIL、0 SKIP |
+| 同一命令（普通技能 assets/toolkit 目录） | 358 PASS、0 FAIL、6 SKIP（依赖开发仓库安装/发行目录的顶层测试；其子项不展开） |
+| `node tests/PGA_AB_BENCHMARK_v1_2/organizer/reviewer-self-test.mjs --repo . --out work/studio-v13-reviewer-isolation` | 9/9 PASS |
+| `node tests/PGA_AB_BENCHMARK_v1_2/organizer/self-test.mjs --repo . --out work/studio-v13-material-selftest` | 23/23 PASS，只有机械控制解，无模型调用 |
+| `node examples/studio/v13-demo.mjs --out work/studio-v13-demo-final --evidence docs/evidence/studio-v1_3` | A/B 实际链路 PASS，真实 PNG/JSON 入库 |
+| 从普通载荷运行同一 demo（out=work/studio-v13-portable-demo） | A/B PASS，无外部开发源依赖 |
+| `node tools/release.mjs`、`node tools/release.mjs --check` | 普通载荷 192 文件，全部哈希一致 |
+| `node tools/release.mjs --skill procedural-game-assets-loop --check` | 循环载荷 132 文件一致，未重建 |
+| `node tests/PGA_CONSTRAINT_BENCHMARK_v0_1/prepare-materials.mjs --check` | D12 64/D13 68 文件一致、控制解合法且像素相同；NOT_RUN |
+| `git diff --check` | 通过 |
+
+开发源 339 个既有测试 + 30 个新增测试；未删除断言。因 /3 已正式支持，三处旧版本断言更新
+支持列表并把未知版本样本改为 /999，仍验证未知版本拒绝。旧核心、配方、烘焙源相对起点
+87db710 无差异；终端/锈爪 hash 与 60 帧旧角色逐像素回归继续通过。未发现旧资产回归。
+
+T05 等价回归精确得到 27px、bounds={x0:7,y0:38,x1:34,y1:39}，operation footprint PASS，
+asset contract REJECTED；edit 提前返回 REJECTED_UNSAFE、无候选文件。另构造具有一致文档/hash
+但伪报 OK 的候选，commit 重编译仍拒绝。文件 export、工作区 submit 均拒绝非法最终编译。
+像素/metadata/node 多类保护独立；restore 保留合同并生成新修订。
+
+Demo A 主体由 20×26 变为 30×18、centerX=23、bottomY=33；底座、仪表、anchor、attachments
+保持。Demo B 的非法移动产生 34px 违规，bounds={x0:7,y0:29,x1:25,y1:31}，无合法候选；
+合法 resize 后提交保护 PASS。实施者打开实际前后 PNG，仅作工程示意自审，没有独立视觉评级。
+
+新 harness 独立维护在 tools/benchmark，不修改 v1.2 冻结包。测试覆盖缺必要动画播放向总判定
+传播 U、严格 schema、五 verdict、镜像解盲和 reviewer 隔离。CONFIRMED 必须有真实宿主输入
+关联；合成测试事件不代表真实评审观察。
+
+新实验是 DRAFT_NOT_RUN：12-run 草案、真实旧版本源码载荷、hold-out 与共同最终合同已准备；
+没有创建 runs/reviews/results 或执行冻结清单，没有 participant/reviewer 模型调用。
+待选定模型/宿主、完成共同计数 runner 与宿主证据通道验证并正式授权后才可冻结运行。
+普通技能载荷排除了历史实验包和宿主数据，避免将冻结/私有证据误打进通用发行。
+
+限制：语义变换只支持矩形；角色资产合同、依赖图和多变量最近可行解未实现。safe domain
+有限试编译不输出候选图，单独报告成本，不意味着两 arm 等算力。合同不防止有全部文件
+写权限的人重写基线及记录。循环版与用户级安装未升级；本轮未 push，不宣称弱 agent 能力改善。
+
 ## 自动化测试
 
 | 时间 | 范围 | 结果 |

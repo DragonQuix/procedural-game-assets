@@ -16,8 +16,9 @@
  * 随机命名空间 `studio/1:` 跨模式版本稳定（种子合同独立于模式版本）。
  */
 import { DEFAULT_OUTLINE } from '../bake/frame.js';
+import { validateProtectionContract } from './protection-contract.js';
 
-export const SCHEMA_VERSIONS = Object.freeze(['pga-studio/1', 'pga-studio/2']);
+export const SCHEMA_VERSIONS = Object.freeze(['pga-studio/1', 'pga-studio/2', 'pga-studio/3']);
 export const STUDIO_SCHEMA_VERSION = SCHEMA_VERSIONS[0]; // 兼容引用：最旧支持版本
 export const LATEST_SCHEMA_VERSION = SCHEMA_VERSIONS[SCHEMA_VERSIONS.length - 1];
 
@@ -309,7 +310,7 @@ function validateConstraints(doc, issues) {
 export function validateStudioDocument(doc) {
   const issues = [];
   if (!isPlainObject(doc)) return [issue('INVALID_DOCUMENT', '(root)', '文档需要 JSON 对象')];
-  checkKeys(doc, ['schemaVersion', 'id', 'seed', 'renderProfile', 'style', 'canvas', 'nodes', 'anchor', 'attachments', 'constraints'], '(root)', issues);
+  checkKeys(doc, ['schemaVersion', 'id', 'seed', 'renderProfile', 'style', 'canvas', 'nodes', 'anchor', 'attachments', 'constraints', 'protection'], '(root)', issues);
   if (!SCHEMA_VERSIONS.includes(doc.schemaVersion)) {
     issues.push(issue('INVALID_DOCUMENT', 'schemaVersion', `未知版本 ${JSON.stringify(doc.schemaVersion)}，本校验器仅支持 ${SCHEMA_VERSIONS.map((v) => `'${v}'`).join(' 与 ')}`));
     return issues; // 版本不兼容时不继续猜测其余字段
@@ -371,6 +372,10 @@ export function validateStudioDocument(doc) {
     }
   }
   validateConstraints(doc, issues);
+  if (doc.protection !== undefined) {
+    if (version !== 'pga-studio/3') issues.push(issue('INVALID_DOCUMENT', 'protection', '资产级保护需要 pga-studio/3'));
+    else issues.push(...validateProtectionContract(doc.protection, validateStudioDocument));
+  }
   return issues;
 }
 
@@ -415,6 +420,7 @@ export function normalizeStudioDocument(doc) {
     anchor: doc.anchor ? { x: doc.anchor.x, y: doc.anchor.y } : { x: canvas.w / 2, y: canvas.h },
     attachments: Object.fromEntries(Object.entries(doc.attachments ?? {}).map(([k, v]) => [k, { x: v.x, y: v.y }])),
     constraints: (doc.constraints ?? []).map((c) => (c.note === undefined ? { kind: c.kind, target: c.target } : { kind: c.kind, target: c.target, note: c.note })),
+    ...(doc.protection === undefined ? {} : { protection: { ...JSON.parse(JSON.stringify(doc.protection)), baseline: normalizeStudioDocument(doc.protection.baseline) } }),
   };
 }
 

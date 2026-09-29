@@ -120,11 +120,12 @@ export function checkCharacterCandidate(args) {
   /* 前置冲突：metadata 保护目标不得由本操作改变 */
   const metaPreserve = preserve.filter((p) => p.kind === 'metadata').map((p) => p.target);
 
-  /* 跨帧对比：受影响帧与附件点报告 */
+  /* 跨帧对比：像素与元数据变化分别计算（R2）；diffPixels 按像素计（四字节一组，R8） */
   const baseFrames = new Map(baseCompiled.frames.map((f) => [f.id, f]));
   const candFrames = new Map(candidateCompiled.frames.map((f) => [f.id, f]));
   const baseRgba = new Map(baseCompiled.asset.frames.map((f) => [f.id, f.rgba]));
   const candRgba = new Map(candidateCompiled.asset.frames.map((f) => [f.id, f.rgba]));
+  const frameDeltas = new Map(); // id → 逐帧变化详情；metadata 保护遍历全部帧，不以像素变化为前提
   const affectedFrames = [];
   const notCoveredChanges = [];
   let totalDiffPixels = 0;
@@ -135,18 +136,31 @@ export function checkCharacterCandidate(args) {
       continue;
     }
     let diffPixels = 0;
+    let changedChannels = 0;
+    let frameSizeChanged = false;
     const a = baseRgba.get(id);
     const b = candRgba.get(id);
     if (a.length !== b.length) {
+      frameSizeChanged = true;
       conflicts.push({ kind: 'metadata', target: 'frameSize', message: `帧 '${id}' 尺寸变化` });
       diffPixels = -1;
     } else {
-      for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) diffPixels++;
+      for (let i = 0; i < a.length; i += 4) {
+        let px = 0;
+        for (let k = 0; k < 4; k++) {
+          if (a[i + k] !== b[i + k]) {
+            changedChannels++;
+            px = 1;
+          }
+        }
+        diffPixels += px;
+      }
     }
     const attachmentDeltas = {};
     for (const [name, pt] of Object.entries(baseF.attachments)) {
       const np = candF.attachments[name];
       if (!np) {
+        attachmentDeltas[name] = { lost: true };
         conflicts.push({ kind: 'metadata', target: `attachments.${name}`, message: `帧 '${id}' 丢失附件点 '${name}'` });
         continue;
       }
@@ -154,15 +168,26 @@ export function checkCharacterCandidate(args) {
       const dy = +(np.y - pt.y).toFixed(2);
       if (dx !== 0 || dy !== 0) attachmentDeltas[name] = { dx, dy };
     }
+    for (const name of Object.keys(candF.attachments)) {
+      if (!Object.hasOwn(baseF.attachments, name)) {
+        attachmentDeltas[name] = { added: true };
+        conflicts.push({ kind: 'metadata', target: `attachments.${name}`, message: `帧 '${id}' 新增附件点 '${name}'（操作不应改变附件点集合）` });
+      }
+    }
     const anchorDelta = { dx: +(candF.anchor.x - baseF.anchor.x).toFixed(2), dy: +(candF.anchor.y - baseF.anchor.y).toFixed(2) };
     const groundingChanged = Boolean(baseF.bounds && candF.bounds && baseF.bounds.y1 !== candF.bounds.y1); // 接地 = 包围盒底缘；顶缘随体高合法变化
-    const changed = diffPixels !== 0;
-    if (changed && baseF.checked) {
-      affectedFrames.push({ id, diffPixels, attachmentDeltas, anchorDelta, groundingChanged });
-    } else if (changed && !baseF.checked) {
-      notCoveredChanges.push({ id, poseKind: baseF.poseKind, diffPixels, note: '该姿态种类不在 template.checkedPoseKinds 内：已重渲染但未做不变量断言（明确不假装覆盖）' });
+    const pixelChanged = diffPixels !== 0;
+    const metadataChanged = frameSizeChanged || Object.keys(attachmentDeltas).length > 0 || anchorDelta.dx !== 0 || anchorDelta.dy !== 0 || groundingChanged;
+    const delta = { id, diffPixels: Math.max(0, diffPixels), changedChannels, attachmentDeltas, anchorDelta, groundingChanged, pixelChanged, metadataChanged, frameSizeChanged };
+    frameDeltas.set(id, delta);
+    if (pixelChanged || metadataChanged) {
+      if (baseF.checked) {
+        affectedFrames.push(delta);
+      } else {
+        notCoveredChanges.push({ id, poseKind: baseF.poseKind, diffPixels: delta.diffPixels, pixelChanged, metadataChanged, attachmentDeltas, note: '该姿态种类不在 template.checkedPoseKinds 内：已重渲染但未做不变量断言（明确不假装覆盖）' });
+      }
     }
-    totalDiffPixels += Math.max(0, diffPixels);
+    totalDiffPixels += delta.diffPixels;
     /* 不变量（仅 checked 帧）：锚点不动、接地（底缘边界）不变 */
     if (baseF.checked) {
       if (anchorDelta.dx !== 0 || anchorDelta.dy !== 0) {
@@ -174,19 +199,19 @@ export function checkCharacterCandidate(args) {
     }
   }
 
-  /* metadata 保护核对（声明驱动） */
+  /* metadata 保护核对（声明驱动）：遍历全部帧——含 notCovered 与仅元数据变化帧（R2/审查 §5.1） */
   for (const target of metaPreserve) {
     if (target === 'anchor') {
-      for (const f of affectedFrames) {
-        if (f.anchorDelta.dx !== 0 || f.anchorDelta.dy !== 0) {
-          conflicts.push({ kind: 'metadata', target: 'anchor', message: `锚点保护命中：帧 '${f.id}' 锚点移动` });
+      for (const [id, d] of frameDeltas) {
+        if (d.anchorDelta.dx !== 0 || d.anchorDelta.dy !== 0) {
+          conflicts.push({ kind: 'metadata', target: 'anchor', message: `锚点保护命中：帧 '${id}' 锚点移动` });
         }
       }
     } else if (target === 'attachments' || target.startsWith('attachments.')) {
       const name = target === 'attachments' ? null : target.slice('attachments.'.length);
-      for (const f of affectedFrames) {
-        for (const key of Object.keys(f.attachmentDeltas)) {
-          if (name === null || key === name) conflicts.push({ kind: 'metadata', target: `attachments.${key}`, message: `附件点保护命中：帧 '${f.id}' 的 '${key}' 移动 ${JSON.stringify(f.attachmentDeltas[key])}` });
+      for (const [id, d] of frameDeltas) {
+        for (const key of Object.keys(d.attachmentDeltas)) {
+          if (name === null || key === name) conflicts.push({ kind: 'metadata', target: `attachments.${key}`, message: `附件点保护命中：帧 '${id}' 的 '${key}' 变化 ${JSON.stringify(d.attachmentDeltas[key])}` });
         }
       }
     } else if (target === 'frameSize') {
@@ -194,21 +219,26 @@ export function checkCharacterCandidate(args) {
     }
   }
 
-  /* 受剪辑影响的剪辑（引用变化帧的剪辑） */
+  /* 受剪辑影响的剪辑（引用变化帧的剪辑，含仅元数据变化帧） */
   const changedIds = new Set([...affectedFrames.map((f) => f.id), ...notCoveredChanges.map((f) => f.id)]);
   const affectedClips = Object.entries(baseCompiled.asset.clips)
     .filter(([, clip]) => clip.frames.some((fid) => changedIds.has(fid)))
     .map(([name, clip]) => ({ name, frames: clip.frames.filter((fid) => changedIds.has(fid)).length, totalFrames: clip.frames.length, ms: clip.ms }));
 
   const rejected = conflicts.length > 0;
+  // UNCHANGED 须像素与元数据双不变：renderHash 覆盖全帧 RGBA + 锚点/附件点/包围盒 + 剪辑（R2）
+  const unchanged = baseCompiled.hashes.renderHash === candidateCompiled.hashes.renderHash;
   return {
-    status: rejected ? 'REJECTED' : totalDiffPixels === 0 ? 'UNCHANGED' : 'OK',
+    status: rejected ? 'REJECTED' : unchanged ? 'UNCHANGED' : 'OK',
     code: rejected ? 'CANDIDATE_INVALID' : null,
     conflicts,
     affectedFrames,
     notCoveredChanges,
     affectedClips,
     totalDiffPixels,
+    pixelChangedFrames: [...frameDeltas.values()].filter((d) => d.pixelChanged).map((d) => d.id),
+    metadataChangedFrames: [...frameDeltas.values()].filter((d) => d.metadataChanged).map((d) => d.id),
+    clipChanged: !deepEqual(baseCompiled.asset.clips, candidateCompiled.asset.clips),
     protections: { metadata: metaPreserve },
   };
 }
