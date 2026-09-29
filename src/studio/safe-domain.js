@@ -46,6 +46,7 @@ export function evaluateSafeOperation(compiled, operation, { revision = null, pr
 }
 
 export function enumerateSafeDomain({ compiled, revision = null, operator, target, field, params = {}, preserve = preserveFromAnyDocument(compiled.document), maxSearch = 512 }) {
+  params = { ...params }; delete params[field];
   preserve = validatePreserve(preserve, compiled.document);
   const range = theoreticalRange(compiled.document, target, operator, field);
   const count = range[1] - range[0] + 1;
@@ -74,7 +75,9 @@ export function inspectSafeDomains(compiled, { revision = null, target, maxSearc
   if (!n) fail('UNSUPPORTED', 'safe inspect 需要有效目标节点');
   const build = (operator, field, params = {}) => {
     try { return enumerateSafeDomain({ compiled, revision, operator, target, field, params, maxSearch }); }
-    catch (e) { return { status: e.code ?? 'ERROR', error: e.message, details: e.details }; }
+    catch (e) { return { status: e.code ?? 'ERROR', revision, documentHash: compiled.hashes.documentHash,
+      contractHash: compiled.protection?.contractHash ?? null, operator, target, field, fixedParams: params,
+      error: e.message, details: e.details }; }
   };
   const fields = ['panel', 'screen'].includes(n.kind) ? ['x', 'y', 'w', 'h'] : n.kind === 'disc' ? ['cx', 'cy', 'rx', 'ry'] : [];
   return { revision, documentHash: compiled.hashes.documentHash, fields: Object.fromEntries(fields.map((field) => [field, build('geometry.set', field)])),
@@ -89,7 +92,19 @@ export function inspectSafeDomains(compiled, { revision = null, target, maxSearc
 /** 不信任请求附带的合法值表；只消费身份绑定，并在当前文档上重算。 */
 export function validateSafeBinding(binding, compiled, revision, operation) {
   if (binding === undefined) return;
-  if (!binding || binding.revision !== revision || binding.documentHash !== compiled.hashes.documentHash || binding.operator !== operation.id || binding.target !== operation.target) fail('STALE_SAFE_DOMAIN', 'safe domain 的修订/文档/操作/目标不匹配；请重新 inspect');
+  const actualFixedParams = { ...operation.params };
+  let fieldMatches = typeof binding?.field === 'string' && Object.hasOwn(actualFixedParams, binding.field);
+  if (fieldMatches) {
+    try { theoreticalRange(compiled.document, operation.target, operation.id, binding.field); }
+    catch (e) { if (e.code !== 'UNSUPPORTED') throw e; fieldMatches = false; }
+  }
+  if (fieldMatches) delete actualFixedParams[binding.field];
+  if (!binding || !fieldMatches || binding.revision !== revision || binding.documentHash !== compiled.hashes.documentHash ||
+      binding.operator !== operation.id || binding.target !== operation.target ||
+      binding.contractHash !== (compiled.protection?.contractHash ?? null) ||
+      stableStringify(binding.fixedParams) !== stableStringify(actualFixedParams)) {
+    fail('STALE_SAFE_DOMAIN', 'safe domain 的修订/文档/操作/目标/字段/固定参数/保护合同不匹配；请重新 inspect');
+  }
 }
 
 export function preflightGeometry(compiled, operation, options = {}) {

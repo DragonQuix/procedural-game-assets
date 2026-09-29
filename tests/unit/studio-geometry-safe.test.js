@@ -83,12 +83,26 @@ test('无合法值、保护变化影响域、确定性枚举与搜索上限', ()
 
 test('revision/hash 改变使旧结果失效，即使恢复到相同内容也需新 revision', () => {
   const compiled = compile(borderFixture()), d = domain(borderFixture());
-  const op = { id: 'geometry.set', target };
+  const op = { id: 'geometry.set', target, params: { w: 24 } };
   assert.doesNotThrow(() => validateSafeBinding(d, compiled, 'r1', op));
   assert.throws(() => validateSafeBinding(d, compiled, 'r2', op), { code: 'STALE_SAFE_DOMAIN' });
   const changed = borderFixture(); changed.protection.nodeIds = [];
   assert.throws(() => validateSafeBinding(d, compile(changed), 'r1', op), { code: 'STALE_SAFE_DOMAIN' });
   assert.notEqual(domain(changed).cacheKey, d.cacheKey);
+});
+
+test('safe binding 区分字段、固定参数与合同哈希，不依赖对象键顺序', () => {
+  const compiled = compile(borderFixture()), d = domain(borderFixture());
+  assert.throws(() => validateSafeBinding(d, compiled, 'r1', { id: 'geometry.set', target, params: { h: 2 } }), { code: 'STALE_SAFE_DOMAIN' });
+  const params = { anchor: { x: 0.5, y: 1 }, targetHeight: 1, targetWidth: 99 };
+  const resize = domain(borderFixture(), 'targetWidth', { operator: 'resize_about_anchor', params });
+  assert.deepEqual(resize.fixedParams, { anchor: { x: 0.5, y: 1 }, targetHeight: 1 });
+  const operation = { id: 'resize_about_anchor', target, params: { targetWidth: 25, targetHeight: 1, anchor: { y: 1, x: 0.5 } } };
+  assert.doesNotThrow(() => validateSafeBinding(resize, compiled, 'r1', operation));
+  assert.throws(() => validateSafeBinding(resize, compiled, 'r1', { ...operation, params: { ...operation.params, targetHeight: 2 } }), { code: 'STALE_SAFE_DOMAIN' });
+  const changed = borderFixture(); changed.protection.nodeIds = [];
+  const current = compile(changed);
+  assert.throws(() => validateSafeBinding({ ...d, documentHash: current.hashes.documentHash }, current, 'r1', { id: 'geometry.set', target, params: { w: 24 } }), { code: 'STALE_SAFE_DOMAIN' });
 });
 
 test('maxSearch 超限只回退真实单点验证，其他异常继续抛出', () => {

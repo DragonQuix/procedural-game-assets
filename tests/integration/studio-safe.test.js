@@ -48,7 +48,7 @@ test('pixelWork 超限的 inspect 不给部分域，合法 edit 仍可单点验�
   assert.equal(d.status, 'SEARCH_LIMIT');
   assert.ok(d.details.pixelWork > d.details.limits.maxPixelWork);
   assert.equal(d.safeRange, undefined);
-  const c = await store.edit({ baseRevision: 'r1', operation: { id: 'geometry.set', target: 'beacon.base', params: { w: 24 } } });
+  const c = await store.edit({ baseRevision: 'r1', safeBinding: d, operation: { id: 'geometry.set', target: 'beacon.base', params: { w: 24 } } });
   assert.equal(c.status, 'OK');
   assert.equal(c.validationMode, 'POINT_FALLBACK');
   assert.equal(c.safeDomain.status, 'SEARCH_LIMIT');
@@ -58,6 +58,19 @@ test('pixelWork 超限的 inspect 不给部分域，合法 edit 仍可单点验�
   assert.equal(c.renderedCandidates, 1);
   await store.commit({ action: 'accept', candidateId: c.candidateId, expectedHead: 'r1' });
   assert.equal((await store._getCompiled('r2')).protection.status, 'PASS');
+});
+
+test('binding 仅绑定域身份，不授权自报合法值；字段和固定 anchor 错配在 IO 前拒绝', async (t) => {
+  const store = await setup(t), target = 'beacon.base';
+  const info = (await inspectWorkspace(store.dir, { node: target })).safeDomain;
+  await assert.rejects(store.edit({ baseRevision: 'r1', operation: { id: 'geometry.set', target, params: { h: 2 } }, safeBinding: info.fields.w }), { code: 'STALE_SAFE_DOMAIN' });
+  await assert.rejects(store.edit({ baseRevision: 'r1', operation: { id: 'resize_about_anchor', target, params: { targetWidth: 25, anchor: 'center' } }, safeBinding: info.recommendedTransforms.resize_about_anchor }), { code: 'STALE_SAFE_DOMAIN' });
+  const forged = { ...info.fields.w, safeRange: { values: [35], intervals: [[35, 35]] } };
+  const rejected = await store.edit({ baseRevision: 'r1', operation: { id: 'geometry.set', target, params: { w: 35 } }, safeBinding: forged });
+  assert.equal(rejected.status, 'REJECTED_UNSAFE');
+  assert.equal(rejected.candidateId, null);
+  assert.deepEqual(rejected.nearestLegalValues, [28, 27, 26]);
+  assert.equal((await readdir(join(store.dir, 'candidates'))).length, 0);
 });
 
 test('超限 explore 只验证显式取值，保护与编译失败不写候选或 PNG，不偷偷 clamp', async (t) => {

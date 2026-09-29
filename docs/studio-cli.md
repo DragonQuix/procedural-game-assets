@@ -330,6 +330,10 @@ anchorPoint；resize 的 anchor 必须明确指定 center/bottom-center/top-left
 目标、固定参数与保护。未来缓存只能优化，不能成为授权来源。
 
 `edit --safe-binding '<inspect返回的某字段域JSON>'` 可显式检查旧域身份；无 binding 仍重新计算。
+身份包含 revision、documentHash、operator、target、field、fixedParams、contractHash。
+从实际 operation.params 中移除 binding.field 对应的请求值后，剩余参数必须与 fixedParams
+稳定序列化一致（包括 anchor 的对象字段，不依赖键顺序）。binding 只标识域，不授权其 values；
+当前修订总要重新验证，即使 binding 自报 COMPLETE 或把非法值写进 safeRange 也不能通过。
 修订变化后需重新 inspect；恢复相同内容也会生成新 revision。一个低层多字段请求只做精确点检查，
 不承诺求最近合法参数元组。单字段非法请求返回 REJECTED_UNSAFE、requestedValue、safeDomain、
 reason、nearestLegalValues、recommendedTransform，不 clamp。explore 同基准分支，拒绝项没有
