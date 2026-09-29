@@ -19,7 +19,7 @@ test('/2 样例合法；/1 样例在多版本校验器下依然合法且版本�
   assert.deepEqual(validateStudioDocument(terminal), []);
   assert.equal(normalizeStudioDocument(wrench).schemaVersion, 'pga-studio/2');
   assert.equal(normalizeStudioDocument(terminal).schemaVersion, 'pga-studio/1');
-  assert.deepEqual(SCHEMA_VERSIONS, ['pga-studio/1', 'pga-studio/2', 'pga-studio/3']);
+  assert.deepEqual(SCHEMA_VERSIONS, ['pga-studio/1', 'pga-studio/2', 'pga-studio/3', 'pga-studio/4']);
   // 规范化保留 /2 结构
   const norm = normalizeStudioDocument(wrench);
   assert.deepEqual(norm.nodes.find((n) => n.id === 'wrench.handle').vertices, wrench.nodes[0].vertices);

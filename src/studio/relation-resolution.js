@@ -28,7 +28,7 @@ function selection(doc, request, target) {
 }
 
 export function resolveRelations(doc, request, primaryTarget) {
-  const selected = selection(doc, request, primaryTarget).sort((a, b) => a.id.localeCompare(b.id, 'en'));
+  const selected = selection(doc, request, primaryTarget).sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
   const next = JSON.parse(JSON.stringify(doc)), repairs = [];
   let trialCompiles = 0;
   const compile = () => {

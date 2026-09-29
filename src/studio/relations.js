@@ -32,7 +32,7 @@ export function evaluateRelation(relation, compiled) {
   if (nodeA.id === nodeB.id) return { ...result, status: 'CONFLICT', reason: 'SAME_NODE' };
   if (relation.type !== 'contact') return { ...result, reason: 'UNSUPPORTED_RELATION_TYPE' };
   if (!edgeA || !edgeB || edgeA.axis !== edgeB.axis || edgeA.sign !== -edgeB.sign) return { ...result, reason: 'UNSUPPORTED_FEATURE_PAIR' };
-  const signedGapPx = (edgeB.coordinate - edgeA.coordinate) * edgeA.sign;
+  const signedGapPx = (edgeB.coordinate - edgeA.coordinate) * edgeA.sign || 0;
   const span = Math.min(edgeA.interval[1], edgeB.interval[1]) - Math.max(edgeA.interval[0], edgeB.interval[0]);
   const status = span < 1 ? 'GAP' : Math.abs(signedGapPx) <= relation.tolerance ? 'SATISFIED' : signedGapPx > 0 ? 'GAP' : 'OVERLAP';
   const repair = supportedResolution(relation, edgeA, edgeB) ? { ...relation.resolution,
