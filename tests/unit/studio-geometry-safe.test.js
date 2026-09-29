@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { compileStudioDocument as compile, createProtectedDocument } from '../../src/studio/compiler.js';
 import { applyOperation } from '../../src/studio/operators.js';
-import { enumerateSafeDomain, evaluateSafeOperation, compressValues, validateSafeBinding } from '../../src/studio/safe-domain.js';
+import { enumerateSafeDomain, evaluateSafeOperation, compressValues, validateSafeBinding, preflightGeometry } from '../../src/studio/safe-domain.js';
 import { borderFixture } from '../fixtures/studio-v13.js';
 
 const target = 'beacon.base';
@@ -89,4 +89,16 @@ test('revision/hash 改变使旧结果失效，即使恢复到相同内容也需
   const changed = borderFixture(); changed.protection.nodeIds = [];
   assert.throws(() => validateSafeBinding(d, compile(changed), 'r1', op), { code: 'STALE_SAFE_DOMAIN' });
   assert.notEqual(domain(changed).cacheKey, d.cacheKey);
+});
+
+test('maxSearch 超限只回退真实单点验证，其他异常继续抛出', () => {
+  const compiled = compile(borderFixture());
+  const operation = { id: 'geometry.set', target, params: { w: 24 } };
+  const result = preflightGeometry(compiled, operation, { revision: 'r1', maxSearch: 3 });
+  assert.equal(result.status, 'SAFE');
+  assert.equal(result.validationMode, 'POINT_FALLBACK');
+  assert.equal(result.safeDomain.status, 'SEARCH_LIMIT');
+  assert.equal(result.safeDomain.safeRange, undefined);
+  assert.deepEqual(result.validation, { tested: 1, trialCompiles: 1 });
+  assert.throws(() => preflightGeometry(compiled, { ...operation, params: { unknown: 1 } }, { maxSearch: 3 }), { code: 'UNSUPPORTED' });
 });

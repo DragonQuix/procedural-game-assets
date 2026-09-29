@@ -336,6 +336,14 @@ reason、nearestLegalValues、recommendedTransform，不 clamp。explore 同基�
 candidateId、不写候选 PNG；renderedCandidates/uniqueCount 与 rejectedVariations 分开报告。
 安全性试编译不输出可观察候选，其计算量在 search.trialCompiles 单列，不代表免费计算。
 
+完整域超出资源预算时，inspect 保持 SEARCH_LIMIT，不返回部分 safeRange。单字段 edit 仅在
+SEARCH_LIMIT 时回退到当前请求的 apply→compile→protect：合法预检为 SAFE，候选照常产生
+OK/UNCHANGED，返回 validationMode=POINT_FALLBACK、safeDomain.status=SEARCH_LIMIT；非法为
+REJECTED_UNSAFE，保留冲突或编译错误，nearestLegalValues=[]。其他枚举异常直接抛出。
+explore 在同一请求内只求一次同身份完整域；超限则逐个验证显式 values，不扩大候选列表。
+validationProbeCount 统计实际单点验证调用（包括 apply 阶段拒绝），validation.trialCompiles
+单列进入编译的次数；复用完整域的后续项两者为 0，不重复计费，也不把验证探针算为候选。
+
 ## 共享观察与最终交付
 
 ```powershell

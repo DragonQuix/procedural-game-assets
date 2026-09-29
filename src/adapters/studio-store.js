@@ -30,7 +30,7 @@ import { compileAny, applyAnyOperation, exploreAnyOperation, operationFromAnyExp
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { encodePNG } from '../export/png.js';
 import { assertProtection } from '../studio/protection-contract.js';
-import { preflightGeometry, validateSafeBinding } from '../studio/safe-domain.js';
+import { preflightGeometry, preflightGeometryVariations, validateSafeBinding } from '../studio/safe-domain.js';
 
 const MARKER = '.pga.json';
 
@@ -469,7 +469,9 @@ export class StudioStore {
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
       const mergedPreserve = [...preserveDoc, ...preserveRequest];
       const unsafe = preflightGeometry(base, operation, { revision: baseRevision, preserve: mergedPreserve });
-      if (unsafe?.status === 'REJECTED_UNSAFE') return { requestId: reqId, baseRevision, head: this.head, ...unsafe, candidateId: null, renderedCandidates: 0 };
+      const validationInfo = { validation: unsafe?.validation ?? null, validationMode: unsafe?.validationMode ?? null,
+        safeDomain: unsafe?.safeDomain ?? null, validationProbeCount: unsafe?.validation.tested ?? 0 };
+      if (unsafe?.status === 'REJECTED_UNSAFE') return { requestId: reqId, baseRevision, head: this.head, ...unsafe, ...validationInfo, candidateId: null, renderedCandidates: 0 };
       const { doc: candDoc, plan } = applyAnyOperation(base.document, operation); // 形状/范围错误向上抛（CANDIDATE_INVALID 等）
       const candidate = compileAny(candDoc, { toolVersion: this.toolVersion });
       const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve, revision: baseRevision });
@@ -481,14 +483,14 @@ export class StudioStore {
         operation,
         preserveRequest,
         preserveDoc,
-        validation: unsafe?.validation ?? null,
+        ...validationInfo,
         doc: candidate.document,
         hashes: candidate.hashes,
         checks,
         previews,
       };
       await writeFileAtomic(workspacePath(this.dir, 'candidates', `${candidateId}.json`), JSON.stringify(record, null, 2) + '\n');
-      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews, geometry: plan.geometry ?? null, renderedCandidates: 1, validation: unsafe?.validation ?? null };
+      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews, geometry: plan.geometry ?? null, renderedCandidates: 1, ...validationInfo };
     });
   }
 
@@ -505,13 +507,16 @@ export class StudioStore {
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
       const mergedPreserve = [...preserveDoc, ...preserveRequest];
       const entries = exploreAnyOperation(base.document, spec);
+      const operations = entries.map((entry) => operationFromAnyExplore(base.document, spec, entry.value));
+      const preflights = preflightGeometryVariations(base, operations, { revision: baseRevision, preserve: mergedPreserve });
       const seen = new Map([[base.hashes.renderHash, 'base']]);
       const candidates = [];
-      for (const entry of entries) {
-        const operation = operationFromAnyExplore(base.document, spec, entry.value);
-        const unsafe = preflightGeometry(base, operation, { revision: baseRevision, preserve: mergedPreserve });
+      for (const [index, entry] of entries.entries()) {
+        const operation = operations[index], unsafe = preflights[index];
+        const validationInfo = { validation: unsafe?.validation ?? null, validationMode: unsafe?.validationMode ?? null,
+          safeDomain: unsafe?.safeDomain ?? null, validationProbeCount: unsafe?.validation.tested ?? 0 };
         if (unsafe?.status === 'REJECTED_UNSAFE') {
-          candidates.push({ value: entry.value, ...unsafe, candidateId: null, renderedCandidates: 0 });
+          candidates.push({ value: entry.value, ...unsafe, ...validationInfo, candidateId: null, renderedCandidates: 0 });
           continue;
         }
         if (entry.error) {
@@ -531,7 +536,7 @@ export class StudioStore {
           operation,
           preserveRequest,
           preserveDoc,
-          validation: unsafe?.validation ?? null,
+        ...validationInfo,
           doc: candidate.document,
           hashes: candidate.hashes,
           checks,
@@ -550,7 +555,8 @@ export class StudioStore {
           hashes: candidate.hashes,
           previews,
           geometry: entry.plan.geometry ?? null,
-          validation: unsafe?.validation ?? null,
+          ...validationInfo,
+          renderedCandidates: 1,
         });
       }
       const basePreviews = await this._writePreviews(base, `${baseRevision}-base`);
@@ -563,7 +569,7 @@ export class StudioStore {
         uniqueCount: candidates.filter((c) => c.candidateId && !c.duplicateOf).length,
         renderedCandidates: candidates.filter((c) => c.candidateId).length,
         rejectedVariations: candidates.filter((c) => c.status === 'REJECTED_UNSAFE').length,
-        validationProbeCount: candidates.reduce((n, c) => n + (c.validation?.trialCompiles ?? 0), 0),
+        validationProbeCount: candidates.reduce((n, c) => n + (c.validationProbeCount ?? 0), 0),
       };
     });
   }

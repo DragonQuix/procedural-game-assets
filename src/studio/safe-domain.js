@@ -1,6 +1,6 @@
 /** 修订绑定的单变量条件域；有限枚举 + 真编译，无 IO 或全局缓存。 */
 import { compileAny, applyAnyOperation, checkAnyCandidate, preserveFromAnyDocument, validatePreserve } from './dispatch.js';
-import { documentHash } from './document.js';
+import { documentHash, stableStringify } from './document.js';
 import { StudioOperationError, GEOMETRY_TRANSFORMS } from './operators.js';
 
 export const SAFE_LIMITS = Object.freeze({ maxSearch: 1024, maxPixelWork: 32_000_000 });
@@ -93,25 +93,56 @@ export function validateSafeBinding(binding, compiled, revision, operation) {
 }
 
 export function preflightGeometry(compiled, operation, options = {}) {
+  return preflight(compiled, operation, options, new Map());
+}
+
+/** 同一请求内复用完整域；不跨 revision 缓存，也不接收外部合法值表。 */
+export function preflightGeometryVariations(compiled, operations, options = {}) {
+  const domains = new Map();
+  return operations.map((operation) => preflight(compiled, operation, options, domains));
+}
+
+function preflight(compiled, operation, options, domains) {
   if (compiled.document.schemaVersion !== 'pga-studio/3' || !isGeometryOperation(operation.id)) return null;
   const fields = Object.keys(operation.params ?? {}).filter((k) => k !== 'anchor');
   // 不支持的类型/参数由原 operator 返回明确错误，不降级处理。
   if (GEOMETRY_TRANSFORMS.includes(operation.id) && !['panel', 'screen'].includes(compiled.document.nodes.find((n) => n.id === operation.target)?.kind)) fail('UNSUPPORTED', '语义变换只支持 panel/screen');
-  let domain;
   if (fields.length === 1 && fields[0] !== 'vertices') {
     const field = fields[0], params = { ...operation.params }; delete params[field];
-    domain = enumerateSafeDomain({ compiled, operator: operation.id, target: operation.target, field, params, ...options });
+    const key = stableStringify([operation.id, operation.target, field, params]);
+    const reused = domains.has(key);
+    let domain = domains.get(key);
+    if (!reused) {
+      try {
+        domain = enumerateSafeDomain({ compiled, operator: operation.id, target: operation.target, field, params, ...options });
+      } catch (e) {
+        if (e.code !== 'SEARCH_LIMIT') throw e;
+        domain = { status: 'SEARCH_LIMIT', revision: options.revision ?? null,
+          documentHash: compiled.hashes.documentHash, contractHash: compiled.protection?.contractHash ?? null,
+          operator: operation.id, target: operation.target, field, fixedParams: params,
+          error: e.message, details: e.details };
+      }
+      domains.set(key, domain);
+    }
     const requestedValue = operation.params[field];
-    if (domain.safeRange.values.includes(requestedValue)) return { status: 'SAFE', validation: domain.search };
+    if (domain.status === 'SEARCH_LIMIT') return pointPreflight(compiled, operation, options, domain, requestedValue, 'POINT_FALLBACK');
+    const validation = reused ? { tested: 0, trialCompiles: 0, domainReused: true } : { ...domain.search, domainReused: false };
+    const common = { safeDomain: domain, validation, validationMode: 'COMPLETE_DOMAIN' };
+    if (domain.safeRange.values.includes(requestedValue)) return { status: 'SAFE', ...common };
     const diagnosis = domain.rejected.find((r) => r.value === requestedValue) ?? { reason: 'OUTSIDE_THEORETICAL_RANGE' };
-    return { status: 'REJECTED_UNSAFE', requestedValue, safeDomain: domain, validation: domain.search, reason: diagnosis.reason, conflicts: diagnosis.conflicts ?? [],
+    return { status: 'REJECTED_UNSAFE', requestedValue, ...common, reason: diagnosis.reason, conflicts: diagnosis.conflicts ?? [], error: diagnosis.error,
       nearestLegalValues: [...domain.safeRange.values].sort((a, b) => Math.abs(a - requestedValue) - Math.abs(b - requestedValue) || a - b).slice(0, 3),
       recommendedTransform: field === 'h' || field === 'y' ? 'squash_keep_base' : 'widen_about_center' };
   }
+  return pointPreflight(compiled, operation, options, { status: 'POINT_CHECK', revision: options.revision ?? null,
+    documentHash: compiled.hashes.documentHash }, operation.params, 'POINT_CHECK');
+}
+
+function pointPreflight(compiled, operation, options, safeDomain, requestedValue, validationMode) {
   const result = evaluateSafeOperation(compiled, operation, options);
   const validation = { tested: 1, trialCompiles: result.trialCompiles };
-  return result.legal ? { status: 'SAFE', validation } : { status: 'REJECTED_UNSAFE', requestedValue: operation.params, validation,
-    safeDomain: { status: 'POINT_CHECK', revision: options.revision ?? null, documentHash: compiled.hashes.documentHash, legal: false },
+  const common = { validation, safeDomain, validationMode };
+  return result.legal ? { status: 'SAFE', ...common } : { status: 'REJECTED_UNSAFE', requestedValue, ...common,
     reason: result.reason, conflicts: result.conflicts ?? [], checks: result.checks, error: result.error,
     nearestLegalValues: [], recommendedTransform: 'resize_about_anchor' };
 }

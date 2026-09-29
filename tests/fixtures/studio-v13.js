@@ -15,3 +15,10 @@ export function borderFixture() {
 }
 
 export const t05Operation = { id: 'geometry.set', target: 'beacon.base', params: { x: 6, y: 33, w: 27, h: 4 } };
+
+export function searchLimitFixture() {
+  const doc = borderFixture();
+  doc.canvas.w = doc.canvas.h = 260;
+  doc.protection.baseline.canvas.w = doc.protection.baseline.canvas.h = 260;
+  return doc;
+}
