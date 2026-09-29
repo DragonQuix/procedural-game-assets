@@ -15,6 +15,8 @@
 保护 schema=pga-protection/1。三者不是同一个版本号。
 
 safe domain 当前无缓存，有限枚举单变量条件域，默认 512 / 硬上限 1024，另有像素工作量限制。
+PR #1 修复后，同次 explore 复用完整域，不跨请求缓存；SEARCH_LIMIT 仅让完整域不可得，
+edit/explore 仍真实单点验证，不放宽保护、不返回 partial COMPLETE。
 探针不向模型输出候选图或审美排名，候选数与 validationProbeCount 分开；没有等算力保证。
 geometry 多字段请求只作点检查，不解最近合法元组。poly/disc/character 语义 resize 不支持；
 角色合同未扩展；已有扁平模型没有依赖边，不由名字推断关系。

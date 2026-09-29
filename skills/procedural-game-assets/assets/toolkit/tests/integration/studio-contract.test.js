@@ -39,6 +39,9 @@ test('commit 真实重编译，不信缓存和伪造 PASS；最终导出/submit/
   await assert.rejects(store.commit({ action: 'accept', candidateId, expectedHead: 'r1' }), { code: 'CANDIDATE_INVALID' });
   const c = await store.edit({ baseRevision: 'r1', operation: legal });
   await store.commit({ action: 'accept', candidateId: c.candidateId, expectedHead: 'r1' });
+  const accepted = await store._getCompiled('r2');
+  assert.deepEqual(accepted.document.protection, borderFixture().protection);
+  assert.notDeepEqual(accepted.document.nodes, accepted.document.protection.baseline.nodes);
   assert.equal((await exportWorkspace(store.dir, join(root, 'export'))).protection.status, 'PASS');
   assert.equal((await submitWorkspace(store.dir, join(root, 'submit'))).protection.status, 'PASS');
   await store.commit({ action: 'restore', targetRevision: 'r1', expectedHead: 'r2' });

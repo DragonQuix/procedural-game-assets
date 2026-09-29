@@ -4,6 +4,55 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S9.1 PR #1 合并前修复（2026-09-29）
+
+依据：`../CONTEXT.md`、ADR-0009/0012、`studio-cli.md`。保持原架构；不新增 rebase、
+不改 hold-out、candidate budget 或 Go/No-Go，不运行 12-run。下列为本次实际重新验证，
+下方 S9 保留原交付时的历史计数。
+
+| 实际命令/范围 | 结果 |
+|---|---|
+| `node --test --test-reporter=spec tests/unit/studio-geometry-safe.test.js tests/integration/studio-safe.test.js tests/integration/studio-observation.test.js tests/integration/studio-contract.test.js` | 22 PASS、0 FAIL、0 SKIP |
+| `node --test --test-reporter=spec "tests/**/*.test.js"`（开发源） | 377 PASS、0 FAIL、0 SKIP |
+| 同一全套命令（普通技能 assets/toolkit 目录） | 366 PASS、0 FAIL、6 SKIP；总计 372 |
+| `node examples/studio/v13-demo.mjs --out work/pr1-v13-demo --evidence work/pr1-v13-evidence` | Demo A/B PASS |
+| 普通载荷内同一 demo，输出到仓库 `work/pr1-portable-demo`、`work/pr1-portable-evidence` | Demo A/B PASS |
+| `node tools/release.mjs`、`node tools/release.mjs --check` | 192 文件一致；仅普通载荷重建 |
+| `node tools/release.mjs --skill procedural-game-assets-loop --check` | 132 文件一致；未重建 |
+| `node tests/PGA_CONSTRAINT_BENCHMARK_v0_1/prepare-materials.mjs --finalize`、`--check` | 追加 D13-0.7.0-4cd1666（68 文件），D12 64 文件、全部旧快照和材料一致；NOT_RUN |
+| `git diff --check` | 通过 |
+
+日志：`work/pr1-focused-tests.log`、`work/pr1-source-tests.log`、`work/pr1-payload-tests.log`；
+机器摘要：`evidence/studio-v1_3/pr1-verification.json`。
+
+新增 7 项顶层测试并扩充旧断言。260×260 fixture 的理论域 pixelWork=35,694,880，
+超过生产默认 32,000,000；inspect 保留 SEARCH_LIMIT，无 partial safeRange。合法 edit
+以 POINT_FALLBACK 真实编译并提交；explore 的 [24,35,300,26] 四次点检查中三次进入编译，
+仅两个合法项物化；保护违规和 apply 越界均无候选/PNG。小资产完整域只枚举一次，后续复用
+不重复计探针。另验证 maxSearch 超限回退及非 SEARCH_LIMIT 异常不被吞掉。
+
+safeBinding 核对字段、固定参数（稳定键顺序）和合同哈希，不授权自报 values。
+观察与 commit 共用身份、派生内容、哈希及保护重验；VALID 才出图，REJECTED/STALE/TAMPERED
+只留显式诊断。accept/restore 后 baseline 不变的断言通过，无 implicit rebase。
+
+普通载荷 6 个 SKIP 的完整测试名称：
+
+1. `真实载荷链：init → 冒烟测试 → --check → 静态服务 HTTP`
+2. `安装核心`
+3. `循环版独立载荷：复制后 CLI、专名安装与原版共存`
+4. `Git 携带：保留 pngjs 与精确字节，autocrlf=true 检出后仍通过清单`
+5. `register-harnesses`
+6. `普通技能可独立携带：视觉标准随清单发行，入口与诊断链接均在包内可读`
+
+这些测试依赖开发仓库技能/安装/发行目录，在开发源全部通过；没有 Studio v1.3
+protection、geometry、safe-domain 或观察核心测试被跳过。
+
+新 D13 source=`4cd1666`，旧 `D13` 与 `D13-0.7.0` 保留于 archivedToolkits。
+manifest 更新逐文件哈希、协议 SHA-256 与共同观察模块哈希；check 验证两组起始 RGBA、
+控制解 RGBA、crop/contact sheet/diff 输出一致，真实编译结果通过同一独立 final contract。
+协议、hold-out、旧冻结工具、共享观察纯层与 core/recipes/bake/geometry 相对 `7b359bc`
+无差异。模型/宿主/推理配置和批准仍未冻结，participant/review/modelCalls 均为 0。
+
 ## S9 Studio v1.3 / 工具包 0.7.0（2026-09-29）
 
 依据：`CONTEXT.md`、ADR-0012、`plans/studio-v1_3-delivery.md`。v1.2 终审的正式解释已归档于

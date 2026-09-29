@@ -244,18 +244,30 @@ export const submitWorkspace = exportWorkspace;
 
 export async function observeWorkspace(wsDir, outDir, { revision, candidateIds = [], node, displayScale = 4, ...opts } = {}) {
   const store = await StudioStore.open(wsDir, opts);
+  await store._refreshHead();
   revision ??= store.head;
   if (!Array.isArray(candidateIds) || candidateIds.length > 16) throw new RangeError('观察最多 16 个已有候选');
   const base = await store._getCompiled(revision);
   if (base.kind === 'character') throw new RangeError('当前候选拼图入口只支持单帧；角色继续使用播放材料');
-  const candidates = [];
+  const candidates = [], validation = { revision, head: store.head, candidates: [] };
   for (const candidateId of candidateIds) {
-    const record = await store._readCandidate(candidateId);
-    if (record.baseRevision !== revision) throw new RangeError('contact sheet 候选必须来自同一基准');
-    const compiled = compileAny(record.doc);
-    candidates.push({ frame: compiled.asset.frames[0], identity: { candidateId, revision, documentHash: compiled.hashes.documentHash } });
+    try {
+      const record = await store._readCandidate(candidateId);
+      const candidateBase = record.baseRevision === revision ? base : await store._getCompiled(record.baseRevision);
+      const { compiled, checks } = store._verifyCandidate(candidateId, record, candidateBase);
+      const stale = record.baseRevision !== revision || record.baseRevision !== store.head;
+      const status = stale ? 'STALE' : ['OK', 'UNCHANGED'].includes(checks.status) ? 'VALID' : 'REJECTED';
+      const identity = { candidateId, revision: record.baseRevision, documentHash: compiled.hashes.documentHash, status };
+      validation.candidates.push({ ...identity, displayed: status === 'VALID', protection: compiled.protection,
+        checkStatus: checks.status, conflicts: checks.conflicts,
+        ...(stale ? { reason: record.baseRevision !== revision ? 'BASE_REVISION_MISMATCH' : 'STALE_REVISION' } : {}) });
+      if (status === 'VALID') candidates.push({ frame: compiled.asset.frames[0], identity });
+    } catch (e) {
+      validation.candidates.push({ candidateId, status: 'TAMPERED', displayed: false,
+        error: { code: e.code ?? 'INVALID_CANDIDATE_RECORD', message: e.message }, conflicts: e.details?.conflicts ?? [] });
+    }
   }
   const target = node ? base.sceneMap.nodes.find((n) => n.id === node) : null;
   if (node && !target) throw new RangeError('观察目标节点不存在');
-  return writeObservationBundle(outDir, { base: { frame: base.asset.frames[0], identity: { revision, documentHash: base.hashes.documentHash } }, candidates, crop: target?.frameRect, scale: displayScale });
+  return writeObservationBundle(outDir, { base: { frame: base.asset.frames[0], identity: { revision, documentHash: base.hashes.documentHash } }, candidates, crop: target?.frameRect, scale: displayScale, validation });
 }

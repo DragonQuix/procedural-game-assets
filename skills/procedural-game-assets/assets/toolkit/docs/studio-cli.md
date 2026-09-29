@@ -305,6 +305,11 @@ compile 返回 protection=PASS/REJECTED/NOT_CONFIGURED；裸 compile 可用于�
 store/CLI 在 create、commit、restore、export/submit 的最终编译上强制检查；无合同不声称全局 PASS。
 合同及基线参与文档哈希、v3 候选身份。只读观察可包含失败诊断，但 overlay 不进入导出资产。
 
+protection.baseline 在 workspace 生命周期内保持初始冻结状态。accept candidate 不改变该
+baseline，restore 也不改变；后续所有 revision 仍相对同一个 frozen baseline 验证，不相对
+上一已接受修订重新设定基准。如果要把当前已接受状态作为新的保护基准，应以该状态创建新的
+protected document/workspace；当前版本没有 implicit rebase，也没有 rebase 操作。
+
 ## 几何与安全域
 
 ```powershell
@@ -330,11 +335,23 @@ anchorPoint；resize 的 anchor 必须明确指定 center/bottom-center/top-left
 目标、固定参数与保护。未来缓存只能优化，不能成为授权来源。
 
 `edit --safe-binding '<inspect返回的某字段域JSON>'` 可显式检查旧域身份；无 binding 仍重新计算。
+身份包含 revision、documentHash、operator、target、field、fixedParams、contractHash。
+从实际 operation.params 中移除 binding.field 对应的请求值后，剩余参数必须与 fixedParams
+稳定序列化一致（包括 anchor 的对象字段，不依赖键顺序）。binding 只标识域，不授权其 values；
+当前修订总要重新验证，即使 binding 自报 COMPLETE 或把非法值写进 safeRange 也不能通过。
 修订变化后需重新 inspect；恢复相同内容也会生成新 revision。一个低层多字段请求只做精确点检查，
 不承诺求最近合法参数元组。单字段非法请求返回 REJECTED_UNSAFE、requestedValue、safeDomain、
 reason、nearestLegalValues、recommendedTransform，不 clamp。explore 同基准分支，拒绝项没有
 candidateId、不写候选 PNG；renderedCandidates/uniqueCount 与 rejectedVariations 分开报告。
 安全性试编译不输出可观察候选，其计算量在 search.trialCompiles 单列，不代表免费计算。
+
+完整域超出资源预算时，inspect 保持 SEARCH_LIMIT，不返回部分 safeRange。单字段 edit 仅在
+SEARCH_LIMIT 时回退到当前请求的 apply→compile→protect：合法预检为 SAFE，候选照常产生
+OK/UNCHANGED，返回 validationMode=POINT_FALLBACK、safeDomain.status=SEARCH_LIMIT；非法为
+REJECTED_UNSAFE，保留冲突或编译错误，nearestLegalValues=[]。其他枚举异常直接抛出。
+explore 在同一请求内只求一次同身份完整域；超限则逐个验证显式 values，不扩大候选列表。
+validationProbeCount 统计实际单点验证调用（包括 apply 阶段拒绝），validation.trialCompiles
+单列进入编译的次数；复用完整域的后续项两者为 0，不重复计费，也不把验证探针算为候选。
 
 ## 共享观察与最终交付
 
@@ -345,6 +362,11 @@ node bin/pga-studio.mjs submit --ws work/ws --out work/final
 
 observe 仅消费同基准已存在候选，输出原生/4x 最近邻 contact sheet、crop 和 diff，以及可复现
 坐标、倍率、revision/candidate/documentHash。PNG 中索引对应 observation.json 的身份标签。
+观察与 commit 共用 candidateId、派生操作、内容哈希及最终编译保护重验。observation.json 的
+validation.candidates 区分 VALID、REJECTED、STALE、TAMPERED，并记录 displayed、保护结果或
+错误；只有 VALID 进入拼图、crop 和 diff。真实保护失败为 REJECTED，自报状态与重验不符为
+TAMPERED；基准不符或不再基于当前 head 为 STALE。旧修订观察也不会把过期候选标为可提交。
+这是本地 agent 工作流一致性检查，不是对完全文件写权限的安全隔离。
 共享纯函数在 `src/observe/frame-views.js`，任意 arm 可传标准 frame 使用；IO 在
 `src/adapters/observation-files.js`。submit 是 workspace export 的同一最终编译入口。
 

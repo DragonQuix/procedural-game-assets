@@ -30,7 +30,7 @@ import { compileAny, applyAnyOperation, exploreAnyOperation, operationFromAnyExp
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { encodePNG } from '../export/png.js';
 import { assertProtection } from '../studio/protection-contract.js';
-import { preflightGeometry, validateSafeBinding } from '../studio/safe-domain.js';
+import { preflightGeometry, preflightGeometryVariations, validateSafeBinding } from '../studio/safe-domain.js';
 
 const MARKER = '.pga.json';
 
@@ -469,7 +469,9 @@ export class StudioStore {
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
       const mergedPreserve = [...preserveDoc, ...preserveRequest];
       const unsafe = preflightGeometry(base, operation, { revision: baseRevision, preserve: mergedPreserve });
-      if (unsafe?.status === 'REJECTED_UNSAFE') return { requestId: reqId, baseRevision, head: this.head, ...unsafe, candidateId: null, renderedCandidates: 0 };
+      const validationInfo = { validation: unsafe?.validation ?? null, validationMode: unsafe?.validationMode ?? null,
+        safeDomain: unsafe?.safeDomain ?? null, validationProbeCount: unsafe?.validation.tested ?? 0 };
+      if (unsafe?.status === 'REJECTED_UNSAFE') return { requestId: reqId, baseRevision, head: this.head, ...unsafe, ...validationInfo, candidateId: null, renderedCandidates: 0 };
       const { doc: candDoc, plan } = applyAnyOperation(base.document, operation); // 形状/范围错误向上抛（CANDIDATE_INVALID 等）
       const candidate = compileAny(candDoc, { toolVersion: this.toolVersion });
       const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve, revision: baseRevision });
@@ -481,14 +483,14 @@ export class StudioStore {
         operation,
         preserveRequest,
         preserveDoc,
-        validation: unsafe?.validation ?? null,
+        ...validationInfo,
         doc: candidate.document,
         hashes: candidate.hashes,
         checks,
         previews,
       };
       await writeFileAtomic(workspacePath(this.dir, 'candidates', `${candidateId}.json`), JSON.stringify(record, null, 2) + '\n');
-      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews, geometry: plan.geometry ?? null, renderedCandidates: 1, validation: unsafe?.validation ?? null };
+      return { requestId: reqId, candidateId, baseRevision, head: this.head, status: checks.status, code: checks.code, conflicts: checks.conflicts, diff: checks.diff, checks, hashes: candidate.hashes, previews, geometry: plan.geometry ?? null, renderedCandidates: 1, ...validationInfo };
     });
   }
 
@@ -505,13 +507,16 @@ export class StudioStore {
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
       const mergedPreserve = [...preserveDoc, ...preserveRequest];
       const entries = exploreAnyOperation(base.document, spec);
+      const operations = entries.map((entry) => operationFromAnyExplore(base.document, spec, entry.value));
+      const preflights = preflightGeometryVariations(base, operations, { revision: baseRevision, preserve: mergedPreserve });
       const seen = new Map([[base.hashes.renderHash, 'base']]);
       const candidates = [];
-      for (const entry of entries) {
-        const operation = operationFromAnyExplore(base.document, spec, entry.value);
-        const unsafe = preflightGeometry(base, operation, { revision: baseRevision, preserve: mergedPreserve });
+      for (const [index, entry] of entries.entries()) {
+        const operation = operations[index], unsafe = preflights[index];
+        const validationInfo = { validation: unsafe?.validation ?? null, validationMode: unsafe?.validationMode ?? null,
+          safeDomain: unsafe?.safeDomain ?? null, validationProbeCount: unsafe?.validation.tested ?? 0 };
         if (unsafe?.status === 'REJECTED_UNSAFE') {
-          candidates.push({ value: entry.value, ...unsafe, candidateId: null, renderedCandidates: 0 });
+          candidates.push({ value: entry.value, ...unsafe, ...validationInfo, candidateId: null, renderedCandidates: 0 });
           continue;
         }
         if (entry.error) {
@@ -531,7 +536,7 @@ export class StudioStore {
           operation,
           preserveRequest,
           preserveDoc,
-          validation: unsafe?.validation ?? null,
+          ...validationInfo,
           doc: candidate.document,
           hashes: candidate.hashes,
           checks,
@@ -550,7 +555,8 @@ export class StudioStore {
           hashes: candidate.hashes,
           previews,
           geometry: entry.plan.geometry ?? null,
-          validation: unsafe?.validation ?? null,
+          ...validationInfo,
+          renderedCandidates: 1,
         });
       }
       const basePreviews = await this._writePreviews(base, `${baseRevision}-base`);
@@ -563,7 +569,7 @@ export class StudioStore {
         uniqueCount: candidates.filter((c) => c.candidateId && !c.duplicateOf).length,
         renderedCandidates: candidates.filter((c) => c.candidateId).length,
         rejectedVariations: candidates.filter((c) => c.status === 'REJECTED_UNSAFE').length,
-        validationProbeCount: candidates.reduce((n, c) => n + (c.validation?.trialCompiles ?? 0), 0),
+        validationProbeCount: candidates.reduce((n, c) => n + (c.validationProbeCount ?? 0), 0),
       };
     });
   }
@@ -592,25 +598,7 @@ export class StudioStore {
         }
         // 篡改防护：不信落盘的 checks——用基准 + 操作重新推导文档、重编译并重新执行保护检查
         const base = await this._getCompiled(record.baseRevision);
-        // R5：保护列表也不信落盘——从基准修订重取文档级 constraints，与候选的请求级保护
-        // 重新合并并重算候选身份；三者（基准+操作+保护）任一被改动都会改变身份，即拒绝。
-        const mergedPreserve = this._authoritativePreserve(base, record);
-        const expectedCandidateId = candidateIdentity(record.baseRevision, base, record.operation, mergedPreserve);
-        if (expectedCandidateId !== record.candidateId || record.candidateId !== candidateId) {
-          fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的身份（基准+操作+保护）与重新计算不符（文件可能被篡改）`, { target: candidateId });
-        }
-        const { doc: rederivedDoc, plan } = applyAnyOperation(base.document, record.operation);
-        const recompiled = compileAny(record.doc, { toolVersion: this.toolVersion });
-        if (recompiled.hashes.documentHash !== record.hashes.documentHash || recompiled.hashes.renderHash !== record.hashes.renderHash) {
-          fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的内容哈希与记录不符（文件可能被篡改）`, { target: candidateId });
-        }
-        if (stableStringify(rederivedDoc) !== stableStringify(record.doc)) {
-          fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的文档与操作重新推导结果不符（文件可能被篡改）`, { target: candidateId });
-        }
-        const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: recompiled, plan, preserve: mergedPreserve, revision: record.baseRevision });
-        if (checks.status !== record.checks.status) {
-          fail('CANDIDATE_INVALID', `候选 '${candidateId}' 落盘状态（${record.checks.status}）与重新校验（${checks.status}）不符（文件可能被篡改）`, { target: candidateId });
-        }
+        const { compiled: recompiled, checks } = this._verifyCandidate(candidateId, record, base);
         if (checks.status !== 'OK' && checks.status !== 'UNCHANGED') {
           fail('CANDIDATE_INVALID', `候选 '${candidateId}' 状态为 ${checks.status}，未通过保护检查，不能提交`, { target: candidateId, details: { conflicts: checks.conflicts } });
         }
@@ -634,6 +622,28 @@ export class StudioStore {
       }
       fail('UNSUPPORTED_OPERATION', `未知 commit 动作 '${action}'（可用：accept, restore）`);
     });
+  }
+
+  /** commit 与观察共用完整性和保护重验，不信候选自报的状态。 */
+  _verifyCandidate(candidateId, record, base) {
+    const mergedPreserve = this._authoritativePreserve(base, record);
+    const expectedCandidateId = candidateIdentity(record.baseRevision, base, record.operation, mergedPreserve);
+    if (expectedCandidateId !== record.candidateId || record.candidateId !== candidateId) {
+      fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的身份（基准+操作+保护）与重新计算不符（文件可能被篡改）`, { target: candidateId });
+    }
+    const { doc: rederivedDoc, plan } = applyAnyOperation(base.document, record.operation);
+    const compiled = compileAny(record.doc, { toolVersion: this.toolVersion });
+    if (compiled.hashes.documentHash !== record.hashes?.documentHash || compiled.hashes.renderHash !== record.hashes?.renderHash) {
+      fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的内容哈希与记录不符（文件可能被篡改）`, { target: candidateId });
+    }
+    if (stableStringify(rederivedDoc) !== stableStringify(record.doc)) {
+      fail('CANDIDATE_INVALID', `候选 '${candidateId}' 的文档与操作重新推导结果不符（文件可能被篡改）`, { target: candidateId });
+    }
+    const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: compiled, plan, preserve: mergedPreserve, revision: record.baseRevision });
+    if (checks.status !== record.checks?.status) {
+      fail('CANDIDATE_INVALID', `候选 '${candidateId}' 落盘状态（${record.checks?.status}）与重新校验（${checks.status}）不符（文件可能被篡改）`, { target: candidateId, details: { conflicts: checks.conflicts } });
+    }
+    return { compiled, checks };
   }
 
   /**

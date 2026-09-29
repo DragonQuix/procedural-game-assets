@@ -9,6 +9,11 @@
 
 依据：`../CONTEXT.md`、`../docs/PLAN.md`、ADR-0001/0002/0008–0012；无 CONTEXT-MAP.md。
 
+- [x] PR #1：SEARCH_LIMIT 单点回退与同次 explore 复用完整域，不阻塞合法单点
+- [x] PR #1：safeBinding 字段/固定参数/合同身份，观察 VALID/REJECTED/STALE/TAMPERED
+- [x] PR #1：基线生命周期文档，新增 7 项测试；源 377 PASS、载荷 366 PASS/6 SKIP
+- [x] PR #1：追加 D13-0.7.0-4cd1666、保留旧快照；起始像素/共同观察/独立合同复核，实验未运行
+
 - [x] v1.2 superseding audited interpretation，旧 scored/raw/review/key/freeze 全部保留
 - [x] /3 资产级合同、T05 27px 回归、metadata/node 独立保护、commit/submit 最终编译重验
 - [x] 矩形三语义 transform，有限试编译安全域、修订绑定、非法探索提前拒绝

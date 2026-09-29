@@ -1,0 +1,25 @@
+{
+  "schema": "pga-v13-pr1-verification/1",
+  "platform": "Windows",
+  "node": "v22.23.2",
+  "productSourceCommit": "4cd1666",
+  "focusedTests": { "tests": 22, "pass": 22, "fail": 0, "skip": 0 },
+  "sourceTests": { "tests": 377, "pass": 377, "fail": 0, "skip": 0 },
+  "payloadTests": { "tests": 372, "pass": 366, "fail": 0, "skip": 6 },
+  "payloadSkips": [
+    "真实载荷链：init → 冒烟测试 → --check → 静态服务 HTTP",
+    "安装核心",
+    "循环版独立载荷：复制后 CLI、专名安装与原版共存",
+    "Git 携带：保留 pngjs 与精确字节，autocrlf=true 检出后仍通过清单",
+    "register-harnesses",
+    "普通技能可独立携带：视觉标准随清单发行，入口与诊断链接均在包内可读"
+  ],
+  "studioCoreTestsSkipped": false,
+  "ordinaryRelease": { "files": 192, "integrity": "PASS" },
+  "loopRelease": { "files": 132, "integrity": "PASS", "rebuilt": false },
+  "demo": { "source": { "A": "PASS", "B": "PASS" }, "payload": { "A": "PASS", "B": "PASS" } },
+  "pointFallback": { "fixtureCanvas": [260, 260], "pixelWork": 35694880, "maxPixelWork": 32000000, "inspect": "SEARCH_LIMIT", "partialRangeReturned": false, "explorePointChecks": 4, "exploreTrialCompiles": 3, "materializedCandidates": 2 },
+  "benchmark": { "status": "DRAFT_NOT_RUN", "D13": "frozen/D13-0.7.0-4cd1666", "D12Files": 64, "D13Files": 68, "archivedSnapshotsPreserved": true, "baselinePixelsEqual": true, "sharedObservationsEqual": true, "independentFinalContract": "PASS", "participantRuns": 0, "reviews": 0, "modelCalls": 0 },
+  "globalInstallChanged": false,
+  "modelBenefit": "UNVERIFIED"
+}
