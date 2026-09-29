@@ -44,16 +44,23 @@ export function classifyVisionEvidence(actualViews, hostEvents = [], requiredVie
 export function deriveReview(review, { task, requiredClips, requiredViews = [], hostEvents = [] }) {
   validateReview(review);
   if (review.task !== task || !strings(requiredClips) || !strings(requiredViews)) fail('评审与外部任务合同不匹配');
-  const taskFit = {}, motion = {};
+  const taskFit = {}, motion = {}, playbackEvidence = {};
   for (const label of ['X', 'Y']) {
     const c = review.candidates[label];
     const viewed = review.playbackViewed && c.motion.playbackViewed && requiredClips.every((clip) => c.motion.viewedClips.includes(clip));
+    const confirmedPlayback = requiredClips.every((clip) => hostEvents.some((e) =>
+      e.source === 'host-transcript' && e.kind === 'animation-playback' && e.candidate === label && e.clip === clip &&
+      e.success === true && e.modelInput === true && typeof e.callId === 'string' && e.callId &&
+      typeof e.modelContextId === 'string' && e.modelContextId && Array.isArray(e.frameInputs) && e.frameInputs.length >= 2 &&
+      e.frameInputs.every((f) => /^[0-9a-f]{64}$/.test(f.sha256) && Number.isFinite(f.timeMs)) &&
+      e.frameInputs.some((f) => f.timeMs > e.frameInputs[0].timeMs && f.sha256 !== e.frameInputs[0].sha256)));
+    playbackEvidence[label] = !requiredClips.length ? 'NOT_REQUIRED' : !viewed ? 'UNVERIFIED' : confirmedPlayback ? 'CONFIRMED' : 'SELF_REPORTED';
     motion[label] = !requiredClips.length ? 'NOT_REQUIRED' : viewed ? c.motion.taskFit : 'UNVERIFIED';
     taskFit[label] = !review.actualViews.length || motion[label] === 'UNVERIFIED' ? 'UNVERIFIED' : c.blockingIssue || c.taskFit === 'NOT_YET' || motion[label] === 'NOT_YET' ? 'NOT_YET' : c.taskFit;
   }
   return { schema: 'pga-derived-review/1', task, reviewerSlot: review.reviewerSlot, rawPairwiseResult: review.pairwiseResult,
     pairwiseResult: Object.values(taskFit).includes('UNVERIFIED') ? 'UNVERIFIED' : review.pairwiseResult,
-    taskFit, motion, visionEvidence: classifyVisionEvidence(review.actualViews, hostEvents, requiredViews.length ? requiredViews : review.actualViews) };
+    taskFit, motion, playbackEvidence, visionEvidence: classifyVisionEvidence(review.actualViews, hostEvents, requiredViews.length ? requiredViews : review.actualViews) };
 }
 
 export function unblindReview(key, review, taskContract) {
@@ -64,7 +71,7 @@ export function unblindReview(key, review, taskContract) {
   if (!r1 || !r2 || r1.X !== key.candidateA || r1.Y !== key.candidateB || r2.X !== key.candidateB || r2.Y !== key.candidateA) fail('blind key 不满足 MIRRORED_BALANCE');
   const mapping = review.reviewerSlot === 1 ? r1 : r2;
   const preferredRun = derived.pairwiseResult === 'X_PREFERRED' ? mapping.X : derived.pairwiseResult === 'Y_PREFERRED' ? mapping.Y : null;
-  return { ...derived, preferredRun, taskFitByRun: { [mapping.X]: derived.taskFit.X, [mapping.Y]: derived.taskFit.Y } };
+  return { ...derived, preferredRun, taskFitByRun: { [mapping.X]: derived.taskFit.X, [mapping.Y]: derived.taskFit.Y }, playbackEvidenceByRun: { [mapping.X]: derived.playbackEvidence.X, [mapping.Y]: derived.playbackEvidence.Y } };
 }
 
 export function candidateVisualStatus(fits) {
@@ -79,7 +86,7 @@ export function taskSuccess({ submitted, technical, protocol, budget, reviews, r
   if (technical === 'FAIL') return 'TECHNICAL_FAIL';
   if (protocol === 'FAIL') return 'PROTOCOL_FAIL';
   if (budget === 'FAIL') return 'BUDGET_FAIL';
-  if ([technical, protocol, budget].some((v) => v !== 'PASS') || reviews.length !== 2 || new Set(reviews.map((r) => r.reviewerSlot)).size !== 2 || reviews.some((r) => r.visionEvidence !== 'CONFIRMED')) return 'UNVERIFIED';
+  if ([technical, protocol, budget].some((v) => v !== 'PASS') || reviews.length !== 2 || new Set(reviews.map((r) => r.reviewerSlot)).size !== 2 || reviews.some((r) => r.visionEvidence !== 'CONFIRMED' || !['CONFIRMED', 'NOT_REQUIRED'].includes(r.playbackEvidenceByRun?.[runId]))) return 'UNVERIFIED';
   const visual = candidateVisualStatus(reviews.map((r) => r.taskFitByRun[runId] ?? 'UNVERIFIED'));
   return visual === 'PASS' ? 'PASS' : visual === 'UNVERIFIED' ? 'UNVERIFIED' : `VISUAL_${visual}`;
 }
