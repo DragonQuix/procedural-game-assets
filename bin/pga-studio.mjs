@@ -38,7 +38,7 @@ import { StudioOperationError } from '../src/studio/operators.js';
 
 const PKG = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
 const GENERATOR = `procedural-game-assets@${PKG.version}`;
-const TOOL_VERSION = `${PKG.version}/pga-studio-1.3`;
+const TOOL_VERSION = `${PKG.version}/pga-studio-1.4`;
 
 function emit(payload, code) {
   process.stdout.write(JSON.stringify(payload, null, 2) + '\n');
@@ -60,13 +60,13 @@ for (let i = 0; i < rest.length; i++) {
 /** R4：命令级选项白名单——拼错的选项（如 --preserv）明确报用法错误，不悄悄变成无效参数。 */
 const COMMAND_OPTS = {
   create: ['doc', 'out', 'display-scale', 'bg'],
-  inspect: ['doc', 'ws', 'revision', 'out', 'node', 'display-scale', 'bg'],
+  inspect: ['doc', 'ws', 'revision', 'out', 'node', 'display-scale', 'bg', 'preserve-relations'],
   export: ['doc', 'ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
   submit: ['ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
   observe: ['ws', 'revision', 'out', 'candidates', 'node', 'display-scale', 'bg'],
   state: ['ws', 'display-scale', 'bg'],
-  edit: ['ws', 'base', 'op', 'target', 'params', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg', 'safe-binding'],
-  explore: ['ws', 'base', 'op', 'target', 'field', 'values', 'params', 'preserve', 'request-id', 'display-scale', 'bg'],
+  edit: ['ws', 'base', 'op', 'target', 'params', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg', 'safe-binding', 'preserve-relations'],
+  explore: ['ws', 'base', 'op', 'target', 'field', 'values', 'params', 'preserve', 'request-id', 'display-scale', 'bg', 'preserve-relations'],
   commit: ['ws', 'accept', 'restore', 'expected-head', 'request-id', 'display-scale', 'bg'],
 };
 if (COMMAND_OPTS[cmd]) {
@@ -102,6 +102,7 @@ function commonOpts() {
     generator: GENERATOR,
     displayScale: intOpt('display-scale', 4),
     background: typeof opts.bg === 'string' ? opts.bg : '#202028',
+    preserveRelations: jsonOpt('preserve-relations', false),
   };
 }
 
@@ -179,6 +180,8 @@ function buildExploreSpec() {
 
 async function main() {
   const common = commonOpts();
+  const relationOption = opts['preserve-relations'] === undefined ? {} : { preserveRelations: jsonOpt('preserve-relations') };
+  if (['edit', 'explore'].includes(cmd) && Object.keys(relationOption).length && !['widen_about_center', 'squash_keep_base', 'resize_about_anchor'].includes(opts.op)) fail('INVALID_DOCUMENT', '--preserve-relations 只支持 semantic transform', 2);
   if (cmd === 'observe') return { result: await observeWorkspace(resolve(requireOpt('ws', 'observe 需要 --ws')), resolve(requireOpt('out', 'observe 需要 --out')), { ...common, revision: opts.revision, candidateIds: jsonOpt('candidates', []), node: opts.node }) };
   if (cmd === 'create') {
     const doc = requireOpt('doc', 'create 需要 --doc <file.json>');
@@ -223,7 +226,7 @@ async function main() {
     return {
       result: await store.edit({
         baseRevision: base,
-        operation: buildOperation(),
+        operation: { ...buildOperation(), ...relationOption },
         safeBinding: jsonOpt('safe-binding', undefined),
         preserve: jsonOpt('preserve', []),
         requestId: typeof opts['request-id'] === 'string' ? opts['request-id'] : undefined,
@@ -237,7 +240,7 @@ async function main() {
     return {
       result: await store.explore({
         baseRevision: base,
-        spec: buildExploreSpec(),
+        spec: { ...buildExploreSpec(), ...relationOption },
         preserve: jsonOpt('preserve', []),
         requestId: typeof opts['request-id'] === 'string' ? opts['request-id'] : undefined,
       }),
@@ -278,7 +281,7 @@ try {
     fail(e.code, e.message, exitCodeFor(e), { target: e.target, details: e.details, retryable: e.retryable, suggestedNextAction: e.suggestedNextAction });
   } else if (e instanceof StudioOverwriteError) {
     fail('UNSAFE_PATH', e.message, 4);
-  } else if (e && e.code === 'PROTECTION_VIOLATION') {
+  } else if (e && ['PROTECTION_VIOLATION', 'RELATION_VIOLATION', 'RELATION_CONFLICT'].includes(e.code)) {
     fail(e.code, e.message, 3, { details: e.details });
   } else if (e && e.code === 'INVALID_DOCUMENT') {
     fail('INVALID_DOCUMENT', e.message, 3);

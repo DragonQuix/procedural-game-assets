@@ -63,3 +63,12 @@ export function assertRelations(compiled) {
   }
   return result;
 }
+
+export function validateRelationBinding(binding, compiled, revision) {
+  const current = evaluateRelations(compiled, { revision });
+  if (!binding || binding.revision !== revision || binding.documentHash !== current.documentHash || binding.relationContractHash !== current.relationContractHash) {
+    const error = new Error('relation inspection 已过期；请重新 inspect');
+    error.code = 'STALE_RELATION_INSPECTION';
+    throw error;
+  }
+}

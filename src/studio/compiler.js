@@ -316,5 +316,8 @@ export function describeCapabilities(doc) {
     schemaVersion: normalized.schemaVersion,
     limits: { canvasMax: 512, nodesMax: 64, rampShades: 4, verticesMax: 8 },
     nodes,
+    relations: { status: normalized.relations?.length ? 'CONFIGURED' : 'NOT_CONFIGURED', types: ['contact'],
+      geometry: ['panel', 'screen'], preserveRelations: 'true | [relationId]',
+      policies: ['translate-follower', 'resize-follower-edge'], finalValidation: 'required relations AND protection' },
   };
 }
