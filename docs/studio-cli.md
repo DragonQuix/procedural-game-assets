@@ -357,6 +357,11 @@ node bin/pga-studio.mjs submit --ws work/ws --out work/final
 
 observe 仅消费同基准已存在候选，输出原生/4x 最近邻 contact sheet、crop 和 diff，以及可复现
 坐标、倍率、revision/candidate/documentHash。PNG 中索引对应 observation.json 的身份标签。
+观察与 commit 共用 candidateId、派生操作、内容哈希及最终编译保护重验。observation.json 的
+validation.candidates 区分 VALID、REJECTED、STALE、TAMPERED，并记录 displayed、保护结果或
+错误；只有 VALID 进入拼图、crop 和 diff。真实保护失败为 REJECTED，自报状态与重验不符为
+TAMPERED；基准不符或不再基于当前 head 为 STALE。旧修订观察也不会把过期候选标为可提交。
+这是本地 agent 工作流一致性检查，不是对完全文件写权限的安全隔离。
 共享纯函数在 `src/observe/frame-views.js`，任意 arm 可传标准 frame 使用；IO 在
 `src/adapters/observation-files.js`。submit 是 workspace export 的同一最终编译入口。
 
