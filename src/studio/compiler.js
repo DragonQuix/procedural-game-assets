@@ -16,6 +16,7 @@ import { assembleFrame, computeBounds } from '../bake/frame.js';
 import { assembleAsset } from '../bake/asset.js';
 import { partSeed } from '../recipes/machine.js';
 import { checkAssetProtection } from './protection-contract.js';
+import { evaluateRelations } from './relations.js';
 import { normalizeStudioDocument, documentHash, styleHash, fnv1aHex, stableStringify, materialsFor } from './document.js';
 
 /** 节点子种子：复用 machine.parts 的子种子算法；命名空间跨模式版本稳定（ADR-0008/0010）。 */
@@ -245,6 +246,7 @@ export function compileStudioDocument(doc, opts = {}) {
   const compiled = { asset, sceneMap, masks, hashes, diagnostics, document: normalized };
   compiled.protectionBaseline = normalized.protection ? compileStudioDocument(normalized.protection.baseline, opts) : null;
   compiled.protection = checkAssetProtection(normalized.protection, compiled.protectionBaseline, compiled, opts.protectionContext);
+  compiled.relations = evaluateRelations(compiled, opts.protectionContext);
   return compiled;
 }
 
@@ -252,8 +254,10 @@ export function compileStudioDocument(doc, opts = {}) {
 export function createProtectedDocument(doc, rules) {
   const baseline = normalizeStudioDocument(doc);
   if (baseline.protection) throw new Error('已有保护合同，不能隐式重置基线');
+  const relations = baseline.relations;
+  delete baseline.relations;
   baseline.schemaVersion = 'pga-studio/2';
-  return normalizeStudioDocument({ ...baseline, schemaVersion: 'pga-studio/3', protection: {
+  return normalizeStudioDocument({ ...baseline, schemaVersion: relations ? 'pga-studio/4' : 'pga-studio/3', ...(relations ? { relations } : {}), protection: {
     schemaVersion: 'pga-protection/1', coordinateSpace: 'final-frame',
     protectedRegions: [], metadataPaths: [], nodeIds: [], ...rules, baseline,
   } });
