@@ -17,8 +17,9 @@
  */
 import { DEFAULT_OUTLINE } from '../bake/frame.js';
 import { validateProtectionContract } from './protection-contract.js';
+import { validateRelations } from './relation-model.js';
 
-export const SCHEMA_VERSIONS = Object.freeze(['pga-studio/1', 'pga-studio/2', 'pga-studio/3']);
+export const SCHEMA_VERSIONS = Object.freeze(['pga-studio/1', 'pga-studio/2', 'pga-studio/3', 'pga-studio/4']);
 export const STUDIO_SCHEMA_VERSION = SCHEMA_VERSIONS[0]; // 兼容引用：最旧支持版本
 export const LATEST_SCHEMA_VERSION = SCHEMA_VERSIONS[SCHEMA_VERSIONS.length - 1];
 
@@ -310,7 +311,7 @@ function validateConstraints(doc, issues) {
 export function validateStudioDocument(doc) {
   const issues = [];
   if (!isPlainObject(doc)) return [issue('INVALID_DOCUMENT', '(root)', '文档需要 JSON 对象')];
-  checkKeys(doc, ['schemaVersion', 'id', 'seed', 'renderProfile', 'style', 'canvas', 'nodes', 'anchor', 'attachments', 'constraints', 'protection'], '(root)', issues);
+  checkKeys(doc, ['schemaVersion', 'id', 'seed', 'renderProfile', 'style', 'canvas', 'nodes', 'anchor', 'attachments', 'constraints', 'protection', 'relations'], '(root)', issues);
   if (!SCHEMA_VERSIONS.includes(doc.schemaVersion)) {
     issues.push(issue('INVALID_DOCUMENT', 'schemaVersion', `未知版本 ${JSON.stringify(doc.schemaVersion)}，本校验器仅支持 ${SCHEMA_VERSIONS.map((v) => `'${v}'`).join(' 与 ')}`));
     return issues; // 版本不兼容时不继续猜测其余字段
@@ -373,8 +374,12 @@ export function validateStudioDocument(doc) {
   }
   validateConstraints(doc, issues);
   if (doc.protection !== undefined) {
-    if (version !== 'pga-studio/3') issues.push(issue('INVALID_DOCUMENT', 'protection', '资产级保护需要 pga-studio/3'));
+    if (!['pga-studio/3', 'pga-studio/4'].includes(version)) issues.push(issue('INVALID_DOCUMENT', 'protection', '资产级保护需要 pga-studio/3 或 /4'));
     else issues.push(...validateProtectionContract(doc.protection, validateStudioDocument));
+  }
+  if (doc.relations !== undefined) {
+    if (version !== 'pga-studio/4') issues.push(issue('INVALID_DOCUMENT', 'relations', 'relations 需要 pga-studio/4'));
+    else issues.push(...validateRelations(doc.relations));
   }
   return issues;
 }
@@ -421,6 +426,7 @@ export function normalizeStudioDocument(doc) {
     attachments: Object.fromEntries(Object.entries(doc.attachments ?? {}).map(([k, v]) => [k, { x: v.x, y: v.y }])),
     constraints: (doc.constraints ?? []).map((c) => (c.note === undefined ? { kind: c.kind, target: c.target } : { kind: c.kind, target: c.target, note: c.note })),
     ...(doc.protection === undefined ? {} : { protection: { ...JSON.parse(JSON.stringify(doc.protection)), baseline: normalizeStudioDocument(doc.protection.baseline) } }),
+    ...(doc.schemaVersion === 'pga-studio/4' ? { relations: JSON.parse(JSON.stringify(doc.relations ?? [])) } : {}),
   };
 }
 

@@ -55,7 +55,7 @@ Studio 文档（.studio.json，唯一可编辑源）
 只含可序列化 JSON（无函数/无代码/无 URL）。未知版本、未知字段、非法值一律拒绝。
 两个版本共存：`pga-studio/1`（冻结词汇）与 `pga-studio/2`（扩展词汇）。
 /2 相对 /1 新增：`poly`/`disc` 几何、`shade-diag` 材质、`ramp` 局部覆盖、`style.meta`。
-**你写新文档时用 /2；旧 /1 文档照常可用。**
+无关系/资产合同的新文档可用 /2；需要显式关系时使用 /4。旧 /1–/3 文档照常可用。
 
 ```json
 {
@@ -369,5 +369,69 @@ TAMPERED；基准不符或不再基于当前 head 为 STALE。旧修订观察也
 这是本地 agent 工作流一致性检查，不是对完全文件写权限的安全隔离。
 共享纯函数在 `src/observe/frame-views.js`，任意 arm 可传标准 frame 使用；IO 在
 `src/adapters/observation-files.js`。submit 是 workspace export 的同一最终编译入口。
+
+## Studio v1.4：显式 Relation（工具包 0.8.0，pga-studio/4）
+
+旧 /1、/2、/3 继续读取；没有 relations 返回 NOT_CONFIGURED，不猜测接触或部件依赖。
+新增关系文档使用 /4，保留 /3 protection。关系属于文档哈希，edit 不能改合同，restore 不能替换合同。
+需要改合同必须显式新建工作区，旧 safe-domain 与 inspection 不可作为授权。
+
+```json
+{
+  "id": "R1",
+  "type": "contact",
+  "endpointA": { "nodeId": "node.a", "feature": "top-edge" },
+  "endpointB": { "nodeId": "node.b", "feature": "bottom-edge" },
+  "tolerance": 0,
+  "required": true,
+  "resolution": {
+    "mode": "resize-follower-edge",
+    "follower": "B",
+    "axis": "y",
+    "invariant": "opposite-edge-and-orthogonal-geometry"
+  }
+}
+```
+
+把此对象放入文档 `relations` 数组。id 唯一（最多 64 条），required 为明确 boolean，tolerance
+是 0–512 的有限像素值。endpoint 用 nodeId+feature；不使用位置作对象身份。
+supported feature 是 top-edge/bottom-edge/min-x-edge/max-x-edge，必须为相向同轴边。
+首版仅 panel/screen 矩形。合法形状但未支持的 type/feature 可被 inspect 为 UNSUPPORTED，
+required 时阻塞最终状态；缺节点为 CONFLICT。未知 JSON 字段仍拒绝。
+
+contact 使用编译后的 frameRect（最终帧像素边界坐标，排除全局描边），不依赖 GUI 或视觉模型。
+相向边 signedGapPx >0 为间隙、<0 为侵入，overlapPx=max(0,-signedGapPx)，absoluteGapPx 为绝对值。
+切向交集至少 1px，且 absoluteGapPx≤tolerance 才 SATISFIED；角点接触不满足。
+inspect 同时返回 endpoint、bbox/coordinates、affectedNodeIds、required、policy、recommended repair。
+该合同不保证接触边在最终画面中未被其它节点遮挡，也不证明美学质量。
+
+支持两种可选策略：translate-follower + invariant=size-and-orthogonal-position；
+resize-follower-edge + invariant=opposite-edge-and-orthogonal-geometry。
+follower 明确 A 或 B，axis 明确 x 或 y。未声明 policy 的关系只能手工维持。
+策略只修法向 gap/overlap，不改变正交位置来寻找新的接触，不移动 primary 节点。
+有向 DAG 按稳定顺序传播；环、非整数、无正交交集、策略冲突或不变量冲突均 RELATION_CONFLICT。
+即使有其它可能解也不搜索、不 clamp、不猜另一个 follower。
+
+```powershell
+node bin/pga-studio.mjs inspect --ws work/ws --node node.a --preserve-relations true
+node bin/pga-studio.mjs edit --ws work/ws --base r1 --op squash_keep_base --target node.a --params '{"deltaHeight":-1}' --preserve-relations true
+node bin/pga-studio.mjs explore --ws work/ws --base r1 --op resize_about_anchor --target node.a --field targetHeight --values '[10,8]' --params '{"anchor":"bottom-center"}' --preserve-relations '["R1"]'
+```
+
+JS API 的 operation/spec 顶层同名字段为 preserveRelations。true 选择 primary 连通分量中的
+required relations；数组选择指定 ID（包括 advisory），重复/未知 ID 拒绝；false/省略不自动修复。
+三个语义变换 widen_about_center/squash_keep_base/resize_about_anchor 支持它，geometry.set 不支持。
+无论是否自动修复，**全部 required relation 与 protection 必须同时通过**。
+advisory 仅诊断、不阻塞；显式要求保持某条 advisory 时，修复失败仍拒绝该请求。
+
+safe domain 与实际操作共享 apply→requested relation resolution→compile→protection→required relation
+管线。binding 额外包含 relationContractHash 和 preserveRelations，保留 revision、documentHash、
+contractHash、field/fixedParams；合同 endpoint/tolerance/policy/required 变化均失效。
+inspect 不带 preserve-relations 时返回不修复关系的域，带开关时 recommendedTransforms 的域
+包含修复；低层字段域仍不修复。SEARCH_LIMIT 继续真实 POINT_FALLBACK，不返回部分域或静默 clamp。
+
+candidate/commit/restore/submit/export 都以重新编译的最终几何和 evaluator 为准，落盘的 PASS
+与 transform 自报不具有授权作用。最终非法文档仍可用文件 inspect 诊断，但不能 create 成安全工作区
+或 export；工程 demo 中 B.png 是明确的拒绝诊断图，不是可提交候选。
 
 ---

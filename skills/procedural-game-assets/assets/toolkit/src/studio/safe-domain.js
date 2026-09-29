@@ -36,47 +36,52 @@ export function evaluateSafeOperation(compiled, operation, { revision = null, pr
   let trialCompiles = 0;
   try {
     const { doc, plan } = applyAnyOperation(compiled.document, operation);
+    trialCompiles += plan.relationTrialCompiles ?? 0;
     trialCompiles++;
     const candidate = compileAny(doc);
     const checks = checkAnyCandidate({ baseCompiled: compiled, candidateCompiled: candidate, plan, preserve, revision });
     return { legal: ['OK', 'UNCHANGED'].includes(checks.status), reason: checks.code, conflicts: checks.conflicts, checks, trialCompiles };
   } catch (e) {
-    return { legal: false, reason: e.code ?? 'COMPILE_ERROR', error: { code: e.code ?? 'COMPILE_ERROR', name: e.name, message: e.message }, trialCompiles };
+    return { legal: false, reason: e.code ?? 'COMPILE_ERROR', error: { code: e.code ?? 'COMPILE_ERROR', name: e.name, message: e.message, ...(e.details ? { details: e.details } : {}) }, trialCompiles: trialCompiles + (e.details?.trialCompiles ?? 0) };
   }
 }
 
-export function enumerateSafeDomain({ compiled, revision = null, operator, target, field, params = {}, preserve = preserveFromAnyDocument(compiled.document), maxSearch = 512 }) {
+export function enumerateSafeDomain({ compiled, revision = null, operator, target, field, params = {}, preserveRelations = false, preserve = preserveFromAnyDocument(compiled.document), maxSearch = 512 }) {
   params = { ...params }; delete params[field];
   preserve = validatePreserve(preserve, compiled.document);
   const range = theoreticalRange(compiled.document, target, operator, field);
   const count = range[1] - range[0] + 1;
-  const pixelWork = count * compiled.asset.frames[0].width * compiled.asset.frames[0].height * compiled.document.nodes.length;
+  const relationCompileBound = preserveRelations !== false && compiled.document.relations?.length ? compiled.document.nodes.length + 3 : 1;
+  const pixelWork = count * compiled.asset.frames[0].width * compiled.asset.frames[0].height * compiled.document.nodes.length * relationCompileBound;
   if (!Number.isInteger(maxSearch) || maxSearch < 1 || maxSearch > SAFE_LIMITS.maxSearch || count > maxSearch || pixelWork > SAFE_LIMITS.maxPixelWork) fail('SEARCH_LIMIT', '安全域搜索超过显式上限；没有返回部分域冒充完整域', { count, maxSearch, pixelWork, limits: SAFE_LIMITS });
   const values = [], rejected = [];
   let trialCompiles = 0;
   for (let value = range[0]; value <= range[1]; value++) {
-    const result = evaluateSafeOperation(compiled, { id: operator, target, params: { ...params, [field]: value } }, { revision, preserve });
+    const result = evaluateSafeOperation(compiled, { id: operator, target, params: { ...params, [field]: value }, ...(preserveRelations === false ? {} : { preserveRelations }) }, { revision, preserve });
     trialCompiles += result.trialCompiles;
     if (result.legal) values.push(value);
     else rejected.push({ value, reason: result.reason, ...(result.error ? { error: result.error } : { conflicts: result.conflicts }) });
   }
   return {
     status: 'COMPLETE', revision, documentHash: compiled.hashes.documentHash, contractHash: compiled.protection?.contractHash ?? null,
+    relationContractHash: compiled.relations?.relationContractHash ?? null, preserveRelations,
     operator, target, field, fixedParams: params, theoreticalRange: range, safeRange: compressValues(values),
-    constraints: { document: compiled.document.constraints, contract: compiled.protection?.status ?? 'NOT_CONFIGURED', preserve },
+    constraints: { document: compiled.document.constraints, contract: compiled.protection?.status ?? 'NOT_CONFIGURED', relations: compiled.relations?.status ?? 'NOT_CONFIGURED', preserve },
     condition: '仅此字段变化，其余参数固定；不同域的笛卡尔积不保证安全',
-    cacheKey: documentHash([revision, compiled.document, operator, target, field, params, preserve]),
+    cacheKey: documentHash([revision, compiled.document, operator, target, field, params, preserve, preserveRelations]),
     cache: 'disabled', search: { tested: count, maxSearch, trialCompiles, pixelWork }, rejected,
   };
 }
 
-export function inspectSafeDomains(compiled, { revision = null, target, maxSearch = 512 } = {}) {
+export function inspectSafeDomains(compiled, { revision = null, target, maxSearch = 512, preserveRelations = false } = {}) {
   const n = compiled.document.nodes?.find((node) => node.id === target);
   if (!n) fail('UNSUPPORTED', 'safe inspect 需要有效目标节点');
   const build = (operator, field, params = {}) => {
-    try { return enumerateSafeDomain({ compiled, revision, operator, target, field, params, maxSearch }); }
+    const selection = GEOMETRY_TRANSFORMS.includes(operator) ? preserveRelations : false;
+    try { return enumerateSafeDomain({ compiled, revision, operator, target, field, params, maxSearch, preserveRelations: selection }); }
     catch (e) { return { status: e.code ?? 'ERROR', revision, documentHash: compiled.hashes.documentHash,
       contractHash: compiled.protection?.contractHash ?? null, operator, target, field, fixedParams: params,
+      relationContractHash: compiled.relations?.relationContractHash ?? null, preserveRelations: selection,
       error: e.message, details: e.details }; }
   };
   const fields = ['panel', 'screen'].includes(n.kind) ? ['x', 'y', 'w', 'h'] : n.kind === 'disc' ? ['cx', 'cy', 'rx', 'ry'] : [];
@@ -102,6 +107,8 @@ export function validateSafeBinding(binding, compiled, revision, operation) {
   if (!binding || !fieldMatches || binding.revision !== revision || binding.documentHash !== compiled.hashes.documentHash ||
       binding.operator !== operation.id || binding.target !== operation.target ||
       binding.contractHash !== (compiled.protection?.contractHash ?? null) ||
+      (binding.relationContractHash ?? null) !== (compiled.relations?.relationContractHash ?? null) ||
+      stableStringify(binding.preserveRelations ?? false) !== stableStringify(operation.preserveRelations ?? false) ||
       stableStringify(binding.fixedParams) !== stableStringify(actualFixedParams)) {
     fail('STALE_SAFE_DOMAIN', 'safe domain 的修订/文档/操作/目标/字段/固定参数/保护合同不匹配；请重新 inspect');
   }
@@ -118,22 +125,23 @@ export function preflightGeometryVariations(compiled, operations, options = {}) 
 }
 
 function preflight(compiled, operation, options, domains) {
-  if (compiled.document.schemaVersion !== 'pga-studio/3' || !isGeometryOperation(operation.id)) return null;
+  if (!['pga-studio/3', 'pga-studio/4'].includes(compiled.document.schemaVersion) || !isGeometryOperation(operation.id)) return null;
   const fields = Object.keys(operation.params ?? {}).filter((k) => k !== 'anchor');
   // 不支持的类型/参数由原 operator 返回明确错误，不降级处理。
   if (GEOMETRY_TRANSFORMS.includes(operation.id) && !['panel', 'screen'].includes(compiled.document.nodes.find((n) => n.id === operation.target)?.kind)) fail('UNSUPPORTED', '语义变换只支持 panel/screen');
   if (fields.length === 1 && fields[0] !== 'vertices') {
     const field = fields[0], params = { ...operation.params }; delete params[field];
-    const key = stableStringify([operation.id, operation.target, field, params]);
+    const key = stableStringify([operation.id, operation.target, field, params, operation.preserveRelations ?? false]);
     const reused = domains.has(key);
     let domain = domains.get(key);
     if (!reused) {
       try {
-        domain = enumerateSafeDomain({ compiled, operator: operation.id, target: operation.target, field, params, ...options });
+        domain = enumerateSafeDomain({ compiled, operator: operation.id, target: operation.target, field, params, ...options, preserveRelations: operation.preserveRelations ?? false });
       } catch (e) {
         if (e.code !== 'SEARCH_LIMIT') throw e;
         domain = { status: 'SEARCH_LIMIT', revision: options.revision ?? null,
           documentHash: compiled.hashes.documentHash, contractHash: compiled.protection?.contractHash ?? null,
+          relationContractHash: compiled.relations?.relationContractHash ?? null, preserveRelations: operation.preserveRelations ?? false,
           operator: operation.id, target: operation.target, field, fixedParams: params,
           error: e.message, details: e.details };
       }

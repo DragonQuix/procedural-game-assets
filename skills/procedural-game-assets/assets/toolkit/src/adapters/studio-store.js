@@ -30,6 +30,7 @@ import { compileAny, applyAnyOperation, exploreAnyOperation, operationFromAnyExp
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { encodePNG } from '../export/png.js';
 import { assertProtection } from '../studio/protection-contract.js';
+import { assertRelations } from '../studio/relations.js';
 import { preflightGeometry, preflightGeometryVariations, validateSafeBinding } from '../studio/safe-domain.js';
 
 const MARKER = '.pga.json';
@@ -115,7 +116,7 @@ function requestHashOf(payload) {
 
 export function candidateIdentity(baseRevision, base, operation, preserve) {
   const identity = [baseRevision, operation, preserve];
-  if (base.document.schemaVersion === 'pga-studio/3') identity.push(base.hashes.documentHash, base.protection.contractHash ?? null);
+  if (['pga-studio/3', 'pga-studio/4'].includes(base.document.schemaVersion)) identity.push(base.hashes.documentHash, base.protection.contractHash ?? null);
   return `c-${fnv1aHex(stableStringify(identity))}`;
 }
 
@@ -158,6 +159,7 @@ export class StudioStore {
     for (const sub of ['revisions', 'candidates', 'requests', 'previews']) await mkdir(join(dir, sub), { recursive: true });
     const compiled = compileAny(doc, { toolVersion: store.toolVersion });
     assertProtection(compiled);
+    assertRelations(compiled);
     const revision = await store._writeRevision({ doc: compiled.document, parent: null, source: { kind: 'create' }, compiled, bumpSeq: 1 });
     await store._writeHead();
     return { store, revision, compiled };
@@ -246,8 +248,10 @@ export class StudioStore {
     if (record.parent) {
       const parent = await this._readRevision(record.parent);
       if (stableStringify(parent.doc.protection) !== stableStringify(record.doc.protection)) fail('PROTECTION_VIOLATION', '修订链中的保护合同发生变化');
+      if (stableStringify(parent.doc.relations ?? []) !== stableStringify(record.doc.relations ?? [])) fail('RELATION_VIOLATION', '修订链中的关系合同发生变化');
     }
     assertProtection(compiled);
+    assertRelations(compiled);
     this._compiled.set(revision, compiled);
     return compiled;
   }
@@ -396,6 +400,7 @@ export class StudioStore {
     const base = await this._getCompiled(expectedHead);
     const recompiled = compileAny(record.doc, { toolVersion: this.toolVersion });
     if (recompiled.protection?.status === 'REJECTED') return null;
+    if (recompiled.relations?.status === 'REJECTED' || stableStringify(base.document.relations ?? []) !== stableStringify(recompiled.document.relations ?? [])) return null;
     if (recompiled.hashes.documentHash !== record.hashes.documentHash || recompiled.hashes.renderHash !== record.hashes.renderHash) return null;
     if (action === 'accept') {
       const candidate = await this._readCandidate(subject);
@@ -463,7 +468,7 @@ export class StudioStore {
     return this._mutate(reqId, payload, async () => {
       const base = await this._getCompiled(baseRevision);
       validateSafeBinding(safeBinding, base, baseRevision, operation);
-      if (base.document.schemaVersion === 'pga-studio/3' && baseRevision !== this.head) fail('STALE_REVISION', 'v1.3 编辑需要当前 head；请重新 inspect');
+      if (['pga-studio/3', 'pga-studio/4'].includes(base.document.schemaVersion) && baseRevision !== this.head) fail('STALE_REVISION', '编辑需要当前 head；请重新 inspect');
       const kind = docKindOf(base.document);
       const preserveRequest = validatePreserve(preserve, base.document, kind); // R4：拼错/未知目标/未知类别在此明确拒绝
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
@@ -475,6 +480,7 @@ export class StudioStore {
       const { doc: candDoc, plan } = applyAnyOperation(base.document, operation); // 形状/范围错误向上抛（CANDIDATE_INVALID 等）
       const candidate = compileAny(candDoc, { toolVersion: this.toolVersion });
       const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve, revision: baseRevision });
+      if (base.document.schemaVersion === 'pga-studio/4' && checks.status === 'REJECTED') return { requestId: reqId, baseRevision, head: this.head, status: 'REJECTED_UNSAFE', candidateId: null, renderedCandidates: 0, checks, conflicts: checks.conflicts, ...validationInfo };
       const candidateId = candidateIdentity(baseRevision, base, operation, mergedPreserve);
       const previews = { base: await this._writePreviews(base, `${baseRevision}-base`), candidate: await this._writePreviews(candidate, candidateId) };
       const record = {
@@ -501,7 +507,7 @@ export class StudioStore {
     const reqId = requestId ?? `req-${fnv1aHex(stableStringify(['explore', baseRevision, spec, preserve]))}`;
     return this._mutate(reqId, ['explore', baseRevision, spec, preserve], async () => {
       const base = await this._getCompiled(baseRevision);
-      if (base.document.schemaVersion === 'pga-studio/3' && baseRevision !== this.head) fail('STALE_REVISION', 'v1.3 探索需要当前 head；请重新 inspect');
+      if (['pga-studio/3', 'pga-studio/4'].includes(base.document.schemaVersion) && baseRevision !== this.head) fail('STALE_REVISION', '探索需要当前 head；请重新 inspect');
       const kind = docKindOf(base.document);
       const preserveRequest = validatePreserve(preserve, base.document, kind); // R4
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);
@@ -525,6 +531,10 @@ export class StudioStore {
         }
         const candidate = compileAny(entry.doc, { toolVersion: this.toolVersion });
         const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan: entry.plan, preserve: mergedPreserve, revision: baseRevision });
+        if (base.document.schemaVersion === 'pga-studio/4' && checks.status === 'REJECTED') {
+          candidates.push({ value: entry.value, status: 'REJECTED_UNSAFE', candidateId: null, renderedCandidates: 0, checks, conflicts: checks.conflicts, ...validationInfo });
+          continue;
+        }
         // 探索项 → 标准 operation 与候选身份：与 edit 同一公式，commit 重执行/重算共用（R3/R5）
         const candidateId = candidateIdentity(baseRevision, base, operation, mergedPreserve);
         const duplicateOf = checks.status !== 'REJECTED' ? (seen.get(candidate.hashes.renderHash) ?? null) : null;
@@ -616,6 +626,7 @@ export class StudioStore {
         const compiled = await this._getCompiled(targetRevision);
         const current = await this._getCompiled(this.head);
         if (stableStringify(current.document.protection) !== stableStringify(compiled.document.protection)) fail('PROTECTION_VIOLATION', '恢复不能解除当前资产保护合同');
+        if (stableStringify(current.document.relations ?? []) !== stableStringify(compiled.document.relations ?? [])) fail('RELATION_VIOLATION', '恢复不能替换当前关系合同');
         const revision = await this._writeRevision({ doc: target.doc, parent: this.head, source: { kind: 'restore', from: targetRevision }, compiled });
         await this._writeHead();
         return { requestId: reqId, action, restoredFrom: targetRevision, head: this.head, revision: revision.revision, parent: revision.parent, hashes: revision.hashes };

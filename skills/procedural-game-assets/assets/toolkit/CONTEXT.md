@@ -38,6 +38,9 @@
 | `head` | Studio 工作区当前已确认修订指针（`head.json`，原子替换更新） | 只有 commit 移动它；并发底线是 expectedHead 校验 |
 | `asset protection contract`（资产级保护合同） | `pga-studio/3.protection` 的冻结基线、最终帧像素区/掩码、metadataPaths 与 nodeIds | `pga-protection/1`；最终重新编译的 RGBA/元数据为权威，不等于 operation footprint；见 ADR-0012 |
 | `safe domain`（安全域） | 指定 revision/documentHash 下，固定其它参数，有限枚举试编译得到的合法整数集合 | 不是多个区间的安全笛卡尔积；探针不输出图像，不计可观察候选，但单列计算量 |
+| `relation contract`（关系合同） | `pga-studio/4.relations` 显式声明稳定端点之间的结构关系；required 与 protection 独立 AND | 首版只支持矩形相向边 contact，不从节点名称推断；见 ADR-0013 |
+| `relation resolution`（关系修复） | relation 声明 follower、axis、mode、invariant 后的确定性 DAG 传播 | 只有 translate-follower / resize-follower-edge；不是任意 constraint solver；primary invariant 不可被修复反改 |
+| `relation inspection`（关系诊断） | 编译后最终几何的 gap/overlap/status 与 revision/document/relationContractHash 绑定 | 不证明接触可见性或视觉质量；旧诊断不能授权新合同 |
 
 ## 坐标契约（要点，全文见 ADR-0002）
 
