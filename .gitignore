@@ -16,6 +16,7 @@ tests/pga-ad-host/handoff/
 tests/pga-ad-host/selftest-v1_1/*
 !tests/pga-ad-host/selftest-v1_1/self-test.json
 tests/pga-ad-host/runs/
+tests/pga-ad-host/runs-*/
 tests/pga-ad-host/eval/
 tests/pga-ad-host/reviews/
 tests/pga-ad-host/reviews-*/
@@ -28,3 +29,6 @@ tests/pga-ad-host/interventions-smoke.md
 tests/pga-ad-host/preregistration-draft.json
 tests/pga-ad-host/preregistration-v1_2-draft.json
 tests/pga-ad-host/*.console.log
+
+# v1.2 scored 批次归档（冻结 preregistration/manifest/分析汇总；参试原始数据仍在忽略目录）
+!tests/pga-ad-host/archives-v1_2/
