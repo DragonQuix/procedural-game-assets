@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "G",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体实测 26x19px（宽 26≥24、高 19≤19 达标），水平居中（宽 26 关于列 25|26 对称，符合锚点列 25 的偶宽约定），底边紧贴底座顶缝（1 基第 31 行）；短、宽、厚重感明确，铜色仪表框与读数居中、干净无污染，底座 36px 宽完整，整体仍是合理完整的资产",
+      "topConcern": "主体高度恰为上限 19px、无余量；保护区与基线的逐像素一致无法仅凭渲染核实（评审目录未提供基线），但可见的底座、仪表、读数均完好且无改动痕迹",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "与 X 逐像素完全相同：主体 26x19px 达标且居中，底边贴底座顶缝，仪表与读数居中干净，底座完整，短宽厚重感明确",
+      "topConcern": "与 X 相同：高度恰在上限无余量；保护区相对基线的逐像素一致无法仅凭渲染核实，但可见部件完好",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "X.native.png 与 Y.native.png 逐像素对比为 0 差异（52x42 画布 RGBA 完全一致）；两图中主体包围盒均为 x13–38、y12–30（26 宽 x19 高），底座包围盒 x8–43、y31–37（36px 宽）完好，仪表框 x21–30、y16–23 与读数居中于主体之上；compare.png 并排目视亦无可见差异",
+  "confidence": "HIGH",
+  "notes": "评判基于实际查看的三张图，并对目录内两张渲染做了最小像素核对（仅读取本目录文件）：宽/高/居中/底边数值与任务要求在标准锚点约定下相符（偶宽主体的中心记为锚点列 25；底边行 0 基为 30、1 基为 31）。保护区与基线的完全一致无法在无基线的评审目录内独立核实，但两候选自身完全一致且可见部件无扰动；主体高度踩线 19px 属达标无阻塞。任务无 motion 要求（requiredClips 为空），motion 字段按模板保留 UNVERIFIED。"
+}

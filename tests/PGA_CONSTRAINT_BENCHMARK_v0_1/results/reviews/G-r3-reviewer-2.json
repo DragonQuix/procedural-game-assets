@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "G",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体明显更矮更宽更重：非轮廓像素区 x[14..37]（宽恰24px）、y[13..31]（高恰19px）、水平中点取整恰为25、底边行恰为31，四项尺寸/位置目标全部精确命中；扁宽主体坐在更宽的底座上，仪表框（x[21..30], y[16..23]）与琥珀色读数完整，整体仍是轮廓、配色一致、无杂散像素的合理完整矿区泵单元。",
+      "topConcern": "高度≤19 仅在不计入1px深色顶部轮廓行的口径下成立（把轮廓像素也计入则为20px、超1px）；另外评审目录内没有基线渲染，底座/仪表/读数'与基线完全一致'只能确认 X 与 Y 相互一致，无法对基线逐像素核验。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "与 X 完全相同的渲染：主体非轮廓像素宽24px、高19px、中心X=25（取整）、底边Y=31，四项要求精确命中；底座、仪表与读数像素完整清晰，资产整体协调完整。",
+      "topConcern": "与 X 相同：高度≤19 依赖不计顶部1px轮廓行的口径；且无基线文件可核验保护区'与基线完全一致'，只能确认与 X 零差异。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "对 52x42 的 X.native.png 与 Y.native.png 逐像素比对：0 个像素差异，两候选完全相同（compare.png 并排目视亦无可见差异）。主体非轮廓像素区实测 x[14..37]、y[13..31]：宽24（≥24）、高19（≤19）、centerX 取整 25（=25）、底边行 31（=31），与任务四项数值零偏差逐一吻合；底座区 y[31..37]、x[8..43] 与仪表/读数区 x[21..30]、y[16..23] 在两图中均完整且一致。",
+  "confidence": "HIGH",
+  "notes": "两候选渲染逐像素完全相同，故配对结论为 NO_MEANINGFUL_DIFFERENCE（不是强行和局，而是实测零差异）。任务四项数值（≥24/≤19/X=25/Y=31）在'非轮廓像素'口径下全部精确命中且零富余，判定 MEETS 的依据充分；若按计入1px轮廓行的最严口径，高度为20px超限1px，已在 topConcern 记录而不作为阻断。保护区（底座、仪表、读数）两候选像素一致且视觉干净完整，但评审目录未提供基线，无法验证'与基线完全一致'这一半边。任务 requiredClips 为空，无动画可看，motion 保持 UNVERIFIED。"
+}

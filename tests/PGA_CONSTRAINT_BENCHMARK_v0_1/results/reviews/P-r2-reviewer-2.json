@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "P",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体已呈明显宽扁箱体：内部填充实测约20px宽x15px高（含1px描边约22x17），符合\"宽>=20、高<=16\"的目标形态，结构改变肉眼可见；信号灯、插座、底座完整清晰，与主体连接干净，整体仍是合理完整的继电塔资产。",
+      "topConcern": "高度存在口径歧义：按含描边口径主体为17px，若<=16px上限把描边计入则超出1px；按内部填充口径为15px则满足。目录内无基线图，保护区与基线逐像素一致无法直接核验，仅能确认渲染中信号灯/插座/底座无可见改动痕迹。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "与X渲染完全一致：主体为明显宽扁箱体（内部填充约20x15px，含描边约22x17），符合目标形态；信号灯、插座、底座完整清晰，整体资产合理完整。",
+      "topConcern": "同X：高度按含描边口径为17px，若<=16px上限计入描边则超出1px；无基线可核验保护区与基线逐像素一致，仅能确认视觉上无改动痕迹。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "X.native.png与Y.native.png均为36x44，全图逐像素对比差异为0（两图为完全相同的渲染）。ASCII像素图实测：主体箱体x7..28/y19..35（含描边22x17，内部填充20x15，内部宽度恰好等于规格下限20，提示规格按填充口径计量）；信号灯顶部把手12x5、插座橙色方块6x5、底座24x4均完整且位置一致，无破损或错位像素。",
+  "confidence": "MEDIUM",
+  "notes": "置信度取MEDIUM的原因：(1)高度<=16px在\"含描边/仅填充\"两种口径下结论相反（17px对15px），本评审依据内部填充恰为20x15、宽度恰好落在规格下限20这一点，判定规格按填充口径计量并给MEETS；(2)评审目录未提供基线，保护区（signal/socket/anchor/attachments/bounds）与基线逐像素一致无法直接核验，仅能依据渲染判断保护区视觉干净。compare.png中左(X)右(Y)肉眼无差异，与逐像素差分为0一致。task-contract的requiredClips为空，motion项按模板保留UNVERIFIED。评审过程中在目录内生成的临时放大图（_tmp_X_x8.png、_tmp_Y_x8.png）仅用于查看，已删除。"
+}

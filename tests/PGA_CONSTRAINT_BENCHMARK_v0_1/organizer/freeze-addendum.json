@@ -1,0 +1,27 @@
+{
+  "schema": "pga-freeze-addendum/1",
+  "createdAt": "2026-09-29T13:45:00Z",
+  "reason": "INT-01（见 interventions.md）：setup-trial.mjs 的 arm→目录拼接错误导致 6 个 D13 trial 绑定到 archivedToolkits[D13-initial-draft]。修正为按 preparation-manifest.toolkits[arm].path 解析并强制逐文件装包核验。",
+  "protocolFrozen": {
+    "status": "未修改",
+    "sha256": "4b2f45928649e0c0f7b7abcbe61aaf5b351999218a09384a4e8c75bc78ec35f0",
+    "note": "冻结材料、任务、判据、模型身份与 Go/No-Go 全部不变；本附录只登记 harness 修复。"
+  },
+  "harnessChanges": [
+    {
+      "file": "organizer/setup-trial.mjs",
+      "oldSha256": "记录于 freeze-manifest.json（frozenArtifacts['organizer/setup-trial.mjs']）",
+      "newSha256": "c077c2f14e5260838b1be9e4373b7247361e611db8485a3621b9922a292bb979",
+      "change": "kit 目录按 manifest 解析；装包后逐文件哈希核验，失配拒绝开跑；共享观察模块整目录复制。"
+    },
+    {
+      "file": "organizer/build-execution-freeze.mjs",
+      "change": "台账哈希的 Buffer.concat 修复（实现缺陷，不影响任何 run 数据）。",
+      "note": "该文件在执行冻结清单生成前修复，其哈希以执行冻结清单生成时的文件为准。"
+    }
+  ],
+  "readiness": {
+    "prepareMaterialsCheck": "toolkits/materials/protocol 逐文件断言全部通过；'runs 不存在'断言在执行期按设计不再成立（runs/ 已由正式执行创建），记录为预期状态而非失败。",
+    "invalidRuns": "runs-invalid/ 保留 6 个错误绑定 run 的全部产物（不入库）。"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "P",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体完成明显的宽扁化结构：身块含描边约22x16px（填充约20x14px），宽>=20px、高<=16px两种口径均满足；信号灯横杆与插座完好无遮挡，颈部立柱从横杆连续连通到主体顶边并保留正常阴影衔接，底座完整，整体是连贯合理的继电塔资产。",
+      "topConcern": "评审目录内没有基线渲染，保护区\"与基线完全一致\"只能在渲染层面确认（横杆、插座、整体包围盒未见异常改动），无法逐像素确证；主体是否相对基线发生\"明显\"改变只能从最终形态落入目标区间间接判断。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "NOT_YET",
+      "topStrength": "主体身块本身与X完全一致（含描边约22x16px，满足尺寸阈值），信号灯横杆与插座像素未动，整体包围盒也未改变。",
+      "topConcern": "颈部与主体的衔接区被改动：颈部下端被截短封口（row16内芯改为纯阴影色、row17只剩描边帽），与主体顶边之间出现row18一整行全透明缝隙，主体顶边row19的4px阴影带被改画成描边色。渲染上颈部悬空、与主体可见断开，衔接/附件区出现破坏，整体不再是一个合理完整的资产。",
+      "blockingIssue": true,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "keyEvidence": "两图均为36x44画布，逐像素对比仅有19个像素不同，全部集中在颈部-主体衔接区（rows16-19 x cols15-20）：X的颈部（rows10-18）连续延伸到主体顶边row19并保留cols16-19的阴影带；Y在row16把颈芯改成纯阴影、row17只剩描边帽、row18整段透明空隙、row19阴影带被描边色覆盖，颈部与主体可见断开。两图的信号灯横杆（rows5-9）、插座（rows24+）与内容包围盒(6,5)-(29,39)完全一致。",
+  "confidence": "MEDIUM",
+  "notes": "已用Read真实查看X.native.png、Y.native.png、compare.png，并仅对本目录内两图做了逐像素核对辅助定位（不涉及目录外材料）。主体尺寸含描边22x16px、填充约20x14px，宽>=20、高<=16在含/不含描边两种口径下均满足，无1px歧义。X/Y差异仅在颈部衔接区：Y存在1px透明缝隙且改动衔接区阴影，判NOT_YET并计blocking；X连贯完整判MEETS。局限：无基线可比对，保护区\"与基线完全一致\"与锚点定义只能做渲染层面判断，故整体置信度取MEDIUM。task-contract无requiredClips，motion记UNVERIFIED。"
+}

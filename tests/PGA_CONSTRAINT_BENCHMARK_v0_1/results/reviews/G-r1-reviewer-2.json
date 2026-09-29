@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "G",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体外轮廓 x=13..38（宽26px≥24）、顶边y=12、底边线y=31（边缘坐标口径高19px≤19，底边Y=31达标），矮宽厚重的体态明显；底座更宽（36px）承托，仪表与读数居中完整，整图是对称、干净、合理的资产。",
+      "topConcern": "主体中心X实测25.5（52px画布的几何中心）而非字面25.0；偶数宽度下这是索引/半像素约定差异，视觉上完全居中，未见可察觉偏移。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "与X逐像素一致：主体26px宽×19px高、中心25.5、底边y=31，尺寸与位置达标；底座、仪表、读数像素与X完全相同，无杂色、无残缺，资产完整合理。",
+      "topConcern": "同X：中心X为25.5而非字面25.0（偶数宽度半像素约定）；保护区与基线的一致性因目录内无基线图而无法直接验证，仅能确认X/Y彼此完全相同。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "X.native.png与Y.native.png（52x42）逐像素比对为0个差异像素，两图调色板及各色像素数完全相同（仅10色、无杂散像素）；主体外轮廓x=13..38、y=12..31，底座x=8..43，仪表/读数居中，两者几何完全一致。",
+  "confidence": "HIGH",
+  "notes": "已用Read实际查看两张原生渲染与compare条，并在评审目录内对这两张图做了像素测量以核实目测结论。基线图不在本评审目录内，任务中保护区须与基线完全一致一项无法直接对基线验证；可验证的是X与Y的底座/仪表/读数区域彼此逐像素相同且画面干净。主体高度按边缘坐标口径（顶边12、底边31）为19；若把y=31接缝行计入主体则多1px，但该行跨34px且同时是底座顶边倒角，归属底座更合理。task-contract的requiredClips为空，无动画可看，motion字段保持UNVERIFIED。"
+}

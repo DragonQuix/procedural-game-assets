@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "G",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体块实测约 26-27px 宽 × 19px 高（含轮廓），达到宽 ≥24、高 ≤19 的矮宽厚重要求；底边最后一行像素 y=30 直接落在底座顶线 y=31 上，底边边界 = 31 成立；整体描边、受光边、仪表与读数干净完整，无杂点，是一个合理完整的矿区压力泵资产。",
+      "topConcern": "主体中心 X 按 bbox 实测约 25.5-26，与目标 25 相差约 1px（取决于是否含斜角轮廓的计数口径）；高 ≤19 与底边 Y=31 均按边界口径刚好达标，无冗余余量。均不构成可见违规。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "与 X 逐像素完全一致：同样的约 26-27px 宽 × 19px 高主体，底边落在 y=31 底座顶线，底座/仪表/读数完整无杂点，符合矮宽厚重与完整性要求。",
+      "topConcern": "同 X：主体中心 X 实测约 25.5-26，与 25 有约 1px 的口径差；高度与底边刚好压线达标。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "X.native.png 与 Y.native.png 在 52x42 全画布逐像素比对为 0 个差异像素（2184 像素全部对上，无未知色）；compare.png 左右两格（0=X，1=Y）目视亦无任何可辨差异。主体块实测宽约 26-27px、高 19px，最后一行像素 y=30 压在底座顶线 y=31；基座（y31-37 宽板）、仪表（x21-30, y16-23）、读数（带高光小方）三处保护区完整、无杂点，且因 X=Y 恒等而彼此一致。",
+  "confidence": "HIGH",
+  "notes": "评审方法：Read 实际查看三张图 + 本地对两张 native 渲染做全画布逐像素 diff 与逐色 bbox 测量（仅访问本评审目录内文件）。边界：任务要求保护区与基线完全一致，但基线图不在评审目录内且禁止外查，故保护区只能确认『渲染上完整且 X/Y 互相一致』，无法直接验证与基线的逐像素一致。宽度 ≥24 按含轮廓的整体剪影口径判定（若只计内部填充约 22px 则不达标，该口径不含轮廓、非像素图常规量法）。高 ≤19 与底边 Y=31 按边界/锚线口径刚好满足。任务 contract 的 requiredClips 为空，目录内无任何片段文件，motion 字段保留模板默认（未验证、未播放、无片段）。"
+}

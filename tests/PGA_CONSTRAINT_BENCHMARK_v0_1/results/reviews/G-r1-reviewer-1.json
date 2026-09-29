@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "G",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体实测宽 26px（x=13..38，≥24）、高 19px（y=12..30，≤19）、底边界 y=31、水平居中且与底座对称；整体呈矮宽厚重的箱体，底座、仪表框与读数在渲染中完整干净，仍是合理完整的资产。",
+      "topConcern": "中心 X 按含描边列取中为 25.5（取整约定为 25），与规格 25 存在半像素约定差异；高度、底边 Y 与顶部 y=12 均与规格精确吻合，宽度余量充足，不构成实质偏差。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "与 X 渲染逐像素完全一致（52x42，0 个差异像素）：主体同样满足宽 26px、高 19px、底边 y=31、水平居中；底座与仪表完整，资产合理完整。",
+      "topConcern": "与 X 相同：中心 X 取中为 25.5（取整约定 25）属半像素约定差异；保护区与基线的一致性无法仅凭本目录材料验证（无基线可对照），渲染内未见任何破损或改动痕迹。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "X.native.png 与 Y.native.png 做逐像素比对，52x42 全图 0 个差异像素，且颜色统计完全相同；对比条 compare.png 中左右两个渲染肉眼亦无差别。像素结构图显示主体横跨 x=13..38（宽 26px）、纵跨 y=12..30（高 19px）、底边界 y=31，满足宽度≥24、高度≤19、底边 Y=31，中心取中约 25（含描边 25.5），并与底座水平对称。",
+  "confidence": "HIGH",
+  "notes": "实际查看并放大核验了 X.native.png、Y.native.png 与 compare.png，另做了逐像素 diff 与尺寸测量以弥补裸眼分辨率限制；两者为同一渲染，配对结论如实记 NO_MEANINGFUL_DIFFERENCE。边界：保护区与基线完全一致这一条只能就最终渲染判断完整性，无法在本目录内核验与基线的逐像素一致；底座、仪表、读数在渲染中均完整无异常。motion 无要求片段（task-contract requiredClips 为空），故 motion.taskFit 保持 UNVERIFIED。"
+}

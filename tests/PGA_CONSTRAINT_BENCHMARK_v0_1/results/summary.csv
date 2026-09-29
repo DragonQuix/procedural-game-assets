@@ -1,0 +1,21 @@
+trialId,arm,task,repeat,submitSuccess,deterministic,geometryPass,finalProtection,budgetPass,protocolPass,candidateCount,invalidMaterialized,rejectedBeforeMaterialization,manualCoordinateRepair,semanticTransform,validationProbe,taskSuccess
+T01,D12,G,1,true,true,true,PASS,PASS,PASS,3,0,0,1,0,0,PASS
+T02,D13,G,1,true,true,true,PASS,PASS,PASS,1,0,0,0,1,1,PASS
+T05,D13,G,2,true,true,true,PASS,PASS,PASS,1,0,0,0,1,1,PASS
+T06,D12,G,2,true,true,true,PASS,PASS,PASS,1,0,0,1,0,0,PASS
+T09,D12,G,3,true,true,true,PASS,PASS,PASS,1,0,0,1,0,0,PASS
+T10,D13,G,3,true,true,true,PASS,PASS,PASS,1,0,0,0,1,1,PASS
+T03,D13,P,1,true,true,true,PASS,PASS,PASS,1,0,0,0,1,1,VISUAL_DISAGREEMENT
+T04,D12,P,1,true,true,true,PASS,PASS,PASS,2,0,0,1,0,0,PASS
+T07,D12,P,2,true,true,true,PASS,PASS,PASS,3,0,0,3,0,0,PASS
+T08,D13,P,2,true,true,true,PASS,PASS,PASS,2,0,0,0,1,43,PASS
+T11,D13,P,3,true,true,true,PASS,PASS,PASS,2,0,1,2,1,3,VISUAL_DISAGREEMENT
+T12,D12,P,3,true,true,true,PASS,PASS,PASS,2,0,0,2,0,0,VISUAL_DISAGREEMENT
+
+pair,d12Trial,d13Trial,matrix,visual
+G-r1,T01,T02,both pass,NO_MEANINGFUL_DIFFERENCE
+G-r2,T06,T05,both pass,NO_MEANINGFUL_DIFFERENCE
+G-r3,T09,T10,both pass,NO_MEANINGFUL_DIFFERENCE
+P-r1,T04,T03,D12 only,CONSENSUS_D12
+P-r2,T07,T08,both pass,NO_MEANINGFUL_DIFFERENCE
+P-r3,T12,T11,neither,MIXED

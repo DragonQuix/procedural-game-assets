@@ -1,0 +1,210 @@
+{
+  "schema": "pga-constraint-benchmark/0.1-frozen",
+  "frozenAt": "2026-09-29T13:12:41.193Z",
+  "benchmark": {
+    "name": "PGA_CONSTRAINT_BENCHMARK",
+    "version": "0.1"
+  },
+  "repository": {
+    "url": "https://github.com/DragonQuix/procedural-game-assets",
+    "masterHeadAtAuthorization": "37317b5ce537b3147604d816bc207283e07ce252",
+    "tag": "v0.7.0"
+  },
+  "draftReference": {
+    "protocolDraftSha256": "241791232c67fea69d501aa5f6a5651db74d3cc3f971c606b7fca86db810da84",
+    "mappingSeed": "pga-constraint/0.1/position/1",
+    "runOrder": [
+      "G-D12-r1",
+      "G-D13-r1",
+      "P-D13-r1",
+      "P-D12-r1",
+      "G-D13-r2",
+      "G-D12-r2",
+      "P-D12-r2",
+      "P-D13-r2",
+      "G-D12-r3",
+      "G-D13-r3",
+      "P-D13-r3",
+      "P-D12-r3"
+    ]
+  },
+  "toolkits": {
+    "D12": {
+      "path": "D12",
+      "source": "4fd4330da167a25d6651daadcfbc47095d22c3ca",
+      "fileCount": 64,
+      "perFileManifest": "preparation-manifest.json",
+      "aggregate": {
+        "tab": "794ec0e3d6bb4ffbc22d9d501bd654c09c422e827bebc02a84d768c79213012b",
+        "spaces": "3e115b27721147766b1cdd5a522a280997e989da7aed4f25e23fb627f3135435",
+        "colon": "2d5334f5eb46588b9e5141ece0e1359ef54e22d28c71e2790e84315d7e55fffb",
+        "hashFirst": "a40c81735bfdb182480a400c67600ab3473a8a1a47fd4c96b91301d4f35d5d5a",
+        "jsonCompact": "ae7b62472975219e50a10d9c9e30c38389e9a09115bc406903c0760b49cce0fc",
+        "jsonPretty": "e8463a4a1d7460f2005f908a9137f6dbefaed88c1b8a666d5069f7a62cd798e7",
+        "rawBytesConcat": "eb97e7695402bd9f5ca0ff235504e3fd9dcbb8ace9b9e6c1becff4275f3f7577"
+      }
+    },
+    "D13": {
+      "path": "D13-0.7.0-4cd1666",
+      "source": "4cd1666e439e7b907a55bd29c5746100c1129c8b",
+      "fileCount": 68,
+      "perFileManifest": "preparation-manifest.json",
+      "aggregate": {
+        "tab": "9cc0b79f2d92a245499cf83b403d6c7efb13a5ef786a72d658c1f92137b2ccad",
+        "spaces": "a5e76aa7471fe1d3d9bd1abd42bdb1976344ecff1391452431aa867d29f1a24e",
+        "colon": "7c59ec589a3eae29959d52cca958012908109501e052fdc7133fc7ce30b20681",
+        "hashFirst": "2b1ef2678273cee2f41fedbb2e4268cd45963ea6f73c7caa40e3a6e74fb3124b",
+        "jsonCompact": "ebf92700d9a81bf063626953ad863f1d7813808f6814c9f27a937addd69de643",
+        "jsonPretty": "6a57271352d092439dc08675fdf4687cff595f23c19af4fd2115999a90149349",
+        "rawBytesConcat": "375a9a0bb2e0cb8cb8d17da898661e6c29fbd656c9ff9fa38b9749534593a947"
+      }
+    }
+  },
+  "materials": {
+    "G/D12.studio.json": "fadfeb4053d181197816019f3b0f25f1a696306cf00d600c2d842f6a67983d08",
+    "G/D13.studio.json": "c7d079c0f3cfdf74dd1ad9019225833d46a9485d6cadfd40d70a35e728236b64",
+    "G/baseline.native.png": "e66c5bbdae89281464aa0602a0a283cf635bbad5318b3cedc713b5c5c0c798ae",
+    "G/task-contract.json": "f398b2d7f14c24bcd8cc13a723e696e5ee0b82ebdf8b5be5452d630f11217462",
+    "P/D12.studio.json": "5f9278f2ab775da7573f9ff61cd8896e3609826419564853676a51713ed2953f",
+    "P/D13.studio.json": "98c125cf46c4bec3f1b172264526da8572ceab534ba97d93ee6511d683c9e38b",
+    "P/baseline.native.png": "bacd4df7d8e30d1fcad8d8cdee0dcdceca9034068b7e70b9909f4bfa94aef4e6",
+    "P/task-contract.json": "3b7c278417e89559ba7374cc5118038b02bce54afdd29fb613485e35b63f8be8"
+  },
+  "prompts": {
+    "base": {
+      "file": "prompts/participant.md",
+      "sha256": "d79ba0357b85d47f177e351c83951b5cf606c59fd7aec382c3e6fae608b2cf7a"
+    },
+    "participantTemplate": {
+      "file": "prompts/participant-frozen-template.md",
+      "sha256": "534f906800cb662f5df1c10d8023d7548092bd8e1c99940e42626699a447dd62"
+    },
+    "reviewerTemplate": {
+      "file": "prompts/reviewer-frozen-template.md",
+      "sha256": "274031b875af5d6e70c60ef068047c1fe2a51e5fd88f7974a93b514a075b3957"
+    }
+  },
+  "commonObservation": {
+    "moduleFiles": {
+      "src/observe/frame-views.js": "a692a16468da9df0251a87744e929261c860f460c9096edb446525095db60ef3",
+      "src/core/raster.js": "14e965d1fa75271a4d823ab5ea061627789c62f563874fb1347cb2422cba3f55",
+      "src/core/transform.js": "5c4458f33ad8f955ca1968e8f020d200661e6fbc8f74e0c1dae8486b2f703a4e"
+    },
+    "runner": {
+      "file": "organizer/trial-observe.mjs",
+      "sha256": "09cfa9ba83d2d695b9475ee62a2a95a6b2dcb9db9f6dedf21569d90a76f106ab",
+      "schema": "pga-trial-observation/1"
+    },
+    "parityEvidence": "prepare-materials --check: sharedObservationsEqual=true, baselinePixelsEqual=true；runner 对两臂使用同一共享模块与同一代码路径"
+  },
+  "harness": {
+    "evaluator": {
+      "file": "organizer/evaluate-run.mjs",
+      "sha256": "01ff9278765c2ce473b2425e6234d6f62fb35aacc624a5e438e60fa65cd38be0"
+    },
+    "setup": {
+      "file": "organizer/setup-trial.mjs",
+      "sha256": "eca282c38662a3540af1de17c0029ae216d4f5e343b0dfb11abcf66eccdb7978"
+    },
+    "freezeVerification": {
+      "file": "organizer/freeze-verification.mjs",
+      "sha256": "320552c54be2ab346a9045739d313addd5364b8f349fb63cca24b3cc3a474d82"
+    },
+    "blind": {
+      "file": "tools/benchmark/blind.mjs",
+      "sha256": "ac48350886f6e133e607dae7913aa7f1db9df9d5ac895feebb3b34ca44226752"
+    },
+    "review": {
+      "file": "tools/benchmark/review.mjs",
+      "sha256": "02a71c498666f3ee0a6d8557fb686eecd6e8196c41f813e60edffa5994169bf6"
+    },
+    "unblind": {
+      "file": "tools/benchmark/unblind.mjs",
+      "sha256": "d3a878e02bf8f60cac8fa1b08ef515a40e3995eaa276e3478f9ecc0656c51fe5"
+    },
+    "reviewSchema": "pga-review/3"
+  },
+  "candidateBudget": 6,
+  "reviewersPerPair": 2,
+  "reviewerPositionPolicy": "MIRRORED_BALANCE",
+  "primary": [
+    "taskSuccess",
+    "invalidRenderedCandidateIncidence",
+    "finalProtectionViolationCount"
+  ],
+  "secondary": [
+    "candidateCount",
+    "rejectedOperationCount",
+    "manualCoordinateRepairCount",
+    "semanticTransformCount",
+    "submitSuccess",
+    "reviewerVisualPreference",
+    "validationProbeCount"
+  ],
+  "go": {
+    "D13FinalProtectionViolations": 0,
+    "D13TaskSuccessMinimum": 5,
+    "invalidRenderedCandidateIncidence": "D12至少1次且D13次数更少；若D12=0则该项改善证据不足，不事后换指标",
+    "manualCoordinateRepair": "D13六次总数严格少于D12；D12=0则不能证明下降",
+    "medianCandidateCount": "D13 <= D12（全部run固定分母，不删失败）",
+    "visualNonRegression": "D13视觉MEETS数不低于D12，最多1对双reviewer一致偏好D12，且两任务均无D13一致NOT_YET"
+  },
+  "model": {
+    "participantModel": "GLM-5.3-Flash",
+    "participantProvider": "account:bigmodel-individual-coding-plan",
+    "participantHost": "ZCode",
+    "participantReasoning": null,
+    "reviewerModel": "GLM-5.3-Flash",
+    "reviewerProvider": "account:bigmodel-individual-coding-plan",
+    "reviewerHost": "ZCode",
+    "reviewerReasoning": null,
+    "evidence": "ListModels 标记当前模型为 account:bigmodel-individual-coding-plan/GLM-5.3-Flash；Control-V3 运行中 rollout 快照的每条请求均含 model={modelId:GLM-5.3-Flash, providerId:account:bigmodel-individual-coding-plan}。宿主不暴露每次调用的 reasoning level，按协议记 null/UNKNOWN。"
+  },
+  "gates": {
+    "REPOSITORY_GATE": {
+      "result": "PASS",
+      "evidence": "HEAD=37317b5ce537b3147604d816bc207283e07ce252，exact tag v0.7.0，branch master，工作区干净，origin 同步，无 v0.7.0 后新提交"
+    },
+    "NOT_RUN_GATE": {
+      "result": "PASS",
+      "evidence": "prepare-materials --check => {status:PASS, experiment:NOT_RUN}；机械搜索无 protocol-frozen/execution-freeze-manifest/freeze-manifest/key.json/review.json/analysis.json/runs/reviews/results/unblind"
+    },
+    "VISION_GATE": {
+      "result": "PASS",
+      "evidence": "work/vision-gate-control/vision-gate-evidence.md：三个全新控制子代理（V1 participant-style、V2 reviewer-style 双图、V3 全图+运行中 rollout 捕获）对机械生成 control PNG 全部多维正确作答并自述看到图像；V3 rollout 与主会话 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块（直接宿主证据）。与上一轮'只回 CDN URL'的记录相反，以本轮机械证据为准",
+      "classification": "CONFIRMED（机制级）；V1/V2 个体会话 model-io 因宿主自动清理未留存，标 CONFIRMED_VIA_MECHANISM"
+    },
+    "AGENT_ISOLATION_GATE": {
+      "result": "PASS",
+      "evidence": "代理 A（agent_a756e8e7）确认 nonce alpha-F3707FB7；全新代理 B（agent_c0493637）明确不知该 nonce、无 A 上下文访问；默认上下文独立"
+    },
+    "MODEL_CONSISTENCY_GATE": {
+      "result": "PASS",
+      "evidence": "会话与子代理均为 GLM-5.3-Flash（V3 rollout 直接证据）；reasoning 未暴露记 null"
+    },
+    "RUNNER_GATE": {
+      "result": "PASS",
+      "evidence": "work/runner-gate-control：D12 create/edit(拒绝+物化)/explore/commit/export(submit-equivalent) 与 D13 create/inspect/safe-domain(REJECTED_UNSAFE+域搜索)/edit/explore/render/commit/submit 全链路机械通过；ledger 含 lowLevelGeometryEdit/semanticTransform/rejectedBeforeMaterialization/materializedCandidate/commit/submit/error-retry(idempotentReplay)/validationProbeCount（与 candidateCount 严格分开）。边界记录：冻结快照 bin/pga.mjs（gallery 入口）缺 tools/gallery 不可运行，实验流程不使用；D12 无原生 submit，用 export 代替",
+      "infrastructureVersion": "trial-observe/1, evaluate-run(pga-run-evaluation/1), setup-trial, freeze-verification（本轮新增，哈希入 freeze-manifest）"
+    },
+    "OBSERVATION_PARITY_GATE": {
+      "result": "PASS",
+      "evidence": "prepare-materials --check sharedObservationsEqual=true, baselinePixelsEqual=true；两臂观察由同一 observe.mjs（trial 本地副本，同一哈希）经共享 frame-views 模块产生，两臂控制解最终 renderHash 一致 (b5e6f2a9:6c4482bf)"
+    },
+    "TOOLKIT_HASH_GATE": {
+      "result": "PASS",
+      "evidence": "organizer/freeze-hash-report.json：D12(64 文件)/D13(68 文件)/materials 与 preparation-manifest.json 逐文件 0 失配；protocol-draft 与 manifest.protocolSha256 一致。上一轮报告的聚合值（0138e970…/bbc5f314…）经 16 种规范过程均不可复现，属上一轮会话私有聚合过程；以逐文件核验为约束性检查，本记录成为聚合溯源"
+    }
+  },
+  "policies": {
+    "failure": "已启动的正式 run 不替换、不因成品质量重跑；仅允许 participant 尚未读取正式 Task 前的纯启动失败重启，并记入 interventions.md",
+    "intervention": "协调器在 12 个 participant 完成前只检查 infra（文件生成、ledger 完整、run 卡住、宿主通道），不汇总两臂成败/偏好/Go 进度，不做结果驱动干预；全部干预记入 interventions.md 与 commands-executed.md",
+    "unverified": "必要证据缺失（含图像输入证据不足）时，相关主结果按 pga-review/3 的 deriveReview/taskSuccess 传播 UNVERIFIED；不补拍、不代看、不降低阈值；D12 基线发生率为 0 的改善条件按冻结协议记 INCONCLUSIVE"
+  },
+  "execution": {
+    "started": false,
+    "participantRuns": 0,
+    "reviews": 0,
+    "results": null
+  }
+}

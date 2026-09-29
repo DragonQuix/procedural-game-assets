@@ -1,0 +1,20 @@
+{
+  "schema": "pga-blind-key/2",
+  "task": "P",
+  "repeat": 2,
+  "mappingSeed": "pga-constraint/0.1/position/1",
+  "candidateA": "T07",
+  "candidateB": "T08",
+  "reviewers": [
+    {
+      "reviewerId": "reviewer-1",
+      "X": "T07",
+      "Y": "T08"
+    },
+    {
+      "reviewerId": "reviewer-2",
+      "X": "T08",
+      "Y": "T07"
+    }
+  ]
+}

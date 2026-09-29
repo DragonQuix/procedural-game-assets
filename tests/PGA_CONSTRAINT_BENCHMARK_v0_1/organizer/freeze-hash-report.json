@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-09-29T13:12:41.120Z",
+  "trees": {
+    "D12": {
+      "fileCount": 64,
+      "source": "4fd4330da167a25d6651daadcfbc47095d22c3ca",
+      "path": "D12"
+    },
+    "D13": {
+      "fileCount": 68,
+      "source": "4cd1666e439e7b907a55bd29c5746100c1129c8b",
+      "path": "D13-0.7.0-4cd1666"
+    }
+  },
+  "materials": {
+    "G/D12.studio.json": "fadfeb4053d181197816019f3b0f25f1a696306cf00d600c2d842f6a67983d08",
+    "G/D13.studio.json": "c7d079c0f3cfdf74dd1ad9019225833d46a9485d6cadfd40d70a35e728236b64",
+    "G/baseline.native.png": "e66c5bbdae89281464aa0602a0a283cf635bbad5318b3cedc713b5c5c0c798ae",
+    "G/task-contract.json": "f398b2d7f14c24bcd8cc13a723e696e5ee0b82ebdf8b5be5452d630f11217462",
+    "P/D12.studio.json": "5f9278f2ab775da7573f9ff61cd8896e3609826419564853676a51713ed2953f",
+    "P/D13.studio.json": "98c125cf46c4bec3f1b172264526da8572ceab534ba97d93ee6511d683c9e38b",
+    "P/baseline.native.png": "bacd4df7d8e30d1fcad8d8cdee0dcdceca9034068b7e70b9909f4bfa94aef4e6",
+    "P/task-contract.json": "3b7c278417e89559ba7374cc5118038b02bce54afdd29fb613485e35b63f8be8"
+  },
+  "aggregates": {
+    "D12": {
+      "tab": "794ec0e3d6bb4ffbc22d9d501bd654c09c422e827bebc02a84d768c79213012b",
+      "spaces": "3e115b27721147766b1cdd5a522a280997e989da7aed4f25e23fb627f3135435",
+      "colon": "2d5334f5eb46588b9e5141ece0e1359ef54e22d28c71e2790e84315d7e55fffb",
+      "hashFirst": "a40c81735bfdb182480a400c67600ab3473a8a1a47fd4c96b91301d4f35d5d5a",
+      "jsonCompact": "ae7b62472975219e50a10d9c9e30c38389e9a09115bc406903c0760b49cce0fc",
+      "jsonPretty": "e8463a4a1d7460f2005f908a9137f6dbefaed88c1b8a666d5069f7a62cd798e7",
+      "rawBytesConcat": "eb97e7695402bd9f5ca0ff235504e3fd9dcbb8ace9b9e6c1becff4275f3f7577"
+    },
+    "D13": {
+      "tab": "9cc0b79f2d92a245499cf83b403d6c7efb13a5ef786a72d658c1f92137b2ccad",
+      "spaces": "a5e76aa7471fe1d3d9bd1abd42bdb1976344ecff1391452431aa867d29f1a24e",
+      "colon": "7c59ec589a3eae29959d52cca958012908109501e052fdc7133fc7ce30b20681",
+      "hashFirst": "2b1ef2678273cee2f41fedbb2e4268cd45963ea6f73c7caa40e3a6e74fb3124b",
+      "jsonCompact": "ebf92700d9a81bf063626953ad863f1d7813808f6814c9f27a937addd69de643",
+      "jsonPretty": "6a57271352d092439dc08675fdf4687cff595f23c19af4fd2115999a90149349",
+      "rawBytesConcat": "375a9a0bb2e0cb8cb8d17da898661e6c29fbd656c9ff9fa38b9749534593a947"
+    }
+  },
+  "files": {
+    "protocol-draft.json": "241791232c67fea69d501aa5f6a5651db74d3cc3f971c606b7fca86db810da84",
+    "prompts/participant.md": "d79ba0357b85d47f177e351c83951b5cf606c59fd7aec382c3e6fae608b2cf7a",
+    "prompts/participant-frozen-template.md": "534f906800cb662f5df1c10d8023d7548092bd8e1c99940e42626699a447dd62",
+    "prompts/reviewer-frozen-template.md": "274031b875af5d6e70c60ef068047c1fe2a51e5fd88f7974a93b514a075b3957",
+    "organizer/materials.mjs": "99f2bde5399c20512d4c415866b63bcdeeb6e20b64b2a570aa8c18ffcc2396ee",
+    "organizer/trial-observe.mjs": "09cfa9ba83d2d695b9475ee62a2a95a6b2dcb9db9f6dedf21569d90a76f106ab",
+    "organizer/evaluate-run.mjs": "01ff9278765c2ce473b2425e6234d6f62fb35aacc624a5e438e60fa65cd38be0",
+    "organizer/setup-trial.mjs": "eca282c38662a3540af1de17c0029ae216d4f5e343b0dfb11abcf66eccdb7978",
+    "organizer/freeze-verification.mjs": "320552c54be2ab346a9045739d313addd5364b8f349fb63cca24b3cc3a474d82",
+    "prepare-materials.mjs": "44c41358cfd0ae75f6304747195443f7fcd335b44e1eba9e6becbee94433f9a9",
+    "README.md": "4c7b9c063f39ed5bfba5114b4be2eac60490aa494808f839752bb5c833c75ca6",
+    "tools/benchmark/README.md": "219474a9c1e3dcb329770954f7cc03ece66d395721e004240d0e89f6840e84b1",
+    "tools/benchmark/blind.mjs": "ac48350886f6e133e607dae7913aa7f1db9df9d5ac895feebb3b34ca44226752",
+    "tools/benchmark/review.mjs": "02a71c498666f3ee0a6d8557fb686eecd6e8196c41f813e60edffa5994169bf6",
+    "tools/benchmark/unblind.mjs": "d3a878e02bf8f60cac8fa1b08ef515a40e3995eaa276e3478f9ecc0656c51fe5",
+    "organizer/freeze-inputs.json": "6f8affdd976f536d1a9863d4715864fb8849120600ae3d31887aabd418a93f0b"
+  },
+  "mismatches": []
+}

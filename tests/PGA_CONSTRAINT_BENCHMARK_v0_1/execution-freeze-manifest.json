@@ -1,0 +1,247 @@
+{
+  "schema": "pga-execution-freeze/1",
+  "createdAt": "2026-09-29T15:57:09.904Z",
+  "protocolSha256": "4b2f45928649e0c0f7b7abcbe61aaf5b351999218a09384a4e8c75bc78ec35f0",
+  "runs": [
+    {
+      "trialId": "T01",
+      "task": "G",
+      "repeat": 1,
+      "anonymousArmId": "kit-A",
+      "toolkit": {
+        "path": "D12",
+        "source": "4fd4330da167a25d6651daadcfbc47095d22c3ca",
+        "fileCount": 64,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "b4a7f13ebdf336a6950ee419e791f23a32394eee590ed80c3a71a53521c9b3f4",
+      "finalRenderHash": "2b073bb41e9161ce0b49f3ab1cae23c0dcb6c4046c564adbe7267c3999b279a7",
+      "submitState": "SUBMITTED",
+      "candidateCount": 3,
+      "validationProbeCount": 0,
+      "operationLedgerHash": "f9a408293eee786e0eb46c60004e8a096bd22a81a1b520a283fcd9c2fdebb065",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_a8891374-abd1-4815-b1d1-6ede83429b2c"
+    },
+    {
+      "trialId": "T02",
+      "task": "G",
+      "repeat": 1,
+      "anonymousArmId": "kit-B",
+      "toolkit": {
+        "path": "D13-0.7.0-4cd1666",
+        "source": "4cd1666e439e7b907a55bd29c5746100c1129c8b",
+        "fileCount": 68,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "8ac99e8fdeb462e4bdb65c0f8495149859087b23c6c4fe48981345dcdb783b13",
+      "finalRenderHash": "2b073bb41e9161ce0b49f3ab1cae23c0dcb6c4046c564adbe7267c3999b279a7",
+      "submitState": "SUBMITTED",
+      "candidateCount": 1,
+      "validationProbeCount": 1,
+      "operationLedgerHash": "e692ed489925c5c51efc1702e202e5183d325729d14e40f41db5d9694201ca1f",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_98c9549e-effd-455e-8b00-1e9c78532c0c"
+    },
+    {
+      "trialId": "T03",
+      "task": "P",
+      "repeat": 1,
+      "anonymousArmId": "kit-B",
+      "toolkit": {
+        "path": "D13-0.7.0-4cd1666",
+        "source": "4cd1666e439e7b907a55bd29c5746100c1129c8b",
+        "fileCount": 68,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "2c49078aa98b860cd64fe0779f2cf8bd037e88a1e8945a9795070c7d08527fab",
+      "finalRenderHash": "1f7479112a2c4f32fe56c33940c6906a1fb2333b2f36facc2472c7bb4a52b703",
+      "submitState": "SUBMITTED",
+      "candidateCount": 1,
+      "validationProbeCount": 1,
+      "operationLedgerHash": "1efeb26b4d827a9ba917bc126c227417e8f1a77403dff1fcf7e0ad9d89f5ef46",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_92a17d2c-c1e1-4ecb-827b-a1f792f3705d"
+    },
+    {
+      "trialId": "T04",
+      "task": "P",
+      "repeat": 1,
+      "anonymousArmId": "kit-A",
+      "toolkit": {
+        "path": "D12",
+        "source": "4fd4330da167a25d6651daadcfbc47095d22c3ca",
+        "fileCount": 64,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "69d9b7d8e3a09d97f0330e21fa497eccb1aa0df9f5e8bbce5bdb45febd97519f",
+      "finalRenderHash": "4510c2fd5d752217ed136feb314073dfdd38dd7101b15bf561c074be86009552",
+      "submitState": "SUBMITTED",
+      "candidateCount": 2,
+      "validationProbeCount": 0,
+      "operationLedgerHash": "de639648f4697cd4e6bdb17710a86bc963a839dd39a0451ccc33237453fb5858",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_77a8bf56-5a17-4250-864f-9157466653c7"
+    },
+    {
+      "trialId": "T05",
+      "task": "G",
+      "repeat": 2,
+      "anonymousArmId": "kit-B",
+      "toolkit": {
+        "path": "D13-0.7.0-4cd1666",
+        "source": "4cd1666e439e7b907a55bd29c5746100c1129c8b",
+        "fileCount": 68,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "8ac99e8fdeb462e4bdb65c0f8495149859087b23c6c4fe48981345dcdb783b13",
+      "finalRenderHash": "2b073bb41e9161ce0b49f3ab1cae23c0dcb6c4046c564adbe7267c3999b279a7",
+      "submitState": "SUBMITTED",
+      "candidateCount": 1,
+      "validationProbeCount": 1,
+      "operationLedgerHash": "e692ed489925c5c51efc1702e202e5183d325729d14e40f41db5d9694201ca1f",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_0c56fc6b-b68b-4d66-bedd-98e3fd4bc11c"
+    },
+    {
+      "trialId": "T06",
+      "task": "G",
+      "repeat": 2,
+      "anonymousArmId": "kit-A",
+      "toolkit": {
+        "path": "D12",
+        "source": "4fd4330da167a25d6651daadcfbc47095d22c3ca",
+        "fileCount": 64,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "b4a7f13ebdf336a6950ee419e791f23a32394eee590ed80c3a71a53521c9b3f4",
+      "finalRenderHash": "2b073bb41e9161ce0b49f3ab1cae23c0dcb6c4046c564adbe7267c3999b279a7",
+      "submitState": "SUBMITTED",
+      "candidateCount": 1,
+      "validationProbeCount": 0,
+      "operationLedgerHash": "02c1b2844063a96f950e659f562c0f48d5b64221dbafb484fa8683e2737dafd7",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_de7e1f7b-5c7a-4a66-943f-f73bc11c64ab"
+    },
+    {
+      "trialId": "T07",
+      "task": "P",
+      "repeat": 2,
+      "anonymousArmId": "kit-A",
+      "toolkit": {
+        "path": "D12",
+        "source": "4fd4330da167a25d6651daadcfbc47095d22c3ca",
+        "fileCount": 64,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "69d9b7d8e3a09d97f0330e21fa497eccb1aa0df9f5e8bbce5bdb45febd97519f",
+      "finalRenderHash": "4510c2fd5d752217ed136feb314073dfdd38dd7101b15bf561c074be86009552",
+      "submitState": "SUBMITTED",
+      "candidateCount": 3,
+      "validationProbeCount": 0,
+      "operationLedgerHash": "adeb158cffa67f27a8e2c2d6757bb3862d9ada87b6cf5a5a231fc182ce678606",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看与未查看项）",
+      "participantSessionId": "sess_subagent_agent_54b334ff-ab58-4d62-a70b-bdf1be834679"
+    },
+    {
+      "trialId": "T08",
+      "task": "P",
+      "repeat": 2,
+      "anonymousArmId": "kit-B",
+      "toolkit": {
+        "path": "D13-0.7.0-4cd1666",
+        "source": "4cd1666e439e7b907a55bd29c5746100c1129c8b",
+        "fileCount": 68,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "0631c1f81ddd2ea85352a4bbe7d01dd382b08c1a004a1c38a9dd537440bcd346",
+      "finalRenderHash": "4510c2fd5d752217ed136feb314073dfdd38dd7101b15bf561c074be86009552",
+      "submitState": "SUBMITTED",
+      "candidateCount": 2,
+      "validationProbeCount": 43,
+      "operationLedgerHash": "9f40063e8967452ee2f96f775173aa1605e6d64292fe63fe3ec2c4fd3278c5df",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_c103dc5c-d7b9-4cec-b9ae-1ee2e6f5f0aa"
+    },
+    {
+      "trialId": "T09",
+      "task": "G",
+      "repeat": 3,
+      "anonymousArmId": "kit-A",
+      "toolkit": {
+        "path": "D12",
+        "source": "4fd4330da167a25d6651daadcfbc47095d22c3ca",
+        "fileCount": 64,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "b4a7f13ebdf336a6950ee419e791f23a32394eee590ed80c3a71a53521c9b3f4",
+      "finalRenderHash": "2b073bb41e9161ce0b49f3ab1cae23c0dcb6c4046c564adbe7267c3999b279a7",
+      "submitState": "SUBMITTED",
+      "candidateCount": 1,
+      "validationProbeCount": 0,
+      "operationLedgerHash": "02c1b2844063a96f950e659f562c0f48d5b64221dbafb484fa8683e2737dafd7",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_7a25334a-18dc-46af-a6c7-f927ba0b3038"
+    },
+    {
+      "trialId": "T10",
+      "task": "G",
+      "repeat": 3,
+      "anonymousArmId": "kit-B",
+      "toolkit": {
+        "path": "D13-0.7.0-4cd1666",
+        "source": "4cd1666e439e7b907a55bd29c5746100c1129c8b",
+        "fileCount": 68,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "8ac99e8fdeb462e4bdb65c0f8495149859087b23c6c4fe48981345dcdb783b13",
+      "finalRenderHash": "2b073bb41e9161ce0b49f3ab1cae23c0dcb6c4046c564adbe7267c3999b279a7",
+      "submitState": "SUBMITTED",
+      "candidateCount": 1,
+      "validationProbeCount": 1,
+      "operationLedgerHash": "e692ed489925c5c51efc1702e202e5183d325729d14e40f41db5d9694201ca1f",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_7289ee5f-d813-4043-a788-8561ed839d11"
+    },
+    {
+      "trialId": "T11",
+      "task": "P",
+      "repeat": 3,
+      "anonymousArmId": "kit-B",
+      "toolkit": {
+        "path": "D13-0.7.0-4cd1666",
+        "source": "4cd1666e439e7b907a55bd29c5746100c1129c8b",
+        "fileCount": 68,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "2c49078aa98b860cd64fe0779f2cf8bd037e88a1e8945a9795070c7d08527fab",
+      "finalRenderHash": "1f7479112a2c4f32fe56c33940c6906a1fb2333b2f36facc2472c7bb4a52b703",
+      "submitState": "SUBMITTED",
+      "candidateCount": 2,
+      "validationProbeCount": 3,
+      "operationLedgerHash": "e53a537ee9decc4e2dd0906c39017e4fa82e9828116457757c8eb9f3a87b1f70",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_6705d8c1-9b5b-4e2e-a679-1cf8fa55cc60"
+    },
+    {
+      "trialId": "T12",
+      "task": "P",
+      "repeat": 3,
+      "anonymousArmId": "kit-A",
+      "toolkit": {
+        "path": "D12",
+        "source": "4fd4330da167a25d6651daadcfbc47095d22c3ca",
+        "fileCount": 64,
+        "perFileManifest": "preparation-manifest.json"
+      },
+      "finalSourceHash": "69d9b7d8e3a09d97f0330e21fa497eccb1aa0df9f5e8bbce5bdb45febd97519f",
+      "finalRenderHash": "4510c2fd5d752217ed136feb314073dfdd38dd7101b15bf561c074be86009552",
+      "submitState": "SUBMITTED",
+      "candidateCount": 2,
+      "validationProbeCount": 0,
+      "operationLedgerHash": "17578fa60c78cb7b99284fed2db4b4f80eb4580a1e9f9935261f30ec62bc95ee",
+      "visionEvidence": "CONFIRMED（宿主 rollout 中 GLM-5.3-Flash 请求含 type:image 内容块；agent 最终报告列明实际查看的全部图像）",
+      "participantSessionId": "sess_subagent_agent_15b1eb71-514d-401e-927e-2d4efee6aa1c"
+    }
+  ]
+}

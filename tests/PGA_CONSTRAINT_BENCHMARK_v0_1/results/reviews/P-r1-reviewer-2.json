@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "P",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体箱体呈要求的宽扁形态（实测含描边宽 22px，达标；高度按 y19–34 计 16px 恰好达标），信号灯（5×5 铜色）与底座完好，竖杆末端直通贴合箱体顶边，整体是一个连贯完整的继电器资产。",
+      "topConcern": "主体高度存在 1px 归属歧义：最底部阴影行（y35）若归箱体则高 17px、超上限 1px，若归底座顶面则 16px 达标；竖杆长度是否与基线附件完全一致无法仅凭最终渲染验证。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "NOT_YET",
+      "topStrength": "主体尺寸、信号灯与底座与 X 完全一致，宽扁形态与各保护元素在画面上同样完好。",
+      "topConcern": "附件区（竖杆末端）被改动并在 y18 留下 1px 全透明空隙：竖杆在 y17 封口后与箱体顶边（y19）脱开，手柄视觉上悬空，同时触碰任务要求不得改动的附件区并破坏资产完整性；主体高度同样存在 16/17px 的归属歧义。",
+      "blockingIssue": true,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "keyEvidence": "两图逐像素对比仅 19px 不同（x15–20、y16–19，竖杆末端）：X 的竖杆延伸至 y18 并与箱体顶边框（y19）相连；Y 的竖杆提前在 y17 封口，y18 整行透明，竖杆与箱体之间出现 1px 悬空缝隙。其余部分（主体箱体 x7–28/y19–35、信号灯 x15–19/y24–28、底座 x6–29/y36–39、顶部铜柄 y5–9）两图完全一致。",
+  "confidence": "MEDIUM",
+  "notes": "评审方法：先以 Read 真实查看 X/Y/compare 三图，再对目录内两张原生 PNG 做像素测量，核实宽 ≥20px/高 ≤16px 约束并定位 X/Y 差异。主体宽 22px 两者均达标；高度为 16 或 17px 取决于 y35 阴影行归箱体还是底座顶面，存在 1px 归属歧义，已如实标注。保护区与基线的一致性无法仅凭最终渲染验证；X 优先的判断基于可见证据：Y 在任务声明不得改动的附件区出现悬空伪影，资产完整性受损。任务无 requiredClips，动画相关字段保持 UNVERIFIED。"
+}

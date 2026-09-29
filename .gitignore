@@ -36,3 +36,10 @@ tests/pga-ad-host/*.console.log
 # 新实验冻结工具包携带唯一依赖；不是新安装。
 !tests/PGA_CONSTRAINT_BENCHMARK_v0_1/frozen/*/node_modules/
 !tests/PGA_CONSTRAINT_BENCHMARK_v0_1/frozen/*/node_modules/pngjs/
+
+# 约束对照实验（v0.1）：参试原始工作区与盲评原始包不入库；results/ 只入小型评估与报告
+tests/PGA_CONSTRAINT_BENCHMARK_v0_1/runs/
+tests/PGA_CONSTRAINT_BENCHMARK_v0_1/runs-invalid/
+tests/PGA_CONSTRAINT_BENCHMARK_v0_1/reviews/
+tests/PGA_CONSTRAINT_BENCHMARK_v0_1/organizer/trial-map.json
+tests/PGA_CONSTRAINT_BENCHMARK_v0_1/organizer/freeze-inputs.json

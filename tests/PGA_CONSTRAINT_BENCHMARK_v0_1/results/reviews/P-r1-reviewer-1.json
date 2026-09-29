@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "P",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体已完成明显结构改造：塔状堆叠被压扁为矮宽块（实测外接宽 22px，满足 ≥20px），中央信号灯、底座与顶部把手完整保留，整体仍是合理完整的继电器资产。",
+      "topConcern": "竖杆底段被截断改形：第 16 行杆身收窄变暗（BCCCCB）、第 17 行仅剩 4px 深色封口、第 18 行为透明，杆与主体之间隔 1 行空隙（结构上悬浮）；主体块外接框高实测 17px（第 19-35 行），按此划分超出 ≤16px 指标 1px。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "主体改造与 X 逐像素一致（宽 22px ≥20px，明显矮宽化）；竖杆以连续柱状高光结构从把手贯穿到主体并无缝相接，结构自洽、整体完整。",
+      "topConcern": "竖杆穿过主体顶边框处（第 19 行中部 4px 由边框色改为杆身暗色）以及杆底 3 行的延续，无法对照基线验证是否属于允许的主体改动范围；主体块外接框高同样实测 17px，边缘超出 ≤16px 指标 1px。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "keyEvidence": "像素级对比（36x44 画布）显示两候选除竖杆-主体交界（第 16-19 行）外逐像素一致（把手、主体、信号灯、底座全部相同）。该交界处：Y 的杆（第 15-20 列）以连续的 D/A/C 柱延伸至第 18 行并以 4px C 段融入主体顶边框（第 19 行），杆-体连续无缝；X 的同一根杆在第 16 行骤变为全暗收窄（BCCCCB）、第 17 行只剩 4px 深色封口帽、第 18 行为透明空隙，杆与主体结构上断开悬浮。",
+  "confidence": "MEDIUM",
+  "notes": "评审方法：用 Read 实际查看三张图后，另以 Python 标准库解码本目录内两个 PNG 的像素网格做精确测量（画布 36x44）。两候选的主体（含底座与中央信号灯）逐像素一致，唯一差异是竖杆底段。主体高度按外接框（第 19-35 行）实测 17px，超出 ≤16px 指标 1px；若把更宽的底座裙边（第 36-39 行）计入主体则为 21px，若不计边框按内容行测量则为 15-16px——因部件划分无权威定义，该 1px 歧义未作为 NOT_YET 依据，仅记为两候选共有的边缘风险。无基线参照，保护区与基线的逐像素一致性无法直接验证，仅能确认两候选在杆以外的区域彼此一致；若竖杆属保护区（socket/attachment），X 对杆底段的截断改形嫌疑大于 Y。requiredClips 为空，无运动片段要求，motion 字段维持 UNVERIFIED。"
+}

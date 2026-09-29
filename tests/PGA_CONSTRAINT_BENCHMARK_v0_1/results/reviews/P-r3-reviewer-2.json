@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "P",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体箱体完成明显结构改变且数值达标：可见面宽20px（含描边22px，≥20px），可见面高15px（≤16px）；同时灯帽、面板插座方块、底座、整体bounds以及灯颈原有插接收尾全部保持原样，改动只落在 relay.body 上，保护区干净。",
+      "topConcern": "灯帽与灯颈整体悬浮在箱体上方约1px，插头凸起与箱体之间留有空隙，观感略脱节；但这是任务明示不强制主体居中与底边位置时的可预期结果。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "NOT_YET",
+      "topStrength": "主体箱体尺寸同样达标，且灯颈与箱体无缝衔接，整体观感更连贯完整。",
+      "topConcern": "为消除空隙，把灯颈裸轴向下延长3行并把主体顶描边中部改成浅色凹口以伪装插接——这改动了 relay.body 之外的像素（灯颈属附件/信号灯安装颈，或凹口属插接部位），违反保护区不得出现任何改动的硬性要求。",
+      "blockingIssue": true,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "keyEvidence": "X 与 Y 除灯颈接驳区（约 y16–19 行）外逐像素一致：X 保留灯颈原收尾（倒角行+4px插头凸起）并与箱体间留1行空隙；Y 把灯颈轴身下延3行、并把主体顶描边中部改成浅色凹口。灯帽（y5–10）、面板插座（y24–28）、底座（y36–39）与整体bounds（x6–29，y5–39）两者完全相同；主体面宽20px（含描边22px）、可见面高15px（含描边与底部倒角行则17px）。",
+  "confidence": "MEDIUM",
+  "notes": "实际查看 X.native.png、Y.native.png、compare.png（Read 均返回可见图像），并仅对目录内渲染做像素测量以核对数值阈值（画布36×44）。目录内无基线图，'与基线一致'只能按 X/Y 成对判断：两者除 y16–19 接驳区外完全相同。判定依据：任务保护对象（signal 帽、socket 面板方块、anchor 底座、attachments、bounds）恰好覆盖除主体箱外的全部可见元素，灯颈最合理归属附件/安装颈，属保护区；且无论把灯颈视为附件、还是把插座视为插接部位，Y 都改动了保护区像素，X 都未改。主体高度按可见面15px（y20–34）计满足≤16px，若把顶描边行与底部倒角行一并计入则为17px，属临界读数，对 X/Y 影响相同。备选解读：若灯颈本属 relay.body，则两者均合规、Y 仅更美观，此时应为无有意义差异；本评审按主解读给出 X_PREFERRED。无动画要求（requiredClips 为空）且目录内无动画材料，motion 保持 UNVERIFIED。"
+}

@@ -1,0 +1,1440 @@
+{
+  "schema": "pga-constraint-analysis/1",
+  "generatedAt": "2026-09-29T16:27:01.560Z",
+  "frozenProtocol": "protocol-frozen.json",
+  "executionFreeze": "execution-freeze-manifest.json",
+  "interventions": "interventions.md",
+  "perRun": {
+    "T01": {
+      "trialId": "T01",
+      "task": "G",
+      "repeat": 1,
+      "arm": "D12",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 13,
+          "y": 12,
+          "w": 24,
+          "h": 19,
+          "centerX": 25,
+          "bottomY": 31
+        },
+        "objectives": {
+          "target": "pump.body",
+          "minWidth": 24,
+          "maxHeight": 19,
+          "centerX": 25,
+          "bottomY": 31
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 3,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 1,
+      "semanticTransform": 0,
+      "validationProbe": 0,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "PASS"
+    },
+    "T02": {
+      "trialId": "T02",
+      "task": "G",
+      "repeat": 1,
+      "arm": "D13",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 13,
+          "y": 12,
+          "w": 24,
+          "h": 19,
+          "centerX": 25,
+          "bottomY": 31
+        },
+        "objectives": {
+          "target": "pump.body",
+          "minWidth": 24,
+          "maxHeight": 19,
+          "centerX": 25,
+          "bottomY": 31
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 1,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 0,
+      "semanticTransform": 1,
+      "validationProbe": 1,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "PASS"
+    },
+    "T05": {
+      "trialId": "T05",
+      "task": "G",
+      "repeat": 2,
+      "arm": "D13",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 13,
+          "y": 12,
+          "w": 24,
+          "h": 19,
+          "centerX": 25,
+          "bottomY": 31
+        },
+        "objectives": {
+          "target": "pump.body",
+          "minWidth": 24,
+          "maxHeight": 19,
+          "centerX": 25,
+          "bottomY": 31
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 1,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 0,
+      "semanticTransform": 1,
+      "validationProbe": 1,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "PASS"
+    },
+    "T06": {
+      "trialId": "T06",
+      "task": "G",
+      "repeat": 2,
+      "arm": "D12",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 13,
+          "y": 12,
+          "w": 24,
+          "h": 19,
+          "centerX": 25,
+          "bottomY": 31
+        },
+        "objectives": {
+          "target": "pump.body",
+          "minWidth": 24,
+          "maxHeight": 19,
+          "centerX": 25,
+          "bottomY": 31
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 1,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 1,
+      "semanticTransform": 0,
+      "validationProbe": 0,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "PASS"
+    },
+    "T09": {
+      "trialId": "T09",
+      "task": "G",
+      "repeat": 3,
+      "arm": "D12",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 13,
+          "y": 12,
+          "w": 24,
+          "h": 19,
+          "centerX": 25,
+          "bottomY": 31
+        },
+        "objectives": {
+          "target": "pump.body",
+          "minWidth": 24,
+          "maxHeight": 19,
+          "centerX": 25,
+          "bottomY": 31
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 1,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 1,
+      "semanticTransform": 0,
+      "validationProbe": 0,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "PASS"
+    },
+    "T10": {
+      "trialId": "T10",
+      "task": "G",
+      "repeat": 3,
+      "arm": "D13",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 13,
+          "y": 12,
+          "w": 24,
+          "h": 19,
+          "centerX": 25,
+          "bottomY": 31
+        },
+        "objectives": {
+          "target": "pump.body",
+          "minWidth": 24,
+          "maxHeight": 19,
+          "centerX": 25,
+          "bottomY": 31
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 1,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 0,
+      "semanticTransform": 1,
+      "validationProbe": 1,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "PASS"
+    },
+    "T03": {
+      "trialId": "T03",
+      "task": "P",
+      "repeat": 1,
+      "arm": "D13",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 7,
+          "y": 19,
+          "w": 20,
+          "h": 16,
+          "centerX": 17,
+          "bottomY": 35
+        },
+        "objectives": {
+          "target": "relay.body",
+          "minWidth": 20,
+          "maxHeight": 16,
+          "centerX": 17,
+          "bottomY": 35
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 1,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 0,
+      "semanticTransform": 1,
+      "validationProbe": 1,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "NOT_YET",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "VISUAL_DISAGREEMENT"
+    },
+    "T04": {
+      "trialId": "T04",
+      "task": "P",
+      "repeat": 1,
+      "arm": "D12",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 7,
+          "y": 19,
+          "w": 20,
+          "h": 16,
+          "centerX": 17,
+          "bottomY": 35
+        },
+        "objectives": {
+          "target": "relay.body",
+          "minWidth": 20,
+          "maxHeight": 16,
+          "centerX": 17,
+          "bottomY": 35
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 2,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 1,
+      "semanticTransform": 0,
+      "validationProbe": 0,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "PASS"
+    },
+    "T07": {
+      "trialId": "T07",
+      "task": "P",
+      "repeat": 2,
+      "arm": "D12",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 7,
+          "y": 19,
+          "w": 20,
+          "h": 16,
+          "centerX": 17,
+          "bottomY": 35
+        },
+        "objectives": {
+          "target": "relay.body",
+          "minWidth": 20,
+          "maxHeight": 16,
+          "centerX": 17,
+          "bottomY": 35
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 3,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 3,
+      "semanticTransform": 0,
+      "validationProbe": 0,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "PASS"
+    },
+    "T08": {
+      "trialId": "T08",
+      "task": "P",
+      "repeat": 2,
+      "arm": "D13",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 7,
+          "y": 19,
+          "w": 20,
+          "h": 16,
+          "centerX": 17,
+          "bottomY": 35
+        },
+        "objectives": {
+          "target": "relay.body",
+          "minWidth": 20,
+          "maxHeight": 16,
+          "centerX": 17,
+          "bottomY": 35
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 2,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 0,
+      "semanticTransform": 1,
+      "validationProbe": 43,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "PASS"
+    },
+    "T11": {
+      "trialId": "T11",
+      "task": "P",
+      "repeat": 3,
+      "arm": "D13",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 7,
+          "y": 19,
+          "w": 20,
+          "h": 16,
+          "centerX": 17,
+          "bottomY": 35
+        },
+        "objectives": {
+          "target": "relay.body",
+          "minWidth": 20,
+          "maxHeight": 16,
+          "centerX": 17,
+          "bottomY": 35
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 2,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 1,
+      "manualCoordinateRepair": 2,
+      "semanticTransform": 1,
+      "validationProbe": 3,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "NOT_YET",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "VISUAL_DISAGREEMENT"
+    },
+    "T12": {
+      "trialId": "T12",
+      "task": "P",
+      "repeat": 3,
+      "arm": "D12",
+      "submitted": true,
+      "technical": "PASS",
+      "protocol": "PASS",
+      "budget": "PASS",
+      "geometry": {
+        "pass": true,
+        "actual": {
+          "x": 7,
+          "y": 19,
+          "w": 20,
+          "h": 16,
+          "centerX": 17,
+          "bottomY": 35
+        },
+        "objectives": {
+          "target": "relay.body",
+          "minWidth": 20,
+          "maxHeight": 16,
+          "centerX": 17,
+          "bottomY": 35
+        }
+      },
+      "finalProtection": "PASS",
+      "candidateCount": 2,
+      "invalidMaterialized": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 2,
+      "semanticTransform": 0,
+      "validationProbe": 0,
+      "submitSuccess": true,
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "taskFit": "MEETS",
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewerSlot": 2,
+          "taskFit": "NOT_YET",
+          "visionEvidence": "CONFIRMED"
+        }
+      ],
+      "taskSuccess": "VISUAL_DISAGREEMENT"
+    }
+  },
+  "armStats": {
+    "D12": {
+      "taskSuccess": 5,
+      "perRun": {
+        "T01": "PASS",
+        "T06": "PASS",
+        "T09": "PASS",
+        "T04": "PASS",
+        "T07": "PASS",
+        "T12": "VISUAL_DISAGREEMENT"
+      },
+      "finalProtectionViolations": 0,
+      "invalidMaterializedCandidates": 0,
+      "invalidIncidenceRuns": 0,
+      "rejectedBeforeMaterialization": 0,
+      "manualCoordinateRepair": 9,
+      "semanticTransform": 0,
+      "candidateMedian": 2,
+      "candidateCounts": [
+        1,
+        1,
+        2,
+        2,
+        3,
+        3
+      ],
+      "validationProbes": 0,
+      "submitSuccess": 6
+    },
+    "D13": {
+      "taskSuccess": 4,
+      "perRun": {
+        "T02": "PASS",
+        "T05": "PASS",
+        "T10": "PASS",
+        "T03": "VISUAL_DISAGREEMENT",
+        "T08": "PASS",
+        "T11": "VISUAL_DISAGREEMENT"
+      },
+      "finalProtectionViolations": 0,
+      "invalidMaterializedCandidates": 0,
+      "invalidIncidenceRuns": 0,
+      "rejectedBeforeMaterialization": 1,
+      "manualCoordinateRepair": 2,
+      "semanticTransform": 6,
+      "candidateMedian": 1,
+      "candidateCounts": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        2
+      ],
+      "validationProbes": 50,
+      "submitSuccess": 6
+    }
+  },
+  "pairMatrix": [
+    {
+      "pair": "G-r1",
+      "d12": "T01",
+      "d13": "T02",
+      "matrix": "both pass",
+      "visual": "NO_MEANINGFUL_DIFFERENCE",
+      "reviewers": [
+        {
+          "reviewer": "reviewer-1",
+          "pairwise": "NO_MEANINGFUL_DIFFERENCE",
+          "preferredArm": null,
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewer": "reviewer-2",
+          "pairwise": "NO_MEANINGFUL_DIFFERENCE",
+          "preferredArm": null,
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        }
+      ]
+    },
+    {
+      "pair": "G-r2",
+      "d12": "T06",
+      "d13": "T05",
+      "matrix": "both pass",
+      "visual": "NO_MEANINGFUL_DIFFERENCE",
+      "reviewers": [
+        {
+          "reviewer": "reviewer-1",
+          "pairwise": "NO_MEANINGFUL_DIFFERENCE",
+          "preferredArm": null,
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewer": "reviewer-2",
+          "pairwise": "NO_MEANINGFUL_DIFFERENCE",
+          "preferredArm": null,
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        }
+      ]
+    },
+    {
+      "pair": "G-r3",
+      "d12": "T09",
+      "d13": "T10",
+      "matrix": "both pass",
+      "visual": "NO_MEANINGFUL_DIFFERENCE",
+      "reviewers": [
+        {
+          "reviewer": "reviewer-1",
+          "pairwise": "NO_MEANINGFUL_DIFFERENCE",
+          "preferredArm": null,
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewer": "reviewer-2",
+          "pairwise": "NO_MEANINGFUL_DIFFERENCE",
+          "preferredArm": null,
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        }
+      ]
+    },
+    {
+      "pair": "P-r1",
+      "d12": "T04",
+      "d13": "T03",
+      "matrix": "D12 only",
+      "visual": "CONSENSUS_D12",
+      "reviewers": [
+        {
+          "reviewer": "reviewer-1",
+          "pairwise": "Y_PREFERRED",
+          "preferredArm": "D12",
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewer": "reviewer-2",
+          "pairwise": "X_PREFERRED",
+          "preferredArm": "D12",
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "NOT_YET"
+          },
+          "visionEvidence": "CONFIRMED"
+        }
+      ]
+    },
+    {
+      "pair": "P-r2",
+      "d12": "T07",
+      "d13": "T08",
+      "matrix": "both pass",
+      "visual": "NO_MEANINGFUL_DIFFERENCE",
+      "reviewers": [
+        {
+          "reviewer": "reviewer-1",
+          "pairwise": "NO_MEANINGFUL_DIFFERENCE",
+          "preferredArm": null,
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewer": "reviewer-2",
+          "pairwise": "NO_MEANINGFUL_DIFFERENCE",
+          "preferredArm": null,
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        }
+      ]
+    },
+    {
+      "pair": "P-r3",
+      "d12": "T12",
+      "d13": "T11",
+      "matrix": "neither",
+      "visual": "MIXED",
+      "reviewers": [
+        {
+          "reviewer": "reviewer-1",
+          "pairwise": "X_PREFERRED",
+          "preferredArm": "D12",
+          "taskFit": {
+            "D12": "MEETS",
+            "D13": "NOT_YET"
+          },
+          "visionEvidence": "CONFIRMED"
+        },
+        {
+          "reviewer": "reviewer-2",
+          "pairwise": "X_PREFERRED",
+          "preferredArm": "D13",
+          "taskFit": {
+            "D12": "NOT_YET",
+            "D13": "MEETS"
+          },
+          "visionEvidence": "CONFIRMED"
+        }
+      ]
+    }
+  ],
+  "perReview": [
+    {
+      "pair": "G-r1",
+      "reviewer": "reviewer-1",
+      "raw": {
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "HIGH",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "G",
+        "reviewerSlot": 1,
+        "rawPairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": null,
+        "taskFitByRun": {
+          "T02": "MEETS",
+          "T01": "MEETS"
+        },
+        "playbackEvidenceByRun": {
+          "T02": "NOT_REQUIRED",
+          "T01": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "G-r1",
+      "reviewer": "reviewer-2",
+      "raw": {
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "HIGH",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "G",
+        "reviewerSlot": 2,
+        "rawPairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": null,
+        "taskFitByRun": {
+          "T01": "MEETS",
+          "T02": "MEETS"
+        },
+        "playbackEvidenceByRun": {
+          "T01": "NOT_REQUIRED",
+          "T02": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "G-r2",
+      "reviewer": "reviewer-1",
+      "raw": {
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "HIGH",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "G",
+        "reviewerSlot": 1,
+        "rawPairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": null,
+        "taskFitByRun": {
+          "T06": "MEETS",
+          "T05": "MEETS"
+        },
+        "playbackEvidenceByRun": {
+          "T06": "NOT_REQUIRED",
+          "T05": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "G-r2",
+      "reviewer": "reviewer-2",
+      "raw": {
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "HIGH",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "G",
+        "reviewerSlot": 2,
+        "rawPairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": null,
+        "taskFitByRun": {
+          "T05": "MEETS",
+          "T06": "MEETS"
+        },
+        "playbackEvidenceByRun": {
+          "T05": "NOT_REQUIRED",
+          "T06": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "G-r3",
+      "reviewer": "reviewer-1",
+      "raw": {
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "HIGH",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "G",
+        "reviewerSlot": 1,
+        "rawPairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": null,
+        "taskFitByRun": {
+          "T10": "MEETS",
+          "T09": "MEETS"
+        },
+        "playbackEvidenceByRun": {
+          "T10": "NOT_REQUIRED",
+          "T09": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "G-r3",
+      "reviewer": "reviewer-2",
+      "raw": {
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "HIGH",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "G",
+        "reviewerSlot": 2,
+        "rawPairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": null,
+        "taskFitByRun": {
+          "T09": "MEETS",
+          "T10": "MEETS"
+        },
+        "playbackEvidenceByRun": {
+          "T09": "NOT_REQUIRED",
+          "T10": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "P-r1",
+      "reviewer": "reviewer-1",
+      "raw": {
+        "pairwiseResult": "Y_PREFERRED",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "MEDIUM",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "P",
+        "reviewerSlot": 1,
+        "rawPairwiseResult": "Y_PREFERRED",
+        "pairwiseResult": "Y_PREFERRED",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": "T04",
+        "taskFitByRun": {
+          "T03": "MEETS",
+          "T04": "MEETS"
+        },
+        "playbackEvidenceByRun": {
+          "T03": "NOT_REQUIRED",
+          "T04": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "P-r1",
+      "reviewer": "reviewer-2",
+      "raw": {
+        "pairwiseResult": "X_PREFERRED",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "MEDIUM",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "NOT_YET"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "P",
+        "reviewerSlot": 2,
+        "rawPairwiseResult": "X_PREFERRED",
+        "pairwiseResult": "X_PREFERRED",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "NOT_YET"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": "T04",
+        "taskFitByRun": {
+          "T04": "MEETS",
+          "T03": "NOT_YET"
+        },
+        "playbackEvidenceByRun": {
+          "T04": "NOT_REQUIRED",
+          "T03": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "P-r2",
+      "reviewer": "reviewer-1",
+      "raw": {
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "MEDIUM",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "P",
+        "reviewerSlot": 1,
+        "rawPairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": null,
+        "taskFitByRun": {
+          "T07": "MEETS",
+          "T08": "MEETS"
+        },
+        "playbackEvidenceByRun": {
+          "T07": "NOT_REQUIRED",
+          "T08": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "P-r2",
+      "reviewer": "reviewer-2",
+      "raw": {
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "MEDIUM",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "P",
+        "reviewerSlot": 2,
+        "rawPairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "MEETS"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": null,
+        "taskFitByRun": {
+          "T08": "MEETS",
+          "T07": "MEETS"
+        },
+        "playbackEvidenceByRun": {
+          "T08": "NOT_REQUIRED",
+          "T07": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "P-r3",
+      "reviewer": "reviewer-1",
+      "raw": {
+        "pairwiseResult": "X_PREFERRED",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "MEDIUM",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "NOT_YET"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "P",
+        "reviewerSlot": 1,
+        "rawPairwiseResult": "X_PREFERRED",
+        "pairwiseResult": "X_PREFERRED",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "NOT_YET"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": "T12",
+        "taskFitByRun": {
+          "T12": "MEETS",
+          "T11": "NOT_YET"
+        },
+        "playbackEvidenceByRun": {
+          "T12": "NOT_REQUIRED",
+          "T11": "NOT_REQUIRED"
+        }
+      }
+    },
+    {
+      "pair": "P-r3",
+      "reviewer": "reviewer-2",
+      "raw": {
+        "pairwiseResult": "X_PREFERRED",
+        "actualViews": [
+          "X.native.png",
+          "Y.native.png",
+          "compare.png"
+        ],
+        "confidence": "MEDIUM",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "NOT_YET"
+        }
+      },
+      "derived": {
+        "schema": "pga-derived-review/1",
+        "task": "P",
+        "reviewerSlot": 2,
+        "rawPairwiseResult": "X_PREFERRED",
+        "pairwiseResult": "X_PREFERRED",
+        "taskFit": {
+          "X": "MEETS",
+          "Y": "NOT_YET"
+        },
+        "motion": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "playbackEvidence": {
+          "X": "NOT_REQUIRED",
+          "Y": "NOT_REQUIRED"
+        },
+        "visionEvidence": "CONFIRMED",
+        "preferredRun": "T11",
+        "taskFitByRun": {
+          "T11": "MEETS",
+          "T12": "NOT_YET"
+        },
+        "playbackEvidenceByRun": {
+          "T11": "NOT_REQUIRED",
+          "T12": "NOT_REQUIRED"
+        }
+      }
+    }
+  ],
+  "goCriteria": [
+    {
+      "id": "D13FinalProtectionViolations",
+      "required": 0,
+      "actual": 0,
+      "verdict": "PASS"
+    },
+    {
+      "id": "D13TaskSuccessMinimum",
+      "required": ">=5/6",
+      "actual": 4,
+      "verdict": "FAIL"
+    },
+    {
+      "id": "invalidRenderedCandidateIncidence",
+      "required": "D12至少1次且D13次数更少；若D12=0则该项改善证据不足，不事后换指标",
+      "actual": {
+        "D12": 0,
+        "D13": 0
+      },
+      "verdict": "INCONCLUSIVE"
+    },
+    {
+      "id": "manualCoordinateRepair",
+      "required": "D13六次总数严格少于D12；D12=0则不能证明下降",
+      "actual": {
+        "D12": 9,
+        "D13": 2
+      },
+      "verdict": "PASS"
+    },
+    {
+      "id": "medianCandidateCount",
+      "required": "D13 <= D12（全部run固定分母，不删失败）",
+      "actual": {
+        "D12": 2,
+        "D13": 1
+      },
+      "verdict": "PASS"
+    },
+    {
+      "id": "visualNonRegression",
+      "required": "D13视觉MEETS数不低于D12，最多1对双reviewer一致偏好D12，且两任务均无D13一致NOT_YET",
+      "actual": {
+        "meets": {
+          "D12": 11,
+          "D13": 10
+        },
+        "consensusD12Pairs": 1,
+        "d13UnanimousNotYetPairs": 0
+      },
+      "verdict": "FAIL"
+    }
+  ],
+  "decision": "NO-GO"
+}

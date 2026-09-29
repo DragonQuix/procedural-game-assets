@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "P",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体已是明显的宽扁块：轮廓约22px宽（内芯恰20px），远超≥20px要求，顶部信号灯、立柱、铜色插座、底部基座齐全，轮廓干净，是清晰的结构改变且整体仍是完整合理的继电塔资产。",
+      "topConcern": "主体高度处在约束边界：填充行y20-35恰16px（满足≤16px），但把y19深色顶缘行计入轮廓则为17px、超限1px；按部件矩形口径判达标，存在1px测量口径歧义。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "与X为同一渲染：主体呈明显宽扁结构（宽约22px、内芯20px），各部件完整，满足宽度≥20px并呈现要求的低矮宽块形态。",
+      "topConcern": "与X相同：主体高度按填充口径为16px达标，按含顶缘描边的轮廓口径为17px，存在1px口径歧义。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "X.native.png与Y.native.png为逐字节相同文件（SHA1均为d6be97662c20c942c3b17193956eda9429287a00），compare.png左右两列亦无可见差异。对同一渲染的像素测量：画布36x44；主体块x7-28宽22px（内芯x8-27恰20px）、y19-35共17行（内芯y20-35恰16行），底部基座x6-29更宽，顶部信号灯横条与铜色插座完整。",
+  "confidence": "MEDIUM",
+  "notes": "两候选文件哈希相同，X与Y之间不存在任何有意义差异，故不选赢家。主体高度1px歧义的取舍：内芯恰为20x16并同时命中两项约束边界，且任务以中心/底边等矩形语义表述，故按部件矩形口径判MEETS；若按含顶缘描边的轮廓口径则为17px、超限1px。保护区与基线的逐像素一致性无法在本评审目录内核验（未提供基线渲染），仅能确认信号灯/插座/锚点/底座在最终渲染中形态完整、无污损或错位。本任务无动画要求（requiredClips为空），motion相关字段维持UNVERIFIED。"
+}

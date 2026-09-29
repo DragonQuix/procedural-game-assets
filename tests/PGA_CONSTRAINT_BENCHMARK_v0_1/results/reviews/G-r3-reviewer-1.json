@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "G",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.native.png",
+    "Y.native.png",
+    "compare.png"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "主体呈明显矮宽厚重比例：像素实测外框宽 26px（列 13–38，≥24 达标）、高 19px（行 12–30，≤19 达标），水平居中（整数中点 X=25，几何中心 25.5 与画布中心一致），底边止于 y=31 与底座顶边无缝相接，尺寸与位置全部符合要求。",
+      "topConcern": "本目录内没有基线图，保护区（底座/仪表/读数）只能目视确认完整干净、无改动痕迹，无法逐像素对照基线验证完全一致。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "与 X 渲染完全相同：主体宽 26px、高 19px、中心 X=25、底边 y=31，矮宽厚重且结构完整，底座、仪表与读数干净无缺。",
+      "topConcern": "同 X：无基线材料可逐像素验证保护区与基线完全一致，仅能目视判断干净完整。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "X.native.png 与 Y.native.png 为字节级相同文件（MD5 一致），compare.png 中 0/1 两侧亦无任何可见差异；像素测量：主体宽 26px（列 13–38）、高 19px（行 12–30）、整数中点 X=25、底边 y=31；底座（行 31–37）、仪表（列 21–30、行 16–23）与内部读数完整无缺、无杂散或越界像素，整体仍是一个合理完整的矿区压力单元。",
+  "confidence": "HIGH",
+  "notes": "任务无 requiredClips，未提供也未查看任何动画，故 motion 保持 UNVERIFIED。评审仅基于本目录渲染：两候选逐像素相同，配对结论为无有意义差异（非强行选赢家）；主体尺寸/位置经像素测量全部达标，保护区目视干净。『与基线完全一致』一项因目录内无基线无法逐像素核实，已记入两候选的 topConcern，但未见任何疑似改动痕迹。"
+}
