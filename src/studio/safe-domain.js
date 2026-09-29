@@ -42,7 +42,7 @@ export function evaluateSafeOperation(compiled, operation, { revision = null, pr
     const checks = checkAnyCandidate({ baseCompiled: compiled, candidateCompiled: candidate, plan, preserve, revision });
     return { legal: ['OK', 'UNCHANGED'].includes(checks.status), reason: checks.code, conflicts: checks.conflicts, checks, trialCompiles };
   } catch (e) {
-    return { legal: false, reason: e.code ?? 'COMPILE_ERROR', error: { code: e.code ?? 'COMPILE_ERROR', name: e.name, message: e.message }, trialCompiles };
+    return { legal: false, reason: e.code ?? 'COMPILE_ERROR', error: { code: e.code ?? 'COMPILE_ERROR', name: e.name, message: e.message, ...(e.details ? { details: e.details } : {}) }, trialCompiles: trialCompiles + (e.details?.trialCompiles ?? 0) };
   }
 }
 
@@ -51,7 +51,8 @@ export function enumerateSafeDomain({ compiled, revision = null, operator, targe
   preserve = validatePreserve(preserve, compiled.document);
   const range = theoreticalRange(compiled.document, target, operator, field);
   const count = range[1] - range[0] + 1;
-  const pixelWork = count * compiled.asset.frames[0].width * compiled.asset.frames[0].height * compiled.document.nodes.length;
+  const relationCompileBound = preserveRelations !== false && compiled.document.relations?.length ? compiled.document.nodes.length + 3 : 1;
+  const pixelWork = count * compiled.asset.frames[0].width * compiled.asset.frames[0].height * compiled.document.nodes.length * relationCompileBound;
   if (!Number.isInteger(maxSearch) || maxSearch < 1 || maxSearch > SAFE_LIMITS.maxSearch || count > maxSearch || pixelWork > SAFE_LIMITS.maxPixelWork) fail('SEARCH_LIMIT', '安全域搜索超过显式上限；没有返回部分域冒充完整域', { count, maxSearch, pixelWork, limits: SAFE_LIMITS });
   const values = [], rejected = [];
   let trialCompiles = 0;

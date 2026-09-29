@@ -28,11 +28,17 @@ function selection(doc, request, target) {
 }
 
 export function resolveRelations(doc, request, primaryTarget) {
+  const stats = { trialCompiles: 0 };
+  try { return resolve(doc, request, primaryTarget, stats); }
+  catch (e) { e.details = { ...e.details, trialCompiles: stats.trialCompiles }; throw e; }
+}
+
+function resolve(doc, request, primaryTarget, stats) {
   const selected = selection(doc, request, primaryTarget).sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
   const next = JSON.parse(JSON.stringify(doc)), repairs = [];
-  let trialCompiles = 0;
+  if (!selected.length) return { doc: next, changes: [], repairs, selectedRelationIds: [], trialCompiles: 0 };
   const compile = () => {
-    trialCompiles++;
+    stats.trialCompiles++;
     try { return compileStudioDocument(next); }
     catch (e) { reject('REPAIR_GEOMETRY_INVALID', { issues: e.issues ?? [], message: e.message }); }
   };
@@ -103,5 +109,5 @@ export function resolveRelations(doc, request, primaryTarget) {
     const changedFields = Object.fromEntries(['x', 'y', 'w', 'h'].filter((k) => stableStringify(old[k]) !== stableStringify(n[k])).map((k) => [k, { from: old[k], to: n[k] }]));
     return Object.keys(changedFields).length ? [{ target: n.id, changedFields }] : [];
   });
-  return { doc: next, changes, repairs, selectedRelationIds: selected.map((r) => r.id), trialCompiles };
+  return { doc: next, changes, repairs, selectedRelationIds: selected.map((r) => r.id), trialCompiles: stats.trialCompiles };
 }
