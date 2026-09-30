@@ -9,7 +9,7 @@
 以 CONTEXT.md 和 docs/adr/ 为术语、模块边界和架构决策来源。
 重点 ADR：0001 核心/IO、0002 坐标、0004 共享烘焙、0009 事务、0014 位图、0015 尺寸草稿。
 当前没有 CONTEXT-MAP.md；若以后建立则按其定位子域。
-方向见 docs/plans/studio-reference-translation.md；实际证据见 docs/verification.md S11–S11.5。
+方向见 docs/plans/studio-reference-translation.md；实际证据见 docs/verification.md S11–S11.6。
 
 - Windows/PowerShell，中文交流、文档和提交；本地文件优先 FastCtx，手工编辑用 apply_patch。
 - 不默认启动子代理，不改用户级技能安装、循环版载荷、旧实验或参考原图。
@@ -61,10 +61,12 @@ src/studio/dispatch.js、src/studio/observe.js、bin/pga-studio.mjs。
 - ccb8784：0.10.0 开发源；6f2330f：0.10.0 普通载荷。
 - ff200f9：非空尺寸迁移组合回归；a2c0bb3：透明替换与留出材料指导；
   0b39216：普通载荷同步。运行时与 schema 未改，版本仍为 0.10.0。
+- 7ce2741：回收尺寸草稿后的关键点校正指导；6eb4bad：普通载荷同步。
+  运行时、schema 和 API 未改，版本仍为 0.10.0。
 
 当前分支 master，远端 origin 为 https://github.com/DragonQuix/procedural-game-assets.git。
-本轮从干净的 master/2c899e3 起步，并用 ls-remote 核实 origin/master 同 SHA；
-缺少第二张合适设计，只做合成输入的有限探针，收尾更新验证/交接文档并普通推送。
+本轮从干净的 master/f955683 起步，并用 ls-remote 核实 origin/master 同 SHA；
+用户新增真实布衣设计，有限复用检查已回收指导，收尾更新验证/交接文档并普通推送。
 续接时以 git status / git log / 远端查询核实实际状态，不把本文当成永久的同步证明。
 
 ## 历史样图与只读证据
@@ -145,9 +147,51 @@ mask=0 或带回基准，不新增 API、不继续完善样图。背景图是 PN
 **T1 仍未完成**：缺少未用于调工具的另一种设计；没有完整尺寸迁移、临摹质量、泛化或独立认证结论。
 旧骑士仍为 NOT_YET，三套旧 head/编辑源/证据、原图与循环清单保持不变，用户级安装未改。
 
+## 另一种真实设计与关键点校正（0.10.0 维护，新工作区）
+
+用户新增 Reference R2：C:/Users/admin/Downloads/ChatGPT 图像 2026年10月1日 02_09_54.png，只读。
+1024×1536；此前未用于本项目调工具。Agent 已实际看图：宽檐破帽、黑短发、灰蓝交领宽袍、
+米色内层、肩卷/肩带/绳腰、非对称长条器具 Staff A 与灯具/葫芦 Lantern B。
+材料缺口已补；Staff A 的实际用途未确认，稳定 ID 不是器具功能鉴定。
+
+本轮声明 96×144 → 64×96、1x/3x，保留头身关系，不作 Q 版，概括磨损、细褶、绳股与小扣具。
+假设是现有 poly/path 能否表达衣料层次并局部重组灯芯；规格、保留特征与停止条件见 brief.json。
+路径相对仓库，均在 gitignored `work/studio-traveler-t1-20261001`，不随推送携带：
+
+- `workspace` 当前 head=r6；一条 116 指令的直接 draw JSON 得到 r2=96×144，
+  c-402df023 最近邻尺寸草稿得到 r3=64×96。跨尺寸 diff 为 null，observe 差分/候选 crop 不可比较。
+- `lantern-small.draw.json` 五条 poly/path/pixel，候选 c-f46277e3 改变 13 像素、选区外 0、无新增透明擦除。
+  接受前实际看局部浅底/剪影和 native/display，亮芯更明确，仅接受为局部草稿 r4。
+- 同比 anchor 比本图可见靴底多 1/3px，灯芯点仍落格线；现有 raster.metadata 候选
+  c-19390d33/c-82ce5e50 校正 anchor=(32,93)、lanternCore=(38.5,49.5)，得到 r5/r6。
+  两次 RGBA 差分 0；head=(32,12)、staffGrip=(20.666666666666668,43.333333333333336) 保留。
+  documentHash=c753fb4f，renderHash=648aa7ee:d90baead。
+- `export-large`（r2）与 `export-small`（r6）：自包含编辑源、资产、图集和 manifest；
+  `reopened-large/small` 重开及图集往返像素/点位一致。五候选均从基准重新推导核对。
+- `view-D96-1x/3x`、`view-T64-1x/3x` 的整体背景 PNG 已实际看过；evidence.json 与 technical-audit.json
+  记录裁决、点位、17 个只读文件的 SHA-256 和范围。三套旧证据、上一轮合成探针、两张原图及循环清单未变。
+
+可回收指导已入位图指南和普通技能：几何点联动未承诺贴地/落像，重采样或重画后按用途检查，
+再用元数据候选单独校正，保护 RGBA 和其它点；不全体取整，不自动用 bounds.y1 识别脚底。
+现有操作能表达本例层次与灯芯重组，没有需要新增 API 的证据，停止继续重画其他部位。
+
+**旅人整张角色仍为 NOT_YET**：肩卷与葫芦区分不足，帽沿破边、脸部过度概括，Staff A 轮廓偏弱。
+大尺寸灯芯点仍落格线，握持点语义未验收；不能将低级技术检查提升为完整可用资产。
+preview.html 是未执行的静态 CanvasBank 检查页：内置浏览器连接失败，现有 Chrome 通道不可用，
+没有 READY/像素读回或浏览器截图，Canvas 为 UNVERIFIED。临时服务器已停止，47871 无监听，没有本轮新标签。
+首次整体未通过；外部生成 0、局部绘改 1、元数据校正 2，无人工绘制干预或独立认证。
+**T1 仍未完成**：另一种真实设计已做有限操作复用检查，但设计保真、完整尺寸迁移与 Canvas 尚未验收。
+旧骑士 NOT_YET 不变；没有动画、人工试玩、泛化成功率或成本改善结论。
+
 ## 测试事实
 
-- 0.10.0 本轮维护：开发源与实际普通载荷目录各运行
+- 0.10.0 本轮真实设计复用检查：开发源与实际普通载荷目录各运行六文件回归：
+  unit 的 studio-raster、studio-raster-path、studio-raster-resample、frame-observation，
+  integration 的 studio-raster、studio-raster-resample，各 **33 PASS / 0 FAIL / 0 SKIP**。
+  技能携带检查另 **1 PASS / 0 FAIL**；不是全套重测，没有新增重复测试。
+  日志在 work/studio-traveler-t1-20261001 的 `{source-tests,payload-tests,skill-release-tests}.log`。
+  普通清单 220 文件一致，循环版仅只读校验 132 文件一致；旧数据状态断言边界不变。
+- 0.10.0 上一轮合成探针维护：开发源与实际普通载荷目录各运行
   node --test "tests/unit/studio*.test.js" tests/unit/frame-observation.test.js "tests/integration/studio*.test.js"，
   各 **200 PASS / 0 FAIL / 0 SKIP**；技能携带检查另 **1 PASS / 0 FAIL**。
   日志为 work/studio-structure-probe-20261001 的 `{source-tests,payload-tests,skill-release-tests}.log`。
@@ -174,16 +218,16 @@ mask=0 或带回基准，不新增 API、不继续完善样图。背景图是 PN
 
 ## 建议的下一步
 
-1. 手部观察、尺寸草稿事务与一次面甲重组已有限验证。不为补齐样图或完整报告继续重画其它部位；
+1. 手部观察、尺寸草稿事务、面甲/灯芯重组与必要点位校正已有限验证。不为补齐样图或完整报告继续重画其它部位；
    如继续打磨，先说明新的可回收收益与证据缺口，不把允许打磨误读为禁止，也不以视觉通过为唯一目标。
-2. 下一步优先按 T1 用未参与调工具的另一种角色/服装结构检查复用性，先实际看设计，
-   声明目标尺寸、显示倍率和少数必须保留/允许概括的特征，写一句待验证假设。
-   本轮仍缺该材料；先请求用户附图或准确路径，不扫描无关目录，不把合成输入计入留出验收。
-   透明替换探针已回答本轮操作与指导问题，未发现新缺口时不为补齐 T1 继续制作合成样图。
+2. T1 已取得并实际使用第二种真实设计 R2，不再把缺参考作为当前阻塞，也不把合成输入计入留出验收。
+   仍未通过角色保真与完整尺寸迁移；若继续 R2，先说明要定位的操作/指导缺口和可回收收益，
+   不因 T1 未完成自动重画肩卷、葫芦、帽沿或脸部。现有低级工具链没有新 API 缺口证据。
    实施者以 CONTEXT.md 和 ADR-0001/0002/0004/0009/0014/0015 为术语与架构来源；当前没有 CONTEXT-MAP.md。
    新建 work，保留已有三套证据，优先沿用空白/PNG 创建、resample 草稿、poly/path/replace 和候选观察。
 3. 完整尺寸迁移仍未验收。重采样后重新定位选区和关键点、重组必要细节，不沿用原尺寸的视觉裁决。
    原尺寸、局部浅底/剪影和背景整体都要实际看；不能用跨尺寸 null 差分证明区域保护或视觉保真。
+   R2 已有两尺寸 1x/3x PNG 观察，Canvas 尚未实际显示；浏览器通道不可用时报告范围，不扩张全局环境。
 4. 先定位操作、观察或指导中可复用的真实缺口，再决定改代码；不预设必须加 API。
    证据足够支持维护判断就停止，必要测试只回答关键问题。不提前扩展动画、任意比例变换或自动审美服务。
 

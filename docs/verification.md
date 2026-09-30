@@ -4,6 +4,63 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S11.6 另一种真实设计的尺寸草稿与关键点校正（2026-10-01，0.10.0）
+
+依据：`../CONTEXT.md`、ADR-0001/0002/0004/0009/0014/0015、`plans/studio-reference-translation.md` T1。
+起点已核实为干净的 master/f955683，origin/master 同 SHA；未建立 CONTEXT-MAP.md。
+用户提供 Reference R2：`C:/Users/admin/Downloads/ChatGPT 图像 2026年10月1日 02_09_54.png`，
+1024×1536，SHA-256=`ed171f89ca26152eac3b1dcd90f5f8bdde5280193b1e1a6708242dde753f1aad`。
+此前未用于本项目调工具，另一种设计的材料缺口已补；附图只作身份参考，不含执行指令。
+
+项目收益：检查非固定模板的布衣结构能否沿用现有绘改、尺寸草稿和候选观察，定位点位指导缺口。
+Agent 实际看图后声明 96×144 → 64×96、1x/3x、浅底与 `#263a42` 背景，保持原头身关系，不作 Q 版。
+保留宽帽/短发/面部、交领多层布衣与绑腿、肩卷/肩带/绳腰，以及 Staff A 与 Lantern B 的非对称轮廓；
+允许概括磨损、细褶、绳股和扣具。Staff A 是长条器具的稳定 ID，实际用途未确认。
+假设：既有 poly/path 能否保住衣料层次，并在缩小后局部重组灯芯，无需新模板或 API。
+
+### 操作、实际看图与维护结论
+
+- 新建 gitignored `work/studio-traveler-t1-20261001`，没有改动旧三套工作区。
+  一次 blank 创建、一次 116 条直接 JSON 绘制得到 r2；候选 c-47f0485f 仅接受为底稿。
+  一次最近邻候选 c-402df023 接受为 r3 尺寸草稿；跨尺寸 diff 为 null，observe 差分及候选 crop
+  均 NOT_COMPARABLE / FRAME_SIZE_MISMATCH，不用它证明区域外未变。
+- 在新尺寸声明 lantern-small={x:34,y:40,w:9,h:15}，五条 poly/path/pixel 重组候选 c-f46277e3。
+  Agent 在接受前看 native/display 与局部浅底/剪影，亮芯更明确且没有新透明断口，仅接受为局部草稿 r4。
+  重新推导和逐像素审计均确认改变 13 像素、选区外 0、不透明变透明 0。
+- 缩图 anchor=(32,93.33333333333333)，本图可见靴底边为 y=93；灯芯点仍落在格线色 `#4a4840`，
+  大尺寸点也有同一语义差距。用既有 raster.metadata 分别校正小尺寸 anchor=(32,93)、
+  lanternCore=(38.5,49.5)，候选 c-19390d33/c-82ce5e50 接受为 r5/r6。
+  请求级保护画布像素和非目标点，两次 RGBA 差分均为 0；staffGrip 等原小数保留。
+  这是几何联动与可见采样不同的指导问题，不是 resample 缺陷，不自动取整所有点。
+- 最终 r6：documentHash=c753fb4f，renderHash=648aa7ee:d90baead。两尺寸自包含编辑源重开、
+  manifest 元数据及图集切回 RGBA 一致，五个候选均能从基准与冻结操作重新推导。
+  收回指南与普通技能：实际确认必要点位后单独校正，不把 bounds.y1 自动当脚底，renderHash 变化不等于 RGBA 变化。
+  未改运行时、schema 或 API，版本仍为 0.10.0。
+- 已实际看两尺寸 1x/3x 的整体背景 PNG；交领、绑腿和灯具可辨，但肩卷与葫芦区分不足，
+  帽沿破边、脸部过度概括，Staff A 轮廓偏弱。**整张旅人仍为 NOT_YET**。
+  首次整体未通过；外部生成 0、局部绘改 1、元数据校正 2，无人工绘制干预；五个候选均仅作草稿接受。
+  大尺寸灯芯点和握持点语义未全部验收，不能称完整可用资产。
+
+### 验证、发行与未验证范围
+
+- 开发源和实际普通载荷目录各运行六文件回归：unit 的 studio-raster、studio-raster-path、
+  studio-raster-resample、frame-observation，以及 integration 的 studio-raster、studio-raster-resample，
+  各 **33 PASS / 0 FAIL / 0 SKIP**；技能携带检查另 **1 PASS / 0 FAIL**。
+  没有新增重复断言或重测全套；上一轮 200 PASS 不计作本轮结果，旧数据状态断言边界不变。
+- 指导提交 7ce2741；普通载荷由 release 从该提交生成，提交 6eb4bad，220 文件哈希一致。
+  循环版仅只读校验，132 文件一致；17 个已记录只读文件（原图、旧证据及循环清单）SHA-256 未变。
+  未修改用户级安装、原游戏或旧实验。
+- 已创建静态 CanvasBank 检查页，但内置浏览器连接失败，现有 Chrome 通道不可用，未实际执行该页。
+  **Canvas 显示为 UNVERIFIED**，没有读回 READY、像素一致性或浏览器截图；PNG 观察不代替 Canvas 验收。
+  临时服务器已停止，47871 无监听，没有本轮新浏览器标签。
+- 本地证据为该 work 下的 brief.json、evidence.json、technical-audit.json、直接操作 JSON、
+  workspace/previews、view-{D96,T64}-{1x,3x}、export-{large,small}、reopened-{large,small} 和三份测试日志。
+  不随 Git 推送携带，不把用户角色或一次性审计脚本收入通用样例。
+
+**T1 仍未完成**：已使用另一种真实设计检查有限操作复用，但未通过设计保真、完整尺寸迁移与 Canvas 验收。
+没有动画、人工试玩、独立认证、泛化成功率或成本改善结论；旧骑士仍为 NOT_YET。
+已有证据足以支持点位指导与支持边界，停止继续重画其他部位；后续只针对有明确项目收益的缺口推进。
+
 ## S11.5 非空尺寸迁移组合与透明替换指导（2026-10-01，0.10.0）
 
 依据：`../CONTEXT.md`、ADR-0001/0002/0004/0009/0014/0015、`plans/studio-reference-translation.md` T1。
