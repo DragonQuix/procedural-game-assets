@@ -1,6 +1,6 @@
 {
   "generator": "procedural-game-assets@0.10.0",
-  "builtFrom": "a2c0bb3524543a1e55a12c017dfc2e1718049b7a",
+  "builtFrom": "7ce2741016fca92fdc133c1faa9c62da0265cbe7",
   "fileCount": 220,
   "pathRoot": "工具包根（携带后的 vendor/pga/）；files 键为相对该根的 POSIX 路径",
   "files": {
@@ -27,7 +27,7 @@
     "docs/recipe-guide.md": "c4ad3cd8a852d1c3a2266bfcdbde9de5cbb594224fd7b15ff3df8b723be10d95",
     "docs/research/asset-loop-landscape.md": "826676b28cd5743a86c12c9038e3f7478166731e115ba5c0275974a1c78d14d3",
     "docs/studio-cli.md": "f85a8dd6aa8f80694e0e6ca3bb484ebd6b7df9c612c51203a650fc72aa5c9826",
-    "docs/studio-raster.md": "950026a57d54e6bf5348bc3d9654ea9a8cd91c252091bade6b3ee9855dacd418",
+    "docs/studio-raster.md": "a1f946b213f6b6a4881ad7ca489659954c52e723a38abf0ea0495e98594c2419",
     "docs/visual-quality.md": "5cab5dac47d303466fe78f56c93c363aa4804e8563177c595a098e63c32f2ed1",
     "docs/visual-review.md": "bcc0da6329168922494071ec533a74b112d73f4bc834a8693a1406bfca5969f6",
     "examples/canvas-slice/index.html": "a09fadd5ca9290aac61998bb2fd699cd427ddf3a5b49445f8f19b6dbf2dbb5a7",
