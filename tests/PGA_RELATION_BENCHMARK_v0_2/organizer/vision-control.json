@@ -1,0 +1,9 @@
+{
+  "schema": "pga-vision-control/2",
+  "coordinatorOnly": true,
+  "objects": {
+    "A": "金色钥匙，深色背景，环形孔与齿",
+    "B": "绿色树冠与棕色树干，浅色背景"
+  },
+  "note": "预备图不是已通过的 gate；需 ZCode 真实宿主 image-input 证据。"
+}

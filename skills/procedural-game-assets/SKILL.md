@@ -86,7 +86,7 @@ CONTEXT.md、README.md；把模板复制为 `game/` 并把 import 改写成指�
 - **离线导出（可选部署）**：`bin/pga.mjs export` → PNG 图集 + 版本化 manifest；
   与启动烘焙同源，往返切回帧逐像素一致（有测试）。
 
-## PGA Studio：文档驱动的资产创作层（0.7.0 / Studio v1.3 alpha，ADR-0008–0012）
+## PGA Studio：文档驱动的资产创作层（0.8.0 / Studio v1.4 alpha，ADR-0008–0013）
 
 面向具备视觉判断的 agent：不必手写绘图代码，用**可编辑 JSON 文档**逐步制作资产，
 经共享烘焙核心渲染、预览、保护与导出。入口与完整合同：
@@ -99,6 +99,7 @@ node examples/studio/smoke.mjs --out work/studio-smoke      # M1：文档→渲�
 node examples/studio/edit-demo.mjs --out work/studio-m2      # M2：探索→保护→接受→恢复
 node examples/studio/m5-demo.mjs --out work/studio-m5        # M5：角色跨帧修改+播放页
 node examples/studio/v13-demo.mjs --out work/studio-v13      # v1.3：最终保护与联动几何
+node examples/studio/v14-relation-demo.mjs --out work/studio-v14 # v1.4：显式关系与保护
 node bin/pga-studio.mjs create --doc examples/studio/terminal.studio.json --out work/ws
 node bin/pga-studio.mjs explore --ws work/ws --base r1 --op geometry.set --target terminal.shell --field w --values 24,26,28
 ```
@@ -115,6 +116,12 @@ node bin/pga-studio.mjs explore --ws work/ws --base r1 --op geometry.set --targe
   widen_about_center / squash_keep_base / resize_about_anchor 自动补偿位置。
   不把多个单变量安全域任意组合；非法值不 clamp，旧修订结果需重新 inspect。
   commit 与 export/submit 都复验最终 RGBA/元数据。NOT_CONFIGURED 不是全局保护通过。
+
+- **v1.4 显式关系**：/4 relations 用稳定 nodeId+feature 声明 contact；inspect 直接报告 gap/overlap。
+  三个矩形语义变换支持 preserveRelations=true 或关系 ID 数组，只按声明 follower/policy 修复。
+  required relation 与 protection 最终必须 AND 通过；不按节点名称猜依赖，不是通用 solver。
+  支持 translate-follower / resize-follower-edge；冲突、非整数或未支持关系均拒绝。
+  工程自检不等于独立认证，v0.2 正式模型实验未执行，不宣称 agent 收益。
 
 明确边界：**不是**严格资产循环（Studio 候选是快速试错，不等于循环版冻结候选或 WOW；
 严格交付仍走 `procedural-game-assets-loop` 的独立评审）；没有 GUI/MCP/云服务；

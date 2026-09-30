@@ -13,6 +13,7 @@ import { compileAny, describeAnyCapabilities } from '../studio/dispatch.js';
 import { buildViews, buildCharacterViews } from '../studio/observe.js';
 import { stableStringify } from '../studio/document.js';
 import { assertProtection } from '../studio/protection-contract.js';
+import { assertRelations, evaluateRelations } from '../studio/relations.js';
 import { inspectSafeDomains } from '../studio/safe-domain.js';
 import { writeObservationBundle } from './observation-files.js';
 import { assetToJSON } from './asset-file.js';
@@ -186,14 +187,16 @@ async function inspectCompiled(compiled, source, opts = {}) {
   const summary = summarize(compiled, source, opts.outDir ?? null, files);
   summary.constraints = compiled.document.constraints;
   summary.protection = compiled.protection;
+  summary.relations = evaluateRelations(compiled, { revision: opts.revision ?? null });
   summary.capabilities = capabilities;
-  if (opts.node && compiled.document.schemaVersion === 'pga-studio/3') summary.safeDomain = inspectSafeDomains(compiled, { revision: opts.revision ?? null, target: opts.node, maxSearch: opts.maxSearch });
+  if (opts.node && ['pga-studio/3', 'pga-studio/4'].includes(compiled.document.schemaVersion)) summary.safeDomain = inspectSafeDomains(compiled, { revision: opts.revision ?? null, target: opts.node, maxSearch: opts.maxSearch, preserveRelations: opts.preserveRelations ?? false });
   return summary;
 }
 
 /** 导出核心：既有资产格式（.asset.json + 图集 PNG + 版本化 manifest）与可编辑源文档。 */
 async function exportCompiled(compiled, source, outDir, opts = {}) {
   assertProtection(compiled);
+  assertRelations(compiled);
   const { asset } = compiled;
   await ensureOutDir(outDir);
   await writeMarker(outDir, opts.generator ?? 'unknown');
@@ -216,6 +219,7 @@ async function exportCompiled(compiled, source, outDir, opts = {}) {
   const summary = summarize(compiled, source, outDir, files);
   summary.manifest = { schemaVersion: manifest.schemaVersion, frames: manifest.frames.length, pages: manifest.pages.length };
   summary.protection = compiled.protection;
+  summary.relations = evaluateRelations(compiled, { revision: opts.revision ?? null });
   return summary;
 }
 

@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "pga-studio/4",
+  "id": "holdout-r-v02",
+  "seed": 204929,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "oxide-jade",
+    "version": 1,
+    "ramps": {
+      "body": [
+        "#293335",
+        "#637871",
+        "#a0b6a0",
+        "#e3ddbf"
+      ],
+      "detail": [
+        "#402d32",
+        "#a76351",
+        "#d79770",
+        "#f8d5a1"
+      ]
+    }
+  },
+  "canvas": {
+    "w": 56,
+    "h": 48,
+    "outline": null
+  },
+  "nodes": [
+    {
+      "id": "node.a",
+      "kind": "panel",
+      "x": 18,
+      "y": 18,
+      "w": 20,
+      "h": 20,
+      "ramp": "body",
+      "material": "bevel-metal",
+      "layer": 0
+    },
+    {
+      "id": "node.b",
+      "kind": "panel",
+      "x": 25,
+      "y": 7,
+      "w": 6,
+      "h": 11,
+      "ramp": "detail",
+      "material": "shade-diag",
+      "layer": 1
+    },
+    {
+      "id": "node.c",
+      "kind": "panel",
+      "x": 10,
+      "y": 38,
+      "w": 36,
+      "h": 3,
+      "ramp": "body",
+      "material": "bevel-metal",
+      "layer": 2
+    }
+  ],
+  "anchor": {
+    "x": 28,
+    "y": 41
+  },
+  "attachments": {},
+  "constraints": [],
+  "protection": {
+    "schemaVersion": "pga-protection/1",
+    "coordinateSpace": "final-frame",
+    "protectedRegions": [
+      {
+        "x": 0,
+        "y": 38,
+        "w": 56,
+        "h": 10
+      }
+    ],
+    "metadataPaths": [
+      "anchor"
+    ],
+    "nodeIds": [
+      "node.c"
+    ],
+    "baseline": {
+      "schemaVersion": "pga-studio/2",
+      "id": "holdout-r-v02",
+      "seed": 204929,
+      "renderProfile": {
+        "name": "pixel-flat",
+        "version": 1
+      },
+      "style": {
+        "id": "oxide-jade",
+        "version": 1,
+        "ramps": {
+          "body": [
+            "#293335",
+            "#637871",
+            "#a0b6a0",
+            "#e3ddbf"
+          ],
+          "detail": [
+            "#402d32",
+            "#a76351",
+            "#d79770",
+            "#f8d5a1"
+          ]
+        }
+      },
+      "canvas": {
+        "w": 56,
+        "h": 48,
+        "outline": null
+      },
+      "nodes": [
+        {
+          "id": "node.a",
+          "kind": "panel",
+          "x": 18,
+          "y": 18,
+          "w": 20,
+          "h": 20,
+          "ramp": "body",
+          "material": "bevel-metal",
+          "layer": 0
+        },
+        {
+          "id": "node.b",
+          "kind": "panel",
+          "x": 25,
+          "y": 7,
+          "w": 6,
+          "h": 11,
+          "ramp": "detail",
+          "material": "shade-diag",
+          "layer": 1
+        },
+        {
+          "id": "node.c",
+          "kind": "panel",
+          "x": 10,
+          "y": 38,
+          "w": 36,
+          "h": 3,
+          "ramp": "body",
+          "material": "bevel-metal",
+          "layer": 2
+        }
+      ],
+      "anchor": {
+        "x": 28,
+        "y": 41
+      },
+      "attachments": {},
+      "constraints": []
+    }
+  },
+  "relations": [
+    {
+      "id": "R1",
+      "type": "contact",
+      "endpointA": {
+        "nodeId": "node.a",
+        "feature": "top-edge"
+      },
+      "endpointB": {
+        "nodeId": "node.b",
+        "feature": "bottom-edge"
+      },
+      "required": true,
+      "tolerance": 0,
+      "resolution": {
+        "mode": "resize-follower-edge",
+        "follower": "B",
+        "axis": "y",
+        "invariant": "opposite-edge-and-orthogonal-geometry"
+      }
+    },
+    {
+      "id": "R2",
+      "type": "contact",
+      "endpointA": {
+        "nodeId": "node.a",
+        "feature": "bottom-edge"
+      },
+      "endpointB": {
+        "nodeId": "node.c",
+        "feature": "top-edge"
+      },
+      "required": true,
+      "tolerance": 0
+    }
+  ]
+}

@@ -24,3 +24,18 @@
 - `skills/procedural-game-assets-loop/assets/toolkit/` 与其 `scripts/` 同为派生产物；用 `tools/release.mjs --skill procedural-game-assets-loop` 生成，安装脚本开发源仍在普通技能 `scripts/`。
 - 独立试验项目、原游戏、共享安装及用户级技能入口默认只读，修改或替换须有明确授权。
 - 按职责做中文原子提交，不擅自 amend 或推送；没有需要提交的改动就不制造空提交。
+
+<!-- symbolic-identity:begin -->
+## Symbolic identity over spatial identity
+
+1. 区分多个 images、candidates、objects、nodes、regions、panels、review alternatives 或 frames 时，不得用显示位置作为唯一身份；所有 agent-generated prompts、benchmark materials 和 blind-review packages 都必须让身份与视觉布局解耦。
+2. 禁止把 left candidate / right candidate、left image / right image、left option / right option、object on the left / object on the right，以及左候选 / 右候选、左图 / 右图、左边那个 / 右边那个、左侧对象 / 右侧对象作为身份标签。
+3. 使用稳定符号身份：Candidate A / Candidate B、Candidate X / Candidate Y、Object A / Object B、Node IDs、Region IDs、Frame IDs、stable filenames 或 stable UUIDs。
+4. Blind review 使用 X/Y 等符号。MIRRORED_BALANCE 改变画面位置时身份不得改变；reviewer prompt 只能引用 X/Y，不得引用屏幕左侧/右侧。优先分别提供 X、Y 独立图像，不让位置承担身份。
+5. Contact sheet 的每个 tile 必须有稳定 ID，标签必须位于 asset pixels 外；prompt 引用 ID，不引用 tile 的左/右位置。
+6. Vision gate 不允许用“左边是什么、右边是什么”验证视觉能力。使用独立的 object_A.png / object_B.png，或明确 A/B 标签；不得无意测试模型的左右辨识能力。
+7. Logs / JSON / schemas / APIs 禁止用 leftCandidate、rightCandidate、leftImage、rightImage 设计身份字段；使用 candidateA、candidateB、candidateX、candidateY 或 stable IDs。
+8. 描述空间几何时，优先使用 object ID、bounding box、coordinates、anchor、edge ID、axis。例如 Node A edge E2 at y=18，优于“A 的上方/左边那个边”。
+9. left/right 并非在所有语境下绝对禁止。方向本身是任务语义时，例如 character faces right、projectile travels left，可以使用方向词；对象身份仍必须使用稳定 ID。
+10. 原则：**Position may describe geometry; position must not define identity.**
+<!-- symbolic-identity:end -->

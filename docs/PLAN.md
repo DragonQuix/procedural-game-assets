@@ -32,7 +32,16 @@
   `plans/agent-studio.md`；agent 合同见 `studio-cli.md`。不改变普通/循环版入口与准出规则；
   循环版载荷不随动（保持 0.5.0），用户级安装升级另行授权。
 
-## 已完成（均验证过，见 verification.md）
+## 当前开发交付（待独立认证）
+
+- Studio v1.4 / 0.8.0：显式 contact、有限 follower 修复、最终关系合同与安全域共用检查链。
+  边界见 ADR-0013，交接见 `plans/studio-v1_4-delivery.md`。新 schema /4，/1–/3 保持兼容。
+- v0.1 已正式归档 NO-GO，不能沿用下方历史 v1.3 交付时的“尚未运行”状态。
+  产品解释见 `experiments/pga-constraint-v0_1-product-interpretation.md`。
+- `PGA_RELATION_BENCHMARK_v0_2` 只准备草案和真实两臂工具；正式验证、D14 final freeze 与实验执行交给 ZCode。
+  本轮不运行模型，不升级用户级安装或循环版载荷。
+
+## 历史已完成
 
 - Studio v1.3 窄范围升级（工具包 0.7.0，ADR-0012）：资产级最终保护、三个矩形联动几何、
   修订绑定安全域与共享观察。v1.2 终审解释见 `experiments/pga-ab-v1_2-final-audited.md`。

@@ -1,0 +1,30 @@
+{
+  "schema": "pga-relation-protocol/0.2-draft",
+  "experiment": "PGA_RELATION_BENCHMARK_v0_2",
+  "status": "DRAFT_NOT_RUN",
+  "approvedToExecute": false,
+  "arms": { "D13": "真实 v0.7.0 tag 的 Studio v1.3", "D14": "Studio v1.4 / 0.8.0 candidate snapshot，待 ZCode final freeze" },
+  "design": { "tasks": ["C", "R"], "repeatsPerTaskPerArm": 3, "plannedRuns": 12, "candidateBudget": 6, "reviewersPerPair": 2, "balance": "MIRRORED_BALANCE", "stableReviewIdentities": ["X", "Y"] },
+  "model": null,
+  "host": null,
+  "reasoning": null,
+  "primary": ["taskSuccess", "finalRequiredRelationViolationCount", "manualCoordinateRepairCount"],
+  "taskSuccessAll": ["submit success", "deterministic", "mechanical task contract PASS", "protection PASS", "required relation PASS", "budget PASS", "protocol PASS", "visual requirement PASS"],
+  "secondary": ["candidateCount", "rejectedOperationCount", "semanticTransformCount", "relationAwareTransformCount", "validationProbeCount", "relationEvaluationProbeCount", "relationRepairCount", "protectionRejectionCount", "retries", "errors", "reviewerPreference"],
+  "hardConstraints": { "finalProtectionViolationCount": 0 },
+  "observationParity": ["baseline", "native", "upscaled", "target crop", "diff", "contact sheet"],
+  "toolCapabilityDifference": "D14 inspect 的 relation diagnostics 允许使用，不属于纯视觉信息差异",
+  "budgetRule": "物化候选预算为 6；无物化 render 的 validation/relation evaluation probe 单独计数，不计 candidate",
+  "goDraft": {
+    "D14FinalRequiredRelationViolations": 0,
+    "D14FinalProtectionViolations": 0,
+    "D14TaskSuccessMinimum": "5/6",
+    "manualCoordinateRepairCount": "D14 总数严格小于 D13",
+    "medianCandidateCount": "D14 <= D13",
+    "visualNonRegression": "D14 双评审 MEETS 总数不低于 D13；D13 一致偏好不超过 1 对；无 D14 一致 NOT_YET",
+    "interpretationCondition": "relation-aware 能力至少在正式 runs 被自行调用且产生可验证行为；不得为满足本条指导 participant 使用某 API"
+  },
+  "excludedPrimary": "invalidRenderedCandidateIncidence 不再作为核心成功判据",
+  "execution": { "started": false, "participantRuns": 0, "reviews": 0, "modelCalls": 0, "results": null },
+  "freezeOwner": "ZCode 独立会话；正式模型/宿主/计数 schema/视觉规则/顺序/工具 final hash 运行前复核冻结"
+}
