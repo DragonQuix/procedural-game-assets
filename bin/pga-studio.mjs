@@ -25,6 +25,9 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import {
   createFromFile,
+  createRasterWorkspace,
+  readStudioDocument,
+  rasterOperationWithImage,
   inspectFromFile,
   inspectWorkspace,
   exportFromFile,
@@ -38,7 +41,7 @@ import { StudioOperationError } from '../src/studio/operators.js';
 
 const PKG = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
 const GENERATOR = `procedural-game-assets@${PKG.version}`;
-const TOOL_VERSION = `${PKG.version}/pga-studio-1.4`;
+const TOOL_VERSION = `${PKG.version}/pga-studio-1.5`;
 
 function emit(payload, code) {
   process.stdout.write(JSON.stringify(payload, null, 2) + '\n');
@@ -59,13 +62,13 @@ for (let i = 0; i < rest.length; i++) {
 
 /** R4：命令级选项白名单——拼错的选项（如 --preserv）明确报用法错误，不悄悄变成无效参数。 */
 const COMMAND_OPTS = {
-  create: ['doc', 'out', 'display-scale', 'bg'],
-  inspect: ['doc', 'ws', 'revision', 'out', 'node', 'display-scale', 'bg', 'preserve-relations'],
+  create: ['doc', 'blank', 'image', 'id', 'width', 'height', 'anchor', 'attachments', 'out', 'display-scale', 'bg'],
+  inspect: ['doc', 'ws', 'revision', 'out', 'node', 'region', 'display-scale', 'bg', 'preserve-relations'],
   export: ['doc', 'ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
   submit: ['ws', 'revision', 'out', 'max-page', 'margin', 'display-scale', 'bg'],
-  observe: ['ws', 'revision', 'out', 'candidates', 'node', 'display-scale', 'bg'],
+  observe: ['ws', 'revision', 'out', 'candidates', 'node', 'region', 'display-scale', 'bg'],
   state: ['ws', 'display-scale', 'bg'],
-  edit: ['ws', 'base', 'op', 'target', 'params', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg', 'safe-binding', 'preserve-relations'],
+  edit: ['ws', 'base', 'op', 'target', 'params', 'operation', 'image', 'material', 'ramp', 'value', 'preserve', 'request-id', 'display-scale', 'bg', 'safe-binding', 'preserve-relations'],
   explore: ['ws', 'base', 'op', 'target', 'field', 'values', 'params', 'preserve', 'request-id', 'display-scale', 'bg', 'preserve-relations'],
   commit: ['ws', 'accept', 'restore', 'expected-head', 'request-id', 'display-scale', 'bg'],
 };
@@ -78,7 +81,7 @@ if (COMMAND_OPTS[cmd]) {
 function intOpt(name, fallback) {
   if (opts[name] === undefined) return fallback;
   const n = Number(opts[name]);
-  if (!Number.isInteger(n) || n < 1) fail('INVALID_DOCUMENT', `--${name} 需要正整数，收到 ${JSON.stringify(opts[name])}`, 2);
+  if (typeof opts[name] !== 'string' || !Number.isInteger(n) || n < 1) fail('INVALID_DOCUMENT', `--${name} 需要正整数，收到 ${JSON.stringify(opts[name])}`, 2);
   return n;
 }
 
@@ -107,20 +110,19 @@ function commonOpts() {
 }
 
 function buildOperation() {
-  const id = requireOpt('op', '需要 --op <geometry.set|material.set|ramp.set|palette.set|rig.set|art.set>');
+  const id = requireOpt('op', '需要 --op <操作 ID>；可用操作见 inspect.capabilities');
   const target = requireOpt('target', `操作 ${id} 需要 --target <目标>`);
-  if (id === 'palette.set' || id === 'rig.set' || id === 'art.set') {
-    // 角色操作（pga-studio/character/1）：统一 { id, target, value }
-    const raw = requireOpt('value', `${id} 需要 --value <值>（颜色 '#rrggbb' / 整数 / ASCII 行 JSON 数组）`);
+  if (id === 'palette.set' || id === 'rig.set' || id === 'art.set' || id === 'raster.metadata') {
+    const raw = requireOpt('value', `${id} 需要 --value <值>（字符串或 JSON）`);
     try {
       return { id, target, value: JSON.parse(raw) };
     } catch {
       return { id, target, value: raw };
     }
   }
-  if (['geometry.set', 'widen_about_center', 'squash_keep_base', 'resize_about_anchor'].includes(id)) {
+  if (['geometry.set', 'widen_about_center', 'squash_keep_base', 'resize_about_anchor', 'raster.draw', 'raster.replace'].includes(id)) {
     const params = jsonOpt('params', null);
-    if (!params) fail('INVALID_DOCUMENT', `geometry.set 需要 --params '{"w":28}'`, 2);
+    if (!params) fail('INVALID_DOCUMENT', `${id} 需要 --params <JSON 对象>`, 2);
     return { id, target, params };
   }
   if (id === 'material.set') return { id, target, material: requireOpt('material', 'material.set 需要 --material <name>') };
@@ -182,10 +184,19 @@ async function main() {
   const common = commonOpts();
   const relationOption = opts['preserve-relations'] === undefined ? {} : { preserveRelations: jsonOpt('preserve-relations') };
   if (['edit', 'explore'].includes(cmd) && Object.keys(relationOption).length && !['widen_about_center', 'squash_keep_base', 'resize_about_anchor'].includes(opts.op)) fail('INVALID_DOCUMENT', '--preserve-relations 只支持 semantic transform', 2);
-  if (cmd === 'observe') return { result: await observeWorkspace(resolve(requireOpt('ws', 'observe 需要 --ws')), resolve(requireOpt('out', 'observe 需要 --out')), { ...common, revision: opts.revision, candidateIds: jsonOpt('candidates', []), node: opts.node }) };
+  if (cmd === 'observe') return { result: await observeWorkspace(resolve(requireOpt('ws', 'observe 需要 --ws')), resolve(requireOpt('out', 'observe 需要 --out')), { ...common, revision: opts.revision, candidateIds: jsonOpt('candidates', []), node: opts.node, region: jsonOpt('region') }) };
   if (cmd === 'create') {
-    const doc = requireOpt('doc', 'create 需要 --doc <file.json>');
     const out = requireOpt('out', 'create 需要 --out <ws>');
+    if (['doc', 'blank', 'image'].filter((key) => opts[key] !== undefined).length !== 1) fail('INVALID_DOCUMENT', 'create 必须选择 --doc、--blank 或 --image 之一', 2);
+    if (opts.blank !== undefined || opts.image !== undefined) {
+      if (opts.blank !== undefined && opts.blank !== true) fail('INVALID_DOCUMENT', '--blank 是无值开关', 2);
+      return { result: await createRasterWorkspace(resolve(out), { ...common,
+        id: requireOpt('id', '位图 create 需要 --id'), width: intOpt('width'), height: intOpt('height'),
+        image: opts.image === undefined ? undefined : resolve(requireOpt('image', '--image 需要 PNG 路径')),
+        anchor: jsonOpt('anchor'), attachments: jsonOpt('attachments', {}) }) };
+    }
+    if (['id', 'width', 'height', 'anchor', 'attachments'].some((key) => opts[key] !== undefined)) fail('INVALID_DOCUMENT', '--doc 不接受位图创建参数', 2);
+    const doc = requireOpt('doc', 'create 需要 --doc <file.json>');
     return { result: await createFromFile(resolve(doc), resolve(out), common) };
   }
   if (cmd === 'inspect') {
@@ -196,12 +207,13 @@ async function main() {
           revision: typeof opts.revision === 'string' ? opts.revision : undefined,
           outDir: typeof opts.out === 'string' ? resolve(opts.out) : undefined,
           node: typeof opts.node === 'string' ? opts.node : undefined,
+          region: jsonOpt('region'),
         }),
       };
     }
     const doc = requireOpt('doc', 'inspect 需要 --doc <file.json> 或 --ws <dir>');
     return {
-      result: await inspectFromFile(resolve(doc), { ...common, outDir: typeof opts.out === 'string' ? resolve(opts.out) : undefined, node: typeof opts.node === 'string' ? opts.node : undefined }),
+      result: await inspectFromFile(resolve(doc), { ...common, outDir: typeof opts.out === 'string' ? resolve(opts.out) : undefined, node: typeof opts.node === 'string' ? opts.node : undefined, region: jsonOpt('region') }),
     };
   }
   if (cmd === 'export' || cmd === 'submit') {
@@ -223,10 +235,13 @@ async function main() {
     const ws = requireOpt('ws', 'edit 需要 --ws <dir>');
     const base = requireOpt('base', 'edit 需要 --base <revision>');
     const store = await StudioStore.open(resolve(ws), common);
+    if (opts.operation !== undefined && ['op', 'target', 'params', 'value', 'material', 'ramp', 'preserve-relations'].some((key) => opts[key] !== undefined)) fail('INVALID_DOCUMENT', '--operation 不能与内联操作参数混用', 2);
+    let operation = opts.operation === undefined ? { ...buildOperation(), ...relationOption } : await readStudioDocument(resolve(requireOpt('operation', '--operation 需要 JSON 文件')));
+    if (opts.image !== undefined) operation = await rasterOperationWithImage(operation, resolve(requireOpt('image', '--image 需要 PNG 路径')));
     return {
       result: await store.edit({
         baseRevision: base,
-        operation: { ...buildOperation(), ...relationOption },
+        operation,
         safeBinding: jsonOpt('safe-binding', undefined),
         preserve: jsonOpt('preserve', []),
         requestId: typeof opts['request-id'] === 'string' ? opts['request-id'] : undefined,

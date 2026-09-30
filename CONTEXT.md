@@ -34,6 +34,9 @@
 | `edit candidate`（编辑候选） | 从某修订派生的未提交文档 + 保护检查结果，内容哈希识别（`c-*`） | 不改变 head；与 pga-loop 的冻结 `candidate` 不同域，见 ADR-0009 |
 | `allowed region`（允许影响区域） | 由操作计划与依赖独立计算的像素可变化区域（旧∪新几何、描边邻域、层序遮挡） | 绝不从事后差分反推；区域外变化即违规 |
 | `character document`（角色文档） | `pga-studio/character/1`：humanoid 配方的结构化数据面（palette/frame/rig/art/poses/clips） | 经既有 bakeHumanoid 编译；不变量仅适配 checkedPoseKinds；见 ADR-0011 |
+| `raster document`（位图文档） | `pga-studio/raster/1`：最终尺寸、内嵌规范化 RGBA、锚点、附件点和保护声明的单帧编辑源 | 边长最多 256、二值 alpha；标准 BakedAsset.kind 为 raster；见 ADR-0014 |
+| `raster region`（位图选区） | 操作前显式声明的稳定 ID + 最终帧矩形 + 可选二值掩码；绘制参数相对矩形原点 | 不是语义部件，也不是跨修订冻结合同；区域外最终像素必须不变 |
+| `reference translation`（参考设计临摹） | Agent 看用户设计和候选，用 Studio 或外部工具创建/修改，再自行看图检查 | 角色身份、风格参考与质量标杆分开；技术 PASS 不证明视觉保真，不默认使用独立长循环 |
 | `grounding`（接地） | 角色帧包围盒底缘（贴地）在修改前后不变 | 顶缘随体高/腿长合法变化；由 solvePose 自动保持 |
 | `head` | Studio 工作区当前已确认修订指针（`head.json`，原子替换更新） | 只有 commit 移动它；并发底线是 expectedHead 校验 |
 | `asset protection contract`（资产级保护合同） | `pga-studio/3.protection` 的冻结基线、最终帧像素区/掩码、metadataPaths 与 nodeIds | `pga-protection/1`；最终重新编译的 RGBA/元数据为权威，不等于 operation footprint；见 ADR-0012 |
@@ -78,6 +81,6 @@ examples/godot/         Godot 可选适配样例（非验收前提）
 - 分析：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ART-ANALYSIS.md`
 - 原游戏设计：`E:/Repos/Games/ForOthers/others_003/docs/DESIGN.md`
 - 来源与授权：`docs/provenance.md`
-- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio、0009 Studio 编辑事务、0010 Studio 风格与构造、0011 Studio 角色与跨帧）
+- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio、0009 Studio 编辑事务、0010 Studio 风格与构造、0011 Studio 角色与跨帧、0012 最终保护与安全域、0013 显式关系、0014 单帧位图创作）
 
 本项目当前没有 `CONTEXT-MAP.md`（未做领域拆分）；如将来拆分领域再建立。

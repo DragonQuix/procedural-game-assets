@@ -1,6 +1,6 @@
 ---
 name: procedural-game-assets
-description: 用程序化资产工具包与轻量 Canvas 模板制作网页游戏：角色、道具、地形等由代码生成，启动烘焙为 Canvas 精灵，模板提供循环、碰撞与交互。用于缺少美术素材、制作像素风网页游戏或按截图诊断视觉问题；有标杆时追求同等级质量而非复制，并检查整体美学与实际游戏画面。离线图集、Godot 与音频为可选参考；严格独立长循环另用 procedural-game-assets-loop。
+description: 用程序化资产工具包与轻量 Canvas 模板制作网页游戏，或由 Agent 看用户角色设计、用 Studio 创建和修改单帧像素资产。支持程序化配方、空白绘制或 PNG 导入，启动烘焙为 Canvas 精灵。用于缺少美术素材、角色临摹、像素风网页游戏或截图诊断；明确临摹时保留指定身份，仅作质量标杆时允许原创。检查整体美学与实际游戏画面；严格独立长循环另用 procedural-game-assets-loop。
 ---
 
 # 程序化游戏资产 + Canvas 网页游戏模板
@@ -86,12 +86,20 @@ CONTEXT.md、README.md；把模板复制为 `game/` 并把 import 改写成指�
 - **离线导出（可选部署）**：`bin/pga.mjs export` → PNG 图集 + 版本化 manifest；
   与启动烘焙同源，往返切回帧逐像素一致（有测试）。
 
-## PGA Studio：文档驱动的资产创作层（0.8.0 / Studio v1.4 alpha，ADR-0008–0013）
+## PGA Studio：文档驱动的资产创作层（0.9.0 / Studio v1.5 alpha，ADR-0008–0014）
 
 面向具备视觉判断的 agent：不必手写绘图代码，用**可编辑 JSON 文档**逐步制作资产，
 经共享烘焙核心渲染、预览、保护与导出。入口与完整合同：
 [Studio CLI 指南](assets/toolkit/docs/studio-cli.md)（`bin/pga-studio.mjs`，
 stdout 纯 JSON；样例与演示在 `assets/toolkit/examples/studio/`）。
+
+**用户要求临摹角色设计时**：先区分角色身份、画风参考和质量标杆，不沿用“允许原创”来更换
+用户要求保留的身份。Agent 自己看参考和真实输出，按差距用 Studio 创建/绘改、再看图和接受/回退。
+可以直接绘制，也可以导入已有或外部生成的 PNG；不要求全部过程在 Studio 内完成。
+位图操作与边界见 [单帧位图创作](assets/toolkit/docs/studio-raster.md)：空白画布、选区批量
+pixel/rect/line/poly、透明擦除/替换、锚点/附件点、明暗背景与裁切观察。
+首版限单帧、边长最多 256、二值 alpha；不自动缩图、去背、风格转换或生成动画。
+技术检查不替代视觉检查，当前 agent 自检不冒充独立认证，不默认启用严格长循环。
 
 ```powershell
 cd <技能目录>/assets/toolkit
@@ -108,6 +116,8 @@ node bin/pga-studio.mjs explore --ws work/ws --base r1 --op geometry.set --targe
 
 - **静态道具**（`pga-studio/1` 矩形、`pga-studio/2` 多边形/圆形/体积概括）与
   **一个角色**（锈爪 humanoid 数据面，13 帧 4 剪辑，跨帧一致修改）。
+- **单帧位图**（`pga-studio/raster/1`）：空白或 PNG 创建、选区批量绘制/擦除/替换、
+  锚点/附件点编辑；边长最多 256，二值 alpha，不依赖 humanoid 模板。
 - 编辑事务：有限操作（geometry/material/ramp/palette/rig/art.set）、同基准候选探索与去重、
   像素/结构/元数据保护、接受/恢复/过期拒绝、幂等重试；错误候选不会污染已确认版本。
 - 观察：native/display 预览、节点定位、受影响帧与附件点报告、自包含播放页（真实播放）。

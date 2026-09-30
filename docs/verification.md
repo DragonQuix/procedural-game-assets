@@ -4,6 +4,61 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S11 Studio v1.5 alpha：Agent 看图驱动的位图创作（2026-09-30）
+
+依据：`../CONTEXT.md`、ADR-0014、`plans/studio-reference-translation.md`。
+package/toolkit=0.9.0，document=pga-studio/raster/1。当前实施 Agent 自检，非独立认证。
+
+### 工具与回归
+
+- 新增单帧位图文档、空白/PNG 创建、选区批量 pixel/rect/line/poly 绘制、透明擦除/替换、
+  anchor/attachments 编辑。尺寸不隐式扩边；IO 解码后将像素冻结到文档或操作，不依赖原 PNG。
+- 选区及掩码先于差分声明；候选/提交复核选区外像素、元数据保护和基准身份。
+  位图局部修改不等于跨修订区域冻结，protection 仍为 NOT_CONFIGURED，视觉仍为 UNVERIFIED。
+- 新增 13 项测试（unit 8、integration 5）全部通过，覆盖非法输入、绘改与掩码、透明擦除、
+  确定性、观察、候选拒绝/提交/恢复/幂等/过期/篡改、真实 CLI、PNG 导入后删除原文件、
+  自包含重开及图集逐像素往返。透明 RGB 规范化为 0，避免既有图集跳过透明像素造成字节差异。
+- 开发源回归：显式过滤下述旧数据状态断言后，**433 PASS / 0 FAIL**。
+  命令为 `node --test --test-skip-pattern="24 participants / 12 pairs / 24 independent reviewers planned; no formal data" "tests/**/*.test.js"`。
+  被名称过滤的子项未计入 Node 的 skipped 数字，不据此宣称未过滤全套通过。
+- 未过滤全套仍有既有失败：`tests/integration/benchmark-e2e-v03.test.js` 的
+  `24 participants / 12 pairs / 24 independent reviewers planned; no formal data`
+  要求正式 runs/reviews/results/execution-freeze 不存在，但当前 HEAD 已归档正式数据。
+  失败是同一子项及父测试的失败传播；本轮未修改该测试、旧实验数据或其结论。
+- 普通载荷套件：**406 PASS / 0 FAIL / 8 SKIP**；跳过依赖开发仓库发行/安装目录的 6 项，
+  以及不随载荷携带实验目录的 v0.2/v0.3 host-only 测试。
+- 普通载荷由 `node tools/release.mjs` 生成，214 个文件哈希校验通过；循环版仅检查，
+  132 个文件一致。用户级安装、原游戏和独立试验项目未改。
+
+### 用户参考的实际试验
+
+用户提供的 Reference R 保持只读。目标选择 **128×256、正面单帧、透明背景**，先保留完整人物
+轮廓与主要服装结构，不把更小尺寸的自动缩图当成本轮验证。Agent 实际看参考，用 Studio
+绘制初稿，查看输出后修正装甲纹路、袍面符文和头发/面甲轮廓，再用 CanvasBank 预览。
+
+- 三个局部修复候选：c-faa720d5、c-a75486bf、c-45c9f71d；分别变化 817、736、1427 个像素，
+  各自事先声明的选区外变化均为 0。这证明局部修改保护生效，不证明角色身份已准确还原。
+- 最终 head=r6，documentHash=3b0918c5，renderHash=0b9b5119:8e0cacc3。
+  预览页实际通过 CanvasBank 显示，浏览器状态读回同一 renderHash；截图完整包含 1x 场景，
+  2x 场景只有局部，不将其记为完整审图。未做动画或人工试玩；临时标签页和服务已关闭。
+- **视觉 NOT_YET**：暗甲、橙色面甲/纹路、交叉背带、长袍符文和护膝可辨；
+  手部仍是整块手套造型，材质层次、头发与面甲细节粗略。工具流程通过不等于最终美术验收通过。
+
+本地证据在 gitignored 的 `work/reference-knight/`：`pilot-evidence.json`、
+`refinement-evidence.json`、`browser-preview.png`、`final/ember-knight.native.png`、
+`final/ember-knight.display.png` 与 `export/ember-knight.studio.json`。
+用户人物与一次性绘制脚本不进入通用样例或技能载荷；可复跑的通用操作示例为
+`examples/studio/raster-mark.draw.json`，使用方式见 `studio-raster.md`。
+回归日志为 `work/studio-raster-source-filtered.log`、`work/studio-raster-payload-tests.log`。
+
+### 维护结论与边界
+
+可继续采用“Agent 看图判断，Studio 提供可回退的绘改与技术检查”这条路线。
+首步已验证创建/导入/局部修改与既有资产链可以连通，不再强迫任意角色适配固定 humanoid 模板。
+尚未证明临摹普遍可靠、Studio 优于直接生成、外部生成模型接入有效，或风格/尺寸迁移成功。
+下一步优先验证局部造型修整和更小尺寸的细节重组，再用另一种角色结构检查复用性；
+不为把本样图修到通过而持续追加一次性绘图代码，不提前建设动画、完整 GUI 或通用约束求解器。
+
 ## S10 Studio v1.4 开发交付（2026-09-30，未独立认证）
 
 依据：`../CONTEXT.md`、ADR-0013、`plans/studio-v1_4-delivery.md`。

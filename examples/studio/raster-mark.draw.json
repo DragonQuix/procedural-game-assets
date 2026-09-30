@@ -1,0 +1,13 @@
+{
+  "id": "raster.draw",
+  "target": "canvas",
+  "params": {
+    "region": { "id": "mask-detail", "x": 8, "y": 6, "w": 16, "h": 20 },
+    "commands": [
+      { "kind": "poly", "points": [[1, 2], [8, 0], [15, 2], [14, 14], [8, 19], [2, 14]], "color": "#263541" },
+      { "kind": "line", "x0": 3, "y0": 7, "x1": 6, "y1": 8, "color": "#ff922c" },
+      { "kind": "line", "x0": 9, "y0": 8, "x1": 12, "y1": 7, "color": "#ff922c" },
+      { "kind": "poly", "points": [[4, 11], [8, 10], [12, 11], [8, 17]], "color": "#111920" }
+    ]
+  }
+}
