@@ -4,6 +4,53 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S11.4 尺寸草稿事务与目标尺寸细节重组（2026-10-01，0.10.0）
+
+依据：`../CONTEXT.md`、ADR-0001/0002/0004/0009/0014/0015、`plans/studio-reference-translation.md` T1。
+本轮项目收益：将显式采样、边界点联动与保护纳入同一候选事务，避免外部缩图后手算点位、重新创建工作区；
+并确认目标尺寸的眼区重组是否可由既有操作表达。不以把整张角色修到通过或增加测试数量为目标。
+
+### 探针、实现与实际看图
+
+- 从上一轮自包含编辑源新建 `work/studio-size-probe-20260930/source`，r1 保持 128×256。
+  Agent 实际查看原参考与新尺寸草稿。前期用已有 Windows FFmpeg 生成 64×128 的外部探针，
+  眼缝与面甲色块难分、袍面细纹零散；外部草稿只用于发现缺口，不要求与新工具采样逐像素等价。
+- 实施 `raster.resample`：显式等比例最近邻、1..256、二值 alpha，锚点/附件点按像素边界比例变换且不取整；
+  ID、seed、constraints 保留，复用候选/接受/恢复/幂等。接受前从基准重推导像素和点位，保护不放宽。
+  跨尺寸 diff.total/outside 为 null / FRAME_SIZE_CHANGED；observe 差分及候选裁切标为
+  NOT_COMPARABLE / FRAME_SIZE_MISMATCH，不套用基准 crop、不生成伪差分。
+- 真实 CLI 探针发现内联参数分派遗漏，补齐后文件与内联入口产生同一候选；回归在修复前确实失败。
+  工具不依赖 FFmpeg，不新增命令或文档版本，不自动重构细节、评审身份或造型。
+- 尺寸候选 `c-1d19dd9e` 经 native/light/display 实际看图，仅接受为 r2 尺寸底稿：
+  documentHash=30480cc7，renderHash=9381b820:adec6bf2。锚点为 `(32,125)`，
+  head=`(32,13)`、handA=`(8,68)`、handB=`(55.5,68)`；这些是几何联动结果，不证明自动识别握点。
+- 在新尺寸重新声明 `visor-small={x:20,y:3,w:25,h:21}`，用现有 poly/path/line 共 10 条指令重组眼区。
+  候选 `c-3c4f9c33` 改变 67 像素，选区外 0。Agent 接受前实际看 cropLight/cropSilhouette/native/display，
+  判断眼缝与橙色眉甲更易区分、未造成新的轮廓断口，接受为局部草稿 r3；
+  documentHash=2e0c2b09，renderHash=2cc1c0e5:adec6bf2，随后导出自包含编辑源。
+- 维护结论：小尺寸需要重新组织少数必要色块，不能沿用源尺寸的视觉裁决；现有绘制操作已能表达本例，
+  不新增绘制 API、不把该面甲变成模板。已足够支持本轮合同与指导，停止重画其它身体区域。
+
+### 必要回归与发行
+
+- 新增 8 项 unit/integration 测试，覆盖整数/非整数最近邻与 alpha、分数点位与同尺寸无漂移、边界尺寸、
+  非法参数与宽高比拒绝、空白图和元数据保护、篡改、候选预览、跨尺寸观察、内联/文件 CLI、
+  幂等、局部绘改、重开、导出像素往返与恢复。没有把某个外部缩图器的默认结果作为工具合同。
+- 开发源与普通载荷分别运行
+  `node --test "tests/unit/studio*.test.js" tests/unit/frame-observation.test.js "tests/integration/studio*.test.js"`，
+  各 **199 PASS / 0 FAIL / 0 SKIP**。技能携带检查另 **1 PASS / 0 FAIL**。
+  范围含既有 Studio 编译、事务、保护、安全域和关系，不是工具包全套重测。
+- 源提交 ccb8784；普通载荷由 release 生成，提交 6f2330f，220 文件哈希一致。
+  循环版仅只读校验 132 文件，用户级安装与旧实验未改。
+  原图、旧 r6 head、上一轮 head 与编辑源 SHA-256 均与本轮起点一致。
+- 本地证据为上述新 work 目录中的 `evidence.json`、CLI JSON、`visor-small.draw.json`、`source/previews/`、
+  `export/` 与 `{source-tests,payload-tests,skill-release-tests}.log`；位于 gitignored work，不随推送携带。
+
+**整张角色仍为 NOT_YET**：手部简化，袍面纹路破碎，头发与材质粗略。
+本轮只有当前 Agent 自检和局部尺寸草稿证据，没有新的 Canvas 场景预览、人工试玩、第二种角色、动画或独立认证。
+T1 的完整尺寸迁移与复用性验收尚未完成，不宣称通用临摹可靠性、成功率或成本提升。
+未重跑全套或旧模型实验；旧正式数据状态断言仍按 S11 的已知边界处理。
+
 ## S11.3 局部修整回收浅底与剪影观察（2026-09-30，0.9.3）
 
 依据：`../CONTEXT.md`、ADR-0001/0009/0014、`studio-raster.md`。
