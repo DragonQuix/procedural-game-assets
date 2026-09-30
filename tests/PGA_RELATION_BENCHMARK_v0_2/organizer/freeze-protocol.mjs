@@ -77,6 +77,19 @@ const unverifiedPolicy = {
   technical: '技术失败（launch gate 拦截、宿主故障）在 participant 未读任务前可用全新试次目录重试并记录；participant 已读任务后的一切失败记 intervention，不得静默重试',
   noExtraRuns: '不得为达成 Go 新增 runs',
 };
+const runVisualRule = {
+  basis: 'taskSuccessAll 含 visual requirement；逐 run 视觉判定冻结于任何正式 run 之前',
+  inputs: '解盲后，两 reviewer 对该 run 候选的 taskFit 判定（pga-review/3 candidates.*.taskFit）',
+  rule: ['任一 reviewer 缺失/非法 taskFit 或为 UNVERIFIED → UNVERIFIED',
+    '否则任一 taskFit = MEETS → PASS',
+    '否则（均 NOT_YET）→ NOT_YET'],
+  taskSuccess: 'visual ∈ {UNVERIFIED, NOT_YET} → taskSuccess ≠ PASS',
+};
+const reviewerEvidence = {
+  imageInput: '每位 reviewer 必须用宿主 Read 工具真实读取 X.png 与 Y.png（image 进入模型上下文），并在 review.actualViews 记录文件路径与自身计算的 SHA-256；宿主另存 Read 调用记录（host-transcript evidence，含文件 sha256）。仅文字声称已看图不算 PASS。',
+  isolation: 'reviewer-1 完成后逐文件哈希校验 reviewer-2 输入未变；reviewer-2 完成后反向校验。稳定排序逐文件 SHA-256。',
+  blindness: 'reviewer 目录不含 key、arm、工具来源、ledger、候选计数、技术结果、另一位 reviewer 产出。',
+};
 const interventionPolicy = '启动前 gate 拦截 = 可重试 launch failure（全新试次目录）；启动后失配/故障 = intervention 记录，不追认；不修改任务；不向 participant 提供额外帮助。';
 const goNoGo = {
   conditions: [
@@ -117,7 +130,7 @@ const protocol = {
   primary: ['taskSuccess', 'finalRequiredRelationViolationCount', 'manualCoordinateRepairCount'],
   hardConstraints: { finalProtectionViolationCount: 0 },
   secondary: ['candidateCount', 'rejectedOperationCount', 'semanticTransformCount', 'relationAwareTransformCount', 'validationProbeCount', 'relationEvaluationProbeCount', 'relationRepairCount', 'protectionRejectionCount', 'retries', 'errors', 'reviewerPreference'],
-  countingSchema, visualNonRegression, unverifiedPolicy, interventionPolicy, goNoGo,
+  countingSchema, visualNonRegression, runVisualRule, reviewerEvidence, unverifiedPolicy, interventionPolicy, goNoGo,
   gates: ['REPOSITORY', 'NOT_RUN', 'GLOBAL_IDENTITY_POLICY', 'VISION', 'AGENT_ISOLATION', 'MODEL_CONSISTENCY', 'TOOLKIT_HASH', 'D14_FINAL_PROVENANCE', 'OBSERVATION_PARITY', 'RUNNER', 'PAYLOAD_BEFORE_AGENT', 'SYMBOLIC_IDENTITY_LINT', 'PRIMARY_METRIC_DEFINITION'],
   freezeOwner: 'ZCode 独立会话',
 };
