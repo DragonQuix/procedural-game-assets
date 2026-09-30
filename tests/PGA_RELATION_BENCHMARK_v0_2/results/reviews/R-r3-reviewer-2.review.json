@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "R",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.png sha256=3707d7642f23fb6c8d05d634a526edd06dabda1e808dbf3771d0e817d3e9bc98",
+    "Y.png sha256=e52d091025135c98c487966408bf1c5aef3085fb0e6e33ae237da54b6a557954"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "结构重构明确且数值全达标：Node A 实测 x12..43, y26..37，宽 32px（≥32）、高 12px（≤12）、centerX=28、bottomY=38；R1（E1-E2）：Node B 底行 y=25 与 Node A 顶行 y=26 相邻，0px 间隙，切向 6px；R2（E3-E4）：A 底行 y=37 与 Node C 顶行 y=38 相邻，0px 间隙，切向 32px；整图为单一连通像素簇（558 不透明像素），无孤点、无断裂缝隙。",
+      "topConcern": "Region P1 与 anchor 的保护合同数值定义在 task-contract.json 中，不在本评审目录内，只能结构性地确认 Node C（基座 y38..40, x10..45）与 Node B 锚位足印（x25..30）未被破坏，无法逐值核对合同数字。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A 几何与要求完全一致（x12..43, y26..37，宽 32、高 12、centerX=28、bottomY=38）；在此之上把 Node B 加高到 y7..25（19 行），比例变化更醒目；R1：B 底行 y=25（x25..30，均为柱体阴影色 64,45,50）与 A 顶行 y=26 相邻，0px 间隙，切向 6px；R2 同样 0px 间隙、切向 32px；整图单一连通簇（606 不透明像素），材质完整。",
+      "topConcern": "同 X：P1/anchor 合同数值无法在评审范围内逐值核对；另外 Node B 底缘整行为深色阴影像素，接触在几何上连续，但柱底一行视觉偏暗（不构成缝隙，仍为不透明柱体像素）。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "对 X.png 与 Y.png 的真实像素测量（PIL 逐像素，边界坐标约定 rect(x,y,w,h) 覆盖 x..x+w-1）：两画布均 56x48。两候选的 Node A（承托板，含底部暗影行 y=37）均为 x12..43, y26..37：宽 32px、高 12px、centerX=28、bottomY=38，与 TASK 数值逐项吻合。R1：Node B 底行 y=25 紧贴 Node A 顶行 y=26，中间 0 空行，切向重叠 6px（X 底行=2 暖色+4 阴影像素，Y 底行=6 阴影像素 (64,45,50)，经逐像素取色确认属柱体簇而非背景缝）。R2：Node A 底行 y=37 紧贴 Node C 顶行 y=38，0 空行，切向重叠 32px。Node C 基座 y38..40, x10..45 在两候选中逐像素一致；Node B 锚位足印 x25..30 一致。两图各为单一 4-连通分量（X 558 / Y 606 不透明像素），slab 角点 (12,26)/(43,26) 与基座角点 (10,38)/(45,38) 分别为米白高光 (227,221,191) 与暗影 (41,51,53)，均与所属簇相连，非杂色孤立点。唯一实质差异：Node B 高度 X=11 行（y15..25）vs Y=19 行（y7..25），任务未对 Node B 高度设约束，两条关系与保护对象在两者中均成立。",
+  "confidence": "HIGH",
+  "notes": "方法：先以 Read 工具真实查看 X.png、Y.png 与 contact-sheet.png（标签在资产像素外，展示顺序不定义身份），再对 X.png/Y.png 原文件做 sha256 校验与逐像素几何测量作为数值证据；身份全程以 X/Y 引用。未评分制总分；偏好不基于复制相似度。残余不可核验项：Region P1 与 anchor 的合同具体数值（task-contract.json 不在评审目录）只能做结构性核对，该限制对 X 与 Y 同等适用，不影响二者在全部可检要求上的判定。"
+}

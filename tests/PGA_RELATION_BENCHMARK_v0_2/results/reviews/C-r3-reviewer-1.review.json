@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "C",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.png sha256=f97b5342103f1b4584813c25f88dd6f92c5301a2fc1ad9bd5047df26e180e2ea",
+    "Y.png sha256=f97b5342103f1b4584813c25f88dd6f92c5301a2fc1ad9bd5047df26e180e2ea"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A 比例按 TASK.md 声明的像素边界坐标逐项达标：块体像素 x=7..32、y=20..29，即 width=26（要求至少 26）、height=10（要求至多 10）、centerX=(7+33)/2=20、bottomY=30，四项全部命中。Node B（木柱，x=18..21、y=6..19）E2 底边界 y=20 与 Node A E1 顶边界 y=20 共面贴合，0px 容差下无缝隙，切向接触长度 4px（>=1px），视觉上交界干净、无悬空。",
+      "topConcern": "task-contract.json 未随评审材料提供，Node C/Region P1/anchor 的保护合同只能按可见证据判断：平台（x=6..41、y=30..32）逐行连续无断裂，未见任何被破坏的保护对象；(7,20) 与 (6,30) 两个孤立即近白像素疑似 anchor 标记，但无法对照合同逐项确认。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "Y.png 与 X.png 的 SHA-256 完全相同（f97b5342103f1b4584813c25f88dd6f92c5301a2fc1ad9bd5047df26e180e2ea），像素数据逐位一致，因此与 X 满足同样的全部数值要求：Node A width=26、height=10、centerX=20、bottomY=30；Node B 与 Node A 接触 0px 间隙、切向接触 4px；配色与材质语言保留，结构连续。",
+      "topConcern": "同 X：task-contract.json 未提供，Region P1/anchor 合同符合性只能确认到“无可见违反”；另因 Y 与 X 字节级相同，两候选之间不存在任何可区分的差异点。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "sha256sum X.png Y.png 输出两者同为 f97b5342103f1b4584813c25f88dd6f92c5301a2fc1ad9bd5047df26e180e2ea，且 RGBA 像素逐位比对一致。像素测量（48x40 帧，按 TASK.md 边界坐标约定）：Node A 块体占 x=7..32、y=20..29，width=26>=26、height=10<=10、centerX=20、bottomY=30，四项数值要求全部满足；Node B 暖色柱体占 x=18..21、y=6..19，底边界 y=20 与 Node A 顶边界 y=20 直接贴合，缝隙 0px（容差 0px），切向接触段 [18,22] 长 4px>=1px；Node C 平台 y=30..32 每行为单一连续段 x=6..41，无 1px 断裂或悬空交界；调色板（暖色木柱高光/阴影、蓝灰块体与平台）保留。整图非透明像素 424 个全部归属上述三簇与 (7,20)、(6,30) 两个疑似 anchor 的近白像素，无散落孤立噪点。",
+  "confidence": "HIGH",
+  "notes": "X 与 Y 为字节级相同的文件，pairwiseResult 取 NO_MEANINGFUL_DIFFERENCE（偏好判断在此无意义）。taskFit 的判定基于直接查看图像与逐像素测量；唯一未决项是 task-contract.json 不在评审材料内，保护合同只能以“平台完整连续、未见可见破坏、存在两个疑似 anchor 标记像素”作为可见证据，未做合同级逐项核对。centerX/bottomY 按 TASK.md 明示的像素边界坐标约定计算（centerX=(7+33)/2=20，bottomY=29+1=30），若改用含端点像素索引约定则两值会偏 0.5/1，但该约定与 TASK.md 声明不符。"
+}

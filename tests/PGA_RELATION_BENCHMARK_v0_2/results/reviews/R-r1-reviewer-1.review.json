@@ -1,0 +1,39 @@
+{
+  "schema": "pga-review/3",
+  "task": "R",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.png sha256=3707d7642f23fb6c8d05d634a526edd06dabda1e808dbf3771d0e817d3e9bc98",
+    "Y.png sha256=e52d091025135c98c487966408bf1c5aef3085fb0e6e33ae237da54b6a557954",
+    "contact-sheet.png sha256=ebdb0c8624d54821eff4fbcdd480e5e3fe195a2cb52c6914a9be057a3ab6bd97"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "像素行程实测：Node A 覆盖列12-43、行26-37，w=32(>=32)、h=12(<=12)、centerX=12+32/2=28、bottomY=38，四项几何要求全部精确命中。R1：Node B(列25-30、行15-25)底边 y=26 与 Node A 顶边 y=26 直接贴合，0px 间隙，切向重叠 6px(>=1)；R2：Node A 底边 y=38 与 Node C(列10-45、行38-40)顶边 y=38 贴合，0px 间隙，切向重叠 32px。色带连续、每行均为单一连续像素行程，无悬空交界、无断裂或游离像素。",
+      "topConcern": "柱体(Node B)仅 11px 高，相对 32px 宽板的比例对比偏含蓄，'较大结构重构/明确比例变化'的表达弱于 Candidate Y；Region P1 与 anchor 的合同文件不在评审目录，保护只能做视觉核验（下半部结构与 Y 逐像素一致，改动仅限柱体高度）。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A 与 Node C 与 X 完全相同且同样精确命中几何要求（列12-43、行26-37，w=32、h=12、centerX=28、bottomY=38；R1/R2 接触均 0px 间隙，切向重叠 6px/32px）。柱体(Node B)拉高至 19px（行7-25，列25-30），竖柱与宽板的比例对比更鲜明，'承托式'结构与'明确的比例变化'表达更充分；木柱三段色带(亮248,213,161/中215,151,112/暗167,99,81+底部暗缘64,45,50)随高度平滑延展，簇完整无断裂。",
+      "topConcern": "Region P1 与 anchor 的合同文件不在评审目录，保护只能做视觉核验；此外无其他 blocking 项。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "keyEvidence": "两候选均为 56x48 RGBA，SHA-256 见 actualViews。以逐行不透明像素行程实测（像素边界约定：矩形覆盖 x..x+w-1 列）：Node B（木柱）X=列25-30/行15-25（6x11），Y=列25-30/行7-25（6x19）；Node A（绿板）两者同为列12-43/行26-37（32x12，centerX=28，bottomY=38）；Node C（底座）两者同为列10-45/行38-40（36x3）。R1 接触面 y=26：柱底行25 与板顶行26 相邻，0px 间隙，切向重叠 6px；R2 接触面 y=38：板底行37 与座顶行38 相邻，0px 间隙，切向重叠 32px。两候选的全部硬性要求（Node A 宽/高/centerX/bottomY、两条 required 0 容差接触、切向>=1px、材质与像素簇完整、Node C 保持）均满足。唯一实质差异是柱体高度带来的比例对比：Y 的竖柱（19px）相对宽板的比例变化比 X（11px）更明确，更契合 TASK.md 的'较大结构重构/明确的比例变化'，故偏好 Y。Region P1 与 anchor 的保护合同（task-contract.json）不在本评审目录，该项仅完成视觉核验：两候选 y>=26 区域逐像素一致，改动仅发生在柱体高度，未见对承托结构或底座的破坏。",
+  "confidence": "HIGH",
+  "notes": "几何与接触关系基于真实图像查看+像素行程实测，为精确判定；Region P1/anchor 保护与'相对原资产的保护保持'因评审目录无 task-contract.json 且无 target answer image，结论限定为'视觉核验通过、合同级未核验'。TASK.md 未含动态要求，无播放片段可看，motion 保持 UNVERIFIED。身份一律以 Node A/B/C、Candidate X/Y 引用，未以画面位置定义身份。"
+}

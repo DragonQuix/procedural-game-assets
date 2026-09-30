@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "R",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.png sha256=e52d091025135c98c487966408bf1c5aef3085fb0e6e33ae237da54b6a557954",
+    "Y.png sha256=c4d9599dd06bac1433cdbe261dd4d982489a2f76fee802b032fe7b185361ec12"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A（含描边，列12-43、行26-37）恰好满足全部数值要求：宽32px、高12px、centerX=28、bottomY=38。R1：柱底(E2)行25与板顶(E1)行26直接接触，切向6px（列25-30）、0px间隙；R2：板底(E3,y=38)与Node C顶(E4)连续接触，切向32px。木柱四段渐变与板面高光/描边像素簇完整，无杂散像素。",
+      "topConcern": "宽与高均取在约束边界值（32为下限、12为上限），“较大结构重构/明确比例变化”按规格下限达成；板底描边行（行37，列12-43）窄于底座（列10-45），形成两级宽度，属造型特征而非缺陷。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A（含描边，列10-45、行28-37）为36x10，centerX=28、bottomY=38，全部数值要求满足且留有余量；板更宽更薄、柱可见段更长（行7-27），比例变化比X更鲜明。R1接触切向6px（列25-30）、R2接触切向36px，均0px间隙；材质与像素簇完整。",
+      "topConcern": "无明显缺陷；相对X的差异仅为比例幅度（板宽+4px、板高-2px、柱可见段+2px），不改变任务达成。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "基于56x48画布逐像素字符图与8倍放大目视复核。X：柱行7-25（列25-30），Node A行26-37（列12-43，宽32、高12、centerX=28、bottomY=38），R1接触y=26切向6px，R2接触y=38切向32px。Y：柱行7-27，Node A行28-37（列10-45，宽36、高10、centerX=28、bottomY=38），R1接触y=28切向6px，R2接触y=38切向36px。两候选四处交界（柱/板、板/座）经透明通道核验均无间隙像素。Node C带（行38-40）在X与Y中逐像素一致，anchor奶白像素(10,38)两图均在（X另有板角高光(12,26)，Y为(10,28)，同属角部高光风格），保护对象保持。",
+  "confidence": "HIGH",
+  "notes": "task-contract.json 不在本评审目录内，Region P1 的坐标定义无法直接核对；但其可见载体（Node C行38-40与anchor像素）在两候选中逐像素一致且完整，保护要求在可观测范围内同等满足。本任务为静态资产，无动画片段，motion 项按 UNVERIFIED 记录。全部硬性要求（几何数值、两条0容差接触、材质簇完整、保护对象）两候选逐项同等满足，残余差异仅为比例幅度，不构成任务达成差异，故 pairwiseResult 取 NO_MEANINGFUL_DIFFERENCE。"
+}

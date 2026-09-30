@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "C",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.png sha256=a1851d45ff8b96ecf919b53e5e63735cdbd343a09ac63646fd6f8388d240faac",
+    "Y.png sha256=f97b5342103f1b4584813c25f88dd6f92c5301a2fc1ad9bd5047df26e180e2ea"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A（蓝色主体块）按像素边界坐标实测：行 y22-29、列 x6-33，即 x∈[6,34)、y∈[22,30) → 宽 28（≥26）、高 8（≤10）、centerX=(6+34)/2=20、bottomY=30，四项数值全部达标且留有余量。Node B（暖色柱，列 x18-21、行 y6-21）底边最后行 y21 与 Node A 顶行 y22 直接邻接，无空隙行（容差 0px 满足），重叠列 x18-21 给出切向接触 4px（≥1px）；柱与主体、主体与底部薄条均无 1px 缝隙或悬空交界；橙柱自上而下亮-中-暗-轮廓分带、主体左亮右暗加底行阴影，配色与材质语言完整。",
+      "topConcern": "task-contract.json 未包含在本评审包内，Node C、Region P1 与 anchor 的保护合同数值无法逐项核对，仅能以视觉证据支持（底部薄条 y30-32 与候选 Y 逐像素一致，全图仅柱/主体/薄条三个像素簇，无多余或缺失簇）；『明显重构』的幅度无重构前对照图可量化，仅以合同数值达标为准。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A（蓝色主体块）按像素边界坐标实测：行 y20-29、列 x7-32，即 x∈[7,33)、y∈[20,30) → 宽 26（恰好 ≥26）、高 10（恰好 ≤10）、centerX=(7+33)/2=20、bottomY=30，四项数值全部达标（含边界值本身）。Node B（暖色柱，列 x18-21、行 y6-19）底边最后行 y19 与 Node A 顶行 y20 直接邻接，无空隙行（容差 0px 满足），重叠列 x18-21 给出切向接触 4px（≥1px）；无悬空交界与可见缝隙；底部薄条与候选 X 逐像素一致，结构连续、配色与材质语言保留。",
+      "topConcern": "宽度与高度均精确落在合同边界值（26/10），对任何坐标约定差异的稳健余量为 0；task-contract.json 未随包提供，Node C、Region P1 与 anchor 的保护合同数值无法逐项核对（视觉证据支持未破坏）；『明显重构』幅度同样无重构前对照可量化。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "对两图 48x40 全帧逐像素测量（PIL，按 TASK.md『坐标均为最终帧像素边界坐标』解读）。X.png：主体块行 y22-29/列 x6-33（宽 28、高 8、centerX=20、bottomY=30），暖柱列 x18-21/行 y6-21，柱底 y21 贴主体顶 y22、重叠列 x18-21（切向 4px），薄条 y30-32/列 x6-41。Y.png：主体块行 y20-29/列 x7-32（宽 26、高 10、centerX=20、bottomY=30），暖柱列 x18-21/行 y6-19，柱底 y19 贴主体顶 y20、重叠列 x18-21（切向 4px），薄条 y30-32 与 X 逐像素相同。两候选四项比例数值与 R1 接触（0px 容差、≥1px 切向）均达标；唯一实质差异是主体块宽高分配（28x8 vs 26x10，X 各留 2px 余量、Y 精确贴线）与柱长（16 vs 14），属构图差异而非质量差异，接触质量、结构完整性、配色材质两图等价。保护合同（Node C/Region P1/anchor）因合同文件未随包提供，仅以视觉一致性（薄条逐像素一致、三簇结构完整）判定，不构成阻断。",
+  "confidence": "HIGH",
+  "notes": "节点指认依据：唯一满足『宽≥26 且高≤10』量级的簇是蓝色主体块，故判为 Node A（重构对象）；暖色柱位于其上方且以其底边贴 A 顶边，对应 Node B 的 E2=bottom-edge 与 Node A 的 E1=top-edge 的 R1 contact；底部薄条为 Node C 候选。contact-sheet.png 已辅助查看，X/Y 标签位于资产像素外，未以画面位置指代身份。动画项不适用于本静态任务，保持 UNVERIFIED。"
+}

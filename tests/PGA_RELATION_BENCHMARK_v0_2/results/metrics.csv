@@ -1,0 +1,13 @@
+runId,task,arm,taskSuccess,visual,mechanical,deterministic,protection,relations,finalRequiredRelationViolationCount,finalProtectionViolationCount,candidateCount,manualCoordinateRepairCount,semanticTransformCount,relationAwareTransformCount,relationRepairCount,validationProbeCount,rejectedOperationCount,retries,errors,budgetPass,protocolPass
+C-D14-r3,C,D14,PASS,PASS,PASS,PASS,PASS,PASS,0,0,1,0,1,1,1,1,0,0,0,true,true
+C-D13-r3,C,D13,PASS,PASS,PASS,PASS,PASS,PASS,0,0,2,0,1,0,0,41,0,0,0,true,true
+C-D13-r1,C,D13,PASS,PASS,PASS,PASS,PASS,PASS,0,0,2,0,1,0,0,41,0,0,0,true,true
+C-D13-r2,C,D13,PASS,PASS,PASS,PASS,PASS,PASS,0,0,2,1,1,0,0,2,0,0,0,true,true
+R-D14-r1,R,D14,PASS,PASS,PASS,PASS,PASS,PASS,0,0,1,0,1,1,1,1,0,0,0,true,true
+R-D13-r2,R,D13,PASS,PASS,PASS,PASS,PASS,PASS,0,0,2,1,1,0,0,2,0,0,0,true,true
+R-D14-r3,R,D14,PASS,PASS,PASS,PASS,PASS,PASS,0,0,1,0,1,1,1,1,0,0,0,true,true
+R-D13-r1,R,D13,PASS,PASS,PASS,PASS,PASS,PASS,0,0,2,0,1,0,0,49,0,0,0,true,true
+R-D14-r2,R,D14,PASS,PASS,PASS,PASS,PASS,PASS,0,0,1,0,1,1,1,1,0,0,0,true,true
+R-D13-r3,R,D13,PASS,PASS,PASS,PASS,PASS,PASS,0,0,2,0,1,0,0,49,0,0,0,true,true
+C-D14-r2,C,D14,PASS,PASS,PASS,PASS,PASS,PASS,0,0,1,0,1,1,1,1,0,0,0,true,true
+C-D14-r1,C,D14,PASS,PASS,PASS,PASS,PASS,PASS,0,0,1,0,1,1,1,1,0,0,0,true,true

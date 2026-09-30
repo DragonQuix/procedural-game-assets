@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "R",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.png sha256=e52d091025135c98c487966408bf1c5aef3085fb0e6e33ae237da54b6a557954",
+    "Y.png sha256=c4d9599dd06bac1433cdbe261dd4d982489a2f76fee802b032fe7b185361ec12"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "All structural and relation constraints verified by pixel measurement: Node A slab rows y=26..37, cols x=12..43 gives width=32 (>=32), height=12 (<=12), centerX=12+32/2=28, bottomY=38; R1: Node B post bottom row y=25 directly above Node A top row y=26 (edge boundary y=26 on both sides, 0px gap, no transparent seam row, no overlap), tangential contact = cols 25..30 intersect 12..43 = 6px >= 1; R2: Node A bottom boundary y=38 meets Node C top boundary y=38 with 0px gap, tangential contact = 32px.",
+      "topConcern": "Node A width and height sit exactly at the constraint bounds (width=32 at the >=32 floor, height=12 at the <=12 ceiling), so the proportion restructure is the mildest that satisfies the letter of the task; no margin on the inequality constraints. Non-blocking.",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "All structural and relation constraints verified by pixel measurement with margin: Node A slab rows y=28..37, cols x=10..45 gives width=36 (>=32), height=10 (<=12), centerX=10+36/2=28, bottomY=28+10=38; R1: Node B post bottom row y=27 directly above Node A top row y=28 (edge boundary y=28 both sides, 0px gap, no transparent seam row), tangential contact = cols 25..30 intersect 10..45 = 6px >= 1; R2: Node A bottom boundary y=38 meets Node C top boundary y=38, 0px gap, tangential contact = 36px. Clearer proportion change (wider/flatter slab, longer 21px post).",
+      "topConcern": "Node B post extended 2px lower than in Candidate X, making the supported member proportionally longer; purely a design choice within spec. No constraint violated.",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "keyEvidence": "Both 56x48 images inspected visually (Read tool) and measured from the actual files. Shared stable mapping: Node B = vertical post (cols x=25..30, shading ramp 248,213,161 -> 215,151,112 -> 167,99,81 -> 64,45,50 intact), Node A = wide slab, Node C = thin bottom plate (rows y=38..40, cols x=10..45, pixel-identical in X and Y, anchor highlight (227,221,191) at (10,38) preserved in both). X: Node A rows y=26..37 x=12..43 (w=32,h=12,centerX=28,bottomY=38); post rows y=7..25; junction rows 25/26 contiguous, R2 boundary y=38. Y: Node A rows y=28..37 x=10..45 (w=36,h=10,centerX=28,bottomY=38); post rows y=7..27; junction rows 27/28 contiguous, R2 boundary y=38. Neither candidate has dangling junctions, transparent seam rows, overlaps, broken outlines, or stray pixels; both preserve material ramps and pixel clusters. Both MEETS. Preference is task-grounded, not copy similarity: the task asks for a relatively large structural restructure with clear proportion change; Candidate Y delivers a more pronounced restructure (slab 36x10 vs 32x12, post 21px vs 19px) while keeping exact equality constraints (centerX=28, bottomY=38) and holding margin on the inequality constraints, whereas Candidate X meets width/height exactly at the bound values with zero margin. Boundary convention applied as instructed (rect (x,y,w,h) covers columns x..x+w-1), so centerX = x + w/2; note that under the alternative pixel-center-mean convention both candidates would yield the identical value 27.5, so the comparison between X and Y is unaffected by the convention choice. Caveat: Region P1 exact bounds are defined in task-contract.json which is outside this reviewer sandbox; protection was verified comparatively (Node C plate and anchor pixel pixel-identical across both candidates), not against the contract file.",
+  "confidence": "HIGH",
+  "notes": "contact-sheet.png also viewed as auxiliary; its X/Y labels sit outside asset pixels and were not used to infer identity. Judgments are based on X.png and Y.png pixel measurements listed in actualViews. No motion clips present in the reviewer sandbox; motion fields left UNVERIFIED."
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "C",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.png sha256=f97b5342103f1b4584813c25f88dd6f92c5301a2fc1ad9bd5047df26e180e2ea",
+    "Y.png sha256=f97b5342103f1b4584813c25f88dd6f92c5301a2fc1ad9bd5047df26e180e2ea"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "NOT_YET",
+      "topStrength": "接触连续性明确达标：Node B 柱体（x∈[18,21]，底边界 y=20）与 Node A 顶板（顶边界 y=20）零间隙切向接触，接触长度 4px ≥ 1px，无 1px 缝隙、无悬空交界；柱体与板体逐行连续无孔洞，蓝灰板 + 橙柱 + 深色底条的配色与材质语言完整，边缘干净。",
+      "topConcern": "Node A 比例重构未明确达标（按任务声明的像素边界坐标约定，实测 left=7、right=32、top=20、bottom=30）：宽度 25px < 要求 ≥26px（差 1px）；centerX=19.5 ≠ 要求 20。height=10（恰为 ≤10 上限）与 bottomY=30（精确）达标。任一约定下宽度不足均成立，判定不变。",
+      "blockingIssue": true,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "NOT_YET",
+      "topStrength": "与 X 字节级完全相同（SHA-256 一致），接触连续性同样明确达标：Node B 底边界与 Node A 顶边界零间隙切向接触 4px，无缝隙、无悬空交界；结构连续、材质配色完整。",
+      "topConcern": "与 X 相同：Node A 宽度 25px < 要求 ≥26px，centerX=19.5 ≠ 20（边界坐标约定）；height=10 与 bottomY=30 达标。比例数字要求未全部满足。",
+      "blockingIssue": true,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "对 X.png 全图逐像素解码（48x40 RGBA）：Node A（承载柱体接触的上方宽板，bottomY=30 与要求精确吻合，确认其身份）占 x∈[7,31]、y∈[20,29]，边界坐标 left=7/right=32/top=20/bottom=30：宽 25px<26px（差 1px），centerX=(7+32)/2=19.5≠20，height=10≤10 达标，bottomY=30 精确达标；即使按像素索引约定（centerX=19、bottomY=29）宽度不足与中心偏移仍不达标。接触项：Node B 柱体占 x∈[18,21]、y∈[6,19]，底边界 20 与 Node A 顶边界 20 切向贴合，重叠区间 x∈[18,22] 接触长 4px≥1px，容差 0px 满足，交界行 y=19（柱体暗棕 f）与 y=20（板顶高光 c）直接相邻，无透明缝隙。Node C 下条带 x∈[6,41]、y∈[30,32] 三行完整连续。X.png 与 Y.png SHA-256 相同（f97b5342…e180e2ea），为字节级同一图像。",
+  "confidence": "HIGH",
+  "notes": "两候选为同一文件内容，故 per-candidate 结论相同；pairwiseResult 取 NO_MEANINGFUL_DIFFERENCE（无任何可偏好差异），同时两者在 Node A 宽度与 centerX 上同为 NOT_YET。评审包内未提供 task-contract.json，Region P1 与 anchor 的合同数值无法核对（该子项记 UNVERIFIED）；Node C 仅做结构完整性核验（条带连续、无破损）。Task C 为静态图像任务，包内无播放片段，motion 保持 UNVERIFIED 且不适用。判定使用 X/Y 符号身份，contact-sheet.png 仅作辅助，展示顺序不定义身份。"
+}

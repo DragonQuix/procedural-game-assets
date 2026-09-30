@@ -1,0 +1,56 @@
+{
+  "schema": "pga-reviewer-image-evidence/1",
+  "verifiedAt": "2026-09-30T06:13:30.157Z",
+  "method": "宿主机械比对 actualViews 声称哈希与包内文件实测哈希",
+  "allMatch": true,
+  "evidence": {
+    "C-r1/reviewer-1": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "C-r1/reviewer-2": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "C-r3/reviewer-1": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "C-r3/reviewer-2": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "C-r2/reviewer-1": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "C-r2/reviewer-2": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "R-r1/reviewer-1": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "R-r1/reviewer-2": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "R-r2/reviewer-1": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "R-r2/reviewer-2": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "R-r3/reviewer-1": {
+      "claimedViews": 2,
+      "hashMatch": true
+    },
+    "R-r3/reviewer-2": {
+      "claimedViews": 2,
+      "hashMatch": true
+    }
+  }
+}

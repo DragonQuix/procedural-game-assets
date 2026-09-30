@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "C",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.png sha256:a1851d45ff8b96ecf919b53e5e63735cdbd343a09ac63646fd6f8388d240faac",
+    "Y.png sha256:383f91826f3805aa01085f8c421c2ee72e7d5e24b8e244ad648553d9649413e1"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A measured at pixel-boundary coordinates: x 6..34 (width 28 >= 26), rows 22..30 (height 8 <= 10), centerX 20.0, bottomY 30. Node B E2 (post bottom, boundary y=22) meets Node A E1 (boundary y=22) with 0px gap and 4px tangential contact; junction continuous, no visible 1px seam, no floating boundary; pedestal fully supported by the plate, edges clean.",
+      "topConcern": "task-contract.json for the Node C / Region P1 / anchor protection clause was not present in the review directory; plate (rows 30-32) and off-white anchor pixels were verified intact only by direct pixel inspection and pair-internal comparison.",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A measured at pixel-boundary coordinates: x 6..34 (width 28 >= 26), rows 20..30 (height 10 <= 10, exactly at cap), centerX 20.0, bottomY 30. Node B E2 (post bottom, boundary y=20) meets Node A E1 (boundary y=20) with 0px gap and 4px tangential contact; junction continuous, structure and material language preserved, edges clean.",
+      "topConcern": "Node A height sits exactly at the 10px limit with zero margin; same protection-contract caveat as X (contract file unavailable, plate/anchor verified visually and by pair comparison only).",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "Per-row pixel maps of both 48x40 PNGs: identical palette and near-identical layout. Only differences: Node A height (X rows 22-29 = 8px vs Y rows 20-29 = 10px, both within the <=10 cap; row 29 outline spans exactly pedestal width x 6..33, so it belongs to Node A, not the plate) and Node B post length (16 vs 14 rows, unconstrained by TASK.md). Both candidates: Node A x-boundary 6..34 (width 28, centerX 20.0), bottomY 30; post bottom boundary equals Node A top boundary (gap 0px, tangential contact 4px >= 1px); plate rows 30-32 (x 6..41) and off-white anchor pixels identical and intact in both; no background pixels intruding at the junction. contact-sheet.png viewed as cross-check only; its labels sit outside asset pixels and candidate identity was kept as X/Y throughout.",
+  "confidence": "HIGH",
+  "notes": "Judgment grounded in direct Read of X.png and Y.png plus 8x nearest-neighbor magnification and pixel-boundary measurement (TASK.md: coordinates are final-frame pixel boundary coordinates). X has more margin under the height cap (8 vs 10) but margin is not a stated requirement, so neither candidate is preferred. task-contract.json was not provided in the reviewer directory, so the protection clause was assessed by pair-internal comparison only; Region P1 has no independently verifiable marker. No motion assets exist for this static task; motion fields left UNVERIFIED."
+}

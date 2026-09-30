@@ -1,0 +1,40 @@
+{
+  "schema": "pga-run-evaluation/1",
+  "runId": "C-D13-r3",
+  "task": "C",
+  "arm": "D13",
+  "repeat": 3,
+  "submitted": true,
+  "submitFile": "holdout-c-v02.studio.json",
+  "submitMatchesHead": true,
+  "mechanical": "PASS",
+  "deterministic": "PASS",
+  "protectionStatus": "PASS",
+  "relationsStatus": "PASS",
+  "finalRequiredRelationViolationCount": 0,
+  "finalProtectionViolationCount": 0,
+  "counts": {
+    "candidateCount": 2,
+    "manualCoordinateRepairCount": 0,
+    "rejectedOperationCount": 0,
+    "semanticTransformCount": 1,
+    "relationAwareTransformCount": 0,
+    "validationProbeCount": 41,
+    "relationEvaluationProbeCount": 0,
+    "relationRepairCount": 0,
+    "protectionRejectionCount": 0,
+    "retries": 0,
+    "errors": 0,
+    "lowLevelGeometryEditCount": 1
+  },
+  "budgetPass": true,
+  "protocol": {
+    "kitOk": true,
+    "taskOk": true,
+    "startOk": true,
+    "pass": true
+  },
+  "kitCompileVersion": "pga-studio/3",
+  "visual": "PENDING_BLIND_REVIEW",
+  "submitSuccess": true
+}

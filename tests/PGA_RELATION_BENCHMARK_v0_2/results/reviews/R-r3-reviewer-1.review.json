@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "R",
+  "reviewerSlot": 1,
+  "actualViews": [
+    "X.png sha256=3707d7642f23fb6c8d05d634a526edd06dabda1e808dbf3771d0e817d3e9bc98",
+    "Y.png sha256=e52d091025135c98c487966408bf1c5aef3085fb0e6e33ae237da54b6a557954"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A 实测 rect(12,26,32,12)：宽 32（≥32）、高 12（≤12）、centerX=28、bottomY=38 全部精确满足；R1 的 E1/E2 在边界 y=26 无缝接触（切向重叠 6px），R2 的 E3/E4 在边界 y=38 无缝接触（切向重叠 32px）；平板与底座像素簇连续完整，材质干净。",
+      "topConcern": "Node B 立柱仅 11px 高（rows 15..25），扁平平板与竖直构件的比例对比较弱，『较大结构重构 / 明确的比例变化』表达偏温和；评审沙箱内无 task-contract.json，Region P1 与 anchor 的保护合同无法对照合同核验。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A 与 X 完全相同且精确达标（rect(12,26,32,12)，centerX=28，bottomY=38）；更高的 Node B 立柱（6x19，rows 7..25）在边界 y=26 保持同样的 0px E1/E2 接触（切向重叠 6px），并形成扁平宽板对细长立柱的鲜明比例变化；全部像素簇连续完整，材质干净。",
+      "topConcern": "Node B 高度在任务中未规定，更高的立柱属于设计取向而非规格增益；评审沙箱内无 task-contract.json，Region P1 与 anchor 的保护合同无法对照合同核验。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "keyEvidence": "对真实 PNG 的逐行像素 run 分析：两候选的 Node A 完全一致（cols 12..43，rows 26..37 = rect(12,26,32,12)：宽 32、高 12、centerX=28、bottomY=38 全部精确），Node C 也完全一致（cols 10..45，rows 38..40），R2 的 E3/E4 在边界 y=38 接触、0px 间隙、切向重叠 32px，底座 36x3 完整。Node B（cols 25..30，centerX=28）在两者中都止于 row 25，故 R1 的 E1/E2 在边界 y=26 无缝接触、切向重叠 6px。唯一差异是 Node B 高度：X 为 11px，Y 为 19px；Y 的细长立柱在同等材质与像素簇完整性下给出任务要求的更明确比例变化。两图非背景像素数（558/606）与几何完全对账，无游离像素。",
+  "confidence": "MEDIUM",
+  "notes": "判定依据：Read 真实查看 X.png/Y.png，另在评审沙箱内生成 8 倍最近邻放大图与逐行像素 run 输出辅助核对。沙箱未提供 task-contract.json，Region P1 边界与 anchor 定义无法对照合同核验，仅能确认 Node C 视觉完整且在两候选中一致。候选身份仅以 X/Y 指代，contact-sheet 标签位于资产像素外，展示顺序不定义身份。"
+}

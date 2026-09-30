@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "R",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.png sha256=3707d7642f23fb6c8d05d634a526edd06dabda1e808dbf3771d0e817d3e9bc98",
+    "Y.png sha256=e52d091025135c98c487966408bf1c5aef3085fb0e6e33ae237da54b6a557954"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A=56x48帧内平板 x[12..43] y[26..37]：w=32(>=32)、h=12(<=12)、centerX=12+32/2=28、底边界y=26+12=38 全部达标；R1立柱(x[25..30],行15..25)底边界y=26与E1零间隙接触、切向重叠6px>=1、无悬空；R2底座Node C(x[10..45],行38..40)顶边界y=38与E3零间隙、切向重叠32px>=1；立柱4色对角渐变完整、x=27列行15..40连续无缝隙、无孤立像素。",
+      "topConcern": "立柱高11px略短于平板高12px，比例对比弱于候选Y，但TASK.md未对Node B高度设约束，不构成缺陷。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "与X共享同一套绿色结构（逐像素一致），Node A四项数值(w=32,h=12,centerX=28,bottomY=38)与R1/R2两条零间隙接触全部达标；立柱(x[25..30],行7..25)高19px居中于centerX=28，4色渐变完整、列连续、无断裂，平板-立柱比例对比更鲜明。",
+      "topConcern": "无任务级缺陷；与X相同，Region P1/anchor保护合同的数值核对超出评审沙箱可用范围（见notes）。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "像素级核验（56x48 RGBA，SHA-256见actualViews）：(1) Node A两候选完全一致：矩形(12,26,32,12)，覆盖列12..43行26..37，w=32>=32、h=12<=12、centerX=28、bottomY=38（像素边界约定y+h）全部满足；(2) R1：Node B立柱列25..30、底行25，Node A顶行26，边界y=26处0px间隙接触，切向重叠6px>=1，立柱完全落在平板范围内无悬空；(3) R2：Node C底座列10..45、行38..40，顶边界y=38与Node A底边界y=38处0px间隙，切向重叠32px>=1，底座3行着色(高光/主体/暗边)完整；(4) 材质：两候选立柱均为pale(248,213,161)/tan(215,151,112)/mid(167,99,81)/dark(64,45,50)对角渐变，x=27列行向连续（X:15..40，Y:7..40）无可见缝隙，无孤立像素；(5) 两候选唯一差异是立柱高度：X行15..25(h=11) vs Y行7..25(h=19)，TASK.md未约束Node B尺寸，该差异不映射到任何任务要求；立柱以外像素两候选逐像素一致，Node C完好。",
+  "confidence": "HIGH",
+  "notes": "任务R为静态承托关系任务，未提供也未要求动画回放，motion保持UNVERIFIED。Region P1与anchor的保护合同定义于task-contract.json，该文件不在本评审沙箱内，未做数值核对；但可验证范围内Node C完好且两候选在立柱以外逐像素一致，帧内无覆盖或破损痕迹。坐标均采用任务约定的像素边界口径（矩形(x,y,w,h)覆盖列x..x+w-1）。"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "C",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.png sha256=a1851d45ff8b96ecf919b53e5e63735cdbd343a09ac63646fd6f8388d240faac",
+    "Y.png sha256=383f91826f3805aa01085f8c421c2ee72e7d5e24b8e244ad648553d9649413e1"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A 实测完全达标：主块 cols 6..33（边界 6..34），宽 28px >= 26；rows 22..29，高 8px <= 10；centerX=(6+34)/2=20；bottomY=30。Node B 竖柱（cols 18..21）底边界 y=22 与 Node A 顶边界 y=22 切向接触，gap 0px，接触长度 4px >= 1px，交界行 alpha 全 255、竖柱底行取块顶面颜色 rgb(129,161,178)，视觉连续无悬空。无半透明像素，边缘干净，配色与材质语言（铜橙柱渐变 + 蓝灰块顶亮面 rgb(129,161,178)/正面 rgb(71,99,125)）保持。",
+      "topConcern": "task-contract.json 未随评审材料提供，Node C/Region P1/anchor 的保护合同仅能视觉核验：底部平台 rows 30..32 cols 6..41 与其他结构完整、无破坏迹象；数值条款未逐项核对。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A 实测完全达标：主块 cols 6..33，宽 28px >= 26；rows 20..29，高 10px <= 10（恰在上限）；centerX=(6+34)/2=20；bottomY=30。Node B 竖柱底边界 y=20 与 Node A 顶边界 y=20 切向接触，gap 0px，接触长度 4px，交界 alpha 全 255、颜色连续，无 1px 缝隙。无半透明像素，配色材质与 X 一致，结构完整。",
+      "topConcern": "块高恰为上限 10px（仍合规，但无余量）；保护合同同 X，仅视觉核验（task-contract.json 未提供）。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "两图 48x40 RGBA，逐像素解码测量。共同达标项：Node A 宽 28px（>=26）、centerX=20（边界坐标 (6+34)/2）、bottomY=30；R1 接触 gap=0px、切向接触长度 4px（>=1px），交界处无透明缝、无半透明像素、无杂散像素。唯一差异：X 块高 8px/柱可见 16px（rows 6..21 柱 + rows 22..29 块），Y 块高 10px/柱可见 14px（rows 6..19 柱 + rows 20..29 块）；两者高度均满足 <=10，差异不落在任何要求维度，且整体轮廓、配色、材质、平台结构一致。测量方法：自写 PNG 解码器输出逐行不透明 span 与交界 alpha/RGB。",
+  "confidence": "HIGH",
+  "notes": "以 X/Y 引用候选；contact-sheet.png 仅作辅助，未以展示位置定义身份。保护合同边界：评审目录内无 task-contract.json，Node C/Region P1/anchor 仅做视觉核验（结构齐全、未受损），数值条款未验证，已在各候选 topConcern 记录。本任务为静帧，无动画剪辑，motion 维持 UNVERIFIED。X.png 与 Y.png 字节数相同但 SHA-256 不同，差异为 2px 块高/柱长分配，实测确认。"
+}

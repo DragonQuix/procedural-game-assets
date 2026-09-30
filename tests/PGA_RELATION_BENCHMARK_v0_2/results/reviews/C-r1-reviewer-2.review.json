@@ -1,0 +1,38 @@
+{
+  "schema": "pga-review/3",
+  "task": "C",
+  "reviewerSlot": 2,
+  "actualViews": [
+    "X.png sha256=a1851d45ff8b96ecf919b53e5e63735cdbd343a09ac63646fd6f8388d240faac",
+    "Y.png sha256=f97b5342103f1b4584813c25f88dd6f92c5301a2fc1ad9bd5047df26e180e2ea"
+  ],
+  "playbackViewed": false,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A 重构全部达标且留有余量：像素 bbox(6,22)-(33,29)，宽 28px(>=26)、高 8px(<=10)、边界 centerX=20.0、bottomY=30。Node B 的 E2 底边界 y=22 与 Node A 的 E1 顶边界 y=22 切向重合，0px 间隙，接触长度 4px(>=1)，交界无可见断裂。Node A 底边界 y=30 与下方基座顶边界 y=30 切向重合，无悬空。",
+      "topConcern": "无阻断性问题。Node A 左缘(x=6)与基座左缘(x=6)齐平，右缘短于基座，属体块设计而非缺陷；配色/材质(高光-橙棕渐变柱+蓝灰板+深色勾边)与像素簇完整，无孤立杂点，alpha 仅 0/255。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "topStrength": "Node A 重构全部达标：像素 bbox(7,20)-(32,29)，宽 26px(恰好达到下限 26，含)、高 10px(恰好达到上限 10，含)、边界 centerX=20.0、bottomY=30。Node B 的 E2 底边界 y=20 与 Node A 的 E1 顶边界 y=20 切向重合，0px 间隙，接触长度 4px(>=1)。基座与 X 完全一致(rows 30-32, x 6-41)。",
+      "topConcern": "无阻断性问题。Node A 宽与高恰好压在约束边界上(26/10)，因要求为 at least/at most 的包含语义故仍达标，但无余量；Node A 左缘(x=7)相对基座左缘(x=6)内缩 1px，属外观差异非缺陷。结构连续、配色/材质保持、无孤立杂点。",
+      "blockingIssue": false,
+      "motion": {
+        "taskFit": "UNVERIFIED",
+        "playbackViewed": false,
+        "viewedClips": []
+      }
+    }
+  },
+  "pairwiseResult": "NO_MEANINGFUL_DIFFERENCE",
+  "keyEvidence": "两图均为 48x40 RGBA、同一 9 色调色板、alpha 仅 0/255、无孤立杂点。Node A 实测：X 宽28/高8/centerX=20.0/bottomY=30；Y 宽26/高10/centerX=20.0/bottomY=30（边界坐标，均满足 宽>=26、高<=10、centerX=20、bottomY=30）。R1 接触：X 柱底边界 22=板顶边界 22，Y 柱底边界 20=板顶边界 20，两者间隙均为 0px、切向接触长度均 4px(>=1)，交界处逐行相邻、无 1px 缝隙。Node A 底边界 30 与下方基座顶边界 30 切向重合，无悬空。下方基座(rows 30-32, x 6-41)两图逐像素一致，调色板一致，锚点 pale 像素在两图中均保持贴附于 Node A 左上角(X:(6,22)/(6,30)，Y:(7,20)/(6,30))，相对关系保持。两候选在全部可测要求上均达标且无可见质量差异；唯一区别是 X 在约束区间内留有余量(28x8)而 Y 恰好达界(26x10)，以及柱高 16 对 14，均不影响合规或观感。局限：评审包内无 task-contract.json，Node C/Region P1/anchor 的保护以两候选互相一致性与可见完整性判断，未见违反，但绝对合同符合度未对原文核验。",
+  "confidence": "HIGH",
+  "notes": "评审方式：Read 真实查看 X.png/Y.png/contact-sheet.png（contact-sheet 标签位于资产区外，展示顺序不定义身份），并以确定性像素级测量复核比例、接触与连通性。坐标采用最终帧像素边界坐标解释（左边界=最左像素 x，右边界=最右像素 x+1）。task C 为静态图，无 playback 要求，motion 记 NOT_APPLICABLE。无 target answer image，偏好不涉及与原图相似度。"
+}

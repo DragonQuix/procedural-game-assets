@@ -1,0 +1,662 @@
+{
+  "schema": "pga-relation-analysis/1",
+  "generatedAt": "2026-09-30T06:11:16.009Z",
+  "isolation": {
+    "status": "PASS",
+    "pairs": {
+      "C-r1/reviewer-1": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "C-r1/reviewer-2": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "C-r3/reviewer-1": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "C-r3/reviewer-2": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "C-r2/reviewer-1": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "C-r2/reviewer-2": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "R-r1/reviewer-1": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "R-r1/reviewer-2": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "R-r2/reviewer-1": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "R-r2/reviewer-2": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "R-r3/reviewer-1": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      },
+      "R-r3/reviewer-2": {
+        "inputsChecked": 6,
+        "mismatch": [],
+        "extraFiles": [
+          "metadata.json",
+          "review.json"
+        ]
+      }
+    }
+  },
+  "firstFormalUnblindTimestamp": "2026-09-30T06:11:15.971Z",
+  "runs": {
+    "C-D14-r3": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 1,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 1,
+        "validationProbeCount": 1,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 1,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 0
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "C-D13-r3": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 2,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 0,
+        "validationProbeCount": 41,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 0,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 1
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "C-D13-r1": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 2,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 0,
+        "validationProbeCount": 41,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 0,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 1
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "C-D13-r2": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 2,
+        "manualCoordinateRepairCount": 1,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 0,
+        "validationProbeCount": 2,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 0,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 1
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "R-D14-r1": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 1,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 1,
+        "validationProbeCount": 1,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 1,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 0
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "R-D13-r2": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 2,
+        "manualCoordinateRepairCount": 1,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 0,
+        "validationProbeCount": 2,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 0,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 1
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "R-D14-r3": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 1,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 1,
+        "validationProbeCount": 1,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 1,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 0
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "R-D13-r1": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 2,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 0,
+        "validationProbeCount": 49,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 0,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 1
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "R-D14-r2": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 1,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 1,
+        "validationProbeCount": 1,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 1,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 0
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "R-D13-r3": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 2,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 0,
+        "validationProbeCount": 49,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 0,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 1
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "C-D14-r2": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 1,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 1,
+        "validationProbeCount": 1,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 1,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 0
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    },
+    "C-D14-r1": {
+      "taskSuccess": "PASS",
+      "visual": "PASS",
+      "components": {
+        "submit": "PASS",
+        "deterministic": "PASS",
+        "mechanical": "PASS",
+        "protection": "PASS",
+        "relations": "PASS",
+        "budget": "PASS",
+        "protocol": "PASS",
+        "visual": "PASS"
+      },
+      "counts": {
+        "candidateCount": 1,
+        "manualCoordinateRepairCount": 0,
+        "rejectedOperationCount": 0,
+        "semanticTransformCount": 1,
+        "relationAwareTransformCount": 1,
+        "validationProbeCount": 1,
+        "relationEvaluationProbeCount": 0,
+        "relationRepairCount": 1,
+        "protectionRejectionCount": 0,
+        "retries": 0,
+        "errors": 0,
+        "lowLevelGeometryEditCount": 0
+      },
+      "finalRequiredRelationViolationCount": 0,
+      "finalProtectionViolationCount": 0
+    }
+  },
+  "pairedResults": {
+    "C-r1": {
+      "X": "C-D14-r1",
+      "Y": "C-D13-r1",
+      "verdict": "NO_MEANINGFUL_DIFFERENCE",
+      "pairKind": "both pass"
+    },
+    "C-r3": {
+      "X": "C-D13-r3",
+      "Y": "C-D14-r3",
+      "verdict": "NO_MEANINGFUL_DIFFERENCE",
+      "pairKind": "both pass"
+    },
+    "C-r2": {
+      "X": "C-D14-r2",
+      "Y": "C-D13-r2",
+      "verdict": "NO_MEANINGFUL_DIFFERENCE",
+      "pairKind": "both pass"
+    },
+    "R-r1": {
+      "X": "R-D13-r1",
+      "Y": "R-D14-r1",
+      "verdict": "MIXED",
+      "pairKind": "both pass"
+    },
+    "R-r2": {
+      "X": "R-D14-r2",
+      "Y": "R-D13-r2",
+      "verdict": "MIXED",
+      "pairKind": "both pass"
+    },
+    "R-r3": {
+      "X": "R-D13-r3",
+      "Y": "R-D14-r3",
+      "verdict": "MIXED",
+      "pairKind": "both pass"
+    }
+  },
+  "primary": {
+    "taskSuccess": {
+      "D13": "6/6",
+      "D14": "6/6"
+    },
+    "finalRequiredRelationViolationCount": {
+      "D13": 0,
+      "D14": 0
+    },
+    "manualCoordinateRepairCount": {
+      "D13": 2,
+      "D14": 0
+    }
+  },
+  "hardConstraint": {
+    "finalProtectionViolationCount": {
+      "D13": 0,
+      "D14": 0
+    }
+  },
+  "secondary": {
+    "candidateCount": {
+      "D13": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "D14": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "median": {
+        "D13": 2,
+        "D14": 1
+      }
+    },
+    "rejectedOperationCount": {
+      "D13": 0,
+      "D14": 0
+    },
+    "semanticTransformCount": {
+      "D13": 6,
+      "D14": 6
+    },
+    "relationAwareTransformCount": {
+      "D13": 0,
+      "D14": 6
+    },
+    "relationRepairCount": {
+      "D13": 0,
+      "D14": 6
+    },
+    "validationProbeCount": {
+      "D13": 184,
+      "D14": 6
+    },
+    "retries": {
+      "D13": 0,
+      "D14": 0
+    },
+    "errors": {
+      "D13": 0,
+      "D14": 0
+    }
+  },
+  "visual": {
+    "pairVerdicts": {
+      "C-r1": "NO_MEANINGFUL_DIFFERENCE",
+      "C-r3": "NO_MEANINGFUL_DIFFERENCE",
+      "C-r2": "NO_MEANINGFUL_DIFFERENCE",
+      "R-r1": "MIXED",
+      "R-r2": "MIXED",
+      "R-r3": "MIXED"
+    },
+    "conditions": {
+      "MEETS_D14": 11,
+      "MEETS_D13": 11,
+      "consensusD13Pairs": 0,
+      "d14ConsistentNotYet": 0,
+      "verifiedPairs": 6,
+      "unverifiedPairs": 0
+    }
+  },
+  "modelConsistency": {
+    "distinctSelfReports": [
+      "account:bigmodel-individual-coding-plan/GLM-5.3-Flash"
+    ],
+    "consistent": true
+  },
+  "goNoGo": {
+    "conditions": [
+      {
+        "id": 1,
+        "name": "D14FinalRequiredRelationViolations",
+        "value": 0,
+        "rule": "= 0",
+        "verdict": "PASS"
+      },
+      {
+        "id": 2,
+        "name": "D14FinalProtectionViolations",
+        "value": 0,
+        "rule": "= 0（硬约束）",
+        "verdict": "PASS"
+      },
+      {
+        "id": 3,
+        "name": "D14TaskSuccessMinimum",
+        "value": "6/6",
+        "rule": "≥ 5/6",
+        "verdict": "PASS"
+      },
+      {
+        "id": 4,
+        "name": "ManualCoordinateRepair",
+        "value": {
+          "D14": 0,
+          "D13": 2
+        },
+        "rule": "D14 < D13",
+        "verdict": "PASS"
+      },
+      {
+        "id": 5,
+        "name": "MedianCandidateCount",
+        "value": {
+          "D14": 1,
+          "D13": 2
+        },
+        "rule": "D14 ≤ D13",
+        "verdict": "PASS"
+      },
+      {
+        "id": 6,
+        "name": "VisualNonRegression",
+        "value": {
+          "MEETS_D14": 11,
+          "MEETS_D13": 11,
+          "consensusD13Pairs": 0,
+          "d14ConsistentNotYet": 0,
+          "verifiedPairs": 6,
+          "unverifiedPairs": 0
+        },
+        "rule": "MEETS_D14 ≥ MEETS_D13 ∧ CONSENSUS_D13 ≤ 1 ∧ 无 D14 一致 NOT_YET；已验证 pair < 4 → INCONCLUSIVE",
+        "verdict": "PASS"
+      }
+    ],
+    "decision": "GO"
+  }
+}
