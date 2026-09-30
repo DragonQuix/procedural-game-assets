@@ -97,6 +97,7 @@ test('真实 JSON CLI：创建/文件操作/局部观察/提交/导出及错误�
   await writeFile(op, JSON.stringify(operation));
   const edit = cli('edit', '--ws', ws, '--base', 'r1', '--operation', op);
   assert.equal(edit.ok, true, JSON.stringify(edit)); assert.equal(edit.result.status, 'OK');
+  for (const key of ['light', 'silhouette', 'selection', 'crop', 'cropDisplay', 'observation']) assert.ok(edit.result.previews.candidate[key]);
   const view = cli('inspect', '--ws', ws, '--region', JSON.stringify(operation.params.region), '--out', join(root, 'view'));
   assert.equal(view.ok, true, JSON.stringify(view));
   for (const key of ['crop', 'cropDisplay', 'selection', 'light', 'silhouette']) assert.ok(view.result.files[key]);
@@ -108,6 +109,32 @@ test('真实 JSON CLI：创建/文件操作/局部观察/提交/导出及错误�
   const propPath = fileURLToPath(new URL('../../examples/studio/terminal.studio.json', import.meta.url));
   assert.equal(cli('inspect', '--doc', propPath, '--region', JSON.stringify(operation.params.region)).error.code, 'UNSUPPORTED_SCOPE');
   assert.equal(cli('explore', '--ws', ws, '--base', 'r2', '--op', 'raster.draw', '--target', 'canvas', '--field', 'x', '--values', '1,2').error.code, 'UNSUPPORTED_SCOPE');
+});
+
+test('未提交候选可局部审图；相同基准的不同选区材料互不覆盖且身份准确', async (t) => {
+  const root = await temporary(t), ws = join(root, 'ws');
+  const { store } = await StudioStore.create(ws, createRasterDocument({ id: 'review', width: 8, height: 8 }));
+  const first = await store.edit({ baseRevision: 'r1', operation });
+  const files = new Map();
+  for (const view of Object.values(first.previews)) for (const path of Object.values(view)) files.set(path, await readFile(join(ws, path)));
+  const secondOp = structuredClone(operation);
+  secondOp.params.region = { id: 'detail-b', x: 5, y: 5, w: 2, h: 2 };
+  const second = await store.edit({ baseRevision: 'r1', operation: secondOp });
+  assert.notEqual(first.previews.base.crop, second.previews.base.crop);
+  for (const [path, content] of files) assert.deepEqual(await readFile(join(ws, path)), content);
+  const candidate = JSON.parse(await readFile(join(ws, first.previews.candidate.observation), 'utf8'));
+  const base = JSON.parse(await readFile(join(ws, first.previews.base.observation), 'utf8'));
+  assert.equal(candidate.candidateId, first.candidateId); assert.equal(candidate.revision, 'r1');
+  assert.equal(candidate.documentHash, first.hashes.documentHash);
+  assert.equal(candidate.target_crop.candidateId, first.candidateId);
+  assert.equal(candidate.region.id, operation.params.region.id); assert.equal(base.candidateId, null);
+  assert.equal((await store.state()).head, 'r1');
+  const compiled = await store._getCompiled('r1');
+  assert.ok(compiled.asset.frames[0].rgba.every((v) => v === 0), '审图不修改已确认资产');
+  const native = decodePNG(await readFile(join(ws, first.previews.candidate.native)));
+  assert.equal(native.rgba[(2 * 8 + 2) * 4], 253, 'native 为资产像素而非粉色选区');
+  const metadata = await store.edit({ baseRevision: 'r1', operation: { id: 'raster.metadata', target: 'anchor', value: { x: 3, y: 8 } } });
+  assert.ok(metadata.previews.candidate.light); assert.equal(metadata.previews.candidate.selection, undefined);
 });
 
 test('连续路径 CLI：无需辅助绘图脚本；失败原子性、重开和恢复沿用现有事务', async (t) => {

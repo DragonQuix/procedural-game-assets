@@ -4,6 +4,27 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S11.2 接受前的位图候选局部观察（2026-09-30，0.9.2）
+
+依据：`../CONTEXT.md`、ADR-0009/0014、`studio-raster.md`。本轮解决的通用缺口是：
+edit 只写 native/display，而 inspect 的明暗背景、剪影和选区裁切面向修订，
+导致 Agent 很容易先接受再检查局部。不是为提高某次样图的验收结果而补材料。
+
+- 位图 edit 的基准与候选预览新增 light/silhouette/observation；绘制和替换追加 selection/crop/cropDisplay。
+  observation 绑定基准 revision、候选 ID、documentHash/renderHash 和 region。
+  基准裁切按候选隔离，不再共用会被后续选区覆盖的 rN-base 路径。已有静态/角色预览路径不变。
+- 新增一项集成测试并加强真实 CLI 断言，覆盖未提交就获得局部图、两个不同选区互不覆盖、
+  身份绑定、观察不移动 head、不污染 native 像素，以及纯元数据编辑没有虚假选区。
+- 开发源：`node --test "tests/unit/studio-raster*.test.js" "tests/integration/studio*.test.js" tests/integration/skill-release.test.js`
+  得到 **74 PASS / 0 FAIL**。普通载荷同范围、不含宿主 skill-release 检查：**73 PASS / 0 FAIL**。
+  范围含已有 Studio 事务、观察、跨帧、保护和关系集成测试；未重跑工具包全套或旧模型实验。
+- 普通载荷经 release 生成，216 文件一致；未升级循环版或用户级安装。
+  日志为 `work/studio-raster-preview-source-tests.log`、`work/studio-raster-preview-payload-tests.log`。
+
+本轮没有新的角色视觉裁决；S11 的 NOT_YET 不变。允许后续用真实局部打磨检验新观察面，
+但必须说明可回收的工具缺口或方法经验；不把价值优先误解为禁止继续打磨样图。
+旧候选/幂等记录不自动补视图，新能力使用新的 edit 请求，不手工修改历史。
+
 ## S11.1 位图路径输入回收（2026-09-30，0.9.1）
 
 依据：`../CONTEXT.md`、ADR-0014、`studio-raster.md`。本轮不是继续打磨角色样图，

@@ -86,7 +86,7 @@ CONTEXT.md、README.md；把模板复制为 `game/` 并把 import 改写成指�
 - **离线导出（可选部署）**：`bin/pga.mjs export` → PNG 图集 + 版本化 manifest；
   与启动烘焙同源，往返切回帧逐像素一致（有测试）。
 
-## PGA Studio：文档驱动的资产创作层（0.9.1 / Studio v1.5 alpha，ADR-0008–0014）
+## PGA Studio：文档驱动的资产创作层（0.9.2 / Studio v1.5 alpha，ADR-0008–0014）
 
 面向具备视觉判断的 agent：不必手写绘图代码，用**可编辑 JSON 文档**逐步制作资产，
 经共享烘焙核心渲染、预览、保护与导出。入口与完整合同：
@@ -100,6 +100,8 @@ stdout 纯 JSON；样例与演示在 `assets/toolkit/examples/studio/`）。
 pixel/rect/line/poly/path、透明擦除/替换、锚点/附件点、明暗背景与裁切观察。
 连续笔画优先用 path，不在任务里另写拆线辅助脚本；从画布观察得到的坐标可显式指定
 params.coordinateSpace 为 canvas-pixels，不必手动换算成选区坐标。路径不填充、不平滑，选区保护不变。
+位图 edit 会直接返回候选的明暗背景、剪影、选区和局部裁切；先看候选再接受，
+不要为了局部审图先 commit。观察文件按候选绑定，不沿用别的候选的裁切或结论。
 首版限单帧、边长最多 256、二值 alpha；不自动缩图、去背、风格转换或生成动画。
 技术检查不替代视觉检查，当前 agent 自检不冒充独立认证，不默认启用严格长循环。
 
