@@ -9,7 +9,7 @@
 以 CONTEXT.md 和 docs/adr/ 为术语、模块边界和架构决策来源。
 重点 ADR：0001 核心/IO、0002 坐标、0004 共享烘焙、0009 事务、0014 位图、0015 尺寸草稿。
 当前没有 CONTEXT-MAP.md；若以后建立则按其定位子域。
-方向见 docs/plans/studio-reference-translation.md；实际证据见 docs/verification.md S11–S11.4。
+方向见 docs/plans/studio-reference-translation.md；实际证据见 docs/verification.md S11–S11.5。
 
 - Windows/PowerShell，中文交流、文档和提交；本地文件优先 FastCtx，手工编辑用 apply_patch。
 - 不默认启动子代理，不改用户级技能安装、循环版载荷、旧实验或参考原图。
@@ -59,10 +59,12 @@ src/studio/dispatch.js、src/studio/observe.js、bin/pga-studio.mjs。
 - 6438537：0.9.2 开发源；6e30f01：0.9.2 普通载荷。
 - 6b4a4f5：0.9.3 开发源；99ba9f9：0.9.3 普通载荷。
 - ccb8784：0.10.0 开发源；6f2330f：0.10.0 普通载荷。
+- ff200f9：非空尺寸迁移组合回归；a2c0bb3：透明替换与留出材料指导；
+  0b39216：普通载荷同步。运行时与 schema 未改，版本仍为 0.10.0。
 
 当前分支 master，远端 origin 为 https://github.com/DragonQuix/procedural-game-assets.git。
-本轮从 master/a76a260 起步，续接时仅有本轮尺寸草稿代码与测试的未提交改动，并用 ls-remote 核对远端基线；
-收尾另做验证/交接文档提交与普通推送。
+本轮从干净的 master/2c899e3 起步，并用 ls-remote 核实 origin/master 同 SHA；
+缺少第二张合适设计，只做合成输入的有限探针，收尾更新验证/交接文档并普通推送。
 续接时以 git status / git log / 远端查询核实实际状态，不把本文当成永久的同步证明。
 
 ## 历史样图与只读证据
@@ -122,9 +124,35 @@ hand-b 未修整，hand-a 手型仍简化，材质、头发与面甲粗略。未
 人工试玩、第二种角色或独立认证，不能把 T1 标为完成。现有操作能表达本例的色块重组，停止继续重画。
 原图、旧 r6 head、上一轮 head 和编辑源 SHA-256 与本轮起点相同；循环版与用户级安装未改。
 
+## 非空尺寸迁移合成探针（0.10.0 维护，新工作区）
+
+没有新的用户参考；本轮 Agent 自绘的 Probe S 不是留出设计，不计入 T1。
+收益是补非空 PNG 到非整数尺寸草稿、掩码替换与候选观察的组合证据，回收操作指导。
+路径相对仓库，位于 gitignored `work/studio-structure-probe-20261001`，不随推送携带：
+
+- `design`：blank + source.draw.json 制作的 48×72 合成输入；`workspace`：从其 PNG 创建，
+  当前 head=r3、32×48，1x/3x，浅底及 `#263a42` 整体背景。特征与一句假设见 `brief.json`。
+- 尺寸候选 c-3037358f 仅接受为 r2 底稿；宽檐帽、外扩斗篷和单侧挎包可辨，一像素暗缝丢失。
+- 掩码替换 c-52b820a3 技术 OK，22 像素变化、选区外 0；看局部浅底/剪影及整体后发现
+  透明补丁抹掉五个斗篷连接像素，**未接受**。head 仍为 r2，没有把失败候选当作后续基准。
+- 直接四条 path/rect 的 c-368aea5d 改变 10 像素、选区外 0，无透明擦除；看相同视图后
+  仅接受为局部草稿 r3。documentHash=8893192e，renderHash=2a253ef5:55ba8711。
+- `export/structure-probe.studio.json` 与 `reopened`：自包含重开及图集切回像素一致；
+  `evidence.json`、`technical-audit.json`：看图路径、裁决、范围与 12 个只读文件的 SHA-256 前后记录。
+
+结论已回收入普通技能和 studio-raster.md：透明替换是擦除，不是叠加；需保留底层时选 draw、
+mask=0 或带回基准，不新增 API、不继续完善样图。背景图是 PNG 观察，不是 Canvas 场景验收。
+**T1 仍未完成**：缺少未用于调工具的另一种设计；没有完整尺寸迁移、临摹质量、泛化或独立认证结论。
+旧骑士仍为 NOT_YET，三套旧 head/编辑源/证据、原图与循环清单保持不变，用户级安装未改。
+
 ## 测试事实
 
-- 0.10.0 开发源与普通载荷各运行
+- 0.10.0 本轮维护：开发源与实际普通载荷目录各运行
+  node --test "tests/unit/studio*.test.js" tests/unit/frame-observation.test.js "tests/integration/studio*.test.js"，
+  各 **200 PASS / 0 FAIL / 0 SKIP**；技能携带检查另 **1 PASS / 0 FAIL**。
+  日志为 work/studio-structure-probe-20261001 的 `{source-tests,payload-tests,skill-release-tests}.log`。
+  普通清单 220 文件一致，循环版只读校验 132 文件一致；不是全套重测。
+- 0.10.0 首次尺寸草稿开发源与普通载荷各运行
   node --test "tests/unit/studio*.test.js" tests/unit/frame-observation.test.js "tests/integration/studio*.test.js"，
   各 **199 PASS / 0 FAIL / 0 SKIP**；
   技能携带检查另 **1 PASS / 0 FAIL**。日志位于 work/studio-size-probe-20260930 的
@@ -150,6 +178,8 @@ hand-b 未修整，hand-a 手型仍简化，材质、头发与面甲粗略。未
    如继续打磨，先说明新的可回收收益与证据缺口，不把允许打磨误读为禁止，也不以视觉通过为唯一目标。
 2. 下一步优先按 T1 用未参与调工具的另一种角色/服装结构检查复用性，先实际看设计，
    声明目标尺寸、显示倍率和少数必须保留/允许概括的特征，写一句待验证假设。
+   本轮仍缺该材料；先请求用户附图或准确路径，不扫描无关目录，不把合成输入计入留出验收。
+   透明替换探针已回答本轮操作与指导问题，未发现新缺口时不为补齐 T1 继续制作合成样图。
    实施者以 CONTEXT.md 和 ADR-0001/0002/0004/0009/0014/0015 为术语与架构来源；当前没有 CONTEXT-MAP.md。
    新建 work，保留已有三套证据，优先沿用空白/PNG 创建、resample 草稿、poly/path/replace 和候选观察。
 3. 完整尺寸迁移仍未验收。重采样后重新定位选区和关键点、重组必要细节，不沿用原尺寸的视觉裁决。

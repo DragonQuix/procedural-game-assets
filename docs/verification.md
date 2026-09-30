@@ -4,6 +4,59 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S11.5 非空尺寸迁移组合与透明替换指导（2026-10-01，0.10.0）
+
+依据：`../CONTEXT.md`、ADR-0001/0002/0004/0009/0014/0015、`plans/studio-reference-translation.md` T1。
+起点核实为干净的 master/2c899e3，origin/master 同 SHA。未建立 CONTEXT-MAP.md。
+本轮没有第二张合适的用户设计；已请求附图或准确路径，没有扫描无关用户目录。
+现有骑士参考已参与调工具，不再把它或既有配方输出当作留出设计。
+
+项目收益与缺口：现有尺寸迁移集成测试从空白图起步，未覆盖非空 PNG、非整数采样、
+新尺寸选区掩码替换和候选观察身份的组合。用最小合成输入定位这条操作链与指导缺口，
+不以获得满意角色样图、增加断言数或认证 T1 为目标。
+
+### 实际操作与看图裁决
+
+- 新建 `work/studio-structure-probe-20261001`；Agent 用 blank + poly/path/rect 制作合成输入 Probe S，
+  实际看源图后声明 48×72 → 32×48、1x/3x、浅底与 `#263a42` 整体背景。
+  保留宽檐尖帽、外扩斗篷与靴间空隙、单侧赭黄挎包和红扣，允许概括面部与布褶。
+  本轮自绘输入不是用户身份参考或未参与调工具的设计。
+- 一句假设：非整数最近邻可能吞掉挎包的一像素暗缝；新尺寸局部替换能否恢复分隔，
+  同时保持掩码外像素与点位不变。沿用 PNG 创建和 raster.resample，没有新增 API。
+- 尺寸候选 `c-3037358f` 实际看 native/light/display 后接受为 r2 底稿。
+  帽形、下摆和挎包可辨，暗缝丢失；跨尺寸 diff 为 null / FRAME_SIZE_CHANGED，不作区域保护证明。
+- `pouch-small={x:21,y:27,w:7,h:9}` 的掩码替换候选 `c-52b820a3` 改变 22 像素、选区外 0，
+  技术 OK。Agent 看 cropLight/cropSilhouette/native/display，发现透明补丁擦掉斗篷连接，**未接受**，
+  head 保持 r2。逐像素检查确认五个基准不透明像素变透明，位置记录在 technical-audit.json。
+- 从未改变的 r2 改用四条 path/rect 绘改，候选 `c-368aea5d` 改变 10 像素、选区外 0，
+  没有不透明像素变透明。实际看相同四类图，暗缝与扣件更可辨、连接完整，仅接受为局部草稿 r3。
+  documentHash=8893192e，renderHash=2a253ef5:55ba8711；导出自包含编辑源后新建 reopened 工作区，
+  文档、native、点位与图集切回像素一致。
+- 维护结论：raster.replace 的透明像素是擦除，不是保留下层的叠加；独立部件补丁可能破坏复合选区。
+  只补笔画且保留底层时可用 raster.draw，或明确 mask=0/带回基准。回收入位图指南与普通技能，
+  不改 alpha 语义、不增加审美模型。已有证据足够，停止绘制更多部位。
+
+### 回归、发行与边界
+
+- 新增一项通用组合回归：12×18 非空 PNG → 8×12 最近邻 → 新尺寸掩码替换，
+  验证显式采样索引、透明擦除与 mask=0 保留、点位保护、原尺寸/浅底/剪影观察身份、
+  删除输入文件后的提交、导出自包含重开、图集像素往返和恢复。不是工具缺陷修复或视觉自动验收。
+- 开发源与实际普通载荷目录各运行
+  `node --test "tests/unit/studio*.test.js" tests/unit/frame-observation.test.js "tests/integration/studio*.test.js"`，
+  各 **200 PASS / 0 FAIL / 0 SKIP**；技能携带检查另 **1 PASS / 0 FAIL**。
+  只覆盖相关 Studio/观察套件，没有重跑全套或旧模型实验，S11 的旧数据状态断言边界不变。
+- 版本仍为 0.10.0，运行时代码与 schema 未改。回归提交 ff200f9，指导提交 a2c0bb3；
+  普通载荷由 release 从 a2c0bb3 生成并提交为 0b39216，220 文件哈希一致。
+  循环版只读校验 132 文件，未重建。
+  原图、三套旧工作区的 head/编辑源/证据及循环清单共 12 个已记录文件 SHA-256 与起点相同。
+  未修改用户级安装、旧实验或原游戏，没有启动临时服务器或浏览器。
+- 本地材料为上述 work 下的 `brief.json`、`evidence.json`、`technical-audit.json`、操作 JSON、
+  `workspace/previews/`、`export/` 与 `{source-tests,payload-tests,skill-release-tests}.log`，不随 Git 推送。
+
+**T1 仍未完成**：合成探针仅支持有限操作链与指导结论，不能认证第二种设计临摹、完整尺寸迁移、
+泛化成功率或成本改善。背景检查是 PNG 观察图，不是 Canvas 场景验收；没有人工试玩、动画或独立认证。
+旧骑士整张角色仍为 **NOT_YET**。下一步须取得未用于调工具的另一种设计，先实际看图再冻结少数特征和规格。
+
 ## S11.4 尺寸草稿事务与目标尺寸细节重组（2026-10-01，0.10.0）
 
 依据：`../CONTEXT.md`、ADR-0001/0002/0004/0009/0014/0015、`plans/studio-reference-translation.md` T1。
