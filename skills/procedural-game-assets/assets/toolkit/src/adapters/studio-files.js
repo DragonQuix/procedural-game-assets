@@ -69,7 +69,7 @@ async function writePreviews(outDir, compiled, views, nodeId) {
   await writeFile(join(outDir, files.native), encodePNG(views.native.width, views.native.height, views.native.rgba));
   files.display = previewFileName('display', compiled);
   await writeFile(join(outDir, files.display), encodePNG(views.display.width, views.display.height, views.display.rgba));
-  for (const kind of ['light', 'silhouette', 'selection']) {
+  for (const kind of ['light', 'silhouette', 'selection', 'cropLight', 'cropSilhouette']) {
     if (!views[kind]) continue;
     files[kind] = previewFileName(kind, compiled);
     const view = views[kind];

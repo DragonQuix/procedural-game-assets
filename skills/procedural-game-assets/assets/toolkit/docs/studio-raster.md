@@ -1,4 +1,4 @@
-# Studio 单帧位图创作（v1.5 alpha，工具包 0.9.2）
+# Studio 单帧位图创作（v1.5 alpha，工具包 0.9.3）
 
 依据：`../CONTEXT.md`、ADR-0014；事务与通用命令见 `studio-cli.md`。
 支持 Agent 自己看图、创建和绘改，不包含自动识别、图像生成服务或自动保真评分。
@@ -92,6 +92,12 @@ observation；绘制/替换操作另带 selection、crop、cropDisplay，自动�
 候选状态仍以 edit 的 status/checks 为准；有预览不等于候选可提交，更不等于视觉通过。
 旧候选和旧幂等请求记录不自动补视图；需要时重新 edit 并使用新的 request-id，不改历史文件。
 
+0.9.3 起，带 region 的位图 edit/inspect 另返回 cropLight、cropSilhouette：
+在同一裁切与 2px 邻域内，用不透明浅底检查深色轮廓、透明断口和部件连接。
+cropLight 保留原不透明像素的颜色，cropSilhouette 只保留不透明形状；背景记录在
+observation.target_crop.backgrounds，仍与修订、候选和哈希绑定。crop/cropDisplay 继续保留透明，
+所有观察背景和覆盖都不进入文档、native 或导出资产。无 region 的元数据修改不返回虚假局部图。
+
 ```powershell
 node bin/pga-studio.mjs inspect --ws work/mask-ws --region '{"id":"visor","x":8,"y":6,"w":16,"h":20}' --out work/mask-detail
 node bin/pga-studio.mjs observe --ws work/mask-ws --candidates '["<candidateId>"]' --region '{"id":"visor","x":8,"y":6,"w":16,"h":20}' --out work/mask-compare
@@ -102,6 +108,19 @@ inspect 输出原尺寸、指定背景放大、浅色背景、剪影；带 regio
 选区覆盖只属于观察图，不能拿它交付。region 与 node 不能同时提供。
 observe 只展示当前基准下完整性与检查通过的已有候选，并记录候选 ID、差分和裁切。
 restore 创建新修订，不抹除历史。过期候选不能接受，位图 edit 也要求当前 head。
+
+### 局部修整的操作顺序
+
+- 保留旧证据；需隔离试改时，从导出的 .studio.json 用 create 建立新工作区，不直接重跑旧绘制脚本。
+- 先给局部稳定 region ID，选区包含连接边与少量邻域；查看 selection 和
+  observation.target_crop.crop 的画布原点。裁切图索引不是画布坐标；放大图的像素位置先除以
+  target_crop.scale 再加裁切原点，才是 canvas-pixels 输入坐标，不能直接抄放大图的像素位置。
+- 一次只修一个可见问题。已有 poly 用于填色、path 用于轮廓或笔画、color=null 用于透明擦除，
+  不预设必须加新操作，也不把某种角色或手部造型写成模板。擦除后重画尤其要检查连接处。
+- 接受前先看候选 cropLight/cropSilhouette 的轮廓和接缝，再看 native 与声明背景下的整体。
+  局部细节变多不等于改善；轮廓断开、尺寸下不可读或破坏设计时可不接受候选，head 不变。
+- 看图仍由 Agent 判断，技术 diff.outside=0 只证明选区外未变。若问题在现有操作下可表达，
+  优先改操作或指导；只有出现可复用缺口才改工具。证据足以支持维护决定时停止打磨。
 
 文档级 constraints 与请求级 preserve 支持全画布 pixels:canvas，以及
 metadata:anchor/attachments/attachments.<名称>/frameSize。没有区域冻结合同，

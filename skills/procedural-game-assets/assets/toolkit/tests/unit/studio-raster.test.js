@@ -104,3 +104,34 @@ test('观察含明暗背景、剪影、选区和裁切；图层不污染资产',
   assert.throws(() => buildViews(result.compiled, { node: 'canvas', region }));
   assert.throws(() => buildCharacterViews({ kind: 'character' }, { region }), /region/);
 });
+
+test('局部浅底与剪影显出透明缺口；保留邻域、掩码内外像素与原始裁切', () => {
+  const painter = new PixelPainter(8, 8);
+  painter.rect(1, 2, 4, 1, '#0d1116');
+  painter.rect(2, 4, 2, 2, '#34434e');
+  const doc = createRasterDocument({ id: 'seam', width: 8, height: 8, rgba: painter.toRGBA() });
+  const compiled = compileRasterDocument(doc), before = new Uint8ClampedArray(compiled.asset.frames[0].rgba);
+  for (const cropRegion of [region, { id: 'edge', x: 0, y: 0, w: 3, h: 4 }]) {
+    for (const scale of [1, 3]) {
+      const views = buildViews(compiled, { region: cropRegion, displayScale: scale, revision: 'r1', candidateId: 'c-seam' });
+      const { crop, cropLight, cropSilhouette } = views;
+      assert.ok(cropLight && cropSilhouette, '局部审图无需依赖宿主的透明背景颜色');
+      assert.equal(cropLight.width, crop.width * scale); assert.equal(cropLight.height, crop.height * scale);
+      assert.equal(cropSilhouette.width, cropLight.width); assert.equal(cropSilhouette.height, cropLight.height);
+      assert.deepEqual(views.meta.target_crop.backgrounds, { light: '#eee8db', silhouette: '#eee8db' });
+      assert.equal(views.meta.target_crop.candidateId, 'c-seam'); assert.equal(views.meta.target_crop.regionId, cropRegion.id);
+      assert.equal(views.meta.target_crop.documentHash, compiled.hashes.documentHash);
+      for (let y = 0; y < cropLight.height; y++) for (let x = 0; x < cropLight.width; x++) {
+        const sourceIndex = (Math.floor(y / scale) * crop.width + Math.floor(x / scale)) * 4;
+        const index = (y * cropLight.width + x) * 4;
+        const opaque = crop.rgba[sourceIndex + 3] === 255;
+        assert.deepEqual([...cropLight.rgba.slice(index, index + 4)], opaque ? [...crop.rgba.slice(sourceIndex, sourceIndex + 4)] : [238, 232, 219, 255]);
+        assert.deepEqual([...cropSilhouette.rgba.slice(index, index + 4)], opaque ? [21, 25, 34, 255] : [238, 232, 219, 255]);
+      }
+      assert.ok(crop.rgba.some((v, i) => i % 4 === 3 && v === 0), '原始裁切仍保留真实透明缺口');
+    }
+  }
+  assert.deepEqual(compiled.asset.frames[0].rgba, before);
+  const noRegion = buildViews(compiled);
+  assert.equal(noRegion.cropLight, undefined); assert.equal(noRegion.cropSilhouette, undefined);
+});
