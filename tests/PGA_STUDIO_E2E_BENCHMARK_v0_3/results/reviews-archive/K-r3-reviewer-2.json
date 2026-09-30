@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "K",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "一眼可读为便携救援绞盘：中央大鼓轮带同心橙色环带，读作缠绕牵引索的鼓轮；轴线向右穿过橙色轴承/出口座后接深色 L 形曲柄，握持结构明确可辨；顶部横梁与立柱组成机架，底部基座完整承托。相对 baseline 的散件堆放是明显结构重组，不是局部装饰。",
+      "concern": "右侧曲柄区域元素偏细碎：细长曲柄臂与右缘小块橙色件堆叠感略强，末端小块贴近基座，稍欠干净；不影响用途识读。",
+      "hierarchyReadability": "鼓轮是明确视觉焦点，鼓轮-轴承-曲柄的轴线方向清晰，机架-鼓轮-基座的主次层级好读。",
+      "structuralCoherence": "鼓轮、驱动壳、导出口与曲柄沿同一水平轴线衔接，机架立柱落地与基座连续，承托与传力路径可信，无悬浮或断开感。",
+      "visibleArtifacts": "未见明显错位、裂缝或穿透错误；仅曲柄区细件密集形成的轻微视觉噪音。"
+    },
+    "Y": {
+      "taskFit": "NOT_YET",
+      "strength": "大鼓轮偏左坐入基座，右侧箱体带橙色出口嘴，鼓轮收放索、出口导出的关系可以读出；基座承托可信，整体简洁统一。",
+      "concern": "握持结构读不出来：顶部横杆与 baseline 原有横杆形态相似，不构成有目的的把手；右侧橙色突出块更像出口嘴而非握把。驱动壳与导出口的区分也偏弱，右侧箱体功能含混。",
+      "hierarchyReadability": "鼓轮焦点明确，但右侧箱体的功能身份含混（驱动还是出口），顶部横杆与主体的连接关系弱，层级不如 Candidate X 清楚。",
+      "structuralCoherence": "鼓轮与基座、右侧箱体的接触衔接可信；顶杆两端落点不明确，悬浮感略强，结构连续性中等。",
+      "visibleArtifacts": "鼓轮下缘与基座交界干净，无明显错位或穿模；主要问题是连接处的表达含糊而非像素级瑕疵。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "HIGH",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+      "modelContextId": "agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "58d9f0d9dd0ce931a4ce0d62b3ff4613862e1aa384a296ee581f816e7ca7db4d",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+      "modelContextId": "agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "f82d304c0525da5055448926a5b383221eb42469c97b81ba296304212a3fc148",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+      "modelContextId": "agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "c37ab8652662a612656db829e2cd72756f83b5a48f1d47c7e64da371d81259f0",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+      "modelContextId": "agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "Candidate X 用带同心环带的中央鼓轮、同轴出口座与右侧 L 形曲柄把绞盘的鼓轮-驱动-导出-握持四个功能一次读全，重组幅度大；Candidate Y 鼓轮与出口可读但缺少可辨认的握持结构，顶杆连接含混，故 X 优先。R1 几何接触由独立程序核验，本判断只覆盖 TASK.md 的视觉意图。"
+}

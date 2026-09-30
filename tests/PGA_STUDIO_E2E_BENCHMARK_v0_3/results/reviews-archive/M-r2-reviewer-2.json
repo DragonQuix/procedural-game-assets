@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "M",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "工作部件金属体积可读：丝杆呈柱状明暗（亮顶暗底），压力垫顶缘高光加饱和橙色成为工作面焦点，夹体沿内缘与轮廓走向的竖向亮带随形体转折，读作倒角金属而非平涂。光照方向统一（左上光），横柄有顶缘高光但仍整体偏暗偏细，次要地位大体保住。",
+      "concern": "横柄被提亮为较浅的钢灰色，亮度上与丝杆、垫接近，次要层级被略微削弱（因面积小、位置低，影响有限）。与 baseline 相比压力垫略有加宽，幅度小，未见明显改形替代材质任务的倾向。",
+      "hierarchyReadability": "焦点落在压力垫与丝杆-夹体开口区，即工作界面；夹体内缘竖向亮带把视线引向开口。横柄虽偏亮但细且位于下方，主次仍可读。",
+      "structuralCoherence": "外轮廓、两颗螺栓、各部件对位与 baseline 一致，未见部件漂移；光照方向（左上）在夹体、丝杆、垫、柄之间一致，无跨部件冲突。",
+      "visibleArtifacts": "原生尺度与放大视图下均未见错位、跨部件越界色块、杂散像素或文字；像素阶梯干净。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "夹体以对角渐变亮带给出整体金属光泽，工作部件均有明暗分离；横柄保持暗青色、明确居次，主次层级清楚。整体色调组织统一，属于合法的不同光照概括。",
+      "concern": "压力垫横向明显加长、几乎横跨整个开口，是相对 baseline 最直观的形变。夹体的对角亮带横扫过 C 形轮廓、不随形体转折，更像叠加的斜向光带，金属体积的说服力弱于随形高光；且最亮区域落在夹体大面上，而非垫-丝杆工作界面。",
+      "hierarchyReadability": "视线先被夹体的宽亮带吸引——夹体属工作部件，方向不算错——但工作界面（垫与丝杆）的对比反而退居其次；横柄暗、明确居次，层级整体清楚但重心偏向体块而非工作面。",
+      "structuralCoherence": "外轮廓与螺栓保留，部件对位正常；对角带（光自右上）与垫、柄的顶部高光大体一致，无严重冲突；压力垫加长是主要结构偏离，未破坏轮廓锚点。",
+      "visibleArtifacts": "未见文字、错位或越界杂色；对角带边界呈干净阶梯过渡。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_fcebde08-454b-4c20-8a83-5ec254155162",
+      "modelContextId": "agent_fcebde08-454b-4c20-8a83-5ec254155162",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "4aef36d9a56212752bde6648a3f26c4b953e560d80b75dcbdbad29b1ee68e6ea",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_fcebde08-454b-4c20-8a83-5ec254155162",
+      "modelContextId": "agent_fcebde08-454b-4c20-8a83-5ec254155162",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "dc41c0559c8ae126784319673a8ab39026bafc1badbb71d3745c2f5dca879487",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_fcebde08-454b-4c20-8a83-5ec254155162",
+      "modelContextId": "agent_fcebde08-454b-4c20-8a83-5ec254155162",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "ca1466383ba842021ffb3498af3607413f8a5c403dbcf5771c372263237f8190",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_fcebde08-454b-4c20-8a83-5ec254155162",
+      "modelContextId": "agent_fcebde08-454b-4c20-8a83-5ec254155162",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "两候选均保留外轮廓与螺栓、都做出金属明暗。Candidate X 的高光随形体（夹体内缘竖带、丝杆柱面、垫顶缘），饱和橙垫把焦点压在工作界面上，比例最贴近 baseline；Candidate Y 的对角亮带偏风格化、不随 C 形转折，压力垫明显加长且最亮处落在夹体大面而非工作界面，横柄的次要层级则比 X 更明确。综合体积可信度、工作面层级与比例保真，倾向 X。"
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "S",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "中心以『源端口→三枚流向箭标→受端口』完整表达能量从一个端口传向另一个端口：左侧橙色端口与右侧浅色端口用色彩状态区分供/受，流向与供需关系无需文字即可读出，端口、流向、连接三种视觉关系齐备，64px 下语义仍清晰可辨，无任何文字、字母或数字。",
+      "concern": "叙事完全依赖水平单向流动，偏向『单向传输』的解读，若模块需表达双向或汇聚会有偏差；三枚连续箭标单独看略接近通用快进符号，脱离端口语境时语义会弱化（在本图语境下仍清楚）。",
+      "hierarchyReadability": "橙色箭标与源端口是中心最亮元素，视线沿流向从源端口移到受端口，主次分明；中心与深色内底对比充分，小尺寸下各元素边界仍可分辨。",
+      "structuralCoherence": "橙/蓝灰配色沿用外壳既有强调色（与底部 anchor 呼应），端口外框的圆角语言与外壳一致；改动集中在中心区域，外壳轮廓与 anchor 未变。",
+      "visibleArtifacts": "未见断线、出界或明显锯齿异常，箭标间距均匀。受 64px 渲染限制，无法核验单像素级瑕疵。"
+    },
+    "Y": {
+      "taskFit": "NOT_YET",
+      "strength": "中心以水平导管连接左右两个端子，橙色能量节点落在导管上，表达了『两个端口之间存在连接』的结构；配色与形状语言（圆角胶囊、端子翼片）和外壳风格协调，无文字、字母或数字。",
+      "concern": "只呈现静态连接，『从一个端口传向另一个端口』缺少流向线索：无流动方向、无供/受状态区分，橙色节点偏置一侧反而引入歧义，右端浅色小块功能不明，整体语义需要猜测，达不到『清楚表达能量转接』的要求。",
+      "hierarchyReadability": "导管灰与深色内底对比偏弱，64px 下中心结构发闷、边界含糊；最亮的橙色节点孤立于导管左侧，未形成可跟随的视线路径；右端浅色块几乎融入导管，层级松散。",
+      "structuralCoherence": "配色与造型延续外壳语言，改动限于中心区域、外壳轮廓与 anchor 未变；但橙色节点与右端浅色块同导管主体的组合关系松散，中心构图完整度低于外壳的规整度。",
+      "visibleArtifacts": "未见出界或轮廓破坏；主要问题是低对比造成的含糊感而非硬性瑕疵。受 64px 渲染限制，无法核验单像素级瑕疵。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+      "modelContextId": "agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "b38246c508c3d03660109eebd0e5b3a883dd399e99a9c807631495d390ae369b",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+      "modelContextId": "agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "9210aaba643e678a42d935c4adecc9794f6ab78511b7b1b5814231d176fe5077",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+      "modelContextId": "agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "70d998ec891b77848f363ffcf71e8b3d30fa77fafd33fefce9bc2a50ad5f2eb6",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+      "modelContextId": "agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "对照 baseline（中心为四灰块环绕橙点的占位）逐一实看：Candidate X（X.png）中心为『橙色源端口→三枚橙色流向箭标→浅色受端口』，供/受状态与流向双重编码，无文字，最直接满足『能量从一个端口传给另一个端口』；Candidate Y（Y.png）中心为水平导管连接两端子、橙色节点偏置于导管左侧，只表达静态连接、无流向线索且导管对比偏弱。故 X_PREFERRED。补充观察：contact-sheet.png 两个 tile 的标签内容与单独文件疑似互换（标 X 的 tile 显示的是 Y.png 的导管设计，标 Y 的 tile 显示的是 X.png 的箭标设计）；本评审的身份绑定以单独读取的 X.png / Y.png 文件内容为准，判断未受影响。机械阈值（P1 界限、像素并集等）按 PROMPT 交由独立程序核验，未以像素数自行替代。"
+}

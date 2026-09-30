@@ -19,7 +19,7 @@ const readState = async () => JSON.parse(await readFile(stateFile, 'utf8').catch
 const writeState = async s => writeFile(stateFile, JSON.stringify(s, null, 2) + '\n');
 const logEvent = async event => appendFile(join(coordDir, 'host-events.jsonl'), JSON.stringify({ at: new Date().toISOString(), ...event }) + '\n');
 
-const [cmd, runId, arg3, arg4] = process.argv.slice(3);
+const [cmd, runId, arg3, arg4, arg5] = process.argv.slice(3);
 const manifest = JSON.parse(await readFile(join(bench, 'candidate-materials/manifest.json'), 'utf8'));
 const frozen = JSON.parse(await readFile(join(bench, 'results/protocol-frozen.json'), 'utf8'));
 
@@ -48,9 +48,9 @@ if (cmd === 'prep') {
   await logEvent({ event: 'task-exposed', runId, promptSha256: arg3, modelContextId: arg4 });
   console.log(JSON.stringify({ status: 'EXPOSED_RECORDED', runId }));
 } else if (cmd === 'finish') {
-  const trial = join(runsRoot, runId);
-  const submission = JSON.parse(await readFile(join(trial, 'final/submission.json'), 'utf8').catch(() => 'null'));
-  const ledger = JSON.parse(await readFile(join(trial, 'ledger.json'), 'utf8'));
+  const staged = join(runsRoot, runId, 'staged');
+  const submission = JSON.parse(await readFile(join(staged, 'final/submission.json'), 'utf8').catch(() => 'null'));
+  const ledger = JSON.parse(await readFile(join(staged, 'ledger.json'), 'utf8'));
   const summary = { runId, submitted: ledger.submitted === true, candidateCount: ledger.candidates.length,
     budget: ledger.candidates.length <= 8 ? 'PASS' : 'FAIL',
     submitSuccess: submission?.submitSuccess === true, technicalStatus: submission?.technical?.status ?? null,
@@ -60,6 +60,30 @@ if (cmd === 'prep') {
   await writeState(state);
   await logEvent({ event: 'participant-finished', ...summary });
   console.log(JSON.stringify(summary));
+} else if (cmd === 'verify-reviewer') {
+  const { tree } = await import(pathToFileURL(join(bench, 'shared/files.mjs')));
+  const { canonical } = await import(pathToFileURL(join(bench, 'shared/accounting.mjs')));
+  const pair = runId, slot = Number(arg3);
+  const packages = JSON.parse(await readFile(join(coordDir, '../private/blind-keys', `${pair}.packages.json`), 'utf8'));
+  const descriptor = packages.find(p => p.slot === slot);
+  const dir = join(bench, 'reviews', pair, `reviewer-${slot}`);
+  const actual = await tree(dir);
+  const ok = canonical(actual) === canonical(descriptor.payload);
+  await logEvent({ event: 'reviewer-payload-verify', pair, slot, status: ok ? 'PASS' : 'PAYLOAD_MISMATCH' });
+  console.log(JSON.stringify({ status: ok ? 'PASS' : 'PAYLOAD_MISMATCH', pair, slot, payloadSha256: descriptor.payload.sha256 }));
+} else if (cmd === 'bind-reviewer') {
+  const state = await readState(), pair = runId, slot = Number(arg3), agentId = arg4, sessionId = arg5;
+  if (!agentId || state.contextRegistry.includes(agentId)) { console.log(JSON.stringify({ status: 'CONTEXT_REJECTED', reason: 'MISSING_OR_DUPLICATE_CONTEXT' })); process.exit(1); }
+  const packages = JSON.parse(await readFile(join(coordDir, '../private/blind-keys', `${pair}.packages.json`), 'utf8'));
+  const descriptor = packages.find(p => p.slot === slot);
+  const template = JSON.parse(await readFile(join(bench, 'reviews', pair, `reviewer-${slot}`, 'review.template.json'), 'utf8'));
+  const binding = { task: template.task, reviewerSlot: template.reviewerSlot, reviewer: { sessionId, modelContextId: agentId } };
+  await writeFile(join(bench, 'reviews', pair, `reviewer-${slot}`, 'review-binding.json'), JSON.stringify(binding), { flag: 'wx' });
+  state.contextRegistry.push(agentId);
+  state.runs[`${pair}-reviewer-${slot}`] = { modelContextId: agentId, sessionId, pair, slot, expectedImages: descriptor.expectedImages };
+  await writeState(state);
+  await logEvent({ event: 'reviewer-bound', pair, slot, modelContextId: agentId });
+  console.log(JSON.stringify({ status: 'BOUND', pair, slot, modelContextId: agentId }));
 } else if (cmd === 'status') {
   const state = await readState();
   console.log(JSON.stringify({ contexts: state.contextRegistry.length, runs: Object.fromEntries(Object.entries(state.runs).map(([k, v]) => [k, { exposed: !!v.taskExposedAt, finished: v.participantFinished?.submitted ?? false }])) }, null, 1));

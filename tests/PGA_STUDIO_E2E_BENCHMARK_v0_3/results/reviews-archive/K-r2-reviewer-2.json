@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "K",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "用途一眼可读：鼓轮盘面呈暖橙色并带数条横向缆线纹理，明确读出收放牵引索的绞盘语义；鼓轮右侧衔接深色驱动壳，壳端外突橙色导出口，形成鼓轮-驱动-导出连续功能链；宽底座与机架承托完整。相对 baseline 的侧视杠杆剪影，属于明显的结构重组而非局部装饰。",
+      "concern": "专门的握持结构不突出：顶部横梁可读作提手但语义偏弱，未见明确的把手凸起；驱动壳表面细节（两条横线）较简单，对驱动机制的说明有限。",
+      "hierarchyReadability": "主次分明：暖色鼓轮是最大视觉焦点，在冷色机架上对比强烈；阅读顺序自左向右为鼓轮、驱动壳、导出口，层次递进自然；细节线克制，不干扰主体。",
+      "structuralCoherence": "鼓轮、驱动壳、导出口自左向右视觉上连续衔接，未见悬空或断裂；机架竖柱、顶梁与底座把主体稳定承托在基座上，整体结构可信。R1 几何接触由机械核验，此处仅评视觉连续性。",
+      "visibleArtifacts": "单图分辨率有限，未见明显断裂、悬空或错位；鼓轮左缘与左机架竖柱交界处略有重叠感，读作鼓轮装配于机架之内，不构成伪影。"
+    },
+    "Y": {
+      "taskFit": "NOT_YET",
+      "strength": "机架完整、构图稳定，底座承托可信；大圆盘作为焦点清晰醒目；相对 baseline 也做了明显的正面机架式结构重组。",
+      "concern": "绞盘功能链读不出来：主体是均匀浅蓝灰的大圆盘，盘面无缆线或收放索的任何语义，中心橙点比例偏大且无纹理区分，更像飞轮或滑轮；右侧橙色横条更像手摇曲柄，其连接的深色竖块被圆盘大量遮挡、语义不明，无法读出驱动壳与导出口的衔接；整体更像通用轮式机械，不符合一眼理解救援绞盘用途的要求。",
+      "hierarchyReadability": "大圆盘焦点明确，但次级元素功能语义不清：深色竖块与橙色横条读完仍无法归类为驱动或导出；中心橙点与盘面缺乏层次过渡，整体偏扁平。",
+      "structuralCoherence": "圆盘与右侧深色块存在重叠衔接，橙色横条连于深色块并穿出右机架竖柱，连接在几何上存在，但功能链不闭合；框架、底座承托完整。",
+      "visibleArtifacts": "未见断裂、悬空或明显错位；深色竖块被圆盘遮挡过多导致部件读不出来，属于语义可读性问题而非几何伪影。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "HIGH",
+  "actualViews": [
+    "X.png",
+    "Y.png",
+    "baseline.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+      "modelContextId": "agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "919f8d6bebf7b4bd677586c0809226fb503c670d7f51b3dc67bf8f082102f630",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+      "modelContextId": "agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "e05e9808199af115f4127a8f1c41e21d0623bc2036d5b45a437e762d64509452",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+      "modelContextId": "agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "d0ad2f0c5afbf4ef80dd8b2013a299ebc8d202bebef9462a58ec464374f162ff",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+      "modelContextId": "agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "Candidate X 的鼓轮带缆线纹理并与驱动壳、导出口构成连续功能链，救援绞盘用途一眼可读，重组明显；Candidate Y 主体为无纹理大圆盘加摇柄状橙条，鼓轮收放索与驱动-导出衔接均不可读。二者均为正面机架构图且承托完整，差异集中在任务语义的可读性上。"
+}

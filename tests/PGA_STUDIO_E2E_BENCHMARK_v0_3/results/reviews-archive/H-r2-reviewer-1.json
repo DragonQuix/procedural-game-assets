@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "H",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "外轮廓明显改造：中部砌成阶梯状梯形躯干，上方悬挂带深色环形外框的大型圆形 display（内含发亮青白色镜面与高光），两侧对称伸展出带挂舱的机械臂，整体立在保留的宽底座上。重量感来自上窄下宽的质量分布与宽厚底座；display 是全图最大、最亮的单一元素，焦点指向非常明确，青色镜面与暗色机身形成唯一强对比，橙色被压缩为小点缀（横条、底座小块、挂舱标记），起点多个亮部争夺注意力的问题被解决。node.emblem（底座下缘的橙色三角）与底座平台在候选中仍可辨识，anchor 区域未见破坏。",
+      "concern": "大型圆环位置偏高，初看有轻微头重倾向，需依赖粗壮立柱与梯形躯干压住；机械臂挂舱上的橙色小标记数量偏多，个别点缀在缩览尺寸下略碎，但不构成与 display 的注意力竞争。",
+      "hierarchyReadability": "层级清楚：第一层为发光圆形 display，第二层为躯干与机械臂的暗色体块，第三层为底座与橙色小标记；明暗分配把视线引向 display 后再回落到机身，可读性良好。",
+      "structuralCoherence": "结构连贯：圆环嵌在环形外框内并坐于立柱，机械臂自躯干两侧对称伸出并连接挂舱，阶梯式梯形段向下过渡到底座，各部件衔接合理，符合一台落地稳定器机器的构造逻辑。",
+      "visibleArtifacts": "在所查看分辨率下未见明显断裂像素、悬空色块或边缘毛刺；环形与镜面的圆形边缘干净，机械臂与躯干的连接处齐整。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "外轮廓明显改造：机身加宽为带肩的矮壮梯形，顶部代之以一块圆角的浅蓝灰色板，内嵌大型橙色圆形 display，其下保留橙色横条；整体重心低、下盘宽，是两个候选中稳定与重量感最直读的一个。橙色大圆以尺寸和对比成为无可争议的焦点，起点多个亮部竞争的问题同样被解决。底座平台、底座下缘橙色三角 emblem 与 anchor 均可辨识，未见破坏。",
+      "concern": "display、横条与底座三角同属橙色系，注意力在橙色元素间略有分摊，焦点主要靠大圆的尺寸而非色彩对比单独确立；大圆为平面色块、缺少高光或内部细节，功能语义上更接近舷窗或徽记，作为 display 的指向性略弱于发光屏幕式处理；顶部浅色板与暗色机身的衔接较简单，形体丰富度低于更机械化的处理。",
+      "hierarchyReadability": "层级可读：大橙色圆为第一焦点，浅色顶板为第二层，暗色机身与底座为第三层；因橙色横条与三角与焦点同色，第二、三 focus 点的区隔稍弱，但主体层级依然明确。",
+      "structuralCoherence": "结构连贯：圆角顶板坐在加宽的梯形机身上，大圆居中、横条居下，宽底座承托整体，形体堆叠关系清楚；只是顶板与机身的过渡为简单叠放，机械细节少于更复杂的设计。",
+      "visibleArtifacts": "在所查看分辨率下未见明显断裂像素、悬空色块或边缘毛刺；大圆边缘干净，顶板圆角与底座边缘齐整。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+      "modelContextId": "agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "797afb7045c0a8eb69e82509575ef86ec9507e280cdbdefa1347a47ff59bed30",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+      "modelContextId": "agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "c0d394c5ae30ae9af3c3cd7ec25ccf6bdafa5f195e08b55334c0dfdd2c45c6ef",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+      "modelContextId": "agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "d9c707222efc12103b2b9eae16bc5ef6b5c8a2b6471abb681b4bc1443299a5e6",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+      "modelContextId": "agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "对比 baseline（左橙板、中青色 display、右青板三个亮部争夺注意力），Candidate X 用发光的青白色圆形 display 建立单一最强焦点，辅以机械臂挂舱与阶梯躯干改造轮廓，宽底座与下宽上窄的质量分布支撑重量感；Candidate Y 以矮壮宽肩轮廓获得最直读的稳定重量感，并用大橙色圆建立焦点，但橙圆为平面色块、与横条和三角同色，display 语义略弱。两者均明显改造外轮廓且底座、emblem 完好，属于两种合法设计；综合 display 焦点清晰度与机械语义，倾向 Candidate X。"
+}

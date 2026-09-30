@@ -1,0 +1,98 @@
+{
+  "H-r1": {
+    "task": "H",
+    "repeat": 1,
+    "A": "H-A-r1",
+    "D14": "H-D14-r1",
+    "reviewer1PayloadSha256": "8abfe286dc0fcd8cd8ab742162cca27e3154db7aca8984d848467c1f6fa5a37e",
+    "reviewer2PayloadSha256": "59ab05cdd68fd609e6e4d42ed2cbd50b517bfcd8901f8f8fd334ac7346cd1318"
+  },
+  "H-r2": {
+    "task": "H",
+    "repeat": 2,
+    "A": "H-A-r2",
+    "D14": "H-D14-r2",
+    "reviewer1PayloadSha256": "cfc3c1fdd3bcaf8adad65e23554d7abb6a3d3ce8c3afc151763d0f625a0477d1",
+    "reviewer2PayloadSha256": "e86d944d671045108426ea3ca9228a11ea349febd32f5d7483c28805bebbec51"
+  },
+  "H-r3": {
+    "task": "H",
+    "repeat": 3,
+    "A": "H-A-r3",
+    "D14": "H-D14-r3",
+    "reviewer1PayloadSha256": "775d642a7791131ee51e73fcbba364c9a2bf49095ba874738970ca5cefb1f413",
+    "reviewer2PayloadSha256": "08d52fd18d7424a55b98177e1296c866c9bbb5b5ee4240dafb561bab562c32bb"
+  },
+  "K-r1": {
+    "task": "K",
+    "repeat": 1,
+    "A": "K-A-r1",
+    "D14": "K-D14-r1",
+    "reviewer1PayloadSha256": "0387064f950f28f00cb4cd25cb76cb74d22843aa5a19643256d7d987765b848b",
+    "reviewer2PayloadSha256": "79e7a8824ca631a684859ef8bf23fff0dfef17511ba2a00957c0f4c1b9fb61c6"
+  },
+  "K-r2": {
+    "task": "K",
+    "repeat": 2,
+    "A": "K-A-r2",
+    "D14": "K-D14-r2",
+    "reviewer1PayloadSha256": "335490df73493ca59d91f5ff8fe623f56f4d3c013318b76c54d3c962e47ef206",
+    "reviewer2PayloadSha256": "29b8fe3b9cf6c62ea20fff84c0c53611a5bb880461e4815cd6768021ec654e24"
+  },
+  "K-r3": {
+    "task": "K",
+    "repeat": 3,
+    "A": "K-A-r3",
+    "D14": "K-D14-r3",
+    "reviewer1PayloadSha256": "d7d5fa359e9011fafbba015af4d4a991b20e999511c314d8a9d45157cee9765b",
+    "reviewer2PayloadSha256": "b1b25ba1c50e362f1f72ea1a0c23acee13297dca31170884d312ae815c3d1a4a"
+  },
+  "M-r1": {
+    "task": "M",
+    "repeat": 1,
+    "A": "M-A-r1",
+    "D14": "M-D14-r1",
+    "reviewer1PayloadSha256": "471147324301f4bd2b4bc0ffcf46704c542bfc8b9c939d007d5f1a90120cc2e8",
+    "reviewer2PayloadSha256": "bfe8ac51ed4e951e0640d06b6bc8b65102c8e48fa2477319376a8dfb4cf3aa70"
+  },
+  "M-r2": {
+    "task": "M",
+    "repeat": 2,
+    "A": "M-A-r2",
+    "D14": "M-D14-r2",
+    "reviewer1PayloadSha256": "77fb7da66c84d05f98babac7aec7f95e9b72ac331e28a3bbb12bd457da1dbcb9",
+    "reviewer2PayloadSha256": "6cf82bb3b21ee64590cd40d9d3edb47a6e266d5061f74be50b9874afe49c87f4"
+  },
+  "M-r3": {
+    "task": "M",
+    "repeat": 3,
+    "A": "M-A-r3",
+    "D14": "M-D14-r3",
+    "reviewer1PayloadSha256": "f144869520dc959ae42de4ce2c77d2278c64ed7e9b4223fbc93395ba334b905f",
+    "reviewer2PayloadSha256": "3e5198d2819c659e162125b4db1a519de414fbee518ad8773a5b9ad5c3edf001"
+  },
+  "S-r1": {
+    "task": "S",
+    "repeat": 1,
+    "A": "S-A-r1",
+    "D14": "S-D14-r1",
+    "reviewer1PayloadSha256": "e1be157e77ebdfa8abc7e9c10388b56c41513852a20176afcf43aac1ffeec033",
+    "reviewer2PayloadSha256": "0188b0c06723676b0409fdbec32280bfe2225e072c5219d4fe664d0e4f6eab37"
+  },
+  "S-r2": {
+    "task": "S",
+    "repeat": 2,
+    "A": "S-A-r2",
+    "D14": "S-D14-r2",
+    "reviewer1PayloadSha256": "76cc91f480871f92a1f68c07c8e729d7f187865cf09fb34092d727c68ffe38a6",
+    "reviewer2PayloadSha256": "bab088c1ef83e614e65c83519cfd900e8b80a7ba78408192553f7631d7dca8dd"
+  },
+  "S-r3": {
+    "task": "S",
+    "repeat": 3,
+    "A": "S-A-r3",
+    "D14": "S-D14-r3",
+    "reviewer1PayloadSha256": "ec3b67a03aa050fcbab27519ec2f420664b5497ed677dc280d78c5d0125056e8",
+    "reviewer2PayloadSha256": "9542d3ff3cf2cd98847405e2d3f894e8383e1cd352c94ac1983bb9d0b50ed798"
+  }
+}

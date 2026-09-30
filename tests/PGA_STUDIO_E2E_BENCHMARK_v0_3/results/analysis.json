@@ -1,0 +1,2253 @@
+{
+  "schema": "pga-e2e-analysis/0.3",
+  "firstFormalUnblindTimestamp": "2026-09-30T12:07:07.104Z",
+  "strictTaskSuccess": {
+    "A": 10,
+    "D14": 6,
+    "byTask": {
+      "H": {
+        "A": 3,
+        "D14": 2
+      },
+      "K": {
+        "A": 3,
+        "D14": 0
+      },
+      "M": {
+        "A": 2,
+        "D14": 2
+      },
+      "S": {
+        "A": 2,
+        "D14": 2
+      }
+    }
+  },
+  "technicalFailureIncidence": [
+    "TECHNICAL_FAIL",
+    "TECHNICAL_FAIL"
+  ],
+  "pairs": [
+    {
+      "pair": "H-r1",
+      "task": "H",
+      "repeat": 1,
+      "A": "PASS",
+      "D14": "TECHNICAL_FAIL",
+      "preference": "CONSENSUS_A",
+      "technicalFailure": {
+        "A": false,
+        "D14": true
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+            "modelContextId": "agent_e8b59abb-f11b-4f87-a20d-1319163c2b68"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "H",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "外轮廓从基线的高矩形机身改为宽而低的梯形整体，重心明显下沉，稳定感和重量感到位；机身中央的大圆面与其下方橙色横条组成一个可读的显示单元，底座深色板与底边中央的橙色小锚点保留。",
+                "concern": "显示圆面与机身的明度、色相都很接近，焦点主要靠面积和居中位置维持，而不是靠显著性；橙色左侧块、橙色横条和底部三角仍在分散第一次注视，基线中『多个亮部争夺注意力』的问题只解决了一半；机身两侧下方的橙块与灰块像是基线元素的直接遗留，与新的整体式机身关联较弱。",
+                "hierarchyReadability": "圆面是最大且居中的元素，层级可读，但橙条与底部橙三角的显著性与其接近，主次关系偏平；需要在明度上再拉开才能算『清楚的焦点』。",
+                "structuralCoherence": "梯形机身与底座贴合自然，侧块与机身拼接干净，无悬空部件；整体像一个落地重型设备。",
+                "visibleArtifacts": "在所看尺度下边缘干净，无断线、漏色或错位像素；圆面左右缘接近梯形斜边，略显局促，但不构成缺陷。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "外轮廓明显重构为拱顶机身加两侧对称棕色支撑翼，造型像带扶壁的落地稳定器，重量感与稳定感都强；上方中央的亮白环形显示是全图最高对比元素，明确成为视觉焦点；底座板与底边中央橙色锚点保留，机身下部中央的通风槽与其上下对齐。",
+                "concern": "两侧支撑翼是较简单的平板，细节少；基线机身上的灰色圆形徽记在 Candidate Y 中与新的亮色显示环合并，看不到独立的第二个圆形元素，徽记以被改写的方式延续，原始身份在像素层面无法进一步确认；棕色翼引入了基线没有的新色系。",
+                "hierarchyReadability": "层级清晰：亮色显示环第一眼抓住视线，机身中调，支撑翼作暗部陪衬，底座最暗；无文字或类文字符号。",
+                "structuralCoherence": "支撑翼沿拱顶机身两翼对称贴合，通风槽、橙色锚点与底座在同一竖直轴线上对齐，结构关系可信。",
+                "visibleArtifacts": "在所看尺度下未见断裂、错位或污渍；翼顶有小的阶梯过渡，属像素风格正常表现。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "HIGH",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+                "modelContextId": "agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "8d598db875fb7ad70eb57e79f4dbbf269b93007ac0e881942e6a259a04b5b8b7",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+                "modelContextId": "agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "bbbaa772cd8a379f5861bc1aef854d52fa17f9e1ee19ae4d614680300c30f547",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+                "modelContextId": "agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "0aac366600dad57a23b4eb83eda8a5fcb016eeb7bbb893080973e62012249e3f",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+                "modelContextId": "agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "两个候选都真实改变了外轮廓并保留底座与底部锚点。Candidate X 以宽梯形机身为稳定重型设计，但显示圆面与机身对比弱，橙色亮部仍在分散注意，焦点靠面积而非显著性维持。Candidate Y 的拱顶加对称支撑翼造型同时给出重量感与工程感，亮白环形显示是全图最高对比元素，直接满足『node.display 成为清楚焦点』的核心要求，且结构轴线对齐干净。综合焦点达成度与轮廓辨识度，Candidate Y 更优。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "H-D14-r1": "MEETS",
+            "H-A-r1": "MEETS"
+          },
+          "preferredRun": "H-A-r1",
+          "pairwiseResult": "Y_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+            "modelContextId": "agent_98f48c38-2a85-4837-a0f4-7053f3be0949"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "H",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "轮廓明显改造：主体变为宽底、向上收分的厚重板状形体，宽矮站姿传达重量与稳定；node.display 改造为背板上的大面积圆形屏幕，以尺寸成为最大元素；底座保护区域、基座与底部中心标记保留。",
+                "concern": "display 屏幕为中等亮度而非发光，焦点主要靠尺寸而非明度；画面仍有多个小的饱和橙色点缀（屏幕下方状态条、左下角块、底座中心点）与主焦点轻微争夺；左右下角脚块颜色不一致（一侧橙、一侧灰），对称位置上的颜色差异略欠统一。",
+                "hierarchyReadability": "大尺寸屏幕居中主导，深色机身其次，橙色小件为三级点缀，层级可读；但屏幕与机身明度接近，焦点强度弱于纯亮度方案。",
+                "structuralCoherence": "背板承托屏幕、下方状态条、底部两侧脚块与基座的结构关系连贯，各部件比例协调，读作一台整体设备。",
+                "visibleArtifacts": "该分辨率下未见杂散像素、断线或明显锯齿，边缘干净。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "轮廓明显改造：主体变为收分单体并加肩部与侧罐，宽底传达稳定与重量；node.display 改造为中心大型镜头，内部高亮白色发光核心是全图最亮、最集中的元素，清楚成为焦点，直接解决了起点多亮部争夺注意力的问题；镜头下方格栅与侧罐提供了清晰的次级细节层级；底座与底部中心标记保留。",
+                "concern": "左侧高侧罐与右侧较矮侧块呈不对称配置（任务允许自定附件，但视觉平衡略欠）；发光核心偏镜头上部，核心下缘与暗色镜头圈形成较大明度跳变；侧罐的锈橙色饱和度对焦点有轻微竞争。",
+                "hierarchyReadability": "三者中更强：单一高亮核心先抓住视线，格栅与侧罐为次级，底座最暗，层级分明。",
+                "structuralCoherence": "镜头核心、下方通风格栅、两侧罐体与基座的部件关系连贯，读作一台带能源核心与燃料罐的地面设备。",
+                "visibleArtifacts": "该分辨率下未见杂散像素、断线或明显锯齿，镜头圈与格栅边缘干净。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+                "modelContextId": "agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "8d598db875fb7ad70eb57e79f4dbbf269b93007ac0e881942e6a259a04b5b8b7",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+                "modelContextId": "agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "bbbaa772cd8a379f5861bc1aef854d52fa17f9e1ee19ae4d614680300c30f547",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+                "modelContextId": "agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "5ade12a0a51224471b790c86caa4f91e7058833bf82121ae0a4bf62d7ee73e2f",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+                "modelContextId": "agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "两候选均明显改造外轮廓且保留底座。Candidate Y 以镜头内高亮白色核心形成单一、最亮的清楚焦点，层级最分明，最直接满足『display 成为清楚焦点并消除多亮部争夺』；Candidate X 的 display 靠尺寸而非明度主导，且残留多个橙色饱和小件轻微竞争注意力。故偏好 Candidate Y。依据 contact-sheet.png 放大细节与各单图确认，身份仅按 X/Y 标签引用。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "H-D14-r1": "MEETS",
+            "H-A-r1": "MEETS"
+          },
+          "preferredRun": "H-A-r1",
+          "pairwiseResult": "Y_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "H-r2",
+      "task": "H",
+      "repeat": 2,
+      "A": "PASS",
+      "D14": "PASS",
+      "preference": "CONSENSUS_A",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+            "modelContextId": "agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "H",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "外轮廓明显改造：中部砌成阶梯状梯形躯干，上方悬挂带深色环形外框的大型圆形 display（内含发亮青白色镜面与高光），两侧对称伸展出带挂舱的机械臂，整体立在保留的宽底座上。重量感来自上窄下宽的质量分布与宽厚底座；display 是全图最大、最亮的单一元素，焦点指向非常明确，青色镜面与暗色机身形成唯一强对比，橙色被压缩为小点缀（横条、底座小块、挂舱标记），起点多个亮部争夺注意力的问题被解决。node.emblem（底座下缘的橙色三角）与底座平台在候选中仍可辨识，anchor 区域未见破坏。",
+                "concern": "大型圆环位置偏高，初看有轻微头重倾向，需依赖粗壮立柱与梯形躯干压住；机械臂挂舱上的橙色小标记数量偏多，个别点缀在缩览尺寸下略碎，但不构成与 display 的注意力竞争。",
+                "hierarchyReadability": "层级清楚：第一层为发光圆形 display，第二层为躯干与机械臂的暗色体块，第三层为底座与橙色小标记；明暗分配把视线引向 display 后再回落到机身，可读性良好。",
+                "structuralCoherence": "结构连贯：圆环嵌在环形外框内并坐于立柱，机械臂自躯干两侧对称伸出并连接挂舱，阶梯式梯形段向下过渡到底座，各部件衔接合理，符合一台落地稳定器机器的构造逻辑。",
+                "visibleArtifacts": "在所查看分辨率下未见明显断裂像素、悬空色块或边缘毛刺；环形与镜面的圆形边缘干净，机械臂与躯干的连接处齐整。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "外轮廓明显改造：机身加宽为带肩的矮壮梯形，顶部代之以一块圆角的浅蓝灰色板，内嵌大型橙色圆形 display，其下保留橙色横条；整体重心低、下盘宽，是两个候选中稳定与重量感最直读的一个。橙色大圆以尺寸和对比成为无可争议的焦点，起点多个亮部竞争的问题同样被解决。底座平台、底座下缘橙色三角 emblem 与 anchor 均可辨识，未见破坏。",
+                "concern": "display、横条与底座三角同属橙色系，注意力在橙色元素间略有分摊，焦点主要靠大圆的尺寸而非色彩对比单独确立；大圆为平面色块、缺少高光或内部细节，功能语义上更接近舷窗或徽记，作为 display 的指向性略弱于发光屏幕式处理；顶部浅色板与暗色机身的衔接较简单，形体丰富度低于更机械化的处理。",
+                "hierarchyReadability": "层级可读：大橙色圆为第一焦点，浅色顶板为第二层，暗色机身与底座为第三层；因橙色横条与三角与焦点同色，第二、三 focus 点的区隔稍弱，但主体层级依然明确。",
+                "structuralCoherence": "结构连贯：圆角顶板坐在加宽的梯形机身上，大圆居中、横条居下，宽底座承托整体，形体堆叠关系清楚；只是顶板与机身的过渡为简单叠放，机械细节少于更复杂的设计。",
+                "visibleArtifacts": "在所查看分辨率下未见明显断裂像素、悬空色块或边缘毛刺；大圆边缘干净，顶板圆角与底座边缘齐整。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+                "modelContextId": "agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "797afb7045c0a8eb69e82509575ef86ec9507e280cdbdefa1347a47ff59bed30",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+                "modelContextId": "agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "c0d394c5ae30ae9af3c3cd7ec25ccf6bdafa5f195e08b55334c0dfdd2c45c6ef",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+                "modelContextId": "agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "d9c707222efc12103b2b9eae16bc5ef6b5c8a2b6471abb681b4bc1443299a5e6",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+                "modelContextId": "agent_00ccd7ef-d63f-4ef8-ba2d-d4812134ac2d",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "对比 baseline（左橙板、中青色 display、右青板三个亮部争夺注意力），Candidate X 用发光的青白色圆形 display 建立单一最强焦点，辅以机械臂挂舱与阶梯躯干改造轮廓，宽底座与下宽上窄的质量分布支撑重量感；Candidate Y 以矮壮宽肩轮廓获得最直读的稳定重量感，并用大橙色圆建立焦点，但橙圆为平面色块、与横条和三角同色，display 语义略弱。两者均明显改造外轮廓且底座、emblem 完好，属于两种合法设计；综合 display 焦点清晰度与机械语义，倾向 Candidate X。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "H-A-r2": "MEETS",
+            "H-D14-r2": "MEETS"
+          },
+          "preferredRun": "H-A-r2",
+          "pairwiseResult": "X_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_7b089b42-407f-46e5-b27c-71113df95d74",
+            "modelContextId": "agent_7b089b42-407f-46e5-b27c-71113df95d74"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "H",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "外轮廓被决定性重构：由 baseline 的矮胖机身+两侧橙色翼板，改为高耸的核心塔+宽大阶梯式梯形底座+两侧悬挂舱体，明显不是换色。重量感来自逐级收分的基座与厚重的暗色体量；node.display 成为巨大发光青色球体，是最亮、最大、对比最强的元素，焦点无可争议。底座平台与底部中央的橙色三角 emblem 均保留。",
+                "concern": "发光球体位于高塔上部，视觉质心略偏上，稳定感主要靠底座撑住；侧舱与核心柱衔接处有窄暗缝，读作悬挂臂尚可，但放大看略显分离。塔顶小方块天线作用不明。",
+                "hierarchyReadability": "层级清楚：青色发光球第一眼，其后是舱体与底座上的橙色点缀灯，再后是暗色结构；明暗对比把视线引向 display，baseline 中互相争夺的多个亮部被整合为单一主焦点加少量次级点缀。",
+                "structuralCoherence": "底座平台—收分基座—核心柱—能量球构成一台连贯机器，两侧舱体对称悬挂并带指示灯，emblem 居中于底座前脸；各部件比例关系可信。",
+                "visibleArtifacts": "舱体与核心柱连接处疑似 1px 暗色接缝（也可能是刻意的悬挂间隙）；其余边缘干净，未见游离像素或色带。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "主体被改造成宽厚的一体式碑体：阶梯状肩部、中央抬高的显示面板、宽大底座，重心低，是两个候选中最像‘稳定、有重量’的形体。node.display 成为面板中央的大橙色圆盘，尺寸与暗色包围对比使其成为明确焦点；底座与橙色三角 emblem 保留。轮廓相对 baseline 有可见改变（侧翼板消失、整体加宽并阶梯化）。",
+                "concern": "轮廓改造相对保守，整体仍是居中对称的方块碑体，与 baseline 的形体血缘较近；圆盘下方的橙色横条是第二个橙色元素，轻微分散注意力；扁平橙色圆盘更像徽标或面板，缺少 X 那种发光 display 的功能暗示。",
+                "hierarchyReadability": "橙色圆盘主导画面，暗色面板为其提供框架；但下方橙色横条与圆盘同色同级，形成轻度竞争；其余结构暗部退后，层级整体可读。",
+                "structuralCoherence": "面板—机身—底座三层堆叠整齐，阶梯肩部过渡自然，整体性最好；无多余装饰，形体自洽。",
+                "visibleArtifacts": "未见明显瑕疵：边缘干净，无游离像素，无明显接缝问题。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_7b089b42-407f-46e5-b27c-71113df95d74",
+                "modelContextId": "agent_7b089b42-407f-46e5-b27c-71113df95d74",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "797afb7045c0a8eb69e82509575ef86ec9507e280cdbdefa1347a47ff59bed30",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_7b089b42-407f-46e5-b27c-71113df95d74",
+                "modelContextId": "agent_7b089b42-407f-46e5-b27c-71113df95d74",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "c0d394c5ae30ae9af3c3cd7ec25ccf6bdafa5f195e08b55334c0dfdd2c45c6ef",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_7b089b42-407f-46e5-b27c-71113df95d74",
+                "modelContextId": "agent_7b089b42-407f-46e5-b27c-71113df95d74",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "675f2648009611520fd1e0fff3c001bd52457100ff92b88f02fe5d97667d4343",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_7b089b42-407f-46e5-b27c-71113df95d74",
+                "modelContextId": "agent_7b089b42-407f-46e5-b27c-71113df95d74",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "两候选均满足 TASK.md 的可见要求：外轮廓明显改造、display 成为焦点、底座与三角 emblem 保留、边缘干净。X 以发光青色能量球取得最强焦点（亮度+尺寸+暗背景对比），轮廓从矮胖翼板机身重构为高塔+宽阶梯底座，重量感与焦点同时成立；Y 更厚重接地但轮廓改造较保守，扁平橙盘的功能暗示弱于发光核心，且盘下橙色横条轻度分散注意。综合 silhouette 改造幅度与 display 焦点强度，偏好 X。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "H-A-r2": "MEETS",
+            "H-D14-r2": "MEETS"
+          },
+          "preferredRun": "H-A-r2",
+          "pairwiseResult": "X_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "H-r3",
+      "task": "H",
+      "repeat": 3,
+      "A": "PASS",
+      "D14": "PASS",
+      "preference": "CONSENSUS_A",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+            "modelContextId": "agent_ca7f65e1-8529-44cc-b158-f75edaad7792"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "H",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "机身改为低矮宽厚的造型：拆除基线两侧外凸的亮色附板，顶部加了一条浅色檐口并让机身横向展开，外轮廓与基线差异明显。大号青色圆盘（node.display）成为画面中唯一的主体亮色，橙色横条作为次级点缀，基线中多个亮部互相争夺注意力的问题得到解决。宽底低重心压在底座上，稳定感和重量感明确；保留了基线材质语言（青色显示、橙色点缀、底座与梯形徽标），与原资产家族连贯。",
+                "concern": "造型改造偏保守：主要靠删除侧板加放宽机身，正面下方留有大片空置的深色区域，观感略空。顶部浅色檐口与显示圆盘上缘间距很小，局部略挤；大圆盘为单一平涂色面，缺少内部结构，读起来略像贴片。檐口作为独立盖板的语义稍有歧义。",
+                "hierarchyReadability": "焦点层级清楚：青色大圆盘第一，橙色横条第二，其余机身与基座退为中性背景层。问题在于第一与第二层级之间的面积对比悬殊，且圆盘内部无明暗变化，层级略平。",
+                "structuralCoherence": "机身、岩台与底座三段衔接自然，右侧机身与岩石交界处有台阶过渡；檐口、机身、底座的堆叠逻辑成立，仅檐口与圆盘过于接近带来轻微含糊。",
+                "visibleArtifacts": "在此分辨率下未见明显杂点、断线或锯齿异常，边缘干净。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "外轮廓被彻底重塑为下宽上收、带阶梯斜肩的钟形塔柱，坐落在原底座上，是四个视图中轮廓改造最彻底的一个，重量感与稳如基座的锚定感最强。发光镜头（node.display）置于顶部凹槽内，近白的高光核心嵌在深色环槽中，是全画面最亮且被暗部包围的孤立亮部，焦点语义极其清楚；镜头下方的横向凹槽线像散热鳍，给视觉提供了承托结构，明度自上而下递减，光逻辑与重力方向一致。",
+                "concern": "机身整体明度较低，与背后岩石在某些区段的明度接近，局部轮廓分离度偏弱，需要靠底座和边缘光辨认形体。显示镜头绝对尺寸偏小，完全靠亮度对比建立焦点；基线的青色与橙色材质语言在机身部分基本让位于深色方案，家族相似性弱于另一个候选。",
+                "hierarchyReadability": "层级非常清楚：发光镜头第一（最高明度与对比），凹槽鳍片第二（提供过渡与引导），底座与梯形徽标第三。视线自镜头沿凹槽下沉到底座，阅读路径顺畅。",
+                "structuralCoherence": "阶梯斜肩、凹槽环与镜头、底座之间的收分逻辑一致，形体像单一铸造件，结构连贯性好；镜头位于顶部属于合理的设计决定，与'稳定器核心'语义相符。",
+                "visibleArtifacts": "在此分辨率下未见明显杂点、断线或锯齿异常，阶梯边缘整齐。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+                "modelContextId": "agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "28db7be238446009bed9d8a9514428294b2a8510873dad1631d19cb46531de45",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+                "modelContextId": "agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "ebbe42344511657c655fd5523a0510583baba2cdc10f8c2523b3e59c3f1b87ec",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+                "modelContextId": "agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "bfc3299c385e1c564a9af956037f8f548db2c781d7ac7a3dad22c394fd7ce45f",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+                "modelContextId": "agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "两个候选都满足任务：外轮廓均明显改变、display 成为清楚焦点、保留底座与梯形徽标、亮部竞争问题均已解决。差异在改造力度与光逻辑：Candidate X 以删除侧板加放宽机身完成改造，焦点是单个平涂大圆盘，改造偏保守且正面下方偏空；Candidate Y 重塑为下宽上收的钟形塔柱，镜头以最高亮度加暗环槽建立焦点，凹槽线承托视线，重量感与层级最强，代价是机身明度接近背景、家族相似性弱。综合轮廓改造的明显程度、明暗分配对'稳定有重量'的服务与焦点清晰度，选 Y。置信度 MEDIUM：图像像素尺寸小，细粒度边缘瑕疵难以完全分辨，机械核验由独立程序负责。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "H-D14-r3": "MEETS",
+            "H-A-r3": "MEETS"
+          },
+          "preferredRun": "H-A-r3",
+          "pairwiseResult": "Y_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+            "modelContextId": "agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "H",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "主体改为宽扁的显示屏式机身：顶部亮色边框内嵌一颗大的青绿发光圆形，是全图最亮、对比最高的元素，node.display 焦点非常清楚；底座加宽、底部中央橙色三角保留，重心低，稳定感合格。轮廓相对基线明显改变（顶部亮框取代原暗屏幕，中段双肩外扩取代两侧橙块），不是单纯换色。",
+                "concern": "发光圆占据机身绝大部分，圆形以下的躯干只剩一条橙色横槽，细节偏少；与大圆相比下半部略显单薄，'有重量'的表达和稳定器的功能叙事弱于更敦实的造型。顶部亮框与双肩的衔接关系稍显含糊。",
+                "hierarchyReadability": "焦点唯一且强烈：大发光圆为第一层级，下方橙色横槽为次级点缀，底座三角再次级，层级清楚；但机身中下部细节层级较单薄。",
+                "structuralCoherence": "亮框、机身、底座三层沿中轴对齐，读作同一台设备，结构连贯；发光圆与其亮框的嵌套关系合理。",
+                "visibleArtifacts": "在所看尺寸下边缘干净：圆形边缘平滑、亮框横线整齐，未见明显杂散像素、断线或溢色。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "轮廓改为下宽上窄的梯形碑状塔身，落在加宽的深色基座上，重心明显下沉，'稳定、有重量'的表达最直接；顶部凹入面板内嵌青绿发光圆且内芯更亮，node.display 是明确焦点。相对基线的方盒轮廓改造幅度大且干净，斜边台阶符合像素风格；基座与橙色三角保留。",
+                "concern": "显示圆相对塔身的比例小于 Candidate X 的方案，焦点强度稍弱；右侧两颗橙色小方块尺寸很小，作用不易读；塔身左缘的暗面台阶在极小尺寸下可能略显粗糙。",
+                "hierarchyReadability": "顶部发光圆为唯一高亮焦点，其下两道凹槽横线为次级结构，小橙块为三级点缀，明暗与色彩层级分明、可读性好。",
+                "structuralCoherence": "凹入显示面板、塔身、基座沿中轴对齐；左侧暗面给梯形以体量感，凹槽与面板的进深关系一致，各部件读作同一台重力稳定器，连贯性好。",
+                "visibleArtifacts": "在所看尺寸下边缘干净：斜边呈整齐的阶梯状、凹槽线条平直，未见明显杂散像素、断线或颜色溢出。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "HIGH",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+                "modelContextId": "agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "28db7be238446009bed9d8a9514428294b2a8510873dad1631d19cb46531de45",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+                "modelContextId": "agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "ebbe42344511657c655fd5523a0510583baba2cdc10f8c2523b3e59c3f1b87ec",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+                "modelContextId": "agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "6f736d9e1922dd2ee546b5ad4d734ebaa9afe55a31b82bb81ba9d37969a99dfa",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+                "modelContextId": "agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "实际查看 baseline.png、X.png、Y.png、contact-sheet.png。基线问题：方盒机身、顶部屏幕暗淡无焦点、左右橙块与青绿圆章等多个亮部争夺注意力。Candidate Y 用下宽上窄的梯形塔身加宽基座，最直接回应'稳定、有重量'，轮廓改造幅度最大，顶部内嵌发光圆保持明确焦点，细节与体量感更完整。Candidate X 焦点更强（大发光圆占机身主体）、同样达标，但下半躯干细节少、重量叙事较弱。两候选均保留基座与橙色三角锚点及青绿圆形元素；节点级保护（node.base/node.emblem/anchor 的逐节点对应）无法仅凭视觉确证，按视觉意图评审。故偏好 Candidate Y。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "H-D14-r3": "MEETS",
+            "H-A-r3": "MEETS"
+          },
+          "preferredRun": "H-A-r3",
+          "pairwiseResult": "Y_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "K-r1",
+      "task": "K",
+      "repeat": 1,
+      "A": "PASS",
+      "D14": "VISUAL_NOT_YET",
+      "preference": "CONSENSUS_A",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+            "modelContextId": "agent_7d2babf5-e665-4dcb-b603-c00b12fd0627"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "K",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "NOT_YET",
+                "strength": "鼓轮（带橙色轮毂的大圆）被放大并移到立柱上，与顶部灰板、右侧矩形块有真实接触，部件不再散落；边缘干净无杂点，底座与支脚区保留，整体比 baseline 更像一台机器。",
+                "concern": "救援绞盘的用途读不出来：没有可见缆索或收放路径，驱动壳与导出口无法区分，也没有可辨认的握持结构；右侧几个矩形堆叠只是体块，缺少功能角色，重组幅度接近重新摆放装饰而非结构重组。",
+                "hierarchyReadability": "视觉焦点是大鼓轮，但缺少缆索、导出口等线索时它同样可能被读成轮子或装饰；其余矩形块层级扁平，看不出主次与功能顺序。",
+                "structuralCoherence": "鼓轮与立柱、顶板相互叠压形成连接，但连接关系语义含糊；右侧体块组与鼓轮之间缺少过渡件，悬接感明显。",
+                "visibleArtifacts": "未见坏点、断线或文字类像素；主要问题是语义缺失而非绘制瑕疵。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "一眼可读为绞盘：中心是缠绕了多圈缆索的鼓轮，嵌在带双立柱的深色框架中；缆索从鼓轮引出连到右侧带散热槽的导出/驱动壳，末端垂下带钩状收尾；顶部横梁承载棕橙色块，兼有提携/驱动读法；右下灰色块上的橙色圆点可读为握持旋钮；底座带支脚，承托可信。便携救援绞盘的用途、结构连续、握持与承托均成立。",
+                "concern": "缆索画成细的波浪轮廓线，越过导出壳后悬空垂到画面边缘，钩状末端悬浮在空白处，略显潦草；顶部横梁上的棕橙色块读作驱动还是提手存在轻微歧义；右侧壳体与鼓轮边缘有局部叠压。",
+                "hierarchyReadability": "鼓轮是明确焦点，缆索把视线自然引向导出壳与钩尾，框架和底座提供稳定收边；各部件功能角色大多可辨认，层级清楚。",
+                "structuralCoherence": "结构连续性好：鼓轮装在框架内，顶部横梁与立柱衔接，缆索把鼓轮与导出壳连成一条功能链，底座支脚落地；仅缆索末段悬空是唯一断点。",
+                "visibleArtifacts": "无文字、无坏点；缆索曲线在导出壳之外有一段悬空并轻微出界到画面右缘，属观感问题而非结构错误。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "HIGH",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+                "modelContextId": "agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "37177924d0b279a6051712c7d1595a060646587217d0bbe621dc46d753aab81a",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+                "modelContextId": "agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "0864e2d42af19a08f5bcaa2d3c8068e8966b244bd0d57b03e04092e46fe5070b",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+                "modelContextId": "agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "3cfaab39206fed13728eea64b8758a9393d37f611f32494af75f120351e90f31",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+                "modelContextId": "agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "Candidate Y 用缠绕缆索的大鼓轮、贯穿鼓轮到导出壳再到钩尾的缆索路径、顶部驱动/提手块、右下握持圆点与带支脚底座，使绞盘用途一眼成立；Candidate X 虽把鼓轮放大并压到立柱上，但无缆索、无可辨导出口与握持，右侧仍是含糊体块，救援绞盘的功能语义没有建立。两张图均无文字。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "K-D14-r1": "NOT_YET",
+            "K-A-r1": "MEETS"
+          },
+          "preferredRun": "K-A-r1",
+          "pairwiseResult": "Y_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_261567fe-4426-420a-97c0-7247c4029033",
+            "modelContextId": "agent_261567fe-4426-420a-97c0-7247c4029033"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "K",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "NOT_YET",
+                "strength": "轮廓干净、整体一块：大直径浅色鼓轮带橙色轮毂是明确焦点，落在左侧立柱与机身交角处，右侧机身末端衔接一个橙色小块，底部深色底座横贯全宽，无悬浮部件。相对 baseline 有明显重组（鼓轮被抬升到立柱顶部转角，机身向右拉长）。",
+                "concern": "握持结构读不出来：左侧高立柱更像机架/支架而非把手，中部灰色机身读作机体本体，右端橙色块更像保险杠而非导出口。全图没有任何绳索/缆索线索，'鼓轮收放牵引索'的语义完全靠鼓轮单体支撑，整体第一眼更像推车、火炮或磨机，而非便携救援绞盘。任务明确要求握持可读，此处未达成。",
+                "hierarchyReadability": "鼓轮是清晰的视觉焦点（面积最大、明度最高、带暖色轮毂）；机身与底座为次要层级。但次级部件的功能不可读：右端橙色小块的用途无法判读，驱动壳→导出口的功能链条只能靠位置猜测。",
+                "structuralCoherence": "结构连续性好：鼓轮压在立柱与机身的交角上，接触可信；机身与末端橙块齐平相接；底座承托全部质量，整体为单一连通体量，无漂浮件。",
+                "visibleArtifacts": "在此分辨率下未见明显瑕疵：边缘干净、无杂散像素、无文字。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "一眼可读为便携绞盘：鼓轮外圈的分段橙色缠绕清晰传达'缆索绕在鼓轮上'；右侧带竖向散热棱的驱动块与橙色导出口齐平衔接，驱动壳→导出口的关系可信；金色牵引索从鼓轮/导出口方向引出、向右下延伸并以吊钩收尾，救援牵引语义强；顶部两根立柱抬起横梁、中段有棕色握段，读作便携提把/提环。鼓轮、驱动、导出、握持、承托五个要素齐备。",
+                "concern": "牵引索线条从驱动块上角上方越过，压在机体轮廓上，略读出跨接/穿插感；横梁中段的棕色块语义略有歧义（提把握段还是摇柄头）；整体构图比 Candidate X 繁密，钩子悬在主体轮廓之外——语义上是缆索自由端、可接受，但视觉上是脱离承托质量的悬空件。",
+                "hierarchyReadability": "层级清楚：缠绕缆索的大鼓轮（暖色、面积最大）为焦点，右侧驱动块与导出口为次级，顶部提把为第三层。功能链条可按 鼓轮→驱动壳→导出口→牵引索→吊钩 的顺序读出，用途传达效率高。",
+                "structuralCoherence": "结构可信：两根立柱把顶部横梁与机体连成框架，鼓轮嵌在框架内，右侧驱动块与导出口直接相接，底座横贯全宽承托全部机体；除作为缆索自由端的吊钩外无悬浮件。",
+                "visibleArtifacts": "牵引索线条越过驱动块上角，与机体轮廓产生一处交叠/遮挡，读作轻微 clipping；其余边缘干净、无杂散像素、无文字。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_261567fe-4426-420a-97c0-7247c4029033",
+                "modelContextId": "agent_261567fe-4426-420a-97c0-7247c4029033",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "37177924d0b279a6051712c7d1595a060646587217d0bbe621dc46d753aab81a",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_261567fe-4426-420a-97c0-7247c4029033",
+                "modelContextId": "agent_261567fe-4426-420a-97c0-7247c4029033",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "0864e2d42af19a08f5bcaa2d3c8068e8966b244bd0d57b03e04092e46fe5070b",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_261567fe-4426-420a-97c0-7247c4029033",
+                "modelContextId": "agent_261567fe-4426-420a-97c0-7247c4029033",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "12efd7aeb24d7a8fcd25903b55c0f23640824be3749db04825ebb1a200133908",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_261567fe-4426-420a-97c0-7247c4029033",
+                "modelContextId": "agent_261567fe-4426-420a-97c0-7247c4029033",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "任务要求一眼读出'便携救援绞盘'且握持可读。Candidate Y 的鼓轮分段橙色缠绕、右侧棱纹驱动块与橙色导出口的平接、向外引出的牵引索与吊钩、顶部立柱横梁提把共同构成完整的绞盘功能叙事，判 MEETS。Candidate X 结构连续、鼓轮焦点清晰，但无任何缆索线索、右端橙块读不出导出口语义、握持结构不可读，整体更接近推车/火炮，判 NOT_YET。两候选相对 baseline 均有明显结构重组。置信度 MEDIUM：单图为小尺寸像素图，依赖 contact-sheet.png 放大视图核对细节。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "K-D14-r1": "NOT_YET",
+            "K-A-r1": "MEETS"
+          },
+          "preferredRun": "K-A-r1",
+          "pairwiseResult": "Y_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "K-r2",
+      "task": "K",
+      "repeat": 2,
+      "A": "PASS",
+      "D14": "VISUAL_NOT_YET",
+      "preference": "CONSENSUS_A",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+            "modelContextId": "agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "K",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "大直径鼓轮是明确主体，轮面的径向分段与橙色轮毂清楚传达“缠绕牵引索的卷筒”；右侧深色驱动壳与鼓轮相邻，橙色导出口从驱动壳右缘水平伸出，形成鼓轮→驱动壳→导出口的连贯读序；两侧立柱加顶部横梁构成便携机架，宽底座承托，机架可兼读作搬运/握持框架。相比基线是明显的结构重组而非局部装饰。",
+                "concern": "导出口伸至画面右缘、末端略贴边；驱动壳高度明显低于鼓轮轴线，驱动与鼓轮的衔接偏“靠放”而非同轴咬合；握持语义依赖机架横梁，缺少专门的把手形状。",
+                "hierarchyReadability": "鼓轮为视觉焦点，主体-驱动-出口自左向右依次展开，机架与底座构成稳定外框，功能分区一眼可辨。",
+                "structuralCoherence": "鼓轮嵌于两立柱之间并坐落底座，驱动壳与鼓轮相邻，导出口与驱动壳右缘直接相连，载荷路径连续；各部件比例协调，无悬空或断裂感。",
+                "visibleArtifacts": "未见明显断裂、错位或悬空；鼓轮径向分段绘制一致。驱动壳与鼓轮交界处的少量遮挡属正常前后关系。"
+              },
+              "Y": {
+                "taskFit": "NOT_YET",
+                "strength": "完成了明显的结构重组：立柱+顶梁的机架、中央大圆盘、右侧竖板与橙色导出口齐备，顶部中央的浅色短梁可读作提握位；整体轮廓居中稳定，落座底座。",
+                "concern": "中央大圆盘是素面圆盘加橙色轮毂，缺少缠绕或轮辐线索，“收放牵引索的鼓轮”不易一眼读出；右侧竖板（驱动壳）大部分被圆盘遮挡，与导出口的衔接关系偏弱；整体更像带轮通用机械，救援绞盘的用途语义不足。",
+                "hierarchyReadability": "大圆盘是唯一焦点但功能归属不明，驱动壳退为背景块，读序在鼓轮→驱动→出口处断裂，观者难以按绞盘部件组织理解。",
+                "structuralCoherence": "圆盘、竖板、导出口在几何上相互接触并落座机架与底座，无悬空断裂；但竖板被圆盘大量遮挡，衔接更多靠接触而非功能表达，结构连续的语义被削弱。",
+                "visibleArtifacts": "未见表面积错位或断裂像素；顶部短梁与顶梁的关系略含糊（似分离段），读作把手时其支撑点不明显。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+                "modelContextId": "agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "919f8d6bebf7b4bd677586c0809226fb503c670d7f51b3dc67bf8f082102f630",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+                "modelContextId": "agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "e05e9808199af115f4127a8f1c41e21d0623bc2036d5b45a437e762d64509452",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+                "modelContextId": "agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "8a8d7c92f507cae46f6e99db94611eb129399c4c24e2d24e2c2ef073b95c29e3",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+                "modelContextId": "agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "Candidate X 的鼓轮带径向缠绕分段且鼓轮→驱动壳→导出口读序连贯，机架与底座齐备，最符合“一眼可辨的便携救援绞盘”；Candidate Y 鼓轮为素面圆盘且驱动壳被遮挡，用途语义弱于 X。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "K-A-r2": "MEETS",
+            "K-D14-r2": "NOT_YET"
+          },
+          "preferredRun": "K-A-r2",
+          "pairwiseResult": "X_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+            "modelContextId": "agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "K",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "用途一眼可读：鼓轮盘面呈暖橙色并带数条横向缆线纹理，明确读出收放牵引索的绞盘语义；鼓轮右侧衔接深色驱动壳，壳端外突橙色导出口，形成鼓轮-驱动-导出连续功能链；宽底座与机架承托完整。相对 baseline 的侧视杠杆剪影，属于明显的结构重组而非局部装饰。",
+                "concern": "专门的握持结构不突出：顶部横梁可读作提手但语义偏弱，未见明确的把手凸起；驱动壳表面细节（两条横线）较简单，对驱动机制的说明有限。",
+                "hierarchyReadability": "主次分明：暖色鼓轮是最大视觉焦点，在冷色机架上对比强烈；阅读顺序自左向右为鼓轮、驱动壳、导出口，层次递进自然；细节线克制，不干扰主体。",
+                "structuralCoherence": "鼓轮、驱动壳、导出口自左向右视觉上连续衔接，未见悬空或断裂；机架竖柱、顶梁与底座把主体稳定承托在基座上，整体结构可信。R1 几何接触由机械核验，此处仅评视觉连续性。",
+                "visibleArtifacts": "单图分辨率有限，未见明显断裂、悬空或错位；鼓轮左缘与左机架竖柱交界处略有重叠感，读作鼓轮装配于机架之内，不构成伪影。"
+              },
+              "Y": {
+                "taskFit": "NOT_YET",
+                "strength": "机架完整、构图稳定，底座承托可信；大圆盘作为焦点清晰醒目；相对 baseline 也做了明显的正面机架式结构重组。",
+                "concern": "绞盘功能链读不出来：主体是均匀浅蓝灰的大圆盘，盘面无缆线或收放索的任何语义，中心橙点比例偏大且无纹理区分，更像飞轮或滑轮；右侧橙色横条更像手摇曲柄，其连接的深色竖块被圆盘大量遮挡、语义不明，无法读出驱动壳与导出口的衔接；整体更像通用轮式机械，不符合一眼理解救援绞盘用途的要求。",
+                "hierarchyReadability": "大圆盘焦点明确，但次级元素功能语义不清：深色竖块与橙色横条读完仍无法归类为驱动或导出；中心橙点与盘面缺乏层次过渡，整体偏扁平。",
+                "structuralCoherence": "圆盘与右侧深色块存在重叠衔接，橙色横条连于深色块并穿出右机架竖柱，连接在几何上存在，但功能链不闭合；框架、底座承托完整。",
+                "visibleArtifacts": "未见断裂、悬空或明显错位；深色竖块被圆盘遮挡过多导致部件读不出来，属于语义可读性问题而非几何伪影。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "HIGH",
+            "actualViews": [
+              "X.png",
+              "Y.png",
+              "baseline.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+                "modelContextId": "agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "919f8d6bebf7b4bd677586c0809226fb503c670d7f51b3dc67bf8f082102f630",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+                "modelContextId": "agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "e05e9808199af115f4127a8f1c41e21d0623bc2036d5b45a437e762d64509452",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+                "modelContextId": "agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "d0ad2f0c5afbf4ef80dd8b2013a299ebc8d202bebef9462a58ec464374f162ff",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+                "modelContextId": "agent_c1679ae9-9fae-405e-8e34-d0657f4df2fb",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "Candidate X 的鼓轮带缆线纹理并与驱动壳、导出口构成连续功能链，救援绞盘用途一眼可读，重组明显；Candidate Y 主体为无纹理大圆盘加摇柄状橙条，鼓轮收放索与驱动-导出衔接均不可读。二者均为正面机架构图且承托完整，差异集中在任务语义的可读性上。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "K-A-r2": "MEETS",
+            "K-D14-r2": "NOT_YET"
+          },
+          "preferredRun": "K-A-r2",
+          "pairwiseResult": "X_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "K-r3",
+      "task": "K",
+      "repeat": 3,
+      "A": "PASS",
+      "D14": "VISUAL_NOT_YET",
+      "preference": "CONSENSUS_A",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+            "modelContextId": "agent_8f667ad4-b9e8-415c-9576-217d59af264b"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "K",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "鼓轮以同心环读出缠索层次，明确指向收放牵引索；鼓轮右侧的驱动壳与导出口水平衔接，牵引索沿水平方向引出并收于末端吊钩，功能链路完整；上方框架与底部宽支座形成可信承托。相对 baseline 做了明显的整体结构重组，而非局部装饰。",
+                "concern": "右侧引索线条与吊钩在当前尺寸下偏小略密，需要留意才能分辨；握持功能主要由顶部横梁隐含承担，缺少一眼可识别的专用把手造型。",
+                "hierarchyReadability": "带缠索环的鼓轮居中且对比最强，是明确视觉主体；驱动-导出链路向右单向延伸，阅读方向清晰；框架与底座退为次要层次，主次分明。",
+                "structuralCoherence": "鼓轮、驱动壳、导出口、框架立柱与底座相互衔接连续，未见悬空构件；牵引索从导出口到吊钩走向连贯。",
+                "visibleArtifacts": "当前分辨率下未见明显断裂、悬空像素或错位接缝；右侧细节密集但形体完整。"
+              },
+              "Y": {
+                "taskFit": "NOT_YET",
+                "strength": "形体干净完整，大鼓轮体量突出，底部宽支座与斜置壳体的承托关系可信，画面稳定。",
+                "concern": "构件布置与 baseline 高度相近（斜置壳体、顶部横条、大圆盘、右下带橙色端帽的方块），更像对 baseline 的放大修形而非任务要求的结构重组；鼓轮为单一圆盘，无缠索或收放线索，驱动壳与导出口的衔接语义弱，握持结构读不出来。",
+                "hierarchyReadability": "大圆盘凭体量成为主体，但缺少功能指向；其余部件功能含义模糊，层级靠大小而非语义建立，用途需猜测。",
+                "structuralCoherence": "鼓轮与下方斜置壳体及右侧方块相接，底座承托成立；顶部横条与主体的连接偏弱，接近浮置但未见明显断裂。",
+                "visibleArtifacts": "未见明显悬空像素或碎块；顶部横条与鼓轮之间衔接较弱，属于衔接不清而非可见错误。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "HIGH",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+                "modelContextId": "agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "58d9f0d9dd0ce931a4ce0d62b3ff4613862e1aa384a296ee581f816e7ca7db4d",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+                "modelContextId": "agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "f82d304c0525da5055448926a5b383221eb42469c97b81ba296304212a3fc148",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+                "modelContextId": "agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "7982aaa07322e3711761b85375ab467841b65aec5420c7b4bf240aa00d6ec978",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+                "modelContextId": "agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "Candidate X 的鼓轮同心环、右侧驱动-导出链路与末端吊钩使绞盘用途与功能连续性一眼可读，且相对 baseline 明显重组；Candidate Y 布局与 baseline 高度相似，鼓轮无缠索线索、导出与握持语义弱，未达到任务要求的结构重组与可读性。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "K-A-r3": "MEETS",
+            "K-D14-r3": "NOT_YET"
+          },
+          "preferredRun": "K-A-r3",
+          "pairwiseResult": "X_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+            "modelContextId": "agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "K",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "一眼可读为便携救援绞盘：中央大鼓轮带同心橙色环带，读作缠绕牵引索的鼓轮；轴线向右穿过橙色轴承/出口座后接深色 L 形曲柄，握持结构明确可辨；顶部横梁与立柱组成机架，底部基座完整承托。相对 baseline 的散件堆放是明显结构重组，不是局部装饰。",
+                "concern": "右侧曲柄区域元素偏细碎：细长曲柄臂与右缘小块橙色件堆叠感略强，末端小块贴近基座，稍欠干净；不影响用途识读。",
+                "hierarchyReadability": "鼓轮是明确视觉焦点，鼓轮-轴承-曲柄的轴线方向清晰，机架-鼓轮-基座的主次层级好读。",
+                "structuralCoherence": "鼓轮、驱动壳、导出口与曲柄沿同一水平轴线衔接，机架立柱落地与基座连续，承托与传力路径可信，无悬浮或断开感。",
+                "visibleArtifacts": "未见明显错位、裂缝或穿透错误；仅曲柄区细件密集形成的轻微视觉噪音。"
+              },
+              "Y": {
+                "taskFit": "NOT_YET",
+                "strength": "大鼓轮偏左坐入基座，右侧箱体带橙色出口嘴，鼓轮收放索、出口导出的关系可以读出；基座承托可信，整体简洁统一。",
+                "concern": "握持结构读不出来：顶部横杆与 baseline 原有横杆形态相似，不构成有目的的把手；右侧橙色突出块更像出口嘴而非握把。驱动壳与导出口的区分也偏弱，右侧箱体功能含混。",
+                "hierarchyReadability": "鼓轮焦点明确，但右侧箱体的功能身份含混（驱动还是出口），顶部横杆与主体的连接关系弱，层级不如 Candidate X 清楚。",
+                "structuralCoherence": "鼓轮与基座、右侧箱体的接触衔接可信；顶杆两端落点不明确，悬浮感略强，结构连续性中等。",
+                "visibleArtifacts": "鼓轮下缘与基座交界干净，无明显错位或穿模；主要问题是连接处的表达含糊而非像素级瑕疵。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "HIGH",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+                "modelContextId": "agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "58d9f0d9dd0ce931a4ce0d62b3ff4613862e1aa384a296ee581f816e7ca7db4d",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+                "modelContextId": "agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "f82d304c0525da5055448926a5b383221eb42469c97b81ba296304212a3fc148",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+                "modelContextId": "agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "c37ab8652662a612656db829e2cd72756f83b5a48f1d47c7e64da371d81259f0",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+                "modelContextId": "agent_6c9fe12f-dcac-4c16-8fb7-2759a25ba674",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "Candidate X 用带同心环带的中央鼓轮、同轴出口座与右侧 L 形曲柄把绞盘的鼓轮-驱动-导出-握持四个功能一次读全，重组幅度大；Candidate Y 鼓轮与出口可读但缺少可辨认的握持结构，顶杆连接含混，故 X 优先。R1 几何接触由独立程序核验，本判断只覆盖 TASK.md 的视觉意图。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "K-A-r3": "MEETS",
+            "K-D14-r3": "NOT_YET"
+          },
+          "preferredRun": "K-A-r3",
+          "pairwiseResult": "X_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "M-r1",
+      "task": "M",
+      "repeat": 1,
+      "A": "PASS",
+      "D14": "VISUAL_DISAGREEMENT",
+      "preference": "MIXED",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+            "modelContextId": "agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "M",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "NOT_YET",
+                "strength": "整体色阶组织统一：冷蓝色调贯穿夹体，少量暖棕集中点缀在工作区，画面协调度高。夹体作为工作部件获得了明确的对角光照分割，亮面与暗面转折可读为金属受光概括，且轮廓与部件位置保持原状，没有以改形替代材质任务。",
+                "concern": "丝杆与压力垫这两个工作部件被压成很暗的棕色小块，明度接近暗部背景，金属体积几乎读不出来；画面视觉重心落在夹体的斜切光照上，而不是工作面上。「工作面优先」的明度层级未成立，横柄与底部小件更多是被淹没而非被设计成次要。",
+                "hierarchyReadability": "层级方向与任务相反：最抢眼的是夹体（jaw）的斜切亮面，丝杆与垫过暗、退入背景；工作面无法第一眼被识别为功能核心。handle 确实次要，但属于对比不足造成的消失。",
+                "structuralCoherence": "结构一致性良好：C 形夹体开口、中央横杆、垫与两个螺栓的位置均与 baseline 对应，未发现部件错位或轮廓漂移；光照分割与部件边界基本贴合。",
+                "visibleArtifacts": "夹体上的对角明暗分界较直、略生硬，在低分辨率下仍可读为光照概括而非破形；未见明显渗色、锯齿块或轮廓外溢。中央暗棕区与暗部背景的衔接略含混，属于可读性弱点而非硬性瑕疵。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "压力垫采用亮橙色并带出顶面亮、侧面暗的体积转折，丝杆有棕色立体表现，工作部件的金属体积清楚可读。明度层级直接服务功能语义：亮的工作面最先吸引视线，蓝灰夹体居中调，横柄与螺栓小而暗、明确次要。轮廓与部件位置保持原状。",
+                "concern": "橙色垫的亮面到暗面由少数几级色阶分段构成，转折略呈阶梯感；夹体本身的光照概括相对克制，若期待夹体也承担更多金属表现，则其体积提示弱于工作面。整体仍在一个合理的合法设计范围内。",
+                "hierarchyReadability": "层级清楚且方向正确：pad 最亮、spindle 次之，二者构成工作面优先层；夹体中调承托；handle 与螺栓暗且小，处于次要层。第一眼即能识别功能核心。",
+                "structuralCoherence": "结构一致性好：夹体开口、中央横杆、垫、底部横柄与两个螺栓均与 baseline 位置对应，无轮廓漂移；橙暖色严格集中在中部工作区，与蓝灰夹体的边界贴合部件形状。",
+                "visibleArtifacts": "垫的顶/侧明暗呈小台阶状色阶分段，低分辨率下可读为立体转折，未见渗色或锯齿破形；未发现颜色溢出部件 ownership 或轮廓外扩的迹象。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+                "modelContextId": "agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "3e48d67598e73d25e62c12f0f0418ca66a223bb0514d9f58cdf4fc0136b2b49a",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+                "modelContextId": "agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "8ea0f91d16f22dff5ca7fb724096cb9dacd289052e9f4fe7df968e36ea25d2d7",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+                "modelContextId": "agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "对照 baseline 的平涂状态：Candidate X 把视觉重量交给夹体的对角光照，丝杆与压力垫被压暗到接近背景，工作面优先的层级不成立，故 NOT_YET；Candidate Y 的亮橙压力垫与棕色丝杆带出金属体积并占据明度顶层，横柄与螺栓退居次要，层级方向与任务的功能语义一致，轮廓与部件位置均未改变。两者差异核心在工作面明度优先与否，判 Y_PREFERRED；图像分辨率较低，金属质感细节存在辨认上限，confidence 取 MEDIUM。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "M-D14-r1": "NOT_YET",
+            "M-A-r1": "MEETS"
+          },
+          "preferredRun": "M-A-r1",
+          "pairwiseResult": "Y_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+            "modelContextId": "agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "M",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "工作部件金属体积明确：夹体上贯穿一条宽的对角亮带，形成大块面金属质感；丝杆竖销有灰色阶；压力垫为亮灰块并带高光。横柄为深棕、明度明显压低，次要地位清楚。外轮廓、两颗螺栓与部件布局与 baseline 一致，未见杂散像素。",
+                "concern": "对角亮带以单一角度贯穿整个夹体直到边缘，倾向读作贴在全身的图形斜纹而非包裹形体的方向光；口部内面、转角遮挡等形体细节较少。上部暗区与轮廓略有粘连，左上螺栓对比被压弱。",
+                "hierarchyReadability": "最亮值集中在工作侧：夹体亮带、亮灰压力垫、灰丝杆；深棕横柄明确退后。工作面优先、横柄次要的明度层级一眼可读。",
+                "structuralCoherence": "baseline 的横杆-竖销-垫块堆叠关系保持完整，斜向明暗在夹体上连续不断裂，整体块面感统一，锚点与螺栓仍可辨认。",
+                "visibleArtifacts": "未见杂散像素或悬挂线条，色带边界干净。轻微问题：均匀斜纹偏图案化，上部暗区略微降低左上螺栓可辨性。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "光照概括方向一致、形体服从光：顶面受光、内面与底面转暗，夹体读作光滑铸金属；丝杆竖销与亮灰垫块是最清晰的金属工作件，工作面强调到位；横柄为暖棕木质感，与金属件有色相区隔，部件分离干净。",
+                "concern": "横柄中段木板条明度接近压力垫且是全图饱和度最高的元素，在『横柄次要』的要求下与工作部件争夺注意力；夹体右下角轮廓外垂下一条细的浅色竖线，读作杂散痕迹。",
+                "hierarchyReadability": "亮灰垫块、钢质竖销与受光夹体顶面构成工作面优先的层级，但暖亮柄身中段把视线拉回横柄，削弱了横柄次要的明度层级意图。",
+                "structuralCoherence": "与 baseline 几何关系最贴合：横杆、竖销、垫块位置与原图一致，部件边界清晰；单一左上光源使整体体块连贯。",
+                "visibleArtifacts": "夹体右下角轮廓之外有一条细浅色竖线（天线状杂散标记）；左上角边缘附近有少量浅色杂点。其余区域干净。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+                "modelContextId": "agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "3e48d67598e73d25e62c12f0f0418ca66a223bb0514d9f58cdf4fc0136b2b49a",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+                "modelContextId": "agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "8ea0f91d16f22dff5ca7fb724096cb9dacd289052e9f4fe7df968e36ea25d2d7",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+                "modelContextId": "agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "3f67f24c0927d7b95f6bd53f720d4600e77a203fe3969f0066f09308b9aed3b2",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+                "modelContextId": "agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "Candidate X 用贯穿夹体的对角亮带给出最强金属体积，横柄深棕明确次要，工作面优先的明度层级最贴合任务；代价是斜纹略偏图案化。Candidate Y 光照方向一致、形体更服帖，但横柄中段亮木板与工作件争视线，且右下轮廓外有细杂线。综合层级要求与杂点，X 优先；因横柄/丝杆视觉身份存在歧义且 X 的条纹风格属任务允许的光照概括范围，置信度取 MEDIUM。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "M-D14-r1": "MEETS",
+            "M-A-r1": "MEETS"
+          },
+          "preferredRun": "M-D14-r1",
+          "pairwiseResult": "X_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "M-r2",
+      "task": "M",
+      "repeat": 2,
+      "A": "PASS",
+      "D14": "PASS",
+      "preference": "CONSENSUS_A",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_222be1a7-b3c1-4be5-863e-281623442496",
+            "modelContextId": "agent_222be1a7-b3c1-4be5-863e-281623442496"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "M",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "夹体用分面明暗与边缘高光读出机加工金属体积；压力垫为最亮的抛光银色、丝杆螺纹亮暗条纹清晰，工作面在明度上明确领先；轮廓锚点与两颗螺栓保持原位，无文字。",
+                "concern": "横柄橙色饱和度仍较抢眼（继承基线色相，但在明度层级里靠次要位控制住了）；开口内侧阴影较深，丝杆下段在该暗部里可读性略降。",
+                "hierarchyReadability": "层级清楚：亮银垫与丝杆高光为第一层，夹体中间灰面为第二层，暗部与橙色横柄为次级；工作面优先的要求成立。",
+                "structuralCoherence": "统一左上光源逻辑贯穿夹体、丝杆与垫，部件边界、螺栓与整体轮廓与基线一致，无借改形替代材质的迹象。",
+                "visibleArtifacts": "未见文字、杂点或边缘毛刺，像素边缘干净。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "夹体以对角高光带组织成可读的金属光泽面，斜向条带贯穿立柱与上下臂，光照概括自洽；丝杆螺纹与垫仍为金属读法，轮廓与螺栓保留，无文字。",
+                "concern": "压力垫为偏灰的青钢色，最亮的重点落在夹体高光带上，垫作为工作面不再明确领先；横柄条位置较基线略上移，有轻微结构漂移；高光带在开口边缘略带装饰感。",
+                "hierarchyReadability": "可读但层级较平：垫与横柄的注意力权重接近，靠夹体斜向高光补足工作面优先；三段明度仍可分辨。",
+                "structuralCoherence": "斜向受光在夹体内部一致，除横柄小幅上移外部件均在原位，螺栓完好；光照方向与丝杆、垫的受光面基本吻合。",
+                "visibleArtifacts": "未见文字或杂点；高光带与开口交界处有轻微色阶跳步，观看尺寸下不构成缺陷。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_222be1a7-b3c1-4be5-863e-281623442496",
+                "modelContextId": "agent_222be1a7-b3c1-4be5-863e-281623442496",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "4aef36d9a56212752bde6648a3f26c4b953e560d80b75dcbdbad29b1ee68e6ea",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_222be1a7-b3c1-4be5-863e-281623442496",
+                "modelContextId": "agent_222be1a7-b3c1-4be5-863e-281623442496",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "dc41c0559c8ae126784319673a8ab39026bafc1badbb71d3745c2f5dca879487",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_222be1a7-b3c1-4be5-863e-281623442496",
+                "modelContextId": "agent_222be1a7-b3c1-4be5-863e-281623442496",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "1878ef31b5d7bc8a939a208907991f2aac16cf5f9758b049f317b21b854f499a",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_222be1a7-b3c1-4be5-863e-281623442496",
+                "modelContextId": "agent_222be1a7-b3c1-4be5-863e-281623442496",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "两候选均满足任务 M：工作部件金属体积可读、无文字、轮廓与螺栓保留。Candidate X 以亮银垫与分面明暗直接实现工作面优先的明度层级且结构与基线对齐；Candidate Y 的斜向光泽自洽但垫偏灰使层级略平、横柄小幅上移。故倾向 Candidate X。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "M-A-r2": "MEETS",
+            "M-D14-r2": "MEETS"
+          },
+          "preferredRun": "M-A-r2",
+          "pairwiseResult": "X_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_fcebde08-454b-4c20-8a83-5ec254155162",
+            "modelContextId": "agent_fcebde08-454b-4c20-8a83-5ec254155162"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "M",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "工作部件金属体积可读：丝杆呈柱状明暗（亮顶暗底），压力垫顶缘高光加饱和橙色成为工作面焦点，夹体沿内缘与轮廓走向的竖向亮带随形体转折，读作倒角金属而非平涂。光照方向统一（左上光），横柄有顶缘高光但仍整体偏暗偏细，次要地位大体保住。",
+                "concern": "横柄被提亮为较浅的钢灰色，亮度上与丝杆、垫接近，次要层级被略微削弱（因面积小、位置低，影响有限）。与 baseline 相比压力垫略有加宽，幅度小，未见明显改形替代材质任务的倾向。",
+                "hierarchyReadability": "焦点落在压力垫与丝杆-夹体开口区，即工作界面；夹体内缘竖向亮带把视线引向开口。横柄虽偏亮但细且位于下方，主次仍可读。",
+                "structuralCoherence": "外轮廓、两颗螺栓、各部件对位与 baseline 一致，未见部件漂移；光照方向（左上）在夹体、丝杆、垫、柄之间一致，无跨部件冲突。",
+                "visibleArtifacts": "原生尺度与放大视图下均未见错位、跨部件越界色块、杂散像素或文字；像素阶梯干净。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "夹体以对角渐变亮带给出整体金属光泽，工作部件均有明暗分离；横柄保持暗青色、明确居次，主次层级清楚。整体色调组织统一，属于合法的不同光照概括。",
+                "concern": "压力垫横向明显加长、几乎横跨整个开口，是相对 baseline 最直观的形变。夹体的对角亮带横扫过 C 形轮廓、不随形体转折，更像叠加的斜向光带，金属体积的说服力弱于随形高光；且最亮区域落在夹体大面上，而非垫-丝杆工作界面。",
+                "hierarchyReadability": "视线先被夹体的宽亮带吸引——夹体属工作部件，方向不算错——但工作界面（垫与丝杆）的对比反而退居其次；横柄暗、明确居次，层级整体清楚但重心偏向体块而非工作面。",
+                "structuralCoherence": "外轮廓与螺栓保留，部件对位正常；对角带（光自右上）与垫、柄的顶部高光大体一致，无严重冲突；压力垫加长是主要结构偏离，未破坏轮廓锚点。",
+                "visibleArtifacts": "未见文字、错位或越界杂色；对角带边界呈干净阶梯过渡。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_fcebde08-454b-4c20-8a83-5ec254155162",
+                "modelContextId": "agent_fcebde08-454b-4c20-8a83-5ec254155162",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "4aef36d9a56212752bde6648a3f26c4b953e560d80b75dcbdbad29b1ee68e6ea",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_fcebde08-454b-4c20-8a83-5ec254155162",
+                "modelContextId": "agent_fcebde08-454b-4c20-8a83-5ec254155162",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "dc41c0559c8ae126784319673a8ab39026bafc1badbb71d3745c2f5dca879487",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_fcebde08-454b-4c20-8a83-5ec254155162",
+                "modelContextId": "agent_fcebde08-454b-4c20-8a83-5ec254155162",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "ca1466383ba842021ffb3498af3607413f8a5c403dbcf5771c372263237f8190",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_fcebde08-454b-4c20-8a83-5ec254155162",
+                "modelContextId": "agent_fcebde08-454b-4c20-8a83-5ec254155162",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "两候选均保留外轮廓与螺栓、都做出金属明暗。Candidate X 的高光随形体（夹体内缘竖带、丝杆柱面、垫顶缘），饱和橙垫把焦点压在工作界面上，比例最贴近 baseline；Candidate Y 的对角亮带偏风格化、不随 C 形转折，压力垫明显加长且最亮处落在夹体大面而非工作界面，横柄的次要层级则比 X 更明确。综合体积可信度、工作面层级与比例保真，倾向 X。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "M-A-r2": "MEETS",
+            "M-D14-r2": "MEETS"
+          },
+          "preferredRun": "M-A-r2",
+          "pairwiseResult": "X_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "M-r3",
+      "task": "M",
+      "repeat": 3,
+      "A": "TECHNICAL_FAIL",
+      "D14": "PASS",
+      "preference": "CONSENSUS_A",
+      "technicalFailure": {
+        "A": true,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+            "modelContextId": "agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "M",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "C 形夹体的斜向亮带给出平面金属体积，开口内垂直丝杆以浅蓝对深底清晰成立，深色顶帽与小横柄收在次级明度，工作面优先的层级成立；轮廓、开口与两颗螺栓保持原位，未靠改形换材质感。下方工作面呈浅蓝灰，与丝杆一起把视线锚定在工作区。",
+                "concern": "整体色阶偏软、对比温和：斜向亮带较宽且过渡平缓，夹体接近单一中间调加一条高光，金属体积感成立但偏弱。压力垫为棕色横杆，虽有杆件体量但金属读感最弱，略偏木质。丝杆未做螺纹暗示，功能语义靠位置推断。",
+                "hierarchyReadability": "亮部集中在夹体亮带、丝杆与下方工作面，横柄与螺栓压暗收小，工作面优先的明度层级可读；开口保持深色，工作部件在洞口中对比充分。棕垫与丝杆的交叠关系清楚。",
+                "structuralCoherence": "单一左上宽光逻辑贯穿夹体与内部零件，开口内不进光、洞感保持；各部件明暗与整体光源一致，无互相矛盾的反光方向。",
+                "visibleArtifacts": "未见到明显断裂像素、越界色块或锯齿堆积。斜向亮带与夹体基色的交界略直、略平，读作风格化金属扫光而非瑕疵。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "金属体积读感更强：夹体左上有明确亮带并配顶缘、内缘的轮廓高光，丝杆以规律明暗横纹直接读出螺纹，机械语义最清楚；下方工作面取最亮值，工作面优先的层级比 X 更明确。横柄保持小而暗，螺栓与轮廓未动。",
+                "concern": "高光小且多：顶角与开口角部有几处很小的近白点缀，1x 尺寸下略显碎，密观看稍欠整体；螺纹条纹是风格化概括，非写实金属，但符合任务允许的不同光照概括。棕色垫的金属读感仍是一票候选中最弱的一环。",
+                "hierarchyReadability": "最亮值集中在工作面（下方工作面、丝杆、内缘高光），横柄、螺栓与饰件收次级，层级对比比 X 更强、视线更明确落在工作区；开口深底保证工作部件对比。",
+                "structuralCoherence": "主光仍可读为左上/顶部，内缘亮线可解释为洞口反弹或轮廓光，方向大体自洽；螺纹条纹与顶帽方向一致，部件之间没有明暗逻辑冲突。",
+                "visibleArtifacts": "无断裂或越界像素；角部近白小点缀在放大视图下读作边缘高光，属风格选择而非噪点，但在小尺寸下略欠含蓄。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+                "modelContextId": "agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "9d25c2aabcdc1846bd8347556e6e7ce6d5dc2d9a396ca85fd78dd503b5fc2985",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+                "modelContextId": "agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "c51755b2a45d16e553627f08aea8bdc15c0a8221e335af75a7dc4a0124127225",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+                "modelContextId": "agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "90709a349aaa633883aed2f51c10b8a1f80b1d1d70ba008512710a614b03b202",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+                "modelContextId": "agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "相对 baseline 的平涂低对比状态，Candidate X 与 Candidate Y 都保留 C 形轮廓、开口与两颗螺栓，均以亮带+浅色丝杆在工作区建立金属体积与工作面优先层级，均达标。Y 在同等轮廓下用更清晰的高光组织（顶缘/内缘轮廓光、规律螺纹条纹、更亮的工作面）给出更强的金属体积与丝杆功能语义，层级更明确，故偏好 Y；差距是程度差异而非类别差异，且 Y 角部小点缀略碎，置信度取 MEDIUM。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "M-D14-r3": "MEETS",
+            "M-A-r3": "MEETS"
+          },
+          "preferredRun": "M-A-r3",
+          "pairwiseResult": "Y_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_beaad268-fc29-4782-84b4-714fec957465",
+            "modelContextId": "agent_beaad268-fc29-4782-84b4-714fec957465"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "M",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "夹体呈现明显金属体积：一道斜向亮带扫过上臂，工作面有一条亮竖边；丝杆与压力垫用青色系多阶并带高光，与开口内深色背景对比清晰；横柄保持深棕、明度居下次级。轮廓与两颗螺栓锚点未变，无文字。",
+                "concern": "全图最大、最亮的斜向光带落在夹体外上侧，视觉权重略偏离工作面；它更像风格化的扫光概括，而非贯穿全图的一致光向。",
+                "hierarchyReadability": "工作件与横柄的层级可读（横柄深棕明显次级），但最亮的大块面在夹体外侧，'工作面优先'的明度指向被略削弱。",
+                "structuralCoherence": "C 形轮廓、开口、两螺栓与各部件位置与基线一致；明暗带贴合机构件平面，未破坏部件边界或改形。",
+                "visibleArtifacts": "该分辨率下未见错位像素、轮廓破损或色带溢出；光带边界为干净的像素阶梯。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "夹体按左上光源做面明暗（左上亮、右下暗），工作面有一条醒目亮边；压力垫与丝杆以青色多阶呈现并带高光，金属体积清楚；横柄深棕、明显次级。轮廓与两颗螺栓锚点未变，无文字。",
+                "concern": "夹体整体偏亮，大面积机体表面与工作件的明度差被压缩；压力垫下缘的亮边与整体光向的配合略显含糊。",
+                "hierarchyReadability": "最亮的部位落在工作面亮边与垫/丝杆高光上，工作区优先的层级最明确；横柄明显次级。",
+                "structuralCoherence": "轮廓、开口与两螺栓与基线一致；明暗沿 C 架平面分布，部件边界完整，无改形。",
+                "visibleArtifacts": "未见明显错位或破形；明暗过渡干净。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_beaad268-fc29-4782-84b4-714fec957465",
+                "modelContextId": "agent_beaad268-fc29-4782-84b4-714fec957465",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "9d25c2aabcdc1846bd8347556e6e7ce6d5dc2d9a396ca85fd78dd503b5fc2985",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_beaad268-fc29-4782-84b4-714fec957465",
+                "modelContextId": "agent_beaad268-fc29-4782-84b4-714fec957465",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "c51755b2a45d16e553627f08aea8bdc15c0a8221e335af75a7dc4a0124127225",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_beaad268-fc29-4782-84b4-714fec957465",
+                "modelContextId": "agent_beaad268-fc29-4782-84b4-714fec957465",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "e60b3c8b8b7ad0f922bd22692e98bad5f1f3c26e571aaee80984b8d5fd9e7dd6",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_beaad268-fc29-4782-84b4-714fec957465",
+                "modelContextId": "agent_beaad268-fc29-4782-84b4-714fec957465",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "基线为全平涂：无金属体积，橙色横柄反而最抢眼。Candidate X 用斜向光带加工作面亮边给出体积，但最亮的大块面在夹体外上侧，注意力略偏离工作面。Candidate Y 的最亮部位（工作面亮边、压力垫与丝杆高光）直接落在工作区，'工作面优先、横柄次级'的层级更贴合任务；两者轮廓与双螺栓锚点均保持、均无文字。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "M-D14-r3": "MEETS",
+            "M-A-r3": "MEETS"
+          },
+          "preferredRun": "M-A-r3",
+          "pairwiseResult": "Y_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "S-r1",
+      "task": "S",
+      "repeat": 1,
+      "A": "PASS",
+      "D14": "PASS",
+      "preference": "CONSENSUS_A",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_c8da483b-388c-47ac-8158-78b7fb79a33b",
+            "modelContextId": "agent_c8da483b-388c-47ac-8158-78b7fb79a33b"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "S",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "中心改造为垂直传输结构：上方端帽（橙色端子叠在青色基座上）作为发射端口，一条垂直导线向下连接一个橙色核心的圆形节点，节点下方导线继续收细延伸。读作能量从端口经通道流向接收节点/汇聚点，符合任务允许的端口-流向-连接-汇聚语义；中心占位的原始垫片阵列被明确替换为功能性结构，未见任何文字、字母或数字。",
+                "concern": "两端不对称：上方是明确的端子，下方接收端是圆形节点，'一个端口传给另一个端口'的双端子对仗感弱于对称双端口布局，主导读法偏向'源到汇聚点'；节点下方导线的延伸用途略含糊。",
+                "hierarchyReadability": "层级清晰：橙色圆形节点是最强视觉焦点，顶部端帽次之，细导线明确承担连接语义；垂直轴在深色中心面板上对比充分，小尺寸下各部件仍可分辨。",
+                "structuralCoherence": "沿用外壳的青灰与橙色点缀语言，与底部橙色基座呼应；结构沿垂直中轴对称，落在中心区域内，与外壳的圆角轮廓和基座方向协调，未破坏 alpha 外轮廓观感。",
+                "visibleArtifacts": "未发现明显孤立杂点、断裂或越界像素；节点下方导线的阶梯式收细在此分辨率下读作有意的锥形收尾而非锯齿。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "中心改造为水平双端口结构：左右各一个带内芯的方形端子，中间由细导线相连，通道中段串有橙青交替的小能量节点标记流动。最直接地表达'把能量从一个端口传给另一个端口'，端口-连接-流向三要素齐备；中心占位被功能性结构替换，未见任何文字、字母或数字。",
+                "concern": "通道中段的能量节点串较小且较密，极小尺寸下相邻色点可能合并成一条彩带，个体节点的分辨度略降；左右端子内部细节在低分辨率下接近消失。",
+                "hierarchyReadability": "两个方形端子锚定两端，视觉重心稳定；中段色点串清楚标出流动路径与方向感；水平构图在深色中心面板上对比清楚，整体一眼可读。",
+                "structuralCoherence": "方形端子呼应原占位中心的垫片语言，配色沿用外壳的青灰/橙双色体系并与底部基座呼应；水平带居中、宽度克制，保持在中心区域内，与外壳轮廓和基座方向协调。",
+                "visibleArtifacts": "未发现明显锯齿、断裂或越界像素；端子与导线的衔接干净，中段色点间距均匀。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_c8da483b-388c-47ac-8158-78b7fb79a33b",
+                "modelContextId": "agent_c8da483b-388c-47ac-8158-78b7fb79a33b",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "d5474c2a90689ab7d564026e8839313a2a3160482406ac541431750c5a66c0d6",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_c8da483b-388c-47ac-8158-78b7fb79a33b",
+                "modelContextId": "agent_c8da483b-388c-47ac-8158-78b7fb79a33b",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "c9d52b8b9165cd9d403d96dfdd9c908c4f6324a09d5a10b592cbdb2dca5ff03e",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_c8da483b-388c-47ac-8158-78b7fb79a33b",
+                "modelContextId": "agent_c8da483b-388c-47ac-8158-78b7fb79a33b",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "3287ae03e2466294e653d1d71a09f863c8c62008bc446704b2fce6b37e6c0525",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_c8da483b-388c-47ac-8158-78b7fb79a33b",
+                "modelContextId": "agent_c8da483b-388c-47ac-8158-78b7fb79a33b",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "对照 baseline：原中心是无语义的垫片阵列（2x2 垫片加中心点），两个候选都把它替换为可读的能量传输结构并保留外壳、配色与底部基座。Candidate X（垂直：端帽-导线-圆形节点）以汇聚语义达标，焦点强但双端子对仗弱；Candidate Y（水平：双方形端口-导线-中段橙青能量节点串）最贴合任务主句'从一个端口传给另一个端口'，端口与流向最明确，故偏好 Y。两者均无文字/字母/数字，均未见明显视觉伪影；contact-sheet 上的 X/Y 标签位于资产像素之外，与单独图像一致，判定不受呈现位置影响。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "S-D14-r1": "MEETS",
+            "S-A-r1": "MEETS"
+          },
+          "preferredRun": "S-A-r1",
+          "pairwiseResult": "Y_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+            "modelContextId": "agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "S",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "中央竖向导通结构可读：上方橙色端子块与中央橙色圆形节点由浅色竖直导条相连，橙色在灰蓝外壳上对比强烈，中央焦点明确；未使用任何文字、字母或数字。",
+                "concern": "导条下端没有端子收尾，'两个端口'的对应关系被削弱，整体更像一根立柱或开关柱，而不是'从一个端口传给另一个端口'；顶部橙色块贴近面板上缘，与保护轮廓的关系略显拥挤。",
+                "hierarchyReadability": "中央竖向元素层级最强，橙与浅蓝的对比清楚，一眼能落到中央节点；但视线沿导条向下终止于无端子的末端，阅读动线不完整，第二 '端口' 需要猜测。",
+                "structuralCoherence": "沿用外壳的灰蓝/橙配色与方块化几何，主体居中于面板内，外壳轮廓、底部锚点与深色面板边界均保持；竖向构图与 baseline 中央菱形四点的语言差异较大，但未与外壳冲突。",
+                "visibleArtifacts": "导条下端戛然而止、无收口；圆形节点与导条交叠处过渡简单；在可见分辨率下未发现明显错位像素、越界图形或文字。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "功能叙事最完整：左侧为空心端口（灰块内嵌深色方孔），右侧为受能端口（灰块内嵌实心橙色方块），中间一串橙色小块表示能量正在两端口之间传递，'把能量从一个端口传给另一个端口' 的关系无需解释即可读出；无文字。",
+                "concern": "传递方向主要靠中间橙块的疏密与大小变化暗示，在道具的小尺寸下方向感偏弱，可能被读成装饰性点串；中间点串与两端口的间距节奏需要均匀，否则结构显得松散。",
+                "hierarchyReadability": "两端的灰蓝色端口块构成稳定框架，中间橙色点串成为视觉焦点，层级分明；结构线索（两端端口）强于方向线索（流向），但整体清晰度高。",
+                "structuralCoherence": "与外壳同一配色体系，水平构图与底部橙色锚点形成呼应，主体居中且未触碰外壳轮廓与面板边界；方中嵌方的端口造型与外壳的方块几何语言一致。",
+                "visibleArtifacts": "中间橙色小块之间存在细小间隙，个别小块的大小看起来略不一致；在可见分辨率下未发现文字、数字或越界图形。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+                "modelContextId": "agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "d5474c2a90689ab7d564026e8839313a2a3160482406ac541431750c5a66c0d6",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+                "modelContextId": "agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "c9d52b8b9165cd9d403d96dfdd9c908c4f6324a09d5a10b592cbdb2dca5ff03e",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+                "modelContextId": "agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "3d740723564efceb16d9c92af4eb645a85a8588e2022d8827b77000581d3878b",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+                "modelContextId": "agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "baseline 中心为橙色圆点加菱形四小方块。Candidate X 用竖向导条连接顶部橙色端子与中央橙色圆节点，连接关系成立但下端无端子，端口到端口的对应不完整；Candidate Y 给出空心端口、一串橙色能量块与实心端口三段式结构，'能量从一个端口传给另一个端口' 的语义最完整，方向感偏弱是主要保留。两者均无文字，均保持外壳、面板与锚点。综合偏好 Candidate Y。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "S-D14-r1": "MEETS",
+            "S-A-r1": "MEETS"
+          },
+          "preferredRun": "S-A-r1",
+          "pairwiseResult": "Y_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "S-r2",
+      "task": "S",
+      "repeat": 2,
+      "A": "VISUAL_DISAGREEMENT",
+      "D14": "VISUAL_DISAGREEMENT",
+      "preference": "MIXED",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+            "modelContextId": "agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "S",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "中心以『源端口→三枚流向箭标→受端口』完整表达能量从一个端口传向另一个端口：左侧橙色端口与右侧浅色端口用色彩状态区分供/受，流向与供需关系无需文字即可读出，端口、流向、连接三种视觉关系齐备，64px 下语义仍清晰可辨，无任何文字、字母或数字。",
+                "concern": "叙事完全依赖水平单向流动，偏向『单向传输』的解读，若模块需表达双向或汇聚会有偏差；三枚连续箭标单独看略接近通用快进符号，脱离端口语境时语义会弱化（在本图语境下仍清楚）。",
+                "hierarchyReadability": "橙色箭标与源端口是中心最亮元素，视线沿流向从源端口移到受端口，主次分明；中心与深色内底对比充分，小尺寸下各元素边界仍可分辨。",
+                "structuralCoherence": "橙/蓝灰配色沿用外壳既有强调色（与底部 anchor 呼应），端口外框的圆角语言与外壳一致；改动集中在中心区域，外壳轮廓与 anchor 未变。",
+                "visibleArtifacts": "未见断线、出界或明显锯齿异常，箭标间距均匀。受 64px 渲染限制，无法核验单像素级瑕疵。"
+              },
+              "Y": {
+                "taskFit": "NOT_YET",
+                "strength": "中心以水平导管连接左右两个端子，橙色能量节点落在导管上，表达了『两个端口之间存在连接』的结构；配色与形状语言（圆角胶囊、端子翼片）和外壳风格协调，无文字、字母或数字。",
+                "concern": "只呈现静态连接，『从一个端口传向另一个端口』缺少流向线索：无流动方向、无供/受状态区分，橙色节点偏置一侧反而引入歧义，右端浅色小块功能不明，整体语义需要猜测，达不到『清楚表达能量转接』的要求。",
+                "hierarchyReadability": "导管灰与深色内底对比偏弱，64px 下中心结构发闷、边界含糊；最亮的橙色节点孤立于导管左侧，未形成可跟随的视线路径；右端浅色块几乎融入导管，层级松散。",
+                "structuralCoherence": "配色与造型延续外壳语言，改动限于中心区域、外壳轮廓与 anchor 未变；但橙色节点与右端浅色块同导管主体的组合关系松散，中心构图完整度低于外壳的规整度。",
+                "visibleArtifacts": "未见出界或轮廓破坏；主要问题是低对比造成的含糊感而非硬性瑕疵。受 64px 渲染限制，无法核验单像素级瑕疵。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+                "modelContextId": "agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "b38246c508c3d03660109eebd0e5b3a883dd399e99a9c807631495d390ae369b",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+                "modelContextId": "agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "9210aaba643e678a42d935c4adecc9794f6ab78511b7b1b5814231d176fe5077",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+                "modelContextId": "agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "70d998ec891b77848f363ffcf71e8b3d30fa77fafd33fefce9bc2a50ad5f2eb6",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+                "modelContextId": "agent_0dde6b68-5f7d-4e8f-81e7-6343c25b7674",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "对照 baseline（中心为四灰块环绕橙点的占位）逐一实看：Candidate X（X.png）中心为『橙色源端口→三枚橙色流向箭标→浅色受端口』，供/受状态与流向双重编码，无文字，最直接满足『能量从一个端口传给另一个端口』；Candidate Y（Y.png）中心为水平导管连接两端子、橙色节点偏置于导管左侧，只表达静态连接、无流向线索且导管对比偏弱。故 X_PREFERRED。补充观察：contact-sheet.png 两个 tile 的标签内容与单独文件疑似互换（标 X 的 tile 显示的是 Y.png 的导管设计，标 Y 的 tile 显示的是 X.png 的箭标设计）；本评审的身份绑定以单独读取的 X.png / Y.png 文件内容为准，判断未受影响。机械阈值（P1 界限、像素并集等）按 PROMPT 交由独立程序核验，未以像素数自行替代。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "S-D14-r2": "MEETS",
+            "S-A-r2": "NOT_YET"
+          },
+          "preferredRun": "S-D14-r2",
+          "pairwiseResult": "X_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_8a0938b8-8e93-4874-a39b-9b610027f303",
+            "modelContextId": "agent_8a0938b8-8e93-4874-a39b-9b610027f303"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "S",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "NOT_YET",
+                "strength": "中心改为两端带竖向端板的横向胶囊通道，构成『两个端子由通道相连』的连接意象；整体居中对称，无文字、字母或数字，外壳设计语言、底部 anchor 与保护轮廓均保持不变，未见越界或杂散像素。",
+                "concern": "功能语义不够清楚：唯一的高亮是一个停在通道偏左处的小橙点，缺少任何流向或转移线索，读起来更像熔丝/杆状独立部件而不是『把能量从一个端口传给另一个端口』；通道灰色与面板灰色对比低，焦点元素过小，中心层级弱，不细看接近空面板。",
+                "hierarchyReadability": "弱。通道体与灰面板明度接近，唯一的强调色是小面积橙点，64px 下中心图形存在感不足，层级不成立。",
+                "structuralCoherence": "中等。青/橙点缀与外壳配色一致且居中对称，但通道形态偏『插入的独立杆件』，与基线面板上方块端口的语言衔接较弱。",
+                "visibleArtifacts": "未见明显杂散像素、越界或错位；橙点与端板边缘干净。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "中心是清楚的三段式传输符号：左端口（青边框、橙色填充，能量源）→ 两枚右向雪佛龙（橙，流向）→ 右端口（青边框、浅色填充，接收端），直白表达『能量从一个端口传给另一个端口』；雪佛龙是几何符号不是文字；沿用基线的青/橙配色与方块端口语言，水平轴线与面板协调，底部 anchor 与外壳不变。",
+                "concern": "方向为单向（源在左端口、汇在右端口），若道具语义要求对称双向会略显受限；两端口填充色不同是刻意的源/汇区分，但极小尺寸下浅色填充可能被读成高亮而非端口，属轻微问题。",
+                "hierarchyReadability": "好。橙色雪佛龙与端口填充对灰面板对比强，焦点明确，符号在 64px 下仍一眼可读，层级成立。",
+                "structuralCoherence": "好。端口方块延续基线语言，雪佛龙与端口同一水平轴对齐，配色与外壳一致，整体像同一道具的原生设计。",
+                "visibleArtifacts": "未见明显杂散像素、越界或错位；雪佛龙像素对齐整齐。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "HIGH",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_8a0938b8-8e93-4874-a39b-9b610027f303",
+                "modelContextId": "agent_8a0938b8-8e93-4874-a39b-9b610027f303",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "b38246c508c3d03660109eebd0e5b3a883dd399e99a9c807631495d390ae369b",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_8a0938b8-8e93-4874-a39b-9b610027f303",
+                "modelContextId": "agent_8a0938b8-8e93-4874-a39b-9b610027f303",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "9210aaba643e678a42d935c4adecc9794f6ab78511b7b1b5814231d176fe5077",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_8a0938b8-8e93-4874-a39b-9b610027f303",
+                "modelContextId": "agent_8a0938b8-8e93-4874-a39b-9b610027f303",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "36e93e69b43f4c81fb863ab8097425a3d9448e8ee92161aa628a68d5f8a0d546",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_8a0938b8-8e93-4874-a39b-9b610027f303",
+                "modelContextId": "agent_8a0938b8-8e93-4874-a39b-9b610027f303",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "直接查看 baseline.png、X.png、Y.png 并以 contact-sheet.png 放大复核。Candidate Y 以『源端口→双雪佛龙流向→接收端口』三段结构清楚表达能量在两端口间的传递，层级与可读性好且无文字；Candidate X 仅有两端子加通道和一枚静止偏置的小橙点，缺流向线索、对比低，传递语义弱，故 NOT_YET 且 pair 偏向 Y。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "S-D14-r2": "NOT_YET",
+            "S-A-r2": "MEETS"
+          },
+          "preferredRun": "S-A-r2",
+          "pairwiseResult": "Y_PREFERRED"
+        }
+      ]
+    },
+    {
+      "pair": "S-r3",
+      "task": "S",
+      "repeat": 3,
+      "A": "PASS",
+      "D14": "PASS",
+      "preference": "MIXED",
+      "technicalFailure": {
+        "A": false,
+        "D14": false
+      },
+      "reviews": [
+        {
+          "reviewerSlot": 1,
+          "context": {
+            "sessionId": "zcode-subagent:agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+            "modelContextId": "agent_b5b58a06-3418-47c5-8208-23a4cb497146"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "S",
+            "reviewerSlot": 1,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "端口间传能语义最完整：流向起点是带橙色充能芯的端口框，流向终点是芯体为空的端口框，两者之间由两段虚线传输段连接，充能/空芯的状态差直接表达能量从一口传向另一口；保留外壳、青+橙基色与底部基座，无文字、字母或数字。",
+                "concern": "端口芯与虚线段线条较细，在 64px 原尺寸下细部对比偏弱；两段虚线的间距观感略不均，最坏情况下可能被读成普通装饰虚线而非流向标记。",
+                "hierarchyReadability": "中心四个部件（源端口-虚线-汇端口）主从关系清楚，橙色芯对青色空的对比支撑方向解读；元素偏小但整体可读，中央视线焦点明确。",
+                "structuralCoherence": "端口方框呼应外壳圆角方形语言，整体居中对称，沿用既有青/橙配色与 anchor、底部基座，与外壳设计语言协调。",
+                "visibleArtifacts": "未见越界、残缺或明显像素错误；仅虚线两段间距观感略不均，属轻微。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "粗壮的指向右侧的箭头自橙色源菱形出发、终于竖向端板，小尺寸下一眼可读出能量流动方向；箭杆中段的橙色菱形作为能量节点强调，视觉层级与对比强，无文字、字母或数字。",
+                "concern": "端口语义偏弱：流向起点是菱形节点而非端口，流向终点的竖板更像终点挡板，两者都不如 Candidate X 的端口框直接对应任务里的端口概念；大箭头是较通用的流向表达，箭杆与中途菱形交叠处略显拥挤。",
+                "hierarchyReadability": "层级极强，箭头体量主导中心视线，远距离可读性优于 Candidate X；但读出的信息更偏流动方向，端口间传输的结构信息较少。",
+                "structuralCoherence": "沿用外壳、配色与底部基座，水平居中；箭头风格与外壳基本协调，但箭头体量相对外壳略重，存在感偏强。",
+                "visibleArtifacts": "未见残缺或越界；菱形与箭杆交界的像素重叠观感上是有意节点而非破损。"
+              }
+            },
+            "pairwiseResult": "X_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+                "callId": "reviewer-1-baseline.png",
+                "sessionId": "zcode-subagent:agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+                "modelContextId": "agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "aa0d1423fddd14b6a2293527fc5a0c8639b9ad5062927451f3da7bfff55fdc16",
+                "callId": "reviewer-1-X.png",
+                "sessionId": "zcode-subagent:agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+                "modelContextId": "agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "6db9aa73e50b104f3021e8d52ef7ea1d717c78d741ab442e03296adecca67074",
+                "callId": "reviewer-1-Y.png",
+                "sessionId": "zcode-subagent:agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+                "modelContextId": "agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "d8904968869ffe43525e27ea8085bd4227e2c22381fec348826cffabaee79ed9",
+                "callId": "reviewer-1-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+                "modelContextId": "agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "Candidate X 以两个端口框（充能橙色芯/空芯）加虚线传输段表达端口间传能，功能语义与任务最贴合；Candidate Y 用粗箭头加源菱形与端板表达流向，可读性强但端口语义弱于 X。两者均无文字，均保持外壳、anchor 与底部基座，故 X 优先。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "S-A-r3": "MEETS",
+            "S-D14-r3": "MEETS"
+          },
+          "preferredRun": "S-A-r3",
+          "pairwiseResult": "X_PREFERRED"
+        },
+        {
+          "reviewerSlot": 2,
+          "context": {
+            "sessionId": "zcode-subagent:agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+            "modelContextId": "agent_b0e39847-8e47-495a-b999-d0f1add4d019"
+          },
+          "raw": {
+            "schema": "pga-e2e-review/0.3",
+            "task": "S",
+            "reviewerSlot": 2,
+            "candidates": {
+              "X": {
+                "taskFit": "MEETS",
+                "strength": "中心为一对方形端口框，源端端口内有橙色充能填充，接收端端口为空心轮廓，两者之间以两枚朝接收端的小 chevron 指示流向。『充能源端 → 空接收端』的状态对比与方向符号双重复现同一语义，即使漏看一个线索仍能读出端口间传输；端口方框造型与外壳的直角切角语言一致，整体居中、克制。",
+                "concern": "两枚 chevron 尺寸很小、线条细且与深色中心底对比偏弱，在原始分辨率下是最弱元素，若被忽略则画面退化为两个静态端口；空心接收端『待接收』的状态表达也较含蓄。chevron 形状在极小尺寸下接近文字符号轮廓，但仍以几何方向标记的方式被读出，未构成文字。",
+                "hierarchyReadability": "第一焦点是橙色充能源端端口，第二层是中部 chevron，第三层是空心接收端口。放大视图下层级清楚；原始尺寸下 chevron 偏淡，方向信息主要靠充能/空置对比支撑。",
+                "structuralCoherence": "两个端口框沿水平轴对称居中，chevron 与端口精确对齐，间距均匀；与八角外壳和底部 anchor 凸块的构图协调，中心图形的直角语言与外壳切角呼应。",
+                "visibleArtifacts": "未观察到明显伪影：边缘干净，无杂散像素、无锯齿断裂，中心图形未越出中心区域，未与外壳轮廓或 anchor 凸块重叠。"
+              },
+              "Y": {
+                "taskFit": "MEETS",
+                "strength": "中心是一条连续的水平传导路径：橙色圆形源端子 → 传导线上的橙色菱形节点 → 朝接收端的箭头 → 敞口方形接收端子。单一连通的『源 → 节点 → 方向 → 接收』链使能量传输的读法直观，橙色源端子与菱形节点明确标出能量所在，箭头使方向无歧义，接收端子给出一端为口的端口形态。",
+                "concern": "构图强烈水平化，源端（实心圆）与接收端（敞口框）形态不对称，中心图形在方形中心区内略偏传导方向一侧，视觉配重稍欠均衡；该不对称本身承载『供→受』语义，属可接受的设计取舍而非缺陷。",
+                "hierarchyReadability": "层级最清楚的一个：橙色源端子与中心菱形节点构成第一焦点，传导线与箭头为第二层，接收端子为第三层。橙色与青色的冷暖对比强，在原始尺寸与放大视图下均易读，方向信息一眼可辨。",
+                "structuralCoherence": "整条传导链沿水平中轴对齐，端子、菱形、箭头与敞口框的尺寸衔接连贯；中心图形与八角外壳的圆角语言、底部 anchor 凸块保持协调，未破坏外壳的设计语言。",
+                "visibleArtifacts": "未观察到明显伪影：路径线条连续无断裂，无杂散像素，中心图形保持在中心区域内，未与外壳轮廓、保护轮廓或 anchor 凸块重叠。"
+              }
+            },
+            "pairwiseResult": "Y_PREFERRED",
+            "confidence": "MEDIUM",
+            "actualViews": [
+              "baseline.png",
+              "X.png",
+              "Y.png",
+              "contact-sheet.png"
+            ],
+            "imageEvidence": [
+              {
+                "view": "baseline.png",
+                "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+                "callId": "reviewer-2-baseline.png",
+                "sessionId": "zcode-subagent:agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+                "modelContextId": "agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+                "modelInput": true
+              },
+              {
+                "view": "X.png",
+                "sha256": "aa0d1423fddd14b6a2293527fc5a0c8639b9ad5062927451f3da7bfff55fdc16",
+                "callId": "reviewer-2-X.png",
+                "sessionId": "zcode-subagent:agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+                "modelContextId": "agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+                "modelInput": true
+              },
+              {
+                "view": "Y.png",
+                "sha256": "6db9aa73e50b104f3021e8d52ef7ea1d717c78d741ab442e03296adecca67074",
+                "callId": "reviewer-2-Y.png",
+                "sessionId": "zcode-subagent:agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+                "modelContextId": "agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+                "modelInput": true
+              },
+              {
+                "view": "contact-sheet.png",
+                "sha256": "f015665ee2c76a99f77f0284522f757727f3aa298fd3124f289da683200463c4",
+                "callId": "reviewer-2-contact-sheet.png",
+                "sessionId": "zcode-subagent:agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+                "modelContextId": "agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+                "modelInput": true
+              }
+            ],
+            "keyEvidence": "baseline 中心为无方向含义的对称小方块簇；两个候选都只改了中心 Region、保持八角外壳、保护轮廓与底部 anchor 凸块，且无文字。Candidate X 以『充能源端端口 + 空接收端端口 + 小 chevron』表达传输，双线索冗余但 chevron 低对比偏弱；Candidate Y 以一条连通的『源端子→菱形节点→箭头→接收端子』传导链表达传输，层级与对比更强、原始尺寸下更易读。两者均满足任务，Y 在传输语义的直接性与视觉层级上占优，故偏好 Y。基于真实查看的 4 张图（原生尺寸 + contact sheet 放大对照），置信度 MEDIUM。"
+          },
+          "evidence": "CONFIRMED",
+          "taskFitByRun": {
+            "S-A-r3": "MEETS",
+            "S-D14-r3": "MEETS"
+          },
+          "preferredRun": "S-D14-r3",
+          "pairwiseResult": "Y_PREFERRED"
+        }
+      ]
+    }
+  ],
+  "statistics": {
+    "overall": {
+      "pairs": 12,
+      "matrix": {
+        "bothPass": 5,
+        "AOnly": 5,
+        "D14Only": 1,
+        "neitherPass": 1
+      },
+      "unresolvedPairs": 0,
+      "exactMcNemar": {
+        "p": 0.21875,
+        "status": "DESCRIPTIVE_ONLY"
+      },
+      "preferences": {
+        "CONSENSUS_A": 9,
+        "MIXED": 3
+      },
+      "consensusOnlySign": {
+        "n": 9,
+        "p": 0.00390625,
+        "excludes": [
+          "MIXED",
+          "NO_MEANINGFUL_DIFFERENCE",
+          "BOTH_NOT_YET",
+          "UNVERIFIED"
+        ]
+      }
+    },
+    "tasks": {
+      "H": {
+        "pairs": 3,
+        "matrix": {
+          "bothPass": 2,
+          "AOnly": 1,
+          "D14Only": 0,
+          "neitherPass": 0
+        },
+        "unresolvedPairs": 0,
+        "exactMcNemar": {
+          "p": 1,
+          "status": "DESCRIPTIVE_ONLY"
+        },
+        "preferences": {
+          "CONSENSUS_A": 3
+        },
+        "consensusOnlySign": {
+          "n": 3,
+          "p": 0.25,
+          "excludes": [
+            "MIXED",
+            "NO_MEANINGFUL_DIFFERENCE",
+            "BOTH_NOT_YET",
+            "UNVERIFIED"
+          ]
+        }
+      },
+      "K": {
+        "pairs": 3,
+        "matrix": {
+          "bothPass": 0,
+          "AOnly": 3,
+          "D14Only": 0,
+          "neitherPass": 0
+        },
+        "unresolvedPairs": 0,
+        "exactMcNemar": {
+          "p": 0.25,
+          "status": "DESCRIPTIVE_ONLY"
+        },
+        "preferences": {
+          "CONSENSUS_A": 3
+        },
+        "consensusOnlySign": {
+          "n": 3,
+          "p": 0.25,
+          "excludes": [
+            "MIXED",
+            "NO_MEANINGFUL_DIFFERENCE",
+            "BOTH_NOT_YET",
+            "UNVERIFIED"
+          ]
+        }
+      },
+      "M": {
+        "pairs": 3,
+        "matrix": {
+          "bothPass": 1,
+          "AOnly": 1,
+          "D14Only": 1,
+          "neitherPass": 0
+        },
+        "unresolvedPairs": 0,
+        "exactMcNemar": {
+          "p": 1,
+          "status": "DESCRIPTIVE_ONLY"
+        },
+        "preferences": {
+          "MIXED": 1,
+          "CONSENSUS_A": 2
+        },
+        "consensusOnlySign": {
+          "n": 2,
+          "p": 0.5,
+          "excludes": [
+            "MIXED",
+            "NO_MEANINGFUL_DIFFERENCE",
+            "BOTH_NOT_YET",
+            "UNVERIFIED"
+          ]
+        }
+      },
+      "S": {
+        "pairs": 3,
+        "matrix": {
+          "bothPass": 2,
+          "AOnly": 0,
+          "D14Only": 0,
+          "neitherPass": 1
+        },
+        "unresolvedPairs": 0,
+        "exactMcNemar": {
+          "p": null,
+          "status": "NOT_APPLICABLE_NO_DISCORDANCE"
+        },
+        "preferences": {
+          "CONSENSUS_A": 1,
+          "MIXED": 2
+        },
+        "consensusOnlySign": {
+          "n": 1,
+          "p": 1,
+          "excludes": [
+            "MIXED",
+            "NO_MEANINGFUL_DIFFERENCE",
+            "BOTH_NOT_YET",
+            "UNVERIFIED"
+          ]
+        }
+      }
+    }
+  }
+}

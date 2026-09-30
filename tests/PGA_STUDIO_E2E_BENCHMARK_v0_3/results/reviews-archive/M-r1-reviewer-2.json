@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "M",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "工作部件金属体积明确：夹体上贯穿一条宽的对角亮带，形成大块面金属质感；丝杆竖销有灰色阶；压力垫为亮灰块并带高光。横柄为深棕、明度明显压低，次要地位清楚。外轮廓、两颗螺栓与部件布局与 baseline 一致，未见杂散像素。",
+      "concern": "对角亮带以单一角度贯穿整个夹体直到边缘，倾向读作贴在全身的图形斜纹而非包裹形体的方向光；口部内面、转角遮挡等形体细节较少。上部暗区与轮廓略有粘连，左上螺栓对比被压弱。",
+      "hierarchyReadability": "最亮值集中在工作侧：夹体亮带、亮灰压力垫、灰丝杆；深棕横柄明确退后。工作面优先、横柄次要的明度层级一眼可读。",
+      "structuralCoherence": "baseline 的横杆-竖销-垫块堆叠关系保持完整，斜向明暗在夹体上连续不断裂，整体块面感统一，锚点与螺栓仍可辨认。",
+      "visibleArtifacts": "未见杂散像素或悬挂线条，色带边界干净。轻微问题：均匀斜纹偏图案化，上部暗区略微降低左上螺栓可辨性。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "光照概括方向一致、形体服从光：顶面受光、内面与底面转暗，夹体读作光滑铸金属；丝杆竖销与亮灰垫块是最清晰的金属工作件，工作面强调到位；横柄为暖棕木质感，与金属件有色相区隔，部件分离干净。",
+      "concern": "横柄中段木板条明度接近压力垫且是全图饱和度最高的元素，在『横柄次要』的要求下与工作部件争夺注意力；夹体右下角轮廓外垂下一条细的浅色竖线，读作杂散痕迹。",
+      "hierarchyReadability": "亮灰垫块、钢质竖销与受光夹体顶面构成工作面优先的层级，但暖亮柄身中段把视线拉回横柄，削弱了横柄次要的明度层级意图。",
+      "structuralCoherence": "与 baseline 几何关系最贴合：横杆、竖销、垫块位置与原图一致，部件边界清晰；单一左上光源使整体体块连贯。",
+      "visibleArtifacts": "夹体右下角轮廓之外有一条细浅色竖线（天线状杂散标记）；左上角边缘附近有少量浅色杂点。其余区域干净。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+      "modelContextId": "agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "3e48d67598e73d25e62c12f0f0418ca66a223bb0514d9f58cdf4fc0136b2b49a",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+      "modelContextId": "agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "8ea0f91d16f22dff5ca7fb724096cb9dacd289052e9f4fe7df968e36ea25d2d7",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+      "modelContextId": "agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "3f67f24c0927d7b95f6bd53f720d4600e77a203fe3969f0066f09308b9aed3b2",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+      "modelContextId": "agent_9a4c9eb5-a2f9-4eb8-8c05-be44477a0932",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "Candidate X 用贯穿夹体的对角亮带给出最强金属体积，横柄深棕明确次要，工作面优先的明度层级最贴合任务；代价是斜纹略偏图案化。Candidate Y 光照方向一致、形体更服帖，但横柄中段亮木板与工作件争视线，且右下轮廓外有细杂线。综合层级要求与杂点，X 优先；因横柄/丝杆视觉身份存在歧义且 X 的条纹风格属任务允许的光照概括范围，置信度取 MEDIUM。"
+}

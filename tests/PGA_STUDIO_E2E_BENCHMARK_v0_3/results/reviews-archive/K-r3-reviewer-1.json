@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "K",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "鼓轮以同心环读出缠索层次，明确指向收放牵引索；鼓轮右侧的驱动壳与导出口水平衔接，牵引索沿水平方向引出并收于末端吊钩，功能链路完整；上方框架与底部宽支座形成可信承托。相对 baseline 做了明显的整体结构重组，而非局部装饰。",
+      "concern": "右侧引索线条与吊钩在当前尺寸下偏小略密，需要留意才能分辨；握持功能主要由顶部横梁隐含承担，缺少一眼可识别的专用把手造型。",
+      "hierarchyReadability": "带缠索环的鼓轮居中且对比最强，是明确视觉主体；驱动-导出链路向右单向延伸，阅读方向清晰；框架与底座退为次要层次，主次分明。",
+      "structuralCoherence": "鼓轮、驱动壳、导出口、框架立柱与底座相互衔接连续，未见悬空构件；牵引索从导出口到吊钩走向连贯。",
+      "visibleArtifacts": "当前分辨率下未见明显断裂、悬空像素或错位接缝；右侧细节密集但形体完整。"
+    },
+    "Y": {
+      "taskFit": "NOT_YET",
+      "strength": "形体干净完整，大鼓轮体量突出，底部宽支座与斜置壳体的承托关系可信，画面稳定。",
+      "concern": "构件布置与 baseline 高度相近（斜置壳体、顶部横条、大圆盘、右下带橙色端帽的方块），更像对 baseline 的放大修形而非任务要求的结构重组；鼓轮为单一圆盘，无缠索或收放线索，驱动壳与导出口的衔接语义弱，握持结构读不出来。",
+      "hierarchyReadability": "大圆盘凭体量成为主体，但缺少功能指向；其余部件功能含义模糊，层级靠大小而非语义建立，用途需猜测。",
+      "structuralCoherence": "鼓轮与下方斜置壳体及右侧方块相接，底座承托成立；顶部横条与主体的连接偏弱，接近浮置但未见明显断裂。",
+      "visibleArtifacts": "未见明显悬空像素或碎块；顶部横条与鼓轮之间衔接较弱，属于衔接不清而非可见错误。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "HIGH",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+      "modelContextId": "agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "58d9f0d9dd0ce931a4ce0d62b3ff4613862e1aa384a296ee581f816e7ca7db4d",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+      "modelContextId": "agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "f82d304c0525da5055448926a5b383221eb42469c97b81ba296304212a3fc148",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+      "modelContextId": "agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "7982aaa07322e3711761b85375ab467841b65aec5420c7b4bf240aa00d6ec978",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+      "modelContextId": "agent_8f667ad4-b9e8-415c-9576-217d59af264b",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "Candidate X 的鼓轮同心环、右侧驱动-导出链路与末端吊钩使绞盘用途与功能连续性一眼可读，且相对 baseline 明显重组；Candidate Y 布局与 baseline 高度相似，鼓轮无缠索线索、导出与握持语义弱，未达到任务要求的结构重组与可读性。"
+}

@@ -1,0 +1,63 @@
+{
+  "runId": "K-D14-r2",
+  "task": "K",
+  "arm": "D14",
+  "submitSuccess": true,
+  "technical": {
+    "status": "PASS",
+    "checks": {
+      "validOutput": true,
+      "dimensions": true,
+      "deterministic": true,
+      "metadata": true,
+      "parts": true,
+      "protection": true,
+      "changed": true,
+      "palette": true,
+      "silhouette": true,
+      "area": true,
+      "requiredRelation": true,
+      "structuralChange": true,
+      "submittedArtifact": true,
+      "sourceFrozen": true
+    },
+    "changedPixels": 1470,
+    "silhouetteChangedPixels": 1041,
+    "protectionViolationCount": 0,
+    "finalHash": "f7e6f4a0510ae3e985eb6057a8aa5746a634cc0d29c82c35e2e9b97ec5b5c18f",
+    "textProhibition": "NOT_REQUIRED"
+  },
+  "budget": "PASS",
+  "protocol": "PASS",
+  "metrics": {
+    "candidateCount": 7,
+    "lowLevelEditCount": {
+      "value": null,
+      "comparability": "NOT_COMPARABLE",
+      "reason": "源码编辑批次与 Studio 原子操作不是同一单位；须保留宿主原始轨迹。"
+    },
+    "manualCoordinateRepairCount": {
+      "value": null,
+      "comparability": "NOT_COMPARABLE",
+      "reason": "仅凭几何 diff 无法识别修复意图；运行前需冻结跨臂人工编码规范。"
+    },
+    "semanticTransformCount": 0,
+    "relationAwareTransformCount": 0,
+    "rejectedOperationCount": 1,
+    "validationProbeCount": 8,
+    "observableRelationDiagnosticCount": 3,
+    "retries": 1,
+    "errors": 0,
+    "submitSuccess": true,
+    "probeInterpretation": "DIAGNOSTIC_ONLY",
+    "wallClockMs": null,
+    "cpuTimeMs": null,
+    "compileInvocations": null,
+    "timingInterpretation": "EXPLORATORY_NOT_COMPARABLE"
+  },
+  "protocolAudit": {
+    "unaccountedImages": [],
+    "status": "PASS",
+    "note": "binding.json.stage.files 内的图像（含 studio create 起点 preview）为 staging 载荷，非 participant 产物。"
+  }
+}

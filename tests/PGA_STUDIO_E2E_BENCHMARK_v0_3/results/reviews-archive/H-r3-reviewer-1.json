@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "H",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "机身改为低矮宽厚的造型：拆除基线两侧外凸的亮色附板，顶部加了一条浅色檐口并让机身横向展开，外轮廓与基线差异明显。大号青色圆盘（node.display）成为画面中唯一的主体亮色，橙色横条作为次级点缀，基线中多个亮部互相争夺注意力的问题得到解决。宽底低重心压在底座上，稳定感和重量感明确；保留了基线材质语言（青色显示、橙色点缀、底座与梯形徽标），与原资产家族连贯。",
+      "concern": "造型改造偏保守：主要靠删除侧板加放宽机身，正面下方留有大片空置的深色区域，观感略空。顶部浅色檐口与显示圆盘上缘间距很小，局部略挤；大圆盘为单一平涂色面，缺少内部结构，读起来略像贴片。檐口作为独立盖板的语义稍有歧义。",
+      "hierarchyReadability": "焦点层级清楚：青色大圆盘第一，橙色横条第二，其余机身与基座退为中性背景层。问题在于第一与第二层级之间的面积对比悬殊，且圆盘内部无明暗变化，层级略平。",
+      "structuralCoherence": "机身、岩台与底座三段衔接自然，右侧机身与岩石交界处有台阶过渡；檐口、机身、底座的堆叠逻辑成立，仅檐口与圆盘过于接近带来轻微含糊。",
+      "visibleArtifacts": "在此分辨率下未见明显杂点、断线或锯齿异常，边缘干净。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "外轮廓被彻底重塑为下宽上收、带阶梯斜肩的钟形塔柱，坐落在原底座上，是四个视图中轮廓改造最彻底的一个，重量感与稳如基座的锚定感最强。发光镜头（node.display）置于顶部凹槽内，近白的高光核心嵌在深色环槽中，是全画面最亮且被暗部包围的孤立亮部，焦点语义极其清楚；镜头下方的横向凹槽线像散热鳍，给视觉提供了承托结构，明度自上而下递减，光逻辑与重力方向一致。",
+      "concern": "机身整体明度较低，与背后岩石在某些区段的明度接近，局部轮廓分离度偏弱，需要靠底座和边缘光辨认形体。显示镜头绝对尺寸偏小，完全靠亮度对比建立焦点；基线的青色与橙色材质语言在机身部分基本让位于深色方案，家族相似性弱于另一个候选。",
+      "hierarchyReadability": "层级非常清楚：发光镜头第一（最高明度与对比），凹槽鳍片第二（提供过渡与引导），底座与梯形徽标第三。视线自镜头沿凹槽下沉到底座，阅读路径顺畅。",
+      "structuralCoherence": "阶梯斜肩、凹槽环与镜头、底座之间的收分逻辑一致，形体像单一铸造件，结构连贯性好；镜头位于顶部属于合理的设计决定，与'稳定器核心'语义相符。",
+      "visibleArtifacts": "在此分辨率下未见明显杂点、断线或锯齿异常，阶梯边缘整齐。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+      "modelContextId": "agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "28db7be238446009bed9d8a9514428294b2a8510873dad1631d19cb46531de45",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+      "modelContextId": "agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "ebbe42344511657c655fd5523a0510583baba2cdc10f8c2523b3e59c3f1b87ec",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+      "modelContextId": "agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "bfc3299c385e1c564a9af956037f8f548db2c781d7ac7a3dad22c394fd7ce45f",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+      "modelContextId": "agent_ca7f65e1-8529-44cc-b158-f75edaad7792",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "两个候选都满足任务：外轮廓均明显改变、display 成为清楚焦点、保留底座与梯形徽标、亮部竞争问题均已解决。差异在改造力度与光逻辑：Candidate X 以删除侧板加放宽机身完成改造，焦点是单个平涂大圆盘，改造偏保守且正面下方偏空；Candidate Y 重塑为下宽上收的钟形塔柱，镜头以最高亮度加暗环槽建立焦点，凹槽线承托视线，重量感与层级最强，代价是机身明度接近背景、家族相似性弱。综合轮廓改造的明显程度、明暗分配对'稳定有重量'的服务与焦点清晰度，选 Y。置信度 MEDIUM：图像像素尺寸小，细粒度边缘瑕疵难以完全分辨，机械核验由独立程序负责。"
+}

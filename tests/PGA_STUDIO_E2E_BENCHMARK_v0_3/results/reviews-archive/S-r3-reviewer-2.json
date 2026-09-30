@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "S",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "中心为一对方形端口框，源端端口内有橙色充能填充，接收端端口为空心轮廓，两者之间以两枚朝接收端的小 chevron 指示流向。『充能源端 → 空接收端』的状态对比与方向符号双重复现同一语义，即使漏看一个线索仍能读出端口间传输；端口方框造型与外壳的直角切角语言一致，整体居中、克制。",
+      "concern": "两枚 chevron 尺寸很小、线条细且与深色中心底对比偏弱，在原始分辨率下是最弱元素，若被忽略则画面退化为两个静态端口；空心接收端『待接收』的状态表达也较含蓄。chevron 形状在极小尺寸下接近文字符号轮廓，但仍以几何方向标记的方式被读出，未构成文字。",
+      "hierarchyReadability": "第一焦点是橙色充能源端端口，第二层是中部 chevron，第三层是空心接收端口。放大视图下层级清楚；原始尺寸下 chevron 偏淡，方向信息主要靠充能/空置对比支撑。",
+      "structuralCoherence": "两个端口框沿水平轴对称居中，chevron 与端口精确对齐，间距均匀；与八角外壳和底部 anchor 凸块的构图协调，中心图形的直角语言与外壳切角呼应。",
+      "visibleArtifacts": "未观察到明显伪影：边缘干净，无杂散像素、无锯齿断裂，中心图形未越出中心区域，未与外壳轮廓或 anchor 凸块重叠。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "中心是一条连续的水平传导路径：橙色圆形源端子 → 传导线上的橙色菱形节点 → 朝接收端的箭头 → 敞口方形接收端子。单一连通的『源 → 节点 → 方向 → 接收』链使能量传输的读法直观，橙色源端子与菱形节点明确标出能量所在，箭头使方向无歧义，接收端子给出一端为口的端口形态。",
+      "concern": "构图强烈水平化，源端（实心圆）与接收端（敞口框）形态不对称，中心图形在方形中心区内略偏传导方向一侧，视觉配重稍欠均衡；该不对称本身承载『供→受』语义，属可接受的设计取舍而非缺陷。",
+      "hierarchyReadability": "层级最清楚的一个：橙色源端子与中心菱形节点构成第一焦点，传导线与箭头为第二层，接收端子为第三层。橙色与青色的冷暖对比强，在原始尺寸与放大视图下均易读，方向信息一眼可辨。",
+      "structuralCoherence": "整条传导链沿水平中轴对齐，端子、菱形、箭头与敞口框的尺寸衔接连贯；中心图形与八角外壳的圆角语言、底部 anchor 凸块保持协调，未破坏外壳的设计语言。",
+      "visibleArtifacts": "未观察到明显伪影：路径线条连续无断裂，无杂散像素，中心图形保持在中心区域内，未与外壳轮廓、保护轮廓或 anchor 凸块重叠。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+      "modelContextId": "agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "aa0d1423fddd14b6a2293527fc5a0c8639b9ad5062927451f3da7bfff55fdc16",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+      "modelContextId": "agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "6db9aa73e50b104f3021e8d52ef7ea1d717c78d741ab442e03296adecca67074",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+      "modelContextId": "agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "f015665ee2c76a99f77f0284522f757727f3aa298fd3124f289da683200463c4",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+      "modelContextId": "agent_b0e39847-8e47-495a-b999-d0f1add4d019",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "baseline 中心为无方向含义的对称小方块簇；两个候选都只改了中心 Region、保持八角外壳、保护轮廓与底部 anchor 凸块，且无文字。Candidate X 以『充能源端端口 + 空接收端端口 + 小 chevron』表达传输，双线索冗余但 chevron 低对比偏弱；Candidate Y 以一条连通的『源端子→菱形节点→箭头→接收端子』传导链表达传输，层级与对比更强、原始尺寸下更易读。两者均满足任务，Y 在传输语义的直接性与视觉层级上占优，故偏好 Y。基于真实查看的 4 张图（原生尺寸 + contact sheet 放大对照），置信度 MEDIUM。"
+}

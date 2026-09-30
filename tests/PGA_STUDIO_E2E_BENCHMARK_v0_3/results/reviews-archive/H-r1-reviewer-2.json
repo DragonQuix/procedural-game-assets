@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "H",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "轮廓明显改造：主体变为宽底、向上收分的厚重板状形体，宽矮站姿传达重量与稳定；node.display 改造为背板上的大面积圆形屏幕，以尺寸成为最大元素；底座保护区域、基座与底部中心标记保留。",
+      "concern": "display 屏幕为中等亮度而非发光，焦点主要靠尺寸而非明度；画面仍有多个小的饱和橙色点缀（屏幕下方状态条、左下角块、底座中心点）与主焦点轻微争夺；左右下角脚块颜色不一致（一侧橙、一侧灰），对称位置上的颜色差异略欠统一。",
+      "hierarchyReadability": "大尺寸屏幕居中主导，深色机身其次，橙色小件为三级点缀，层级可读；但屏幕与机身明度接近，焦点强度弱于纯亮度方案。",
+      "structuralCoherence": "背板承托屏幕、下方状态条、底部两侧脚块与基座的结构关系连贯，各部件比例协调，读作一台整体设备。",
+      "visibleArtifacts": "该分辨率下未见杂散像素、断线或明显锯齿，边缘干净。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "轮廓明显改造：主体变为收分单体并加肩部与侧罐，宽底传达稳定与重量；node.display 改造为中心大型镜头，内部高亮白色发光核心是全图最亮、最集中的元素，清楚成为焦点，直接解决了起点多亮部争夺注意力的问题；镜头下方格栅与侧罐提供了清晰的次级细节层级；底座与底部中心标记保留。",
+      "concern": "左侧高侧罐与右侧较矮侧块呈不对称配置（任务允许自定附件，但视觉平衡略欠）；发光核心偏镜头上部，核心下缘与暗色镜头圈形成较大明度跳变；侧罐的锈橙色饱和度对焦点有轻微竞争。",
+      "hierarchyReadability": "三者中更强：单一高亮核心先抓住视线，格栅与侧罐为次级，底座最暗，层级分明。",
+      "structuralCoherence": "镜头核心、下方通风格栅、两侧罐体与基座的部件关系连贯，读作一台带能源核心与燃料罐的地面设备。",
+      "visibleArtifacts": "该分辨率下未见杂散像素、断线或明显锯齿，镜头圈与格栅边缘干净。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+      "modelContextId": "agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "8d598db875fb7ad70eb57e79f4dbbf269b93007ac0e881942e6a259a04b5b8b7",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+      "modelContextId": "agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "bbbaa772cd8a379f5861bc1aef854d52fa17f9e1ee19ae4d614680300c30f547",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+      "modelContextId": "agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "5ade12a0a51224471b790c86caa4f91e7058833bf82121ae0a4bf62d7ee73e2f",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+      "modelContextId": "agent_98f48c38-2a85-4837-a0f4-7053f3be0949",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "两候选均明显改造外轮廓且保留底座。Candidate Y 以镜头内高亮白色核心形成单一、最亮的清楚焦点，层级最分明，最直接满足『display 成为清楚焦点并消除多亮部争夺』；Candidate X 的 display 靠尺寸而非明度主导，且残留多个橙色饱和小件轻微竞争注意力。故偏好 Candidate Y。依据 contact-sheet.png 放大细节与各单图确认，身份仅按 X/Y 标签引用。"
+}

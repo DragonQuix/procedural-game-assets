@@ -1,0 +1,194 @@
+{
+  "H-A-r1": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 2,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "H-D14-r1": {
+    "technical": "FAIL",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 6,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "H-D14-r2": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 8,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "H-A-r2": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 1,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "H-A-r3": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 2,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "H-D14-r3": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 7,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "K-D14-r1": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 7,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "K-A-r1": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 2,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "K-A-r2": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 1,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "K-D14-r2": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 7,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "K-D14-r3": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 6,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "K-A-r3": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 2,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "M-A-r1": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 1,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "M-D14-r1": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 5,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "M-D14-r2": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 5,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "M-A-r2": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 2,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "M-A-r3": {
+    "technical": "FAIL",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 1,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "M-D14-r3": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 5,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "S-D14-r1": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 6,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "S-A-r1": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 2,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "S-A-r2": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 1,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "S-D14-r2": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 5,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "S-D14-r3": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 6,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  },
+  "S-A-r3": {
+    "technical": "PASS",
+    "budget": "PASS",
+    "submitSuccess": true,
+    "candidateCount": 1,
+    "protocolAudit": "PASS",
+    "technicalFailureIncidence": false
+  }
+}

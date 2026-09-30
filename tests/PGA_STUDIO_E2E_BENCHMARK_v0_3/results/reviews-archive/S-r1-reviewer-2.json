@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "S",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "中央竖向导通结构可读：上方橙色端子块与中央橙色圆形节点由浅色竖直导条相连，橙色在灰蓝外壳上对比强烈，中央焦点明确；未使用任何文字、字母或数字。",
+      "concern": "导条下端没有端子收尾，'两个端口'的对应关系被削弱，整体更像一根立柱或开关柱，而不是'从一个端口传给另一个端口'；顶部橙色块贴近面板上缘，与保护轮廓的关系略显拥挤。",
+      "hierarchyReadability": "中央竖向元素层级最强，橙与浅蓝的对比清楚，一眼能落到中央节点；但视线沿导条向下终止于无端子的末端，阅读动线不完整，第二 '端口' 需要猜测。",
+      "structuralCoherence": "沿用外壳的灰蓝/橙配色与方块化几何，主体居中于面板内，外壳轮廓、底部锚点与深色面板边界均保持；竖向构图与 baseline 中央菱形四点的语言差异较大，但未与外壳冲突。",
+      "visibleArtifacts": "导条下端戛然而止、无收口；圆形节点与导条交叠处过渡简单；在可见分辨率下未发现明显错位像素、越界图形或文字。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "功能叙事最完整：左侧为空心端口（灰块内嵌深色方孔），右侧为受能端口（灰块内嵌实心橙色方块），中间一串橙色小块表示能量正在两端口之间传递，'把能量从一个端口传给另一个端口' 的关系无需解释即可读出；无文字。",
+      "concern": "传递方向主要靠中间橙块的疏密与大小变化暗示，在道具的小尺寸下方向感偏弱，可能被读成装饰性点串；中间点串与两端口的间距节奏需要均匀，否则结构显得松散。",
+      "hierarchyReadability": "两端的灰蓝色端口块构成稳定框架，中间橙色点串成为视觉焦点，层级分明；结构线索（两端端口）强于方向线索（流向），但整体清晰度高。",
+      "structuralCoherence": "与外壳同一配色体系，水平构图与底部橙色锚点形成呼应，主体居中且未触碰外壳轮廓与面板边界；方中嵌方的端口造型与外壳的方块几何语言一致。",
+      "visibleArtifacts": "中间橙色小块之间存在细小间隙，个别小块的大小看起来略不一致；在可见分辨率下未发现文字、数字或越界图形。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+      "modelContextId": "agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "d5474c2a90689ab7d564026e8839313a2a3160482406ac541431750c5a66c0d6",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+      "modelContextId": "agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "c9d52b8b9165cd9d403d96dfdd9c908c4f6324a09d5a10b592cbdb2dca5ff03e",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+      "modelContextId": "agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "3d740723564efceb16d9c92af4eb645a85a8588e2022d8827b77000581d3878b",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+      "modelContextId": "agent_f0792504-6f8b-4f1b-bfc7-2b7f9fd30c0b",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "baseline 中心为橙色圆点加菱形四小方块。Candidate X 用竖向导条连接顶部橙色端子与中央橙色圆节点，连接关系成立但下端无端子，端口到端口的对应不完整；Candidate Y 给出空心端口、一串橙色能量块与实心端口三段式结构，'能量从一个端口传给另一个端口' 的语义最完整，方向感偏弱是主要保留。两者均无文字，均保持外壳、面板与锚点。综合偏好 Candidate Y。"
+}

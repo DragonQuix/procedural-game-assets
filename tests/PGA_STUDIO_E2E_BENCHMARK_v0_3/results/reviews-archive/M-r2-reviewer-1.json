@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "M",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "夹体用分面明暗与边缘高光读出机加工金属体积；压力垫为最亮的抛光银色、丝杆螺纹亮暗条纹清晰，工作面在明度上明确领先；轮廓锚点与两颗螺栓保持原位，无文字。",
+      "concern": "横柄橙色饱和度仍较抢眼（继承基线色相，但在明度层级里靠次要位控制住了）；开口内侧阴影较深，丝杆下段在该暗部里可读性略降。",
+      "hierarchyReadability": "层级清楚：亮银垫与丝杆高光为第一层，夹体中间灰面为第二层，暗部与橙色横柄为次级；工作面优先的要求成立。",
+      "structuralCoherence": "统一左上光源逻辑贯穿夹体、丝杆与垫，部件边界、螺栓与整体轮廓与基线一致，无借改形替代材质的迹象。",
+      "visibleArtifacts": "未见文字、杂点或边缘毛刺，像素边缘干净。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "夹体以对角高光带组织成可读的金属光泽面，斜向条带贯穿立柱与上下臂，光照概括自洽；丝杆螺纹与垫仍为金属读法，轮廓与螺栓保留，无文字。",
+      "concern": "压力垫为偏灰的青钢色，最亮的重点落在夹体高光带上，垫作为工作面不再明确领先；横柄条位置较基线略上移，有轻微结构漂移；高光带在开口边缘略带装饰感。",
+      "hierarchyReadability": "可读但层级较平：垫与横柄的注意力权重接近，靠夹体斜向高光补足工作面优先；三段明度仍可分辨。",
+      "structuralCoherence": "斜向受光在夹体内部一致，除横柄小幅上移外部件均在原位，螺栓完好；光照方向与丝杆、垫的受光面基本吻合。",
+      "visibleArtifacts": "未见文字或杂点；高光带与开口交界处有轻微色阶跳步，观看尺寸下不构成缺陷。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_222be1a7-b3c1-4be5-863e-281623442496",
+      "modelContextId": "agent_222be1a7-b3c1-4be5-863e-281623442496",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "4aef36d9a56212752bde6648a3f26c4b953e560d80b75dcbdbad29b1ee68e6ea",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_222be1a7-b3c1-4be5-863e-281623442496",
+      "modelContextId": "agent_222be1a7-b3c1-4be5-863e-281623442496",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "dc41c0559c8ae126784319673a8ab39026bafc1badbb71d3745c2f5dca879487",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_222be1a7-b3c1-4be5-863e-281623442496",
+      "modelContextId": "agent_222be1a7-b3c1-4be5-863e-281623442496",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "1878ef31b5d7bc8a939a208907991f2aac16cf5f9758b049f317b21b854f499a",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_222be1a7-b3c1-4be5-863e-281623442496",
+      "modelContextId": "agent_222be1a7-b3c1-4be5-863e-281623442496",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "两候选均满足任务 M：工作部件金属体积可读、无文字、轮廓与螺栓保留。Candidate X 以亮银垫与分面明暗直接实现工作面优先的明度层级且结构与基线对齐；Candidate Y 的斜向光泽自洽但垫偏灰使层级略平、横柄小幅上移。故倾向 Candidate X。"
+}

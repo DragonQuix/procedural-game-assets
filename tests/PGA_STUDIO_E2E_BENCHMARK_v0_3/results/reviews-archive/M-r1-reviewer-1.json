@@ -1,0 +1,57 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "M",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "NOT_YET",
+      "strength": "整体色阶组织统一：冷蓝色调贯穿夹体，少量暖棕集中点缀在工作区，画面协调度高。夹体作为工作部件获得了明确的对角光照分割，亮面与暗面转折可读为金属受光概括，且轮廓与部件位置保持原状，没有以改形替代材质任务。",
+      "concern": "丝杆与压力垫这两个工作部件被压成很暗的棕色小块，明度接近暗部背景，金属体积几乎读不出来；画面视觉重心落在夹体的斜切光照上，而不是工作面上。「工作面优先」的明度层级未成立，横柄与底部小件更多是被淹没而非被设计成次要。",
+      "hierarchyReadability": "层级方向与任务相反：最抢眼的是夹体（jaw）的斜切亮面，丝杆与垫过暗、退入背景；工作面无法第一眼被识别为功能核心。handle 确实次要，但属于对比不足造成的消失。",
+      "structuralCoherence": "结构一致性良好：C 形夹体开口、中央横杆、垫与两个螺栓的位置均与 baseline 对应，未发现部件错位或轮廓漂移；光照分割与部件边界基本贴合。",
+      "visibleArtifacts": "夹体上的对角明暗分界较直、略生硬，在低分辨率下仍可读为光照概括而非破形；未见明显渗色、锯齿块或轮廓外溢。中央暗棕区与暗部背景的衔接略含混，属于可读性弱点而非硬性瑕疵。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "压力垫采用亮橙色并带出顶面亮、侧面暗的体积转折，丝杆有棕色立体表现，工作部件的金属体积清楚可读。明度层级直接服务功能语义：亮的工作面最先吸引视线，蓝灰夹体居中调，横柄与螺栓小而暗、明确次要。轮廓与部件位置保持原状。",
+      "concern": "橙色垫的亮面到暗面由少数几级色阶分段构成，转折略呈阶梯感；夹体本身的光照概括相对克制，若期待夹体也承担更多金属表现，则其体积提示弱于工作面。整体仍在一个合理的合法设计范围内。",
+      "hierarchyReadability": "层级清楚且方向正确：pad 最亮、spindle 次之，二者构成工作面优先层；夹体中调承托；handle 与螺栓暗且小，处于次要层。第一眼即能识别功能核心。",
+      "structuralCoherence": "结构一致性好：夹体开口、中央横杆、垫、底部横柄与两个螺栓均与 baseline 位置对应，无轮廓漂移；橙暖色严格集中在中部工作区，与蓝灰夹体的边界贴合部件形状。",
+      "visibleArtifacts": "垫的顶/侧明暗呈小台阶状色阶分段，低分辨率下可读为立体转折，未见渗色或锯齿破形；未发现颜色溢出部件 ownership 或轮廓外扩的迹象。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+      "modelContextId": "agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "3e48d67598e73d25e62c12f0f0418ca66a223bb0514d9f58cdf4fc0136b2b49a",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+      "modelContextId": "agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "8ea0f91d16f22dff5ca7fb724096cb9dacd289052e9f4fe7df968e36ea25d2d7",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+      "modelContextId": "agent_eb2c528a-3310-4988-8c2c-9cca5fdea20b",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "对照 baseline 的平涂状态：Candidate X 把视觉重量交给夹体的对角光照，丝杆与压力垫被压暗到接近背景，工作面优先的层级不成立，故 NOT_YET；Candidate Y 的亮橙压力垫与棕色丝杆带出金属体积并占据明度顶层，横柄与螺栓退居次要，层级方向与任务的功能语义一致，轮廓与部件位置均未改变。两者差异核心在工作面明度优先与否，判 Y_PREFERRED；图像分辨率较低，金属质感细节存在辨认上限，confidence 取 MEDIUM。"
+}

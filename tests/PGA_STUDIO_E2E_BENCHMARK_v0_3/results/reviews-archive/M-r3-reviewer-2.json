@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "M",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "夹体呈现明显金属体积：一道斜向亮带扫过上臂，工作面有一条亮竖边；丝杆与压力垫用青色系多阶并带高光，与开口内深色背景对比清晰；横柄保持深棕、明度居下次级。轮廓与两颗螺栓锚点未变，无文字。",
+      "concern": "全图最大、最亮的斜向光带落在夹体外上侧，视觉权重略偏离工作面；它更像风格化的扫光概括，而非贯穿全图的一致光向。",
+      "hierarchyReadability": "工作件与横柄的层级可读（横柄深棕明显次级），但最亮的大块面在夹体外侧，'工作面优先'的明度指向被略削弱。",
+      "structuralCoherence": "C 形轮廓、开口、两螺栓与各部件位置与基线一致；明暗带贴合机构件平面，未破坏部件边界或改形。",
+      "visibleArtifacts": "该分辨率下未见错位像素、轮廓破损或色带溢出；光带边界为干净的像素阶梯。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "夹体按左上光源做面明暗（左上亮、右下暗），工作面有一条醒目亮边；压力垫与丝杆以青色多阶呈现并带高光，金属体积清楚；横柄深棕、明显次级。轮廓与两颗螺栓锚点未变，无文字。",
+      "concern": "夹体整体偏亮，大面积机体表面与工作件的明度差被压缩；压力垫下缘的亮边与整体光向的配合略显含糊。",
+      "hierarchyReadability": "最亮的部位落在工作面亮边与垫/丝杆高光上，工作区优先的层级最明确；横柄明显次级。",
+      "structuralCoherence": "轮廓、开口与两螺栓与基线一致；明暗沿 C 架平面分布，部件边界完整，无改形。",
+      "visibleArtifacts": "未见明显错位或破形；明暗过渡干净。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_beaad268-fc29-4782-84b4-714fec957465",
+      "modelContextId": "agent_beaad268-fc29-4782-84b4-714fec957465",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "9d25c2aabcdc1846bd8347556e6e7ce6d5dc2d9a396ca85fd78dd503b5fc2985",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_beaad268-fc29-4782-84b4-714fec957465",
+      "modelContextId": "agent_beaad268-fc29-4782-84b4-714fec957465",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "c51755b2a45d16e553627f08aea8bdc15c0a8221e335af75a7dc4a0124127225",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_beaad268-fc29-4782-84b4-714fec957465",
+      "modelContextId": "agent_beaad268-fc29-4782-84b4-714fec957465",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "e60b3c8b8b7ad0f922bd22692e98bad5f1f3c26e571aaee80984b8d5fd9e7dd6",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_beaad268-fc29-4782-84b4-714fec957465",
+      "modelContextId": "agent_beaad268-fc29-4782-84b4-714fec957465",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "基线为全平涂：无金属体积，橙色横柄反而最抢眼。Candidate X 用斜向光带加工作面亮边给出体积，但最亮的大块面在夹体外上侧，注意力略偏离工作面。Candidate Y 的最亮部位（工作面亮边、压力垫与丝杆高光）直接落在工作区，'工作面优先、横柄次级'的层级更贴合任务；两者轮廓与双螺栓锚点均保持、均无文字。"
+}

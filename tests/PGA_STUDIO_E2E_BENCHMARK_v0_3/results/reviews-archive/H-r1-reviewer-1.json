@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "H",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "外轮廓从基线的高矩形机身改为宽而低的梯形整体，重心明显下沉，稳定感和重量感到位；机身中央的大圆面与其下方橙色横条组成一个可读的显示单元，底座深色板与底边中央的橙色小锚点保留。",
+      "concern": "显示圆面与机身的明度、色相都很接近，焦点主要靠面积和居中位置维持，而不是靠显著性；橙色左侧块、橙色横条和底部三角仍在分散第一次注视，基线中『多个亮部争夺注意力』的问题只解决了一半；机身两侧下方的橙块与灰块像是基线元素的直接遗留，与新的整体式机身关联较弱。",
+      "hierarchyReadability": "圆面是最大且居中的元素，层级可读，但橙条与底部橙三角的显著性与其接近，主次关系偏平；需要在明度上再拉开才能算『清楚的焦点』。",
+      "structuralCoherence": "梯形机身与底座贴合自然，侧块与机身拼接干净，无悬空部件；整体像一个落地重型设备。",
+      "visibleArtifacts": "在所看尺度下边缘干净，无断线、漏色或错位像素；圆面左右缘接近梯形斜边，略显局促，但不构成缺陷。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "外轮廓明显重构为拱顶机身加两侧对称棕色支撑翼，造型像带扶壁的落地稳定器，重量感与稳定感都强；上方中央的亮白环形显示是全图最高对比元素，明确成为视觉焦点；底座板与底边中央橙色锚点保留，机身下部中央的通风槽与其上下对齐。",
+      "concern": "两侧支撑翼是较简单的平板，细节少；基线机身上的灰色圆形徽记在 Candidate Y 中与新的亮色显示环合并，看不到独立的第二个圆形元素，徽记以被改写的方式延续，原始身份在像素层面无法进一步确认；棕色翼引入了基线没有的新色系。",
+      "hierarchyReadability": "层级清晰：亮色显示环第一眼抓住视线，机身中调，支撑翼作暗部陪衬，底座最暗；无文字或类文字符号。",
+      "structuralCoherence": "支撑翼沿拱顶机身两翼对称贴合，通风槽、橙色锚点与底座在同一竖直轴线上对齐，结构关系可信。",
+      "visibleArtifacts": "在所看尺度下未见断裂、错位或污渍；翼顶有小的阶梯过渡，属像素风格正常表现。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "HIGH",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+      "modelContextId": "agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "8d598db875fb7ad70eb57e79f4dbbf269b93007ac0e881942e6a259a04b5b8b7",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+      "modelContextId": "agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "bbbaa772cd8a379f5861bc1aef854d52fa17f9e1ee19ae4d614680300c30f547",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+      "modelContextId": "agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "0aac366600dad57a23b4eb83eda8a5fcb016eeb7bbb893080973e62012249e3f",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+      "modelContextId": "agent_e8b59abb-f11b-4f87-a20d-1319163c2b68",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "两个候选都真实改变了外轮廓并保留底座与底部锚点。Candidate X 以宽梯形机身为稳定重型设计，但显示圆面与机身对比弱，橙色亮部仍在分散注意，焦点靠面积而非显著性维持。Candidate Y 的拱顶加对称支撑翼造型同时给出重量感与工程感，亮白环形显示是全图最高对比元素，直接满足『node.display 成为清楚焦点』的核心要求，且结构轴线对齐干净。综合焦点达成度与轮廓辨识度，Candidate Y 更优。"
+}

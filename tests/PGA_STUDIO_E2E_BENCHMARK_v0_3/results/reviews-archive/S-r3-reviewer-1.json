@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "S",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "端口间传能语义最完整：流向起点是带橙色充能芯的端口框，流向终点是芯体为空的端口框，两者之间由两段虚线传输段连接，充能/空芯的状态差直接表达能量从一口传向另一口；保留外壳、青+橙基色与底部基座，无文字、字母或数字。",
+      "concern": "端口芯与虚线段线条较细，在 64px 原尺寸下细部对比偏弱；两段虚线的间距观感略不均，最坏情况下可能被读成普通装饰虚线而非流向标记。",
+      "hierarchyReadability": "中心四个部件（源端口-虚线-汇端口）主从关系清楚，橙色芯对青色空的对比支撑方向解读；元素偏小但整体可读，中央视线焦点明确。",
+      "structuralCoherence": "端口方框呼应外壳圆角方形语言，整体居中对称，沿用既有青/橙配色与 anchor、底部基座，与外壳设计语言协调。",
+      "visibleArtifacts": "未见越界、残缺或明显像素错误；仅虚线两段间距观感略不均，属轻微。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "粗壮的指向右侧的箭头自橙色源菱形出发、终于竖向端板，小尺寸下一眼可读出能量流动方向；箭杆中段的橙色菱形作为能量节点强调，视觉层级与对比强，无文字、字母或数字。",
+      "concern": "端口语义偏弱：流向起点是菱形节点而非端口，流向终点的竖板更像终点挡板，两者都不如 Candidate X 的端口框直接对应任务里的端口概念；大箭头是较通用的流向表达，箭杆与中途菱形交叠处略显拥挤。",
+      "hierarchyReadability": "层级极强，箭头体量主导中心视线，远距离可读性优于 Candidate X；但读出的信息更偏流动方向，端口间传输的结构信息较少。",
+      "structuralCoherence": "沿用外壳、配色与底部基座，水平居中；箭头风格与外壳基本协调，但箭头体量相对外壳略重，存在感偏强。",
+      "visibleArtifacts": "未见残缺或越界；菱形与箭杆交界的像素重叠观感上是有意节点而非破损。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "a16729ed106ebbe16b3155799dbe4fa96ddcfa63c71ce7719bac775a837aaf15",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+      "modelContextId": "agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "aa0d1423fddd14b6a2293527fc5a0c8639b9ad5062927451f3da7bfff55fdc16",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+      "modelContextId": "agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "6db9aa73e50b104f3021e8d52ef7ea1d717c78d741ab442e03296adecca67074",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+      "modelContextId": "agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "d8904968869ffe43525e27ea8085bd4227e2c22381fec348826cffabaee79ed9",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+      "modelContextId": "agent_b5b58a06-3418-47c5-8208-23a4cb497146",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "Candidate X 以两个端口框（充能橙色芯/空芯）加虚线传输段表达端口间传能，功能语义与任务最贴合；Candidate Y 用粗箭头加源菱形与端板表达流向，可读性强但端口语义弱于 X。两者均无文字，均保持外壳、anchor 与底部基座，故 X 优先。"
+}

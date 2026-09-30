@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "M",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "C 形夹体的斜向亮带给出平面金属体积，开口内垂直丝杆以浅蓝对深底清晰成立，深色顶帽与小横柄收在次级明度，工作面优先的层级成立；轮廓、开口与两颗螺栓保持原位，未靠改形换材质感。下方工作面呈浅蓝灰，与丝杆一起把视线锚定在工作区。",
+      "concern": "整体色阶偏软、对比温和：斜向亮带较宽且过渡平缓，夹体接近单一中间调加一条高光，金属体积感成立但偏弱。压力垫为棕色横杆，虽有杆件体量但金属读感最弱，略偏木质。丝杆未做螺纹暗示，功能语义靠位置推断。",
+      "hierarchyReadability": "亮部集中在夹体亮带、丝杆与下方工作面，横柄与螺栓压暗收小，工作面优先的明度层级可读；开口保持深色，工作部件在洞口中对比充分。棕垫与丝杆的交叠关系清楚。",
+      "structuralCoherence": "单一左上宽光逻辑贯穿夹体与内部零件，开口内不进光、洞感保持；各部件明暗与整体光源一致，无互相矛盾的反光方向。",
+      "visibleArtifacts": "未见到明显断裂像素、越界色块或锯齿堆积。斜向亮带与夹体基色的交界略直、略平，读作风格化金属扫光而非瑕疵。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "金属体积读感更强：夹体左上有明确亮带并配顶缘、内缘的轮廓高光，丝杆以规律明暗横纹直接读出螺纹，机械语义最清楚；下方工作面取最亮值，工作面优先的层级比 X 更明确。横柄保持小而暗，螺栓与轮廓未动。",
+      "concern": "高光小且多：顶角与开口角部有几处很小的近白点缀，1x 尺寸下略显碎，密观看稍欠整体；螺纹条纹是风格化概括，非写实金属，但符合任务允许的不同光照概括。棕色垫的金属读感仍是一票候选中最弱的一环。",
+      "hierarchyReadability": "最亮值集中在工作面（下方工作面、丝杆、内缘高光），横柄、螺栓与饰件收次级，层级对比比 X 更强、视线更明确落在工作区；开口深底保证工作部件对比。",
+      "structuralCoherence": "主光仍可读为左上/顶部，内缘亮线可解释为洞口反弹或轮廓光，方向大体自洽；螺纹条纹与顶帽方向一致，部件之间没有明暗逻辑冲突。",
+      "visibleArtifacts": "无断裂或越界像素；角部近白小点缀在放大视图下读作边缘高光，属风格选择而非噪点，但在小尺寸下略欠含蓄。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "61ea8aa1a3bfce0e381a896afcb3cf9b6421f255294a741b5a762968198bae07",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+      "modelContextId": "agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "9d25c2aabcdc1846bd8347556e6e7ce6d5dc2d9a396ca85fd78dd503b5fc2985",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+      "modelContextId": "agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "c51755b2a45d16e553627f08aea8bdc15c0a8221e335af75a7dc4a0124127225",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+      "modelContextId": "agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "90709a349aaa633883aed2f51c10b8a1f80b1d1d70ba008512710a614b03b202",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+      "modelContextId": "agent_eefe13c1-7c53-40fe-9afe-1d5bb2926533",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "相对 baseline 的平涂低对比状态，Candidate X 与 Candidate Y 都保留 C 形轮廓、开口与两颗螺栓，均以亮带+浅色丝杆在工作区建立金属体积与工作面优先层级，均达标。Y 在同等轮廓下用更清晰的高光组织（顶缘/内缘轮廓光、规律螺纹条纹、更亮的工作面）给出更强的金属体积与丝杆功能语义，层级更明确，故偏好 Y；差距是程度差异而非类别差异，且 Y 角部小点缀略碎，置信度取 MEDIUM。"
+}

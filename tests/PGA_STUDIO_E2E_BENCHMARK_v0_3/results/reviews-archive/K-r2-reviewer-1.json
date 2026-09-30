@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "K",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "大直径鼓轮是明确主体，轮面的径向分段与橙色轮毂清楚传达“缠绕牵引索的卷筒”；右侧深色驱动壳与鼓轮相邻，橙色导出口从驱动壳右缘水平伸出，形成鼓轮→驱动壳→导出口的连贯读序；两侧立柱加顶部横梁构成便携机架，宽底座承托，机架可兼读作搬运/握持框架。相比基线是明显的结构重组而非局部装饰。",
+      "concern": "导出口伸至画面右缘、末端略贴边；驱动壳高度明显低于鼓轮轴线，驱动与鼓轮的衔接偏“靠放”而非同轴咬合；握持语义依赖机架横梁，缺少专门的把手形状。",
+      "hierarchyReadability": "鼓轮为视觉焦点，主体-驱动-出口自左向右依次展开，机架与底座构成稳定外框，功能分区一眼可辨。",
+      "structuralCoherence": "鼓轮嵌于两立柱之间并坐落底座，驱动壳与鼓轮相邻，导出口与驱动壳右缘直接相连，载荷路径连续；各部件比例协调，无悬空或断裂感。",
+      "visibleArtifacts": "未见明显断裂、错位或悬空；鼓轮径向分段绘制一致。驱动壳与鼓轮交界处的少量遮挡属正常前后关系。"
+    },
+    "Y": {
+      "taskFit": "NOT_YET",
+      "strength": "完成了明显的结构重组：立柱+顶梁的机架、中央大圆盘、右侧竖板与橙色导出口齐备，顶部中央的浅色短梁可读作提握位；整体轮廓居中稳定，落座底座。",
+      "concern": "中央大圆盘是素面圆盘加橙色轮毂，缺少缠绕或轮辐线索，“收放牵引索的鼓轮”不易一眼读出；右侧竖板（驱动壳）大部分被圆盘遮挡，与导出口的衔接关系偏弱；整体更像带轮通用机械，救援绞盘的用途语义不足。",
+      "hierarchyReadability": "大圆盘是唯一焦点但功能归属不明，驱动壳退为背景块，读序在鼓轮→驱动→出口处断裂，观者难以按绞盘部件组织理解。",
+      "structuralCoherence": "圆盘、竖板、导出口在几何上相互接触并落座机架与底座，无悬空断裂；但竖板被圆盘大量遮挡，衔接更多靠接触而非功能表达，结构连续的语义被削弱。",
+      "visibleArtifacts": "未见表面积错位或断裂像素；顶部短梁与顶梁的关系略含糊（似分离段），读作把手时其支撑点不明显。"
+    }
+  },
+  "pairwiseResult": "X_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+      "modelContextId": "agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "919f8d6bebf7b4bd677586c0809226fb503c670d7f51b3dc67bf8f082102f630",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+      "modelContextId": "agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "e05e9808199af115f4127a8f1c41e21d0623bc2036d5b45a437e762d64509452",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+      "modelContextId": "agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "8a8d7c92f507cae46f6e99db94611eb129399c4c24e2d24e2c2ef073b95c29e3",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+      "modelContextId": "agent_6c641f5c-3239-456b-8fe1-0d0b6ba5e3e2",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "Candidate X 的鼓轮带径向缠绕分段且鼓轮→驱动壳→导出口读序连贯，机架与底座齐备，最符合“一眼可辨的便携救援绞盘”；Candidate Y 鼓轮为素面圆盘且驱动壳被遮挡，用途语义弱于 X。"
+}

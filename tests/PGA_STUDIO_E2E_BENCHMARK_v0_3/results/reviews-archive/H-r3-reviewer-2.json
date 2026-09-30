@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "H",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "MEETS",
+      "strength": "主体改为宽扁的显示屏式机身：顶部亮色边框内嵌一颗大的青绿发光圆形，是全图最亮、对比最高的元素，node.display 焦点非常清楚；底座加宽、底部中央橙色三角保留，重心低，稳定感合格。轮廓相对基线明显改变（顶部亮框取代原暗屏幕，中段双肩外扩取代两侧橙块），不是单纯换色。",
+      "concern": "发光圆占据机身绝大部分，圆形以下的躯干只剩一条橙色横槽，细节偏少；与大圆相比下半部略显单薄，'有重量'的表达和稳定器的功能叙事弱于更敦实的造型。顶部亮框与双肩的衔接关系稍显含糊。",
+      "hierarchyReadability": "焦点唯一且强烈：大发光圆为第一层级，下方橙色横槽为次级点缀，底座三角再次级，层级清楚；但机身中下部细节层级较单薄。",
+      "structuralCoherence": "亮框、机身、底座三层沿中轴对齐，读作同一台设备，结构连贯；发光圆与其亮框的嵌套关系合理。",
+      "visibleArtifacts": "在所看尺寸下边缘干净：圆形边缘平滑、亮框横线整齐，未见明显杂散像素、断线或溢色。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "轮廓改为下宽上窄的梯形碑状塔身，落在加宽的深色基座上，重心明显下沉，'稳定、有重量'的表达最直接；顶部凹入面板内嵌青绿发光圆且内芯更亮，node.display 是明确焦点。相对基线的方盒轮廓改造幅度大且干净，斜边台阶符合像素风格；基座与橙色三角保留。",
+      "concern": "显示圆相对塔身的比例小于 Candidate X 的方案，焦点强度稍弱；右侧两颗橙色小方块尺寸很小，作用不易读；塔身左缘的暗面台阶在极小尺寸下可能略显粗糙。",
+      "hierarchyReadability": "顶部发光圆为唯一高亮焦点，其下两道凹槽横线为次级结构，小橙块为三级点缀，明暗与色彩层级分明、可读性好。",
+      "structuralCoherence": "凹入显示面板、塔身、基座沿中轴对齐；左侧暗面给梯形以体量感，凹槽与面板的进深关系一致，各部件读作同一台重力稳定器，连贯性好。",
+      "visibleArtifacts": "在所看尺寸下边缘干净：斜边呈整齐的阶梯状、凹槽线条平直，未见明显杂散像素、断线或颜色溢出。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "HIGH",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "c07054d8b6e6be9a5a3fa17629519387908b509b16ffe9405d98188aaf763de0",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+      "modelContextId": "agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "28db7be238446009bed9d8a9514428294b2a8510873dad1631d19cb46531de45",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+      "modelContextId": "agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "ebbe42344511657c655fd5523a0510583baba2cdc10f8c2523b3e59c3f1b87ec",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+      "modelContextId": "agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "6f736d9e1922dd2ee546b5ad4d734ebaa9afe55a31b82bb81ba9d37969a99dfa",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+      "modelContextId": "agent_9a364a4a-ba11-47e6-9722-3f4e5b6805b9",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "实际查看 baseline.png、X.png、Y.png、contact-sheet.png。基线问题：方盒机身、顶部屏幕暗淡无焦点、左右橙块与青绿圆章等多个亮部争夺注意力。Candidate Y 用下宽上窄的梯形塔身加宽基座，最直接回应'稳定、有重量'，轮廓改造幅度最大，顶部内嵌发光圆保持明确焦点，细节与体量感更完整。Candidate X 焦点更强（大发光圆占机身主体）、同样达标，但下半躯干细节少、重量叙事较弱。两候选均保留基座与橙色三角锚点及青绿圆形元素；节点级保护（node.base/node.emblem/anchor 的逐节点对应）无法仅凭视觉确证，按视觉意图评审。故偏好 Candidate Y。"
+}

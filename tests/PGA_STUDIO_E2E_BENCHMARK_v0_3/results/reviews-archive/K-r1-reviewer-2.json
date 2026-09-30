@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "K",
+  "reviewerSlot": 2,
+  "candidates": {
+    "X": {
+      "taskFit": "NOT_YET",
+      "strength": "轮廓干净、整体一块：大直径浅色鼓轮带橙色轮毂是明确焦点，落在左侧立柱与机身交角处，右侧机身末端衔接一个橙色小块，底部深色底座横贯全宽，无悬浮部件。相对 baseline 有明显重组（鼓轮被抬升到立柱顶部转角，机身向右拉长）。",
+      "concern": "握持结构读不出来：左侧高立柱更像机架/支架而非把手，中部灰色机身读作机体本体，右端橙色块更像保险杠而非导出口。全图没有任何绳索/缆索线索，'鼓轮收放牵引索'的语义完全靠鼓轮单体支撑，整体第一眼更像推车、火炮或磨机，而非便携救援绞盘。任务明确要求握持可读，此处未达成。",
+      "hierarchyReadability": "鼓轮是清晰的视觉焦点（面积最大、明度最高、带暖色轮毂）；机身与底座为次要层级。但次级部件的功能不可读：右端橙色小块的用途无法判读，驱动壳→导出口的功能链条只能靠位置猜测。",
+      "structuralCoherence": "结构连续性好：鼓轮压在立柱与机身的交角上，接触可信；机身与末端橙块齐平相接；底座承托全部质量，整体为单一连通体量，无漂浮件。",
+      "visibleArtifacts": "在此分辨率下未见明显瑕疵：边缘干净、无杂散像素、无文字。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "一眼可读为便携绞盘：鼓轮外圈的分段橙色缠绕清晰传达'缆索绕在鼓轮上'；右侧带竖向散热棱的驱动块与橙色导出口齐平衔接，驱动壳→导出口的关系可信；金色牵引索从鼓轮/导出口方向引出、向右下延伸并以吊钩收尾，救援牵引语义强；顶部两根立柱抬起横梁、中段有棕色握段，读作便携提把/提环。鼓轮、驱动、导出、握持、承托五个要素齐备。",
+      "concern": "牵引索线条从驱动块上角上方越过，压在机体轮廓上，略读出跨接/穿插感；横梁中段的棕色块语义略有歧义（提把握段还是摇柄头）；整体构图比 Candidate X 繁密，钩子悬在主体轮廓之外——语义上是缆索自由端、可接受，但视觉上是脱离承托质量的悬空件。",
+      "hierarchyReadability": "层级清楚：缠绕缆索的大鼓轮（暖色、面积最大）为焦点，右侧驱动块与导出口为次级，顶部提把为第三层。功能链条可按 鼓轮→驱动壳→导出口→牵引索→吊钩 的顺序读出，用途传达效率高。",
+      "structuralCoherence": "结构可信：两根立柱把顶部横梁与机体连成框架，鼓轮嵌在框架内，右侧驱动块与导出口直接相接，底座横贯全宽承托全部机体；除作为缆索自由端的吊钩外无悬浮件。",
+      "visibleArtifacts": "牵引索线条越过驱动块上角，与机体轮廓产生一处交叠/遮挡，读作轻微 clipping；其余边缘干净、无杂散像素、无文字。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "MEDIUM",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+      "callId": "reviewer-2-baseline.png",
+      "sessionId": "zcode-subagent:agent_261567fe-4426-420a-97c0-7247c4029033",
+      "modelContextId": "agent_261567fe-4426-420a-97c0-7247c4029033",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "37177924d0b279a6051712c7d1595a060646587217d0bbe621dc46d753aab81a",
+      "callId": "reviewer-2-X.png",
+      "sessionId": "zcode-subagent:agent_261567fe-4426-420a-97c0-7247c4029033",
+      "modelContextId": "agent_261567fe-4426-420a-97c0-7247c4029033",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "0864e2d42af19a08f5bcaa2d3c8068e8966b244bd0d57b03e04092e46fe5070b",
+      "callId": "reviewer-2-Y.png",
+      "sessionId": "zcode-subagent:agent_261567fe-4426-420a-97c0-7247c4029033",
+      "modelContextId": "agent_261567fe-4426-420a-97c0-7247c4029033",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "12efd7aeb24d7a8fcd25903b55c0f23640824be3749db04825ebb1a200133908",
+      "callId": "reviewer-2-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_261567fe-4426-420a-97c0-7247c4029033",
+      "modelContextId": "agent_261567fe-4426-420a-97c0-7247c4029033",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "任务要求一眼读出'便携救援绞盘'且握持可读。Candidate Y 的鼓轮分段橙色缠绕、右侧棱纹驱动块与橙色导出口的平接、向外引出的牵引索与吊钩、顶部立柱横梁提把共同构成完整的绞盘功能叙事，判 MEETS。Candidate X 结构连续、鼓轮焦点清晰，但无任何缆索线索、右端橙块读不出导出口语义、握持结构不可读，整体更接近推车/火炮，判 NOT_YET。两候选相对 baseline 均有明显结构重组。置信度 MEDIUM：单图为小尺寸像素图，依赖 contact-sheet.png 放大视图核对细节。"
+}

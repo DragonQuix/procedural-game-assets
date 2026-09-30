@@ -1,0 +1,66 @@
+{
+  "schema": "pga-e2e-review/0.3",
+  "task": "K",
+  "reviewerSlot": 1,
+  "candidates": {
+    "X": {
+      "taskFit": "NOT_YET",
+      "strength": "鼓轮（带橙色轮毂的大圆）被放大并移到立柱上，与顶部灰板、右侧矩形块有真实接触，部件不再散落；边缘干净无杂点，底座与支脚区保留，整体比 baseline 更像一台机器。",
+      "concern": "救援绞盘的用途读不出来：没有可见缆索或收放路径，驱动壳与导出口无法区分，也没有可辨认的握持结构；右侧几个矩形堆叠只是体块，缺少功能角色，重组幅度接近重新摆放装饰而非结构重组。",
+      "hierarchyReadability": "视觉焦点是大鼓轮，但缺少缆索、导出口等线索时它同样可能被读成轮子或装饰；其余矩形块层级扁平，看不出主次与功能顺序。",
+      "structuralCoherence": "鼓轮与立柱、顶板相互叠压形成连接，但连接关系语义含糊；右侧体块组与鼓轮之间缺少过渡件，悬接感明显。",
+      "visibleArtifacts": "未见坏点、断线或文字类像素；主要问题是语义缺失而非绘制瑕疵。"
+    },
+    "Y": {
+      "taskFit": "MEETS",
+      "strength": "一眼可读为绞盘：中心是缠绕了多圈缆索的鼓轮，嵌在带双立柱的深色框架中；缆索从鼓轮引出连到右侧带散热槽的导出/驱动壳，末端垂下带钩状收尾；顶部横梁承载棕橙色块，兼有提携/驱动读法；右下灰色块上的橙色圆点可读为握持旋钮；底座带支脚，承托可信。便携救援绞盘的用途、结构连续、握持与承托均成立。",
+      "concern": "缆索画成细的波浪轮廓线，越过导出壳后悬空垂到画面边缘，钩状末端悬浮在空白处，略显潦草；顶部横梁上的棕橙色块读作驱动还是提手存在轻微歧义；右侧壳体与鼓轮边缘有局部叠压。",
+      "hierarchyReadability": "鼓轮是明确焦点，缆索把视线自然引向导出壳与钩尾，框架和底座提供稳定收边；各部件功能角色大多可辨认，层级清楚。",
+      "structuralCoherence": "结构连续性好：鼓轮装在框架内，顶部横梁与立柱衔接，缆索把鼓轮与导出壳连成一条功能链，底座支脚落地；仅缆索末段悬空是唯一断点。",
+      "visibleArtifacts": "无文字、无坏点；缆索曲线在导出壳之外有一段悬空并轻微出界到画面右缘，属观感问题而非结构错误。"
+    }
+  },
+  "pairwiseResult": "Y_PREFERRED",
+  "confidence": "HIGH",
+  "actualViews": [
+    "baseline.png",
+    "X.png",
+    "Y.png",
+    "contact-sheet.png"
+  ],
+  "imageEvidence": [
+    {
+      "view": "baseline.png",
+      "sha256": "9a30b8bda417982aa405216d9bb5c05e25642ae9d80b4dbec7c540f765d3edab",
+      "callId": "reviewer-1-baseline.png",
+      "sessionId": "zcode-subagent:agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+      "modelContextId": "agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+      "modelInput": true
+    },
+    {
+      "view": "X.png",
+      "sha256": "37177924d0b279a6051712c7d1595a060646587217d0bbe621dc46d753aab81a",
+      "callId": "reviewer-1-X.png",
+      "sessionId": "zcode-subagent:agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+      "modelContextId": "agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+      "modelInput": true
+    },
+    {
+      "view": "Y.png",
+      "sha256": "0864e2d42af19a08f5bcaa2d3c8068e8966b244bd0d57b03e04092e46fe5070b",
+      "callId": "reviewer-1-Y.png",
+      "sessionId": "zcode-subagent:agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+      "modelContextId": "agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+      "modelInput": true
+    },
+    {
+      "view": "contact-sheet.png",
+      "sha256": "3cfaab39206fed13728eea64b8758a9393d37f611f32494af75f120351e90f31",
+      "callId": "reviewer-1-contact-sheet.png",
+      "sessionId": "zcode-subagent:agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+      "modelContextId": "agent_7d2babf5-e665-4dcb-b603-c00b12fd0627",
+      "modelInput": true
+    }
+  ],
+  "keyEvidence": "Candidate Y 用缠绕缆索的大鼓轮、贯穿鼓轮到导出壳再到钩尾的缆索路径、顶部驱动/提手块、右下握持圆点与带支脚底座，使绞盘用途一眼成立；Candidate X 虽把鼓轮放大并压到立柱上，但无缆索、无可辨导出口与握持，右侧仍是含糊体块，救援绞盘的功能语义没有建立。两张图均无文字。"
+}
