@@ -1,6 +1,6 @@
-# Studio 单帧位图创作（v1.5 alpha，工具包 0.9.3）
+# Studio 单帧位图创作（v1.5 alpha，工具包 0.10.0）
 
-依据：`../CONTEXT.md`、ADR-0014；事务与通用命令见 `studio-cli.md`。
+依据：`../CONTEXT.md`、ADR-0014/0015；事务与通用命令见 `studio-cli.md`。
 支持 Agent 自己看图、创建和绘改，不包含自动识别、图像生成服务或自动保真评分。
 
 ## 最小流程
@@ -83,6 +83,40 @@ patch.png 必须恰好等于 region.w/h；替换包括透明擦除，选区外�
 `raster.metadata` 的 target 为 `anchor` 或 `attachments`，value 为对应完整对象。
 锚点与附件点是最终帧像素边界坐标；不更改像素，不自动识别人物关节。
 
+### 显式尺寸草稿（0.10.0 起）
+
+已有位图需要另一个等比例尺寸时，可用 `raster.resample` 生成候选，不必分开缩图、手算点位和重新导入。
+
+```json
+{
+  "id": "raster.resample",
+  "target": "canvas",
+  "params": { "width": 16, "height": 16, "sampling": "nearest" }
+}
+```
+
+可通过现有 operation 文件入口操作 32×32 的 mask-ws（修改示例尺寸以适配实际画布）：
+
+```powershell
+node bin/pga-studio.mjs edit --ws work/mask-ws --base <当前修订> --operation examples/studio/raster-resample.json
+```
+
+- 两个尺寸都必须为 1..256 整数，sampling 必须显式为 nearest，必须严格保持宽高比。
+  不支持拉伸、裁切、平滑插值或省略采样规则。create 导入仍只接受原尺寸。
+- 目标像素中心采样源索引 `floor((i+0.5)*sourceSize/targetSize)`，复制二值 alpha RGBA。
+  anchor/attachments 按边界坐标比例变换且不取整；ID、seed、constraints 不变，同尺寸为 UNCHANGED。
+- checks.resample 给出 from/to、sampling 和点位前后值。全画布 pixels 或 frameSize 保护仍会拒绝
+  尺寸变化，空白图也不能绕过；anchor/attachments 保护按最终值检查，不自动放宽合同。
+- 尺寸变化时 diff.total/outside 为 null，reason=FRAME_SIZE_CHANGED，**不是区域外零变化**。
+  observe 保留真实尺寸的拼图，但差分为 NOT_COMPARABLE / FRAME_SIZE_MISMATCH，计数与 files 为 null。
+  传入的 region 属于基准尺寸，不自动映射到尺寸候选，候选 crop 也标不可比较。
+- 候选照常提供 native/display/light/silhouette 和身份绑定，没有虚假局部图。
+  先实际看目标原尺寸和背景图再接受为草稿；拒绝时不提交，恢复仍用 commit --restore。
+  接受草稿后按新尺寸重新选择 region，用已有 poly/path/replace 重组细节并检查点位。
+
+重采样可能丢失眼缝、装饰和连接边，不负责临摹、风格转换或识别特征重构。
+几何点同比缩放也不证明附件仍落在可见部件上；每个目标尺寸必须独立看图，不能沿用源尺寸的视觉通过。
+
 ## 看图、比较与回退
 
 0.9.2 起，位图 `edit` 的 `previews.base/candidate` 在接受前就返回 light、silhouette、
@@ -138,4 +172,4 @@ metadata:anchor/attachments/attachments.<名称>/frameSize。没有区域冻结�
   runtime kind 为 raster；可直接编译后传给既有 CanvasBank。导出不等于视觉验收通过。
 - 参考身份、造型授权与风格要求由任务说明和 Agent 负责。先看轮廓/比例/识别特征，
   再修局部细节；看目标尺寸和场景背景，不只看放大图。
-- 当前无动画、图层、位图 explore、自动风格转换或跨尺寸细节重构；相关请求明确缩小范围。
+- 当前无动画、图层、位图 explore、自动风格转换或跨尺寸细节重构；显式重采样只提供尺寸草稿。

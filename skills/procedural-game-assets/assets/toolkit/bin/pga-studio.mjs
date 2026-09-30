@@ -120,7 +120,7 @@ function buildOperation() {
       return { id, target, value: raw };
     }
   }
-  if (['geometry.set', 'widen_about_center', 'squash_keep_base', 'resize_about_anchor', 'raster.draw', 'raster.replace'].includes(id)) {
+  if (['geometry.set', 'widen_about_center', 'squash_keep_base', 'resize_about_anchor', 'raster.draw', 'raster.replace', 'raster.resample'].includes(id)) {
     const params = jsonOpt('params', null);
     if (!params) fail('INVALID_DOCUMENT', `${id} 需要 --params <JSON 对象>`, 2);
     return { id, target, params };

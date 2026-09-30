@@ -1,0 +1,5 @@
+{
+  "id": "raster.resample",
+  "target": "canvas",
+  "params": { "width": 16, "height": 16, "sampling": "nearest" }
+}

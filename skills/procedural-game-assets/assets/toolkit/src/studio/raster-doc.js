@@ -119,6 +119,25 @@ export function regionContains(r, x, y) {
   return x >= r.x && y >= r.y && x < r.x + r.w && y < r.y + r.h && (r.mask === undefined || r.mask[y - r.y][x - r.x] === '1');
 }
 
+function resampleDraft(doc, params) {
+  keys(params, ['width', 'height', 'sampling'], 'resample.params');
+  const { width, height, sampling } = params, { w, h } = doc.canvas;
+  integer(width, 1, RASTER_LIMITS.dimension, 'width'); integer(height, 1, RASTER_LIMITS.dimension, 'height');
+  if (sampling !== 'nearest') fail('resample 需要显式 sampling=nearest', 'UNSUPPORTED_SCOPE');
+  if (width * h !== height * w) fail('resample 首版必须保持宽高比，不暗中拉伸', 'UNSUPPORTED_SCOPE');
+  const source = hexToRGBA(doc.rgba), rgba = new Uint8ClampedArray(width * height * 4);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const sx = Math.floor((x + 0.5) * w / width), sy = Math.floor((y + 0.5) * h / height);
+    const index = (sy * w + sx) * 4;
+    rgba.set(source.subarray(index, index + 4), (y * width + x) * 4);
+  }
+  const scalePoint = (p) => ({ x: width === w ? p.x : p.x / w * width, y: height === h ? p.y : p.y / h * height });
+  const next = normalizeRasterDocument({ ...doc, canvas: { w: width, h: height }, rgba: rgbaToHex(rgba),
+    anchor: scalePoint(doc.anchor), attachments: Object.fromEntries(Object.entries(doc.attachments).map(([id, p]) => [id, scalePoint(p)])) });
+  return { doc: next, plan: { id: 'raster.resample', target: 'canvas', region: null, metadata: null,
+    resample: { from: { w, h }, to: { w: width, h: height }, sampling } } };
+}
+
 function drawCommand(p, command, origin) {
   const fields = { pixel: ['x', 'y'], rect: ['x', 'y', 'w', 'h'], line: ['x0', 'y0', 'x1', 'y1', 'thick'], poly: ['points'], path: ['points', 'thick', 'closed'] };
   if (!command || !Object.hasOwn(fields, command.kind)) fail('绘制只支持 pixel/rect/line/poly/path', 'UNSUPPORTED_OPERATION');
@@ -172,7 +191,12 @@ export function applyRasterOperation(input, operation) {
     return { doc: next, plan: { id: operation.id, target: operation.target, region: null,
       metadata: { target: operation.target, from: doc[operation.target], to: next[operation.target] } } };
   }
-  if (!['raster.draw', 'raster.replace'].includes(operation.id)) fail('位图仅支持 raster.draw/raster.replace/raster.metadata', 'UNSUPPORTED_OPERATION');
+  if (operation.id === 'raster.resample') {
+    keys(operation, ['id', 'target', 'params'], 'operation');
+    if (operation.target !== 'canvas') fail('重采样 target 必须为 canvas');
+    return resampleDraft(doc, operation.params);
+  }
+  if (!['raster.draw', 'raster.replace'].includes(operation.id)) fail('位图仅支持 raster.draw/raster.replace/raster.metadata/raster.resample', 'UNSUPPORTED_OPERATION');
   keys(operation, ['id', 'target', 'params'], 'operation');
   if (operation.target !== 'canvas') fail('位图绘制 target 必须为 canvas');
   const params = operation.params;
@@ -204,36 +228,49 @@ export function applyRasterOperation(input, operation) {
 export function checkRasterCandidate({ baseCompiled, candidateCompiled, plan, preserve = [] }) {
   const base = baseCompiled.document, next = candidateCompiled.document, conflicts = [];
   const protections = validateRasterPreserve(preserve, base);
+  const resample = plan.id === 'raster.resample', sizeChanged = !equal(base.canvas, next.canvas);
+  if (resample) {
+    keys(plan.resample, ['from', 'to', 'sampling'], 'resample.plan');
+    const expected = resampleDraft(base, { width: plan.resample.to.w, height: plan.resample.to.h, sampling: plan.resample.sampling });
+    if (!equal(plan.resample, expected.plan.resample)) conflicts.push({ kind: 'structure', target: 'resample', message: '重采样计划与基准不符' });
+    for (const field of ['canvas', 'rgba', 'anchor', 'attachments']) if (!equal(next[field], expected.doc[field])) {
+      conflicts.push({ kind: 'resample', target: field, message: '最终结果与显式重采样及点位变换不符' });
+    }
+  }
   for (const field of Object.keys(base)) {
-    if (field === 'rgba' || field === plan.metadata?.target) continue;
+    if (field === 'rgba' || field === plan.metadata?.target || resample && ['canvas', 'anchor', 'attachments'].includes(field)) continue;
     if (!equal(base[field], next[field])) conflicts.push({ kind: 'structure', target: field, message: '非目标字段发生变化' });
   }
   if (plan.metadata && (!equal(base[plan.metadata.target], plan.metadata.from) || !equal(next[plan.metadata.target], plan.metadata.to))) conflicts.push({ kind: 'metadata', target: plan.metadata.target, message: '元数据与操作计划不符' });
   const region = plan.region ? validateRasterRegion(plan.region, base.canvas.w, base.canvas.h) : null;
   let changed = 0, outside = 0;
-  for (let i = 0; i < base.rgba.length; i += 8) {
+  for (let i = 0; !sizeChanged && i < base.rgba.length; i += 8) {
     if (base.rgba.slice(i, i + 8) === next.rgba.slice(i, i + 8)) continue;
     changed++;
     const pixel = i / 8;
     if (!region || !regionContains(region, pixel % base.canvas.w, Math.floor(pixel / base.canvas.w))) outside++;
   }
+  if (sizeChanged && !resample) conflicts.push({ kind: 'pixels', target: 'canvas', message: '局部编辑不能改变帧尺寸' });
   if (outside) conflicts.push({ kind: 'pixels', target: region?.id ?? 'canvas', message: `${outside} 个像素在事先声明的选区外改变` });
   for (const p of protections) {
     const t = p.target;
-    const violated = p.kind === 'pixels' ? changed > 0 : t === 'frameSize' ? !equal(base.canvas, next.canvas) :
+    const violated = p.kind === 'pixels' ? sizeChanged || changed > 0 : t === 'frameSize' ? sizeChanged :
       t.startsWith('attachments.') ? !equal(base.attachments[t.slice(12)], next.attachments[t.slice(12)]) : !equal(base[t], next[t]);
     if (violated) conflicts.push({ kind: p.kind, target: t, message: '违反声明保护' });
   }
   return { status: conflicts.length ? 'REJECTED' : equal(base, next) ? 'UNCHANGED' : 'OK', code: conflicts.length ? 'CANDIDATE_INVALID' : null,
-    conflicts, diff: { total: changed, outside }, protections, allowedRegion: region, visualReview: 'UNVERIFIED' };
+    conflicts, diff: sizeChanged ? { total: null, outside: null, reason: 'FRAME_SIZE_CHANGED' } : { total: changed, outside },
+    protections, allowedRegion: region, visualReview: 'UNVERIFIED', ...(resample ? { resample: { ...plan.resample,
+      anchor: { from: base.anchor, to: next.anchor }, attachments: { from: base.attachments, to: next.attachments } } } : {}) };
 }
 
 export function describeRasterCapabilities(doc) {
   const normalized = normalizeRasterDocument(doc);
   return { schemaVersion: RASTER_SCHEMA_VERSION, canvas: normalized.canvas, target: 'canvas', limits: RASTER_LIMITS,
-    operations: ['raster.draw', 'raster.replace', 'raster.metadata'], primitives: ['pixel', 'rect', 'line', 'poly', 'path'],
+    operations: ['raster.draw', 'raster.replace', 'raster.metadata', 'raster.resample'], primitives: ['pixel', 'rect', 'line', 'poly', 'path'],
     coordinateSpace: 'region-local-pixels', alpha: 'binary', eraseColor: null,
     coordinateSpaces: ['region-local-pixels', 'canvas-pixels'],
     path: { minPoints: 2, maxPoints: RASTER_LIMITS.vertices, maxThickness: 64, supportsClosed: true, defaultClosed: false, fill: false },
+    resample: { sampling: ['nearest'], preserveAspectRatio: true, scope: 'whole-canvas-draft', metadata: 'scale-boundary-points-without-rounding' },
     selection: 'rect + optional binary mask rows', explore: 'UNSUPPORTED_SCOPE', visualReview: 'agent' };
 }
