@@ -6,7 +6,7 @@ import { StudioDocumentError, stableStringify, fnv1aHex } from './document.js';
 import { StudioOperationError } from './operators.js';
 
 export const RASTER_SCHEMA_VERSION = 'pga-studio/raster/1';
-export const RASTER_LIMITS = Object.freeze({ dimension: 256, commands: 128, vertices: 128 });
+export const RASTER_LIMITS = Object.freeze({ dimension: 256, commands: 128, vertices: 128, strokeSegments: 512 });
 const ID = /^[a-z][a-z0-9._-]{0,63}$/;
 const ATTACHMENT = /^[a-zA-Z][a-zA-Z0-9_]{0,31}$/;
 const UNSAFE = new Set(['__proto__', 'constructor', 'prototype']);
@@ -119,29 +119,46 @@ export function regionContains(r, x, y) {
   return x >= r.x && y >= r.y && x < r.x + r.w && y < r.y + r.h && (r.mask === undefined || r.mask[y - r.y][x - r.x] === '1');
 }
 
-function drawCommand(p, command) {
-  const fields = { pixel: ['x', 'y'], rect: ['x', 'y', 'w', 'h'], line: ['x0', 'y0', 'x1', 'y1', 'thick'], poly: ['points'] };
-  if (!command || !Object.hasOwn(fields, command.kind)) fail('绘制只支持 pixel/rect/line/poly', 'UNSUPPORTED_OPERATION');
+function drawCommand(p, command, origin) {
+  const fields = { pixel: ['x', 'y'], rect: ['x', 'y', 'w', 'h'], line: ['x0', 'y0', 'x1', 'y1', 'thick'], poly: ['points'], path: ['points', 'thick', 'closed'] };
+  if (!command || !Object.hasOwn(fields, command.kind)) fail('绘制只支持 pixel/rect/line/poly/path', 'UNSUPPORTED_OPERATION');
   keys(command, ['kind', 'color', ...fields[command.kind]], 'command');
   if (command.color !== null && (typeof command.color !== 'string' || !/^#[0-9a-fA-F]{6}$/.test(command.color))) fail('color 需要 #rrggbb 或 null（擦除）');
-  const c = command.color === null ? 0 : command.color;
+  command = { ...command };
   for (const field of fields[command.kind]) {
-    if (field === 'points' || field === 'thick' && command.thick === undefined) continue;
+    if (['points', 'closed'].includes(field) || field === 'thick' && command.thick === undefined) continue;
     integer(command[field], 0, RASTER_LIMITS.dimension, field);
+    if (['x', 'x0', 'x1'].includes(field)) command[field] -= origin.x;
+    if (['y', 'y0', 'y1'].includes(field)) command[field] -= origin.y;
+    if (field !== 'thick') integer(command[field], 0, RASTER_LIMITS.dimension, field);
   }
+  if (['poly', 'path'].includes(command.kind)) {
+    const min = command.kind === 'poly' ? 3 : 2;
+    if (!Array.isArray(command.points) || command.points.length < min || command.points.length > RASTER_LIMITS.vertices) fail(`${command.kind} 需要 ${min}..${RASTER_LIMITS.vertices} 个顶点`);
+    command.points = command.points.map((pt) => {
+      if (!Array.isArray(pt) || pt.length !== 2) fail('顶点需要 [x,y]');
+      integer(pt[0], 0, RASTER_LIMITS.dimension, 'point.x'); integer(pt[1], 0, RASTER_LIMITS.dimension, 'point.y');
+      const local = [pt[0] - origin.x, pt[1] - origin.y];
+      const edge = command.kind === 'poly' ? 0 : 1;
+      integer(local[0], 0, p.w - edge, 'point.x'); integer(local[1], 0, p.h - edge, 'point.y');
+      return local;
+    });
+  }
+  const c = command.color === null ? 0 : command.color;
   if (command.kind === 'pixel') p.set(command.x, command.y, c);
   if (command.kind === 'rect') {
     integer(command.w, 1, p.w, 'w'); integer(command.h, 1, p.h, 'h');
     p.rect(command.x, command.y, command.w, command.h, c);
   }
   if (command.kind === 'line') p.line(command.x0, command.y0, command.x1, command.y1, c, command.thick ?? 1);
-  if (command.kind === 'poly') {
-    if (!Array.isArray(command.points) || command.points.length < 3 || command.points.length > RASTER_LIMITS.vertices) fail('poly 需要 3..128 个顶点');
-    for (const pt of command.points) {
-      if (!Array.isArray(pt) || pt.length !== 2) fail('顶点需要 [x,y]');
-      integer(pt[0], 0, p.w, 'point.x'); integer(pt[1], 0, p.h, 'point.y');
-    }
-    p.poly(command.points, c);
+  if (command.kind === 'poly') p.poly(command.points, c);
+  if (command.kind === 'path') {
+    if (command.closed !== undefined && typeof command.closed !== 'boolean') fail('path.closed 需要布尔值');
+    const points = command.points, count = command.closed ? points.length : points.length - 1;
+    const thick = command.thick ?? 1;
+    integer(thick, 1, 64, 'path.thick');
+    // 沿用 line 的方形笔刷和端点规则；不填充、不平滑、不额外修饰连接处。
+    for (let i = 0; i < count; i++) p.line(...points[i], ...points[(i + 1) % points.length], c, thick);
   }
 }
 
@@ -159,7 +176,7 @@ export function applyRasterOperation(input, operation) {
   keys(operation, ['id', 'target', 'params'], 'operation');
   if (operation.target !== 'canvas') fail('位图绘制 target 必须为 canvas');
   const params = operation.params;
-  keys(params, operation.id === 'raster.draw' ? ['region', 'commands'] : ['region', 'rgba'], 'params');
+  keys(params, operation.id === 'raster.draw' ? ['region', 'commands', 'coordinateSpace'] : ['region', 'rgba'], 'params');
   const region = validateRasterRegion(params.region, doc.canvas.w, doc.canvas.h);
   const base = PixelPainter.fromRGBA(doc.canvas.w, doc.canvas.h, hexToRGBA(doc.rgba));
   let patch;
@@ -167,10 +184,15 @@ export function applyRasterOperation(input, operation) {
     validatePixels(params.rgba, region.w, region.h);
     patch = PixelPainter.fromRGBA(region.w, region.h, hexToRGBA(params.rgba));
   } else {
+    const space = params.coordinateSpace === undefined ? 'region-local-pixels' : params.coordinateSpace;
+    if (!['region-local-pixels', 'canvas-pixels'].includes(space)) fail('coordinateSpace 仅支持 region-local-pixels 或 canvas-pixels');
+    const origin = space === 'canvas-pixels' ? region : { x: 0, y: 0 };
     if (!Array.isArray(params.commands) || params.commands.length < 1 || params.commands.length > RASTER_LIMITS.commands) fail('commands 需要 1..128 条绘制指令');
+    const segments = params.commands.reduce((sum, cmd) => sum + (cmd?.kind === 'line' ? 1 : cmd?.kind === 'path' && Array.isArray(cmd.points) ? Math.max(0, cmd.points.length - 1) + (cmd.closed === true ? 1 : 0) : 0), 0);
+    if (segments > RASTER_LIMITS.strokeSegments) fail('一次绘制的 line/path 合计最多 512 条线段', 'RESOURCE_LIMIT');
     patch = new PixelPainter(region.w, region.h);
     for (let y = 0; y < region.h; y++) for (let x = 0; x < region.w; x++) patch.set(x, y, base.get(region.x + x, region.y + y));
-    for (const command of params.commands) drawCommand(patch, command);
+    for (const command of params.commands) drawCommand(patch, command, origin);
   }
   // 必须复制包括 alpha=0 的全部通道；blit 会跳过透明像素，不能用于擦除。
   for (let y = 0; y < region.h; y++) for (let x = 0; x < region.w; x++) {
@@ -209,7 +231,9 @@ export function checkRasterCandidate({ baseCompiled, candidateCompiled, plan, pr
 export function describeRasterCapabilities(doc) {
   const normalized = normalizeRasterDocument(doc);
   return { schemaVersion: RASTER_SCHEMA_VERSION, canvas: normalized.canvas, target: 'canvas', limits: RASTER_LIMITS,
-    operations: ['raster.draw', 'raster.replace', 'raster.metadata'], primitives: ['pixel', 'rect', 'line', 'poly'],
+    operations: ['raster.draw', 'raster.replace', 'raster.metadata'], primitives: ['pixel', 'rect', 'line', 'poly', 'path'],
     coordinateSpace: 'region-local-pixels', alpha: 'binary', eraseColor: null,
+    coordinateSpaces: ['region-local-pixels', 'canvas-pixels'],
+    path: { minPoints: 2, maxPoints: RASTER_LIMITS.vertices, maxThickness: 64, supportsClosed: true, defaultClosed: false, fill: false },
     selection: 'rect + optional binary mask rows', explore: 'UNSUPPORTED_SCOPE', visualReview: 'agent' };
 }

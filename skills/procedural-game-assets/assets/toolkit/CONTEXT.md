@@ -35,7 +35,7 @@
 | `allowed region`（允许影响区域） | 由操作计划与依赖独立计算的像素可变化区域（旧∪新几何、描边邻域、层序遮挡） | 绝不从事后差分反推；区域外变化即违规 |
 | `character document`（角色文档） | `pga-studio/character/1`：humanoid 配方的结构化数据面（palette/frame/rig/art/poses/clips） | 经既有 bakeHumanoid 编译；不变量仅适配 checkedPoseKinds；见 ADR-0011 |
 | `raster document`（位图文档） | `pga-studio/raster/1`：最终尺寸、内嵌规范化 RGBA、锚点、附件点和保护声明的单帧编辑源 | 边长最多 256、二值 alpha；标准 BakedAsset.kind 为 raster；见 ADR-0014 |
-| `raster region`（位图选区） | 操作前显式声明的稳定 ID + 最终帧矩形 + 可选二值掩码；绘制参数相对矩形原点 | 不是语义部件，也不是跨修订冻结合同；区域外最终像素必须不变 |
+| `raster region`（位图选区） | 操作前显式声明的稳定 ID + 最终帧矩形 + 可选二值掩码；绘制坐标默认相对矩形原点，可显式选画布坐标 | 坐标系不改变允许区域；不是语义部件，也不是跨修订冻结合同；区域外最终像素必须不变 |
 | `reference translation`（参考设计临摹） | Agent 看用户设计和候选，用 Studio 或外部工具创建/修改，再自行看图检查 | 角色身份、风格参考与质量标杆分开；技术 PASS 不证明视觉保真，不默认使用独立长循环 |
 | `grounding`（接地） | 角色帧包围盒底缘（贴地）在修改前后不变 | 顶缘随体高/腿长合法变化；由 solvePose 自动保持 |
 | `head` | Studio 工作区当前已确认修订指针（`head.json`，原子替换更新） | 只有 commit 移动它；并发底线是 expectedHead 校验 |
