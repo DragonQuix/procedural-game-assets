@@ -83,7 +83,7 @@
       "status": "FROZEN_RELEASE"
     },
     "D14": {
-      "path": "frozen/D14-0.8.0-20b81c1",
+      "path": "frozen/D14-FINAL-0.8.0-91aaa75",
       "files": {
         "bin/pga-studio.mjs": "23811e89c41a57f4b5369c34c8902dd6b834c8a9f2fbf2273ef0965ca18c5be7",
         "bin/pga.mjs": "f6ce8aaad03e020d99219efaa28c577310dbdea90ab35da0f74b1cb2f23d99a5",
@@ -162,8 +162,10 @@
       "sha256": "b91c035257a79985b9edebe2fb1779831da6d7f049eebbfbc69fd591986cc65f",
       "arm": "D14",
       "version": "0.8.0",
-      "sourceCommit": "20b81c1a7377e86f9b37706b1cfb4ba216b7e36c",
-      "status": "CANDIDATE_NOT_FINAL_FREEZE"
+      "sourceCommit": "91aaa757bd910255f293c57f594cac06f9f169af",
+      "sourceTag": "v0.8.0",
+      "status": "FROZEN_FINAL",
+      "provenance": "frozen/D14-FINAL-0.8.0-91aaa75.provenance.json"
     }
   },
   "sharedObservation": {
@@ -308,7 +310,7 @@
   "experimentRunsCreated": 0,
   "modelCalls": 0,
   "independentValidation": "NOT_RUN",
-  "finalFreeze": "ZCODE_REQUIRED",
+  "finalFreeze": "D14_FINAL_SNAPSHOT_BUILT_PROTOCOL_FREEZE_PENDING",
   "identityLint": {
     "status": "PASS",
     "filesChecked": [
