@@ -97,10 +97,17 @@ test('真实 JSON CLI：创建/文件操作/局部观察/提交/导出及错误�
   await writeFile(op, JSON.stringify(operation));
   const edit = cli('edit', '--ws', ws, '--base', 'r1', '--operation', op);
   assert.equal(edit.ok, true, JSON.stringify(edit)); assert.equal(edit.result.status, 'OK');
-  for (const key of ['light', 'silhouette', 'selection', 'crop', 'cropDisplay', 'observation']) assert.ok(edit.result.previews.candidate[key]);
+  for (const key of ['light', 'silhouette', 'selection', 'crop', 'cropDisplay', 'cropLight', 'cropSilhouette', 'observation']) assert.ok(edit.result.previews.candidate[key]);
   const view = cli('inspect', '--ws', ws, '--region', JSON.stringify(operation.params.region), '--out', join(root, 'view'));
   assert.equal(view.ok, true, JSON.stringify(view));
-  for (const key of ['crop', 'cropDisplay', 'selection', 'light', 'silhouette']) assert.ok(view.result.files[key]);
+  for (const key of ['crop', 'cropDisplay', 'cropLight', 'cropSilhouette', 'selection', 'light', 'silhouette']) assert.ok(view.result.files[key]);
+  for (const key of ['cropLight', 'cropSilhouette']) {
+    const candidate = decodePNG(await readFile(join(ws, edit.result.previews.candidate[key])));
+    assert.ok(candidate.rgba.every((v, i) => i % 4 !== 3 || v === 255));
+    const inspected = decodePNG(await readFile(join(root, 'view', view.result.files[key])));
+    assert.deepEqual([...inspected.rgba.slice(0, 4)], [238, 232, 219, 255]);
+    assert.ok(inspected.rgba.every((v, i) => i % 4 !== 3 || v === 255));
+  }
   assert.equal(cli('commit', '--ws', ws, '--accept', edit.result.candidateId, '--expected-head', 'r1').ok, true);
   assert.equal(cli('export', '--ws', ws, '--out', join(root, 'export')).ok, true);
   assert.equal(cli('edit', '--ws', ws, '--base', 'r2', '--operation', op, '--op', 'raster.draw').code, 2);
@@ -135,6 +142,7 @@ test('未提交候选可局部审图；相同基准的不同选区材料互不�
   assert.equal(native.rgba[(2 * 8 + 2) * 4], 253, 'native 为资产像素而非粉色选区');
   const metadata = await store.edit({ baseRevision: 'r1', operation: { id: 'raster.metadata', target: 'anchor', value: { x: 3, y: 8 } } });
   assert.ok(metadata.previews.candidate.light); assert.equal(metadata.previews.candidate.selection, undefined);
+  assert.equal(metadata.previews.candidate.cropLight, undefined); assert.equal(metadata.previews.candidate.cropSilhouette, undefined);
 });
 
 test('连续路径 CLI：无需辅助绘图脚本；失败原子性、重开和恢复沿用现有事务', async (t) => {

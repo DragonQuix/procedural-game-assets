@@ -34,7 +34,8 @@ Studio 文档（.studio.json，唯一可编辑源）
 
 - `create` 的基准预览写在**工作区根目录**：`<id>.native.png` / `<id>.display.png`；
   result.files 里的值是**相对于 outDir 的裸文件名**。
-- `edit` / `explore` 的预览在 `<ws>/previews/<标签>/` 下（基准为 `<基准修订>-base`，候选为候选 ID）。
+- `edit` / `explore` 的预览在 `<ws>/previews/<标签>/` 下，候选标签为候选 ID。
+  静态/角色基准标签为 `<基准修订>-base`；位图 edit 基准标签为 `<candidateId>-base`，避免不同选区互相覆盖。
 - `commit` 不写新预览：被接受候选的预览就是当前 head 的渲染；需要时可用
   `inspect --ws <dir> --out <dir>` 重新生成 head 的预览图。
 

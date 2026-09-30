@@ -10,6 +10,9 @@ import { scaleNearest } from '../core/transform.js';
 import { targetCrop } from '../observe/frame-views.js';
 import { validateRasterRegion, regionContains } from './raster-doc.js';
 
+const LIGHT_BACKGROUND = '#eee8db';
+const SILHOUETTE_COLOR = '#151922';
+
 /** 帧 → { width, height, rgba } 普通数据。 */
 function frameView(frame) {
   return { width: frame.width, height: frame.height, rgba: frame.rgba };
@@ -23,6 +26,15 @@ function withBackground(painter, background) {
   return { width: out.w, height: out.h, rgba: out.toRGBA() };
 }
 
+function rasterContrastViews(painter) {
+  const silhouette = painter.clone();
+  silhouette.map(() => SILHOUETTE_COLOR);
+  return {
+    light: withBackground(painter, LIGHT_BACKGROUND),
+    silhouette: withBackground(silhouette, LIGHT_BACKGROUND),
+  };
+}
+
 /**
  * 构建一次编译的观察视图集。
  * @param {object} compiled compileStudioDocument 的结果
@@ -30,6 +42,7 @@ function withBackground(painter, background) {
  * @param {number} [opts.displayScale] display 放大倍数（正整数），默认 4
  * @param {string} [opts.background] display 背景色，默认 '#202028'
  * @param {string} [opts.node] 需要 target_crop 的节点 ID
+ * @param {object} [opts.region] 位图选区，追加透明裁切、局部浅底与剪影
  * @returns {{ native, display, crop?: object, meta: object }}
  */
 export function buildViews(compiled, opts = {}) {
@@ -53,10 +66,7 @@ export function buildViews(compiled, opts = {}) {
     },
   };
   if (compiled.kind === 'raster') {
-    views.light = withBackground(scaled, '#eee8db');
-    const silhouette = scaled.clone();
-    silhouette.map(() => '#151922');
-    views.silhouette = withBackground(silhouette, '#eee8db');
+    Object.assign(views, rasterContrastViews(scaled));
   }
   if (opts.region !== undefined) {
     if (compiled.kind !== 'raster' || opts.node !== undefined) throw new RangeError('region 只用于位图且不能与 node 同时使用');
@@ -64,6 +74,11 @@ export function buildViews(compiled, opts = {}) {
     views.target_crop = targetCrop(frame, { rect: region, contextPx: 2, scale, identity: { revision: opts.revision ?? null, candidateId: opts.candidateId ?? null, documentHash: compiled.hashes.documentHash, regionId: region.id } });
     views.crop = views.target_crop.native;
     views.meta.target_crop = views.target_crop.meta;
+    const cropPainter = PixelPainter.fromRGBA(views.crop.width, views.crop.height, views.crop.rgba);
+    const contrast = rasterContrastViews(scaleNearest(cropPainter, scale));
+    views.cropLight = contrast.light;
+    views.cropSilhouette = contrast.silhouette;
+    views.meta.target_crop.backgrounds = { light: LIGHT_BACKGROUND, silhouette: LIGHT_BACKGROUND };
     views.meta.region = region;
     const selection = PixelPainter.fromRGBA(frame.width, frame.height, frame.rgba);
     for (let y = 0; y < frame.height; y++) for (let x = 0; x < frame.width; x++) {

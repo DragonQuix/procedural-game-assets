@@ -454,7 +454,7 @@ export class StudioStore {
     await writeFile(join(this.dir, files.native), encodePNG(views.native.width, views.native.height, views.native.rgba));
     await writeFile(join(this.dir, files.display), encodePNG(views.display.width, views.display.height, views.display.rgba));
     if (compiled.kind === 'raster') {
-      for (const kind of ['light', 'silhouette', 'selection', 'crop', 'cropDisplay']) {
+      for (const kind of ['light', 'silhouette', 'selection', 'crop', 'cropDisplay', 'cropLight', 'cropSilhouette']) {
         const view = kind === 'cropDisplay' ? views.target_crop?.display : views[kind];
         if (!view) continue;
         files[kind] = join('previews', label, `${label}.${kind}.png`);
