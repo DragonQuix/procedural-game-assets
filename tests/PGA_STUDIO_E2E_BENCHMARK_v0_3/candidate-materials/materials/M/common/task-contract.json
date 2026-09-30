@@ -1,0 +1,174 @@
+{
+  "schema": "pga-e2e-task/0.3",
+  "task": "M",
+  "width": 68,
+  "height": 68,
+  "anchor": {
+    "x": 34,
+    "y": 63
+  },
+  "attachments": {},
+  "protectedRegions": [
+    {
+      "x": 10,
+      "y": 9,
+      "w": 2,
+      "h": 2
+    },
+    {
+      "x": 51,
+      "y": 52,
+      "w": 2,
+      "h": 2
+    },
+    {
+      "x": 14,
+      "y": 13,
+      "w": 4,
+      "h": 4,
+      "mask": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "x": 14,
+      "y": 46,
+      "w": 4,
+      "h": 4,
+      "mask": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "protectedNodeIds": [
+    "node.bolt.a",
+    "node.bolt.b"
+  ],
+  "requiredNodeIds": [
+    "node.jaw",
+    "node.spindle",
+    "node.pad",
+    "node.handle",
+    "node.bolt.a",
+    "node.bolt.b"
+  ],
+  "crop": {
+    "x": 4,
+    "y": 4,
+    "w": 60,
+    "h": 60
+  },
+  "candidateBudget": 8,
+  "minChangedPixels": 80,
+  "maxColors": 20,
+  "valueBounds": [
+    20,
+    245
+  ],
+  "silhouetteChange": [
+    0,
+    24
+  ],
+  "ownershipExpansion": 1,
+  "workNodes": [
+    "node.jaw",
+    "node.spindle",
+    "node.pad"
+  ],
+  "secondaryNodes": [
+    "node.handle"
+  ],
+  "minWorkColors": 3,
+  "regions": {
+    "P1": {
+      "x": 10,
+      "y": 9,
+      "w": 2,
+      "h": 2
+    },
+    "P2": {
+      "x": 51,
+      "y": 52,
+      "w": 2,
+      "h": 2
+    },
+    "P3": {
+      "x": 14,
+      "y": 13,
+      "w": 4,
+      "h": 4,
+      "mask": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    "P4": {
+      "x": 14,
+      "y": 46,
+      "w": 4,
+      "h": 4,
+      "mask": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0
+      ]
+    }
+  }
+}

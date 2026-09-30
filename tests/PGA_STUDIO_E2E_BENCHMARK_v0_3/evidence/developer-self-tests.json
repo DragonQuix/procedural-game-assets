@@ -1,0 +1,84 @@
+{
+  "schema": "pga-e2e-developer-checks/0.3",
+  "status": "PASS",
+  "node": "v22.23.2",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--test",
+    "--test-reporter=tap",
+    "tests/integration/benchmark-e2e-v03.test.js"
+  ],
+  "tests": 16,
+  "passed": 16,
+  "failed": 0,
+  "skipped": 0,
+  "exitCode": 0,
+  "hashes": {
+    "status": "PASS",
+    "tag": "v0.8.0",
+    "participantRuns": 0,
+    "reviews": 0,
+    "scoredModelCalls": 0
+  },
+  "leakage": {
+    "schema": "pga-e2e-leakage/0.3",
+    "corpusRoots": [
+      "tests/PGA_AB_BENCHMARK_v1_2",
+      "tests/PGA_CONSTRAINT_BENCHMARK_v0_1",
+      "tests/PGA_RELATION_BENCHMARK_v0_2",
+      "examples/studio"
+    ],
+    "trackedFilesScanned": 287,
+    "geometryDocuments": 30,
+    "imageFingerprints": 60,
+    "sourceLayouts": 5,
+    "wordingDocuments": 10,
+    "status": "PASS",
+    "checks": [
+      {
+        "task": "H",
+        "sourceLayoutDuplicate": null,
+        "geometryDuplicates": [],
+        "baselinePixelDuplicate": null,
+        "wording32CharacterMatches": [],
+        "targetImage": "NONE",
+        "manualInterpretationRequired": true
+      },
+      {
+        "task": "K",
+        "sourceLayoutDuplicate": null,
+        "geometryDuplicates": [],
+        "baselinePixelDuplicate": null,
+        "wording32CharacterMatches": [],
+        "targetImage": "NONE",
+        "manualInterpretationRequired": true
+      },
+      {
+        "task": "M",
+        "sourceLayoutDuplicate": null,
+        "geometryDuplicates": [],
+        "baselinePixelDuplicate": null,
+        "wording32CharacterMatches": [],
+        "targetImage": "NONE",
+        "manualInterpretationRequired": true
+      },
+      {
+        "task": "S",
+        "sourceLayoutDuplicate": null,
+        "geometryDuplicates": [],
+        "baselinePixelDuplicate": null,
+        "wording32CharacterMatches": [],
+        "targetImage": "NONE",
+        "manualInterpretationRequired": true
+      }
+    ],
+    "limitation": "静态扫描只能排除列出的逐字/布局/像素重复，不能证明模型训练数据中从未出现相似题材；功能与开放视觉目标另附人工说明。"
+  },
+  "evidenceType": "SYNTHETIC_MECHANICAL_ONLY",
+  "participantRuns": 0,
+  "reviews": 0,
+  "scoredModelCalls": 0,
+  "formalModelFreeze": false,
+  "formalHostFreeze": false,
+  "note": "合成 review/host callback 只在临时目录测试并清理，不是模型裁决或正式 run。"
+}

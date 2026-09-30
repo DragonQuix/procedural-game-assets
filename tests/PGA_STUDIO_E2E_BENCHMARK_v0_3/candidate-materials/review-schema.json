@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "task",
+    "reviewerSlot",
+    "candidates",
+    "pairwiseResult",
+    "confidence",
+    "actualViews",
+    "imageEvidence",
+    "keyEvidence"
+  ],
+  "properties": {
+    "schema": {
+      "const": "pga-e2e-review/0.3"
+    },
+    "task": {
+      "enum": [
+        "H",
+        "K",
+        "M",
+        "S"
+      ]
+    },
+    "reviewerSlot": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "candidates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "X",
+        "Y"
+      ],
+      "properties": {
+        "X": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "taskFit",
+            "strength",
+            "concern",
+            "hierarchyReadability",
+            "structuralCoherence",
+            "visibleArtifacts"
+          ],
+          "properties": {
+            "taskFit": {
+              "enum": [
+                "MEETS",
+                "NOT_YET",
+                "UNVERIFIED"
+              ]
+            },
+            "strength": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "concern": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "hierarchyReadability": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "structuralCoherence": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "visibleArtifacts": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            }
+          }
+        },
+        "Y": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "taskFit",
+            "strength",
+            "concern",
+            "hierarchyReadability",
+            "structuralCoherence",
+            "visibleArtifacts"
+          ],
+          "properties": {
+            "taskFit": {
+              "enum": [
+                "MEETS",
+                "NOT_YET",
+                "UNVERIFIED"
+              ]
+            },
+            "strength": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "concern": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "hierarchyReadability": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "structuralCoherence": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "visibleArtifacts": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            }
+          }
+        }
+      }
+    },
+    "pairwiseResult": {
+      "enum": [
+        "X_PREFERRED",
+        "Y_PREFERRED",
+        "NO_MEANINGFUL_DIFFERENCE",
+        "BOTH_NOT_YET",
+        "UNVERIFIED"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNVERIFIED"
+      ]
+    },
+    "actualViews": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "X.png",
+          "Y.png",
+          "baseline.png",
+          "contact-sheet.png"
+        ]
+      }
+    },
+    "imageEvidence": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "view",
+          "sha256",
+          "callId",
+          "sessionId",
+          "modelContextId",
+          "modelInput"
+        ],
+        "properties": {
+          "view": {
+            "enum": [
+              "X.png",
+              "Y.png",
+              "baseline.png",
+              "contact-sheet.png"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "callId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "sessionId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "modelContextId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "modelInput": {
+            "const": true
+          }
+        }
+      }
+    },
+    "keyEvidence": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    }
+  }
+}

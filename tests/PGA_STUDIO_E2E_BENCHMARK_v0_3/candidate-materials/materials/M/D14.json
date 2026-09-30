@@ -1,0 +1,385 @@
+{
+  "schemaVersion": "pga-studio/4",
+  "id": "e2e-m-v03",
+  "seed": 90377,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "e2e-m",
+    "version": 1,
+    "ramps": {
+      "shell": [
+        "#202e3b",
+        "#526572",
+        "#92a3a5",
+        "#dce7da"
+      ],
+      "signal": [
+        "#493529",
+        "#ba7951",
+        "#e7b275",
+        "#f0e6b8"
+      ],
+      "trim": [
+        "#253947",
+        "#688b92",
+        "#99b9b3",
+        "#d1e4cc"
+      ],
+      "dark": [
+        "#202c35",
+        "#384852",
+        "#596870",
+        "#849292"
+      ]
+    }
+  },
+  "canvas": {
+    "w": 68,
+    "h": 68,
+    "outline": null
+  },
+  "nodes": [
+    {
+      "id": "node.jaw",
+      "kind": "poly",
+      "vertices": [
+        [
+          10,
+          9
+        ],
+        [
+          53,
+          9
+        ],
+        [
+          53,
+          20
+        ],
+        [
+          25,
+          20
+        ],
+        [
+          25,
+          43
+        ],
+        [
+          53,
+          43
+        ],
+        [
+          53,
+          54
+        ],
+        [
+          10,
+          54
+        ]
+      ],
+      "ramp": {
+        "shades": [
+          "#526572",
+          "#526572",
+          "#92a3a5",
+          "#526572"
+        ]
+      },
+      "material": "flat",
+      "layer": 0
+    },
+    {
+      "id": "node.spindle",
+      "kind": "panel",
+      "x": 44,
+      "y": 21,
+      "w": 5,
+      "h": 21,
+      "ramp": "shell",
+      "material": "flat",
+      "layer": 1
+    },
+    {
+      "id": "node.pad",
+      "kind": "panel",
+      "x": 36,
+      "y": 37,
+      "w": 19,
+      "h": 5,
+      "ramp": "trim",
+      "material": "flat",
+      "layer": 2
+    },
+    {
+      "id": "node.handle",
+      "kind": "panel",
+      "x": 29,
+      "y": 26,
+      "w": 31,
+      "h": 6,
+      "ramp": "signal",
+      "material": "flat",
+      "layer": 3
+    },
+    {
+      "id": "node.bolt.a",
+      "kind": "disc",
+      "cx": 16,
+      "cy": 15,
+      "rx": 2,
+      "ry": 2,
+      "ramp": "dark",
+      "material": "flat",
+      "layer": 4
+    },
+    {
+      "id": "node.bolt.b",
+      "kind": "disc",
+      "cx": 16,
+      "cy": 48,
+      "rx": 2,
+      "ry": 2,
+      "ramp": "dark",
+      "material": "flat",
+      "layer": 5
+    }
+  ],
+  "anchor": {
+    "x": 34,
+    "y": 63
+  },
+  "attachments": {},
+  "constraints": [],
+  "protection": {
+    "schemaVersion": "pga-protection/1",
+    "coordinateSpace": "final-frame",
+    "protectedRegions": [
+      {
+        "x": 10,
+        "y": 9,
+        "w": 2,
+        "h": 2
+      },
+      {
+        "x": 51,
+        "y": 52,
+        "w": 2,
+        "h": 2
+      },
+      {
+        "x": 14,
+        "y": 13,
+        "w": 4,
+        "h": 4,
+        "mask": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "x": 14,
+        "y": 46,
+        "w": 4,
+        "h": 4,
+        "mask": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0
+        ]
+      }
+    ],
+    "metadataPaths": [
+      "anchor",
+      "attachments"
+    ],
+    "nodeIds": [
+      "node.bolt.a",
+      "node.bolt.b"
+    ],
+    "baseline": {
+      "schemaVersion": "pga-studio/2",
+      "id": "e2e-m-v03",
+      "seed": 90377,
+      "renderProfile": {
+        "name": "pixel-flat",
+        "version": 1
+      },
+      "style": {
+        "id": "e2e-m",
+        "version": 1,
+        "ramps": {
+          "shell": [
+            "#202e3b",
+            "#526572",
+            "#92a3a5",
+            "#dce7da"
+          ],
+          "signal": [
+            "#493529",
+            "#ba7951",
+            "#e7b275",
+            "#f0e6b8"
+          ],
+          "trim": [
+            "#253947",
+            "#688b92",
+            "#99b9b3",
+            "#d1e4cc"
+          ],
+          "dark": [
+            "#202c35",
+            "#384852",
+            "#596870",
+            "#849292"
+          ]
+        }
+      },
+      "canvas": {
+        "w": 68,
+        "h": 68,
+        "outline": null
+      },
+      "nodes": [
+        {
+          "id": "node.jaw",
+          "kind": "poly",
+          "vertices": [
+            [
+              10,
+              9
+            ],
+            [
+              53,
+              9
+            ],
+            [
+              53,
+              20
+            ],
+            [
+              25,
+              20
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              53,
+              43
+            ],
+            [
+              53,
+              54
+            ],
+            [
+              10,
+              54
+            ]
+          ],
+          "ramp": {
+            "shades": [
+              "#526572",
+              "#526572",
+              "#92a3a5",
+              "#526572"
+            ]
+          },
+          "material": "flat",
+          "layer": 0
+        },
+        {
+          "id": "node.spindle",
+          "kind": "panel",
+          "x": 44,
+          "y": 21,
+          "w": 5,
+          "h": 21,
+          "ramp": "shell",
+          "material": "flat",
+          "layer": 1
+        },
+        {
+          "id": "node.pad",
+          "kind": "panel",
+          "x": 36,
+          "y": 37,
+          "w": 19,
+          "h": 5,
+          "ramp": "trim",
+          "material": "flat",
+          "layer": 2
+        },
+        {
+          "id": "node.handle",
+          "kind": "panel",
+          "x": 29,
+          "y": 26,
+          "w": 31,
+          "h": 6,
+          "ramp": "signal",
+          "material": "flat",
+          "layer": 3
+        },
+        {
+          "id": "node.bolt.a",
+          "kind": "disc",
+          "cx": 16,
+          "cy": 15,
+          "rx": 2,
+          "ry": 2,
+          "ramp": "dark",
+          "material": "flat",
+          "layer": 4
+        },
+        {
+          "id": "node.bolt.b",
+          "kind": "disc",
+          "cx": 16,
+          "cy": 48,
+          "rx": 2,
+          "ry": 2,
+          "ramp": "dark",
+          "material": "flat",
+          "layer": 5
+        }
+      ],
+      "anchor": {
+        "x": 34,
+        "y": 63
+      },
+      "attachments": {},
+      "constraints": []
+    }
+  },
+  "relations": []
+}

@@ -8,3 +8,4 @@ tests/PGA_RELATION_BENCHMARK_v0_2/shared/** -text
 tests/PGA_RELATION_BENCHMARK_v0_2/materials/** -text
 tests/PGA_RELATION_BENCHMARK_v0_2/protocol-draft.json -text
 tests/PGA_RELATION_BENCHMARK_v0_2/vision/** -text
+tests/integration/benchmark-e2e-v03.test.js -text

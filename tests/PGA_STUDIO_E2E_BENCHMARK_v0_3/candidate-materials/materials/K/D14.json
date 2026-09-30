@@ -1,0 +1,351 @@
+{
+  "schemaVersion": "pga-studio/4",
+  "id": "e2e-k-v03",
+  "seed": 90375,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "e2e-k",
+    "version": 1,
+    "ramps": {
+      "shell": [
+        "#202e3b",
+        "#526572",
+        "#92a3a5",
+        "#dce7da"
+      ],
+      "signal": [
+        "#493529",
+        "#ba7951",
+        "#e7b275",
+        "#f0e6b8"
+      ],
+      "trim": [
+        "#253947",
+        "#688b92",
+        "#99b9b3",
+        "#d1e4cc"
+      ],
+      "dark": [
+        "#202c35",
+        "#384852",
+        "#596870",
+        "#849292"
+      ]
+    }
+  },
+  "canvas": {
+    "w": 80,
+    "h": 64,
+    "outline": null
+  },
+  "nodes": [
+    {
+      "id": "node.cradle",
+      "kind": "poly",
+      "vertices": [
+        [
+          12,
+          49
+        ],
+        [
+          20,
+          24
+        ],
+        [
+          26,
+          24
+        ],
+        [
+          24,
+          49
+        ],
+        [
+          64,
+          49
+        ],
+        [
+          68,
+          55
+        ],
+        [
+          10,
+          55
+        ]
+      ],
+      "ramp": "dark",
+      "material": "flat",
+      "layer": 0
+    },
+    {
+      "id": "node.drive",
+      "kind": "panel",
+      "x": 32,
+      "y": 40,
+      "w": 24,
+      "h": 10,
+      "ramp": "shell",
+      "material": "flat",
+      "layer": 1
+    },
+    {
+      "id": "node.outlet",
+      "kind": "panel",
+      "x": 56,
+      "y": 42,
+      "w": 12,
+      "h": 6,
+      "ramp": "signal",
+      "material": "flat",
+      "layer": 2
+    },
+    {
+      "id": "node.drum",
+      "kind": "disc",
+      "cx": 44,
+      "cy": 28,
+      "rx": 10,
+      "ry": 10,
+      "ramp": "trim",
+      "material": "flat",
+      "layer": 3
+    },
+    {
+      "id": "node.hub",
+      "kind": "disc",
+      "cx": 44,
+      "cy": 28,
+      "rx": 3,
+      "ry": 3,
+      "ramp": "signal",
+      "material": "flat",
+      "layer": 4
+    },
+    {
+      "id": "node.grip",
+      "kind": "panel",
+      "x": 24,
+      "y": 13,
+      "w": 29,
+      "h": 4,
+      "ramp": "trim",
+      "material": "flat",
+      "layer": 5
+    },
+    {
+      "id": "node.foot",
+      "kind": "panel",
+      "x": 10,
+      "y": 55,
+      "w": 60,
+      "h": 4,
+      "ramp": "shell",
+      "material": "flat",
+      "layer": 6
+    }
+  ],
+  "anchor": {
+    "x": 40,
+    "y": 59
+  },
+  "attachments": {},
+  "constraints": [],
+  "protection": {
+    "schemaVersion": "pga-protection/1",
+    "coordinateSpace": "final-frame",
+    "protectedRegions": [
+      {
+        "x": 0,
+        "y": 55,
+        "w": 80,
+        "h": 9
+      }
+    ],
+    "metadataPaths": [
+      "anchor",
+      "attachments"
+    ],
+    "nodeIds": [
+      "node.foot"
+    ],
+    "baseline": {
+      "schemaVersion": "pga-studio/2",
+      "id": "e2e-k-v03",
+      "seed": 90375,
+      "renderProfile": {
+        "name": "pixel-flat",
+        "version": 1
+      },
+      "style": {
+        "id": "e2e-k",
+        "version": 1,
+        "ramps": {
+          "shell": [
+            "#202e3b",
+            "#526572",
+            "#92a3a5",
+            "#dce7da"
+          ],
+          "signal": [
+            "#493529",
+            "#ba7951",
+            "#e7b275",
+            "#f0e6b8"
+          ],
+          "trim": [
+            "#253947",
+            "#688b92",
+            "#99b9b3",
+            "#d1e4cc"
+          ],
+          "dark": [
+            "#202c35",
+            "#384852",
+            "#596870",
+            "#849292"
+          ]
+        }
+      },
+      "canvas": {
+        "w": 80,
+        "h": 64,
+        "outline": null
+      },
+      "nodes": [
+        {
+          "id": "node.cradle",
+          "kind": "poly",
+          "vertices": [
+            [
+              12,
+              49
+            ],
+            [
+              20,
+              24
+            ],
+            [
+              26,
+              24
+            ],
+            [
+              24,
+              49
+            ],
+            [
+              64,
+              49
+            ],
+            [
+              68,
+              55
+            ],
+            [
+              10,
+              55
+            ]
+          ],
+          "ramp": "dark",
+          "material": "flat",
+          "layer": 0
+        },
+        {
+          "id": "node.drive",
+          "kind": "panel",
+          "x": 32,
+          "y": 40,
+          "w": 24,
+          "h": 10,
+          "ramp": "shell",
+          "material": "flat",
+          "layer": 1
+        },
+        {
+          "id": "node.outlet",
+          "kind": "panel",
+          "x": 56,
+          "y": 42,
+          "w": 12,
+          "h": 6,
+          "ramp": "signal",
+          "material": "flat",
+          "layer": 2
+        },
+        {
+          "id": "node.drum",
+          "kind": "disc",
+          "cx": 44,
+          "cy": 28,
+          "rx": 10,
+          "ry": 10,
+          "ramp": "trim",
+          "material": "flat",
+          "layer": 3
+        },
+        {
+          "id": "node.hub",
+          "kind": "disc",
+          "cx": 44,
+          "cy": 28,
+          "rx": 3,
+          "ry": 3,
+          "ramp": "signal",
+          "material": "flat",
+          "layer": 4
+        },
+        {
+          "id": "node.grip",
+          "kind": "panel",
+          "x": 24,
+          "y": 13,
+          "w": 29,
+          "h": 4,
+          "ramp": "trim",
+          "material": "flat",
+          "layer": 5
+        },
+        {
+          "id": "node.foot",
+          "kind": "panel",
+          "x": 10,
+          "y": 55,
+          "w": 60,
+          "h": 4,
+          "ramp": "shell",
+          "material": "flat",
+          "layer": 6
+        }
+      ],
+      "anchor": {
+        "x": 40,
+        "y": 59
+      },
+      "attachments": {},
+      "constraints": []
+    }
+  },
+  "relations": [
+    {
+      "id": "R1",
+      "type": "contact",
+      "endpointA": {
+        "nodeId": "node.drive",
+        "feature": "max-x-edge"
+      },
+      "endpointB": {
+        "nodeId": "node.outlet",
+        "feature": "min-x-edge"
+      },
+      "required": true,
+      "tolerance": 0,
+      "resolution": {
+        "mode": "translate-follower",
+        "follower": "B",
+        "axis": "x",
+        "invariant": "size-and-orthogonal-position"
+      }
+    }
+  ]
+}
