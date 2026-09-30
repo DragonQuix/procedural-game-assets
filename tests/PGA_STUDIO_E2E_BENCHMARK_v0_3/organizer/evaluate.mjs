@@ -1,10 +1,10 @@
 import { execFileSync } from 'node:child_process';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readJSON, tree } from '../shared/files.mjs';
 import { evaluateFinal } from '../shared/state.mjs';
-import { canonical, sha256, metrics } from '../shared/accounting.mjs';
+import { canonical, sha256, metrics, renderHash, stateHash } from '../shared/accounting.mjs';
 
 // 使用 materialRoot 的可信 worker 和冻结 common 合同；不加载 trial 内的 evaluator。
 export async function evaluateTrial({ trial, materialRoot, manifest, task, arm }) {
@@ -27,6 +27,15 @@ export async function evaluateTrial({ trial, materialRoot, manifest, task, arm }
     final.checks.sourceFrozen = sourceHash === submitted.sourceHash;
     if (!final.checks.sourceFrozen) final.status = 'FAIL';
     const ledger = await readJSON(join(trial, 'ledger.json'));
+    const dirs = await readdir(join(trial, 'candidates')).catch(e => { if (e.code === 'ENOENT') return []; throw e; });
+    if (dirs.length !== ledger.candidates.length || new Set(ledger.candidates.map(c => c.key)).size !== dirs.length) throw new Error('CANDIDATE_LEDGER_MISMATCH');
+    for (const [i, c] of ledger.candidates.entries()) {
+      if (c.id !== `c${i + 1}` || !dirs.includes(c.id)) throw new Error('CANDIDATE_LEDGER_MISMATCH');
+      const state = await readJSON(join(trial, 'candidates', c.id, 'state.json'));
+      if (c.key !== `${renderHash(state.frame)}:${stateHash(state)}`) throw new Error('CANDIDATE_STATE_HASH_MISMATCH');
+    }
+    const key = `${renderHash(first.frame)}:${stateHash(first)}`, baselineKey = `${renderHash(baseline.frame)}:${stateHash(baseline)}`;
+    if (key !== baselineKey && !ledger.candidates.some(c => c.key === key)) throw new Error('FINAL_NOT_ACCOUNTED');
     return { submitSuccess: submitted.status === 'FINALIZED', technical: final, budget: ledger.candidates.length <= 8 ? 'PASS' : 'FAIL', protocol: 'UNVERIFIED', metrics: metrics(ledger) };
   } catch (e) { return { submitSuccess: false, technical: { status: 'FAIL', reason: e.message }, technicalFailureIncidence: true, protocol: 'UNVERIFIED' }; }
 }

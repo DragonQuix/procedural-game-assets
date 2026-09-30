@@ -39,8 +39,8 @@ export function materials(api) {
     panel('node.grip', 24, 13, 29, 4, 'trim', 5), panel('node.foot', 10, 55, 60, 4, 'shell', 6),
   ], { protectedRegions: [{ x: 0, y: 55, w: 80, h: 9 }], nodeIds: ['node.foot'] },
   { structuralChange: { minimumMovedParts: 2, minimumTotalCenterDisplacement: 12 },
-    relations: [{ id: 'R1', type: 'contact', endpointA: { nodeId: 'node.drive', feature: 'right-edge' },
-      endpointB: { nodeId: 'node.outlet', feature: 'left-edge' }, required: true, tolerance: 0,
+    relations: [{ id: 'R1', type: 'contact', endpointA: { nodeId: 'node.drive', feature: 'max-x-edge' },
+      endpointB: { nodeId: 'node.outlet', feature: 'min-x-edge' }, required: true, tolerance: 0,
       resolution: { mode: 'translate-follower', follower: 'B', axis: 'x', invariant: 'size-and-orthogonal-position' } }] });
   const M = make('M', 68, 68, [
     poly('node.jaw', [[10, 9], [53, 9], [53, 20], [25, 20], [25, 43], [53, 43], [53, 54], [10, 54]], 'shell', 0),
@@ -48,9 +48,14 @@ export function materials(api) {
     panel('node.handle', 29, 26, 31, 6, 'signal', 3), disc('node.bolt.a', 16, 15, 2, 2, 'dark', 4),
     disc('node.bolt.b', 16, 48, 2, 2, 'dark', 5),
   ], { protectedRegions: [{ x: 10, y: 9, w: 2, h: 2 }, { x: 51, y: 52, w: 2, h: 2 },
-    { x: 14, y: 13, w: 4, h: 4 }, { x: 14, y: 46, w: 4, h: 4 }], nodeIds: ['node.bolt.a', 'node.bolt.b'] },
+    { x: 14, y: 13, w: 4, h: 4, mask: [0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0] },
+    { x: 14, y: 46, w: 4, h: 4, mask: [0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0] }], nodeIds: ['node.bolt.a', 'node.bolt.b'] },
   { silhouetteChange: [0, 24], ownershipExpansion: 1, minChangedPixels: 80, maxColors: 20,
     workNodes: ['node.jaw', 'node.spindle', 'node.pad'], secondaryNodes: ['node.handle'], minWorkColors: 3 });
+  // 端点保护兼容逐步材质编辑；起点仍平涂，不预置完成图。
+  M.baseline.nodes.find(n => n.id === 'node.jaw').ramp = { shades: ['#526572', '#526572', '#92a3a5', '#526572'] };
+  M.D14 = api.createProtectedDocument(M.baseline, { protectedRegions: M.contract.protectedRegions, nodeIds: M.contract.protectedNodeIds, metadataPaths: ['anchor', 'attachments'] });
+  M.D14 = { ...M.D14, schemaVersion: 'pga-studio/4', relations: [] };
   const S = make('S', 64, 64, [
     poly('node.case', [[16, 7], [48, 7], [57, 18], [57, 46], [48, 57], [16, 57], [7, 46], [7, 18]], 'shell', 0),
     panel('node.face', 14, 14, 36, 36, 'dark', 1),
@@ -72,7 +77,7 @@ export function directSource(doc) {
   const lines = ["import { PixelPainter } from './kit/src/core/raster.js';", 'export function render() {',
     `  const layers = [];`, `  const add = (id, draw) => { const p = new PixelPainter(${doc.canvas.w}, ${doc.canvas.h}); draw(p); layers.push({ id, width: p.w, height: p.h, rgba: Array.from(p.toRGBA()) }); };`];
   for (const n of doc.nodes.toSorted((a, b) => a.layer - b.layer)) {
-    const color = doc.style.ramps[n.ramp][1];
+    const color = typeof n.ramp === 'string' ? doc.style.ramps[n.ramp][1] : n.ramp.shades[1];
     const call = n.kind === 'poly' ? `p.poly(${JSON.stringify(n.vertices)}, '${color}')` : n.kind === 'disc' ? `p.ellipse(${n.cx}, ${n.cy}, ${n.rx}, ${n.ry}, '${color}')` : `p.rect(${n.x}, ${n.y}, ${n.w}, ${n.h}, '${color}')`;
     lines.push(`  add('${n.id}', p => ${call});`);
   }

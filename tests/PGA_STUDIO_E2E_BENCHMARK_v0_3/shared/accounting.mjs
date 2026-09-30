@@ -1,6 +1,5 @@
-import { createHash } from 'node:crypto';
-export const canonical = v => v && typeof v === 'object' ? Array.isArray(v) ? `[${v.map(canonical).join(',')}]` : `{${Object.keys(v).sort().map(k => `${JSON.stringify(k)}:${canonical(v[k])}`).join(',')}}` : JSON.stringify(v);
-export const sha256 = value => createHash('sha256').update(value).digest('hex');
+import { canonical, sha256 } from './hashes.mjs';
+export { canonical, sha256 };
 export const renderHash = frame => sha256(canonical({ width: frame.width, height: frame.height, rgba: Array.from(frame.rgba) }));
 export const stateHash = state => sha256(canonical({ anchor: state.frame.anchor, attachments: state.frame.attachments, layers: state.layers }));
 

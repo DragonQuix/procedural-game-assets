@@ -56,3 +56,9 @@ tests/PGA_RELATION_BENCHMARK_v0_2/runs-invalid/
 # PGA_RELATION_BENCHMARK_v0_2 正式原始 runs 与盲评原始目录（大型二进制，正式材料复制到 results/ 入库）
 tests/PGA_RELATION_BENCHMARK_v0_2/runs/
 tests/PGA_RELATION_BENCHMARK_v0_2/reviews/
+
+# v0.3 只提交准备期候选材料；保留 tag 自带的 PNG 依赖。
+!tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/candidate-materials/frozen/*/node_modules/
+!tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/candidate-materials/frozen/*/node_modules/pngjs/
+!tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/candidate-materials/shared/node_modules/
+!tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/candidate-materials/shared/node_modules/pngjs/

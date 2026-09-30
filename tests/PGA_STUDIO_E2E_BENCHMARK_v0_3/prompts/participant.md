@@ -20,7 +20,9 @@ wrapper 自动提供 `--ws`，不要重复传入。例如：
 D14 可以 `node run.mjs observe --candidate c-xxxxxxxx` 查看未提交候选。
 输出包括 baseline/candidate native、最近邻 display、task crop、diff、外置稳定标签 contact sheet。
 Candidate A/B 在观察中分别表示 baseline/current，不是实验 arm。用文件名或稳定 Node ID 引用对象。
-最终只用 `node run.mjs submit`。Studio 的 `export` 不是 benchmark finalization。
+最终只用 `node run.mjs submit`。Studio 产品层的 `export`/`submit` 导出不是 benchmark finalization；
+wrapper 不提供产品层 `submit`/`observe` 别名，统一使用 common observe 与 benchmark submit。
+safe-domain 是 inspect/edit/explore 的能力，不是独立 CLI command。
 
 最多 8 个物化可观察状态。源码保存、无图 validation probe、物化前拒绝不计；
 edit/explore 已产生的候选图计入，即使未打开、未采用或机械失败。不得绕过 wrapper 私自出图；

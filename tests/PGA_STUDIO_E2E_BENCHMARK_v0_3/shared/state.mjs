@@ -20,8 +20,9 @@ export function bounds(layer) {
 }
 
 export function evaluateFinal(first, second, baseline, contract) {
-  const checks = {}, a = baseline.frame, b = first.frame;
+  const checks = {};
   try {
+    const a = baseline.frame, b = first.frame;
     checks.validOutput = canonical(compose({ ...b, layers: first.layers })) === canonical(first);
     checks.dimensions = b.width === contract.width && b.height === contract.height;
     if (!checks.validOutput || !checks.dimensions) return { status: 'FAIL', checks, reason: 'INVALID_FINAL_OUTPUT' };
@@ -30,7 +31,7 @@ export function evaluateFinal(first, second, baseline, contract) {
     const oldLayers = new Map(baseline.layers.map(l => [l.id, l])), layers = new Map(first.layers.map(l => [l.id, l]));
     checks.parts = canonical([...layers.keys()].sort()) === canonical([...contract.requiredNodeIds].sort()) && first.layers.every(l => bounds(l));
     let changed = 0, silhouette = 0, area = 0, protectionViolations = 0;
-    const colors = new Set(), inRect = (x, y, r) => x >= r.x && y >= r.y && x < r.x + r.w && y < r.y + r.h;
+    const colors = new Set(), inRect = (x, y, r) => x >= r.x && y >= r.y && x < r.x + r.w && y < r.y + r.h && (!r.mask || r.mask[(y - r.y) * r.w + x - r.x] === 1);
     for (let y = 0; y < b.height; y++) for (let x = 0; x < b.width; x++) {
       const i = (y * b.width + x) * 4, diff = b.rgba.slice(i, i + 4).some((v, k) => v !== a.rgba[i + k]);
       if (diff) changed++;

@@ -8,6 +8,8 @@ import { symbolicContactSheet } from './src/observe/symbolic-sheet.js';
 
 export async function observe(out, baseline, candidate, cropRect) {
   await mkdir(out, { recursive: true });
+  baseline = { ...baseline, rgba: Uint8ClampedArray.from(baseline.rgba) };
+  candidate = { ...candidate, rgba: Uint8ClampedArray.from(candidate.rgba) };
   const up = f => {
     const p = scaleNearest(PixelPainter.fromRGBA(f.width, f.height, Uint8ClampedArray.from(f.rgba)), 4);
     return { width: p.w, height: p.h, rgba: p.toRGBA() };

@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile, readdir, rmdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { schemaErrors } from './review-schema.mjs';
-import { sha256, canonical } from '../shared/accounting.mjs';
+import { sha256, canonical } from '../shared/hashes.mjs';
 
 export async function submitReviewDraft({ directory, binding, author, draft }) {
   if (canonical(author) !== canonical(binding.reviewer) || !author?.modelContextId || !author?.sessionId) throw new Error('REVIEWER_IDENTITY_MISMATCH');

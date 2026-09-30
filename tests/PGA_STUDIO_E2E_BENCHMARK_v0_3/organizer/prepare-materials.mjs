@@ -12,7 +12,7 @@ import { reviewSchema } from './review-schema.mjs';
 
 export const benchmark = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const repo = resolve(benchmark, '../..');
-export const TAG_COMMIT = 'acc66812511cced611e50035ad1726cdbc9f070e';
+export const TAG_COMMIT = '91aaa757bd910255f293c57f594cac06f9f169af';
 const git = (...args) => execFileSync('git', args, { cwd: repo, maxBuffer: 20 * 1024 * 1024 });
 const list = paths => git('ls-tree', '-r', '--name-only', TAG_COMMIT, '--', ...paths).toString().trim().split(/\r?\n/).filter(Boolean);
 const DEP_PREFIX = 'skills/procedural-game-assets/assets/toolkit/';
@@ -94,6 +94,9 @@ export async function prepareMaterials(out) {
     provenance, identityLint: assertIdentityMaterials(lintInputs), matrixSha256: sha256(await readFile(join(out, 'planned-matrix.json'))),
     protocolSha256: sha256(await readFile(join(benchmark, 'protocol-draft.json'))),
     sourceTrees: { organizer: await tree(join(benchmark, 'organizer')), shared: await tree(join(benchmark, 'shared')), prompts: await tree(join(benchmark, 'prompts')), tasks: await tree(join(benchmark, 'tasks')) },
+    coordinatorDependencies: { src: await tree(join(repo, 'src')), 'tools/benchmark': await tree(join(repo, 'tools/benchmark')) },
+    protocolFiles: Object.fromEntries(await Promise.all(['protocol-draft.json', 'PROTOCOL.md', 'README.md', 'HOLDOUT.md'].map(async name => [name, sha256(await readFile(join(benchmark, name)))]))),
+    selfTestSha256: sha256(await readFile(join(repo, 'tests/integration/benchmark-e2e-v03.test.js'))),
     participantRuns: 0, reviews: 0, scoredModelCalls: 0, modelIdentity: null, host: null, freezeOwner: 'ZCode' };
   await json(join(out, 'manifest.json'), manifest); return manifest;
 }
@@ -105,6 +108,9 @@ export async function checkMaterials(out) {
   for (const task of Object.values(m.tasks)) for (const start of Object.values(task.starts)) assert.equal(sha256(await readFile(join(out, start.path))), start.sha256);
   for (const [arm, mapping] of Object.entries(m.provenance)) for (const [target, source] of Object.entries(mapping)) assert.equal(sha256(await readFile(join(out, `frozen/${arm}`, target))), sha256(git('show', `${TAG_COMMIT}:${source}`)));
   for (const [name, descriptor] of Object.entries(m.sourceTrees)) assert.deepEqual(await tree(join(benchmark, name)), descriptor);
+  for (const [name, descriptor] of Object.entries(m.coordinatorDependencies)) assert.deepEqual(await tree(join(repo, name)), descriptor);
+  for (const [name, hash] of Object.entries(m.protocolFiles)) assert.equal(sha256(await readFile(join(benchmark, name))), hash);
+  assert.equal(sha256(await readFile(join(repo, 'tests/integration/benchmark-e2e-v03.test.js'))), m.selfTestSha256);
   assert.equal(m.protocolSha256, sha256(await readFile(join(benchmark, 'protocol-draft.json'))));
   assert.equal(m.matrixSha256, sha256(await readFile(join(out, 'planned-matrix.json'))));
   assert.deepEqual(await readJSON(join(out, 'planned-matrix.json')), plannedMatrix());
@@ -114,5 +120,6 @@ export async function checkMaterials(out) {
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const at = process.argv.indexOf('--out'), out = at >= 0 ? resolve(process.argv[at + 1]) : join(benchmark, 'candidate-materials');
-  console.log(JSON.stringify(process.argv.includes('--check') ? await checkMaterials(out) : await prepareMaterials(out)));
+  const result = process.argv.includes('--check') ? await checkMaterials(out) : await prepareMaterials(out);
+  console.log(JSON.stringify({ status: result.status, out, participantRuns: 0, reviews: 0, scoredModelCalls: 0 }));
 }

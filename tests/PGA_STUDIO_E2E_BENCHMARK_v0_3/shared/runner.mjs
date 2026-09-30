@@ -56,7 +56,7 @@ async function collectStudioCandidates(root, ledger, baseline) {
     const r = await readJSON(join(root, 'ws/requests', name)), result = r.result ?? {};
     const rejected = !result.revision && !['OK', 'UNCHANGED'].includes(result.status);
     ledger.events.push({ event: 'studio-request', requestId: r.requestId, rejectedOperationCount: rejected ? 1 : 0,
-      validationProbeCount: rejected ? result.safeDomain?.validation?.tested ?? result.safeDomain?.search?.tested ?? 0 : 0 });
+      validationProbeCount: rejected ? result.validationProbeCount ?? result.validation?.tested ?? result.safeDomain?.validation?.tested ?? result.safeDomain?.search?.tested ?? 0 : 0 });
     requests.add(name);
   }
   ledger.studioRecords = [...seen]; ledger.studioRequests = [...requests];
@@ -74,11 +74,11 @@ export async function run(root = process.cwd(), args = process.argv.slice(2)) {
     if (command === 'studio') {
       if (arm !== 'D14') throw new Error('STUDIO_NOT_AVAILABLE_IN_A');
       const cliArgs = args.slice(1);
-      if (!['state', 'inspect', 'edit', 'explore', 'commit', 'safe-domain', 'export'].includes(cliArgs[0]) || cliArgs.includes('--ws') || cliArgs.includes('--doc')) throw new Error('INVALID_STUDIO_COMMAND');
+      if (!['state', 'inspect', 'edit', 'explore', 'commit', 'export'].includes(cliArgs[0]) || cliArgs.includes('--ws') || cliArgs.includes('--doc')) throw new Error('INVALID_STUDIO_COMMAND');
       const result = spawnSync(process.execPath, [join(root, 'kit/bin/pga-studio.mjs'), ...cliArgs, '--ws', join(root, 'ws')], { cwd: root, timeout: 30000, maxBuffer: 16 * 1024 * 1024, encoding: 'utf8' });
       let response; try { response = JSON.parse(result.stdout); } catch { response = { error: result.error?.message ?? result.stderr }; }
       ledger.events.push({ event: 'studio-call', command: cliArgs[0], response, errors: result.status === 0 ? 0 : 1,
-        retries: response.result?.idempotentReplay ? 1 : 0,
+        retries: response.idempotentReplay || response.result?.idempotentReplay ? 1 : 0,
         observableRelationDiagnosticCount: response.result?.relations || response.result?.relationInspection ? 1 : 0 });
       await collectStudioCandidates(root, ledger, baseline);
       await json(ledgerFile, ledger);

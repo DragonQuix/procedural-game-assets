@@ -9,7 +9,8 @@ export function taskSuccess({ runId, submitSuccess, technical, budget, protocol,
   if (technical?.status === 'FAIL') return 'TECHNICAL_FAIL';
   if (budget === 'FAIL') return 'BUDGET_FAIL';
   if (protocol === 'FAIL') return 'PROTOCOL_FAIL';
-  if (technical?.status !== 'PASS' || !technical.checks || !Object.values(technical.checks).every(v => v === true) || budget !== 'PASS' || protocol !== 'PASS' || !independent(reviews) || reviews.some(r => r.evidence !== 'CONFIRMED')) return 'UNVERIFIED';
+  const required = ['validOutput', 'dimensions', 'deterministic', 'metadata', 'parts', 'protection', 'changed', 'palette', 'silhouette', 'area', 'requiredRelation', 'submittedArtifact', 'sourceFrozen'];
+  if (technical?.status !== 'PASS' || !technical.checks || !required.every(k => technical.checks[k] === true) || !Object.values(technical.checks).every(v => v === true) || budget !== 'PASS' || protocol !== 'PASS' || !independent(reviews) || reviews.some(r => r.evidence !== 'CONFIRMED')) return 'UNVERIFIED';
   const visual = candidateVisualStatus(reviews.map(r => r.taskFitByRun[runId] ?? 'UNVERIFIED'));
   return visual === 'PASS' ? 'PASS' : visual === 'UNVERIFIED' ? 'UNVERIFIED' : `VISUAL_${visual}`;
 }
@@ -37,6 +38,7 @@ export function exactBinomialTwoSided(a, b) {
 export function descriptiveStatistics(pairs) {
   const matrix = { bothPass: 0, AOnly: 0, D14Only: 0, neitherPass: 0 }, preferences = {};
   for (const pair of pairs) {
+    if (!['CONSENSUS_A', 'CONSENSUS_D14', 'MIXED', 'NO_MEANINGFUL_DIFFERENCE', 'BOTH_NOT_YET', 'UNVERIFIED'].includes(pair.preference)) throw new Error('INVALID_PREFERENCE');
     if (!['PASS', 'NOT_SUBMITTED', 'TECHNICAL_FAIL', 'BUDGET_FAIL', 'PROTOCOL_FAIL', 'UNVERIFIED', 'VISUAL_NOT_YET', 'VISUAL_DISAGREEMENT'].includes(pair.A) || !['PASS', 'NOT_SUBMITTED', 'TECHNICAL_FAIL', 'BUDGET_FAIL', 'PROTOCOL_FAIL', 'UNVERIFIED', 'VISUAL_NOT_YET', 'VISUAL_DISAGREEMENT'].includes(pair.D14)) throw new Error('INVALID_SUCCESS_STATUS');
     matrix[pair.A === 'PASS' ? pair.D14 === 'PASS' ? 'bothPass' : 'AOnly' : pair.D14 === 'PASS' ? 'D14Only' : 'neitherPass']++;
     preferences[pair.preference] = (preferences[pair.preference] ?? 0) + 1;
