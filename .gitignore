@@ -52,3 +52,7 @@ tests/PGA_CONSTRAINT_BENCHMARK_v0_1/organizer/freeze-inputs.json
 tests/PGA_RELATION_BENCHMARK_v0_2/runs/
 tests/PGA_RELATION_BENCHMARK_v0_2/reviews/
 tests/PGA_RELATION_BENCHMARK_v0_2/runs-invalid/
+
+# PGA_RELATION_BENCHMARK_v0_2 正式原始 runs 与盲评原始目录（大型二进制，正式材料复制到 results/ 入库）
+tests/PGA_RELATION_BENCHMARK_v0_2/runs/
+tests/PGA_RELATION_BENCHMARK_v0_2/reviews/

@@ -1,7 +1,7 @@
 {
   "schema": "pga-relation-preparation/1",
-  "status": "DRAFT_NOT_RUN",
-  "approvedToExecute": false,
+  "status": "FROZEN",
+  "approvedToExecute": true,
   "toolkits": {
     "D13": {
       "path": "frozen/D13-0.7.0-37317b5",
@@ -310,7 +310,7 @@
   "experimentRunsCreated": 0,
   "modelCalls": 0,
   "independentValidation": "NOT_RUN",
-  "finalFreeze": "D14_FINAL_SNAPSHOT_BUILT_PROTOCOL_FREEZE_PENDING",
+  "finalFreeze": "FROZEN",
   "identityLint": {
     "status": "PASS",
     "filesChecked": [
