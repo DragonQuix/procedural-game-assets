@@ -429,7 +429,7 @@ export class StudioStore {
 
   /* ---------- 预览 ---------- */
 
-  async _writePreviews(compiled, label) {
+  async _writePreviews(compiled, label, observation = {}) {
     const dir = join(this.dir, 'previews', label);
     await mkdir(dir, { recursive: true });
     if (compiled.kind === 'character') {
@@ -446,13 +446,24 @@ export class StudioStore {
       await writeFile(join(this.dir, files.player), views.playerHtml);
       return files;
     }
-    const views = buildViews(compiled, { displayScale: this.displayScale, background: this.background });
+    const views = buildViews(compiled, { displayScale: this.displayScale, background: this.background, ...observation });
     const files = {
       native: join('previews', label, `${label}.native.png`),
       display: join('previews', label, `${label}.display.png`),
     };
     await writeFile(join(this.dir, files.native), encodePNG(views.native.width, views.native.height, views.native.rgba));
     await writeFile(join(this.dir, files.display), encodePNG(views.display.width, views.display.height, views.display.rgba));
+    if (compiled.kind === 'raster') {
+      for (const kind of ['light', 'silhouette', 'selection', 'crop', 'cropDisplay']) {
+        const view = kind === 'cropDisplay' ? views.target_crop?.display : views[kind];
+        if (!view) continue;
+        files[kind] = join('previews', label, `${label}.${kind}.png`);
+        await writeFile(join(this.dir, files[kind]), encodePNG(view.width, view.height, view.rgba));
+      }
+      files.observation = join('previews', label, `${label}.observation.json`);
+      await writeFile(join(this.dir, files.observation), JSON.stringify({ ...views.meta,
+        revision: observation.revision ?? null, candidateId: observation.candidateId ?? null }, null, 2) + '\n');
+    }
     return files;
   }
 
@@ -484,7 +495,11 @@ export class StudioStore {
       const checks = checkAnyCandidate({ baseCompiled: base, candidateCompiled: candidate, plan, preserve: mergedPreserve, revision: baseRevision });
       if (base.document.schemaVersion === 'pga-studio/4' && checks.status === 'REJECTED') return { requestId: reqId, baseRevision, head: this.head, status: 'REJECTED_UNSAFE', candidateId: null, renderedCandidates: 0, checks, conflicts: checks.conflicts, ...validationInfo };
       const candidateId = candidateIdentity(baseRevision, base, operation, mergedPreserve);
-      const previews = { base: await this._writePreviews(base, `${baseRevision}-base`), candidate: await this._writePreviews(candidate, candidateId) };
+      // 位图选区因候选而异，基准裁切也必须按候选隔离，不能覆盖同修订的另一份观察。
+      const observation = kind === 'raster' ? { region: plan.region ?? undefined, revision: baseRevision } : {};
+      const baseLabel = kind === 'raster' ? `${candidateId}-base` : `${baseRevision}-base`;
+      const previews = { base: await this._writePreviews(base, baseLabel, observation),
+        candidate: await this._writePreviews(candidate, candidateId, { ...observation, candidateId }) };
       const record = {
         candidateId,
         baseRevision,

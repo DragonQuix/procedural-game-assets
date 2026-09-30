@@ -1,4 +1,4 @@
-# Studio 单帧位图创作（v1.5 alpha，工具包 0.9.1）
+# Studio 单帧位图创作（v1.5 alpha，工具包 0.9.2）
 
 依据：`../CONTEXT.md`、ADR-0014；事务与通用命令见 `studio-cli.md`。
 支持 Agent 自己看图、创建和绘改，不包含自动识别、图像生成服务或自动保真评分。
@@ -84,6 +84,13 @@ patch.png 必须恰好等于 region.w/h；替换包括透明擦除，选区外�
 锚点与附件点是最终帧像素边界坐标；不更改像素，不自动识别人物关节。
 
 ## 看图、比较与回退
+
+0.9.2 起，位图 `edit` 的 `previews.base/candidate` 在接受前就返回 light、silhouette、
+observation；绘制/替换操作另带 selection、crop、cropDisplay，自动使用本次 region。
+先看返回的候选视图，再决定是否 commit，不需要先接受才能做局部检查。
+基准裁切按候选隔离；observation 绑定基准 revision、候选 ID（基准图为 null）、文档/渲染哈希和 region。
+候选状态仍以 edit 的 status/checks 为准；有预览不等于候选可提交，更不等于视觉通过。
+旧候选和旧幂等请求记录不自动补视图；需要时重新 edit 并使用新的 request-id，不改历史文件。
 
 ```powershell
 node bin/pga-studio.mjs inspect --ws work/mask-ws --region '{"id":"visor","x":8,"y":6,"w":16,"h":20}' --out work/mask-detail
