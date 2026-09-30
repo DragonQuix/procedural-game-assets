@@ -8,6 +8,7 @@
 import { PixelPainter } from '../core/raster.js';
 import { scaleNearest } from '../core/transform.js';
 import { targetCrop } from '../observe/frame-views.js';
+import { validateRasterRegion, regionContains } from './raster-doc.js';
 
 /** 帧 → { width, height, rgba } 普通数据。 */
 function frameView(frame) {
@@ -51,6 +52,25 @@ export function buildViews(compiled, opts = {}) {
       renderHash: compiled.hashes.renderHash,
     },
   };
+  if (compiled.kind === 'raster') {
+    views.light = withBackground(scaled, '#eee8db');
+    const silhouette = scaled.clone();
+    silhouette.map(() => '#151922');
+    views.silhouette = withBackground(silhouette, '#eee8db');
+  }
+  if (opts.region !== undefined) {
+    if (compiled.kind !== 'raster' || opts.node !== undefined) throw new RangeError('region 只用于位图且不能与 node 同时使用');
+    const region = validateRasterRegion(opts.region, frame.width, frame.height);
+    views.target_crop = targetCrop(frame, { rect: region, contextPx: 2, scale, identity: { revision: opts.revision ?? null, candidateId: opts.candidateId ?? null, documentHash: compiled.hashes.documentHash, regionId: region.id } });
+    views.crop = views.target_crop.native;
+    views.meta.target_crop = views.target_crop.meta;
+    views.meta.region = region;
+    const selection = PixelPainter.fromRGBA(frame.width, frame.height, frame.rgba);
+    for (let y = 0; y < frame.height; y++) for (let x = 0; x < frame.width; x++) {
+      if (regionContains(region, x, y)) selection.set(x, y, '#ef4584');
+    }
+    views.selection = withBackground(scaleNearest(selection, scale), background);
+  }
   if (opts.node !== undefined) {
     const entry = compiled.sceneMap.nodes.find((n) => n.id === opts.node);
     if (!entry) throw new RangeError(`sceneMap 中不存在节点 '${opts.node}'`);
@@ -83,6 +103,7 @@ function base64Encode(bytes) {
  * 调用方传 encode(width,height,rgba)→PNG 字节后才有 playerHtml，否则为 null。
  */
 export function buildCharacterViews(compiled, opts = {}) {
+  if (opts.region !== undefined) throw new RangeError('region 只用于位图');
   const scale = opts.displayScale ?? 4;
   const background = opts.background ?? '#202028';
   const encode = opts.encode;

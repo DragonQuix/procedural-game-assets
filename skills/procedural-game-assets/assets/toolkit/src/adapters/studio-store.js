@@ -116,6 +116,7 @@ function requestHashOf(payload) {
 
 export function candidateIdentity(baseRevision, base, operation, preserve) {
   const identity = [baseRevision, operation, preserve];
+  if (base.kind === 'raster') identity.push(base.hashes.documentHash);
   if (['pga-studio/3', 'pga-studio/4'].includes(base.document.schemaVersion)) identity.push(base.hashes.documentHash, base.protection.contractHash ?? null);
   return `c-${fnv1aHex(stableStringify(identity))}`;
 }
@@ -469,6 +470,7 @@ export class StudioStore {
       const base = await this._getCompiled(baseRevision);
       validateSafeBinding(safeBinding, base, baseRevision, operation);
       if (['pga-studio/3', 'pga-studio/4'].includes(base.document.schemaVersion) && baseRevision !== this.head) fail('STALE_REVISION', '编辑需要当前 head；请重新 inspect');
+      if (base.kind === 'raster' && baseRevision !== this.head) fail('STALE_REVISION', '位图编辑需要当前 head；请重新 inspect');
       const kind = docKindOf(base.document);
       const preserveRequest = validatePreserve(preserve, base.document, kind); // R4：拼错/未知目标/未知类别在此明确拒绝
       const preserveDoc = validatePreserve(preserveFromAnyDocument(base.document), base.document, kind);

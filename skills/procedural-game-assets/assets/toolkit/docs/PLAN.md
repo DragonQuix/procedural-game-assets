@@ -34,6 +34,10 @@
 
 ## 当前开发交付（待独立认证）
 
+- Studio v1.5 alpha / 0.9.0：Agent 看图驱动的单帧位图创作。空白/PNG 创建、选区批量绘改和替换、
+  元数据编辑、观察、候选/恢复与标准导出；见 ADR-0014、`studio-raster.md`。
+  `plans/studio-reference-translation.md` 的首步工具原型已实施，后续风格迁移与动画未实施。
+  用户角色样图只作局部修复与接入验证，不构成通用临摹质量认证；循环版与用户级安装不升级。
 - Studio v1.4 / 0.8.0：显式 contact、有限 follower 修复、最终关系合同与安全域共用检查链。
   边界见 ADR-0013，交接见 `plans/studio-v1_4-delivery.md`。新 schema /4，/1–/3 保持兼容。
 - v0.1 已正式归档 NO-GO，不能沿用下方历史 v1.3 交付时的“尚未运行”状态。
