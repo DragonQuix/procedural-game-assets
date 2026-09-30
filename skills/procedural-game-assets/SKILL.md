@@ -86,7 +86,7 @@ CONTEXT.md、README.md；把模板复制为 `game/` 并把 import 改写成指�
 - **离线导出（可选部署）**：`bin/pga.mjs export` → PNG 图集 + 版本化 manifest；
   与启动烘焙同源，往返切回帧逐像素一致（有测试）。
 
-## PGA Studio：文档驱动的资产创作层（0.9.3 / Studio v1.5 alpha，ADR-0008–0014）
+## PGA Studio：文档驱动的资产创作层（0.10.0 / Studio v1.5 alpha，ADR-0008–0015）
 
 面向具备视觉判断的 agent：不必手写绘图代码，用**可编辑 JSON 文档**逐步制作资产，
 经共享烘焙核心渲染、预览、保护与导出。入口与完整合同：
@@ -105,6 +105,10 @@ params.coordinateSpace 为 canvas-pixels，不必手动换算成选区坐标。�
 局部修整先看 cropLight/cropSilhouette 的深色轮廓、透明断口和连接处，再看 native 与整体背景图；
 不要依赖宿主对透明 cropDisplay 的默认底色。根据 observation.target_crop.crop 的画布原点定位，
 选区包含连接边；擦除后重画需检查接缝。隔离试改从导出的 .studio.json 新建工作区，保留旧证据。
+需要等比例尺寸草稿时，用 raster.resample 显式指定 width/height 和 sampling=nearest；
+锚点/附件点按像素边界坐标联动且不取整，保护不放宽。跨尺寸 diff 为 null / FRAME_SIZE_CHANGED，
+observe 差分和候选裁切为 NOT_COMPARABLE，不得当成“区域外零变化”。先看目标原尺寸和背景图，
+再接受为草稿、重新选区并用已有操作重组少数必要特征；缩图本身不证明尺寸迁移完成。
 首版限单帧、边长最多 256、二值 alpha；不自动缩图、去背、风格转换或生成动画。
 技术检查不替代视觉检查，当前 agent 自检不冒充独立认证，不默认启用严格长循环。
 
@@ -124,7 +128,7 @@ node bin/pga-studio.mjs explore --ws work/ws --base r1 --op geometry.set --targe
 - **静态道具**（`pga-studio/1` 矩形、`pga-studio/2` 多边形/圆形/体积概括）与
   **一个角色**（锈爪 humanoid 数据面，13 帧 4 剪辑，跨帧一致修改）。
 - **单帧位图**（`pga-studio/raster/1`）：空白或 PNG 创建、选区批量绘制/擦除/替换、
-  锚点/附件点编辑；边长最多 256，二值 alpha，不依赖 humanoid 模板。
+  锚点/附件点编辑和显式等比例最近邻尺寸草稿；边长最多 256，二值 alpha，不依赖 humanoid 模板。
 - 编辑事务：有限操作（geometry/material/ramp/palette/rig/art.set）、同基准候选探索与去重、
   像素/结构/元数据保护、接受/恢复/过期拒绝、幂等重试；错误候选不会污染已确认版本。
 - 观察：native/display 预览、节点定位、受影响帧与附件点报告、自包含播放页（真实播放）。

@@ -36,6 +36,7 @@
 | `character document`（角色文档） | `pga-studio/character/1`：humanoid 配方的结构化数据面（palette/frame/rig/art/poses/clips） | 经既有 bakeHumanoid 编译；不变量仅适配 checkedPoseKinds；见 ADR-0011 |
 | `raster document`（位图文档） | `pga-studio/raster/1`：最终尺寸、内嵌规范化 RGBA、锚点、附件点和保护声明的单帧编辑源 | 边长最多 256、二值 alpha；标准 BakedAsset.kind 为 raster；见 ADR-0014 |
 | `raster region`（位图选区） | 操作前显式声明的稳定 ID + 最终帧矩形 + 可选二值掩码；绘制坐标默认相对矩形原点，可显式选画布坐标 | 坐标系不改变允许区域；不是语义部件，也不是跨修订冻结合同；区域外最终像素必须不变 |
+| `resample draft`（尺寸草稿） | raster.resample 显式等比例最近邻采样的候选，锚点与附件点按像素边界坐标同比变换 | ADR-0015；不是细节重构或视觉通过；跨尺寸逐像素差分不可比较 |
 | `reference translation`（参考设计临摹） | Agent 看用户设计和候选，用 Studio 或外部工具创建/修改，再自行看图检查 | 角色身份、风格参考与质量标杆分开；技术 PASS 不证明视觉保真，不默认使用独立长循环 |
 | `grounding`（接地） | 角色帧包围盒底缘（贴地）在修改前后不变 | 顶缘随体高/腿长合法变化；由 solvePose 自动保持 |
 | `head` | Studio 工作区当前已确认修订指针（`head.json`，原子替换更新） | 只有 commit 移动它；并发底线是 expectedHead 校验 |
@@ -81,6 +82,6 @@ examples/godot/         Godot 可选适配样例（非验收前提）
 - 分析：`E:/Repos/Games/ForOthers/others_003/docs/PROCEDURAL-ART-ANALYSIS.md`
 - 原游戏设计：`E:/Repos/Games/ForOthers/others_003/docs/DESIGN.md`
 - 来源与授权：`docs/provenance.md`
-- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio、0009 Studio 编辑事务、0010 Studio 风格与构造、0011 Studio 角色与跨帧、0012 最终保护与安全域、0013 显式关系、0014 单帧位图创作）
+- ADR：`docs/adr/`（0001 平台解耦、0002 坐标、0003 离线清单、0004 网页优先接入、0005 Canvas 模板、0006 资产循环入口、0007 质量同级评审、0008 agent Studio、0009 Studio 编辑事务、0010 Studio 风格与构造、0011 Studio 角色与跨帧、0012 最终保护与安全域、0013 显式关系、0014 单帧位图创作、0015 显式尺寸草稿）
 
 本项目当前没有 `CONTEXT-MAP.md`（未做领域拆分）；如将来拆分领域再建立。
