@@ -1,4 +1,4 @@
-# Studio 单帧位图创作（v1.5 alpha）
+# Studio 单帧位图创作（v1.5 alpha，工具包 0.9.1）
 
 依据：`../CONTEXT.md`、ADR-0014；事务与通用命令见 `studio-cli.md`。
 支持 Agent 自己看图、创建和绘改，不包含自动识别、图像生成服务或自动保真评分。
@@ -42,11 +42,39 @@ node bin/pga-studio.mjs export --ws work/mask-ws --out work/mask-export
 ```
 
 - region 是最终帧内矩形，右下排他；mask 可省略，存在时必须为 h 行、每行 w 个 0/1。
-- 绘制坐标相对 region 原点，必须为整数；`pixel` 用像素索引，line 端点遵循 PixelPainter 规则。
+- 绘制坐标默认相对 region 原点，必须为整数；`pixel` 用像素索引，line 端点遵循 PixelPainter 规则。
 - mask=0 的像素不受影响；mask 全零拒绝。原语越出矩形报错，不靠掩码隐藏非法绘制。
 - color 为 `#rrggbb` 或 null；null 真正擦除 RGBA，不是覆盖一层背景色。
-- 支持 pixel(x,y)、rect(x,y,w,h)、line(x0,y0,x1,y1,thick?)、poly(points)。
-  一次最多 128 条，poly 3..128 顶点，line 粗细 1..64。没有渐变、软笔刷或半透明混合。
+- 支持 pixel(x,y)、rect(x,y,w,h)、line(x0,y0,x1,y1,thick?)、poly(points)、path(points,thick?,closed?)。
+  一次最多 128 条，poly 3..128 顶点，path 2..128 顶点；line/path 粗细 1..64，合计最多 512 条线段。
+  没有渐变、软笔刷或半透明混合。
+
+### 连续路径与画布坐标（0.9.1 起）
+
+观察图定位到的是最终画布坐标时，可直接声明 `params.coordinateSpace: "canvas-pixels"`，
+不必手动减去选区原点；省略或 `"region-local-pixels"` 保持旧行为。不自动猜测坐标系。
+两种坐标系都必须落在同一事先声明的 region 中，矩形宽高和笔刷粗细不平移。
+region/mask 和锚点、附件点仍使用原合同，不受该字段影响。
+
+```json
+{
+  "id": "raster.draw",
+  "target": "canvas",
+  "params": {
+    "region": { "id": "contour-a", "x": 8, "y": 6, "w": 16, "h": 20 },
+    "coordinateSpace": "canvas-pixels",
+    "commands": [
+      { "kind": "path", "points": [[11, 10], [20, 10], [20, 20], [16, 23], [11, 20]], "closed": true, "color": "#ff922c" }
+    ]
+  }
+}
+```
+
+path 默认不闭合；closed=true 追加末点到首点的线段，**不填充内部**。
+每段等价于已有 line，连接处不做额外圆角或平滑。粗笔刷的全部覆盖必须在 region 矩形内，
+不能用 mask 隐藏越界；color=null 沿路径擦除。完整纯 JSON 样例见
+`examples/studio/raster-path.draw.json`，可直接替换最小流程中的 operation 文件。
+这只减少输入拆分，不保证轮廓画得更好，也不提供贝塞尔曲线或自动描摹。
 
 `raster.replace` 使用同样的 region，params.rgba 为 `w*h*8` 个小写十六进制 RGBA 字符。
 也可以不填 rgba，使用 `edit --operation replace.json --image patch.png`，由 IO 层解码并冻结像素。

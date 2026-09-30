@@ -4,6 +4,40 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S11.1 位图路径输入回收（2026-09-30，0.9.1）
+
+依据：`../CONTEXT.md`、ADR-0014、`studio-raster.md`。本轮不是继续打磨角色样图，
+而是检查 S11 修整轨迹中哪些重复工作应由 Studio 提供。
+
+### 缺口与项目改进
+
+S11 的头部和身体脚本均自行展开折线；身体脚本还把画布坐标减去选区原点，
+148 条指令分成两次 edit。由此新增 `raster.draw` 的 path 和显式 canvas-pixels 坐标输入，
+默认保留 region-local-pixels。路径复用 line 栅格规则，可闭合但不填充、不平滑。
+每条最多 128 点，每次 line/path 合计最多 512 条线段；选区、掩码和元数据合同不变。
+通用示例 `examples/studio/raster-path.draw.json` 可直接交给现有 CLI，无需另写绘制脚本。
+
+### 最小验证与结论
+
+- 只读回放原身体操作：**148 条变为 70 条**，可在一次 edit 中表达；新文档与原两次操作后的
+  文档完全相同，renderHash=5ea7cc47:8e0cacc3，选区外差分为 0。
+  原参考、角色工作区和修订未改，未写入新角色候选。此回放只支持“表达更紧凑”，不支持美术改进。
+- 新增 6 项回归覆盖连续/闭合路径与旧 line 逐像素等价、全部原语的两种坐标输入、透明擦除、
+  掩码保护、非法输入、粗笔刷越界、展开线段预算，以及 CLI 失败不移 head、删除输入后提交、重开/导出/恢复。
+- 开发源相关套件加普通技能发行检查：**20 PASS / 0 FAIL**；普通载荷内相关套件：**19 PASS / 0 FAIL**。
+  运行文件为 `tests/unit/studio-raster.test.js`、`tests/unit/studio-raster-path.test.js`、
+  `tests/integration/studio-raster.test.js`，开发源另含 `tests/integration/skill-release.test.js`。
+  没有重跑全套，S11 的全量数字不作为本轮重新验证的结果；旧基准数据状态断言也未修改。
+- 普通载荷经 release 生成，216 文件哈希一致；循环版只检查，132 文件一致，用户级安装未改。
+
+证据：`work/studio-raster-path-trace.log`、`work/studio-raster-path-release-tests.log`、
+`work/studio-raster-path-payload-tests.log`。前者是对已有轨迹的纯函数回放，不是新增正式实验。
+输出与既有像素完全一致，故不为此补拍浏览器截图或重新审美，S11 的视觉 NOT_YET 保持不变。
+
+维护决定：保留路径和坐标输入能力及通用回归，停止该项补证。不扩展曲线、自动描摹或语义部件；
+后续尺寸迁移另行验证细节损失和元数据变换，不由本轮结果推断其可用性。
+本轮未验证模型调用成本、Agent 成功率、临摹质量或第二种角色结构。
+
 ## S11 Studio v1.5 alpha：Agent 看图驱动的位图创作（2026-09-30）
 
 依据：`../CONTEXT.md`、ADR-0014、`plans/studio-reference-translation.md`。

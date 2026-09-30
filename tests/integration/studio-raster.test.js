@@ -109,3 +109,29 @@ test('真实 JSON CLI：创建/文件操作/局部观察/提交/导出及错误�
   assert.equal(cli('inspect', '--doc', propPath, '--region', JSON.stringify(operation.params.region)).error.code, 'UNSUPPORTED_SCOPE');
   assert.equal(cli('explore', '--ws', ws, '--base', 'r2', '--op', 'raster.draw', '--target', 'canvas', '--field', 'x', '--values', '1,2').error.code, 'UNSUPPORTED_SCOPE');
 });
+
+test('连续路径 CLI：无需辅助绘图脚本；失败原子性、重开和恢复沿用现有事务', async (t) => {
+  const root = await temporary(t), ws = join(root, 'ws'), input = join(root, 'path.json');
+  const example = fileURLToPath(new URL('../../examples/studio/raster-path.draw.json', import.meta.url));
+  const source = JSON.parse(await readFile(example, 'utf8'));
+  assert.equal(cli('create', '--blank', '--id', 'path-sample', '--width', '32', '--height', '32', '--out', ws).ok, true);
+  await writeFile(input, JSON.stringify(source));
+  const edited = cli('edit', '--ws', ws, '--base', 'r1', '--operation', input);
+  assert.equal(edited.ok, true, JSON.stringify(edited)); assert.equal(edited.result.diff.outside, 0);
+  const before = await readFile(join(ws, 'head.json'), 'utf8');
+  const invalid = structuredClone(source);
+  invalid.params.commands.push({ kind: 'path', points: [[8, 6], [9, 7]], thick: 3, color: '#ffffff' });
+  await writeFile(input, JSON.stringify(invalid));
+  assert.equal(cli('edit', '--ws', ws, '--base', 'r1', '--operation', input).ok, false);
+  assert.equal(await readFile(join(ws, 'head.json'), 'utf8'), before);
+  await rm(input);
+  assert.equal(cli('commit', '--ws', ws, '--accept', edited.result.candidateId, '--expected-head', 'r1').ok, true);
+  const reopened = await StudioStore.open(ws), compiled = await reopened._getCompiled('r2');
+  assert.equal(compiled.hashes.renderHash, edited.result.hashes.renderHash);
+  const view = cli('inspect', '--ws', ws, '--region', JSON.stringify(source.params.region), '--out', join(root, 'view'));
+  assert.equal(view.ok, true); assert.ok(view.result.capabilities.primitives.includes('path'));
+  const exported = await exportWorkspace(ws, join(root, 'out'));
+  const doc = JSON.parse(await readFile(join(root, 'out', exported.files.document), 'utf8'));
+  assert.equal(compileRasterDocument(doc).hashes.renderHash, compiled.hashes.renderHash);
+  assert.equal(cli('commit', '--ws', ws, '--restore', 'r1', '--expected-head', 'r2').result.head, 'r3');
+});
