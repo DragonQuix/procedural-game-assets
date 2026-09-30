@@ -62,3 +62,8 @@ tests/PGA_RELATION_BENCHMARK_v0_2/reviews/
 !tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/candidate-materials/frozen/*/node_modules/pngjs/
 !tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/candidate-materials/shared/node_modules/
 !tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/candidate-materials/shared/node_modules/pngjs/
+
+# PGA_STUDIO_E2E_BENCHMARK_v0_3 正式原始 runs 与盲评原始目录（大型二进制；正式小型结果入 results/ 入库）
+tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/runs/
+tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/runs-invalid/
+tests/PGA_STUDIO_E2E_BENCHMARK_v0_3/reviews/

@@ -1,0 +1,238 @@
+{
+  "schema": "pga-e2e-protocol-frozen/0.3",
+  "frozenAt": "2026-09-30T08:46:25.479Z",
+  "freezeOwner": "ZCode",
+  "repo": {
+    "headAtFreeze": "b911ffcd8b1d374b9477fecfaf4ed9112b9c8a54",
+    "mergeCommitOfPr3": "b911ffcd8b1d374b9477fecfaf4ed9112b9c8a54",
+    "pr3Head": "5c0d1a60ad5889185c270028079c4a5147fcd230"
+  },
+  "product": {
+    "studioVersion": "v1.4",
+    "packageVersion": "v0.8.0",
+    "tag": "v0.8.0",
+    "tagCommit": "91aaa757bd910255f293c57f594cac06f9f169af",
+    "note": "不创建新产品 tag；D14 引用 frozen v0.8.0"
+  },
+  "candidateMaterials": {
+    "manifestSha256": "a863ed6d371651ad26113ffca1ff9ec0df46a1f0e632ad57f1398fc4ceb062d9",
+    "toolkits": {
+      "A": "3b2d59037671c03f521c957a372b657418f7fafbfa7958edd64a60c8df42ec1d",
+      "D14": "b91c035257a79985b9edebe2fb1779831da6d7f049eebbfbc69fd591986cc65f"
+    },
+    "sharedObservation": "d29c28f9ee5093d6e6515ac2f1cff6b0a4a7ff63b1f00d88691d5556f014e7e7",
+    "vision": "f5a82f13562cb61209012050c0eea018241d25cbcd4d693f8c8b02bfe051100f",
+    "tasks": {
+      "H": "fbb9183955005a2e2a8fe5922ab5669c2aff9213e94d80c0f2b9dd969124b021",
+      "K": "f1832b5a165424ab1098e31b3b69f2febc3d88a0045cfb005845069468d5d6bd",
+      "M": "8b2fe98b8b07a3413966a4e249aa7433612de6ca61de40a0942e8a23f635b865",
+      "S": "b4f179964226f5a3076a50e36bdbc556dd7e12277bb4d026f4b661aae08d79e2"
+    },
+    "starts": {
+      "H-A": "4aa9f95ff01c614820a971b667de34e5925bfcc006c67f5eaca88ebcec90c9ef",
+      "H-D14": "d38fca9872297aa306761996b5b01592533cf3f6ac57e56115dfeaccc04cf4f3",
+      "K-A": "3e8f274d01aa48c40aef10ac8e06a3d43022cab18be75f428be031e80e066090",
+      "K-D14": "4dd9bbc780a93ed5ae05863d76805fe5993c4ae4d93b6c785fee41d2f13c6040",
+      "M-A": "7e95f5361ca852f318fd03466803d3139958c85f878ded16a01d24d4d8a32326",
+      "M-D14": "dd0739c6ebf46068512a90936e309e2ee890d4142cd63d5732b5f91e02be5d55",
+      "S-A": "a401e14dd7bcdb61da4b3fa843c3f9596a5ebdfc6e57f7a887ef7fb6f6954355",
+      "S-D14": "551f014554307bb334a5eaa9233fc95d3bf2a08b8b19e4c81b5d9086fdc666f0"
+    },
+    "regenCheck": "REGEN_MATCH=true（work/v03-regen 重生成与候选逐哈希一致，2026-09-30）"
+  },
+  "benchmarkSource": {
+    "protocolFiles": {
+      "protocol-draft.json": "80f8c1ba69b842b58818df5d439794143cd59c90dc87d96ed7cf3a3e95ac0225",
+      "PROTOCOL.md": "e094528c100c8bf5e28612681b51ebc12a85badbbb777efdceb2c883f316b24a",
+      "README.md": "a1df38c503d489a9af05fb962749e513de4c46a7ada2a65ee69fa704ef66177f",
+      "HOLDOUT.md": "9464de9a18c4e45610372acdee6f99c285ae476d9f9682c5c0db8940fb00b904"
+    },
+    "selfTestSha256": "bd21218cfd0c7ea35771540f0198739b1ad21271536bc99863f845219654674d",
+    "sourceTrees": {
+      "organizer": "eb6949b1cd1038b1b2c9530813eaca181c7cee3dab2ab57d9ee9f54ae79ba016",
+      "shared": "cb872605b48cf9306a4f71cb8331513c9f883c354fce12a2eee047b6e1950e36",
+      "prompts": "316d36d672c67b115b00ed5f87da35a9c3f3da3a044e032f5cdb39c284295428",
+      "tasks": "da01ad12f75c5e29c5e06ea60978f1a3420bb88793bb91ce608da2af6fab76f5"
+    }
+  },
+  "componentHashes": {
+    "participantPrompt": "59f39145636ab19fd49fc4db924f8ab9badffc3608518aa5049a0a4a09ad62bf",
+    "reviewerPrompt": "67dc272f78174ac8eebc846b94c883391245d6af3f83c344756d520d448fbbdd",
+    "visionPrompt": "538f34c41ad363cc5883b2e1998bbc8b2e8168ec9b617e08c5c4ab08f9a233d7",
+    "submitReviewHost": "02ab49d872a39f4dd16de5f82377aaa11fa3822e6240820d3e159067a18ff803",
+    "evaluator": "208a8988cc255733ad3a23256bbc043cecd010d1f7120bba16b7ac7c4ac4091a",
+    "evaluateState": "03f7a104841108b3b0baa76b3cafa4e92f16b92bc29951f599c29658f570f875",
+    "runner": "94491ec76286e8e2be96ffecaa09b451191d67b08ccd43d1821f88df67406a03",
+    "renderWorker": "3bd678904774022fce2a7fe078714b7db133039b77b44f2d5bbbef0d3d4f4649",
+    "blind": "4cb1d177ff7bc6cfee0940eb3df8fe833947796595e518a3272afd6b151a84aa",
+    "symbolicBlind": "ec36de20912e5b91c4032ec544f5b55dd156d1a5aae8f0c2e8763cdec7ce7fa6",
+    "outcomes": "967fa651ec3bb3c1c872897551f1b919f8ec3290fa6ab6e774810c443bc20be5",
+    "trials": "5708c130982f9e6c1c971c143063750a4204411c2c52e0442a37b192d5ed1367",
+    "gates": "e76f2a41ebe1baa907ad8255a3d5aa470d309286a9533104968f29908e09dc79",
+    "reviewGate": "5270d51baca2fc4538174ce72e871f34fb6d8986f09bd5fe5b3965d06f331405",
+    "reviewSchema": "ba0482b29fe27609681a45d2e2da48ab8bf6ed9cf9f6617c8b74585bd86209b9",
+    "identityLint": "19713938dcc48fedd2c2ea0596b3413a1c8e4a41c778fbbe0a7fd3599a434d1d",
+    "accounting": "17f569f0553d3e07ade42d97cc4cd79eaed812830d9a2a3a7f4c64c6d572fc4a"
+  },
+  "mappingSeed": "f453320051fd721a5ec2bd2d99a4169d",
+  "plannedRunOrder": [
+    "H-A-r1",
+    "H-D14-r1",
+    "H-D14-r2",
+    "H-A-r2",
+    "H-A-r3",
+    "H-D14-r3",
+    "K-D14-r1",
+    "K-A-r1",
+    "K-A-r2",
+    "K-D14-r2",
+    "K-D14-r3",
+    "K-A-r3",
+    "M-A-r1",
+    "M-D14-r1",
+    "M-D14-r2",
+    "M-A-r2",
+    "M-A-r3",
+    "M-D14-r3",
+    "S-D14-r1",
+    "S-A-r1",
+    "S-A-r2",
+    "S-D14-r2",
+    "S-D14-r3",
+    "S-A-r3"
+  ],
+  "plannedMatrixSha256": "f5c5175fb3e70afa41b86cc730fd95b4bbe687cad2f099cd674f360406fd02f7",
+  "candidateBudget": 8,
+  "reviewerMaxSchemaAttempts": 4,
+  "modelIdentity": {
+    "policy": "EXACT_REQUIRED",
+    "requestedModel": "GLM-5.3-Flash",
+    "actual": {
+      "model": "GLM-5.3-Flash",
+      "host": "ZCode",
+      "version": null,
+      "reasoning": null
+    },
+    "evidence": {
+      "source": "host-api",
+      "attestationId": "zcode-system-context:glm-5.3-flash:2026-09-30"
+    },
+    "frozenBeforeFirstRun": true,
+    "sha256": "bef2f5742fe6dcbda6a6e6c9d49df9bcb3d06cf616486a689a90c9119bbc26d4"
+  },
+  "host": {
+    "name": "ZCode",
+    "modelPolicyNote": "每次 participant/reviewer 创建前由 coordinator 复核宿主系统上下文模型声明；漂移即 LAUNCH_BLOCKED。",
+    "limitations": [
+      "ZCode 不向子代理暴露原生 transcript callId/sessionId；以 coordinator 分配的 agentId 作为 modelContextId，事件 callId 由 host adapter 分配并在证据中标注。",
+      "共享文件系统不构成沙箱：participant/reviewer 各限其 trial/review 目录，由 prompt 边界 + 事后审计控制；nonce 测试证明对话历史不共享。"
+    ]
+  },
+  "visionEvidence": {
+    "expectedImages": {
+      "vision_A.png": "39c3de5c49100c7d4bb5e0adceb18fbd1fac6128d49ae1f799ed8521a9d2f0db",
+      "vision_B.png": "b4e73b6c06cc10866133708821fa3bd94dbe97ed9c238e45699f450d0ea7c15a"
+    },
+    "objectRecognitionVerified": true,
+    "recognition": {
+      "objectA": "帆船：深蓝底、暖橙棕梯形船体、浅米色桅杆+右侧三角帆（桅杆高出帆顶）",
+      "objectB": "放大镜形环：米色底、绿色圆环、深棕柄、环心中空透出背景"
+    },
+    "hostEvents": [
+      {
+        "source": "host-transcript",
+        "kind": "image-input",
+        "success": true,
+        "modelInput": true,
+        "view": "vision_A.png",
+        "sha256": "39c3de5c49100c7d4bb5e0adceb18fbd1fac6128d49ae1f799ed8521a9d2f0db",
+        "callId": "v03-vision-r2-read-1",
+        "modelContextId": "agent_1e2984cb-a3ce-4c0d-93aa-06cc4c20e8cc",
+        "sessionId": "zcode-subagent:agent_1e2984cb-a3ce-4c0d-93aa-06cc4c20e8cc"
+      },
+      {
+        "source": "host-transcript",
+        "kind": "image-input",
+        "success": true,
+        "modelInput": true,
+        "view": "vision_B.png",
+        "sha256": "b4e73b6c06cc10866133708821fa3bd94dbe97ed9c238e45699f450d0ea7c15a",
+        "callId": "v03-vision-r2-read-2",
+        "modelContextId": "agent_1e2984cb-a3ce-4c0d-93aa-06cc4c20e8cc",
+        "sessionId": "zcode-subagent:agent_1e2984cb-a3ce-4c0d-93aa-06cc4c20e8cc"
+      }
+    ],
+    "context": {
+      "modelContextId": "agent_1e2984cb-a3ce-4c0d-93aa-06cc4c20e8cc",
+      "sessionId": "zcode-subagent:agent_1e2984cb-a3ce-4c0d-93aa-06cc4c20e8cc"
+    },
+    "note": "严格版逐张读取重验通过（首次并行读取运行因 A/B 标签互换作废，仅留证据）。命名同义词差异不判失败（环+柄 vs 放大镜/树）。callId 为 host adapter 分配。"
+  },
+  "agentIsolationEvidence": {
+    "nonce": "ef115489006fe50e",
+    "nonceWriterAgent": "agent_00ae25c6-b9e4-4cbd-a52c-beb9b6839a8c",
+    "probeAgent": "agent_72bc5bbd-391d-4cfd-a77f-da9b2779fa6e",
+    "priorNonceAnswer": "没有",
+    "sharedFsConfirmed": true,
+    "conclusion": "对话历史不共享（prior nonce 无法获知）；文件系统共享为已记录 limitation，宿主以目录边界与事后审计控制。"
+  },
+  "primary": {
+    "strictTaskSuccess": "PASS 仅当 submit 成功、双冷渲染 deterministic、全部硬机械约束、保护、适用 required relation、预算与协议全 PASS，且两位独立 reviewer 均 MEETS 并有 CONFIRMED 图像证据。MEETS+NOT_YET=DISAGREEMENT；NOT_YET+NOT_YET=NOT_YET；任一 UNVERIFIED=UNVERIFIED。",
+    "technicalFailureIncidence": "invalidFinalOutput / hardContractViolation / toolBlockedCompletion / submitFailure 任一发生；未知不是 false。",
+    "pairedVisualPreference": "只分类 CONSENSUS_A / CONSENSUS_D14 / MIXED / NO_MEANINGFUL_DIFFERENCE / BOTH_NOT_YET / UNVERIFIED；不加总审美分数。"
+  },
+  "secondary": {
+    "allowed": [
+      "candidateCount",
+      "semanticTransformCount",
+      "relationAwareTransformCount",
+      "rejectedOperationCount",
+      "submitSuccess",
+      "retries/errors",
+      "raw reviewer outcomes",
+      "reviewValidationAttempts"
+    ],
+    "diagnosticOnly": [
+      "validationProbeCount = DIAGNOSTIC_ONLY，不得用于计算效率结论",
+      "observableRelationDiagnosticCount 只计可观察诊断产物"
+    ],
+    "notComparable": [
+      "lowLevelEditCount = NOT_COMPARABLE",
+      "manualCoordinateRepairCount = NOT_COMPARABLE",
+      "wallClockMs/cpuTimeMs/compileInvocations 仅 exploratory"
+    ]
+  },
+  "statistics": {
+    "planned": [
+      "paired 2×2 success matrix",
+      "two-sided exact McNemar（有 unresolved 时不运行）",
+      "consensus-only two-sided exact sign/binomial",
+      "task-level breakdown"
+    ],
+    "constraints": [
+      "不试多个检验挑最小 p",
+      "12 pairs 嵌套于 4 tasks；4 tasks 是主要泛化单位",
+      "不追加 repeat、不设第三 reviewer"
+    ]
+  },
+  "decisionRule": {
+    "layers": [
+      "Engineering decision: SUPPORTS | DOES_NOT_SUPPORT | MIXED/INCONCLUSIVE",
+      "Visual/product hypothesis: SUPPORTS | DOES_NOT_SUPPORT | MIXED/INCONCLUSIVE"
+    ],
+    "note": "不构造人为总分；解释措辞按 PROTOCOL.md 两层结构。"
+  },
+  "executionPolicy": {
+    "scale": "4 tasks × 2 arms × 3 repeats = 24 participant runs；12 pairs × 2 reviewers = 24 reviewer runs",
+    "launchOrdering": "按 plannedRunOrder 顺序执行 launch gate；允许有限并行但逐 slot 走完整 payload-before-agent 时序",
+    "failurePolicy": "任务暴露前失败按 launch policy 记录重试；任务暴露后失败即正式 run 结果，不补跑挑优",
+    "interventionPolicy": "发现产品 bug / 设计 blocker / 不公平即停止回报，不由 ZCode 修 benchmark 语义；host adapter 仅在协调器私有目录",
+    "unblindPolicy": "24 participant frozen + 24 evaluate + 24 valid review 或 NOT_SUBMITTED + isolation checks 完成后才记录 firstFormalUnblindTimestamp"
+  },
+  "accessIsolation": {
+    "participantRoots": "仅自身 trial staged 目录",
+    "reviewerRoots": "仅自身 reviewer 目录",
+    "keyStorage": "mapping key 仅协调器 results/private/（不入 participant/reviewer package）",
+    "audit": "评估时对账 candidate ledger 与目录；绕过 wrapper 出图无法核实即 UNVERIFIED"
+  }
+}

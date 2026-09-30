@@ -1,0 +1,12 @@
+{
+  "schema": "pga-e2e-freeze-manifest/0.3",
+  "createdAt": "2026-09-30T08:46:25.519Z",
+  "files": {
+    "protocol-frozen.json": "426880b66f8b4d98b3ad21d0468e2679d050337407c606cde45461d0f54c8ff5"
+  },
+  "inputs": {
+    "candidateManifest": "f5c5175fb3e70afa41b86cc730fd95b4bbe687cad2f099cd674f360406fd02f7",
+    "protocolDraft": "80f8c1ba69b842b58818df5d439794143cd59c90dc87d96ed7cf3a3e95ac0225"
+  },
+  "hostAttestation": "ZCode 系统上下文声明 session model = account:bigmodel-individual-coding-plan/GLM-5.3-Flash；用户任务书同日确认。EXACT_REQUIRED 通过。"
+}
