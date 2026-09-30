@@ -4,6 +4,48 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S11.3 局部修整回收浅底与剪影观察（2026-09-30，0.9.3）
+
+依据：`../CONTEXT.md`、ADR-0001/0009/0014、`studio-raster.md`。
+待验证假设：现有 path、canvas-pixels 和候选裁切能否表达手部修整，不借助专用绘图脚本或新绘制 API。
+项目收益是定位操作、观察或指导的可复用缺口，不以把这张角色修到视觉通过为目标。
+
+### 实际看图与维护改进
+
+- Agent 实际查看用户原图、旧 native/display 与手部裁切，从旧导出的 .studio.json 新建
+  `work/studio-local-refinement-20260930/workspace`；旧 `work/reference-knight/workspace` 的 r6 保持只读。
+- `hand-a` 选区为 `{x:6,y:118,w:26,h:32}`，两次操作均为直接 JSON，沿用 poly/path、透明擦除和画布坐标。
+  候选 `c-c65c055a` 改变 373 像素，区域外 0；技术 OK，但完整浅底图显出新腕部断口，Agent 未接受。
+  透明 cropDisplay 在深色宿主底色上使描边与透明区域不易区分，需要整张浅底图才能检查局部接缝。
+- 据此在已有位图 edit/inspect 观察面增加 cropLight/cropSilhouette，共用原裁切和 2px 邻域。
+  cropLight 保留不透明像素颜色，cropSilhouette 保留不透明形状，两者使用不透明浅底。
+  background 元数据仍与修订、候选、region 和哈希绑定；原透明裁切、文档、native 和导出像素不变。
+  不改共享 targetCrop、不新增绘制操作、不从连通性或颜色指标自动判断造型。
+- 第二候选 `c-61d5b316` 改变 393 像素，区域外 0。Agent 在接受前实际查看 cropLight、cropSilhouette、
+  native 和 display，判断腕部连接完整、掌甲与指节比原块状手套更可辨，接受为局部草稿；新 head=r2，
+  documentHash=5410e14e，renderHash=6521a4dc:8e0cacc3。编辑源导出到该目录的 `export/`。
+- 通用指导补充：隔离试改、选区连接边、裁切原点与倍率换算、擦除后检查接缝，以及局部图后检查整体。
+  两次有目的试改已足够支持这项维护决定，停止继续重画，不把该角色或手型收进通用模板。
+
+### 必要回归与边界
+
+- 新增一项通用 unit 回归，增强已有真实 CLI 与候选隔离测试。新断言在实现前分别因缺少局部视图失败；
+  实现后验证裁切尺寸/邻域、边缘裁切、1x/3x 最近邻、掩码内外可观察像素、背景/剪影 RGBA、身份绑定、
+  原始透明裁切与资产像素不变、无 region 时无虚假局部图。
+- 开发源与普通载荷分别运行
+  `node --test "tests/unit/studio*.test.js" tests/unit/frame-observation.test.js "tests/integration/studio*.test.js"`，
+  各得 **191 PASS / 0 FAIL / 0 SKIP**。范围含静态/角色/位图编译、观察、事务、保护、安全域与关系回归。
+  开发仓库另运行 `tests/integration/skill-release.test.js`：**1 PASS / 0 FAIL**。
+- 普通载荷由 release 从源提交 6b4a4f5 生成，216 文件哈希一致；循环版只读校验 132 文件一致，未重建。
+  用户原图、旧 r6 head、旧导出编辑源及两份旧 evidence 的 SHA-256 前后相同；未修改旧实验或用户级安装。
+- 本地记录：`work/studio-local-refinement-20260930/evidence.json`、两份 draw.json、候选目录、`export/`，
+  以及 `source-tests.log`、`payload-tests.log`、`skill-release-tests.log`。这些位于 gitignored work，不随推送携带。
+
+**整张角色仍为 NOT_YET**：hand-b 未修整，hand-a 手型仍简化，材质、头发和面甲仍粗略。
+本轮是 Agent 自检，不是独立认证；没有新增浏览器预览或人工试玩，没有尺寸/风格迁移、第二种角色或动画证据。
+只支持本例中的操作表达与观察改进，不证明普遍临摹质量、模型成功率或成本提升。
+未重跑工具包全套；S11 的旧正式数据状态断言仍是已知边界，不为全绿接管旧实验。
+
 ## S11.2 接受前的位图候选局部观察（2026-09-30，0.9.2）
 
 依据：`../CONTEXT.md`、ADR-0009/0014、`studio-raster.md`。本轮解决的通用缺口是：

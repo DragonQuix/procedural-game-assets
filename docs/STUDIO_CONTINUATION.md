@@ -1,6 +1,6 @@
 # Studio 临摹路线续接说明
 
-更新时间：2026-09-30。适用起点：工具包 0.9.2 / Studio v1.5 alpha。
+更新时间：2026-09-30。适用起点：工具包 0.9.3 / Studio v1.5 alpha。
 本文件是清空会话后的工作入口，不替代领域合同或验证记录。
 
 ## 先读与执行边界
@@ -9,7 +9,7 @@
 以 CONTEXT.md 和 docs/adr/ 为术语、模块边界和架构决策来源。
 重点 ADR：0001 核心/IO、0002 坐标、0004 共享烘焙、0009 事务、0014 位图。
 当前没有 CONTEXT-MAP.md；若以后建立则按其定位子域。
-方向见 docs/plans/studio-reference-translation.md；实际证据见 docs/verification.md S11、S11.1、S11.2。
+方向见 docs/plans/studio-reference-translation.md；实际证据见 docs/verification.md S11–S11.3。
 
 - Windows/PowerShell，中文交流、文档和提交；本地文件优先 FastCtx，手工编辑用 apply_patch。
 - 不默认启动子代理，不改用户级技能安装、循环版载荷、旧实验或参考原图。
@@ -40,6 +40,9 @@ Agent 实际看用户角色设计，通过 Studio 创建和修改，再用自身
 - 0.9.2：位图 edit 接受前直接返回 light/silhouette/observation；绘制/替换还返回
   selection/crop/cropDisplay。基准裁切按候选隔离；JSON 绑定 revision、candidateId 和哈希。
   旧候选及幂等请求不自动补材料；重新 edit 用新 request-id，不能直接修改历史。
+- 0.9.3：从 hand-a 局部试改回收 cropLight/cropSilhouette，edit/inspect 在原裁切及 2px 邻域内
+  提供不透明浅底，显出深色描边、透明断口和连接处。crop/cropDisplay 保留透明，观察背景不进资产。
+  指导补充隔离试改、裁切原点/倍率换算和接缝检查；没有新增绘制操作或自动造型判断。
 
 主要实现：src/studio/raster-doc.js、src/adapters/studio-store.js、src/adapters/studio-files.js、
 src/studio/dispatch.js、src/studio/observe.js、bin/pga-studio.mjs。
@@ -50,11 +53,13 @@ src/studio/dispatch.js、src/studio/observe.js、bin/pga-studio.mjs。
 - 1e321c6：0.9.0 开发源；5037835：0.9.0 普通载荷。
 - 2f64f51：0.9.1 开发源；42bcff5：0.9.1 普通载荷。
 - 6438537：0.9.2 开发源；6e30f01：0.9.2 普通载荷。
+- 6b4a4f5：0.9.3 开发源；99ba9f9：0.9.3 普通载荷。
 
 当前分支 master，远端 origin 为 https://github.com/DragonQuix/procedural-game-assets.git。
+本轮从干净的 master/d103cb2 起步，并用 ls-remote 核对了该远端基线；收尾另做文档提交与推送。
 续接时以 git status / git log / 远端查询核实实际状态，不把本文当成永久的同步证明。
 
-## 当前样图与本地证据
+## 历史样图与只读证据
 
 用户原图：C:/Users/admin/Downloads/0000.png，只读。
 Agent 已看图：暗甲、橙色面甲/装甲纹路、长黑发、交叉背带、袍面符文、护膝。
@@ -76,14 +81,34 @@ Agent 已看图：暗甲、橙色面甲/装甲纹路、长黑发、交叉背带�
 不是独立认证，未证明普遍可靠临摹、尺寸迁移、风格迁移或动画。临时浏览器标签和服务器已关闭。
 work 文件如缺失，不要求重建整套样图证据；先用通用 fixture 处理可复用问题。
 
+## 本轮局部修整（新工作区）
+
+以下路径相对仓库，同样位于 gitignored 的 work，不随 Git 推送：
+
+- work/studio-local-refinement-20260930/workspace：从旧自包含编辑源创建的新工作区，head=r2。
+- 该目录的 hand-a.draw.json、hand-a-connected.draw.json：两次直接 JSON 操作，没有专用绘制脚本。
+- 候选 c-c65c055a：373 像素变化，选区外 0；技术 OK，但看完整浅底图发现腕部断口，未接受。
+- 候选 c-61d5b316：393 像素变化，选区外 0；接受前看 cropLight/cropSilhouette/native/display，
+  腕部连接完整、掌甲和指节更可辨，仅接受为局部草稿。图像在 workspace/previews/c-61d5b316/。
+- export/ember-knight.studio.json：本轮草稿编辑源；evidence.json：假设、图像输入、判断和只读文件哈希。
+
+当前 documentHash=5410e14e，renderHash=6521a4dc:8e0cacc3。**整张角色仍为 NOT_YET**：
+hand-b 未修整，hand-a 手型仍简化，材质、头发与面甲粗略。未补浏览器预览、人工试玩或独立认证。
+原图、旧 r6 head、旧编辑源与两份旧 evidence 的 SHA-256 前后相同；旧候选没有补写新视图。
+本轮已回答手部试改的有限操作与观察问题，不为把样图修完而继续重画或对称复制到 hand-b。
+
 ## 测试事实
 
+- 0.9.3 开发源与普通载荷各运行：
+  node --test "tests/unit/studio*.test.js" tests/unit/frame-observation.test.js "tests/integration/studio*.test.js"
+  各 **191 PASS / 0 FAIL / 0 SKIP**；开发仓库技能携带检查另 **1 PASS / 0 FAIL**。
+  日志为 work/studio-local-refinement-20260930/{source-tests,payload-tests,skill-release-tests}.log。
 - 0.9.2 开发源运行：node --test "tests/unit/studio-raster*.test.js" "tests/integration/studio*.test.js" tests/integration/skill-release.test.js
   74 PASS / 0 FAIL。载荷目录同范围但不含 skill-release：73 PASS / 0 FAIL。
   日志 work/studio-raster-preview-source-tests.log、studio-raster-preview-payload-tests.log。
 - 普通发行清单 216 文件；循环版保持原 132 文件，只读核对、不重建。
 - 0.9.0 曾跑较广回归：过滤旧断言后 433 PASS；普通载荷 406 PASS / 8 SKIP。
-  不是 0.9.2 的全套重测结果。0.9.1 的 20/19 相关回归见 S11.1。
+  不是 0.9.2/0.9.3 的全套重测结果。0.9.1 的 20/19 相关回归见 S11.1。
 - 已知旧断言：tests/integration/benchmark-e2e-v03.test.js 中
   “24 participants / 12 pairs / 24 independent reviewers planned; no formal data”
   仍要求正式实验数据不存在，但提交 376f563 已归档数据。未为凑绿删除数据或改旧测试。
@@ -91,16 +116,16 @@ work 文件如缺失，不要求重建整套样图证据；先用通用 fixture 
 
 ## 建议的下一步
 
-1. 实际打开用户参考和最后样图，选择一个有明确项目收益的局部问题，例如手部轮廓修整。
-   先写一句待验证假设：现有 path/画布坐标/候选裁切是否足够让 Agent 不借助专用脚本完成局部调整，
-   当前欠缺的是绘制操作、观察信息、通用指导，还是 Agent 自身视觉/造型能力。
-2. 从自包含编辑源建立新的 work 工作区，保留 r6 和旧 evidence。用现有 JSON CLI 创建候选，
-   实际看 candidate 的 crop/native/display，再接受或放弃；勿先提交后看图。
-   一到两次有目的修整用于找缺口，不预设必须出新 API，不把不断重画当作开发成果。
-3. 有重复/可迁移的缺口才改开发源或技能指导，并加能防退化的最小测试；
-   如工具已足够，则记录这一有限结论，转入一个更小尺寸的细节重组问题。
-4. 尺寸迁移目前未做。不要先写通用 resize 冒充临摹：目标尺寸、细节保留、锚点/附件点变换、
-   跨尺寸观察和事务如何表达需要先定位一个真实缺口。之后再考虑第二种角色结构，动画后置。
+1. 手部局部试改已有限验证：现有绘制操作可以表达，局部浅底与剪影补齐了观察缺口。
+   不继续补修 hand-b 或重拍旧样图来凑完整报告；如仍要打磨，先说明新的可回收收益与证据缺口。
+2. 按 docs/plans/studio-reference-translation.md T1，选择一个更小尺寸的细节重组问题。
+   实施者仍以 CONTEXT.md 和 ADR-0001/0002/0004/0009/0014 为术语与架构来源。
+   先实际看参考和当前草稿，声明目标尺寸、显示倍率、要保留或概括的少数特征，写一句待验证假设。
+   用新 work 保留两套历史证据，优先沿用空白/PNG 创建、poly/path/replace 和已有候选观察。
+3. 尺寸迁移目前未做。不要先写通用 resize 冒充临摹；先定位细节取舍、锚点/附件点定位、
+   跨尺寸观察或事务中一个真实缺口，再决定改代码还是指导。缩图只能当草稿，不能直接放行。
+4. 每个候选先看局部浅底/剪影，再看目标原尺寸和背景下的整体，实际看图后接受或放弃。
+   有可迁移缺口才补开发源和最小回归；证据足够即停止。之后再考虑另一种角色结构，动画后置。
 
 保持方向：用户提供设计后，Agent 能通过可观察、可修改、可回退的工具把它翻译成游戏资产。
 不要把工作重新引向通用关系求解器、完整 GUI、强制模型服务、无限评审或漂亮报告。
