@@ -1,0 +1,500 @@
+{
+  "pairs": [
+    {
+      "pair": "H-r1",
+      "task": "H",
+      "repeat": 1,
+      "runs": [
+        "H-A-r1",
+        "H-D14-r1"
+      ]
+    },
+    {
+      "pair": "H-r2",
+      "task": "H",
+      "repeat": 2,
+      "runs": [
+        "H-D14-r2",
+        "H-A-r2"
+      ]
+    },
+    {
+      "pair": "H-r3",
+      "task": "H",
+      "repeat": 3,
+      "runs": [
+        "H-A-r3",
+        "H-D14-r3"
+      ]
+    },
+    {
+      "pair": "K-r1",
+      "task": "K",
+      "repeat": 1,
+      "runs": [
+        "K-D14-r1",
+        "K-A-r1"
+      ]
+    },
+    {
+      "pair": "K-r2",
+      "task": "K",
+      "repeat": 2,
+      "runs": [
+        "K-A-r2",
+        "K-D14-r2"
+      ]
+    },
+    {
+      "pair": "K-r3",
+      "task": "K",
+      "repeat": 3,
+      "runs": [
+        "K-D14-r3",
+        "K-A-r3"
+      ]
+    },
+    {
+      "pair": "M-r1",
+      "task": "M",
+      "repeat": 1,
+      "runs": [
+        "M-A-r1",
+        "M-D14-r1"
+      ]
+    },
+    {
+      "pair": "M-r2",
+      "task": "M",
+      "repeat": 2,
+      "runs": [
+        "M-D14-r2",
+        "M-A-r2"
+      ]
+    },
+    {
+      "pair": "M-r3",
+      "task": "M",
+      "repeat": 3,
+      "runs": [
+        "M-A-r3",
+        "M-D14-r3"
+      ]
+    },
+    {
+      "pair": "S-r1",
+      "task": "S",
+      "repeat": 1,
+      "runs": [
+        "S-D14-r1",
+        "S-A-r1"
+      ]
+    },
+    {
+      "pair": "S-r2",
+      "task": "S",
+      "repeat": 2,
+      "runs": [
+        "S-A-r2",
+        "S-D14-r2"
+      ]
+    },
+    {
+      "pair": "S-r3",
+      "task": "S",
+      "repeat": 3,
+      "runs": [
+        "S-D14-r3",
+        "S-A-r3"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "runId": "H-A-r1",
+      "pair": "H-r1",
+      "task": "H",
+      "repeat": 1,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "H-D14-r1",
+      "pair": "H-r1",
+      "task": "H",
+      "repeat": 1,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "H-D14-r2",
+      "pair": "H-r2",
+      "task": "H",
+      "repeat": 2,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "H-A-r2",
+      "pair": "H-r2",
+      "task": "H",
+      "repeat": 2,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "H-A-r3",
+      "pair": "H-r3",
+      "task": "H",
+      "repeat": 3,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "H-D14-r3",
+      "pair": "H-r3",
+      "task": "H",
+      "repeat": 3,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "K-D14-r1",
+      "pair": "K-r1",
+      "task": "K",
+      "repeat": 1,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "K-A-r1",
+      "pair": "K-r1",
+      "task": "K",
+      "repeat": 1,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "K-A-r2",
+      "pair": "K-r2",
+      "task": "K",
+      "repeat": 2,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "K-D14-r2",
+      "pair": "K-r2",
+      "task": "K",
+      "repeat": 2,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "K-D14-r3",
+      "pair": "K-r3",
+      "task": "K",
+      "repeat": 3,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "K-A-r3",
+      "pair": "K-r3",
+      "task": "K",
+      "repeat": 3,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "M-A-r1",
+      "pair": "M-r1",
+      "task": "M",
+      "repeat": 1,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "M-D14-r1",
+      "pair": "M-r1",
+      "task": "M",
+      "repeat": 1,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "M-D14-r2",
+      "pair": "M-r2",
+      "task": "M",
+      "repeat": 2,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "M-A-r2",
+      "pair": "M-r2",
+      "task": "M",
+      "repeat": 2,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "M-A-r3",
+      "pair": "M-r3",
+      "task": "M",
+      "repeat": 3,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "M-D14-r3",
+      "pair": "M-r3",
+      "task": "M",
+      "repeat": 3,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "S-D14-r1",
+      "pair": "S-r1",
+      "task": "S",
+      "repeat": 1,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "S-A-r1",
+      "pair": "S-r1",
+      "task": "S",
+      "repeat": 1,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "S-A-r2",
+      "pair": "S-r2",
+      "task": "S",
+      "repeat": 2,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "S-D14-r2",
+      "pair": "S-r2",
+      "task": "S",
+      "repeat": 2,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "S-D14-r3",
+      "pair": "S-r3",
+      "task": "S",
+      "repeat": 3,
+      "arm": "D14",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "runId": "S-A-r3",
+      "pair": "S-r3",
+      "task": "S",
+      "repeat": 3,
+      "arm": "A",
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    }
+  ],
+  "reviewers": [
+    {
+      "reviewerId": "H-r1-reviewer-1",
+      "pair": "H-r1",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "H-r1-reviewer-2",
+      "pair": "H-r1",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "H-r2-reviewer-1",
+      "pair": "H-r2",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "H-r2-reviewer-2",
+      "pair": "H-r2",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "H-r3-reviewer-1",
+      "pair": "H-r3",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "H-r3-reviewer-2",
+      "pair": "H-r3",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "K-r1-reviewer-1",
+      "pair": "K-r1",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "K-r1-reviewer-2",
+      "pair": "K-r1",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "K-r2-reviewer-1",
+      "pair": "K-r2",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "K-r2-reviewer-2",
+      "pair": "K-r2",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "K-r3-reviewer-1",
+      "pair": "K-r3",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "K-r3-reviewer-2",
+      "pair": "K-r3",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "M-r1-reviewer-1",
+      "pair": "M-r1",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "M-r1-reviewer-2",
+      "pair": "M-r1",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "M-r2-reviewer-1",
+      "pair": "M-r2",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "M-r2-reviewer-2",
+      "pair": "M-r2",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "M-r3-reviewer-1",
+      "pair": "M-r3",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "M-r3-reviewer-2",
+      "pair": "M-r3",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "S-r1-reviewer-1",
+      "pair": "S-r1",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "S-r1-reviewer-2",
+      "pair": "S-r1",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "S-r2-reviewer-1",
+      "pair": "S-r2",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "S-r2-reviewer-2",
+      "pair": "S-r2",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "S-r3-reviewer-1",
+      "pair": "S-r3",
+      "slot": 1,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    },
+    {
+      "reviewerId": "S-r3-reviewer-2",
+      "pair": "S-r3",
+      "slot": 2,
+      "status": "PLANNED_NOT_CREATED",
+      "context": null
+    }
+  ]
+}

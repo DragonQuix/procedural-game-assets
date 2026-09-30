@@ -23,7 +23,7 @@ baseline native PNG、最近邻 enlarged、task crop、candidate、diff、带外
 
 候选预算 8。定义：有意暴露给 participant 视觉评估的唯一物化渲染状态。
 计数 identity 为 `renderHash + semanticStateHash`：前者为尺寸和最终 RGBA 的 SHA256；后者为
-有序、命名的各部件 RGBA 与 anchor/attachments 的规范 JSON SHA256。
+有序、命名的各部件 RGBA（透明像素 RGB 归零）与 anchor/attachments 的规范 JSON SHA256。
 它是跨臂可验证的 committed source state 投影，不靠 A 文件保存次数或 D workspace ID。
 同像素但隐藏部件支持、层序或元数据不同算新状态；注释、变量名、格式或等价源码不同不算。
 起点 identity 免费；复看同状态不重复计。Studio edit/explore 已写预览即计，即使没打开或最终拒绝；

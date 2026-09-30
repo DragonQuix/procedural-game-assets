@@ -1,0 +1,78 @@
+{
+  "schema": "pga-e2e-task/0.3",
+  "task": "K",
+  "width": 80,
+  "height": 64,
+  "anchor": {
+    "x": 40,
+    "y": 59
+  },
+  "attachments": {},
+  "protectedRegions": [
+    {
+      "x": 0,
+      "y": 55,
+      "w": 80,
+      "h": 9
+    }
+  ],
+  "protectedNodeIds": [
+    "node.foot"
+  ],
+  "requiredNodeIds": [
+    "node.cradle",
+    "node.drive",
+    "node.outlet",
+    "node.drum",
+    "node.hub",
+    "node.grip",
+    "node.foot"
+  ],
+  "crop": {
+    "x": 4,
+    "y": 4,
+    "w": 72,
+    "h": 56
+  },
+  "candidateBudget": 8,
+  "minChangedPixels": 40,
+  "maxColors": 24,
+  "valueBounds": [
+    20,
+    245
+  ],
+  "structuralChange": {
+    "minimumMovedParts": 2,
+    "minimumTotalCenterDisplacement": 12
+  },
+  "relations": [
+    {
+      "id": "R1",
+      "type": "contact",
+      "endpointA": {
+        "nodeId": "node.drive",
+        "feature": "max-x-edge"
+      },
+      "endpointB": {
+        "nodeId": "node.outlet",
+        "feature": "min-x-edge"
+      },
+      "required": true,
+      "tolerance": 0,
+      "resolution": {
+        "mode": "translate-follower",
+        "follower": "B",
+        "axis": "x",
+        "invariant": "size-and-orthogonal-position"
+      }
+    }
+  ],
+  "regions": {
+    "P1": {
+      "x": 0,
+      "y": 55,
+      "w": 80,
+      "h": 9
+    }
+  }
+}

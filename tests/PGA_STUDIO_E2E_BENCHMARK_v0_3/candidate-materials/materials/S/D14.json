@@ -1,0 +1,491 @@
+{
+  "schemaVersion": "pga-studio/4",
+  "id": "e2e-s-v03",
+  "seed": 90383,
+  "renderProfile": {
+    "name": "pixel-flat",
+    "version": 1
+  },
+  "style": {
+    "id": "e2e-s",
+    "version": 1,
+    "ramps": {
+      "shell": [
+        "#202e3b",
+        "#526572",
+        "#92a3a5",
+        "#dce7da"
+      ],
+      "signal": [
+        "#493529",
+        "#ba7951",
+        "#e7b275",
+        "#f0e6b8"
+      ],
+      "trim": [
+        "#253947",
+        "#688b92",
+        "#99b9b3",
+        "#d1e4cc"
+      ],
+      "dark": [
+        "#202c35",
+        "#384852",
+        "#596870",
+        "#849292"
+      ]
+    }
+  },
+  "canvas": {
+    "w": 64,
+    "h": 64,
+    "outline": null
+  },
+  "nodes": [
+    {
+      "id": "node.case",
+      "kind": "poly",
+      "vertices": [
+        [
+          16,
+          7
+        ],
+        [
+          48,
+          7
+        ],
+        [
+          57,
+          18
+        ],
+        [
+          57,
+          46
+        ],
+        [
+          48,
+          57
+        ],
+        [
+          16,
+          57
+        ],
+        [
+          7,
+          46
+        ],
+        [
+          7,
+          18
+        ]
+      ],
+      "ramp": "shell",
+      "material": "flat",
+      "layer": 0
+    },
+    {
+      "id": "node.face",
+      "kind": "panel",
+      "x": 14,
+      "y": 14,
+      "w": 36,
+      "h": 36,
+      "ramp": "dark",
+      "material": "flat",
+      "layer": 1
+    },
+    {
+      "id": "node.mark.a",
+      "kind": "poly",
+      "vertices": [
+        [
+          22,
+          24
+        ],
+        [
+          29,
+          24
+        ],
+        [
+          29,
+          29
+        ],
+        [
+          22,
+          29
+        ]
+      ],
+      "ramp": "trim",
+      "material": "flat",
+      "layer": 2
+    },
+    {
+      "id": "node.mark.b",
+      "kind": "poly",
+      "vertices": [
+        [
+          35,
+          24
+        ],
+        [
+          42,
+          24
+        ],
+        [
+          42,
+          29
+        ],
+        [
+          35,
+          29
+        ]
+      ],
+      "ramp": "trim",
+      "material": "flat",
+      "layer": 3
+    },
+    {
+      "id": "node.mark.c",
+      "kind": "poly",
+      "vertices": [
+        [
+          22,
+          35
+        ],
+        [
+          29,
+          35
+        ],
+        [
+          29,
+          40
+        ],
+        [
+          22,
+          40
+        ]
+      ],
+      "ramp": "trim",
+      "material": "flat",
+      "layer": 4
+    },
+    {
+      "id": "node.mark.d",
+      "kind": "poly",
+      "vertices": [
+        [
+          35,
+          35
+        ],
+        [
+          42,
+          35
+        ],
+        [
+          42,
+          40
+        ],
+        [
+          35,
+          40
+        ]
+      ],
+      "ramp": "trim",
+      "material": "flat",
+      "layer": 5
+    },
+    {
+      "id": "node.mark.e",
+      "kind": "disc",
+      "cx": 32,
+      "cy": 32,
+      "rx": 2,
+      "ry": 2,
+      "ramp": "signal",
+      "material": "flat",
+      "layer": 6
+    },
+    {
+      "id": "node.anchor",
+      "kind": "panel",
+      "x": 26,
+      "y": 54,
+      "w": 12,
+      "h": 5,
+      "ramp": "signal",
+      "material": "flat",
+      "layer": 7
+    }
+  ],
+  "anchor": {
+    "x": 32,
+    "y": 59
+  },
+  "attachments": {},
+  "constraints": [],
+  "protection": {
+    "schemaVersion": "pga-protection/1",
+    "coordinateSpace": "final-frame",
+    "protectedRegions": [
+      {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 14
+      },
+      {
+        "x": 0,
+        "y": 50,
+        "w": 64,
+        "h": 14
+      },
+      {
+        "x": 0,
+        "y": 14,
+        "w": 14,
+        "h": 36
+      },
+      {
+        "x": 50,
+        "y": 14,
+        "w": 14,
+        "h": 36
+      }
+    ],
+    "metadataPaths": [
+      "anchor",
+      "attachments"
+    ],
+    "nodeIds": [
+      "node.case",
+      "node.anchor"
+    ],
+    "baseline": {
+      "schemaVersion": "pga-studio/2",
+      "id": "e2e-s-v03",
+      "seed": 90383,
+      "renderProfile": {
+        "name": "pixel-flat",
+        "version": 1
+      },
+      "style": {
+        "id": "e2e-s",
+        "version": 1,
+        "ramps": {
+          "shell": [
+            "#202e3b",
+            "#526572",
+            "#92a3a5",
+            "#dce7da"
+          ],
+          "signal": [
+            "#493529",
+            "#ba7951",
+            "#e7b275",
+            "#f0e6b8"
+          ],
+          "trim": [
+            "#253947",
+            "#688b92",
+            "#99b9b3",
+            "#d1e4cc"
+          ],
+          "dark": [
+            "#202c35",
+            "#384852",
+            "#596870",
+            "#849292"
+          ]
+        }
+      },
+      "canvas": {
+        "w": 64,
+        "h": 64,
+        "outline": null
+      },
+      "nodes": [
+        {
+          "id": "node.case",
+          "kind": "poly",
+          "vertices": [
+            [
+              16,
+              7
+            ],
+            [
+              48,
+              7
+            ],
+            [
+              57,
+              18
+            ],
+            [
+              57,
+              46
+            ],
+            [
+              48,
+              57
+            ],
+            [
+              16,
+              57
+            ],
+            [
+              7,
+              46
+            ],
+            [
+              7,
+              18
+            ]
+          ],
+          "ramp": "shell",
+          "material": "flat",
+          "layer": 0
+        },
+        {
+          "id": "node.face",
+          "kind": "panel",
+          "x": 14,
+          "y": 14,
+          "w": 36,
+          "h": 36,
+          "ramp": "dark",
+          "material": "flat",
+          "layer": 1
+        },
+        {
+          "id": "node.mark.a",
+          "kind": "poly",
+          "vertices": [
+            [
+              22,
+              24
+            ],
+            [
+              29,
+              24
+            ],
+            [
+              29,
+              29
+            ],
+            [
+              22,
+              29
+            ]
+          ],
+          "ramp": "trim",
+          "material": "flat",
+          "layer": 2
+        },
+        {
+          "id": "node.mark.b",
+          "kind": "poly",
+          "vertices": [
+            [
+              35,
+              24
+            ],
+            [
+              42,
+              24
+            ],
+            [
+              42,
+              29
+            ],
+            [
+              35,
+              29
+            ]
+          ],
+          "ramp": "trim",
+          "material": "flat",
+          "layer": 3
+        },
+        {
+          "id": "node.mark.c",
+          "kind": "poly",
+          "vertices": [
+            [
+              22,
+              35
+            ],
+            [
+              29,
+              35
+            ],
+            [
+              29,
+              40
+            ],
+            [
+              22,
+              40
+            ]
+          ],
+          "ramp": "trim",
+          "material": "flat",
+          "layer": 4
+        },
+        {
+          "id": "node.mark.d",
+          "kind": "poly",
+          "vertices": [
+            [
+              35,
+              35
+            ],
+            [
+              42,
+              35
+            ],
+            [
+              42,
+              40
+            ],
+            [
+              35,
+              40
+            ]
+          ],
+          "ramp": "trim",
+          "material": "flat",
+          "layer": 5
+        },
+        {
+          "id": "node.mark.e",
+          "kind": "disc",
+          "cx": 32,
+          "cy": 32,
+          "rx": 2,
+          "ry": 2,
+          "ramp": "signal",
+          "material": "flat",
+          "layer": 6
+        },
+        {
+          "id": "node.anchor",
+          "kind": "panel",
+          "x": 26,
+          "y": 54,
+          "w": 12,
+          "h": 5,
+          "ramp": "signal",
+          "material": "flat",
+          "layer": 7
+        }
+      ],
+      "anchor": {
+        "x": 32,
+        "y": 59
+      },
+      "attachments": {},
+      "constraints": []
+    }
+  },
+  "relations": []
+}

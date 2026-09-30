@@ -21,6 +21,8 @@ export function materials(api) {
       protectedRegions: rules.protectedRegions, protectedNodeIds: rules.nodeIds,
       requiredNodeIds: nodes.map(n => n.id), crop: { x: 4, y: 4, w: width - 8, h: height - 8 },
       candidateBudget: 8, minChangedPixels: 40, maxColors: 24, valueBounds: [20, 245], ...extra };
+    const regionList = extra.allowedMutationRect ? [extra.allowedMutationRect, ...rules.protectedRegions] : rules.protectedRegions;
+    contract.regions = Object.fromEntries(regionList.map((r, i) => [`P${i + 1}`, r]));
     return { baseline: doc, D14, contract };
   };
   const H = make('H', 72, 64, [

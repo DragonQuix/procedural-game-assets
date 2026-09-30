@@ -65,7 +65,8 @@ export async function prepareMaterials(out) {
   const tasks = {}, lintInputs = [];
   for (const [task, spec] of Object.entries(materials(api))) {
     const common = join(out, `materials/${task}/common`), baseline = compiledState(api, spec.D14);
-    await json(join(common, 'baseline.state.json'), baseline);
+    await mkdir(common, { recursive: true });
+    await writeFile(join(common, 'baseline.state.json'), JSON.stringify(baseline) + '\n');
     await json(join(common, 'task-contract.json'), spec.contract);
     await cp(join(benchmark, `tasks/${task}.md`), join(common, 'TASK.md'));
     await cp(join(benchmark, 'prompts/participant.md'), join(common, 'participant.md'));

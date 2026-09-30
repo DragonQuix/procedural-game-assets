@@ -1,0 +1,63 @@
+{
+  "schema": "pga-e2e-task/0.3",
+  "task": "H",
+  "width": 72,
+  "height": 64,
+  "anchor": {
+    "x": 36,
+    "y": 59
+  },
+  "attachments": {},
+  "protectedRegions": [
+    {
+      "x": 0,
+      "y": 52,
+      "w": 72,
+      "h": 12
+    }
+  ],
+  "protectedNodeIds": [
+    "node.base",
+    "node.emblem"
+  ],
+  "requiredNodeIds": [
+    "node.body",
+    "node.brace",
+    "node.fin.a",
+    "node.fin.b",
+    "node.display",
+    "node.vent",
+    "node.base",
+    "node.emblem"
+  ],
+  "crop": {
+    "x": 4,
+    "y": 4,
+    "w": 64,
+    "h": 56
+  },
+  "candidateBudget": 8,
+  "minChangedPixels": 40,
+  "maxColors": 24,
+  "valueBounds": [
+    20,
+    245
+  ],
+  "silhouetteChange": [
+    60,
+    560
+  ],
+  "opaqueArea": [
+    700,
+    2300
+  ],
+  "focalNode": "node.display",
+  "regions": {
+    "P1": {
+      "x": 0,
+      "y": 52,
+      "w": 72,
+      "h": 12
+    }
+  }
+}

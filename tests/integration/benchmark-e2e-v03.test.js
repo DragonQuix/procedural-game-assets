@@ -47,6 +47,7 @@ test('v0.3 benchmark infrastructure (synthetic only)', { skip: !existsSync(join(
     for (const task of ['H', 'K', 'M', 'S']) {
       await t.test(`${task}: equal actual starts, observation byte parity, one evaluator, two distinct feasible solutions`, async () => {
         starts[task] = {}; finals[task] = {}; trials[task] = {};
+        assert.ok(specs[task].contract.regions.P1);
         for (const arm of ['A', 'D14']) {
           const out = join(temp, `${task}-${arm}`), runId = `${task}-${arm}-r1`;
           const gate = await prepareTrial({ out, materialRoot, manifest, runId }); assert.equal(gate.status, 'PASS');
@@ -110,7 +111,9 @@ test('v0.3 benchmark infrastructure (synthetic only)', { skip: !existsSync(join(
         assert.equal(metrics(l).candidateCount, 0);
         assert.equal(accountCandidate(l, finals.H.A, 'source-1').added, true);
         assert.equal(accountCandidate(l, finals.H.A, 'source-comments-only').added, false);
-        const hidden = structuredClone(finals.H.A); hidden.layers[0].rgba[0] = 1;
+        const transparent = structuredClone(finals.H.A); transparent.layers[0].rgba[0] = 1;
+        assert.equal(accountCandidate(l, transparent, 'transparent-rgb-only').added, false);
+        const hidden = structuredClone(finals.H.A); hidden.layers[0].rgba[(28 * hidden.frame.width + 36) * 4] = 1;
         assert.equal(accountCandidate(l, hidden, 'hidden-state').added, true);
         for (let i = 0; i < 7; i++) { const s = structuredClone(finals.H.A); s.frame.rgba[0] = i + 10; accountCandidate(l, s, `v${i}`); }
         assert.equal(metrics(l).candidateCount, 9);
@@ -167,6 +170,8 @@ test('v0.3 benchmark infrastructure (synthetic only)', { skip: !existsSync(join(
       const calls = [], host = { getModelIdentity: async () => actual, createEmptyParticipant: async () => { calls.push('create'); return { ...context, actual }; }, exposeTask: async () => calls.push('expose') };
       const input = { out, manifest, execution, runId: 'H-A-r2', host, contextRegistry: new Set() };
       assert.equal((await launchParticipant({ ...input, execution: null })).status, 'LAUNCH_BLOCKED');
+      const wrongVision = structuredClone(execution); wrongVision.visionEvidence.expectedImages['vision_A.png'] = '0'.repeat(64);
+      assert.equal((await launchParticipant({ ...input, execution: wrongVision })).reason, 'VISION_MATERIAL_HASH_MISMATCH');
       const file = join(out, 'staged/kit/src/core/raster.js'), bytes = await readFile(file); await writeFile(file, Buffer.concat([bytes, Buffer.from('\n// corruption\n')]));
       const blocked = await launchParticipant(input); assert.equal(blocked.status, 'LAUNCH_BLOCKED'); assert.equal(blocked.taskExposed, false); assert.deepEqual(calls, []);
       await writeFile(file, bytes);
@@ -219,12 +224,12 @@ test('v0.3 benchmark infrastructure (synthetic only)', { skip: !existsSync(join(
       assert.equal(deriveReview({ ...inputs, hostEvents: [] }).evidence, 'UNVERIFIED');
       review.imageEvidence[0].sha256 = '0'.repeat(64); assert.equal(deriveReview(inputs).evidence, 'UNVERIFIED');
       const visionImages = Object.fromEntries(['vision_A.png', 'vision_B.png'].map(v => [v, manifest.vision.files[v]]));
-      const execution = { status: 'FROZEN', approvedToExecute: true,
+      const execution = { status: 'FROZEN', approvedToExecute: true, manifestHash: sha256(canonical(manifest)), protocolSha256: manifest.protocolSha256,
         modelIdentity: freezeModelIdentity({ policy: 'FREEZE_ACTUAL', requestedModel: 'nominal-other', actual }),
         visionEvidence: { expectedImages: visionImages, hostEvents: evidence(visionImages), context, objectRecognitionVerified: true } };
       const calls = [], host = { getModelIdentity: async () => actual,
         createEmptyReviewer: async () => { calls.push('create'); return { ...context, modelContextId: 'synthetic-reviewer-new', actual }; }, exposeReview: async () => calls.push('expose') };
-      const launch = { directory: join(out, 'reviewer-1'), descriptor: packages[0], execution, host, contextRegistry: new Set() };
+      const launch = { directory: join(out, 'reviewer-1'), descriptor: packages[0], manifest, execution, host, contextRegistry: new Set() };
       assert.equal((await launchReviewer({ ...launch, host: { ...host, getModelIdentity: async () => ({ ...actual, model: 'mismatch' }) } })).status, 'LAUNCH_BLOCKED');
       assert.deepEqual(calls, []); assert.equal((await launchReviewer(launch)).status, 'PASS'); assert.deepEqual(calls, ['create', 'expose']);
     });

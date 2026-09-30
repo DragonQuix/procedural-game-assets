@@ -32,9 +32,10 @@ export async function buildBlind({ out, task, repeat, seed, candidateA, candidat
   return { key, packages };
 }
 
-export async function launchReviewer({ directory, descriptor, execution, host, contextRegistry }) {
+export async function launchReviewer({ directory, descriptor, manifest, execution, host, contextRegistry }) {
   const blocked = reason => ({ status: 'LAUNCH_BLOCKED', reason, reviewerCreated: false, taskExposed: false });
-  if (execution?.status !== 'FROZEN' || execution.approvedToExecute !== true || visionGate(execution.visionEvidence).status !== 'PASS') return blocked('EXECUTION_NOT_FROZEN');
+  if (execution?.status !== 'FROZEN' || execution.approvedToExecute !== true || execution.manifestHash !== sha256(canonical(manifest)) || execution.protocolSha256 !== manifest.protocolSha256 || visionGate(execution.visionEvidence).status !== 'PASS') return blocked('EXECUTION_NOT_FROZEN');
+  if (!['vision_A.png', 'vision_B.png'].every(v => execution.visionEvidence.expectedImages[v] === manifest.vision.files[v])) return blocked('VISION_MATERIAL_HASH_MISMATCH');
   if (modelIdentityGate(execution.modelIdentity, await host.getModelIdentity()).status !== 'PASS') return blocked('MODEL_IDENTITY_MISMATCH');
   if (canonical(await tree(directory)) !== canonical(descriptor.payload)) return blocked('REVIEW_PAYLOAD_MISMATCH');
   const reviewer = await host.createEmptyReviewer({ cwd: directory, requestedModel: execution.modelIdentity.actual.model });

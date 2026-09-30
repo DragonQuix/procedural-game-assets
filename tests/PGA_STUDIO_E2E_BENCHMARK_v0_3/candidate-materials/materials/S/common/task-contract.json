@@ -1,0 +1,113 @@
+{
+  "schema": "pga-e2e-task/0.3",
+  "task": "S",
+  "width": 64,
+  "height": 64,
+  "anchor": {
+    "x": 32,
+    "y": 59
+  },
+  "attachments": {},
+  "protectedRegions": [
+    {
+      "x": 0,
+      "y": 0,
+      "w": 64,
+      "h": 14
+    },
+    {
+      "x": 0,
+      "y": 50,
+      "w": 64,
+      "h": 14
+    },
+    {
+      "x": 0,
+      "y": 14,
+      "w": 14,
+      "h": 36
+    },
+    {
+      "x": 50,
+      "y": 14,
+      "w": 14,
+      "h": 36
+    }
+  ],
+  "protectedNodeIds": [
+    "node.case",
+    "node.anchor"
+  ],
+  "requiredNodeIds": [
+    "node.case",
+    "node.face",
+    "node.mark.a",
+    "node.mark.b",
+    "node.mark.c",
+    "node.mark.d",
+    "node.mark.e",
+    "node.anchor"
+  ],
+  "crop": {
+    "x": 4,
+    "y": 4,
+    "w": 56,
+    "h": 56
+  },
+  "candidateBudget": 8,
+  "minChangedPixels": 40,
+  "maxColors": 24,
+  "valueBounds": [
+    20,
+    245
+  ],
+  "allowedMutationRect": {
+    "x": 14,
+    "y": 14,
+    "w": 36,
+    "h": 36
+  },
+  "silhouetteChange": [
+    0,
+    0
+  ],
+  "symbolArea": [
+    70,
+    650
+  ],
+  "symbolNodePrefix": "node.mark.",
+  "functionalTheme": "energy-transfer",
+  "forbiddenText": true,
+  "regions": {
+    "P1": {
+      "x": 14,
+      "y": 14,
+      "w": 36,
+      "h": 36
+    },
+    "P2": {
+      "x": 0,
+      "y": 0,
+      "w": 64,
+      "h": 14
+    },
+    "P3": {
+      "x": 0,
+      "y": 50,
+      "w": 64,
+      "h": 14
+    },
+    "P4": {
+      "x": 0,
+      "y": 14,
+      "w": 14,
+      "h": 36
+    },
+    "P5": {
+      "x": 50,
+      "y": 14,
+      "w": 14,
+      "h": 36
+    }
+  }
+}

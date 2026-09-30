@@ -58,6 +58,7 @@ export async function verifyTrial({ out, manifest, runId }) {
 export async function launchParticipant({ out, manifest, execution, runId, host, contextRegistry }) {
   const blocked = reason => ({ status: 'LAUNCH_BLOCKED', reason, participantCreated: false, taskExposed: false });
   if (execution?.status !== 'FROZEN' || execution.approvedToExecute !== true || execution.manifestHash !== sha256(canonical(manifest)) || execution.protocolSha256 !== manifest.protocolSha256) return blocked('EXECUTION_NOT_FROZEN');
+  if (!['vision_A.png', 'vision_B.png'].every(v => execution.visionEvidence?.expectedImages?.[v] === manifest.vision.files[v])) return blocked('VISION_MATERIAL_HASH_MISMATCH');
   if (visionGate(execution.visionEvidence).status !== 'PASS') return blocked('VISION_GATE_NOT_PASSED');
   const actual = await host.getModelIdentity();
   if (modelIdentityGate(execution.modelIdentity, actual).status !== 'PASS') return blocked('MODEL_IDENTITY_MISMATCH');
