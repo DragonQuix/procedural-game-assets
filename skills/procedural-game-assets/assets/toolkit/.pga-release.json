@@ -1,6 +1,6 @@
 {
   "generator": "procedural-game-assets@0.10.0",
-  "builtFrom": "7ce2741016fca92fdc133c1faa9c62da0265cbe7",
+  "builtFrom": "79ccb3f3d8f5e85cfb0199f73075ea65ee26bb18",
   "fileCount": 220,
   "pathRoot": "工具包根（携带后的 vendor/pga/）；files 键为相对该根的 POSIX 路径",
   "files": {
@@ -22,12 +22,12 @@
     "docs/adr/0013-studio-relations.md": "80efce45bec9f4711e241939a7e29f1af1cb1c71ff813d838c6d5020fb5d2acc",
     "docs/adr/0014-studio-raster-authoring.md": "6826c3b90406a9ea824cdb102c12db39055853958b881a2d3864baeb60ad1412",
     "docs/adr/0015-studio-raster-resample.md": "3f15963f380432805042641e92fa2cd81e52c6e789d3da92cdcfff49f0b93426",
-    "docs/PLAN.md": "7b8d709c8085c46564aa065469aa8bb7b51acd92654ef260092dedff78f3c5dd",
+    "docs/PLAN.md": "4dcf0029c2c974075634d6cc6ae265c8a2038171d734f3c383c24a881c9151fc",
     "docs/provenance.md": "7c49e08242b32978455cfa08b0b6df09352c2a64ddc5965ce17fe301958816bc",
     "docs/recipe-guide.md": "c4ad3cd8a852d1c3a2266bfcdbde9de5cbb594224fd7b15ff3df8b723be10d95",
     "docs/research/asset-loop-landscape.md": "826676b28cd5743a86c12c9038e3f7478166731e115ba5c0275974a1c78d14d3",
     "docs/studio-cli.md": "f85a8dd6aa8f80694e0e6ca3bb484ebd6b7df9c612c51203a650fc72aa5c9826",
-    "docs/studio-raster.md": "a1f946b213f6b6a4881ad7ca489659954c52e723a38abf0ea0495e98594c2419",
+    "docs/studio-raster.md": "72d59040684b981c69a7391216ec95233617eedbabfedacdceae6cdccf29a8b9",
     "docs/visual-quality.md": "5cab5dac47d303466fe78f56c93c363aa4804e8563177c595a098e63c32f2ed1",
     "docs/visual-review.md": "bcc0da6329168922494071ec533a74b112d73f4bc834a8693a1406bfca5969f6",
     "examples/canvas-slice/index.html": "a09fadd5ca9290aac61998bb2fd699cd427ddf3a5b49445f8f19b6dbf2dbb5a7",

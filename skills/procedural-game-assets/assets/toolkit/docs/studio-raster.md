@@ -172,6 +172,15 @@ restore 创建新修订，不抹除历史。过期候选不能接受，位图 ed
 - 看图仍由 Agent 判断，技术 diff.outside=0 只证明选区外未变。若问题在现有操作下可表达，
   优先改操作或指导；只有出现可复用缺口才改工具。证据足以支持维护决定时停止打磨。
 
+### 相邻识别物的分阶段组织
+
+- 相邻部件难分时，先分别声明少数必须保留的轮廓、主要色块和遮挡关系，再用同一局部选区
+  表达制作顺序：被遮挡部件的可见体量在先，前景部件覆盖在后。不要求建立图层或固定角色模板。
+- 第一候选先看形、连接边与整体尺寸可读性；有改善才接受为中间草稿，再另用候选补必要框线或亮点。
+  不靠磨损、纹理和更多细线掩盖体量缺失。第二阶段仍需重新看原尺寸、局部浅底/剪影和整体背景。
+- 色块分离改善不等于部件身份或完整角色保真通过；低尺寸下仍难辨时明确保留 NOT_YET，
+  不把局部改善提升为完整尺寸迁移。少量候选已能支持制作方法或尺寸边界时停止。
+
 ### 复用检查的材料边界
 
 另一种角色结构的复用检查，应先实际看未参与调工具的设计，记录来源、源图尺寸、目标帧尺寸、
@@ -197,3 +206,21 @@ metadata:anchor/attachments/attachments.<名称>/frameSize。没有区域冻结�
 - 参考身份、造型授权与风格要求由任务说明和 Agent 负责。先看轮廓/比例/识别特征，
   再修局部细节；看目标尺寸和场景背景，不只看放大图。
 - 当前无动画、图层、位图 explore、自动风格转换或跨尺寸细节重构；显式重采样只提供尺寸草稿。
+
+### 最小 Canvas 接入检查
+
+任意 Studio 文档族通过 `src/studio/dispatch.js` 的 `compileAny` 分派到共享编译核心，
+再传入现有 CanvasBank；`dispatch.js` 不导出 `compileStudioDocument`，
+`compiler.js` 的同名函数面向静态道具，不是位图文档入口。
+
+```js
+import { compileAny } from './src/studio/dispatch.js';
+import { createCanvasBank } from './src/adapters/canvas.js';
+const compiled = compileAny(doc);
+const bank = createCanvasBank({ assets: [compiled.asset], makeCanvas });
+const sprite = bank.sprite(compiled.asset.frames[0].id);
+```
+
+检查页绑定实际 revision、documentHash/renderHash，先核对编译结果，再实际看声明倍率的完整画面，
+单独记录 Canvas 像素读回。Node 导入/编译冒烟、HTTP 200、PNG 与 DOM READY 都不单独证明实际显示通过。
+受信浏览器不可用时保留 UNVERIFIED，清理自己的服务和标签，不转入全局环境修复。
