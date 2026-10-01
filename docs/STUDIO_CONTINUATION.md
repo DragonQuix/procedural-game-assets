@@ -9,9 +9,9 @@
 以 CONTEXT.md 和 docs/adr/ 为术语、模块边界和架构决策来源。
 重点 ADR：0001 核心/IO、0002 坐标、0004 共享烘焙、0009 事务、0014 位图、0015 尺寸草稿。
 当前没有 CONTEXT-MAP.md；若以后建立则按其定位子域。
-方向见 docs/plans/studio-reference-translation.md；实际证据见 docs/verification.md S11–S11.6。
-下一轮直接执行 [T1 识别特征组织与实际接入方案](plans/studio-t1-authoring-followup.md)，
-不是重新制订同一份计划。该方案待执行，未新增视觉裁决或功能交付。
+方向见 docs/plans/studio-reference-translation.md；实际证据见 docs/verification.md S11–S11.7。
+[T1 识别特征组织与实际接入方案](plans/studio-t1-authoring-followup.md) 已执行有限方法试验，见 S11.7，
+不重订或重复执行。两候选改善局部分离，整张旅人仍 NOT_YET、Canvas UNVERIFIED、T1 未完成。
 
 - Windows/PowerShell，中文交流、文档和提交；本地文件优先 FastCtx，手工编辑用 apply_patch。
 - 不默认启动子代理，不改用户级技能安装、循环版载荷、旧实验或参考原图。
@@ -67,6 +67,8 @@ src/studio/dispatch.js、src/studio/observe.js、bin/pga-studio.mjs。
   运行时、schema 和 API 未改，版本仍为 0.10.0。
 - ccdac27：R2 复用检查、验证范围与交接记录；e0898d8：下一轮 T1 方法与接入方案及路线索引。
   后者仅制订方案，不计作 T1 新证据；普通载荷来源仍为 7ce2741。
+- 79ccb3f：回收相邻部件分阶段制作与 Canvas 编译入口指导；90d8366：普通载荷同步，220 文件一致。
+  没有运行时、schema 或 API 改动，版本仍为 0.10.0；本轮证据与边界见 S11.7。
 
 当前分支 master，远端 origin 为 https://github.com/DragonQuix/procedural-game-assets.git。
 R2 实施轮从干净的 master/f955683 起步，证据归档于 ccdac27；随后方案整理从干净的
@@ -189,8 +191,12 @@ preview.html 是未执行的静态 CanvasBank 检查页：内置浏览器连接�
 
 ## 测试事实
 
-以下为已实施轮的结果；本次方案整理只核对文档与载荷，不重跑测试，不将旧 PASS 计为新结果。
+以下按实施轮分别记录，不将旧 PASS 计为本轮结果。
 
+- 0.10.0 T1 方法后续：两候选重推导/局部审计、自包含重开/图集切回通过；
+  开发源与实际普通载荷目录各一次共享编译/导入冒烟通过，技能携带测试 **1 PASS / 0 FAIL / 0 SKIP**。
+  没有运行时改动，未重跑六文件/全套或旧模型实验。普通清单 220、循环只读清单 132 文件一致；
+  21 个记录的只读文件 SHA-256 不变。日志在下述新 work，Canvas 仍 UNVERIFIED。
 - 0.10.0 R2 真实设计复用检查：开发源与实际普通载荷目录各运行六文件回归：
   unit 的 studio-raster、studio-raster-path、studio-raster-resample、frame-observation，
   integration 的 studio-raster、studio-raster-resample，各 **33 PASS / 0 FAIL / 0 SKIP**。
@@ -222,21 +228,37 @@ preview.html 是未执行的静态 CanvasBank 检查页：内置浏览器连接�
   仍要求正式实验数据不存在，但提交 376f563 已归档数据。未为凑绿删除数据或改旧测试。
   如运行全套应如实报告此边界，不能宣称全部通过，也不接管旧实验。
 
-## 建议的下一步
+## T1 方法后续实施（已停止）
 
-1. 按 docs/plans/studio-t1-authoring-followup.md 直接推进：优先检验“先独立轮廓/遮挡/色块，再补细节”
-   的制作方法。推荐只选提灯 Lantern B 与葫芦 Gourd C 的分离问题，不把全部 NOT_YET 项改成待修清单。
-   先实际看参考与确认版本、说明收益、写一句假设，再产生少量候选；不预设新增 API。
-2. R2 已是已见设计，下一轮不是新的留出验收或独立认证。新建唯一 work，从 R2 自包含编辑源 create；
-   三套骑士证据、合成探针和 R2 原工作区全部只读。保留 96×144 → 64×96、1x/3x 与既定身份要求。
-   实施者以 CONTEXT.md 和 ADR-0001/0002/0004/0009/0014/0015 为术语与架构来源；当前没有 CONTEXT-MAP.md。
-3. 实际看目标原尺寸、局部浅底/剪影和背景整体后决定接受或放弃；像素、元数据、视觉状态分开记录。
-   若需外部初稿，用显式整理和已有 PNG 导入，不要求两条路径都做，不把生成器设为新依赖。
-   连续两次修改未改善同一识别差距时停止；有方法或支持边界结论即停止，不为满意样图继续重画。
-4. 用共享编译与 CanvasBank 补最小真实显示，绑定实际修订/哈希，不把 PNG 或 READY 单独当作验收。
-   已有浏览器通道仍不可用则记 UNVERIFIED，不修全局环境。清理自己的服务与标签；T1 未成立前不推进 T2/T3。
-5. 只回收有复现依据的经验；确有通用工具缺口才改代码和最小回归。影响普通载荷时用 release 生成，
-   循环版和用户级安装不升级。结束更新新 work 证据、verification.md 和本文，中文原子提交并普通推送。
+从核实与 origin/master 一致的干净 master/7de5343 直接执行既定方案，没有重订计划。
+新证据位于 gitignored `work/studio-t1-authoring-20261001-lantern-gourd-a`，不随推送携带：
+
+- 从 R2 export-small 自包含编辑源 create，新 r1 与旧 r6 同内容；旧两尺寸编辑源和所有旧工作区只读。
+  保留原尺寸规格，不作 Q 版，本轮只编辑 64×96，未产生新大尺寸或尺寸候选。
+- `lantern-gourd-junction={x:34,y:35,w:13,h:22}`：先六条 poly/rect 组织 Gourd C 双腹与前景 Lantern B 色块，
+  c-0e31ec08 改变 95 像素；再八条 path/line/pixel/rect 补框线、亮芯与收腰，c-4be44928 改变 27 像素。
+  两次选区外 0、无透明擦除或元数据漂移；接受前实际看 native、局部浅底/剪影和 3x 整体背景。
+  双腹体量与亮玻璃分离改善，仅接受为 r2/r3 局部草稿；另看最终 1x 背景，双腹仍小，身份不判通过。
+- 当前 head=r3，documentHash=57e01ac3、renderHash=e63105aa:d90baead。
+  anchor=(32,93)，灯芯点=(38.5,49.5) 仍落在亮像素 [255,224,154,255]，无需元数据候选。
+  未改点的小数保留，staffGrip 和 head 语义未重验。export/reopened 与图集切回一致。
+- `brief.json`、两份 draw JSON、`evidence.json`、`technical-audit.json`、readonly-before/after.json
+  绑定输入、少数特征、假设、实际图像和范围。外部生成 0、绘改 2、元数据 0，无人工绘制干预。
+  首次审计误猜靴底占据列而失败，改为实际采样/基准逐字节检查后通过，不算工具回归缺陷或新增覆盖。
+- `preview.html` 绑定 r3/两哈希，使用 `compileAny as compileStudioDocument` 与现有 CanvasBank。
+  旧页引用 dispatch.js 未导出函数的问题已记录，不修改旧页；正确入口指导已回收。
+  内置连接不受信，现有 Chrome 不可用；HTTP 200 不替代浏览器执行，无 READY/像素读回/截图。
+  服务已停止，47872 无监听，新建标签 0；未修全局环境。
+
+**旅人和旧骑士仍 NOT_YET，T1 未完成，Canvas UNVERIFIED。** 方法假设只获有限支持，
+不认证新的留出设计、完整保真、两尺寸迁移、游戏可读、动画、人工试玩、独立认证或成本改善。
+两个候选已足够支持通用制作指导，停止打磨；不把肩卷、帽子、脸和全部身体列成下一轮必修清单。
+
+继续时先读 S11.7 与本节，不重复这份已执行方案。只针对新证据支持的不同可回收问题推进；
+没有新问题或受信浏览器通道变化时，不为全绿报告重跑、扩画或修全局环境。
+任意文档族用 dispatch.js 的 compileAny 分派到共享编译核心；实际 Canvas 未验收前不提升状态。
+T1 成立前不推进 T2/T3、动画、完整 GUI、自动审美服务或旧模型实验。后续若确有必要仍需新工作区、
+旧证据只读、少量候选、独立点位检查与如实范围记录，普通载荷只用 release 生成，循环版和用户级安装不随动。
 
 保持方向：用户提供设计后，Agent 能通过可观察、可修改、可回退的工具把它翻译成游戏资产。
 不要把工作重新引向通用关系求解器、完整 GUI、强制模型服务、无限评审或漂亮报告。

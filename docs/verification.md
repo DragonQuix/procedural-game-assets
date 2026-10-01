@@ -4,6 +4,62 @@
 
 环境：Windows，Node v22.23.2，Godot 4.6.2-stable（仅此版本，不宣称全 4.x）。
 
+## S11.7 相邻配件分阶段组织与接入边界（2026-10-01，0.10.0）
+
+直接执行 `plans/studio-t1-authoring-followup.md`，未重订计划。
+依据：`../CONTEXT.md`、ADR-0001/0002/0004/0009/0014/0015；未建立 CONTEXT-MAP.md。
+起点核实为干净的 master/7de5343，origin/master 同 SHA。R2 已是已见设计，本轮不是新留出或独立认证。
+
+项目收益：检验相邻识别物先组织轮廓、遮挡和主要色块，再补必要细节的制作顺序；不修完角色。
+Agent 实际看 R2 原图与旧两尺寸 1x/3x 输出，确认 Gourd C 的双腹在 Lantern B 后方，旧小尺寸葫芦难辨。
+保留双腹收腰、前景灯具外框和亮芯，概括磨损与绳股；沿用 96×144 → 64×96、二值 alpha、1x/3x，
+浅底及 `#263a42` 背景，不作 Q 版。本轮仅编辑 64×96，没有新的大尺寸或跨尺寸候选。
+假设：先组织葫芦体量，再用前景灯具覆盖，能改善两者分离，无需新增 API。
+
+### 操作、实际看图与有限判断
+
+- 新建 gitignored `work/studio-t1-authoring-20261001-lantern-gourd-a`，从 S11.6 小尺寸自包含编辑源 create。
+  新 r1 与旧 r6 同内容：documentHash=c753fb4f、renderHash=648aa7ee:d90baead。
+  选区 `lantern-gourd-junction={x:34,y:35,w:13,h:22}` 包含连接邻域，其余部位不重画。
+- 六条 poly/rect 的轮廓色块候选 c-0e31ec08 改变 95 像素、选区外 0、不透明变透明 0，
+  anchor/attachments/frameSize 不变。接受前实际看 native、cropLight/cropSilhouette 和 3x 整体背景，
+  双腹棕色体量比基准更易区分，但灯具近似直条，仅接受为中间局部草稿 r2。
+- 八条 path/line/pixel/rect 的必要细节候选 c-4be44928 改变 27 像素、选区外 0、无透明擦除或点位漂移。
+  接受前看同类四视图，灯具框线与亮芯恢复，棕色体量和亮玻璃分离改善，仅接受为局部草稿 r3。
+  最终 documentHash=57e01ac3、renderHash=e63105aa:d90baead；另实际看最终 1x 背景。
+  1x 下葫芦双腹仍很小，不能据局部改善宣称部件身份或完整角色通过。
+- 灯芯点 `(38.5,49.5)` 仍为亮像素中心，RGBA=[255,224,154,255]；可见靴底边仍为 y=93，
+  anchor=(32,93)，两行靴底 RGBA 与基准相同。无需元数据候选，未改点的小数保留；
+  staffGrip 语义和 head 点未重新验收，不把数据不变提升为语义正确。
+- 两候选已足够支持有限制作顺序指导，停止，不追加身体/帽子/脸/肩卷修改。
+  外部生成 0、绘改候选 2、接受局部草稿 2、重采样 0、元数据候选 0，无人工绘制干预。
+  收回 studio-raster.md 与普通技能：先体量/遮挡再细节，分离改善与身份验收分开，不强制模板或图层。
+
+### 本轮技术检查、发行与 Canvas 限制
+
+- 两候选从基准和冻结操作重新推导，文档/哈希、已接受修订与观察身份一致；区域外 RGBA、非目标元数据不变。
+  自包含导出重开、native 与图集切回 RGBA、manifest 点位一致，二值 alpha 保持。
+  首次一次性审计误猜靴底占据列而失败，改为实际采样和基准逐字节比较后通过；
+  该无效预期不算工具缺陷或新增回归覆盖，不为审计断言数量继续补证。
+- 新 CanvasBank 检查页绑定实际 r3 及哈希。发现旧页从 dispatch.js 引用未导出的 compileStudioDocument；
+  新页用 `compileAny as compileStudioDocument`，仍调用共享位图编译核心和现有 createCanvasBank。
+  旧页保持只读；回收文档族的正确分派入口指导，不新增 API 或另写烘焙器。
+- 开发源与实际普通载荷目录各运行一次共享编译/导入冒烟，均绑定最终两哈希并确认指导存在；
+  技能携带测试 **1 PASS / 0 FAIL / 0 SKIP**。没有运行时代码改动，未重跑六文件、全套或旧模型实验；
+  S11.6 的 33 PASS 不计作本轮新结果，Node 冒烟不是实际 Canvas 执行。
+- 指导提交 79ccb3f；release 生成普通载荷并提交为 90d8366，220 文件哈希一致。
+  循环版仅 --check，132 文件一致；21 个已记录原图、旧 head/编辑源/证据和循环清单 SHA-256 前后不变。
+  未修改用户级安装、原游戏、旧实验或旧工作区，版本仍为 0.10.0。
+- 内置浏览器报 `privileged native pipe bridge is not available; browser-client is not trusted`，
+  现有独立 Chrome 通道报 `Browser is not available: chrome`。页面 HTTP 200，但没有浏览器执行、
+  READY、Canvas 像素读回或截图，**Canvas 仍 UNVERIFIED**；不拿 PNG 或 HTTP 成功替代验收。
+  未修全局环境，自己的服务已停止，47872 无监听，新建标签 0。
+
+本地证据为上述 work 中 brief/evidence/technical-audit JSON、两份操作、workspace/previews、
+view-1x、export、reopened、preview.html、只读哈希快照和冒烟/携带/发行日志，不随 Git 推送。
+**旅人和旧骑士仍 NOT_YET，T1 未完成**：未验证完整保真、两尺寸独立细节与迁移、实际 Canvas、
+动画、人工试玩、独立认证、泛化成功率或成本。本轮有限方法结论不授权 T2/T3；停止样图打磨。
+
 ## S11.6 另一种真实设计的尺寸草稿与关键点校正（2026-10-01，0.10.0）
 
 依据：`../CONTEXT.md`、ADR-0001/0002/0004/0009/0014/0015、`plans/studio-reference-translation.md` T1。
