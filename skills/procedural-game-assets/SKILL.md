@@ -105,6 +105,8 @@ params.coordinateSpace 为 canvas-pixels，不必手动换算成选区坐标。�
 位图 edit 会直接返回候选的明暗背景、剪影、选区和局部裁切；先看候选再接受，
 不要为了局部审图先 commit。观察文件按候选绑定，不沿用别的候选的裁切或结论。
 局部修整先看 cropLight/cropSilhouette 的深色轮廓、透明断口和连接处，再看 native 与整体背景图；
+相邻识别物难分时，先组织各自轮廓、遮挡顺序和主要色块；第一候选看形，有改善才用另一候选补必要细节。
+不靠加纹理补体量缺失，不强制模板或图层；色块分离改善不等于部件身份、完整角色或尺寸迁移通过。
 不要依赖宿主对透明 cropDisplay 的默认底色。根据 observation.target_crop.crop 的画布原点定位，
 选区包含连接边；擦除后重画需检查接缝。隔离试改从导出的 .studio.json 新建工作区，保留旧证据。
 需要等比例尺寸草稿时，用 raster.resample 显式指定 width/height 和 sampling=nearest；
@@ -115,6 +117,9 @@ observe 差分和候选裁切为 NOT_COMPARABLE，不得当成“区域外零变
 不要把 bounds.y1 自动当脚底，也不要全体取整；attachments 的完整 value 带回未改点和原小数。
 可用请求级 preserve 保护画布像素、帧尺寸和非目标点，检查同尺寸 diff.total=0，再导出新点位。
 renderHash 含元数据，改变不等于 RGBA 改变；技术点位正确也不证明部件已还原。
+Canvas 检查使用 src/studio/dispatch.js 的 compileAny 编译文档族，再传给 createCanvasBank；
+dispatch.js 不导出 compileStudioDocument。页面绑定实际修订和哈希，实际看声明倍率完整画面并单列像素读回；
+Node 编译、HTTP 200、PNG 或 READY 不单独算显示验收，受信浏览器不可用则记 UNVERIFIED 并清理自己的服务与标签。
 复用检查先实际看未参与调工具的设计，声明来源、尺寸、显示倍率、少数保留/概括特征及一句假设。
 缺参考时说明材料缺口、请求附图或准确路径，不扫描无关目录；仅为明确项目收益做最小合成探针，
 不拿本轮自绘或配方输出冒充留出设计，不据此认证临摹质量或完整尺寸迁移。
